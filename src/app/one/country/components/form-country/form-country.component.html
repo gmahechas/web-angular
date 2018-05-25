@@ -1,0 +1,18 @@
+<form [formGroup]="countryForm" (ngSubmit)="onSubmit(countryForm)">
+
+  <ng-content select="h3"></ng-content>
+
+  <div class="ui-g">
+    <div class="ui-g-6 ui-g-nopad">
+      <div>Pais *:</div>
+      <input pInputText type="text" placeholder="Pais" formControlName="country_name" />
+      <app-validation-errors-shared [control]="countryForm.get('country_name')"></app-validation-errors-shared>
+      <div>Codigo *:</div>
+      <input pInputText type="text" placeholder="Codigo" formControlName="country_code" />
+      <app-validation-errors-shared [control]="countryForm.get('country_code')"></app-validation-errors-shared>
+      <br>
+      <ng-content select="button"></ng-content>
+    </div>
+  </div>
+
+</form>

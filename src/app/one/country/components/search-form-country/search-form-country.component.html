@@ -1,0 +1,7 @@
+<form [formGroup]="searchFormCountry" (ngSubmit)="onSubmit(searchFormCountry)">
+  <span>Buscar Pais</span>
+  <input pInputText type="text" placeholder="Pais" formControlName="country_name">
+  <input pInputText type="text" placeholder="Codigo" formControlName="country_code" >
+  <button pButton type="submit" label="Buscar" [disabled]="searchFormCountry.invalid" class="ui-button-secondary"></button>
+  <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
+</form>

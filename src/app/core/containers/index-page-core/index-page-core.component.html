@@ -1,0 +1,8 @@
+<button pButton type="button" icon="fas fa-bars" class="ui-button-secondary" (click)="showSidenav(true)"></button>
+<app-message-shared></app-message-shared>
+<router-outlet></router-outlet>
+<!-- Misc -->
+<app-nav-core [menuItems]="menuItems" [showSidenav]="showSidenav$ | async" (hide)="showSidenav($event)"></app-nav-core>
+<app-block-core [blockedDocument]="blockedDocument$ | async"></app-block-core>
+<app-growl-core></app-growl-core>
+<app-confirm-shared></app-confirm-shared>

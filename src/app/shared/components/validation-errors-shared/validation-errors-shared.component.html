@@ -1,0 +1,5 @@
+<div class="ui-message ui-corner-all ui-messages-error" *ngIf="invalid">
+  <i class="fa fa-close"></i>
+  <span *ngIf="control.errors['required']">Campo Requerido</span>
+  <span *ngIf="control.errors['minlength']">Minimo {{ control.errors['minlength'].requiredLength }} letras</span>
+</div>

@@ -1,0 +1,15 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-g-nopad">Paises</div>
+  <div class="ui-g-12">
+    <app-search-form-country [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate($event)"></app-search-form-country>
+  </div>
+  <div class="ui-g-12 ui-g-nopad">
+    <div class="ui-g-6 ui-g-nopad">
+      <app-table-shared [configTable]="configTable" [data]="countries$ | async" (rowSelect)="onEdit($event)"
+        (rowUnselect)="onCancel()"></app-table-shared>
+    </div>
+    <div class="ui-g-6 ui-g-nopad">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
