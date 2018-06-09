@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { routes } from './state.routes';
 
-import { SharedModule } from 'primeng/components/common/shared';
+import { SharedModule } from './../../shared/shared.module';
 
 import * as fromContainers from './containers';
 

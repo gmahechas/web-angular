@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromLayout from './../reducers/layout-core.reducer';
 import * as fromCore from './../reducers';
+import * as fromLayout from './../reducers/layout-core.reducer';
 
 export const getMenuItems = createSelector(
   fromCore.getLayoutState,
@@ -16,4 +16,14 @@ export const getShowSidenav = createSelector(
 export const getBlockedDocument = createSelector(
   fromCore.getLayoutState,
   fromLayout.getBlockedDocument
+);
+
+export const getShowSpinner = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getShowSpinner
+);
+
+export const getProgressBar = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getProgressBar
 );

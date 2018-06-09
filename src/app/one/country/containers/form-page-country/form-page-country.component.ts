@@ -27,7 +27,11 @@ export class FormPageCountryComponent implements OnInit {
   }
 
   onStore(country: Country) {
-    this.store.dispatch(new fromStore.EntityStore(country));
+    this.store.dispatch(new fromStore.StoreEntity(country));
+  }
+
+  onUpdate(country: Country) {
+    this.store.dispatch(new fromStore.UpdateEntity(country));
   }
 
   onCancel() {
@@ -37,6 +41,6 @@ export class FormPageCountryComponent implements OnInit {
   }
 
   onDestroy(country: Country) {
-    this.store.dispatch(new fromStore.EntityDestroy(country));
+    this.store.dispatch(new fromStore.DestroyEntity(country));
   }
 }

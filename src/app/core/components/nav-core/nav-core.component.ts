@@ -9,7 +9,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class NavCoreComponent implements OnInit {
 
-  @Input() menuItems: MenuItem[];
+  @Input() menuItems: any[];
   @Input() showSidenav = false;
   @Output() hide: EventEmitter<boolean> = new EventEmitter<boolean>();
 

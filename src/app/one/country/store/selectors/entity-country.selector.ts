@@ -10,24 +10,11 @@ export const getEntityState = createSelector(
 );
 
 export const {
-  selectIds: getIds,
-  selectEntities: getEntities,
-  selectAll: getAllEntities,
-  selectTotal: getTotalEntities,
+  selectIds: getIds, // 1,2,3...
+  selectEntities: getEntities, // Key with Entities
+  selectAll: getAllEntities, // Entities
+  selectTotal: getTotalEntities, // total
 } = fromEntity.adapter.getSelectors(getEntityState);
-
-export const getSelectedId = createSelector(
-  getEntityState,
-  fromEntity.getSelectedId
-);
-
-export const getSelected = createSelector(
-  getEntities,
-  getSelectedId,
-  (entities, selectedId) => {
-    return selectedId && entities[selectedId];
-  }
-);
 
 export const getSelectedByRouter = createSelector(
   getEntities,

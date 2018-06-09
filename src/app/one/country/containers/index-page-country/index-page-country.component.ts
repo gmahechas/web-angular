@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromStore from './../../store';
@@ -11,20 +11,30 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-index-page-country',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-page-country.component.html',
   styleUrls: ['./index-page-country.component.scss']
 })
 export class IndexPageCountryComponent implements OnInit {
 
-  countries$: Observable<Country[]>;
   query$: Observable<SearchCountry>;
+
+  data$: Observable<Country[]>;
+  total$: Observable<number>;
+  perPage$: Observable<number>;
+  from$: Observable<number>;
+  to$: Observable<number>;
   configTable: any;
 
   constructor(
     private store: Store<fromStore.State>
   ) {
-    this.countries$ = store.pipe(select(fromStore.getAllEntities));
+    this.data$ = store.pipe(select(fromStore.getAllEntities));
     this.query$ = store.pipe(select(fromStore.getQuery));
+    this.total$ = store.pipe(select(fromStore.getTotal));
+    this.perPage$ = store.pipe(select(fromStore.getPerPage));
+    this.from$ = store.pipe(select(fromStore.getFrom));
+    this.to$ = store.pipe(select(fromStore.getTo));
     this.configTable = {
       dataKey: 'country_id',
       cols: [
@@ -38,21 +48,23 @@ export class IndexPageCountryComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(countrySearch: SearchCountry) {
-    this.store.dispatch(new fromStore.EntityLoad(countrySearch));
+    this.store.dispatch(new fromStore.LoadEntity({ ...countrySearch, limit: 20, page: 1 }));
   }
 
   onCreate() {
     this.store.dispatch(new fromCore.Go({
-      path: ['country', 'create'],
-      /* extras: { skipLocationChange: true } */
+      path: ['country', 'create']
     }));
   }
 
   onEdit(country: Country) {
     this.store.dispatch(new fromCore.Go({
-      path: ['country', country.country_id],
-      /* extras: { skipLocationChange: true } */
+      path: ['country', country.country_id]
     }));
+  }
+
+  onPaginate(event) {
+    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
   }
 
   onCancel() {

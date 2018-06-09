@@ -20,7 +20,11 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.EntityLoadSuccess: {
+    case EntityActionTypes.LoadEntity: {
+      return initialState;
+    }
+
+    case EntityActionTypes.LoadSuccessEntity: {
       return {
         ...state,
         total: action.payload.paginationCountry.total,
@@ -31,10 +35,8 @@ export function reducer(state = initialState, action: EntityActions): State {
       };
     }
 
-    case EntityActionTypes.EntityLoadFail: {
-      return {
-        ...initialState
-      };
+    case EntityActionTypes.LoadFailEntity: {
+      return initialState;
     }
 
     default:

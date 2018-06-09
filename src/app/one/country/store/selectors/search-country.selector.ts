@@ -13,16 +13,6 @@ export const getLoaded = createSelector(
     fromSearch.getLoaded
 );
 
-export const getLoading = createSelector(
-    getSearchState,
-    fromSearch.getLoading
-);
-
-export const getError = createSelector(
-    getSearchState,
-    fromSearch.getError
-);
-
 export const getQuery = createSelector(
     getSearchState,
     fromSearch.getQuery

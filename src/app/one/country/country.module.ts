@@ -13,8 +13,6 @@ import * as fromComponents from './components';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
 
-import { CountryService } from './services/country.service';
-
 @NgModule({
   imports: [
     RouterModule.forChild(routes),

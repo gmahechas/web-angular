@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { AuthActions, AuthActionTypes, Login, LoginSuccess, LoginFailure } from '../actions/auth.actions';
-import { AuthService } from '../../services/auth.service';
-import { Auth } from './../../models/auth.model';
-import { Token } from '../../models/token.model';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../../../core/store';
+import * as fromActions from '../actions';
 
-import { of } from 'rxjs';
+import * as fromModels from './../../models';
+
+import { AuthService } from '../../services/auth.service';
+
+import { of, defer } from 'rxjs';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -15,48 +17,59 @@ export class AuthEffects {
 
   @Effect()
   login$ = this.actions$.pipe(
-    ofType<Login>(AuthActionTypes.Login),
+    ofType<fromActions.Login>(fromActions.AuthActionTypes.Login),
     map(action => action.payload),
-    exhaustMap((auth: Auth) =>
+    exhaustMap((auth: fromModels.Auth) =>
       this.authService
         .login(auth)
         .pipe(
-          map(((token: Token) => new LoginSuccess(token)),
-            catchError(error => of(new LoginFailure(error)))
+          map(((token: fromModels.Token) => new fromActions.LoginSuccess(token)),
+            catchError(error => of(new fromActions.LoginFailure(error)))
           )
         )
     ));
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
-    ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
+    ofType<fromActions.LoginSuccess>(fromActions.AuthActionTypes.LoginSuccess),
     map(action => action.payload),
-    tap((token: Token) => {
+    tap((token: fromModels.Token) => {
       this.authService.setToken(token);
     })
   );
 
   @Effect({ dispatch: false })
   loginRedirect$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginRedirect),
+    ofType(fromActions.AuthActionTypes.LoginRedirect),
     tap(authed => {
       this.authService.removeToken();
-      this.router.navigate(['/auth']);
+      this.store.dispatch(new fromStore.Go({
+        path: ['auth']
+      }));
     })
   );
 
   @Effect({ dispatch: false })
   logout$ = this.actions$.pipe(
-    ofType(AuthActionTypes.Logout),
+    ofType(fromActions.AuthActionTypes.Logout),
     tap(authed => {
       this.authService.removeToken();
-      this.router.navigate(['/auth']);
+      this.store.dispatch(new fromStore.Go({
+        path: ['auth']
+      }));
     })
+  );
+
+  @Effect({ dispatch: false })
+  init$ = defer(() => {
+    return of('check login');
+  }).pipe(
+    tap((jum) => console.log(jum))
   );
 
   constructor(
     private actions$: Actions,
-    private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<fromStore.State>
   ) { }
 }

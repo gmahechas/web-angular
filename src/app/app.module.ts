@@ -11,6 +11,7 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
 import { CustomRouterStateSerializer } from './shared/router-utils';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { GraphqlModule } from './graphql/graphql.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
@@ -34,6 +35,7 @@ import { IndexPageCoreComponent } from './core/containers/index-page-core/index-
       maxAge: 25,
       logOnly: environment.production
     }),
+    GraphqlModule,
     SharedModule,
     CoreModule.forRoot(),
     AuthModule.forRoot()

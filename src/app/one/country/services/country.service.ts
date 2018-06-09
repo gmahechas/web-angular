@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql/country.graphql';
+
+import * as fromModels from './../models';
 
 import { Observable } from 'rxjs';
 
-import { Country } from '../models/country.model';
-import { SearchCountry } from '../models/search-country.model';
-import { PaginationCountry } from '../models/pagination-country.model';
-
-
 @Injectable()
 export class CountryService {
+
+  queryRef: QueryRef<fromModels.PaginationCountry>;
 
   constructor(
     private apollo: Apollo
   ) { }
 
-
-  paginationCountry(searchCountry: SearchCountry) {
-    return this.apollo.watchQuery<PaginationCountry>({
-      query: fromGraphql.paginationCountry,
+  load(searchCountry: fromModels.SearchCountry) {
+    this.queryRef = this.apollo.watchQuery<fromModels.PaginationCountry, fromModels.SearchCountry>({
+      query: fromGraphql.pagination,
       variables: searchCountry
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
-  storeCountry(country: Country): Observable<any> {
-    return this.apollo.mutate({
-      mutation: fromGraphql.storeCountry,
+  store(country: fromModels.Country): Observable<any> {
+    return this.apollo.mutate<fromModels.StoreCountry>({
+      mutation: fromGraphql.store,
       variables: {
         country_name: country.country_name,
         country_code: country.country_code
@@ -35,9 +35,9 @@ export class CountryService {
     });
   }
 
-  updateCountry(country: Country): Observable<any> {
-    return this.apollo.mutate({
-      mutation: fromGraphql.updateCountry,
+  update(country: fromModels.Country): Observable<any> {
+    return this.apollo.mutate<fromModels.UpdateCountry>({
+      mutation: fromGraphql.update,
       variables: {
         country_id: country.country_id,
         country_name: country.country_name,
@@ -46,12 +46,24 @@ export class CountryService {
     });
   }
 
-  destroyCountry(country: Country): Observable<any> {
-    return this.apollo.mutate({
-      mutation: fromGraphql.destroyCountry,
+  destroy(country: fromModels.Country): Observable<any> {
+    return this.apollo.mutate<fromModels.DestroyCountry>({
+      mutation: fromGraphql.destroy,
       variables: {
         country_id: country.country_id
       }
     });
   }
+
+  pagination(searchCountry: fromModels.SearchCountry) {
+    return this.queryRef.fetchMore({
+      query: fromGraphql.pagination,
+      variables: searchCountry,
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult.data;
+      }
+    });
+  }
+
 }

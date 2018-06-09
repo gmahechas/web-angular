@@ -1,3 +1,5 @@
+import { Country } from './country.model';
+
 export interface PaginationCountry {
   paginationCountry: {
     total?: number;
@@ -5,5 +7,6 @@ export interface PaginationCountry {
     current_page?: number;
     from?: number;
     to?: number;
+    data?: Country[];
   };
 }

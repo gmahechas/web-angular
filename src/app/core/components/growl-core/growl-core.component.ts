@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-growl-core',

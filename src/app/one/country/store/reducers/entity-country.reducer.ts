@@ -3,7 +3,7 @@ import { Country } from './../../models/country.model';
 import { EntityActionTypes, EntityActions } from '../actions/entity-country.actions';
 
 export interface State extends EntityState<Country> {
-  selectedId: string | null;
+
 }
 
 export const adapter: EntityAdapter<Country> = createEntityAdapter<Country>({
@@ -11,79 +11,35 @@ export const adapter: EntityAdapter<Country> = createEntityAdapter<Country>({
   sortComparer: false
 });
 
-export const initialState: State = adapter.getInitialState({
-  selectedId: null
-});
+export const initialState: State = adapter.getInitialState();
 
 export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.EntityLoadSuccess: {
-      return adapter.addAll(action.payload.paginationCountry['data'], {
-        ...state,
-        selectedId: state.selectedId
-      });
+    case EntityActionTypes.LoadSuccessEntity: {
+      return adapter.addAll(action.payload.paginationCountry.data, state);
     }
 
-    case EntityActionTypes.EntitySelect: {
-      return {
-        ...state,
-        selectedId: action.payload
-      };
+    case EntityActionTypes.LoadFailEntity: {
+      return adapter.removeAll(state);
     }
 
-    case EntityActionTypes.EntityUnselect: {
-      return {
-        ...state,
-        selectedId: null
-      };
+    case EntityActionTypes.StoreSuccessEntity: {
+      return adapter.addOne(action.payload.storeCountry, state);
     }
 
-
-    case EntityActionTypes.EntityStoreSuccess: {
-      return {
-        ...adapter.addOne(action.payload.storeCountry, state)
-      };
+    case EntityActionTypes.UpdateSuccessEntity: {
+      return adapter.updateOne({
+        id: action.payload.updateCountry.country_id,
+        changes: action.payload.updateCountry
+      },
+        state
+      );
     }
 
-    case EntityActionTypes.EntityStoreFail: {
-      return {
-        ...state
-      };
-    }
-
-
-    case EntityActionTypes.EntityUpdateSuccess: {
-      return {
-        ...adapter.updateOne(
-          {
-            id: action.payload.updateCountry.country_id,
-            changes: action.payload.updateCountry
-          },
-          state
-        ),
-        selectedId: null
-      };
-    }
-
-    case EntityActionTypes.EntityUpdateFail: {
-      return {
-        ...state
-      };
-    }
-
-    case EntityActionTypes.EntityDestroySuccess: {
-      return {
-        ...adapter.removeOne(action.payload.destroyCountry.country_id, state),
-        selectedId: null
-      };
-    }
-
-    case EntityActionTypes.EntityDestroyFail: {
-      return {
-        ...state
-      };
+    case EntityActionTypes.DestroySuccessEntity: {
+      return adapter.removeOne(action.payload.destroyCountry.country_id, state);
     }
 
     default:
@@ -91,5 +47,3 @@ export function reducer(state = initialState, action: EntityActions): State {
   }
 
 }
-
-export const getSelectedId = (state: State) => state.selectedId;

@@ -9,7 +9,6 @@ export class IndexPageDashboardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

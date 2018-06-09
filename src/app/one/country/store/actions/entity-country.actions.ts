@@ -1,110 +1,99 @@
 import { Action } from '@ngrx/store';
 
-import { Country } from './../../models/country.model';
-import { SearchCountry } from './../../models/search-country.model';
-import { PaginationCountry } from '../../models/pagination-country.model';
-import { StoreCountry } from '../../models/store-country.model';
-import { UpdateCountry } from '../../models/update-country.model';
-import { DestroyCountry } from './../../models/destroy-country.model';
+import * as fromModels from '../../models';
 
 export enum EntityActionTypes {
-  EntityLoad = '[Country] Entity Load',
-  EntityLoadSuccess = '[Country] Entity Load Success',
-  EntityLoadFail = '[Country] Entity Load Fail',
-  EntitySelect = '[Country] Entity Select',
-  EntityUnselect = '[Country] Entity Unselect',
-  EntityStore = '[Country] Entity Store',
-  EntityStoreSuccess = '[Country] Entity Store Success',
-  EntityStoreFail = '[Country] Entity Store Fail',
-  EntityUpdate = '[Country] Entity Update',
-  EntityUpdateSuccess = '[Country] Entity Update Success',
-  EntityUpdateFail = '[Country] Entity Update Fail',
-  EntityDestroy = '[Country] Entity Destroy',
-  EntityDestroySuccess = '[Country] Entity Destroy Success',
-  EntityDestroyFail = '[Country] Entity Destroy Fail'
+  LoadEntity = '[Country] Load Entity ',
+  LoadSuccessEntity = '[Country] Load Success Entity',
+  LoadFailEntity = '[Country] Load Fail Entity',
+  StoreEntity = '[Country] Store Entity',
+  StoreSuccessEntity = '[Country] Store Success Entity',
+  StoreFailEntity = '[Country] Store Fail Entity',
+  UpdateEntity = '[Country] Update Entity',
+  UpdateSuccessEntity = '[Country] Update Success Entity',
+  UpdateFailEntity = '[Country] Update Fail Entity',
+  DestroyEntity = '[Country] Destroy Entity',
+  DestroySuccessEntity = '[Country] Destroy Success Entity',
+  DestroyFailEntity = '[Country] Destroy Fail Entity',
+  PaginateEntity = '[Country] Paginate Entity'
 }
 
-export class EntityLoad implements Action {
-  readonly type = EntityActionTypes.EntityLoad;
-  constructor(public payload: SearchCountry) { }
+export class LoadEntity implements Action {
+  readonly type = EntityActionTypes.LoadEntity;
+  constructor(public payload: fromModels.SearchCountry) { }
 }
 
-export class EntityLoadSuccess implements Action {
-  readonly type = EntityActionTypes.EntityLoadSuccess;
-  constructor(public payload: PaginationCountry) { }
+export class LoadSuccessEntity implements Action {
+  readonly type = EntityActionTypes.LoadSuccessEntity;
+  constructor(public payload: fromModels.PaginationCountry) { }
 }
 
-export class EntityLoadFail implements Action {
-  readonly type = EntityActionTypes.EntityLoadFail;
+export class LoadFailEntity implements Action {
+  readonly type = EntityActionTypes.LoadFailEntity;
   constructor(public payload: any) { }
 }
 
-export class EntitySelect implements Action {
-  readonly type = EntityActionTypes.EntitySelect;
-  constructor(public payload: string) { }
+export class StoreEntity implements Action {
+  readonly type = EntityActionTypes.StoreEntity;
+  constructor(public payload: fromModels.Country) { }
 }
 
-export class EntityUnselect implements Action {
-  readonly type = EntityActionTypes.EntityUnselect;
+export class StoreSuccessEntity implements Action {
+  readonly type = EntityActionTypes.StoreSuccessEntity;
+  constructor(public payload: fromModels.StoreCountry) { }
 }
 
-export class EntityStore implements Action {
-  readonly type = EntityActionTypes.EntityStore;
-  constructor(public payload: Country) { }
-}
-
-export class EntityStoreSuccess implements Action {
-  readonly type = EntityActionTypes.EntityStoreSuccess;
-  constructor(public payload: StoreCountry) { }
-}
-
-export class EntityStoreFail implements Action {
-  readonly type = EntityActionTypes.EntityStoreFail;
+export class StoreFailEntity implements Action {
+  readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: any) { }
 }
 
-export class EntityUpdate implements Action {
-  readonly type = EntityActionTypes.EntityUpdate;
-  constructor(public payload: Country) { }
+export class UpdateEntity implements Action {
+  readonly type = EntityActionTypes.UpdateEntity;
+  constructor(public payload: fromModels.Country) { }
 }
 
-export class EntityUpdateSuccess implements Action {
-  readonly type = EntityActionTypes.EntityUpdateSuccess;
-  constructor(public payload: UpdateCountry) { }
+export class UpdateSuccessEntity implements Action {
+  readonly type = EntityActionTypes.UpdateSuccessEntity;
+  constructor(public payload: fromModels.UpdateCountry) { }
 }
 
-export class EntityUpdateFail implements Action {
-  readonly type = EntityActionTypes.EntityUpdateFail;
+export class UpdateFailEntity implements Action {
+  readonly type = EntityActionTypes.UpdateFailEntity;
   constructor(public payload: any) { }
 }
 
-export class EntityDestroy implements Action {
-  readonly type = EntityActionTypes.EntityDestroy;
-  constructor(public payload: Country) { }
+export class DestroyEntity implements Action {
+  readonly type = EntityActionTypes.DestroyEntity;
+  constructor(public payload: fromModels.Country) { }
 }
 
-export class EntityDestroySuccess implements Action {
-  readonly type = EntityActionTypes.EntityDestroySuccess;
-  constructor(public payload: DestroyCountry) { }
+export class DestroySuccessEntity implements Action {
+  readonly type = EntityActionTypes.DestroySuccessEntity;
+  constructor(public payload: fromModels.DestroyCountry) { }
 }
 
-export class EntityDestroyFail implements Action {
-  readonly type = EntityActionTypes.EntityDestroyFail;
+export class DestroyFailEntity implements Action {
+  readonly type = EntityActionTypes.DestroyFailEntity;
   constructor(public payload: any) { }
+}
+
+export class PaginateEntity implements Action {
+  readonly type = EntityActionTypes.PaginateEntity;
+  constructor(public payload: number) { }
 }
 
 export type EntityActions =
-  | EntityLoad
-  | EntityLoadSuccess
-  | EntityLoadFail
-  | EntitySelect
-  | EntityUnselect
-  | EntityStore
-  | EntityStoreSuccess
-  | EntityStoreFail
-  | EntityUpdate
-  | EntityUpdateSuccess
-  | EntityUpdateFail
-  | EntityDestroy
-  | EntityDestroySuccess
-  | EntityDestroyFail;
+  | LoadEntity
+  | LoadSuccessEntity
+  | LoadFailEntity
+  | StoreEntity
+  | StoreSuccessEntity
+  | StoreFailEntity
+  | UpdateEntity
+  | UpdateSuccessEntity
+  | UpdateFailEntity
+  | DestroyEntity
+  | DestroySuccessEntity
+  | DestroyFailEntity
+  | PaginateEntity;

@@ -16,6 +16,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import * as fromComponents from './components';
 
@@ -35,7 +36,8 @@ import * as fromComponents from './components';
     ProgressSpinnerModule,
     ConfirmDialogModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    ProgressBarModule
   ],
   declarations: [
     ...fromComponents.components
@@ -56,6 +58,7 @@ import * as fromComponents from './components';
     ConfirmDialogModule,
     MessagesModule,
     MessageModule,
+    ProgressBarModule,
     ...fromComponents.components
   ]
 })

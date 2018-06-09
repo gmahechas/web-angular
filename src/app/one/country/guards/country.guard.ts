@@ -8,7 +8,6 @@ import * as fromCore from './../../../core/store';
 
 import { Observable, of } from 'rxjs';
 import { tap, map, filter, take, switchMap, catchError } from 'rxjs/operators';
-import { SearchCountry } from '../models/search-country.model';
 
 @Injectable()
 export class CountryGuard implements CanActivate {
@@ -18,7 +17,7 @@ export class CountryGuard implements CanActivate {
     private countryService: CountryService
   ) { }
 
-
+  /* Always return 200 response */
   /*   hasInApi(country_id: string) {
       return this.countryService.paginationCountry({ country_id: +country_id }).pipe(
         map(({ data }) => new fromStore.EntityLoadSuccess(data)),
@@ -62,7 +61,7 @@ export class CountryGuard implements CanActivate {
       select(fromStore.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.EntityLoad({ country_id: +country_id, country_name: '', country_code: '' }));
+          this.store.dispatch(new fromStore.LoadEntity({ country_id: +country_id, country_name: '', country_code: '' }));
         }
       }),
       filter(loaded => loaded),

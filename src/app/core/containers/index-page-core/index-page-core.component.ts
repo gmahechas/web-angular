@@ -4,8 +4,6 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from './../../store';
 import * as fromAuth from '../../../auth/store';
 
-import { MenuItem } from 'primeng/api';
-
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +16,10 @@ export class IndexPageCoreComponent implements OnInit {
   loggedIn$: Observable<boolean>;
   showSidenav$: Observable<boolean>;
   blockedDocument$: Observable<boolean>;
-  menuItems: MenuItem[]; // TODO
+  showSpinner$: Observable<boolean>;
+  progressBar$: Observable<boolean>;
+  menuItems: any[]; // TODO
+  menuItems$: Observable<any[]>;
 
   constructor(
     private store: Store<fromStore.State>
@@ -26,12 +27,14 @@ export class IndexPageCoreComponent implements OnInit {
     this.loggedIn$ = store.pipe(select(fromAuth.getLoggedIn));
     this.showSidenav$ = store.pipe(select(fromStore.getShowSidenav));
     this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
+    this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));
+    this.progressBar$ = store.pipe(select(fromStore.getProgressBar));
+    this.menuItems$ = store.pipe(select(fromStore.getMenuItems));
     this.menuItems = [
       {
         icon: '',
         label: 'Inicio',
-        routerLink: 'dashboard',
-        command: (() => this.showSidenav(false))
+        routerLink: 'dashboard'
       },
       {
         icon: 'fas fa-cog',
@@ -42,13 +45,11 @@ export class IndexPageCoreComponent implements OnInit {
             items: [
               {
                 label: 'Paises',
-                routerLink: 'country',
-                command: (() => this.showSidenav(false))
+                routerLink: 'country'
               },
               {
                 label: 'Estados',
-                routerLink: 'state',
-                command: (() => this.showSidenav(false))
+                routerLink: 'state'
               }
             ]
           }

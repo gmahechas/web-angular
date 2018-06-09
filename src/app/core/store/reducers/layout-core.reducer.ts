@@ -1,10 +1,11 @@
-import { LayoutActionTypes, LayoutActions } from './../actions/layout-core.actions';
-import { MenuItem } from 'primeng/api';
+import { LayoutActionTypes, LayoutActions, CloseSpinner, ShowProgressBar } from './../actions/layout-core.actions';
 
 export interface State {
-  menuItems: MenuItem[];
+  menuItems: any[];
   showSidenav: boolean;
   blockedDocument: boolean;
+  showSpinner: boolean;
+  progressBar: boolean;
 }
 
 const initialState: State = {
@@ -12,7 +13,7 @@ const initialState: State = {
     {
       icon: '',
       label: 'Inicio',
-      routerLink: ['dashboard']
+      routerLink: 'dashboard'
     },
     {
       icon: 'fas fa-cog',
@@ -23,7 +24,11 @@ const initialState: State = {
           items: [
             {
               label: 'Paises',
-              routerLink: ['country']
+              routerLink: 'country'
+            },
+            {
+              label: 'Estados',
+              routerLink: 'state'
             }
           ]
         }
@@ -32,6 +37,8 @@ const initialState: State = {
   ],
   showSidenav: false,
   blockedDocument: false,
+  showSpinner: false,
+  progressBar: false
 };
 
 export function reducer(state: State = initialState, action: LayoutActions): State {
@@ -61,6 +68,30 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
         blockedDocument: false
       };
 
+      case LayoutActionTypes.ShowSpinner:
+      return {
+        ...state,
+        showSpinner: true,
+      };
+
+    case LayoutActionTypes.CloseSpinner:
+      return {
+        ...state,
+        showSpinner: false,
+      };
+
+      case LayoutActionTypes.ShowProgressBar:
+      return {
+        ...state,
+        progressBar: true,
+      };
+
+      case LayoutActionTypes.CloseProgressBar:
+      return {
+        ...state,
+        progressBar: false,
+      };
+
     default:
       return state;
   }
@@ -69,3 +100,5 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
 export const getMenuItems = (state: State) => state.menuItems;
 export const getShowSidenav = (state: State) => state.showSidenav;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
+export const getShowSpinner = (state: State) => state.showSpinner;
+export const getProgressBar = (state: State) => state.progressBar;

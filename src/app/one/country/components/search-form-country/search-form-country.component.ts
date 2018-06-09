@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { SearchCountry } from './../../models/search-country.model';
 
 @Component({
   selector: 'app-search-form-country',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './search-form-country.component.html',
   styleUrls: ['./search-form-country.component.scss']
 })
