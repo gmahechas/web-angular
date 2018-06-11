@@ -20,7 +20,7 @@ export class FormPageCountryComponent implements OnInit {
   constructor(
     private store: Store<fromStore.State>
   ) {
-    this.country$ = store.select(fromStore.getSelectedByRouter);
+    this.country$ = store.pipe(select(fromStore.getSelectedByRouter));
   }
 
   ngOnInit() {

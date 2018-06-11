@@ -1,4 +1,3 @@
-import { CountryService } from './../services/country.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
@@ -6,11 +5,13 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from './../store';
 import * as fromCore from './../../../core/store';
 
+import { CountryService } from './../services/country.service';
+
 import { Observable, of } from 'rxjs';
 import { tap, map, filter, take, switchMap, catchError } from 'rxjs/operators';
 
 @Injectable()
-export class CountryGuard implements CanActivate {
+export class CountryExistGuard implements CanActivate {
 
   constructor(
     private store: Store<fromStore.State>,

@@ -1,5 +1,5 @@
-import { CountryGuard } from './country.guard';
+import { CountryExistGuard } from './country-exist.guard';
 
-export const guards: any[] = [CountryGuard];
+export const guards: any[] = [CountryExistGuard];
 
-export * from './country.guard';
+export * from './country-exist.guard';

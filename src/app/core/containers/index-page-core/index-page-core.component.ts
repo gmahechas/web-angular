@@ -34,7 +34,8 @@ export class IndexPageCoreComponent implements OnInit {
       {
         icon: '',
         label: 'Inicio',
-        routerLink: 'dashboard'
+        routerLink: 'dashboard',
+        command: (() => this.showSidenav(false))
       },
       {
         icon: 'fas fa-cog',
@@ -45,11 +46,13 @@ export class IndexPageCoreComponent implements OnInit {
             items: [
               {
                 label: 'Paises',
-                routerLink: 'country'
+                routerLink: 'country',
+                command: (() => this.showSidenav(false))
               },
               {
                 label: 'Estados',
-                routerLink: 'state'
+                routerLink: 'state',
+                command: (() => this.showSidenav(false))
               }
             ]
           }

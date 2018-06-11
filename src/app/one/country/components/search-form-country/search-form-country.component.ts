@@ -5,6 +5,7 @@ import { SearchCountry } from './../../models/search-country.model';
 
 @Component({
   selector: 'app-search-form-country',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './search-form-country.component.html',
   styleUrls: ['./search-form-country.component.scss']
 })

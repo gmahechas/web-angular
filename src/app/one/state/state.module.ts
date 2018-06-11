@@ -12,7 +12,7 @@ import * as fromContainers from './containers';
     SharedModule
   ],
   declarations: [
-    ...fromContainers.containers,
+    ...fromContainers.containers
   ]
 })
 export class StateModule { }

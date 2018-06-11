@@ -11,7 +11,7 @@ import * as fromModels from './../../models';
 import { CountryService } from '../../services/country.service';
 
 import { of, from } from 'rxjs';
-import { map, tap, switchMap, catchError, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class EntityCountryEffects {

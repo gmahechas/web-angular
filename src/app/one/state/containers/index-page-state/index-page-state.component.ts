@@ -10,7 +10,6 @@ import * as fromCore from './../../../../core/store';
 })
 export class IndexPageStateComponent implements OnInit {
 
-  country: any;
   constructor(
     private store: Store<fromCore.State>
   ) { }
