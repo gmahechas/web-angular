@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { routes } from './estate.routes';
@@ -13,12 +14,15 @@ import * as fromComponents from './components';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
 
+import { CountryModule } from './../country/country.module';
+
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
     StoreModule.forFeature('estate', reducers),
     EffectsModule.forFeature(effects),
-    SharedModule
+    SharedModule,
+    CountryModule
   ],
   declarations: [
     ...fromContainers.containers,

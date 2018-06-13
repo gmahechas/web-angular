@@ -12,6 +12,7 @@ import * as fromContainers from './containers';
 import * as fromComponents from './components';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
+import * as fromSharedComponents from './shared/components';
 
 @NgModule({
   imports: [
@@ -22,11 +23,15 @@ import * as fromGuards from './guards';
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedComponents.sharedComponents
   ],
   providers: [
     ...fromServices.services,
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedComponents.sharedComponents
   ]
 })
 export class CountryModule { }

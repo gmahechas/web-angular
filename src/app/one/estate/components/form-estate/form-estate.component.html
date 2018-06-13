@@ -4,6 +4,8 @@
 
   <div class="ui-g">
     <div class="ui-g-6 ui-g-nopad">
+      <div>Pais *:</div>
+      <app-dropdown-country></app-dropdown-country>
       <div>Estado *:</div>
       <input pInputText type="text" placeholder="Estado" formControlName="estate_name" />
       <app-validation-errors-shared [control]="estateForm.get('estate_name')"></app-validation-errors-shared>
