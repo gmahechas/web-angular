@@ -28,21 +28,14 @@ export class CountryService {
   store(country: fromModels.Country): Observable<any> {
     return this.apollo.mutate<fromModels.StoreCountry>({
       mutation: fromGraphql.store,
-      variables: {
-        country_name: country.country_name,
-        country_code: country.country_code
-      }
+      variables: country
     });
   }
 
   update(country: fromModels.Country): Observable<any> {
     return this.apollo.mutate<fromModels.UpdateCountry>({
       mutation: fromGraphql.update,
-      variables: {
-        country_id: country.country_id,
-        country_name: country.country_name,
-        country_code: country.country_code
-      }
+      variables: country
     });
   }
 

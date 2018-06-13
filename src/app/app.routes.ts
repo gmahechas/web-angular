@@ -16,8 +16,8 @@ export const routes: Routes = [
     canLoad: [/* AuthGuard */]
   },
   {
-    path: 'state',
-    loadChildren: './one/state/state.module#StateModule',
+    path: 'estate',
+    loadChildren: './one/estate/estate.module#EstateModule',
     canLoad: [/* AuthGuard */]
   },
   {

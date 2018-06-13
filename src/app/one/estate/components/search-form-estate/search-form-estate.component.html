@@ -1,0 +1,7 @@
+<form [formGroup]="searchFormEstate" (ngSubmit)="onSubmit(searchFormEstate)">
+  <span>Buscar</span>
+  <input pInputText type="text" placeholder="Estado" formControlName="estate_name">
+  <input pInputText type="text" placeholder="Codigo" formControlName="estate_code">
+  <button pButton type="submit" label="Buscar" [disabled]="searchFormEstate.invalid" class="ui-button-secondary"></button>
+  <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
+</form>

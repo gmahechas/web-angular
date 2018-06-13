@@ -1,0 +1,18 @@
+<form [formGroup]="estateForm" (ngSubmit)="onSubmit(estateForm)">
+
+  <ng-content select="h3"></ng-content>
+
+  <div class="ui-g">
+    <div class="ui-g-6 ui-g-nopad">
+      <div>Estado *:</div>
+      <input pInputText type="text" placeholder="Estado" formControlName="estate_name" />
+      <app-validation-errors-shared [control]="estateForm.get('estate_name')"></app-validation-errors-shared>
+      <div>Codigo *:</div>
+      <input pInputText type="text" placeholder="Codigo" formControlName="estate_code" />
+      <app-validation-errors-shared [control]="estateForm.get('estate_code')"></app-validation-errors-shared>
+      <br>
+      <ng-content select="button"></ng-content>
+    </div>
+  </div>
+
+</form>

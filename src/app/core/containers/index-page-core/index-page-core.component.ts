@@ -51,7 +51,12 @@ export class IndexPageCoreComponent implements OnInit {
               },
               {
                 label: 'Estados',
-                routerLink: 'state',
+                routerLink: 'estate',
+                command: (() => this.showSidenav(false))
+              },
+              {
+                label: 'Ciudades',
+                routerLink: 'city',
                 command: (() => this.showSidenav(false))
               }
             ]

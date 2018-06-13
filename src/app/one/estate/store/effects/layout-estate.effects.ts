@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable()
-export class LayoutCountryEffects {
+export class LayoutEstateEffects {
 
   // Notifications / Spinner
   @Effect({ dispatch: false })
@@ -83,7 +83,7 @@ export class LayoutCountryEffects {
       fromActions.EntityActionTypes.LoadEntity,
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+      this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );
 
@@ -91,8 +91,8 @@ export class LayoutCountryEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.StoreCountry) => {
-      this.store.dispatch(new fromActions.LoadEntity(data.storeCountry));
+    tap((data: fromModels.StoreEstate) => {
+      this.store.dispatch(new fromActions.LoadEntity(data.storeEstate));
     })
   );
 
@@ -100,7 +100,7 @@ export class LayoutCountryEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.UpdateCountry) => {
+    tap((data: fromModels.UpdateEstate) => {
       // TODO
     })
   );
@@ -109,8 +109,8 @@ export class LayoutCountryEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.DestroyCountry) => {
-      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+    tap((data: fromModels.DestroyEstate) => {
+      this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );
 
