@@ -13,25 +13,38 @@ export class FormEstateComponent implements OnChanges, OnInit {
 
   @Input() estate: Estate;
   @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
+  configDropDownCountry: any;
 
   estateForm: FormGroup = this.formBuilder.group({
-    estate_name: new FormControl('', [Validators.required]),
-    estate_code: new FormControl('', [Validators.required, Validators.minLength(2)])
+    estate: this.formBuilder.group({
+      estate_name: new FormControl('', [Validators.required]),
+      estate_code: new FormControl('', [Validators.required, Validators.minLength(2)])
+    }),
+    country: new FormControl('', [Validators.required])
   });
 
   ngOnChanges() {
     if (this.estate) {
       this.estateForm.reset();
       this.estateForm.setValue({
-        estate_name: this.estate.estate_name,
-        estate_code: this.estate.estate_code,
+        estate: {
+          estate_name: this.estate.estate_name,
+          estate_code: this.estate.estate_code
+        },
+        country: this.estate['country']
       });
     }
   }
 
   constructor(
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.configDropDownCountry = {
+      placeholder: 'Pais',
+      dataKey: 'country_id',
+      optionLabel: 'country_name'
+    };
+  }
 
   ngOnInit() {
   }
@@ -44,14 +57,13 @@ export class FormEstateComponent implements OnChanges, OnInit {
           ...this.estate,
           ...estateForm.value
         };
-        this.submitted.emit(updatedEstate);
+        /*         this.submitted.emit(updatedEstate); */
       }
     } else {
       if (this.estateForm.valid) {
-        this.submitted.emit(estateForm.value);
+        /*         this.submitted.emit(estateForm.value); */
       }
     }
 
   }
-
 }

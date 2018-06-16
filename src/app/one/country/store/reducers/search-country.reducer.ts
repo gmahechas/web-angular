@@ -18,7 +18,8 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.LoadEntity: {
+    case EntityActionTypes.LoadEntity:
+    case EntityActionTypes.LoadEntityShared: {
       return {
         ...state,
         loaded: false,

@@ -22,7 +22,8 @@ export class LayoutCountryEffects {
       fromActions.EntityActionTypes.StoreEntity,
       fromActions.EntityActionTypes.UpdateEntity,
       fromActions.EntityActionTypes.DestroyEntity,
-      fromActions.EntityActionTypes.PaginateEntity
+      fromActions.EntityActionTypes.PaginateEntity,
+      fromActions.EntityActionTypes.LoadEntityShared
     ),
     tap(() => {
       this.store.dispatch(new fromCore.ShowSpinner);
@@ -33,6 +34,7 @@ export class LayoutCountryEffects {
   loadSuccessEntity$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadSuccessEntity,
+      fromActions.EntityActionTypes.LoadSuccessEntityShared
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);

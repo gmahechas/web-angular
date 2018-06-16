@@ -7,7 +7,9 @@ import * as fromModels from './../models';
 
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CountryService {
 
   queryRef: QueryRef<fromModels.PaginationCountry>;

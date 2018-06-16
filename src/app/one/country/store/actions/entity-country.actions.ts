@@ -15,7 +15,10 @@ export enum EntityActionTypes {
   DestroyEntity = '[Country] Destroy Entity',
   DestroySuccessEntity = '[Country] Destroy Success Entity',
   DestroyFailEntity = '[Country] Destroy Fail Entity',
-  PaginateEntity = '[Country] Paginate Entity'
+  PaginateEntity = '[Country] Paginate Entity',
+  LoadEntityShared = '[Country] Load Entity Shared',
+  LoadSuccessEntityShared = '[Country] Load Success Entity Shared',
+  LoadFailEntityShared = '[Country] Load Fail Entity Shared'
 }
 
 export class LoadEntity implements Action {
@@ -83,6 +86,11 @@ export class PaginateEntity implements Action {
   constructor(public payload: number) { }
 }
 
+export class LoadEntityShared implements Action {
+  readonly type = EntityActionTypes.LoadEntityShared;
+  constructor(public payload: fromModels.SearchCountry) { }
+}
+
 export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
@@ -96,4 +104,5 @@ export type EntityActions =
   | DestroyEntity
   | DestroySuccessEntity
   | DestroyFailEntity
-  | PaginateEntity;
+  | PaginateEntity
+  | LoadEntityShared;

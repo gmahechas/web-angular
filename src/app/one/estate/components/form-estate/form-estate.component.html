@@ -4,17 +4,23 @@
 
   <div class="ui-g">
     <div class="ui-g-6 ui-g-nopad">
+      <div formGroupName="estate">
+        <div>Estado *:</div>
+        <input pInputText type="text" placeholder="Estado" formControlName="estate_name" />
+        <app-validation-errors-shared [control]="estateForm.get('estate.estate_name')"></app-validation-errors-shared>
+        <div>Codigo *:</div>
+        <input pInputText type="text" placeholder="Codigo" formControlName="estate_code" />
+        <app-validation-errors-shared [control]="estateForm.get('estate.estate_code')"></app-validation-errors-shared>
+      </div>
       <div>Pais *:</div>
-      <app-dropdown-country></app-dropdown-country>
-      <div>Estado *:</div>
-      <input pInputText type="text" placeholder="Estado" formControlName="estate_name" />
-      <app-validation-errors-shared [control]="estateForm.get('estate_name')"></app-validation-errors-shared>
-      <div>Codigo *:</div>
-      <input pInputText type="text" placeholder="Codigo" formControlName="estate_code" />
-      <app-validation-errors-shared [control]="estateForm.get('estate_code')"></app-validation-errors-shared>
+      <app-dropdown-country [group]="estateForm" [controlName]="'country'" [configDropDown]="configDropDownCountry"></app-dropdown-country>
+      <app-validation-errors-shared [control]="estateForm.get('country')"></app-validation-errors-shared>
       <br>
       <ng-content select="button"></ng-content>
     </div>
   </div>
 
 </form>
+{{ estateForm.value | json }}
+<br>
+{{ estateForm.valid }}

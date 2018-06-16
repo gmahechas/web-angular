@@ -16,6 +16,15 @@ query paginationEstate($estate_id: ID, $limit: Int, $page: Int) {
       estate_created_at
       estate_updated_at
       estate_deleted_at
+      country_id
+      country {
+        country_id
+        country_name
+        country_code
+        country_created_at
+        country_updated_at
+        country_deleted_at
+      }
     }
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-table-shared',
@@ -21,9 +20,7 @@ export class TableSharedComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   onRowSelect(event) {
     this.rowSelect.emit(event.data);

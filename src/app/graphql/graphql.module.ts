@@ -22,7 +22,10 @@ export class GraphqlModule {
       link: httpLink.create({
         uri: environment.apilUrl + environment.graphqlUrl
       }),
-      cache: new InMemoryCache(),
+
+      cache: new InMemoryCache({
+        addTypename: false
+      }),
       defaultOptions: {
         watchQuery: {
           fetchPolicy: 'network-only'
