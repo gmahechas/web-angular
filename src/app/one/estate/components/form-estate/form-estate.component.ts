@@ -13,14 +13,12 @@ export class FormEstateComponent implements OnChanges, OnInit {
 
   @Input() estate: Estate;
   @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
-  configDropDownCountry: any;
 
   estateForm: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
       estate_name: new FormControl('', [Validators.required]),
       estate_code: new FormControl('', [Validators.required, Validators.minLength(2)])
-    }),
-    country: new FormControl('', [Validators.required])
+    })
   });
 
   ngOnChanges() {
@@ -30,21 +28,14 @@ export class FormEstateComponent implements OnChanges, OnInit {
         estate: {
           estate_name: this.estate.estate_name,
           estate_code: this.estate.estate_code
-        },
-        country: this.estate['country']
+        }
       });
     }
   }
 
   constructor(
     private formBuilder: FormBuilder
-  ) {
-    this.configDropDownCountry = {
-      placeholder: 'Pais',
-      dataKey: 'country_id',
-      optionLabel: 'country_name'
-    };
-  }
+  ) { }
 
   ngOnInit() {
   }

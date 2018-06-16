@@ -12,10 +12,6 @@
         <input pInputText type="text" placeholder="Codigo" formControlName="estate_code" />
         <app-validation-errors-shared [control]="estateForm.get('estate.estate_code')"></app-validation-errors-shared>
       </div>
-      <div>Pais *:</div>
-      <app-dropdown-country [group]="estateForm" [controlName]="'country'" [configDropDown]="configDropDownCountry"></app-dropdown-country>
-      <app-validation-errors-shared [control]="estateForm.get('country')"></app-validation-errors-shared>
-      <br>
       <ng-content select="button"></ng-content>
     </div>
   </div>

@@ -7,7 +7,9 @@ import * as fromModels from './../models';
 
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class EstateService {
 
   queryRef: QueryRef<fromModels.PaginationEstate>;
