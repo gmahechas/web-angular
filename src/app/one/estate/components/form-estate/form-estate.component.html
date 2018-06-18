@@ -6,11 +6,9 @@
     <div class="ui-g-6 ui-g-nopad">
       <div formGroupName="estate">
         <div>Estado *:</div>
-        <input pInputText type="text" placeholder="Estado" formControlName="estate_name" />
-        <app-validation-errors-shared [control]="estateForm.get('estate.estate_name')"></app-validation-errors-shared>
+        <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
         <div>Codigo *:</div>
-        <input pInputText type="text" placeholder="Codigo" formControlName="estate_code" />
-        <app-validation-errors-shared [control]="estateForm.get('estate.estate_code')"></app-validation-errors-shared>
+        <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
       </div>
       <ng-content select="button"></ng-content>
     </div>

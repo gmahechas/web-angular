@@ -15,16 +15,20 @@ export class FormCountryComponent implements OnChanges, OnInit {
   @Output() submitted: EventEmitter<Country> = new EventEmitter<Country>();
 
   countryForm: FormGroup = this.formBuilder.group({
-    country_name: new FormControl('', [Validators.required]),
-    country_code: new FormControl('', [Validators.required, Validators.minLength(2)])
+    country: this.formBuilder.group({
+      country_name: new FormControl('', [Validators.required]),
+      country_code: new FormControl('', [Validators.required, Validators.minLength(2)])
+    })
   });
 
   ngOnChanges() {
     if (this.country) {
       this.countryForm.reset();
       this.countryForm.setValue({
-        country_name: this.country.country_name,
-        country_code: this.country.country_code,
+        country: {
+          country_name: this.country.country_name,
+          country_code: this.country.country_code,
+        }
       });
     }
   }
@@ -42,13 +46,13 @@ export class FormCountryComponent implements OnChanges, OnInit {
       if (this.countryForm.dirty && this.countryForm.valid) {
         const updatedCountry = {
           ...this.country,
-          ...countryForm.value
+          ...countryForm.value.country
         };
         this.submitted.emit(updatedCountry);
       }
     } else {
       if (this.countryForm.valid) {
-        this.submitted.emit(countryForm.value);
+        this.submitted.emit(countryForm.value.country);
       }
     }
 

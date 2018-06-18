@@ -1,6 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
-    <input pInputText type="text" placeholder="Required" formControlName="username"/>
-    <input pInputText type="password" placeholder="Required" formControlName="password" />
+    <app-input-text-shared [group]="loginForm" [groupName]="'auth'" [controlName]="'username'" [placeholder]="'Usuario'"></app-input-text-shared>
+    <app-input-password-shared [group]="loginForm" [groupName]="'auth'" [controlName]="'password'" [placeholder]="'Contraseña'"></app-input-password-shared>
     <button pButton type="submit" label="Iniciar Sesion" [disabled]="loginForm.invalid"></button>
     <button pButton type="button" label="Olvide mi Contraseña"></button>
 </form>

@@ -5,11 +5,9 @@
   <div class="ui-g">
     <div class="ui-g-6 ui-g-nopad">
       <div>Pais *:</div>
-      <input pInputText type="text" placeholder="Pais" formControlName="country_name" />
-      <app-validation-errors-shared [control]="countryForm.get('country_name')"></app-validation-errors-shared>
+      <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_name'" [placeholder]="'Pais'"></app-input-text-shared>
       <div>Codigo *:</div>
-      <input pInputText type="text" placeholder="Codigo" formControlName="country_code" />
-      <app-validation-errors-shared [control]="countryForm.get('country_code')"></app-validation-errors-shared>
+      <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
       <br>
       <ng-content select="button"></ng-content>
     </div>

@@ -16,8 +16,10 @@ export class SearchFormCountryComponent implements OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   searchFormCountry: FormGroup = this.formBuilder.group({
-    country_name: new FormControl(''),
-    country_code: new FormControl('')
+    country: this.formBuilder.group({
+      country_name: new FormControl(''),
+      country_code: new FormControl('')
+    })
   });
 
   constructor(
@@ -26,13 +28,15 @@ export class SearchFormCountryComponent implements OnInit {
 
   ngOnInit() {
     this.searchFormCountry.setValue({
-      country_name: this.query.country_name,
-      country_code: this.query.country_code
+      country: {
+        country_name: this.query.country_name,
+        country_code: this.query.country_code
+      }
     });
   }
 
   onSubmit(searchFormCountry: FormGroup) {
-    this.search.emit(searchFormCountry.value);
+    this.search.emit(searchFormCountry.value.country);
   }
 
   onCreate() {

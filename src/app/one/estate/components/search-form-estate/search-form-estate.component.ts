@@ -16,8 +16,10 @@ export class SearchFormEstateComponent implements OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   searchFormEstate: FormGroup = this.formBuilder.group({
-    estate_name: new FormControl(''),
-    estate_code: new FormControl(''),
+    estate: this.formBuilder.group({
+      estate_name: new FormControl(''),
+      estate_code: new FormControl(''),
+    })
   });
 
   constructor(
@@ -26,13 +28,15 @@ export class SearchFormEstateComponent implements OnInit {
 
   ngOnInit() {
     this.searchFormEstate.setValue({
-      estate_name: this.query.estate_name,
-      estate_code: this.query.estate_code
+      estate: {
+        estate_name: this.query.estate_name,
+        estate_code: this.query.estate_code
+      }
     });
   }
 
   onSubmit(searchFormEstate: FormGroup) {
-    this.search.emit(searchFormEstate.value);
+    this.search.emit(searchFormEstate.value.estate);
   }
 
   onCreate() {

@@ -10,8 +10,10 @@ import { Auth } from '../../models/auth.model';
 export class LoginFormAuthComponent implements OnInit {
 
   loginForm: FormGroup = this.formBuilder.group({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
+    auth: this.formBuilder.group({
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+    })
   });
 
   @Output() submitted: EventEmitter<Auth> = new EventEmitter<Auth>();

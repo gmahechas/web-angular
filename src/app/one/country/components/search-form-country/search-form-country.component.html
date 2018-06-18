@@ -1,7 +1,7 @@
 <form [formGroup]="searchFormCountry" (ngSubmit)="onSubmit(searchFormCountry)">
   <span>Buscar</span>
-  <input pInputText type="text" placeholder="Pais" formControlName="country_name">
-  <input pInputText type="text" placeholder="Codigo" formControlName="country_code" >
+  <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_name'" [placeholder]="'Pais'"></app-input-text-shared>
+  <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
   <button pButton type="submit" label="Buscar" [disabled]="searchFormCountry.invalid" class="ui-button-secondary"></button>
   <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
 </form>
