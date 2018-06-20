@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetect
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 import { Estate } from './../../models/estate.model';
+import { Country } from './../../../country/models/country.model';
 
 @Component({
   selector: 'app-form-estate',
@@ -11,15 +12,29 @@ import { Estate } from './../../models/estate.model';
 })
 export class FormEstateComponent implements OnChanges, OnInit {
 
+  @Output() submitted: EventEmitter<{ Estate, Country }> = new EventEmitter<{ Estate, Country }>();
+  @Output() fromKeyUp: EventEmitter<string> = new EventEmitter<string>();
   @Input() estate: Estate;
-  @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
+  @Input() countries: Country[];
+  configDropDown: any;
 
   estateForm: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
       estate_name: new FormControl('', [Validators.required]),
       estate_code: new FormControl('', [Validators.required, Validators.minLength(2)])
-    })
+    }),
+    country: new FormControl('', [Validators.required])
   });
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.configDropDown = {
+      placeholder: 'Selecciona el pais',
+      dataKey: 'country_id',
+      optionLabel: 'country_name'
+    };
+  }
 
   ngOnChanges() {
     if (this.estate) {
@@ -28,14 +43,11 @@ export class FormEstateComponent implements OnChanges, OnInit {
         estate: {
           estate_name: this.estate.estate_name,
           estate_code: this.estate.estate_code
-        }
+        },
+        country: this.estate['country']
       });
     }
   }
-
-  constructor(
-    private formBuilder: FormBuilder
-  ) { }
 
   ngOnInit() {
   }
@@ -48,13 +60,19 @@ export class FormEstateComponent implements OnChanges, OnInit {
           ...this.estate,
           ...estateForm.value
         };
-        /*         this.submitted.emit(updatedEstate); */
+        /*         console.log(updatedEstate); */
+        this.submitted.emit(updatedEstate);
       }
     } else {
       if (this.estateForm.valid) {
-        /*         this.submitted.emit(estateForm.value); */
+        /*         console.log(estateForm.value); */
+        this.submitted.emit(estateForm.value);
       }
     }
 
+  }
+
+  keyUp(event) {
+    this.fromKeyUp.emit(event);
   }
 }

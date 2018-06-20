@@ -11,19 +11,19 @@ export class DropdownSharedComponent implements OnInit {
 
   @Input() group: FormGroup;
   @Input() controlName: string;
-  @Input() data: any[];
   @Input() configDropDown: any;
+  @Input() data: any[];
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
   search = false;
 
   constructor() { }
 
   ngOnInit() {
-
   }
 
   onKeyUp(event) {
     this.search = true;
     this.keyUp.emit(event.target.value);
   }
+
 }

@@ -1,7 +1,7 @@
 <div [formGroup]="group">
-  <p-dropdown [formControlName]="controlName" [placeholder]="configDropDown.placeholder" [options]="(search) ? data : (group.get(controlName).value) ? [group.get(controlName).value] : data"
-    (keyup)="onKeyUp($event)" [optionLabel]="configDropDown.optionLabel" dataKey="configDropDown.dataKey" filter="true" emptyFilterMessage="No hay resultados" resetFilterOnHide="true" [autoDisplayFirst]="false">
+  <p-dropdown [formControlName]="controlName" [placeholder]="configDropDown.placeholder" [dataKey]="configDropDown.dataKey"
+    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)"
+    [options]="(search) ? data : (group.get(controlName).value) ? [group.get(controlName).value] : data">
   </p-dropdown>
 </div>
-
 

@@ -7,6 +7,7 @@ import { reducers, effects } from './store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared/shared.module';
+import { SharedCountryModule } from '../country/shared-country/shared-country.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
@@ -17,7 +18,8 @@ import * as fromGuards from './guards';
     RouterModule.forChild(routes),
     StoreModule.forFeature('estate', reducers),
     EffectsModule.forFeature(effects),
-    SharedModule
+    SharedModule,
+    SharedCountryModule
   ],
   declarations: [
     ...fromContainers.containers,

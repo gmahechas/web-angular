@@ -10,11 +10,14 @@
         <div>Codigo *:</div>
         <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
       </div>
+      <div formGroupName="country">
+        <div>Pais *:</div>
+        <app-dropdown-country></app-dropdown-country>
+        <!--         <app-dropdown-shared [group]="estateForm" [controlName]="'country'" [configDropDown]="configDropDown" [data]="countries"
+          (keyUp)="keyUp($event)"></app-dropdown-shared> -->
+      </div>
       <ng-content select="button"></ng-content>
     </div>
   </div>
 
 </form>
-{{ estateForm.value | json }}
-<br>
-{{ estateForm.valid }}

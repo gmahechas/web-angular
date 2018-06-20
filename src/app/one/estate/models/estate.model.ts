@@ -5,4 +5,5 @@ export interface Estate {
   estate_created_at?: string;
   estate_updated_at?: string;
   estate_deleted_at?: string;
+  country_id?: number;
 }
