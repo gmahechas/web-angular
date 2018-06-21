@@ -12,9 +12,7 @@
       </div>
       <div formGroupName="country">
         <div>Pais *:</div>
-        <app-dropdown-country></app-dropdown-country>
-        <!--         <app-dropdown-shared [group]="estateForm" [controlName]="'country'" [configDropDown]="configDropDown" [data]="countries"
-          (keyUp)="keyUp($event)"></app-dropdown-shared> -->
+        <app-dropdown-page-country [group]="estateForm" [controlName]="'country'"></app-dropdown-page-country>
       </div>
       <ng-content select="button"></ng-content>
     </div>

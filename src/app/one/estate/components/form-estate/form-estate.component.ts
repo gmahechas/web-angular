@@ -1,3 +1,4 @@
+
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
@@ -12,11 +13,9 @@ import { Country } from './../../../country/models/country.model';
 })
 export class FormEstateComponent implements OnChanges, OnInit {
 
-  @Output() submitted: EventEmitter<{ Estate, Country }> = new EventEmitter<{ Estate, Country }>();
+  @Output() submitted: EventEmitter<{ estate: Estate, country: Country }> = new EventEmitter<{ estate: Estate, country: Country }>();
   @Output() fromKeyUp: EventEmitter<string> = new EventEmitter<string>();
   @Input() estate: Estate;
-  @Input() countries: Country[];
-  configDropDown: any;
 
   estateForm: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
@@ -28,13 +27,7 @@ export class FormEstateComponent implements OnChanges, OnInit {
 
   constructor(
     private formBuilder: FormBuilder
-  ) {
-    this.configDropDown = {
-      placeholder: 'Selecciona el pais',
-      dataKey: 'country_id',
-      optionLabel: 'country_name'
-    };
-  }
+  ) { }
 
   ngOnChanges() {
     if (this.estate) {
@@ -56,16 +49,17 @@ export class FormEstateComponent implements OnChanges, OnInit {
 
     if (this.estate) {
       if (this.estateForm.dirty && this.estateForm.valid) {
-        const updatedEstate = {
-          ...this.estate,
-          ...estateForm.value
+        const updated = {
+          estate: {
+            ...estateForm.value.estate,
+            estate_id: this.estate.estate_id
+          },
+          country: this.estateForm.value.country
         };
-        /*         console.log(updatedEstate); */
-        this.submitted.emit(updatedEstate);
+        this.submitted.emit(updated);
       }
     } else {
       if (this.estateForm.valid) {
-        /*         console.log(estateForm.value); */
         this.submitted.emit(estateForm.value);
       }
     }

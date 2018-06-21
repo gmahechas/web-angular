@@ -1,6 +1,6 @@
 <div [formGroup]="group">
   <p-dropdown [formControlName]="controlName" [placeholder]="configDropDown.placeholder" [dataKey]="configDropDown.dataKey"
-    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)"
+    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)" [tabindex]="-1"
     [options]="(search) ? data : (group.get(controlName).value) ? [group.get(controlName).value] : data">
   </p-dropdown>
 </div>

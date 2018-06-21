@@ -1,3 +1,4 @@
+import { Country } from './../../../country/models/country.model';
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
@@ -5,8 +6,6 @@ import * as fromStore from './../../store';
 import * as fromCore from './../../../../core/store';
 
 import { Estate } from './../../models/estate.model';
-import { Country } from '../../../country/models/country.model';
-import * as fromCountry from '../../../country/store';
 
 import { Observable } from 'rxjs';
 
@@ -18,24 +17,22 @@ import { Observable } from 'rxjs';
 export class FormPageEstateComponent implements OnInit {
 
   estate$: Observable<Estate>;
-  countries$: Observable<Country[]>;
 
   constructor(
     private store: Store<fromStore.State>
   ) {
     this.estate$ = store.pipe(select(fromStore.getSelectedByRouter));
-    this.countries$ = store.pipe(select(fromCountry.getAllEntities));
   }
 
   ngOnInit() {
   }
 
-  onStore({ estate, country }) {
+  onStore({ estate, country }: { estate: Estate, country: Country }) {
     this.store.dispatch(new fromStore.StoreEntity({ ...estate, country_id: country.country_id }));
   }
 
-  onUpdate(estate: Estate) {
-    this.store.dispatch(new fromStore.UpdateEntity(estate));
+  onUpdate({ estate, country }: { estate: Estate, country: Country }) {
+    this.store.dispatch(new fromStore.UpdateEntity({ ...estate, country: country, country_id: country.country_id }));
   }
 
   onCancel() {
@@ -48,7 +45,4 @@ export class FormPageEstateComponent implements OnInit {
     this.store.dispatch(new fromStore.DestroyEntity(estate));
   }
 
-  fromKeyUp(event) {
-    this.store.dispatch(new fromCountry.LoadEntityShared({ country_name: event, country_code: '' }));
-  }
 }

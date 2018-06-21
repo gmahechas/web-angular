@@ -26,4 +26,7 @@ export class DropdownSharedComponent implements OnInit {
     this.keyUp.emit(event.target.value);
   }
 
+  focus(event) {
+    console.log(event);
+  }
 }

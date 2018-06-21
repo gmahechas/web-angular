@@ -36,18 +36,40 @@ mutation storeEstate($estate_name: String, $estate_code: String, $country_id: ID
     estate_id
     estate_name
     estate_code
+    estate_created_at
+    estate_updated_at
+    estate_deleted_at
     country_id
+    country {
+      country_id
+      country_name
+      country_code
+      country_created_at
+      country_updated_at
+      country_deleted_at
+    }
   }
 }
 `;
 
 export const update: DocumentNode = gql`
-mutation updateEstate($estate_id: ID!, $estate_name: String, $estate_code: String) {
-    updateEstate(estate_id: $estate_id, estate_name: $estate_name, estate_code: $estate_code) {
+mutation updateEstate($estate_id: ID!, $estate_name: String, $estate_code: String, $country_id: ID) {
+    updateEstate(estate_id: $estate_id, estate_name: $estate_name, estate_code: $estate_code, country_id: $country_id) {
       estate_id
       estate_name
       estate_code
+      estate_created_at
+      estate_updated_at
+      estate_deleted_at
       country_id
+      country {
+        country_id
+        country_name
+        country_code
+        country_created_at
+        country_updated_at
+        country_deleted_at
+      }
     }
 }
 `;

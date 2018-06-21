@@ -30,7 +30,7 @@ export class EstateService {
   store(estate: fromModels.Estate): Observable<any> {
     return this.apollo.mutate<fromModels.StoreEstate>({
       mutation: fromGraphql.store,
-      variables: {...estate, country_id: 1}
+      variables: estate
     });
   }
 
