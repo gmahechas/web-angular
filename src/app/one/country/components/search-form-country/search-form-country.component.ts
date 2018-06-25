@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { SearchCountry } from './../../models/search-country.model';
@@ -9,7 +9,7 @@ import { SearchCountry } from './../../models/search-country.model';
   templateUrl: './search-form-country.component.html',
   styleUrls: ['./search-form-country.component.scss']
 })
-export class SearchFormCountryComponent implements OnInit {
+export class SearchFormCountryComponent implements OnChanges, OnInit {
 
   @Input() query: SearchCountry;
   @Output() search: EventEmitter<SearchCountry> = new EventEmitter<SearchCountry>();
@@ -17,6 +17,7 @@ export class SearchFormCountryComponent implements OnInit {
 
   searchFormCountry: FormGroup = this.formBuilder.group({
     country: this.formBuilder.group({
+      country_id: new FormControl(''),
       country_name: new FormControl(''),
       country_code: new FormControl('')
     })
@@ -26,17 +27,21 @@ export class SearchFormCountryComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.searchFormCountry.setValue({
       country: {
-        country_name: this.query.country_name,
-        country_code: this.query.country_code
+        country_id: this.query.country.country_id,
+        country_name: this.query.country.country_name,
+        country_code: this.query.country.country_code
       }
     });
   }
 
+  ngOnInit() {
+  }
+
   onSubmit(searchFormCountry: FormGroup) {
-    this.search.emit(searchFormCountry.value.country);
+    this.search.emit(searchFormCountry.value);
   }
 
   onCreate() {

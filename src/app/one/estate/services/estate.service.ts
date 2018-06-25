@@ -21,7 +21,12 @@ export class EstateService {
   load(searchEstate: fromModels.SearchEstate) {
     this.queryRef = this.apollo.watchQuery<fromModels.PaginationEstate, fromModels.SearchEstate>({
       query: fromGraphql.pagination,
-      variables: searchEstate
+      variables: {
+        ...searchEstate.estate,
+        ...searchEstate.country,
+        limit: searchEstate.limit,
+        page: searchEstate.page
+      }
     });
 
     return this.queryRef.valueChanges;
@@ -53,7 +58,12 @@ export class EstateService {
   pagination(searchEstate: fromModels.SearchEstate) {
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
-      variables: searchEstate,
+      variables: {
+        ...searchEstate.estate,
+        ...searchEstate.country,
+        limit: searchEstate.limit,
+        page: searchEstate.page
+      },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) { return prev; }
         return fetchMoreResult.data;

@@ -11,6 +11,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 export const prime: any[] = [
   SidebarModule,
@@ -25,5 +26,6 @@ export const prime: any[] = [
   ConfirmDialogModule,
   MessagesModule,
   MessageModule,
-  ProgressBarModule
+  ProgressBarModule,
+  KeyFilterModule
 ];

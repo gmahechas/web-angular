@@ -2,8 +2,22 @@ import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 
 export const pagination: DocumentNode = gql`
-query paginationEstate($estate_id: ID, $limit: Int, $page: Int) {
-  paginationEstate(estate_id: $estate_id, limit: $limit, page: $page) {
+query paginationEstate(
+  $estate_id: ID,
+  $estate_name: String,
+  $estate_code: String,
+  $country_id: ID,
+  $limit: Int,
+  $page: Int
+) {
+  paginationEstate(
+    estate_id: $estate_id,
+    estate_name: $estate_name,
+    estate_code: $estate_code,
+    country_id: $country_id,
+    limit: $limit,
+    page: $page
+  ) {
     total
     per_page
     current_page

@@ -92,7 +92,14 @@ export class LayoutEstateEffects {
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
     tap((data: fromModels.StoreEstate) => {
-      this.store.dispatch(new fromActions.LoadEntity(data.storeEstate));
+      this.store.dispatch(new fromActions.LoadEntity({
+        estate: {
+          estate_id: String(data.storeEstate.estate_id),
+          estate_name: data.storeEstate.estate_name,
+          estate_code: data.storeEstate.estate_code
+        },
+        country: data.storeEstate.country
+      }));
     })
   );
 
@@ -101,7 +108,7 @@ export class LayoutEstateEffects {
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
     tap((data: fromModels.UpdateEstate) => {
-      // TODO
+      this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );
 

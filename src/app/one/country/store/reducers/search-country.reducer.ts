@@ -9,8 +9,11 @@ export interface State {
 const initialState: State = {
   loaded: false,
   query: {
-    country_code: '',
-    country_name: ''
+    country: {
+      country_id: '',
+      country_code: '',
+      country_name: ''
+    }
   }
 };
 

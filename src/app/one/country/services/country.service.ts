@@ -21,7 +21,11 @@ export class CountryService {
   load(searchCountry: fromModels.SearchCountry) {
     this.queryRef = this.apollo.watchQuery<fromModels.PaginationCountry, fromModels.SearchCountry>({
       query: fromGraphql.pagination,
-      variables: searchCountry
+      variables: {
+        ...searchCountry.country,
+        limit: searchCountry.limit,
+        page: searchCountry.page
+      }
     });
 
     return this.queryRef.valueChanges;
@@ -53,7 +57,11 @@ export class CountryService {
   pagination(searchCountry: fromModels.SearchCountry) {
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
-      variables: searchCountry,
+      variables: {
+        ...searchCountry.country,
+        limit: searchCountry.limit,
+        page: searchCountry.page
+      },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) { return prev; }
         return fetchMoreResult.data;

@@ -9,8 +9,12 @@ export interface State {
 const initialState: State = {
   loaded: false,
   query: {
-    estate_name: '',
-    estate_code: ''
+    estate: {
+      estate_id: null,
+      estate_name: '',
+      estate_code: '',
+    },
+    country: null
   }
 };
 

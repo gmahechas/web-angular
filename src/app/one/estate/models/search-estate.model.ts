@@ -1,7 +1,12 @@
+import { Country } from '../../country/models';
+
 export interface SearchEstate {
-  estate_id?: number;
-  estate_code?: string;
-  estate_name?: string;
+  estate?: {
+    estate_id?: string;
+    estate_name?: string;
+    estate_code?: string;
+  };
+  country?: Country;
   limit?: number;
   page?: number;
 }

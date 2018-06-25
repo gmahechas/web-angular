@@ -13,9 +13,9 @@ export class DropdownSharedComponent implements OnInit {
   @Input() controlName: string;
   @Input() configDropDown: any;
   @Input() data: any[];
+  @Input() options: string[];
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
   search = false;
-
   constructor() { }
 
   ngOnInit() {
@@ -26,7 +26,4 @@ export class DropdownSharedComponent implements OnInit {
     this.keyUp.emit(event.target.value);
   }
 
-  focus(event) {
-    console.log(event);
-  }
 }

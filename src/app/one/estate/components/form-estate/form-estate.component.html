@@ -12,7 +12,7 @@
       </div>
       <div formGroupName="country">
         <div>Pais *:</div>
-        <app-dropdown-page-country [group]="estateForm" [controlName]="'country'"></app-dropdown-page-country>
+        <app-dropdown-page-country [group]="estateForm" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
       </div>
       <ng-content select="button"></ng-content>
     </div>

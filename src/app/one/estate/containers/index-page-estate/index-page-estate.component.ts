@@ -41,7 +41,7 @@ export class IndexPageEstateComponent implements OnInit {
         { field: 'estate_id', header: 'Id', style: { 'width': '5%' } },
         { field: 'estate_name', header: 'Estado', style: { 'width': '45%' } },
         { field: 'estate_code', header: 'Codigo', style: { 'width': '10%' } },
-        { field: 'country', subfield: 'country_name', style: { 'width': '40%' } }
+        { field: 'country', subfield: 'country_name', header: 'Pais', style: { 'width': '40%' } }
       ]
     };
   }
@@ -49,7 +49,12 @@ export class IndexPageEstateComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(estateSearch: SearchEstate) {
-    this.store.dispatch(new fromStore.LoadEntity({ ...estateSearch, limit: 20, page: 1 }));
+    this.store.dispatch(new fromStore.LoadEntity({
+      estate: estateSearch.estate,
+      country: estateSearch.country,
+      limit: 20,
+      page: 1
+    }));
   }
 
   onCreate() {
