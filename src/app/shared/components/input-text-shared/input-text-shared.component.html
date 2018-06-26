@@ -1,6 +1,6 @@
 <div [formGroup]="group">
   <div [formGroupName]="groupName">
-    <input pInputText type="text" [placeholder]="placeholder" [formControlName]="controlName" pKeyFilter="alpha" />
+    <input pInputText type="text" [placeholder]="placeholder" [formControlName]="controlName" [pKeyFilter]="(keyFilter) ? keyFilter : 'alphanum'" />
     <app-validation-errors-shared [control]="group.get(groupName + '.' + controlName)"></app-validation-errors-shared>
   </div>
 </div>

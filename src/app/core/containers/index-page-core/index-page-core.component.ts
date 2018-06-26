@@ -14,7 +14,6 @@ import { Observable } from 'rxjs';
 export class IndexPageCoreComponent implements OnInit {
 
   loggedIn$: Observable<boolean>;
-  showSidenav$: Observable<boolean>;
   blockedDocument$: Observable<boolean>;
   showSpinner$: Observable<boolean>;
   progressBar$: Observable<boolean>;
@@ -25,7 +24,6 @@ export class IndexPageCoreComponent implements OnInit {
     private store: Store<fromStore.State>
   ) {
     this.loggedIn$ = store.pipe(select(fromAuth.getLoggedIn));
-    this.showSidenav$ = store.pipe(select(fromStore.getShowSidenav));
     this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
     this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));
     this.progressBar$ = store.pipe(select(fromStore.getProgressBar));
@@ -34,8 +32,7 @@ export class IndexPageCoreComponent implements OnInit {
       {
         icon: '',
         label: 'Inicio',
-        routerLink: 'dashboard',
-        command: (() => this.showSidenav(false))
+        routerLink: 'dashboard'
       },
       {
         icon: 'fas fa-cog',
@@ -46,18 +43,15 @@ export class IndexPageCoreComponent implements OnInit {
             items: [
               {
                 label: 'Paises',
-                routerLink: 'country',
-                command: (() => this.showSidenav(false))
+                routerLink: 'country'
               },
               {
                 label: 'Estados',
-                routerLink: 'estate',
-                command: (() => this.showSidenav(false))
+                routerLink: 'estate'
               },
               {
                 label: 'Ciudades',
-                routerLink: 'city',
-                command: (() => this.showSidenav(false))
+                routerLink: 'city'
               }
             ]
           }
@@ -67,13 +61,5 @@ export class IndexPageCoreComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  showSidenav(event: boolean) {
-    if (event) {
-      this.store.dispatch(new fromStore.OpenSidenav());
-    } else if (!event) {
-      this.store.dispatch(new fromStore.CloseSidenav());
-    }
   }
 }

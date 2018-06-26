@@ -1,5 +1,4 @@
-import { SidebarModule } from 'primeng/sidebar';
-import { PanelMenuModule } from 'primeng/panelmenu';
+import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
@@ -12,10 +11,10 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { InputMaskModule } from 'primeng/inputmask';
 
 export const prime: any[] = [
-  SidebarModule,
-  PanelMenuModule,
+  MenubarModule,
   ButtonModule,
   TableModule,
   PaginatorModule,
@@ -27,5 +26,6 @@ export const prime: any[] = [
   MessagesModule,
   MessageModule,
   ProgressBarModule,
-  KeyFilterModule
+  KeyFilterModule,
+  InputMaskModule
 ];

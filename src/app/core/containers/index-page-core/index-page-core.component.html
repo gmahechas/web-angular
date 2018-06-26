@@ -1,6 +1,5 @@
-<app-nav-core [menuItems]="menuItems" [showSidenav]="showSidenav$ | async" (hide)="showSidenav($event)"></app-nav-core>
+<app-nav-core [menuItems]="menuItems"></app-nav-core>
 <app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>
-<button pButton type="button" icon="pi pi-bars" class="ui-button-secondary" (click)="showSidenav(true)"></button>
 <app-message-core></app-message-core>
 <router-outlet></router-outlet>
 <!-- Misc -->

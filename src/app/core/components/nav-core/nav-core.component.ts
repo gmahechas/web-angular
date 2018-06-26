@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-nav-core',
@@ -10,16 +9,6 @@ import { MenuItem } from 'primeng/api';
 export class NavCoreComponent implements OnInit {
 
   @Input() menuItems: any[];
-  @Input() showSidenav = false;
-  @Output() hide: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit() { }
-
-  onHide() {
-    this.hide.emit(false);
-  }
-
-  toggle(event) {
-    console.log(event);
-  }
 }
