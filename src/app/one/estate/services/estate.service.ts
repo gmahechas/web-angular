@@ -59,14 +59,16 @@ export class EstateService {
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
       variables: {
-        ...searchEstate.estate,
-        ...searchEstate.country,
+        estate_id: searchEstate.estate.estate_id,
+        estate_name: searchEstate.estate.estate_name,
+        estate_code: searchEstate.estate.estate_code,
+        country_id: (searchEstate.country) ? searchEstate.country.country_id : '',
         limit: searchEstate.limit,
         page: searchEstate.page
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) { return prev; }
-        return fetchMoreResult.data;
+        return fetchMoreResult;
       }
     });
   }

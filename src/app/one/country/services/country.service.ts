@@ -58,13 +58,15 @@ export class CountryService {
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
       variables: {
-        ...searchCountry.country,
+        country_id: searchCountry.country.country_id,
+        country_name: searchCountry.country.country_name,
+        country_code: searchCountry.country.country_code,
         limit: searchCountry.limit,
         page: searchCountry.page
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) { return prev; }
-        return fetchMoreResult.data;
+        return fetchMoreResult;
       }
     });
   }
