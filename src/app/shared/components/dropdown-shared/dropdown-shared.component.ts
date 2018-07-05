@@ -25,12 +25,4 @@ export class DropdownSharedComponent implements OnInit {
     this.keyUp.emit(event.target.value);
   }
 
-  setOptions() {
-    if (this.group.get(this.controlName).value) {
-      return [this.group.get(this.controlName).value].concat(this.data);
-    } else {
-      return this.data;
-    }
-  }
-
 }
