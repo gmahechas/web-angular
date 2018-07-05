@@ -14,17 +14,23 @@ export class DropdownSharedComponent implements OnInit {
   @Input() configDropDown: any;
   @Input() data: any[];
   @Input() options: string[];
-  @Input() unChanged: boolean;
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
-  search = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   onKeyUp(event) {
-    this.search = true;
     this.keyUp.emit(event.target.value);
+  }
+
+  setOptions() {
+    if (this.group.get(this.controlName).value) {
+      return [this.group.get(this.controlName).value];
+    } else {
+      return this.data;
+    }
   }
 
 }

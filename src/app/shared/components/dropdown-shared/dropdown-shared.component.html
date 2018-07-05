@@ -1,7 +1,7 @@
 <div [formGroup]="group">
   <p-dropdown [formControlName]="controlName" [placeholder]="configDropDown.placeholder" [dataKey]="configDropDown.dataKey"
     [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)"
-    [tabindex]="-1" [options]="(unChanged) ? (group.get(controlName).value) ? [group.get(controlName).value] : data : (search) ? data : (group.get(controlName).value) ? [group.get(controlName).value] : data">
+    [tabindex]="-1" [options]="setOptions()">
     <ng-template let-selectedItem pTemplate="selectedItem">
       <span *ngFor="let option of options">
         {{ (selectedItem.value[option]) ? selectedItem.value[option] : option }}
