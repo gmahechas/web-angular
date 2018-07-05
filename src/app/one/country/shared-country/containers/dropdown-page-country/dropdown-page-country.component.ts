@@ -19,6 +19,7 @@ export class DropdownPageCountryComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() controlName: string;
   @Input() options: string[];
+  @Input() unChanged: boolean;
   countries$: Observable<Country[]>;
   configDropDown: any;
 

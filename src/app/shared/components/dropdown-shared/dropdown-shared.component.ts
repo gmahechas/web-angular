@@ -14,6 +14,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() configDropDown: any;
   @Input() data: any[];
   @Input() options: string[];
+  @Input() unChanged: boolean;
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
   search = false;
   constructor() { }
