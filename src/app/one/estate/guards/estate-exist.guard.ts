@@ -68,9 +68,7 @@ export class EstateExistGuard implements CanActivate {
               estate_name: '',
               estate_code: ''
             },
-            country: {
-              country_id: null
-            }
+            country: null
           }));
         }
       }),
