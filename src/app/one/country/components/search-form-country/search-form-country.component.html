@@ -5,4 +5,5 @@
   <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
   <button pButton type="submit" label="Buscar" [disabled]="searchFormCountry.invalid" class="ui-button-secondary"></button>
   <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
+  <button pButton type="button" label="Limpiar" (click)="searchFormCountry.reset()" class="ui-button-secondary"></button>
 </form>
