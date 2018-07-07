@@ -19,10 +19,23 @@ export class DropdownSharedComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (this.group.get(this.controlName).value) {
+      console.log(this.group.get(this.controlName).value[this.configDropDown.dataKey]);
+    }
   }
 
   onKeyUp(event) {
     this.keyUp.emit(event.target.value);
   }
 
+  setOptions() {
+    if (this.group.get(this.controlName).value) {
+      return [this.group.get(this.controlName).value].concat(this.data.filter(
+        entity => entity[this.configDropDown.dataKey] !== this.group.get(this.controlName).value[this.configDropDown.dataKey]
+      ));
+    } else {
+      return this.data;
+    }
+
+  }
 }
