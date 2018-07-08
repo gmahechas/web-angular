@@ -1,11 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { routes } from './auth.routes';
 
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from './../shared/shared.module';
 
 import * as fromContainers from './containers';
@@ -34,7 +33,7 @@ export class AuthModule {
 @NgModule({
   imports: [
     AuthModule,
-    RouterModule.forChild(routes),
+    AuthRoutingModule,
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature(effects)
   ],

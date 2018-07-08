@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth/guards/auth.guard';
 import { NotFoundCoreComponent } from './core/components/not-found-core/not-found-core.component';
@@ -26,3 +27,10 @@ export const routes: Routes = [
   },
   { path: '**', redirectTo: 'not-found' },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
+})
+
+export class AppRoutingModule {}

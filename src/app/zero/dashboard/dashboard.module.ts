@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { routes } from './dashboard.routes';
 
 import { SharedModule } from '../../shared/shared.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    DashboardRoutingModule
   ],
   declarations: [
     ...fromContainers.containers,
