@@ -9,7 +9,6 @@ import * as fromContainers from './containers';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
 import * as fromInterceptors from './interceptors';
-import { ProgressBarCoreComponent } from './components/progress-bar-core/progress-bar-core.component';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { ProgressBarCoreComponent } from './components/progress-bar-core/progres
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components,
-    ProgressBarCoreComponent
+    ...fromComponents.components
   ]
 })
 export class CoreModule {
