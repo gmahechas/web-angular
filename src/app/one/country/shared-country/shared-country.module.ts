@@ -10,9 +10,9 @@ import * as fromContainers from './containers';
 
 @NgModule({
   imports: [
+    SharedModule,
     StoreModule.forFeature('country', reducers),
-    EffectsModule.forFeature(effects),
-    SharedModule
+    EffectsModule.forFeature(effects)
   ],
   declarations: [
     ...fromContainers.containers
