@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable()
-export class LayoutCountryEffects {
+export class LayoutCityEffects {
 
   // Notifications / Spinner
   @Effect({ dispatch: false })
@@ -84,7 +84,7 @@ export class LayoutCountryEffects {
       fromActions.EntityActionTypes.LoadEntity,
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+      this.store.dispatch(new fromCore.Go({ path: ['city'] }));
     })
   );
 
@@ -92,13 +92,14 @@ export class LayoutCountryEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.StoreCountry) => {
+    tap((data: fromModels.StoreCity) => {
       this.store.dispatch(new fromActions.LoadEntity({
-        country: {
-          country_id: String(data.storeCountry.country_id),
-          country_name: data.storeCountry.country_name,
-          country_code: data.storeCountry.country_code,
-        }
+        city: {
+          city_id: String(data.storeCity.city_id),
+          city_name: data.storeCity.city_name,
+          city_code: data.storeCity.city_code
+        },
+        estate: data.storeCity.estate
       }));
     })
   );
@@ -107,8 +108,8 @@ export class LayoutCountryEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.UpdateCountry) => {
-      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+    tap((data: fromModels.UpdateCity) => {
+      this.store.dispatch(new fromCore.Go({ path: ['city'] }));
     })
   );
 
@@ -116,8 +117,8 @@ export class LayoutCountryEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.DestroyCountry) => {
-      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+    tap((data: fromModels.DestroyCity) => {
+      this.store.dispatch(new fromCore.Go({ path: ['city'] }));
     })
   );
 

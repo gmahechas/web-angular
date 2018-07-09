@@ -22,7 +22,8 @@ export class LayoutEstateEffects {
       fromActions.EntityActionTypes.StoreEntity,
       fromActions.EntityActionTypes.UpdateEntity,
       fromActions.EntityActionTypes.DestroyEntity,
-      fromActions.EntityActionTypes.PaginateEntity
+      fromActions.EntityActionTypes.PaginateEntity,
+      fromActions.EntityActionTypes.LoadEntityShared
     ),
     tap(() => {
       this.store.dispatch(new fromCore.ShowSpinner);

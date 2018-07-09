@@ -22,6 +22,11 @@ export const routes: Routes = [
     canLoad: [/* AuthGuard */]
   },
   {
+    path: 'city',
+    loadChildren: './one/city/city.module#CityModule',
+    canLoad: [/* AuthGuard */]
+  },
+  {
     path: 'not-found',
     component: NotFoundCoreComponent
   },

@@ -3,30 +3,30 @@ import { Action } from '@ngrx/store';
 import * as fromModels from '../../models';
 
 export enum EntityActionTypes {
-  LoadEntity = '[Estate] Load Entity ',
-  LoadSuccessEntity = '[Estate] Load Success Entity',
-  LoadFailEntity = '[Estate] Load Fail Entity',
-  StoreEntity = '[Estate] Store Entity',
-  StoreSuccessEntity = '[Estate] Store Success Entity',
-  StoreFailEntity = '[Estate] Store Fail Entity',
-  UpdateEntity = '[Estate] Update Entity',
-  UpdateSuccessEntity = '[Estate] Update Success Entity',
-  UpdateFailEntity = '[Estate] Update Fail Entity',
-  DestroyEntity = '[Estate] Destroy Entity',
-  DestroySuccessEntity = '[Estate] Destroy Success Entity',
-  DestroyFailEntity = '[Estate] Destroy Fail Entity',
-  PaginateEntity = '[Estate] Paginate Entity',
-  LoadEntityShared = '[Estate] Load Entity Shared'
+  LoadEntity = '[City] Load Entity ',
+  LoadSuccessEntity = '[City] Load Success Entity',
+  LoadFailEntity = '[City] Load Fail Entity',
+  StoreEntity = '[City] Store Entity',
+  StoreSuccessEntity = '[City] Store Success Entity',
+  StoreFailEntity = '[City] Store Fail Entity',
+  UpdateEntity = '[City] Update Entity',
+  UpdateSuccessEntity = '[City] Update Success Entity',
+  UpdateFailEntity = '[City] Update Fail Entity',
+  DestroyEntity = '[City] Destroy Entity',
+  DestroySuccessEntity = '[City] Destroy Success Entity',
+  DestroyFailEntity = '[City] Destroy Fail Entity',
+  PaginateEntity = '[City] Paginate Entity',
+  LoadEntityShared = '[City] Load Entity Shared'
 }
 
 export class LoadEntity implements Action {
   readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: fromModels.SearchEstate) { }
+  constructor(public payload: fromModels.SearchCity) { }
 }
 
 export class LoadSuccessEntity implements Action {
   readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: fromModels.PaginationEstate) { }
+  constructor(public payload: fromModels.PaginationCity) { }
 }
 
 export class LoadFailEntity implements Action {
@@ -36,12 +36,12 @@ export class LoadFailEntity implements Action {
 
 export class StoreEntity implements Action {
   readonly type = EntityActionTypes.StoreEntity;
-  constructor(public payload: fromModels.Estate) { }
+  constructor(public payload: fromModels.City) { }
 }
 
 export class StoreSuccessEntity implements Action {
   readonly type = EntityActionTypes.StoreSuccessEntity;
-  constructor(public payload: fromModels.StoreEstate) { }
+  constructor(public payload: fromModels.StoreCity) { }
 }
 
 export class StoreFailEntity implements Action {
@@ -51,12 +51,12 @@ export class StoreFailEntity implements Action {
 
 export class UpdateEntity implements Action {
   readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: fromModels.Estate) { }
+  constructor(public payload: fromModels.City) { }
 }
 
 export class UpdateSuccessEntity implements Action {
   readonly type = EntityActionTypes.UpdateSuccessEntity;
-  constructor(public payload: fromModels.UpdateEstate) { }
+  constructor(public payload: fromModels.UpdateCity) { }
 }
 
 export class UpdateFailEntity implements Action {
@@ -66,12 +66,12 @@ export class UpdateFailEntity implements Action {
 
 export class DestroyEntity implements Action {
   readonly type = EntityActionTypes.DestroyEntity;
-  constructor(public payload: fromModels.Estate) { }
+  constructor(public payload: fromModels.City) { }
 }
 
 export class DestroySuccessEntity implements Action {
   readonly type = EntityActionTypes.DestroySuccessEntity;
-  constructor(public payload: fromModels.DestroyEstate) { }
+  constructor(public payload: fromModels.DestroyCity) { }
 }
 
 export class DestroyFailEntity implements Action {
@@ -86,7 +86,7 @@ export class PaginateEntity implements Action {
 
 export class LoadEntityShared implements Action {
   readonly type = EntityActionTypes.LoadEntityShared;
-  constructor(public payload: fromModels.SearchEstate) { }
+  constructor(public payload: fromModels.SearchCity) { }
 }
 
 export type EntityActions =

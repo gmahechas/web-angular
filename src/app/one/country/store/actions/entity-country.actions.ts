@@ -16,9 +16,7 @@ export enum EntityActionTypes {
   DestroySuccessEntity = '[Country] Destroy Success Entity',
   DestroyFailEntity = '[Country] Destroy Fail Entity',
   PaginateEntity = '[Country] Paginate Entity',
-  LoadEntityShared = '[Country] Load Entity Shared',
-  LoadSuccessEntityShared = '[Country] Load Success Entity Shared',
-  LoadFailEntityShared = '[Country] Load Fail Entity Shared'
+  LoadEntityShared = '[Country] Load Entity Shared'
 }
 
 export class LoadEntity implements Action {

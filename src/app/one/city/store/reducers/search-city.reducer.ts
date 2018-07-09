@@ -1,20 +1,20 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-estate.actions';
-import { SearchEstate } from '../../models/search-estate.model';
+import { EntityActionTypes, EntityActions } from '../actions/entity-city.actions';
+import { SearchCity } from '../../models/search-city.model';
 
 export interface State {
   loaded: boolean;
-  query: SearchEstate;
+  query: SearchCity;
 }
 
 const initialState: State = {
   loaded: false,
   query: {
-    estate: {
-      estate_id: '',
-      estate_name: '',
-      estate_code: ''
+    city: {
+      city_id: '',
+      city_name: '',
+      city_code: ''
     },
-    country: null
+    estate: null
   }
 };
 

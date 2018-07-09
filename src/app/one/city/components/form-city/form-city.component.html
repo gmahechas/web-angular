@@ -1,0 +1,22 @@
+<form [formGroup]="cityForm" (ngSubmit)="onSubmit(cityForm)">
+
+  <ng-content select="h3"></ng-content>
+
+  <div class="ui-g">
+    <div class="ui-g-6 ui-g-nopad">
+      <div formGroupName="city">
+        <div>Ciudad *:</div>
+        <app-input-text-shared [group]="cityForm" [groupName]="'city'" [controlName]="'city_name'" [placeholder]="'Ciudad'"></app-input-text-shared>
+        <div>Codigo *:</div>
+        <app-input-text-shared [group]="cityForm" [groupName]="'city'" [controlName]="'city_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+      </div>
+      <div formGroupName="estate">
+          <div>Estado *:</div>
+        <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']"></app-dropdown-page-estate>
+      </div>
+      <br>
+      <ng-content select="button"></ng-content>
+    </div>
+  </div>
+
+</form>
