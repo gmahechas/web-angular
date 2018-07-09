@@ -13,6 +13,8 @@ export class InputTextSharedComponent implements OnInit {
   @Input() controlName: string;
   @Input() placeholder: string;
   @Input() keyFilter: string;
+  @Input() toolTip: string;
+  @Input() tooltipPosition: string;
 
   constructor() { }
 

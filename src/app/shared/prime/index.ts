@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
 import { GrowlModule } from 'primeng/growl';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -22,6 +23,7 @@ export const prime: any[] = [
   TableModule,
   PaginatorModule,
   InputTextModule,
+  TooltipModule,
   GrowlModule,
   BlockUIModule,
   ProgressSpinnerModule,
