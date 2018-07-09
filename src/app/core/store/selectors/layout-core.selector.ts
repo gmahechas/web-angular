@@ -3,6 +3,11 @@ import { createSelector } from '@ngrx/store';
 import * as fromCore from './../reducers';
 import * as fromLayout from './../reducers/layout-core.reducer';
 
+export const getShowSidebar = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getShowSidebar
+);
+
 export const getMenuItems = createSelector(
   fromCore.getLayoutState,
   fromLayout.getMenuItems

@@ -1,12 +1,22 @@
 import { Action } from '@ngrx/store';
 
 export enum LayoutActionTypes {
+  OpenSidebar = '[Layout] Open Sidebar',
+  CloseSidebar = '[Layout] Close Sidebar',
   BlockedDocument = '[Layout] Blocked Document',
   UnblockedDocument = '[Layout] Unblocked Document',
   ShowSpinner = '[Layout] Open Spinner',
   CloseSpinner = '[Layout] Close Spinner',
   ShowProgressBar = '[Layout] Open Progress Bar',
   CloseProgressBar = '[Layout] Close Progress Bar',
+}
+
+export class OpenSidebar implements Action {
+  readonly type = LayoutActionTypes.OpenSidebar;
+}
+
+export class CloseSidebar implements Action {
+  readonly type = LayoutActionTypes.CloseSidebar;
 }
 
 export class BlockedDocument implements Action {
@@ -34,6 +44,8 @@ export class CloseProgressBar implements Action {
 }
 
 export type LayoutActions =
+  | OpenSidebar
+  | CloseSidebar
   | BlockedDocument
   | UnblockedDocument
   | ShowSpinner

@@ -1,6 +1,7 @@
 import { LayoutActionTypes, LayoutActions } from './../actions/layout-core.actions';
 
 export interface State {
+  showSidebar: boolean;
   menuItems: any[];
   blockedDocument: boolean;
   showSpinner: boolean;
@@ -8,6 +9,7 @@ export interface State {
 }
 
 const initialState: State = {
+  showSidebar: false,
   menuItems: [
     {
       icon: '',
@@ -41,6 +43,18 @@ const initialState: State = {
 
 export function reducer(state: State = initialState, action: LayoutActions): State {
   switch (action.type) {
+
+    case LayoutActionTypes.OpenSidebar:
+      return {
+        ...state,
+        showSidebar: true
+      };
+
+    case LayoutActionTypes.CloseSidebar:
+      return {
+        ...state,
+        showSidebar: false
+      };
 
     case LayoutActionTypes.BlockedDocument:
       return {
@@ -83,6 +97,7 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
   }
 }
 
+export const getShowSidebar = (state: State) => state.showSidebar;
 export const getMenuItems = (state: State) => state.menuItems;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
 export const getShowSpinner = (state: State) => state.showSpinner;

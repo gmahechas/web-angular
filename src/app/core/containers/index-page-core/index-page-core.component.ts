@@ -14,25 +14,25 @@ import { Observable } from 'rxjs';
 export class IndexPageCoreComponent implements OnInit {
 
   loggedIn$: Observable<boolean>;
+  showSidebar: Observable<boolean>;
+  menuItems: any[]; // TODO
+  menuItems$: Observable<any[]>;
   blockedDocument$: Observable<boolean>;
   showSpinner$: Observable<boolean>;
   progressBar$: Observable<boolean>;
-  menuItems: any[]; // TODO
-  menuItems$: Observable<any[]>;
 
   constructor(
     private store: Store<fromStore.State>
   ) {
     this.loggedIn$ = store.pipe(select(fromAuth.getLoggedIn));
-    this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
-    this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));
-    this.progressBar$ = store.pipe(select(fromStore.getProgressBar));
+    this.showSidebar = store.pipe(select(fromStore.getShowSidebar));
     this.menuItems$ = store.pipe(select(fromStore.getMenuItems));
     this.menuItems = [
       {
         icon: '',
         label: 'Inicio',
-        routerLink: 'dashboard'
+        routerLink: 'dashboard',
+        command: (() => this.opencloseSidebar(false))
       },
       {
         icon: 'fas fa-cog',
@@ -43,23 +43,37 @@ export class IndexPageCoreComponent implements OnInit {
             items: [
               {
                 label: 'Paises',
-                routerLink: 'country'
+                routerLink: 'country',
+                command: (() => this.opencloseSidebar(false))
               },
               {
                 label: 'Estados',
-                routerLink: 'estate'
+                routerLink: 'estate',
+                command: (() => this.opencloseSidebar(false))
               },
               {
                 label: 'Ciudades',
-                routerLink: 'city'
+                routerLink: 'city',
+                command: (() => this.opencloseSidebar(false))
               }
             ]
           }
         ]
       }
     ];
+    this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
+    this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));
+    this.progressBar$ = store.pipe(select(fromStore.getProgressBar));
   }
 
   ngOnInit() {
+  }
+
+  opencloseSidebar(event: boolean) {
+    if (event) {
+      this.store.dispatch(new fromStore.OpenSidebar());
+    } else if (!event) {
+      this.store.dispatch(new fromStore.CloseSidebar());
+    }
   }
 }
