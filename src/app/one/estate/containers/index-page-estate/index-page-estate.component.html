@@ -3,6 +3,8 @@
   <div class="ui-g-12">
     <app-search-form-estate [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-estate>
   </div>
+</div>
+<div class="ui-g">
   <div class="ui-g-8">
     <app-table-shared [data]="data$ | async" [totalRecords]="total$ | async" [rows]="perPage$ | async" [first]="from$ | async"
       [to]="to$ | async" [configTable]="configTable" (rowSelect)="onEdit($event)" (rowUnselect)="onCancel()" (pageChange)="onPaginate($event)">
