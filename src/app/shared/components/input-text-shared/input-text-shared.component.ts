@@ -11,6 +11,7 @@ export class InputTextSharedComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() groupName: string;
   @Input() controlName: string;
+  @Input() label: string;
   @Input() placeholder: string;
   @Input() keyFilter: string;
   @Input() toolTip: string;

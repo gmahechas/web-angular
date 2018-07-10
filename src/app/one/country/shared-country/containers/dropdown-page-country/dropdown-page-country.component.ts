@@ -27,7 +27,7 @@ export class DropdownPageCountryComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      placeholder: 'Selecciona el pais',
+      placeholder: 'Pais',
       dataKey: 'country_id',
       optionLabel: 'country_name'
     };

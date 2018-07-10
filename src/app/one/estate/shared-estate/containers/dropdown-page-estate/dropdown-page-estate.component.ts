@@ -27,7 +27,7 @@ export class DropdownPageEstateComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      placeholder: 'Selecciona el Estado',
+      placeholder: 'Estado',
       dataKey: 'estate_id',
       optionLabel: 'estate_name'
     };
