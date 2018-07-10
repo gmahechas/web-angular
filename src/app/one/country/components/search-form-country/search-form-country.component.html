@@ -1,9 +1,19 @@
 <form [formGroup]="searchFormCountry" (ngSubmit)="onSubmit(searchFormCountry)">
-  Buscar
-  <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_id'" [placeholder]="'Id'"></app-input-text-shared>
-  <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_name'" [placeholder]="'Pais'"></app-input-text-shared>
-  <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
-  <button pButton type="submit" label="Buscar" [disabled]="searchFormCountry.invalid" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Limpiar" (click)="searchFormCountry.reset()" class="ui-button-secondary"></button>
+  <span>Buscar</span>
+  <div class="ui-grid-row">
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_id'" [placeholder]="'Id'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_name'" [placeholder]="'Pais'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-2">
+      <app-input-text-shared [group]="searchFormCountry" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-8">
+      <button pButton type="submit" label="Buscar" [disabled]="searchFormCountry.invalid" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Limpiar" (click)="searchFormCountry.reset()" class="ui-button-secondary"></button>
+    </div>
+  </div>
 </form>

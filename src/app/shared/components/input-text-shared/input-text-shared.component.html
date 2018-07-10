@@ -1,7 +1,8 @@
 <div [formGroup]="group">
   <div [formGroupName]="groupName">
     <input pInputText type="text" [placeholder]="placeholder" [formControlName]="controlName" [pKeyFilter]="(keyFilter) ? keyFilter : 'alphanum'"
-    [tooltipDisabled]="(toolTip) ? false : true" [pTooltip]="toolTip" [tooltipPosition]="(tooltipPosition) ? tooltipPosition : 'right'" />
+      [tooltipDisabled]="(toolTip) ? false : true" [pTooltip]="toolTip" [tooltipPosition]="(tooltipPosition) ? tooltipPosition : 'right'"
+      [ngStyle]="{width : '100%'}" />
     <app-validation-errors-shared [control]="group.get(groupName + '.' + controlName)"></app-validation-errors-shared>
   </div>
 </div>

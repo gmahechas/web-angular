@@ -1,10 +1,22 @@
 <form [formGroup]="searchFormCity" (ngSubmit)="onSubmit(searchFormCity)">
-  Buscar
-  <app-input-text-shared [group]="searchFormCity" [groupName]="'city'" [controlName]="'city_id'" [placeholder]="'Id'"></app-input-text-shared>
-  <app-input-text-shared [group]="searchFormCity" [groupName]="'city'" [controlName]="'city_name'" [placeholder]="'Ciudad'"></app-input-text-shared>
-  <app-input-text-shared [group]="searchFormCity" [groupName]="'city'" [controlName]="'city_code'" [placeholder]="'Codigo'"></app-input-text-shared>
-  <app-dropdown-page-estate [group]="searchFormCity" [controlName]="'estate'" [options]="['estate_name']"></app-dropdown-page-estate>
-  <button pButton type="submit" label="Buscar" [disabled]="searchFormCity.invalid" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Limpiar" (click)="searchFormCity.reset()" class="ui-button-secondary"></button>
+  <span>Buscar</span>
+  <div class="ui-grid-row">
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormCity" [groupName]="'city'" [controlName]="'city_id'" [placeholder]="'Id'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormCity" [groupName]="'city'" [controlName]="'city_name'" [placeholder]="'Ciudad'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormCity" [groupName]="'city'" [controlName]="'city_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-2">
+      <app-dropdown-page-estate [group]="searchFormCity" [controlName]="'estate'" [options]="['estate_name']"></app-dropdown-page-estate>
+    </div>
+    <div class="ui-grid-col-7">
+      <button pButton type="submit" label="Buscar" [disabled]="searchFormCity.invalid" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Limpiar" (click)="searchFormCity.reset()" class="ui-button-secondary"></button>
+    </div>
+  </div>
 </form>

@@ -1,10 +1,22 @@
 <form [formGroup]="searchFormEstate" (ngSubmit)="onSubmit(searchFormEstate)">
   <span>Buscar</span>
-  <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_id'" [placeholder]="'Id'"></app-input-text-shared>
-  <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
-  <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
-  <app-dropdown-page-country [group]="searchFormEstate" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
-  <button pButton type="submit" label="Buscar" [disabled]="searchFormEstate.invalid" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Limpiar" (click)="searchFormEstate.reset()" class="ui-button-secondary"></button>
+  <div class="ui-grid-row">
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_id'" [placeholder]="'Id'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-1">
+      <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+    </div>
+    <div class="ui-grid-col-2">
+      <app-dropdown-page-country [group]="searchFormEstate" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
+    </div>
+    <div class="ui-grid-col-7">
+      <button pButton type="submit" label="Buscar" [disabled]="searchFormEstate.invalid" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Agregar" (click)="onCreate()" class="ui-button-secondary"></button>
+      <button pButton type="button" label="Limpiar" (click)="searchFormEstate.reset()" class="ui-button-secondary"></button>
+    </div>
+  </div>
 </form>
