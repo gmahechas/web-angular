@@ -23,6 +23,7 @@ export class CityService {
       query: fromGraphql.pagination,
       variables: {
         ...searchCity.city,
+        ...searchCity.estate,
         limit: searchCity.limit,
         page: searchCity.page
       }
