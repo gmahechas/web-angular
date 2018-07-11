@@ -33,7 +33,6 @@ export class CityService {
   }
 
   store(city: fromModels.City): Observable<any> {
-    console.log(city);
     return this.apollo.mutate<fromModels.StoreCity>({
       mutation: fromGraphql.store,
       variables: city

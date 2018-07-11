@@ -59,6 +59,9 @@ mutation destroyCountry($country_id: ID!) {
     country_id
     country_name
     country_code
+    country_created_at
+    country_updated_at
+    country_deleted_at
   }
 }
 `;

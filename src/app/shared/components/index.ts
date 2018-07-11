@@ -1,4 +1,5 @@
 import { DropdownSharedComponent } from './dropdown-shared/dropdown-shared.component';
+import { ButtonSharedComponent } from './button-shared/button-shared.component';
 import { InputCalendarSharedComponent } from './input-calendar-shared/input-calendar-shared.component';
 import { InputMaskSharedComponent } from './input-mask-shared/input-mask-shared.component';
 import { InputPasswordSharedComponent } from './input-password-shared/input-password-shared.component';
@@ -8,6 +9,7 @@ import { ValidationErrorsSharedComponent } from './validation-errors-shared/vali
 
 export const components: any[] = [
   DropdownSharedComponent,
+  ButtonSharedComponent,
   InputCalendarSharedComponent,
   InputMaskSharedComponent,
   InputPasswordSharedComponent,
@@ -17,6 +19,7 @@ export const components: any[] = [
 ];
 
 export * from './dropdown-shared/dropdown-shared.component';
+export * from './button-shared/button-shared.component';
 export * from './input-calendar-shared/input-calendar-shared.component';
 export * from './input-mask-shared/input-mask-shared.component';
 export * from './input-password-shared/input-password-shared.component';
