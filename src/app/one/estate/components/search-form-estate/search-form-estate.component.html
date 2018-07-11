@@ -1,5 +1,4 @@
 <form [formGroup]="searchFormEstate" (ngSubmit)="onSubmit(searchFormEstate)">
-  <span>Buscar</span>
   <div class="ui-grid-row">
     <div class="ui-grid-col-1">
       <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_id'" [placeholder]="'Id'"></app-input-text-shared>
