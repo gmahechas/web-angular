@@ -1,7 +1,8 @@
 <div class="ui-g">
-  <div class="ui-g-12">Buscar Paises</div>
   <div class="ui-g-12">
-    <app-search-form-country [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-country>
+    <app-panel-shared [header]="'Buscar Paises'">
+      <app-search-form-country [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-country>
+    </app-panel-shared>
   </div>
 </div>
 <div class="ui-g">

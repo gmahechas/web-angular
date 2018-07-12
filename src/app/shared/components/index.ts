@@ -6,6 +6,7 @@ import { InputPasswordSharedComponent } from './input-password-shared/input-pass
 import { InputTextSharedComponent } from './input-text-shared/input-text-shared.component';
 import { TableSharedComponent } from './table-shared/table-shared.component';
 import { ValidationErrorsSharedComponent } from './validation-errors-shared/validation-errors-shared.component';
+import { PanelSharedComponent } from './panel-shared/panel-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -15,7 +16,8 @@ export const components: any[] = [
   InputPasswordSharedComponent,
   InputTextSharedComponent,
   TableSharedComponent,
-  ValidationErrorsSharedComponent
+  ValidationErrorsSharedComponent,
+  PanelSharedComponent
 ];
 
 export * from './dropdown-shared/dropdown-shared.component';
@@ -26,3 +28,4 @@ export * from './input-password-shared/input-password-shared.component';
 export * from './input-text-shared/input-text-shared.component';
 export * from './table-shared/table-shared.component';
 export * from './validation-errors-shared/validation-errors-shared.component';
+export * from './panel-shared/panel-shared.component';

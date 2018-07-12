@@ -1,7 +1,7 @@
 <app-form-estate *ngIf="!(estate$ | async) as estate" (submitted)="onStore($event)">
   <h3>Agregar Estado</h3>
-  <button pButton type="submit" label="Guardar" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Cancelar" class="ui-button-secondary" (click)="onCancel()"></button>
+  <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-estate>
 
 <app-form-estate *ngIf="(estate$ | async) as estate" (submitted)="onUpdate($event)" [estate]="estate">

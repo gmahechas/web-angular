@@ -1,7 +1,7 @@
 <app-form-country *ngIf="!(country$ | async) as country" (submitted)="onStore($event)">
   <h3>Agregar Pais</h3>
-  <button pButton type="submit" label="Guardar" class="ui-button-secondary"></button>
-  <button pButton type="button" label="Cancelar" class="ui-button-secondary" (click)="onCancel()"></button>
+  <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-country>
 
 <app-form-country *ngIf="(country$ | async) as country" (submitted)="onUpdate($event)" [country]="country">

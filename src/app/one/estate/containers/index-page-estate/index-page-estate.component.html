@@ -1,7 +1,8 @@
 <div class="ui-g">
-  <div class="ui-g-12">Buscar Estados</div>
   <div class="ui-g-12">
-    <app-search-form-estate [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-estate>
+    <app-panel-shared [header]="'Buscar Estados'">
+      <app-search-form-estate [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-estate>
+    </app-panel-shared>
   </div>
 </div>
 <div class="ui-g">
