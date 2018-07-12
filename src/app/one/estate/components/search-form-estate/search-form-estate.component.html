@@ -1,21 +1,43 @@
 <form [formGroup]="searchFormEstate" (ngSubmit)="onSubmit(searchFormEstate)">
-  <div class="ui-grid-row">
-    <div class="ui-grid-col-1">
-      <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_id'" [placeholder]="'Id'"></app-input-text-shared>
-    </div>
-    <div class="ui-grid-col-1">
-      <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
-    </div>
-    <div class="ui-grid-col-1">
-      <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
-    </div>
-    <div class="ui-grid-col-2">
-      <app-dropdown-page-country [group]="searchFormEstate" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
-    </div>
-    <div class="ui-grid-col-7">
-      <app-button-shared [type]="'submit'" [label]="'Buscar'" [disabled]="searchFormEstate.invalid" [class]="'ui-button-secondary'"></app-button-shared>
-      <app-button-shared [type]="'button'" [label]="'Agregar'" [class]="'ui-button-secondary'" (click)="onCreate()"></app-button-shared>
-      <app-button-shared [type]="'button'" [label]="'Limpiar'" [class]="'ui-button-secondary'" (click)="searchFormEstate.reset()"></app-button-shared>
+  <div class="ui-grid">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-1">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">Id:</div>
+          <div class="ui-grid-col-9">
+            <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_id'" [placeholder]="'Id'"></app-input-text-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-1">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">Estado:</div>
+          <div class="ui-grid-col-8">
+            <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-1">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">Codigo:</div>
+          <div class="ui-grid-col-8">
+            <app-input-text-shared [group]="searchFormEstate" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-2">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">Pais:</div>
+          <div class="ui-grid-col-9">
+            <app-dropdown-page-country [group]="searchFormEstate" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-7">
+        <app-button-shared [type]="'submit'" [label]="'Buscar'" [disabled]="searchFormEstate.invalid" [class]="'ui-button-secondary'"></app-button-shared>
+        <app-button-shared [type]="'button'" [label]="'Agregar'" [class]="'ui-button-secondary'" (click)="onCreate()"></app-button-shared>
+        <app-button-shared [type]="'button'" [label]="'Limpiar'" [class]="'ui-button-secondary'" (click)="searchFormEstate.reset()"></app-button-shared>
+      </div>
     </div>
   </div>
 </form>

@@ -4,17 +4,39 @@
       <ng-content select=".form-title"></ng-content>
     </div>
     <div class="panel-content">
-      <div class="ui-g">
-        <div class="ui-g-6 ui-g-nopad">
-          <div formGroupName="city">
+      <div class="ui-grid">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Ciudad *:</div>
+          <div class="ui-grid-col-6">
             <app-input-text-shared [group]="cityForm" [groupName]="'city'" [controlName]="'city_name'" [placeholder]="'Ciudad'"></app-input-text-shared>
-            <app-input-text-shared [group]="cityForm" [groupName]="'city'" [controlName]="'city_code'" [placeholder]="'Codigo'"></app-input-text-shared>
           </div>
-          <div formGroupName="estate">
-            <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']"></app-dropdown-page-estate>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="cityForm.get('city.city_name')"></app-validation-errors-shared>
           </div>
         </div>
-        <ng-content select="app-button-shared"></ng-content>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Codigo *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="cityForm" [groupName]="'city'" [controlName]="'city_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="cityForm.get('city.city_code')"></app-validation-errors-shared>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Estado *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']"></app-dropdown-page-estate>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="cityForm.get('estate')"></app-validation-errors-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
       </div>
     </div>
   </app-panel-shared>
