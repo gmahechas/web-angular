@@ -1,7 +1,10 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <app-panel-shared [header]="'Buscar Ciudades'">
-      <app-search-form-city [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-city>
+    <app-panel-shared>
+      <div class="panel-header">Buscar Ciudades</div>
+      <div class="panel-content">
+        <app-search-form-city [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-city>
+      </div>
     </app-panel-shared>
   </div>
 </div>

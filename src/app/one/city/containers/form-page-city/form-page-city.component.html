@@ -1,11 +1,11 @@
 <app-form-city *ngIf="!(city$ | async) as city" (submitted)="onStore($event)">
-  <h3>Agregar Ciudad</h3>
+  <div class="form-title">Agregar Ciudad</div>
   <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-city>
 
 <app-form-city *ngIf="(city$ | async) as city" (submitted)="onUpdate($event)" [city]="city">
-  <h3>Editar Ciudad</h3>
+  <div class="form-title">Editar Ciudad</div>
   <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="'Eliminar'" [class]="'ui-button-secondary'" (click)="onDestroy(city)"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>

@@ -1,3 +1,6 @@
-<p-panel [header]="header">
-    <ng-content></ng-content>
+<p-panel>
+  <p-header>
+    <ng-content select="div.panel-header"></ng-content>
+  </p-header>
+  <ng-content select="div.panel-content"></ng-content>
 </p-panel>

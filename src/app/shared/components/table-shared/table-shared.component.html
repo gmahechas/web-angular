@@ -1,7 +1,11 @@
 <div *ngIf="data.length > 0">
-  de {{ first }} a {{ to }} de {{ totalRecords }}
   <p-table [columns]="configTable.cols" [value]="data" selectionMode="single" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
     [dataKey]="configTable.dataKey">
+    <ng-template pTemplate="caption">
+      <div style="text-align:left">
+        de {{ first }} a {{ to }} de {{ totalRecords }}
+      </div>
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [ngStyle]="col.style">{{col.header}}</th>
@@ -12,8 +16,8 @@
         <td *ngFor="let col of columns" [ngStyle]="col.style">
           <div *ngIf="!col.subfield;then field_template else subfield_template"></div>
           <ng-template #field_template>
-              {{rowData[col.field]}}
-            </ng-template>
+            {{rowData[col.field]}}
+          </ng-template>
           <ng-template #subfield_template>
             {{rowData[col.field][col.subfield]}}
           </ng-template>

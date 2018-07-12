@@ -1,16 +1,16 @@
 <form [formGroup]="countryForm" (ngSubmit)="onSubmit(countryForm)">
-
-  <ng-content select="h3"></ng-content>
-
-  <div class="ui-g">
-    <div class="ui-g-6 ui-g-nopad">
-      <div>Pais *:</div>
-      <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_name'" [placeholder]="'Pais'"></app-input-text-shared>
-      <div>Codigo *:</div>
-      <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
-      <br>
-      <ng-content select="app-button-shared"></ng-content>
+  <app-panel-shared>
+    <div class="panel-header">
+      <ng-content select=".form-title"></ng-content>
     </div>
-  </div>
-
+    <div class="panel-content">
+      <div class="ui-g">
+        <div class="ui-g-6 ui-g-nopad">
+          <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_name'" [placeholder]="'Pais'"></app-input-text-shared>
+          <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </div>
+  </app-panel-shared>
 </form>

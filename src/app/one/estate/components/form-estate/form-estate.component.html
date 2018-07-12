@@ -1,21 +1,21 @@
 <form [formGroup]="estateForm" (ngSubmit)="onSubmit(estateForm)">
-
-  <ng-content select="h3"></ng-content>
-
-  <div class="ui-g">
-    <div class="ui-g-6 ui-g-nopad">
-      <div formGroupName="estate">
-        <div>Estado *:</div>
-        <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
-        <div>Codigo *:</div>
-        <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
-      </div>
-      <div formGroupName="country">
-        <div>Pais *:</div>
-        <app-dropdown-page-country [group]="estateForm" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
-      </div>
-      <ng-content select="app-button-shared"></ng-content>
+  <app-panel-shared>
+    <div class="panel-header">
+      <ng-content select=".form-title"></ng-content>
     </div>
-  </div>
-
+    <div class="panel-content">
+      <div class="ui-g">
+        <div class="ui-g-6 ui-g-nopad">
+          <div formGroupName="estate">
+            <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_name'" [placeholder]="'Estado'"></app-input-text-shared>
+            <app-input-text-shared [group]="estateForm" [groupName]="'estate'" [controlName]="'estate_code'" [placeholder]="'Codigo'"></app-input-text-shared>
+          </div>
+          <div formGroupName="country">
+            <app-dropdown-page-country [group]="estateForm" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
+          </div>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </div>
+  </app-panel-shared>
 </form>
