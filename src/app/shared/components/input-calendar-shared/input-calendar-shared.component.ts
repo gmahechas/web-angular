@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-input-calendar-shared',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input-calendar-shared.component.html',
   styleUrls: ['./input-calendar-shared.component.scss']
 })

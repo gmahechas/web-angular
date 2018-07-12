@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-button-shared',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-shared.component.html',
   styleUrls: ['./button-shared.component.scss']
 })
