@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-header-core',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header-core.component.html',
   styles: []
 })

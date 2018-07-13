@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromStore from './../../store';
@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-index-page-country',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-page-country.component.html',
   styles: []
 })

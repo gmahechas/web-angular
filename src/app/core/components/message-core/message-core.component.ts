@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-message-core',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './message-core.component.html',
   styles: []
 })

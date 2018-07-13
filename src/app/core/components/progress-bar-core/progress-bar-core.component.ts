@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-progress-bar-core',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './progress-bar-core.component.html',
   styles: []
 })

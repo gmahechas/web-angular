@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar-core',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar-core.component.html',
   styles: []
 })
