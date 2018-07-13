@@ -4,7 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-not-found-core',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './not-found-core.component.html',
-  styleUrls: ['./not-found-core.component.scss']
+  styles: []
 })
 export class NotFoundCoreComponent implements OnInit {
 

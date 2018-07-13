@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-input-password-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input-password-shared.component.html',
-  styleUrls: ['./input-password-shared.component.scss']
+  styles: []
 })
 export class InputPasswordSharedComponent implements OnInit {
 

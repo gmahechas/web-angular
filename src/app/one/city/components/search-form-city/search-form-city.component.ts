@@ -7,7 +7,7 @@ import { SearchCity } from './../../models/search-city.model';
   selector: 'app-search-form-city',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './search-form-city.component.html',
-  styleUrls: ['./search-form-city.component.scss']
+  styles: []
 })
 export class SearchFormCityComponent implements OnChanges, OnInit {
 

@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   selector: 'app-dropdown-page-city',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dropdown-page-city.component.html',
-  styleUrls: ['./dropdown-page-city.component.scss']
+  styles: []
 })
 export class DropdownPageCityComponent implements OnInit {
 

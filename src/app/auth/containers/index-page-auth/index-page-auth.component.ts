@@ -8,7 +8,7 @@ import { Auth } from './../../models/auth.model';
 @Component({
   selector: 'app-index-page-auth',
   templateUrl: './index-page-auth.component.html',
-  styleUrls: ['./index-page-auth.component.scss']
+  styles: []
 })
 export class IndexPageAuthComponent implements OnInit {
 

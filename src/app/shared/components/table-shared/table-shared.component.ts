@@ -4,7 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
   selector: 'app-table-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './table-shared.component.html',
-  styleUrls: ['./table-shared.component.scss']
+  styles: []
 })
 export class TableSharedComponent implements OnInit {
 

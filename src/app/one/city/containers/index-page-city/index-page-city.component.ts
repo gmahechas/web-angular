@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   selector: 'app-index-page-city',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-page-city.component.html',
-  styleUrls: ['./index-page-city.component.scss']
+  styles: []
 })
 export class IndexPageCityComponent implements OnInit {
 

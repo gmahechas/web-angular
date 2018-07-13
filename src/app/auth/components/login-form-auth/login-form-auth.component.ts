@@ -5,7 +5,7 @@ import { Auth } from '../../models/auth.model';
 @Component({
   selector: 'app-login-form-auth',
   templateUrl: './login-form-auth.component.html',
-  styleUrls: ['./login-form-auth.component.scss']
+  styles: []
 })
 export class LoginFormAuthComponent implements OnInit {
 

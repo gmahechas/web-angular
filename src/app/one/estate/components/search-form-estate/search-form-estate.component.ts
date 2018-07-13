@@ -7,7 +7,7 @@ import { SearchEstate } from './../../models/search-estate.model';
   selector: 'app-search-form-estate',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './search-form-estate.component.html',
-  styleUrls: ['./search-form-estate.component.scss']
+  styles: []
 })
 export class SearchFormEstateComponent implements OnChanges, OnInit {
 

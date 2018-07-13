@@ -7,7 +7,7 @@ import { SearchCountry } from './../../models/search-country.model';
   selector: 'app-search-form-country',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './search-form-country.component.html',
-  styleUrls: ['./search-form-country.component.scss']
+  styles: []
 })
 export class SearchFormCountryComponent implements OnChanges, OnInit {
 

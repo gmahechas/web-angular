@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-form-page-country',
   templateUrl: './form-page-country.component.html',
-  styleUrls: ['./form-page-country.component.scss']
+  styles: []
 })
 export class FormPageCountryComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { Country } from './../../models/country.model';
   selector: 'app-form-country',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './form-country.component.html',
-  styleUrls: ['./form-country.component.scss']
+  styles: []
 })
 export class FormCountryComponent implements OnChanges, OnInit {
 

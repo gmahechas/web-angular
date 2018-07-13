@@ -4,7 +4,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
   selector: 'app-input-calendar-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input-calendar-shared.component.html',
-  styleUrls: ['./input-calendar-shared.component.scss']
+  styles: []
 })
 export class InputCalendarSharedComponent implements OnInit {
 

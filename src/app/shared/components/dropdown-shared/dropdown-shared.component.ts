@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-dropdown-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dropdown-shared.component.html',
-  styleUrls: ['./dropdown-shared.component.scss']
+  styles: []
 })
 export class DropdownSharedComponent implements OnInit {
 

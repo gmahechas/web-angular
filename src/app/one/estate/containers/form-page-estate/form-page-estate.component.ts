@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-form-page-estate',
   templateUrl: './form-page-estate.component.html',
-  styleUrls: ['./form-page-estate.component.scss']
+  styles: []
 })
 export class FormPageEstateComponent implements OnInit {
 

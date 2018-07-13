@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-form-page-city',
   templateUrl: './form-page-city.component.html',
-  styleUrls: ['./form-page-city.component.scss']
+  styles: []
 })
 export class FormPageCityComponent implements OnInit {
 

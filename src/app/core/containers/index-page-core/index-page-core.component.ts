@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-index-page-core',
   templateUrl: './index-page-core.component.html',
-  styleUrls: ['./index-page-core.component.scss']
+  styles: []
 })
 export class IndexPageCoreComponent implements OnInit {
 

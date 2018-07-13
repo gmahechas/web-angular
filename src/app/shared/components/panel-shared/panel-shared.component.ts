@@ -4,7 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-panel-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './panel-shared.component.html',
-  styleUrls: ['./panel-shared.component.scss']
+  styles: []
 })
 export class PanelSharedComponent implements OnInit {
 

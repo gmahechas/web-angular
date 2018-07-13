@@ -9,7 +9,7 @@ import { Country } from './../../../country/models/country.model';
   selector: 'app-form-estate',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './form-estate.component.html',
-  styleUrls: ['./form-estate.component.scss']
+  styles: []
 })
 export class FormEstateComponent implements OnChanges, OnInit {
 

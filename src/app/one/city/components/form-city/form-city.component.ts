@@ -7,7 +7,7 @@ import { City } from './../../models/city.model';
   selector: 'app-form-city',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './form-city.component.html',
-  styleUrls: ['./form-city.component.scss']
+  styles: []
 })
 export class FormCityComponent implements OnChanges, OnInit {
 

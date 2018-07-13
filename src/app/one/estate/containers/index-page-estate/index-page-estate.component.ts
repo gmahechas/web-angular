@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   selector: 'app-index-page-estate',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-page-estate.component.html',
-  styleUrls: ['./index-page-estate.component.scss']
+  styles: []
 })
 export class IndexPageEstateComponent implements OnInit {
 

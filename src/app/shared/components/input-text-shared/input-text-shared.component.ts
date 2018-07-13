@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-input-text-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input-text-shared.component.html',
-  styleUrls: ['./input-text-shared.component.scss']
+  styles: []
 })
 export class InputTextSharedComponent implements OnInit {
 

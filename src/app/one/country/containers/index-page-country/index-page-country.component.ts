@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   selector: 'app-index-page-country',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-page-country.component.html',
-  styleUrls: ['./index-page-country.component.scss']
+  styles: []
 })
 export class IndexPageCountryComponent implements OnInit {
 

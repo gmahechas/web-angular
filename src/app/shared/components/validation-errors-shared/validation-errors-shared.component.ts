@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
   selector: 'app-validation-errors-shared',
   changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './validation-errors-shared.component.html',
-  styleUrls: ['./validation-errors-shared.component.scss']
+  styles: []
 })
 export class ValidationErrorsSharedComponent implements OnInit {
 
