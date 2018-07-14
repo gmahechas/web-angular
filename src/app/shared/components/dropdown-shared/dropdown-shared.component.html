@@ -1,6 +1,6 @@
 <div [formGroup]="group">
   <p-dropdown [formControlName]="controlName" [placeholder]="configDropDown.placeholder" [dataKey]="configDropDown.dataKey"
-    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)"
+    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)" (onChange)="onChange($event)"
     [tabindex]="-1" [options]="setOptions()" [style]="{'width':'100%'}">
     <ng-template let-selectedItem pTemplate="selectedItem">
       <span *ngFor="let option of options">
