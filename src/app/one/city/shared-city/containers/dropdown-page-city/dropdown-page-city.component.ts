@@ -19,6 +19,7 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() controlName: string;
   @Input() options: string[];
+  @Input() placeholder: string;
   entities$: Observable<City[]>;
   configDropDown: any;
 
@@ -27,9 +28,8 @@ export class DropdownPageCityComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      placeholder: 'Selecciona el pais',
       dataKey: 'city_id',
-      optionLabel: 'TODO'
+      optionLabel: 'city_name'
     };
   }
 

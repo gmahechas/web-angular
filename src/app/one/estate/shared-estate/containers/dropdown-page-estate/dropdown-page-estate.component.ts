@@ -19,6 +19,7 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() controlName: string;
   @Input() options: string[];
+  @Input() placeholder: string;
   entities$: Observable<Estate[]>;
   configDropDown: any;
 
@@ -27,7 +28,6 @@ export class DropdownPageEstateComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      placeholder: 'Estado',
       dataKey: 'estate_id',
       optionLabel: 'estate_name'
     };
