@@ -20,7 +20,7 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() controlName: string;
   @Input() options: string[];
   @Input() placeholder: string;
-  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
   entities$: Observable<City[]>;
   configDropDown: any;
 
@@ -48,7 +48,7 @@ export class DropdownPageCityComponent implements OnInit {
     }));
   }
 
-  onChange(event) {
-    this.change.emit(event);
+  handleChange(event) {
+    this.changeDropdown.emit(event);
   }
 }

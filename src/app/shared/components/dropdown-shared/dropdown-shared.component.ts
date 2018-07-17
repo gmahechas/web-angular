@@ -16,7 +16,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() options: string[];
   @Input() placeholder: string;
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
-  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Output() handleChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -38,6 +38,6 @@ export class DropdownSharedComponent implements OnInit {
   }
 
   onChange(event) {
-    this.change.emit(event.value);
+    this.handleChange.emit(event.value);
   }
 }
