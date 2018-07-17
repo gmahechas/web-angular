@@ -38,6 +38,6 @@ export class DropdownSharedComponent implements OnInit {
   }
 
   onChange(event) {
-    console.log(event.value);
+    this.change.emit(event.value);
   }
 }

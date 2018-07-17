@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -20,6 +20,7 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() controlName: string;
   @Input() options: string[];
   @Input() placeholder: string;
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
   entities$: Observable<City[]>;
   configDropDown: any;
 
@@ -40,8 +41,14 @@ export class DropdownPageCityComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadEntityShared({
       city: {
         city_id: null,
-        city_name: event, // TODO
-      }
+        city_name: event,
+        city_code: ''
+      },
+      estate: null
     }));
+  }
+
+  onChange(event) {
+    this.change.emit(event);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -20,6 +20,7 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() controlName: string;
   @Input() options: string[];
   @Input() placeholder: string;
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
   entities$: Observable<Estate[]>;
   configDropDown: any;
 
@@ -45,5 +46,9 @@ export class DropdownPageEstateComponent implements OnInit {
       },
       country: null
     }));
+  }
+
+  onChange(event) {
+    this.change.emit(event);
   }
 }
