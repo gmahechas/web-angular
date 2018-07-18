@@ -40,7 +40,7 @@ export class IndexPageEstateComponent implements OnInit {
         { field: 'estate_id', header: 'Id', style: { 'width': '5%' } },
         { field: 'estate_name', header: 'Estado', style: { 'width': '45%' } },
         { field: 'estate_code', header: 'Codigo', style: { 'width': '10%' } },
-        { field: 'country', subfield: 'country_name', header: 'Pais', style: { 'width': '40%' } }
+        { field: 'country.country_name', header: 'Pais', style: { 'width': '40%' } }
       ]
     };
   }

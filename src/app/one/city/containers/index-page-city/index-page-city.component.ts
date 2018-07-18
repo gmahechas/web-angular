@@ -38,9 +38,10 @@ export class IndexPageCityComponent implements OnInit {
       dataKey: 'city_id',
       cols: [
         { field: 'city_id', header: 'Id', style: { width: '5%' } },
-        { field: 'city_name', header: 'Ciudad', style: { width: '45%' } },
+        { field: 'city_name', header: 'Ciudad', style: { width: '30%' } },
         { field: 'city_code', header: 'Codigo', style: { width: '10%' } },
-        { field: 'estate', subfield: 'estate_name', header: 'Estado', style: { 'width': '40%' } }
+        { field: 'estate.estate_name', header: 'Estado', style: { 'width': '30%' } },
+        { field: 'estate.country.country_name', header: 'Pais', style: { 'width': '25%' } }
       ]
     };
   }

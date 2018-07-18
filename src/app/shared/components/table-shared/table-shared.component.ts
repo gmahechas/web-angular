@@ -33,4 +33,20 @@ export class TableSharedComponent implements OnInit {
   onPageChange(event) {
     this.pageChange.emit(event);
   }
+
+  setField(value, field: string) {
+    const splitField = field.split('.');
+    const fieldsLength = splitField.length;
+    if (fieldsLength === 1) {
+      return value[field];
+    } else if (fieldsLength === 2) {
+      return value[splitField[0]][splitField[1]];
+    } else if (fieldsLength === 3) {
+      return value[splitField[0]][splitField[1]][splitField[2]];
+    } else if (fieldsLength === 4) {
+      return value[splitField[0]][splitField[1]][splitField[2]][splitField[3]];
+    }
+
+  }
+
 }

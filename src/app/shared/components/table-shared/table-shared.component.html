@@ -14,13 +14,7 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData">
         <td *ngFor="let col of columns" [ngStyle]="col.style">
-          <div *ngIf="!col.subfield;then field_template else subfield_template"></div>
-          <ng-template #field_template>
-            {{rowData[col.field]}}
-          </ng-template>
-          <ng-template #subfield_template>
-            {{rowData[col.field][col.subfield]}}
-          </ng-template>
+          {{ setField(rowData, col.field) }}
         </td>
       </tr>
     </ng-template>
