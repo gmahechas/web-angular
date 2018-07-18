@@ -37,6 +37,26 @@ export class DropdownSharedComponent implements OnInit {
     }
   }
 
+  setOption(value, option: string) {
+    const splitOption = option.split('.');
+    const optionsLength = splitOption.length;
+    if (optionsLength === 1) {
+      return (value[option]) ? value[option] : option;
+    } else if (optionsLength === 2) {
+      if (value[splitOption[0]][splitOption[1]]) {
+        return value[splitOption[0]][splitOption[1]];
+      } else {
+        return option;
+      }
+    } else if (optionsLength === 3) {
+      if (value[splitOption[0]][splitOption[1]][splitOption[2]]) {
+        return value[splitOption[0]][splitOption[1]][splitOption[2]];
+      } else {
+        return option;
+      }
+    }
+  }
+
   onChange(event) {
     this.handleChange.emit(event.value);
   }

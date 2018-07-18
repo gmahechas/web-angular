@@ -1,15 +1,15 @@
 <div [formGroup]="group">
   <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder) : 'Seleccionar'" [dataKey]="configDropDown.dataKey"
-    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)" (onChange)="onChange($event)"
-    [tabindex]="-1" [options]="setOptions()" [style]="{'width':'100%'}">
+    [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)"
+    (onChange)="onChange($event)" [tabindex]="-1" [options]="setOptions()" [style]="{'width':'100%'}">
     <ng-template let-selectedItem pTemplate="selectedItem">
       <span *ngFor="let option of options">
-        {{ (selectedItem.value[option]) ? selectedItem.value[option] : option }}
+        {{ setOption(selectedItem.value, option) }}
       </span>
     </ng-template>
     <ng-template let-item pTemplate="item">
       <span *ngFor="let option of options">
-        {{ (item.value[option]) ? item.value[option] : option }}
+        {{ setOption(item.value, option) }}
       </span>
     </ng-template>
   </p-dropdown>
