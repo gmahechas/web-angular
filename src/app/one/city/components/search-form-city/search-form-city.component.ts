@@ -17,11 +17,11 @@ export class SearchFormCityComponent implements OnChanges, OnInit {
 
   searchFormCity: FormGroup = this.formBuilder.group({
     city: this.formBuilder.group({
-      city_id: new FormControl(''),
-      city_name: new FormControl(''),
-      city_code: new FormControl(''),
+      city_id: this.formBuilder.control(''),
+      city_name: this.formBuilder.control(''),
+      city_code: this.formBuilder.control(''),
     }),
-    estate: new FormControl('')
+    estate: this.formBuilder.control('')
   });
 
   constructor(

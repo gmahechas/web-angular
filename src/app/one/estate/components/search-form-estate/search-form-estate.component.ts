@@ -17,11 +17,11 @@ export class SearchFormEstateComponent implements OnChanges, OnInit {
 
   searchFormEstate: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
-      estate_id: new FormControl(''),
-      estate_name: new FormControl(''),
-      estate_code: new FormControl(''),
+      estate_id: this.formBuilder.control(''),
+      estate_name: this.formBuilder.control(''),
+      estate_code: this.formBuilder.control(''),
     }),
-    country: new FormControl('')
+    country: this.formBuilder.control('')
   });
 
   constructor(

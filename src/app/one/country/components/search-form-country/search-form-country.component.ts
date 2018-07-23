@@ -17,9 +17,9 @@ export class SearchFormCountryComponent implements OnChanges, OnInit {
 
   searchFormCountry: FormGroup = this.formBuilder.group({
     country: this.formBuilder.group({
-      country_id: new FormControl(''),
-      country_name: new FormControl(''),
-      country_code: new FormControl('')
+      country_id: this.formBuilder.control(''),
+      country_name: this.formBuilder.control(''),
+      country_code: this.formBuilder.control('')
     })
   });
 

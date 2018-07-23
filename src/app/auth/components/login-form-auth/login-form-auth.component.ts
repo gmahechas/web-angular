@@ -12,8 +12,8 @@ export class LoginFormAuthComponent implements OnInit {
 
   loginForm: FormGroup = this.formBuilder.group({
     auth: this.formBuilder.group({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+      username: this.formBuilder.control('', [Validators.required]),
+      password: this.formBuilder.control('', [Validators.required])
     })
   });
 

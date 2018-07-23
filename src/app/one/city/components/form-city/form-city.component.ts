@@ -16,10 +16,10 @@ export class FormCityComponent implements OnChanges, OnInit {
 
   cityForm: FormGroup = this.formBuilder.group({
     city: this.formBuilder.group({
-      city_name: new FormControl('', [Validators.required]),
-      city_code: new FormControl('', [Validators.required, Validators.minLength(2)])
+      city_name: this.formBuilder.control('', [Validators.required]),
+      city_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
     }),
-    estate: new FormControl('', [Validators.required])
+    estate: this.formBuilder.control('', [Validators.required])
   });
 
   ngOnChanges() {

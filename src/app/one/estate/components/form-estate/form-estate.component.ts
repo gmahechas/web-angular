@@ -18,10 +18,10 @@ export class FormEstateComponent implements OnChanges, OnInit {
 
   estateForm: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
-      estate_name: new FormControl('', [Validators.required]),
-      estate_code: new FormControl('', [Validators.required, Validators.minLength(2)])
+      estate_name: this.formBuilder.control('', [Validators.required]),
+      estate_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
     }),
-    country: new FormControl('', [Validators.required])
+    country: this.formBuilder.control('', [Validators.required])
   });
 
   constructor(
