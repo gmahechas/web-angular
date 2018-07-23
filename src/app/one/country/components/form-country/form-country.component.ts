@@ -21,6 +21,10 @@ export class FormCountryComponent implements OnChanges, OnInit {
     })
   });
 
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
+
   ngOnChanges() {
     if (this.country) {
       this.countryForm.reset();
@@ -32,10 +36,6 @@ export class FormCountryComponent implements OnChanges, OnInit {
       });
     }
   }
-
-  constructor(
-    private formBuilder: FormBuilder
-  ) { }
 
   ngOnInit() {
   }

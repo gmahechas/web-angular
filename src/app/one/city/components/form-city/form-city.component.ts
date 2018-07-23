@@ -22,6 +22,10 @@ export class FormCityComponent implements OnChanges, OnInit {
     estate: this.formBuilder.control('', [Validators.required])
   });
 
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
+
   ngOnChanges() {
     if (this.city) {
       this.cityForm.reset();
@@ -34,10 +38,6 @@ export class FormCityComponent implements OnChanges, OnInit {
       });
     }
   }
-
-  constructor(
-    private formBuilder: FormBuilder
-  ) { }
 
   ngOnInit() {
   }
