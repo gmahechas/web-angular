@@ -56,6 +56,7 @@ export class CityService {
   }
 
   pagination(searchCity: fromModels.SearchCity) {
+    console.log(searchCity);
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
       variables: {

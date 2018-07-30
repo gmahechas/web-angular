@@ -34,7 +34,7 @@ export class FormCityComponent implements OnChanges, OnInit {
           city_name: this.city.city_name,
           city_code: this.city.city_code
         },
-        estate: this.city['estate']
+        estate: this.city.estate
       });
     }
   }

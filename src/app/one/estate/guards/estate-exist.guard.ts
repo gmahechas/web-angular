@@ -78,8 +78,8 @@ export class EstateExistGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.checkStore(route.params['estate_id']).pipe(
-      switchMap(() => this.hasEntity(route.params['estate_id']))
+    return this.checkStore(route.params.estate_id).pipe(
+      switchMap(() => this.hasEntity(route.params.estate_id))
     );
   }
 

@@ -78,8 +78,8 @@ export class CityExistGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.checkStore(route.params['city_id']).pipe(
-      switchMap(() => this.hasEntity(route.params['city_id']))
+    return this.checkStore(route.params.city_id).pipe(
+      switchMap(() => this.hasEntity(route.params.city_id))
     );
   }
 

@@ -36,7 +36,7 @@ export class FormEstateComponent implements OnChanges, OnInit {
           estate_name: this.estate.estate_name,
           estate_code: this.estate.estate_code
         },
-        country: this.estate['country']
+        country: this.estate.country
       });
     }
   }

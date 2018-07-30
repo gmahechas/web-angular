@@ -77,8 +77,8 @@ export class CountryExistGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.checkStore(route.params['country_id']).pipe(
-      switchMap(() => this.hasEntity(route.params['country_id']))
+    return this.checkStore(route.params.country_id).pipe(
+      switchMap(() => this.hasEntity(route.params.country_id))
     );
   }
 
