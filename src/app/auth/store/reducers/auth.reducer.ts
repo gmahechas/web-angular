@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
 
 import { Token } from './../../models/token.model';
@@ -23,13 +22,6 @@ export function reducer(state = initialState, action: AuthActions): State {
       return {
         ...state,
         loggedIn: true
-      };
-    }
-
-    case AuthActionTypes.LoginFailure: {
-      return {
-        ...state,
-        loggedIn: false
       };
     }
 
