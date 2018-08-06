@@ -4,8 +4,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from '../shared/shared.module';
 
-import * as fromComponents from './components';
 import * as fromContainers from './containers';
+import * as fromComponents from './components';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
 import * as fromInterceptors from './interceptors';
