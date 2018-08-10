@@ -27,6 +27,6 @@ export class LoginFormAuthComponent implements OnInit {
   }
 
   login(loginForm: FormGroup) {
-    this.submitted.emit(loginForm.value);
+    this.submitted.emit(loginForm.value.auth);
   }
 }

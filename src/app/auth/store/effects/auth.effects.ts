@@ -61,7 +61,7 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   init$ = defer(() => {
-    return of('check login');
+    return of(this.authService.getToken());
   }).pipe(
     tap((jum) => console.log(jum))
   );
