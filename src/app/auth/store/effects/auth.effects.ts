@@ -34,6 +34,9 @@ export class AuthEffects {
     map(action => action.payload),
     tap((token: fromModels.Token) => {
       this.authService.setToken(token);
+      this.store.dispatch(new fromStore.Go({
+        path: ['dashboard']
+      }));
     })
   );
 
@@ -63,7 +66,7 @@ export class AuthEffects {
   init$ = defer(() => {
     return of(this.authService.getToken());
   }).pipe(
-    tap((jum) => console.log(jum))
+    tap((token: fromModels.Token) => console.log(token))
   );
 
   constructor(
