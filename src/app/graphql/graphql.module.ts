@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
@@ -8,6 +9,7 @@ import { environment } from './../../environments/environment';
 
 @NgModule({
   imports: [
+    HttpClientModule,
     ApolloModule,
     HttpLinkModule
   ],
@@ -22,7 +24,6 @@ export class GraphqlModule {
       link: httpLink.create({
         uri: environment.apilUrl + environment.graphqlUrl
       }),
-
       cache: new InMemoryCache({
         addTypename: false
       }),

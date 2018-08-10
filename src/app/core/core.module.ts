@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { SharedModule } from '../shared/shared.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
-import * as fromInterceptors from './interceptors';
 
 @NgModule({
   imports: [
-    HttpClientModule,
     SharedModule
   ],
   declarations: [
@@ -27,9 +23,7 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         ...fromServices.services,
-        ...fromGuards.guards,
-        { provide: HTTP_INTERCEPTORS, useClass: fromInterceptors.TokenInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: fromInterceptors.RefreshTokenInterceptor, multi: true },
+        ...fromGuards.guards
       ],
     };
   }
