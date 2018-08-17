@@ -62,6 +62,28 @@ export class AuthEffects {
     })
   );
 
+  @Effect()
+  refreshToken$ = this.actions$.pipe(
+    ofType<fromActions.RefreshToken>(fromActions.AuthActionTypes.RefreshToken),
+    map(action => action.payload),
+    exhaustMap((token: fromModels.Token) =>
+      this.authService.refreshToken(token).pipe(
+        map((newToken: fromModels.Token) => new fromActions.RefreshTokenSuccess(newToken)),
+        catchError((errors) => {
+          return of(new fromActions.RefreshTokenFailure(errors));
+        })
+      )
+    ));
+
+    @Effect({ dispatch: false })
+    refreshTokenSuccess$ = this.actions$.pipe(
+      ofType<fromActions.RefreshTokenSuccess>(fromActions.AuthActionTypes.RefreshTokenSuccess),
+      map(action => action.payload),
+      tap((token: fromModels.Token) => {
+        this.authService.setToken(token);
+      })
+    );
+
   @Effect({ dispatch: false })
   init$ = defer(() => {
     return of(this.authService.getToken());

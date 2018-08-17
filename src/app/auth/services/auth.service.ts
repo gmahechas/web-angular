@@ -15,13 +15,22 @@ export class AuthService {
 
   login(auth: Auth) {
     return this.httpClient.post(
-      environment.apilUrl + environment.oauthUrl, { grant_type: 'password', ...environment.oauth, ...auth }
+      environment.apilUrl + environment.oauthUrl, {
+        grant_type: 'password',
+        ...environment.oauth,
+        ...auth
+      }
     );
   }
 
-  refreshToken(refreshToken: string) {
+  refreshToken(refreshToken: Token) {
+    console.log('refresh->', refreshToken);
     return this.httpClient.post(
-      environment.apilUrl + environment.oauthUrl, { grant_type: 'refresh_token', ...environment.oauth, refresh_token: refreshToken }
+      environment.apilUrl + environment.oauthUrl, {
+        grant_type: 'refresh_token',
+        ...environment.oauth,
+        refresh_token: refreshToken.refresh_token
+      }
     );
   }
 
