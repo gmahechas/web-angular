@@ -14,6 +14,9 @@ import * as fromGuards from './guards';
   declarations: [
     ...fromContainers.containers,
     ...fromComponents.components
+  ],
+  exports: [
+    ...fromContainers.containers
   ]
 })
 export class CoreModule {

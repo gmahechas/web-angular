@@ -1,5 +1,2 @@
-<div class="ui-message ui-corner-all ui-messages-error" *ngIf="invalid">
-  <i class="pi pi-times"></i>
-  <span *ngIf="control.errors['required']">Campo Requerido</span>
-  <span *ngIf="control.errors['minlength']">Minimo {{ control.errors['minlength'].requiredLength }} letras</span>
-</div>
+<p-message severity="error" [text]="control.errors['required'] ? 'Campo Requerido' : control.errors['minlength'] ? 'Minimo ' + control.errors['minlength'].requiredLength +  ' letras' : ''"
+  *ngIf="invalid"></p-message>
