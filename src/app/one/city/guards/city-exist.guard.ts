@@ -18,7 +18,7 @@ export class CityExistGuard implements CanActivate {
     private cityService: CityService
   ) { }
 
-  /* Always return 200 response */
+  /* FIXME: Always return 200 response */
   /*   hasInApi(city_id: string) {
       return this.cityService.paginationCity({ city_id: +city_id }).pipe(
         map(({ data }) => new fromStore.EntityLoadSuccess(data)),

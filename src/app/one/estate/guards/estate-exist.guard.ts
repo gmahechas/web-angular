@@ -18,7 +18,7 @@ export class EstateExistGuard implements CanActivate {
     private estateService: EstateService
   ) { }
 
-  /* Always return 200 response */
+  /* FIXME: Always return 200 response */
   /*   hasInApi(estate_id: string) {
       return this.estateService.paginationEstate({ estate_id: +estate_id }).pipe(
         map(({ data }) => new fromStore.EntityLoadSuccess(data)),

@@ -18,7 +18,7 @@ export class CountryExistGuard implements CanActivate {
     private countryService: CountryService
   ) { }
 
-  /* Always return 200 response */
+  /* FIXME: Always return 200 response */
   /*   hasInApi(country_id: string) {
       return this.countryService.paginationCountry({ country_id: +country_id }).pipe(
         map(({ data }) => new fromStore.EntityLoadSuccess(data)),

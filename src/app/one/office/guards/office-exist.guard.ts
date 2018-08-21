@@ -18,7 +18,7 @@ export class OfficeExistGuard implements CanActivate {
     private officeService: OfficeService
   ) { }
 
-  /* Always return 200 response */
+  /* FIXME: Always return 200 response */
   /*   hasInApi(office_id: string) {
       return this.officeService.paginationOffice({ office_id: +office_id }).pipe(
         map(({ data }) => new fromStore.EntityLoadSuccess(data)),
