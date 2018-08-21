@@ -55,7 +55,17 @@ export class IndexPageCoreComponent implements OnInit {
                 label: 'Ciudades',
                 routerLink: 'city',
                 command: (() => this.opencloseSidebar(false))
-              }
+              },
+              {
+                label: 'Empresa',
+                routerLink: 'company',
+                command: (() => this.opencloseSidebar(false))
+              },
+              {
+                label: 'Oficinas',
+                routerLink: 'office',
+                command: (() => this.opencloseSidebar(false))
+              },
             ]
           }
         ]

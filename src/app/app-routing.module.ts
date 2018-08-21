@@ -27,6 +27,16 @@ export const routes: Routes = [
     canLoad: [/* AuthGuard */]
   },
   {
+    path: 'company',
+    loadChildren: './one/company/company.module#CompanyModule',
+    canLoad: [/* AuthGuard */]
+  },
+  {
+    path: 'office',
+    loadChildren: './one/office/office.module#OfficeModule',
+    canLoad: [/* AuthGuard */]
+  },
+  {
     path: 'not-found',
     component: NotFoundCoreComponent
   },
