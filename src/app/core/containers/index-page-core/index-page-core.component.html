@@ -1,7 +1,6 @@
 <app-sidebar-core [showSidebar]="showSidebar | async" [menuItems]="menuItems" (hide)="opencloseSidebar($event)"></app-sidebar-core>
 <app-header-core (clickOpen)="opencloseSidebar($event)"></app-header-core>
 <app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>
-<app-message-core></app-message-core>
 <router-outlet></router-outlet>
 <!-- Misc -->
 <app-block-core [blockedDocument]="blockedDocument$ | async"></app-block-core>
