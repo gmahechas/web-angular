@@ -53,7 +53,7 @@ export class LayoutEstateEffects {
         severity: 'success',
         summary: 'Exito',
         detail: 'Se llevo a cabo',
-        key: 'growl'
+        key: 'toast'
       });
     })
   );
@@ -72,7 +72,7 @@ export class LayoutEstateEffects {
         severity: 'error',
         summary: 'Error',
         detail: 'Ha ocurrido un error.',
-        key: 'growl'
+        key: 'toast'
       });
     })
   );

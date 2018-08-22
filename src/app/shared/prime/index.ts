@@ -16,6 +16,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
+import { ToastModule } from 'primeng/toast';
 
 export const prime: any[] = [
   SidebarModule,
@@ -35,5 +36,6 @@ export const prime: any[] = [
   KeyFilterModule,
   InputMaskModule,
   CalendarModule,
-  PanelModule
+  PanelModule,
+  ToastModule
 ];
