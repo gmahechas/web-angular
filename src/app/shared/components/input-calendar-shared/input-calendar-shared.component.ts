@@ -12,6 +12,18 @@ export class InputCalendarSharedComponent implements OnInit {
   @Input() dateFormat: string;
   @Input() showButtonBar: boolean;
   @Input() inline: boolean;
+  @Input() hourFormat: number;
+  @Input() showIcon: boolean;
+  @Input() inputMinDate: string;
+  @Input() inputMaxDate: string;
+  minDate: Date;
+  maxDate: Date;
+  @Input() inputInvalidDates: string[];
+  invalidDates: Date[] = [];
+  @Input() monthNavigator: boolean;
+  @Input() yearNavigator: boolean;
+  @Input() yearRange: string;
+  @Input() showTime: boolean;
 
   constructor() { }
 
@@ -26,10 +38,15 @@ export class InputCalendarSharedComponent implements OnInit {
         'Mayo', 'Junio', 'Julio', 'Agosto',
         'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
       ],
-      monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+      monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
       today: 'Hoy',
       clear: 'Borrar'
     };
+
+    this.minDate = new Date(this.inputMinDate);
+    this.maxDate = new Date(this.inputMaxDate);
+
+    this.inputInvalidDates.map(date => this.invalidDates.push(new Date(date)));
   }
 
 }

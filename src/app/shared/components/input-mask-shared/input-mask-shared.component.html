@@ -1,1 +1,5 @@
-<p-inputMask [mask]="mask"></p-inputMask>
+<div [formGroup]="group">
+  <div [formGroupName]="groupName">
+    <p-inputMask [formControlName]="controlName" [mask]="mask" [placeholder]="placeholder"></p-inputMask>
+  </div>
+</div>
