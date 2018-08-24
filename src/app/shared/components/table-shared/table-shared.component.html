@@ -1,4 +1,5 @@
 <div *ngIf="data.length > 0">
+  <p-paginator *ngIf="totalRecords > rows" [rows]="rows" [totalRecords]="totalRecords" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
   <p-table [columns]="configTable.cols" [value]="data" selectionMode="single" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
     [dataKey]="configTable.dataKey">
     <ng-template pTemplate="caption">
