@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import { Message } from 'primeng/api';
+
 export enum LayoutActionTypes {
   OpenSidebar = '[Layout] Open Sidebar',
   CloseSidebar = '[Layout] Close Sidebar',
@@ -9,6 +11,7 @@ export enum LayoutActionTypes {
   CloseSpinner = '[Layout] Close Spinner',
   ShowProgressBar = '[Layout] Open Progress Bar',
   CloseProgressBar = '[Layout] Close Progress Bar',
+  ShowMessages = '[Layout] Show Messages',
 }
 
 export class OpenSidebar implements Action {
@@ -43,6 +46,11 @@ export class CloseProgressBar implements Action {
   readonly type = LayoutActionTypes.CloseProgressBar;
 }
 
+export class ShowMessages implements Action {
+  readonly type = LayoutActionTypes.ShowMessages;
+  constructor(public payload: Message[]) { }
+}
+
 export type LayoutActions =
   | OpenSidebar
   | CloseSidebar
@@ -51,4 +59,5 @@ export type LayoutActions =
   | ShowSpinner
   | CloseSpinner
   | ShowProgressBar
-  | CloseProgressBar;
+  | CloseProgressBar
+  | ShowMessages;
