@@ -5,6 +5,7 @@ import { NotFoundCoreComponent } from './not-found-core/not-found-core.component
 import { SpinnerCoreComponent } from './spinner-core/spinner-core.component';
 import { ProgressBarCoreComponent } from './progress-bar-core/progress-bar-core.component';
 import { ToastCoreComponent } from './toast-core/toast-core.component';
+import { ConfirmCoreComponent } from './confirm-core/confirm-core.component';
 
 export const components: any[] = [
   SidebarCoreComponent,
@@ -13,7 +14,8 @@ export const components: any[] = [
   NotFoundCoreComponent,
   SpinnerCoreComponent,
   ProgressBarCoreComponent,
-  ToastCoreComponent
+  ToastCoreComponent,
+  ConfirmCoreComponent
 ];
 
 export * from './sidebar-core/sidebar-core.component';
@@ -23,3 +25,4 @@ export * from './not-found-core/not-found-core.component';
 export * from './spinner-core/spinner-core.component';
 export * from './progress-bar-core/progress-bar-core.component';
 export * from './toast-core/toast-core.component';
+export * from './confirm-core/confirm-core.component';
