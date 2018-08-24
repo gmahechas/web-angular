@@ -7,8 +7,6 @@ import * as fromActions from '../actions';
 
 import * as fromModels from './../../models';
 
-import { MessageService } from 'primeng/components/common/messageservice';
-
 import { map, tap } from 'rxjs/operators';
 
 @Injectable()
@@ -49,12 +47,9 @@ export class LayoutEstateEffects {
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Exito',
-        detail: 'Se llevo a cabo',
-        key: 'toast'
-      });
+      this.store.dispatch(new fromCore.ShowMessages([
+        { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
+      ]));
     })
   );
 
@@ -68,12 +63,9 @@ export class LayoutEstateEffects {
     ),
     tap(action => {
       this.store.dispatch(new fromCore.CloseSpinner);
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Ha ocurrido un error.',
-        key: 'toast'
-      });
+      this.store.dispatch(new fromCore.ShowMessages([
+        { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
+      ]));
     })
   );
 
@@ -124,7 +116,6 @@ export class LayoutEstateEffects {
 
   constructor(
     private actions$: Actions,
-    private messageService: MessageService,
     private store: Store<fromCore.State>
   ) { }
 }
