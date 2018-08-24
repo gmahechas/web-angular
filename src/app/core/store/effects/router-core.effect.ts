@@ -8,7 +8,7 @@ import * as fromActions from '../actions';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable()
-export class RouterEffects {
+export class RouterCoreEffects {
 
 
   @Effect({ dispatch: false })
