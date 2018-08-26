@@ -9,8 +9,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 export class TableSharedComponent implements OnInit {
 
   @Input() data: any[];
-  @Input() rows: number;
   @Input() totalRecords: number;
+  @Input() rows: number;
   @Input() first: number;
   @Input() to: number;
   @Input() configTable: any;
