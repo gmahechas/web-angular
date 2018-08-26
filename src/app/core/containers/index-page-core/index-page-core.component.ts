@@ -66,6 +66,11 @@ export class IndexPageCoreComponent implements OnInit {
                 routerLink: 'office',
                 command: (() => this.opencloseSidebar(false))
               },
+              {
+                label: 'Personas',
+                routerLink: 'person',
+                command: (() => this.opencloseSidebar(false))
+              },
             ]
           }
         ]

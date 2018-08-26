@@ -32,7 +32,7 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onUpdate({ estate, country }: { estate: Estate, country: Country }) {
-    this.store.dispatch(new fromStore.UpdateEntity({ ...estate, country: country, country_id: country.country_id }));
+    this.store.dispatch(new fromStore.UpdateEntity({ ...estate, country_id: country.country_id }));
   }
 
   onCancel() {

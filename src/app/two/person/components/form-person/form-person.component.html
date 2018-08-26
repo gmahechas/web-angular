@@ -1,0 +1,98 @@
+<form [formGroup]="personForm" (ngSubmit)="onSubmit(personForm)">
+  <app-panel-shared>
+    <div class="panel-header">
+      <ng-content select=".form-title"></ng-content>
+    </div>
+    <div class="panel-content">
+      <div class="ui-grid">
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Tipo de Persona *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_business_type'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_business_type')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Tipo de Identificacion *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification_type'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_identification_type')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Identificacion *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_identification')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Primer Nombre *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_first_name'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_first_name')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Segundo Nombre *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_second_name'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_second_name')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Primer Apellido *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_first_surname'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_first_surname')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Segundo Apellido *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_second_surname'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('person.person_second_surname')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Ciudad *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-city [group]="personForm" [controlName]="'city'" [options]="['city_name']"></app-dropdown-page-city>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="personForm.get('city')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="personForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </div>
+  </app-panel-shared>
+</form>
