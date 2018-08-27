@@ -40,30 +40,18 @@ export class DropdownSharedComponent implements OnInit {
   setOption(value, option: string) {
     const splitOption = option.split('.');
     const optionsLength = splitOption.length;
-    if (optionsLength === 1) {
-      if (value[splitOption[0]]) {
-        return value[splitOption[0]];
-      } else {
-        return option;
-      }
-    } else if (optionsLength === 2) {
-      if (value[splitOption[0]][splitOption[1]]) {
-        return value[splitOption[0]][splitOption[1]];
-      } else {
-        return option;
-      }
-    } else if (optionsLength === 3) {
-      if (value[splitOption[0]][splitOption[1]][splitOption[2]]) {
-        return value[splitOption[0]][splitOption[1]][splitOption[2]];
-      } else {
-        return option;
-      }
-    } else if (optionsLength === 4) {
-      if (value[splitOption[0]][splitOption[1]][splitOption[2]][splitOption[3]]) {
-        return value[splitOption[0]][splitOption[1]][splitOption[2]][splitOption[3]];
-      } else {
-        return option;
-      }
+
+    // FIXME:
+    switch (optionsLength) {
+      case 1: return (value[splitOption[0]])
+        ? value[splitOption[0]] : option;
+      case 2: return (value[splitOption[0]][splitOption[1]])
+        ? value[splitOption[0]][splitOption[1]] : option;
+      case 3: return (value[splitOption[0]][splitOption[1]][splitOption[2]])
+        ? value[splitOption[0]][splitOption[1]][splitOption[2]] : option;
+      case 4: return (value[splitOption[0]][splitOption[1]][splitOption[2]][splitOption[3]])
+        ? value[splitOption[0]][splitOption[1]][splitOption[2]] : option;
+      default: return option;
     }
   }
 

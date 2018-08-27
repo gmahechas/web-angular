@@ -38,12 +38,17 @@ export class TableSharedComponent implements OnInit {
     const splitField = field.split('.');
     const fieldsLength = splitField.length;
 
+    // FIXME:
     switch (fieldsLength) {
-      case 1: return value[splitField[0]];
-      case 2: return value[splitField[0]][splitField[1]];
-      case 3: return value[splitField[0]][splitField[1]][splitField[2]];
-      case 4: return value[splitField[0]][splitField[1]][splitField[2]][splitField[3]];
-      default: return '';
+      case 1: return (value[splitField[0]])
+        ? value[splitField[0]] : field;
+      case 2: return (value[splitField[0]][splitField[1]])
+        ? value[splitField[0]][splitField[1]] : field;
+      case 3: return (value[splitField[0]][splitField[1]][splitField[2]])
+        ? value[splitField[0]][splitField[1]][splitField[2]] : field;
+      case 4: return (value[splitField[0]][splitField[1]][splitField[2]][splitField[3]])
+        ? value[splitField[0]][splitField[1]][splitField[2]][splitField[3]] : field;
+      default: return field;
     }
   }
 

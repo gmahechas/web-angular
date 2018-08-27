@@ -37,11 +37,11 @@ export class IndexPageCityComponent implements OnInit {
     this.configTable = {
       dataKey: 'city_id',
       cols: [
-        { field: 'city_id', header: 'Id', style: { width: '5%' } },
-        { field: 'city_name', header: 'Ciudad', style: { width: '30%' } },
-        { field: 'city_code', header: 'Codigo', style: { width: '10%' } },
-        { field: 'estate.estate_name', header: 'Estado', style: { 'width': '30%' } },
-        { field: 'estate.country.country_name', header: 'Pais', style: { 'width': '25%' } }
+        { fields: ['city_id'], header: 'Id', style: { width: '5%' } },
+        { fields: ['city_name'], header: 'Ciudad', style: { width: '30%' } },
+        { fields: ['city_code'], header: 'Codigo', style: { width: '10%' } },
+        { fields: ['estate.estate_name'], header: 'Estado', style: { 'width': '30%' } },
+        { fields: ['estate.country.country_name'], header: 'Pais', style: { 'width': '25%' } }
       ]
     };
   }
