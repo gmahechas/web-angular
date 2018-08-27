@@ -43,7 +43,7 @@ export class FormCountryComponent implements OnChanges, OnInit {
   onSubmit(countryForm: FormGroup) {
 
     if (this.country) {
-      if (this.countryForm.dirty && this.countryForm.valid) {
+      if (countryForm.dirty) {
         const updated = {
           country_id: this.country.country_id,
           ...countryForm.value.country
@@ -51,9 +51,7 @@ export class FormCountryComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      if (this.countryForm.valid) {
-        this.submitted.emit(countryForm.value.country);
-      }
+      this.submitted.emit(countryForm.value.country);
     }
 
   }

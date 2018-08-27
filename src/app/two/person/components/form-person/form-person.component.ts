@@ -55,7 +55,7 @@ export class FormPersonComponent implements OnChanges, OnInit {
   onSubmit(personForm: FormGroup) {
 
     if (this.person) {
-      if (this.personForm.dirty && this.personForm.valid) {
+      if (personForm.dirty) {
         const updated = {
           person_id: this.person.person_id,
           ...personForm.value.person,
@@ -64,9 +64,7 @@ export class FormPersonComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      if (this.personForm.valid) {
-        this.submitted.emit({ ...personForm.value.person, city_id: personForm.value.city.city_id });
-      }
+      this.submitted.emit({ ...personForm.value.person, city_id: personForm.value.city.city_id });
     }
 
   }

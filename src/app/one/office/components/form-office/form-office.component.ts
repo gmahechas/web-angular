@@ -43,7 +43,7 @@ export class FormOfficeComponent implements OnChanges, OnInit {
   onSubmit(officeForm: FormGroup) {
 
     if (this.office) {
-      if (this.officeForm.dirty && this.officeForm.valid) {
+      if (officeForm.dirty) {
         const updated = {
           office_id: this.office.office_id,
           ...officeForm.value.office,
@@ -52,9 +52,7 @@ export class FormOfficeComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      if (this.officeForm.valid) {
-        this.submitted.emit({ ...officeForm.value.office, city_id: officeForm.value.city.city_id });
-      }
+      this.submitted.emit({ ...officeForm.value.office, city_id: officeForm.value.city.city_id });
     }
 
   }

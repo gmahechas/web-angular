@@ -45,7 +45,7 @@ export class FormCityComponent implements OnChanges, OnInit {
   onSubmit(cityForm: FormGroup) {
 
     if (this.city) {
-      if (this.cityForm.dirty && this.cityForm.valid) {
+      if (cityForm.dirty) {
         const updated = {
           city_id: this.city.city_id,
           ...cityForm.value.city,
@@ -54,9 +54,7 @@ export class FormCityComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      if (this.cityForm.valid) {
-        this.submitted.emit({ ...cityForm.value.city, estate_id: cityForm.value.estate.estate_id });
-      }
+      this.submitted.emit({ ...cityForm.value.city, estate_id: cityForm.value.estate.estate_id });
     }
 
   }

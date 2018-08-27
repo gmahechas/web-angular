@@ -41,7 +41,7 @@ export class FormProfileComponent implements OnChanges, OnInit {
   onSubmit(profileForm: FormGroup) {
 
     if (this.profile) {
-      if (this.profileForm.dirty && this.profileForm.valid) {
+      if (profileForm.dirty) {
         const updated = {
           profile_id: this.profile.profile_id,
           ...profileForm.value.profile
@@ -49,9 +49,7 @@ export class FormProfileComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      if (this.profileForm.valid) {
-        this.submitted.emit(profileForm.value);
-      }
+      this.submitted.emit(profileForm.value);
     }
 
   }

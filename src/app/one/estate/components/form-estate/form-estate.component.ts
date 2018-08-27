@@ -46,7 +46,7 @@ export class FormEstateComponent implements OnChanges, OnInit {
   onSubmit(estateForm: FormGroup) {
 
     if (this.estate) {
-      if (this.estateForm.dirty && this.estateForm.valid) {
+      if (estateForm.dirty) {
         const updated = {
           estate_id: this.estate.estate_id,
           ...estateForm.value.estate,
@@ -55,9 +55,7 @@ export class FormEstateComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      if (this.estateForm.valid) {
-        this.submitted.emit({ ...estateForm.value.estate, country_id: estateForm.value.country.country_id });
-      }
+      this.submitted.emit({ ...estateForm.value.estate, country_id: estateForm.value.country.country_id });
     }
 
   }
