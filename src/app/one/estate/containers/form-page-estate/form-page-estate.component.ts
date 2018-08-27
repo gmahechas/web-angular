@@ -1,4 +1,3 @@
-import { Country } from './../../../country/models/country.model';
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
@@ -27,12 +26,12 @@ export class FormPageEstateComponent implements OnInit {
   ngOnInit() {
   }
 
-  onStore({ estate, country }: { estate: Estate, country: Country }) {
-    this.store.dispatch(new fromStore.StoreEntity({ ...estate, country_id: country.country_id }));
+  onStore(estate: Estate) {
+    this.store.dispatch(new fromStore.StoreEntity(estate));
   }
 
-  onUpdate({ estate, country }: { estate: Estate, country: Country }) {
-    this.store.dispatch(new fromStore.UpdateEntity({ ...estate, country_id: country.country_id }));
+  onUpdate(estate: Estate) {
+    this.store.dispatch(new fromStore.UpdateEntity(estate));
   }
 
   onCancel() {

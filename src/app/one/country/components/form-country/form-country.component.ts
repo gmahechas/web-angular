@@ -44,11 +44,11 @@ export class FormCountryComponent implements OnChanges, OnInit {
 
     if (this.country) {
       if (this.countryForm.dirty && this.countryForm.valid) {
-        const updatedCountry = {
-          ...this.country,
+        const updated = {
+          country_id: this.country.country_id,
           ...countryForm.value.country
         };
-        this.submitted.emit(updatedCountry);
+        this.submitted.emit(updated);
       }
     } else {
       if (this.countryForm.valid) {

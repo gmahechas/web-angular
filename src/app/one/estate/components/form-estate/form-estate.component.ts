@@ -12,9 +12,8 @@ import { Country } from './../../../country/models/country.model';
 })
 export class FormEstateComponent implements OnChanges, OnInit {
 
-  @Output() submitted: EventEmitter<{ estate: Estate, country: Country }> = new EventEmitter<{ estate: Estate, country: Country }>();
-  @Output() fromKeyUp: EventEmitter<string> = new EventEmitter<string>();
   @Input() estate: Estate;
+  @Output() submitted: EventEmitter<{ estate: Estate, country: Country }> = new EventEmitter<{ estate: Estate, country: Country }>();
 
   estateForm: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
@@ -49,23 +48,18 @@ export class FormEstateComponent implements OnChanges, OnInit {
     if (this.estate) {
       if (this.estateForm.dirty && this.estateForm.valid) {
         const updated = {
-          estate: {
-            ...estateForm.value.estate,
-            estate_id: this.estate.estate_id
-          },
-          country: this.estateForm.value.country
+          estate_id: this.estate.estate_id,
+          ...estateForm.value.estate,
+          country_id: estateForm.value.country.country_id
         };
         this.submitted.emit(updated);
       }
     } else {
       if (this.estateForm.valid) {
-        this.submitted.emit(estateForm.value);
+        this.submitted.emit({ ...estateForm.value.estate, country_id: estateForm.value.country.country_id });
       }
     }
 
   }
 
-  keyUp(event) {
-    this.fromKeyUp.emit(event);
-  }
 }

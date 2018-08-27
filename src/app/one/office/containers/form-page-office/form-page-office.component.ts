@@ -5,7 +5,6 @@ import * as fromStore from './../../store';
 import * as fromCore from './../../../../core/store';
 
 import { Office } from './../../models/office.model';
-import { City } from './../../../city/models/city.model';
 
 import { Observable } from 'rxjs';
 
@@ -27,12 +26,12 @@ export class FormPageOfficeComponent implements OnInit {
   ngOnInit() {
   }
 
-  onStore({ office, city }: { office: Office, city: City }) {
-    this.store.dispatch(new fromStore.StoreEntity({...office, city_id: city.city_id }));
+  onStore(office: Office) {
+    this.store.dispatch(new fromStore.StoreEntity(office));
   }
 
-  onUpdate({ office, city }: { office: Office, city: City }) {
-    this.store.dispatch(new fromStore.UpdateEntity({...office, city_id: city.city_id }));
+  onUpdate(office: Office) {
+    this.store.dispatch(new fromStore.UpdateEntity(office));
   }
 
   onCancel() {

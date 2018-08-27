@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
@@ -6,7 +5,6 @@ import * as fromStore from './../../store';
 import * as fromCore from './../../../../core/store';
 
 import { Person } from './../../models/person.model';
-import { City } from './../../../../one/city/models/city.model';
 
 import { Observable } from 'rxjs';
 
@@ -28,12 +26,12 @@ export class FormPagePersonComponent implements OnInit {
   ngOnInit() {
   }
 
-  onStore({ person, city }: { person: Person, city: City }) {
-    this.store.dispatch(new fromStore.StoreEntity({...person, city_id: city.city_id }));
+  onStore(person: Person) {
+    this.store.dispatch(new fromStore.StoreEntity(person));
   }
 
-  onUpdate({ person, city }: { person: Person, city: City }) {
-    this.store.dispatch(new fromStore.UpdateEntity({...person, city_id: city.city_id }));
+  onUpdate(person: Person) {
+    this.store.dispatch(new fromStore.UpdateEntity(person));
   }
 
   onCancel() {

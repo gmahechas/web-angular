@@ -57,17 +57,15 @@ export class FormPersonComponent implements OnChanges, OnInit {
     if (this.person) {
       if (this.personForm.dirty && this.personForm.valid) {
         const updated = {
-          person: {
-            ...personForm.value.person,
-            person_id: this.person.person_id
-          },
-          city: this.personForm.value.city
+          person_id: this.person.person_id,
+          ...personForm.value.person,
+          city_id: personForm.value.city.city_id
         };
         this.submitted.emit(updated);
       }
     } else {
       if (this.personForm.valid) {
-        this.submitted.emit(personForm.value);
+        this.submitted.emit({ ...personForm.value.person, city_id: personForm.value.city.city_id });
       }
     }
 

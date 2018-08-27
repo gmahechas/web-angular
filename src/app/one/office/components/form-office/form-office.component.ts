@@ -45,17 +45,15 @@ export class FormOfficeComponent implements OnChanges, OnInit {
     if (this.office) {
       if (this.officeForm.dirty && this.officeForm.valid) {
         const updated = {
-          office: {
-            ...officeForm.value.office,
-            office_id: this.office.office_id
-          },
-          city: this.officeForm.value.city
+          office_id: this.office.office_id,
+          ...officeForm.value.office,
+          city_id: officeForm.value.city.city_id
         };
         this.submitted.emit(updated);
       }
     } else {
       if (this.officeForm.valid) {
-        this.submitted.emit(officeForm.value);
+        this.submitted.emit({ ...officeForm.value.office, city_id: officeForm.value.city.city_id });
       }
     }
 

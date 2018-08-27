@@ -47,17 +47,15 @@ export class FormCityComponent implements OnChanges, OnInit {
     if (this.city) {
       if (this.cityForm.dirty && this.cityForm.valid) {
         const updated = {
-          city: {
-            ...cityForm.value.city,
-            city_id: this.city.city_id
-          },
-          estate: this.cityForm.value.estate
+          city_id: this.city.city_id,
+          ...cityForm.value.city,
+          estate_id: cityForm.value.estate.estate_id
         };
         this.submitted.emit(updated);
       }
     } else {
       if (this.cityForm.valid) {
-        this.submitted.emit(cityForm.value);
+        this.submitted.emit({ ...cityForm.value.city, estate_id: cityForm.value.estate.estate_id });
       }
     }
 
