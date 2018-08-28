@@ -1,0 +1,51 @@
+<form [formGroup]="searchFormUser" (ngSubmit)="onSubmit(searchFormUser)">
+  <div class="ui-grid">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-1">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">Id:</div>
+          <div class="ui-grid-col-9">
+            <app-input-text-shared [group]="searchFormUser" [groupName]="'user'" [controlName]="'user_id'"></app-input-text-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-1">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">Usuario:</div>
+          <div class="ui-grid-col-8">
+            <app-input-text-shared [group]="searchFormUser" [groupName]="'user'" [controlName]="'username'"></app-input-text-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-1">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">Email:</div>
+          <div class="ui-grid-col-8">
+            <app-input-text-shared [group]="searchFormUser" [groupName]="'user'" [controlName]="'email'"></app-input-text-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-2">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">Persona:</div>
+          <div class="ui-grid-col-9">
+            <app-dropdown-page-person [group]="searchFormUser" [controlName]="'person'" [options]="['person_first_name', 'person_second_name']"></app-dropdown-page-person>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-2">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">Perfil:</div>
+          <div class="ui-grid-col-9">
+            <app-dropdown-page-profile [group]="searchFormUser" [controlName]="'profile'" [options]="['profile_name']"></app-dropdown-page-profile>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-col-7">
+        <app-button-shared [type]="'submit'" [label]="'Buscar'" [disabled]="searchFormUser.invalid" [class]="'ui-button-secondary'"></app-button-shared>
+        <app-button-shared [type]="'button'" [label]="'Agregar'" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
+        <app-button-shared [type]="'button'" [label]="'Limpiar'" (click)="searchFormUser.reset()" [class]="'ui-button-secondary'"></app-button-shared>
+      </div>
+    </div>
+  </div>
+</form>

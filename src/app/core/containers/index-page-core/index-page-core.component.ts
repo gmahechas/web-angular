@@ -76,6 +76,11 @@ export class IndexPageCoreComponent implements OnInit {
                 routerLink: 'profile',
                 command: (() => this.opencloseSidebar(false))
               },
+              {
+                label: 'Usuarios',
+                routerLink: 'user',
+                command: (() => this.opencloseSidebar(false))
+              },
             ]
           }
         ]

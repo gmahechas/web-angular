@@ -47,6 +47,11 @@ export const routes: Routes = [
     canLoad: [/* AuthGuard */]
   },
   {
+    path: 'user',
+    loadChildren: './two/user/user.module#UserModule',
+    canLoad: [/* AuthGuard */]
+  },
+  {
     path: 'not-found',
     component: NotFoundCoreComponent
   },

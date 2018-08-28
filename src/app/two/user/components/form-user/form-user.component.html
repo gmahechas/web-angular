@@ -1,0 +1,58 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+  <app-panel-shared>
+    <div class="panel-header">
+      <ng-content select=".form-title"></ng-content>
+    </div>
+    <div class="panel-content">
+      <div class="ui-grid">
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Usuario *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="userForm" [groupName]="'user'" [controlName]="'username'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="userForm.get('user.username')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Email *:</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="userForm" [groupName]="'user'" [controlName]="'email'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="userForm.get('user.email')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Persona *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-person [group]="userForm" [controlName]="'person'" [options]="['person_first_name', 'person_second_name']"></app-dropdown-page-person>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="userForm.get('person')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Perfil *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-profile [group]="userForm" [controlName]="'profile'" [options]="['profile_name']"></app-dropdown-page-profile>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="userForm.get('person')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="userForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </div>
+  </app-panel-shared>
+</form>

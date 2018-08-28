@@ -4,24 +4,24 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromStore from '../../../store';
 
-import { Person } from './../../../models/person.model';
+import { User } from './../../../models/user.model';
 
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-dropdown-page-person',
+  selector: 'app-dropdown-page-user',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './dropdown-page-person.component.html',
+  templateUrl: './dropdown-page-user.component.html',
   styles: []
 })
-export class DropdownPagePersonComponent implements OnInit {
+export class DropdownPageUserComponent implements OnInit {
 
   @Input() group: FormGroup;
   @Input() controlName: string;
   @Input() options: string[];
   @Input() placeholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
-  entities$: Observable<Person[]>;
+  entities$: Observable<User[]>;
   configDropDown: any;
 
   constructor(
@@ -29,8 +29,8 @@ export class DropdownPagePersonComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      dataKey: 'person_id',
-      optionLabel: 'person_id'
+      dataKey: 'user_id',
+      optionLabel: 'user_name'
     };
   }
 
@@ -38,14 +38,15 @@ export class DropdownPagePersonComponent implements OnInit {
   }
 
   keyUp(event) {
-    // FIXME:
-    /*
-        this.store.dispatch(new fromStore.LoadEntityShared({
-          person: {
-
-          }
-        }));
-     */
+    this.store.dispatch(new fromStore.LoadEntityShared({
+      user: {
+        user_id: null,
+        username: event,
+        email: null
+      },
+      person: null,
+      profile: null
+    }));
   }
 
   handleChange(event) {
