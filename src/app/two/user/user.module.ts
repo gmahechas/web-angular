@@ -6,11 +6,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
-import { SharedPersonModule } from '../person/shared-person/shared-person.module';
-import { SharedProfileModule } from '../profile/shared-profile/shared-profile.module';
+import { PersonModule } from '../person/person.module';
+import { ProfileModule } from '../profile/profile.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromSharedContainers from './shared/containers';
 import * as fromGuards from './guards';
 
 @NgModule({
@@ -19,15 +20,19 @@ import * as fromGuards from './guards';
     UserRoutingModule,
     StoreModule.forFeature('user', reducers),
     EffectsModule.forFeature(effects),
-    SharedPersonModule,
-    SharedProfileModule
+    PersonModule,
+    ProfileModule
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedContainers.containers
   ],
   providers: [
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedContainers.containers
   ]
 })
 export class UserModule { }

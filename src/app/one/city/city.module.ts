@@ -6,10 +6,11 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared/shared.module';
 import { CityRoutingModule } from './city-routing.module';
-import { SharedEstateModule } from '../estate/shared-estate/shared-estate.module';
+import { EstateModule } from '../estate/estate.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromSharedContainers from './shared/containers';
 import * as fromGuards from './guards';
 
 @NgModule({
@@ -18,14 +19,18 @@ import * as fromGuards from './guards';
     CityRoutingModule,
     StoreModule.forFeature('city', reducers),
     EffectsModule.forFeature(effects),
-    SharedEstateModule,
+    EstateModule,
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedContainers.containers
   ],
   providers: [
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedContainers.containers
   ]
 })
 export class CityModule { }

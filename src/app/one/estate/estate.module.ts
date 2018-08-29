@@ -6,10 +6,11 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared/shared.module';
 import { EstateRoutingModule } from './estate-routing.module';
-import { SharedCountryModule } from '../country/shared-country/shared-country.module';
+import { CountryModule } from '../country/country.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromSharedContainers from './shared/containers';
 import * as fromGuards from './guards';
 
 @NgModule({
@@ -18,14 +19,18 @@ import * as fromGuards from './guards';
     EstateRoutingModule,
     StoreModule.forFeature('estate', reducers),
     EffectsModule.forFeature(effects),
-    SharedCountryModule
+    CountryModule
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedContainers.containers
   ],
   providers: [
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedContainers.containers
   ]
 })
 export class EstateModule { }

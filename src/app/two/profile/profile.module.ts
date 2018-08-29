@@ -9,6 +9,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromSharedContainers from './shared/containers';
 import * as fromGuards from './guards';
 
 @NgModule({
@@ -20,10 +21,14 @@ import * as fromGuards from './guards';
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedContainers.containers
   ],
   providers: [
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedContainers.containers
   ]
 })
 export class ProfileModule { }

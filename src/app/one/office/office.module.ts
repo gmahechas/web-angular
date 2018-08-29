@@ -6,12 +6,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared/shared.module';
 import { OfficeRoutingModule } from './office-routing.module';
-import { SharedCityModule } from '../city/shared-city/shared-city.module';
+import { CityModule } from '../city/city.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromSharedContainers from './shared/containers';
 import * as fromGuards from './guards';
-
 
 @NgModule({
   imports: [
@@ -19,14 +19,18 @@ import * as fromGuards from './guards';
     OfficeRoutingModule,
     StoreModule.forFeature('office', reducers),
     EffectsModule.forFeature(effects),
-    SharedCityModule
+    CityModule
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedContainers.containers
   ],
   providers: [
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedContainers.containers
   ]
 })
 export class OfficeModule { }

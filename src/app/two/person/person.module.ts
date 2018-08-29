@@ -6,10 +6,11 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '../../shared/shared.module';
 import { PersonRoutingModule } from './person-routing.module';
-import { SharedCityModule } from '../../one/city/shared-city/shared-city.module';
+import { CityModule } from '../../one/city/city.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromSharedContainers from './shared/containers';
 import * as fromGuards from './guards';
 
 @NgModule({
@@ -18,14 +19,18 @@ import * as fromGuards from './guards';
     PersonRoutingModule,
     StoreModule.forFeature('person', reducers),
     EffectsModule.forFeature(effects),
-    SharedCityModule
+    CityModule
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromSharedContainers.containers
   ],
   providers: [
     ...fromGuards.guards
+  ],
+  exports: [
+    ...fromSharedContainers.containers
   ]
 })
 export class PersonModule { }
