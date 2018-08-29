@@ -28,7 +28,7 @@ export class DropdownSharedComponent implements OnInit {
   onKeyUp(event) {
     const key = event.target.value;
 
-    if (key.length === 3) {
+    if (key.length >= 3) {
       this.keyUp.emit(event.target.value);
     }
   }
