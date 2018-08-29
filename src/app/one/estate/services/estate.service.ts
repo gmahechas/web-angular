@@ -56,14 +56,13 @@ export class EstateService {
   }
 
   pagination(searchEstate: fromModels.SearchEstate) {
-    console.log(searchEstate);
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
       variables: {
         estate_id: searchEstate.estate.estate_id,
         estate_name: searchEstate.estate.estate_name,
         estate_code: searchEstate.estate.estate_code,
-        country_id: searchEstate.country.country_id,
+        country_id: (searchEstate.country) ? searchEstate.country.country_id : null,
         limit: searchEstate.limit,
         page: searchEstate.page
       },

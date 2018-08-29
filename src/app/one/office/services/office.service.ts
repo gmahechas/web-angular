@@ -56,13 +56,12 @@ export class OfficeService {
   }
 
   pagination(searchOffice: fromModels.SearchOffice) {
-    console.log(searchOffice);
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
       variables: {
         office_id: searchOffice.office.office_id,
         office_name: searchOffice.office.office_name,
-        city_id: searchOffice.city.city_id,
+        city_id: (searchOffice.city) ? searchOffice.city.city_id : null,
         limit: searchOffice.limit,
         page: searchOffice.page
       },
