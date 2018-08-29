@@ -20,6 +20,7 @@ export class DropdownPagePersonComponent implements OnInit {
   @Input() controlName: string;
   @Input() options: string[];
   @Input() placeholder: string;
+  @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
   entities$: Observable<Person[]>;
   configDropDown: any;

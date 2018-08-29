@@ -1,7 +1,8 @@
 <div [formGroup]="group">
   <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder) : 'Seleccionar'" [dataKey]="configDropDown.dataKey"
     [optionLabel]="configDropDown.optionLabel" [showClear]="true" [autoDisplayFirst]="false" filter="true" (keyup)="onKeyUp($event)"
-    (onChange)="onChange($event)" [options]="setOptions()" [style]="{'width':'100%'}">
+    [filterPlaceholder]="(filterPlaceholder) ? filterPlaceholder : ''" (onChange)="onChange($event)" [options]="setOptions()"
+    [style]="{'width':'100%'}">
     <ng-template let-selectedItem pTemplate="selectedItem">
       <span *ngFor="let option of options">
         {{ setOption(selectedItem.value, option) }}
