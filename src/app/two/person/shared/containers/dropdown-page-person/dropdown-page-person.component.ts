@@ -19,6 +19,7 @@ export class DropdownPagePersonComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() controlName: string;
   @Input() options: string[];
+  @Input() optionLabel: string;
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
@@ -30,8 +31,7 @@ export class DropdownPagePersonComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      dataKey: 'person_id',
-      optionLabel: 'person_id'
+      dataKey: 'person_id'
     };
   }
 

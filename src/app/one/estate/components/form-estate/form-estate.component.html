@@ -26,7 +26,7 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Pais *:</div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-country [group]="estateForm" [controlName]="'country'" [options]="['country_name']"></app-dropdown-page-country>
+            <app-dropdown-page-country [group]="estateForm" [controlName]="'country'" [options]="['country_name']" [optionLabel]="'country_name'"></app-dropdown-page-country>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="estateForm.get('country')"></app-validation-errors-shared>

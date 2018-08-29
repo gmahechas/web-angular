@@ -19,6 +19,7 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() controlName: string;
   @Input() options: string[];
+  @Input() optionLabel: string;
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
@@ -30,8 +31,7 @@ export class DropdownPageEstateComponent implements OnInit {
   ) {
     this.entities$ = store.pipe(select(fromStore.getAllEntities));
     this.configDropDown = {
-      dataKey: 'estate_id',
-      optionLabel: 'estate_name'
+      dataKey: 'estate_id'
     };
   }
 

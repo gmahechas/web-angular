@@ -29,7 +29,8 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Persona *:</div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-person [group]="userForm" [controlName]="'person'" [options]="['person_first_name', 'person_second_name']"></app-dropdown-page-person>
+            <app-dropdown-page-person [group]="userForm" [controlName]="'person'" [options]="['person_first_name', 'person_second_name']"
+              [optionLabel]="'person_identification'"></app-dropdown-page-person>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="userForm.get('person')"></app-validation-errors-shared>
@@ -39,7 +40,7 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Perfil *:</div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-profile [group]="userForm" [controlName]="'profile'" [options]="['profile_name']"></app-dropdown-page-profile>
+            <app-dropdown-page-profile [group]="userForm" [controlName]="'profile'" [options]="['profile_name']" [optionLabel]="'profile_name'"></app-dropdown-page-profile>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="userForm.get('person')"></app-validation-errors-shared>

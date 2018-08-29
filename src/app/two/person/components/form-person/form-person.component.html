@@ -79,7 +79,7 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Ciudad *:</div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-city [group]="personForm" [controlName]="'city'" [options]="['city_name']"></app-dropdown-page-city>
+            <app-dropdown-page-city [group]="personForm" [controlName]="'city'" [options]="['city_name']" [optionLabel]="'city_name'"></app-dropdown-page-city>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="personForm.get('city')"></app-validation-errors-shared>

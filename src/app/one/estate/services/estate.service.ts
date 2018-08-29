@@ -56,6 +56,7 @@ export class EstateService {
   }
 
   pagination(searchEstate: fromModels.SearchEstate) {
+    console.log(searchEstate);
     return this.queryRef.fetchMore({
       query: fromGraphql.pagination,
       variables: {
