@@ -55,6 +55,7 @@ mutation storePerson(
   $person_second_name: String,
   $person_first_surname: String,
   $person_second_surname: String,
+  $person_legal_name: String,
   $city_id: ID!
 ) {
   storePerson(
@@ -65,6 +66,7 @@ mutation storePerson(
     person_second_name: $person_second_name,
     person_first_surname: $person_first_surname,
     person_second_surname: $person_second_surname,
+    person_legal_name: $person_legal_name,
     city_id: $city_id
   ) {
     person_id
@@ -102,6 +104,7 @@ mutation updatePerson(
   $person_second_name: String,
   $person_first_surname: String,
   $person_second_surname: String,
+  $person_legal_name: String,
   $city_id: ID
 ) {
     updatePerson(
@@ -113,6 +116,7 @@ mutation updatePerson(
       person_second_name: $person_second_name,
       person_first_surname: $person_first_surname,
       person_second_surname: $person_second_surname,
+      person_legal_name: $person_legal_name,
       city_id: $city_id
     ) {
       person_id

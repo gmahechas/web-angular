@@ -19,11 +19,11 @@ export class FormPersonComponent implements OnChanges, OnInit {
       person_business_type: this.formBuilder.control('', [Validators.required]),
       person_identification_type: this.formBuilder.control('', [Validators.required]),
       person_identification: this.formBuilder.control('', [Validators.required]),
-      person_first_name: this.formBuilder.control('', [Validators.required]),
-      person_second_name: this.formBuilder.control('', [Validators.required]),
-      person_first_surname: this.formBuilder.control('', [Validators.required]),
-      person_second_surname: this.formBuilder.control('', [Validators.required]),
-      person_legal_name: this.formBuilder.control('', [Validators.required])
+      person_first_name: this.formBuilder.control(''),
+      person_second_name: this.formBuilder.control(''),
+      person_first_surname: this.formBuilder.control(''),
+      person_second_surname: this.formBuilder.control(''),
+      person_legal_name: this.formBuilder.control('')
     }),
     city: this.formBuilder.control('', [Validators.required])
   });
