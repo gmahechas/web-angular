@@ -9,6 +9,7 @@ export interface Person {
   person_second_name?: string;
   person_first_surname?: string;
   person_second_surname?: string;
+  person_legal_name?: string;
   person_created_at?: string;
   person_updated_at?: string;
   person_deleted_at?: string;

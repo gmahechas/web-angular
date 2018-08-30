@@ -22,7 +22,8 @@ export class FormPersonComponent implements OnChanges, OnInit {
       person_first_name: this.formBuilder.control('', [Validators.required]),
       person_second_name: this.formBuilder.control('', [Validators.required]),
       person_first_surname: this.formBuilder.control('', [Validators.required]),
-      person_second_surname: this.formBuilder.control('', [Validators.required])
+      person_second_surname: this.formBuilder.control('', [Validators.required]),
+      person_legal_name: this.formBuilder.control('', [Validators.required])
     }),
     city: this.formBuilder.control('', [Validators.required])
   });
@@ -42,7 +43,8 @@ export class FormPersonComponent implements OnChanges, OnInit {
           person_first_name: this.person.person_first_name,
           person_second_name: this.person.person_second_name,
           person_first_surname: this.person.person_first_surname,
-          person_second_surname: this.person.person_second_surname
+          person_second_surname: this.person.person_second_surname,
+          person_legal_name: this.person.person_legal_name
         },
         city: this.person.city
       });

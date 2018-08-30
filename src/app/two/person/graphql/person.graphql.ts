@@ -28,6 +28,7 @@ query paginationPerson(
       person_second_name
       person_first_surname
       person_second_surname
+      person_legal_name
       person_created_at
       person_updated_at
       person_deleted_at
@@ -74,6 +75,7 @@ mutation storePerson(
     person_second_name
     person_first_surname
     person_second_surname
+    person_legal_name
     person_created_at
     person_updated_at
     person_deleted_at
@@ -121,6 +123,7 @@ mutation updatePerson(
       person_second_name
       person_first_surname
       person_second_surname
+      person_legal_name
       person_created_at
       person_updated_at
       person_deleted_at
@@ -148,6 +151,7 @@ mutation destroyPerson($person_id: ID!) {
     person_second_name
     person_first_surname
     person_second_surname
+    person_legal_name
     person_created_at
     person_updated_at
     person_deleted_at

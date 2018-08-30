@@ -38,14 +38,19 @@ export class IndexPagePersonComponent implements OnInit {
       dataKey: 'person_id',
       cols: [
         { fields: ['person_id'], header: 'Id', style: { 'width': '5%' } },
-        { fields: ['person_business_type'], header: 'Tipo', style: { 'width': '10%' } },
+        { fields: ['person_business_type'], header: 'Tipo', style: { 'width': '5%' } },
         { fields: ['person_identification_type'], header: 'Tipo Ident', style: { 'width': '5%' } },
         { fields: ['person_identification'], header: 'Identificacion', style: { 'width': '20%' } },
-        { fields: ['person_first_name'], header: 'Primer Nombre', style: { 'width': '15%' } },
-        { fields: ['person_second_name'], header: 'Segundo Nombre', style: { 'width': '15%' } },
-        { fields: ['person_first_surname'], header: 'Primer Nombre', style: { 'width': '10%' } },
-        { fields: ['person_second_surname'], header: 'Segundo Nombre', style: { 'width': '10%' } },
-        { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '10%' } },
+        {
+          fields: [
+            'person_first_name',
+            'person_second_name',
+            'person_first_surname',
+            'person_second_surname',
+            'person_legal_name'
+          ], header: 'Nombres', style: { 'width': '50%' }
+        },
+        { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '15%' } },
       ]
     };
   }
