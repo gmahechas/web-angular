@@ -18,22 +18,6 @@ export class CityExistGuard implements CanActivate {
     private cityService: CityService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(city_id: string) {
-      return this.cityService.paginationCity({ city_id: +city_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchCity => !!searchCity),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(city_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class CityExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(city_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));

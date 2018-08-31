@@ -18,22 +18,6 @@ export class EstateExistGuard implements CanActivate {
     private estateService: EstateService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(estate_id: string) {
-      return this.estateService.paginationEstate({ estate_id: +estate_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchEstate => !!searchEstate),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(estate_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class EstateExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(estate_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));

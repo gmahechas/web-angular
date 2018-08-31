@@ -18,22 +18,6 @@ export class PersonExistGuard implements CanActivate {
     private personService: PersonService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(person_id: string) {
-      return this.personService.paginationPerson({ person_id: +person_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchPerson => !!searchPerson),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(person_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class PersonExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(person_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));

@@ -18,22 +18,6 @@ export class CountryExistGuard implements CanActivate {
     private countryService: CountryService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(country_id: string) {
-      return this.countryService.paginationCountry({ country_id: +country_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchCountry => !!searchCountry),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(country_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class CountryExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(country_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));

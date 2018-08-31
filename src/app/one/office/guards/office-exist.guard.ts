@@ -18,22 +18,6 @@ export class OfficeExistGuard implements CanActivate {
     private officeService: OfficeService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(office_id: string) {
-      return this.officeService.paginationOffice({ office_id: +office_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchOffice => !!searchOffice),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(office_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class OfficeExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(office_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));

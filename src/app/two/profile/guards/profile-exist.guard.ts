@@ -18,22 +18,6 @@ export class ProfileExistGuard implements CanActivate {
     private profileService: ProfileService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(profile_id: string) {
-      return this.profileService.paginationProfile({ profile_id: +profile_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchProfile => !!searchProfile),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(profile_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class ProfileExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(profile_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));

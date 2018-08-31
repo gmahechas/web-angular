@@ -18,22 +18,6 @@ export class UserExistGuard implements CanActivate {
     private userService: UserService
   ) { }
 
-  /* FIXME: Always return 200 response */
-  /*   hasInApi(user_id: string) {
-      return this.userService.paginationUser({ user_id: +user_id }).pipe(
-        map(({ data }) => new fromStore.EntityLoadSuccess(data)),
-        tap((action: fromStore.EntityLoadSuccess) => this.store.dispatch(action)),
-        map(action => action.payload),
-        map(searchUser => !!searchUser),
-        catchError(() => {
-          this.store.dispatch(new fromCore.Go({
-            path: ['not-found']
-          }));
-          return of(false);
-        })
-      );
-    } */
-
   hasInStore(user_id: string): Observable<boolean> {
     return this.store.pipe(
       select(fromStore.getEntities),
@@ -48,7 +32,6 @@ export class UserExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        /* this.hasInApi(user_id); */
         this.store.dispatch(new fromCore.Go({
           path: ['not-found']
         }));
