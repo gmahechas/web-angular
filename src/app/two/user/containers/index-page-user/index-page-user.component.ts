@@ -38,16 +38,18 @@ export class IndexPageUserComponent implements OnInit {
       dataKey: 'user_id',
       cols: [
         { fields: ['user_id'], header: 'Id', style: { 'width': '5%' } },
-        { fields: ['username'], header: 'Usuario', style: { 'width': '45%' } },
+        { fields: ['username'], header: 'Usuario', style: { 'width': '20%' } },
+        { fields: ['profile.profile_name'], header: 'Usuario', style: { 'width': '25%' } },
         { fields: ['email'], header: 'Correo', style: { 'width': '50%' } },
         {
           fields: [
             'person.person_first_name',
             'person.person_second_name',
             'person.person_first_surname',
-            'person.person_second_surname'
+            'person.person_second_surname',
+            'person.person_legal_name'
           ],
-          header: 'Correo', style: { 'width': '50%' }
+          header: 'Persona', style: { 'width': '50%' }
         },
       ]
     };

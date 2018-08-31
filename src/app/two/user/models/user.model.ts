@@ -1,7 +1,7 @@
 import { Profile } from './../../profile/models/profile.model';
 import { Person } from './../../person/models/person.model';
 
-export interface User {
+export interface  User {
   user_id?: number;
   username?: string;
   email?: string;
@@ -12,6 +12,6 @@ export interface User {
   user_deleted_at?: string;
   person_id?: number;
   person?: Person;
-  profile_id: number;
-  profile: Profile;
+  profile_id?: number;
+  profile?: Profile;
 }
