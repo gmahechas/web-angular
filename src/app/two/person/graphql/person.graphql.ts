@@ -5,12 +5,14 @@ export const pagination: DocumentNode = gql`
 query paginationPerson(
   $person_id: ID,
   $person_identification: String,
+  $person_names: String,
   $limit: Int,
   $page: Int
 ) {
   paginationPerson(
     person_id: $person_id,
     person_identification: $person_identification,
+    person_names: $person_names,
     limit: $limit,
     page: $page
   ) {

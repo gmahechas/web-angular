@@ -60,6 +60,7 @@ export class PersonService {
       variables: {
         person_id: searchPerson.person.person_id,
         person_identification: searchPerson.person.person_identification,
+        person_names: searchPerson.person.person_names,
         limit: searchPerson.limit,
         page: searchPerson.page
       },

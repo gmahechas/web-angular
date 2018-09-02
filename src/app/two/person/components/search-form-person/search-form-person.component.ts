@@ -18,7 +18,8 @@ export class SearchFormPersonComponent implements OnChanges, OnInit {
   searchFormPerson: FormGroup = this.formBuilder.group({
     person: this.formBuilder.group({
       person_id: this.formBuilder.control(''),
-      person_identification: this.formBuilder.control('')
+      person_identification: this.formBuilder.control(''),
+      person_names: this.formBuilder.control('')
     })
   });
 
@@ -30,7 +31,8 @@ export class SearchFormPersonComponent implements OnChanges, OnInit {
     this.searchFormPerson.setValue({
       person: {
         person_id: this.query.person.person_id,
-        person_identification: this.query.person.person_identification
+        person_identification: this.query.person.person_identification,
+        person_names: this.query.person.person_names
       }
     });
   }

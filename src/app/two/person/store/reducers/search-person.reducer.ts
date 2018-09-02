@@ -11,7 +11,8 @@ const initialState: State = {
   query: {
     person: {
       person_id: '',
-      person_identification: ''
+      person_identification: '',
+      person_names: ''
     }
   }
 };
