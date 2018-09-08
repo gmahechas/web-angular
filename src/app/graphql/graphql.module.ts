@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
 import { Store } from '@ngrx/store';
@@ -16,7 +15,6 @@ import { environment } from './../../environments/environment';
 
 @NgModule({
   imports: [
-    HttpClientModule,
     ApolloModule,
     HttpLinkModule
   ],
