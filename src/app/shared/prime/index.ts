@@ -15,7 +15,8 @@ import { InputMaskModule } from 'primeng/inputmask'; // InputMask
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel'; // Panel - for forms
 import { ToastModule } from 'primeng/toast'; // Toast
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog'; // Confirm
+import { CheckboxModule } from 'primeng/checkbox'; // Checkbox
 
 export const prime: any[] = [
   SidebarModule,
@@ -35,5 +36,6 @@ export const prime: any[] = [
   CalendarModule,
   PanelModule,
   ToastModule,
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  CheckboxModule
 ];
