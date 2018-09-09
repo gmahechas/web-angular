@@ -17,6 +17,7 @@ import { PanelModule } from 'primeng/panel'; // Panel - for forms
 import { ToastModule } from 'primeng/toast'; // Toast
 import { ConfirmDialogModule } from 'primeng/confirmdialog'; // Confirm
 import { CheckboxModule } from 'primeng/checkbox'; // Checkbox
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 export const prime: any[] = [
   SidebarModule,
@@ -37,5 +38,6 @@ export const prime: any[] = [
   PanelModule,
   ToastModule,
   ConfirmDialogModule,
-  CheckboxModule
+  CheckboxModule,
+  InputSwitchModule
 ];

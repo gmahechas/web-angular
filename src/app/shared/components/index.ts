@@ -8,6 +8,7 @@ import { TableSharedComponent } from './table-shared/table-shared.component';
 import { ValidationErrorsSharedComponent } from './validation-errors-shared/validation-errors-shared.component';
 import { PanelSharedComponent } from './panel-shared/panel-shared.component';
 import { CheckboxSharedComponent } from './checkbox-shared/checkbox-shared.component';
+import { InputSwitchSharedComponent } from './input-switch-shared/input-switch-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -19,7 +20,8 @@ export const components: any[] = [
   TableSharedComponent,
   ValidationErrorsSharedComponent,
   PanelSharedComponent,
-  CheckboxSharedComponent
+  CheckboxSharedComponent,
+  InputSwitchSharedComponent
 ];
 
 export * from './dropdown-shared/dropdown-shared.component';
@@ -32,3 +34,4 @@ export * from './table-shared/table-shared.component';
 export * from './validation-errors-shared/validation-errors-shared.component';
 export * from './panel-shared/panel-shared.component';
 export * from './checkbox-shared/checkbox-shared.component';
+export * from './input-switch-shared/input-switch-shared.component';
