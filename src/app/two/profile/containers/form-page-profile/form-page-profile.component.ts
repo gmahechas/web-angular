@@ -43,4 +43,10 @@ export class FormPageProfileComponent implements OnInit {
   onDestroy(profile: Profile) {
     this.store.dispatch(new fromStore.DestroyEntity(profile));
   }
+
+  onProfileMenu(profile: Profile) {
+    this.store.dispatch(new fromCore.Go({
+      path: ['profile_menu', profile.profile_id]
+    }));
+  }
 }

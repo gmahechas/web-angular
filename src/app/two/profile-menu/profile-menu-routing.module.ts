@@ -5,7 +5,7 @@ import * as fromContainers from './containers';
 
 export const routes: Routes = [
   {
-    path: '', component: fromContainers.IndexPageProfileMenuComponent
+    path: ':profile_id', component: fromContainers.IndexPageProfileMenuComponent
   }
 ];
 
