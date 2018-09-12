@@ -16,8 +16,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel'; // Panel - for forms
 import { ToastModule } from 'primeng/toast'; // Toast
 import { ConfirmDialogModule } from 'primeng/confirmdialog'; // Confirm
-import { CheckboxModule } from 'primeng/checkbox'; // Checkbox
-import { InputSwitchModule } from 'primeng/inputswitch';
+import { CheckboxModule } from 'primeng/checkbox'; // Checkbox True - False
+import { InputSwitchModule } from 'primeng/inputswitch'; // True - False
+import { TreeModule } from 'primeng/tree';
 
 export const prime: any[] = [
   SidebarModule,
@@ -39,5 +40,6 @@ export const prime: any[] = [
   ToastModule,
   ConfirmDialogModule,
   CheckboxModule,
-  InputSwitchModule
+  InputSwitchModule,
+  TreeModule
 ];
