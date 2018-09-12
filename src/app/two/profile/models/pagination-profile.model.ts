@@ -8,5 +8,5 @@ export interface PaginationProfile {
     from?: number;
     to?: number;
     data?: Profile[];
-};
+  };
 }

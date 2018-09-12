@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'person', loadChildren: './two/person/person.module#PersonModule', canLoad: [/* AuthGuard */] },
   { path: 'profile', loadChildren: './two/profile/profile.module#ProfileModule', canLoad: [/* AuthGuard */] },
   { path: 'user', loadChildren: './two/user/user.module#UserModule', canLoad: [/* AuthGuard */] },
-  { path: 'profile_menu', loadChildren: './two/profile-menu/profile-menu.module#ProfileMenuModule', canLoad: [/* AuthGuard */] },
+  { path: 'profile-menu', loadChildren: './two/profile-menu/profile-menu.module#ProfileMenuModule', canLoad: [/* AuthGuard */] },
   { path: 'not-found', component: NotFoundCoreComponent },
   { path: '**', redirectTo: 'not-found' },
 ];

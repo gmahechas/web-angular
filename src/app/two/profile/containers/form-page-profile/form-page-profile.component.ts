@@ -46,7 +46,7 @@ export class FormPageProfileComponent implements OnInit {
 
   onProfileMenu(profile: Profile) {
     this.store.dispatch(new fromCore.Go({
-      path: ['profile_menu', profile.profile_id]
+      path: ['profile-menu', profile.profile_id]
     }));
   }
 }
