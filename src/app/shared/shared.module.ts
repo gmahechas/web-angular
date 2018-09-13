@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import * as fromPrime from './prime';
 import * as fromComponents from './components';
+import * as fromPipes from './pipes';
 
 @NgModule({
   imports: [
@@ -13,13 +14,15 @@ import * as fromComponents from './components';
     ...fromPrime.prime
   ],
   declarations: [
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromPipes.pipes
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     ...fromPrime.prime,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromPipes.pipes
   ]
 })
 export class SharedModule { }

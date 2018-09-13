@@ -36,6 +36,7 @@ query paginationProfileMenu(
         menu_created_at
         menu_updated_at
         menu_deleted_at
+        menu_parent_id
       }
     }
   }

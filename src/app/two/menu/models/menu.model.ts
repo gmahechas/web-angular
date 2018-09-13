@@ -5,6 +5,6 @@ export interface Menu {
   menu_created_at?: string;
   menu_updated_at?: string;
   menu_deleted_at?: string;
-  menu_id_parent?: number;
+  menu_parent_id?: number;
   menu_parent?: Menu;
 }
