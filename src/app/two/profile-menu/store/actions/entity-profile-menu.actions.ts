@@ -3,9 +3,9 @@ import { Action } from '@ngrx/store';
 import * as fromModels from '../../models';
 
 export enum EntityActionTypes {
-  LoadEntity = '[Profile] Load Entity ',
-  LoadSuccessEntity = '[Profile] Load Success Entity',
-  LoadFailEntity = '[Profile] Load Fail Entity'
+  LoadEntity = '[Profile Menu] Load Entity ',
+  LoadSuccessEntity = '[Profile Menu] Load Success Entity',
+  LoadFailEntity = '[Profile Menu] Load Fail Entity'
 }
 
 export class LoadEntity implements Action {
