@@ -1,0 +1,59 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit(projectForm)">
+  <app-panel-shared>
+    <div class="panel-header">
+      <ng-content select=".form-title"></ng-content>
+    </div>
+    <div class="panel-content">
+      <div class="ui-grid">
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Proyecto</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_name'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="projectForm.get('project.project_name')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Direccion</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_address'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="projectForm.get('project.project_address')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Telefono</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_phone'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="projectForm.get('project.project_phone')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Macro Proyecto *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-macroproject [group]="projectForm" [controlName]="'macroproject'" [options]="['macroproject_name']"
+              [optionLabel]="'macroproject_name'"></app-dropdown-page-macroproject>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="projectForm.get('macroproject')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="projectForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </div>
+  </app-panel-shared>
+</form>

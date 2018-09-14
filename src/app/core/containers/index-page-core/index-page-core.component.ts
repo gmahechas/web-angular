@@ -79,6 +79,11 @@ export class IndexPageCoreComponent implements OnInit {
         routerLink: 'macroproject',
         command: (() => this.opencloseSidebar(false))
       },
+      {
+        label: 'Proyectos',
+        routerLink: 'project',
+        command: (() => this.opencloseSidebar(false))
+      },
     ];
     this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
     this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));

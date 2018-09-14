@@ -17,6 +17,7 @@ export const routes: Routes = [
   { path: 'user', loadChildren: './two/user/user.module#UserModule', canLoad: [/* AuthGuard */] },
   { path: 'profile-menu', loadChildren: './two/profile-menu/profile-menu.module#ProfileMenuModule', canLoad: [/* AuthGuard */] },
   { path: 'macroproject', loadChildren: './three/macroproject/macroproject.module#MacroprojectModule', canLoad: [/* AuthGuard */] },
+  { path: 'project', loadChildren: './three/project/project.module#ProjectModule', canLoad: [/* AuthGuard */] },
   { path: 'not-found', component: NotFoundCoreComponent },
   { path: '**', redirectTo: 'not-found' },
 ];
