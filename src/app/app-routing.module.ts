@@ -18,6 +18,11 @@ export const routes: Routes = [
   { path: 'profile-menu', loadChildren: './two/profile-menu/profile-menu.module#ProfileMenuModule', canLoad: [/* AuthGuard */] },
   { path: 'macroproject', loadChildren: './three/macroproject/macroproject.module#MacroprojectModule', canLoad: [/* AuthGuard */] },
   { path: 'project', loadChildren: './three/project/project.module#ProjectModule', canLoad: [/* AuthGuard */] },
+  {
+    path: 'user-office-project',
+    loadChildren: './three/user-office-project/user-office-project.module#UserOfficeProjectModule',
+    canLoad: [/* AuthGuard */]
+  },
   { path: 'not-found', component: NotFoundCoreComponent },
   { path: '**', redirectTo: 'not-found' },
 ];
