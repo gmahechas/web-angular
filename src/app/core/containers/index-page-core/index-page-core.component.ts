@@ -35,56 +35,50 @@ export class IndexPageCoreComponent implements OnInit {
         command: (() => this.opencloseSidebar(false))
       },
       {
-        icon: 'fas fa-cog',
-        label: 'Configuracion',
-        items: [
-          {
-            label: 'Mantenimiento',
-            items: [
-              {
-                label: 'Paises',
-                routerLink: 'country',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Estados',
-                routerLink: 'estate',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Ciudades',
-                routerLink: 'city',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Empresa',
-                routerLink: 'company',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Oficinas',
-                routerLink: 'office',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Personas',
-                routerLink: 'person',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Perfiles',
-                routerLink: 'profile',
-                command: (() => this.opencloseSidebar(false))
-              },
-              {
-                label: 'Usuarios',
-                routerLink: 'user',
-                command: (() => this.opencloseSidebar(false))
-              },
-            ]
-          }
-        ]
-      }
+        label: 'Paises',
+        routerLink: 'country',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Estados',
+        routerLink: 'estate',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Ciudades',
+        routerLink: 'city',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Empresa',
+        routerLink: 'company',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Oficinas',
+        routerLink: 'office',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Personas',
+        routerLink: 'person',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Perfiles',
+        routerLink: 'profile',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Usuarios',
+        routerLink: 'user',
+        command: (() => this.opencloseSidebar(false))
+      },
+      {
+        label: 'Macro Proyectos',
+        routerLink: 'macroproject',
+        command: (() => this.opencloseSidebar(false))
+      },
     ];
     this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
     this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));

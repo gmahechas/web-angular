@@ -1,0 +1,70 @@
+<form [formGroup]="macroprojectForm" (ngSubmit)="onSubmit(macroprojectForm)">
+  <app-panel-shared>
+    <div class="panel-header">
+      <ng-content select=".form-title"></ng-content>
+    </div>
+    <div class="panel-content">
+      <div class="ui-grid">
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Macro Proyecto</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'" [controlName]="'macroproject_name'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_name')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Direccion</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'" [controlName]="'macroproject_address'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_address')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Telefono</div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'" [controlName]="'macroproject_phone'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_phone')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Ciudad *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-city [group]="macroprojectForm" [controlName]="'city'" [options]="['city_name']"
+              [optionLabel]="'city_name'"></app-dropdown-page-city>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="macroprojectForm.get('city')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">Oficina *:</div>
+          <div class="ui-grid-col-6">
+            <app-dropdown-page-office [group]="macroprojectForm" [controlName]="'office'" [options]="['office_name']"
+              [optionLabel]="'office_name'"></app-dropdown-page-office>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="macroprojectForm.get('office')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="macroprojectForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </div>
+  </app-panel-shared>
+</form>
