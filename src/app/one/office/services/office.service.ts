@@ -23,7 +23,7 @@ export class OfficeService {
       query: fromGraphql.pagination,
       variables: {
         ...searchOffice.office,
-        ...searchOffice.city,
+        city_id: (searchOffice.city) ? searchOffice.city.city_id : null,
         limit: searchOffice.limit,
         page: searchOffice.page
       }

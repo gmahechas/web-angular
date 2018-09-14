@@ -23,8 +23,8 @@ export class UserService {
       query: fromGraphql.pagination,
       variables: {
         ...searchUser.user,
-        ...searchUser.person,
-        ...searchUser.profile,
+        person_id: (searchUser.person) ? searchUser.person.person_id : null,
+        profile_id: (searchUser.profile) ? searchUser.profile.profile_id : null,
         limit: searchUser.limit,
         page: searchUser.page
       }

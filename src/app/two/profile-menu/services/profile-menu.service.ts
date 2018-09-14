@@ -19,7 +19,7 @@ export class ProfileMenuService {
       query: fromGraphql.pagination,
       variables: {
         ...searchProfileMenu.profile_menu,
-        ...searchProfileMenu.profile,
+        profile_id: (searchProfileMenu.profile) ? searchProfileMenu.profile.profile_id : null,
         limit: searchProfileMenu.limit,
         page: searchProfileMenu.page
       }

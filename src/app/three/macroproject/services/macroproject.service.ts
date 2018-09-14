@@ -23,8 +23,8 @@ export class MacroprojectService {
       query: fromGraphql.pagination,
       variables: {
         ...searchMacroproject.macroproject,
-        ...searchMacroproject.city,
-        ...searchMacroproject.office,
+        city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id :  null,
+        office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id :  null,
         limit: searchMacroproject.limit,
         page: searchMacroproject.page
       }
