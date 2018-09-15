@@ -1,6 +1,6 @@
 <div *ngIf="data.length > 0">
-  <p-paginator *ngIf="totalRecords > rows" [rows]="rows" [totalRecords]="totalRecords" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
-  <p-table [columns]="configTable.cols" [value]="data" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
+  <p-table [value]="data" [columns]="configTable.cols" selectionMode="single" (onRowSelect)="onRowSelect($event)"
     (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
     <ng-template pTemplate="caption">
       <div style="text-align:left">
@@ -32,5 +32,5 @@
       </div>
     </ng-template>
   </p-table>
-  <p-paginator *ngIf="totalRecords > rows" [rows]="rows" [totalRecords]="totalRecords" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
+  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
