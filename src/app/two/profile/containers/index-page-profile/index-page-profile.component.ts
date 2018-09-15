@@ -39,7 +39,8 @@ export class IndexPageProfileComponent implements OnInit {
       cols: [
         { fields: ['profile_id'], header: 'Id', style: { width: '10%' } },
         { fields: ['profile_name'], header: 'Perfil', style: { width: '90%' } }
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

@@ -51,7 +51,8 @@ export class IndexPagePersonComponent implements OnInit {
           ], header: 'Nombres', style: { 'width': '50%' }
         },
         { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '15%' } },
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

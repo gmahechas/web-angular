@@ -51,7 +51,8 @@ export class IndexPageUserComponent implements OnInit {
           ],
           header: 'Persona', style: { 'width': '50%' }
         },
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

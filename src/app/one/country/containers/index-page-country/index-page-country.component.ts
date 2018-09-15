@@ -40,7 +40,8 @@ export class IndexPageCountryComponent implements OnInit {
         { fields: ['country_id'], header: 'Id', style: { width: '10%' } },
         { fields: ['country_name'], header: 'Pais', style: { width: '70%' } },
         { fields: ['country_code'], header: 'Codigo', style: { width: '20%' } },
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

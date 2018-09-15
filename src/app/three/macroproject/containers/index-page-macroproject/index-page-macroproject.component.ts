@@ -43,7 +43,8 @@ export class IndexPageMacroprojectComponent implements OnInit {
         { fields: ['macroproject_phone'], header: 'Direccion', style: { 'width': '15%' } },
         { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '20%' } },
         { fields: ['office.office_name'], header: 'Oficina', style: { 'width': '20%' } },
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

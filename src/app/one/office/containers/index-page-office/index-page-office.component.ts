@@ -40,7 +40,8 @@ export class IndexPageOfficeComponent implements OnInit {
         { fields: ['office_id'], header: 'Id', style: { 'width': '30%' } },
         { fields: ['office_name'], header: 'Oficina', style: { 'width': '35%' } },
         { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '35%' } },
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

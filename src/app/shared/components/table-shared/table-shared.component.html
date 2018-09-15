@@ -1,7 +1,7 @@
 <div *ngIf="data.length > 0">
   <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
-  <p-table [value]="data" [columns]="configTable.cols" [selectionMode]="(configTable.selectionMode) ? configTable.selectionMode : 'single'"
-    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
+  <p-table [value]="data" [columns]="configTable.cols" [selectionMode]="configTable.selectionMode" (onRowSelect)="onRowSelect($event)"
+    (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [ngStyle]="col.style">{{col.header}}</th>

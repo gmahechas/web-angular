@@ -42,7 +42,8 @@ export class IndexPageProjectComponent implements OnInit {
         { fields: ['project_address'], header: 'Direccion', style: { 'width': '25%' } },
         { fields: ['project_phone'], header: 'Telefono', style: { 'width': '15%' } },
         { fields: ['macroproject.macroproject_name'], header: 'Macro Proyecto', style: { 'width': '30%' } },
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 

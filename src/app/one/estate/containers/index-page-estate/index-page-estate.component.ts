@@ -41,7 +41,8 @@ export class IndexPageEstateComponent implements OnInit {
         { fields: ['estate_name'], header: 'Estado', style: { 'width': '40%' } },
         { fields: ['estate_code'], header: 'Codigo', style: { 'width': '10%' } },
         { fields: ['country.country_name'], header: 'Pais', style: { 'width': '40%' } }
-      ]
+      ],
+      selectionMode: 'single'
     };
   }
 
