@@ -24,7 +24,6 @@ export class ProfileMenuService {
         page: searchProfileMenu.page
       }
     }).valueChanges;
-
   }
 
 }

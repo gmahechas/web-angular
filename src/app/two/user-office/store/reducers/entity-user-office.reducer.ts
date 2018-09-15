@@ -1,13 +1,13 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { ProfileMenu } from './../../models/profile-menu.model';
-import { EntityActionTypes, EntityActions } from '../actions/entity-profile-menu.actions';
+import { UserOffice } from './../../models/user-office.model';
+import { EntityActionTypes, EntityActions } from '../actions/entity-user-office.actions';
 
-export interface State extends EntityState<ProfileMenu> {
+export interface State extends EntityState<UserOffice> {
 
 }
 
-export const adapter: EntityAdapter<ProfileMenu> = createEntityAdapter<ProfileMenu>({
-  selectId: (entity: ProfileMenu) => entity.profile_menu_id,
+export const adapter: EntityAdapter<UserOffice> = createEntityAdapter<UserOffice>({
+  selectId: (entity: UserOffice) => entity.user_office_id,
   sortComparer: false
 });
 
@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: EntityActions): State {
   switch (action.type) {
 
     case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.paginationProfileMenu.data, state);
+      return adapter.addAll(action.payload.paginationUserOffice.data, state);
     }
 
     case EntityActionTypes.LoadFailEntity: {
