@@ -37,8 +37,8 @@ export class IndexPageEstateComponent implements OnInit {
     this.configTable = {
       dataKey: 'estate_id',
       cols: [
-        { fields: ['estate_id'], header: 'Id', style: { 'width': '5%' } },
-        { fields: ['estate_name'], header: 'Estado', style: { 'width': '45%' } },
+        { fields: ['estate_id'], header: 'Id', style: { 'width': '10%' } },
+        { fields: ['estate_name'], header: 'Estado', style: { 'width': '40%' } },
         { fields: ['estate_code'], header: 'Codigo', style: { 'width': '10%' } },
         { fields: ['country.country_name'], header: 'Pais', style: { 'width': '40%' } }
       ]

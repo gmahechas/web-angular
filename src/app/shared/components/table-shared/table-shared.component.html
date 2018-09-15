@@ -2,11 +2,6 @@
   <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
   <p-table [value]="data" [columns]="configTable.cols" selectionMode="single" (onRowSelect)="onRowSelect($event)"
     (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
-    <ng-template pTemplate="caption">
-      <div style="text-align:left">
-        Mostrando de {{ first }} a {{ to }}
-      </div>
-    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [ngStyle]="col.style">{{col.header}}</th>
@@ -20,16 +15,6 @@
           </span>
         </td>
       </tr>
-    </ng-template>
-    <ng-template pTemplate="footer" let-columns>
-      <tr>
-        <td *ngFor="let col of columns">{{col.header}}</td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-      <div style="text-align:left">
-        En total hay {{ totalRecords }} registros
-      </div>
     </ng-template>
   </p-table>
   <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
