@@ -55,7 +55,7 @@ export class IndexPageCoreComponent implements OnInit {
         command: (() => this.opencloseSidebar(false))
       },
       {
-        label: 'Oficinas',
+        label: 'Sucursales',
         routerLink: 'office',
         command: (() => this.opencloseSidebar(false))
       },

@@ -1,10 +1,10 @@
 <div *ngIf="data.length > 0">
   <p-paginator *ngIf="totalRecords > rows" [rows]="rows" [totalRecords]="totalRecords" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
-  <p-table [columns]="configTable.cols" [value]="data" selectionMode="single" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-    [dataKey]="configTable.dataKey">
+  <p-table [columns]="configTable.cols" [value]="data" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+    (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
     <ng-template pTemplate="caption">
       <div style="text-align:left">
-        de {{ first }} a {{ to }} de {{ totalRecords }}
+        Mostrando de {{ first }} a {{ to }}
       </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
@@ -20,6 +20,16 @@
           </span>
         </td>
       </tr>
+    </ng-template>
+    <ng-template pTemplate="footer" let-columns>
+      <tr>
+        <td *ngFor="let col of columns">{{col.header}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div style="text-align:left">
+        En total hay {{ totalRecords }} registros
+      </div>
     </ng-template>
   </p-table>
   <p-paginator *ngIf="totalRecords > rows" [rows]="rows" [totalRecords]="totalRecords" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
