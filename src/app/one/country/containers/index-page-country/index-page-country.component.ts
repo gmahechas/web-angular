@@ -7,8 +7,6 @@ import * as fromCore from './../../../../core/store';
 import { Country } from './../../models/country.model';
 import { SearchCountry } from './../../models/search-country.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-index-page-country',
   templateUrl: './index-page-country.component.html',
@@ -16,24 +14,18 @@ import { Observable } from 'rxjs';
 })
 export class IndexPageCountryComponent implements OnInit {
 
-  query$: Observable<SearchCountry>;
+  query$ = this.store.pipe(select(fromStore.getQuery));
 
-  data$: Observable<Country[]>;
-  total$: Observable<number>;
-  perPage$: Observable<number>;
-  from$: Observable<number>;
-  to$: Observable<number>;
+  data$ = this.store.pipe(select(fromStore.getAllEntities));
+  total$ = this.store.pipe(select(fromStore.getTotal));
+  perPage$ = this.store.pipe(select(fromStore.getPerPage));
+  from$ = this.store.pipe(select(fromStore.getFrom));
+  to$ = this.store.pipe(select(fromStore.getTo));
   configTable: any;
 
   constructor(
     private store: Store<fromStore.State>
   ) {
-    this.data$ = store.pipe(select(fromStore.getAllEntities));
-    this.query$ = store.pipe(select(fromStore.getQuery));
-    this.total$ = store.pipe(select(fromStore.getTotal));
-    this.perPage$ = store.pipe(select(fromStore.getPerPage));
-    this.from$ = store.pipe(select(fromStore.getFrom));
-    this.to$ = store.pipe(select(fromStore.getTo));
     this.configTable = {
       dataKey: 'country_id',
       cols: [

@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Person } from './../../models/person.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-person',
   templateUrl: './form-page-person.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPagePersonComponent implements OnInit {
 
-  person$: Observable<Person>;
+  person$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.person$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

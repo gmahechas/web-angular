@@ -7,8 +7,6 @@ import * as fromCore from './../../../../core/store';
 import { User } from './../../models/user.model';
 import { SearchUser } from './../../models/search-user.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-index-page-user',
   templateUrl: './index-page-user.component.html',
@@ -16,24 +14,18 @@ import { Observable } from 'rxjs';
 })
 export class IndexPageUserComponent implements OnInit {
 
-  query$: Observable<SearchUser>;
+  query$ = this.store.pipe(select(fromStore.getQuery));
 
-  data$: Observable<User[]>;
-  total$: Observable<number>;
-  perPage$: Observable<number>;
-  from$: Observable<number>;
-  to$: Observable<number>;
+  data$ = this.store.pipe(select(fromStore.getAllEntities));
+  total$ = this.store.pipe(select(fromStore.getTotal));
+  perPage$ = this.store.pipe(select(fromStore.getPerPage));
+  from$ = this.store.pipe(select(fromStore.getFrom));
+  to$ = this.store.pipe(select(fromStore.getTo));
   configTable: any;
 
   constructor(
     private store: Store<fromStore.State>
   ) {
-    this.data$ = store.pipe(select(fromStore.getAllEntities));
-    this.query$ = store.pipe(select(fromStore.getQuery));
-    this.total$ = store.pipe(select(fromStore.getTotal));
-    this.perPage$ = store.pipe(select(fromStore.getPerPage));
-    this.from$ = store.pipe(select(fromStore.getFrom));
-    this.to$ = store.pipe(select(fromStore.getTo));
     this.configTable = {
       dataKey: 'user_id',
       cols: [

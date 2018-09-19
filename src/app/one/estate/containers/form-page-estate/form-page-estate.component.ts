@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Estate } from './../../models/estate.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-estate',
   templateUrl: './form-page-estate.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageEstateComponent implements OnInit {
 
-  estate$: Observable<Estate>;
+  estate$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.estate$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

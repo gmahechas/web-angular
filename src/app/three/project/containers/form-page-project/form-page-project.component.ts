@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Project } from './../../models/project.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-project',
   templateUrl: './form-page-project.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageProjectComponent implements OnInit {
 
-  project$: Observable<Project>;
+  project$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.project$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

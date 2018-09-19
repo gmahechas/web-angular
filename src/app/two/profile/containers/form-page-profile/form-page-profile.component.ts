@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Profile } from './../../models/profile.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-profile',
   templateUrl: './form-page-profile.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageProfileComponent implements OnInit {
 
-  profile$: Observable<Profile>;
+  profile$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.profile$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

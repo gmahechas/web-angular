@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { City } from './../../models/city.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-city',
   templateUrl: './form-page-city.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageCityComponent implements OnInit {
 
-  city$: Observable<City>;
+  city$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.city$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

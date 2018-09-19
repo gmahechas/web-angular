@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Office } from './../../models/office.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-office',
   templateUrl: './form-page-office.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageOfficeComponent implements OnInit {
 
-  office$: Observable<Office>;
+  office$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.office$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

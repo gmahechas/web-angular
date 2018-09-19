@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Macroproject } from './../../models/macroproject.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-macroproject',
   templateUrl: './form-page-macroproject.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageMacroprojectComponent implements OnInit {
 
-  macroproject$: Observable<Macroproject>;
+  macroproject$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.macroproject$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }

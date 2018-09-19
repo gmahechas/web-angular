@@ -6,8 +6,6 @@ import * as fromCore from './../../../../core/store';
 
 import { Country } from './../../models/country.model';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-form-page-country',
   templateUrl: './form-page-country.component.html',
@@ -15,13 +13,11 @@ import { Observable } from 'rxjs';
 })
 export class FormPageCountryComponent implements OnInit {
 
-  country$: Observable<Country>;
+  country$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.country$ = store.pipe(select(fromStore.getSelectedByRouter));
-  }
+  ) { }
 
   ngOnInit() {
   }
