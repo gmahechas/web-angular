@@ -88,7 +88,8 @@ export class LayoutPersonEffects {
       this.store.dispatch(new fromActions.LoadEntity({
         person: {
           person_id: String(data.storePerson.person_id),
-          person_identification: data.storePerson.person_identification
+          person_identification: data.storePerson.person_identification,
+          person_names: '' // TODO:
         }
       }));
     })
