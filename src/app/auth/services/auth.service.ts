@@ -6,7 +6,9 @@ import { Token } from './../models/token.model';
 
 import { environment } from './../../../environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
 
   constructor(

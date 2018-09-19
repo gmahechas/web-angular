@@ -27,7 +27,7 @@ import { IndexPageCoreComponent } from './core/containers/index-page-core/index-
     HttpClientModule,
     GraphqlModule,
     SharedModule,
-    AuthModule.forRoot(),
+    AuthModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({
