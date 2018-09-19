@@ -38,4 +38,4 @@ export class AuthModule {
     EffectsModule.forFeature(effects)
   ],
 })
-export class RootAuthModule {}
+export class RootAuthModule { }

@@ -10,7 +10,7 @@ import * as fromModels from './../../models';
 
 import { OfficeService } from '../../services/office.service';
 
-import { of, from, Scheduler, asyncScheduler, empty } from 'rxjs';
+import { of, from, Scheduler, asyncScheduler, EMPTY } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
 
 export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
@@ -98,7 +98,7 @@ export class EntityOfficeEffects {
     map(action => action.payload),
     switchMap((searchOffice: fromModels.SearchOffice) => {
       if (searchOffice === '') {
-        return empty();
+        return EMPTY;
       }
 
       const nextSearch$ = this.actions$.pipe(
