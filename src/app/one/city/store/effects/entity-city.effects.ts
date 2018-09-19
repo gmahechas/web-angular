@@ -1,7 +1,7 @@
-import { Injectable, Optional, Inject, InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Store, select } from '@ngrx/store';
+import { Store, select, Action } from '@ngrx/store';
 import * as fromReducers from './../reducers';
 import * as fromSelectors from '../selectors';
 import * as fromActions from '../actions';
@@ -10,11 +10,8 @@ import * as fromModels from './../../models';
 
 import { CityService } from '../../services/city.service';
 
-import { of, from, Scheduler, asyncScheduler, EMPTY } from 'rxjs';
+import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
-
-export const SEARCH_DEBOUNCE = new InjectionToken<number>('Search Debounce');
-export const SEARCH_SCHEDULER = new InjectionToken<Scheduler>('Search Scheduler');
 
 @Injectable()
 export class EntityCityEffects {
@@ -92,40 +89,35 @@ export class EntityCityEffects {
   );
 
   @Effect()
-  loadEntityShared$ = this.actions$.pipe(
-    ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
-    debounceTime(this.debounce || 600, this.scheduler || asyncScheduler),
-    map(action => action.payload),
-    switchMap((searchCity: fromModels.SearchCity) => {
-      if (searchCity === '') {
-        return EMPTY;
-      }
+  loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
+    this.actions$.pipe(
+      ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
+      debounceTime(debounce, scheduler),
+      map(action => action.payload),
+      switchMap((searchCity: fromModels.SearchCity) => {
+        if (searchCity === '') {
+          return EMPTY;
+        }
 
-      const nextSearch$ = this.actions$.pipe(
-        ofType(fromActions.EntityActionTypes.LoadEntityShared),
-        skip(1)
-      );
+        const nextSearch$ = this.actions$.pipe(
+          ofType(fromActions.EntityActionTypes.LoadEntityShared),
+          skip(1)
+        );
 
-      return this.cityService.load({ ...searchCity, limit: 20, page: 1 }).pipe(
-        takeUntil(nextSearch$),
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity(errors));
-        })
-      );
+        return this.cityService.load({ ...searchCity, limit: 20, page: 1 }).pipe(
+          takeUntil(nextSearch$),
+          map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+          catchError((errors) => {
+            return of(new fromActions.LoadFailEntity(errors));
+          })
+        );
 
-    })
-  );
+      })
+    )
 
   constructor(
     private actions$: Actions,
     private cityService: CityService,
-    private store: Store<fromReducers.State>,
-    @Optional()
-    @Inject(SEARCH_DEBOUNCE)
-    private debounce: number,
-    @Optional()
-    @Inject(SEARCH_SCHEDULER)
-    private scheduler: Scheduler
+    private store: Store<fromReducers.State>
   ) { }
 }
