@@ -5,8 +5,6 @@ import * as fromGraphql from './../graphql/profile.graphql';
 
 import * as fromModels from './../models';
 
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,21 +29,21 @@ export class ProfileService {
     return this.queryRef.valueChanges;
   }
 
-  store(profile: fromModels.Profile): Observable<any> {
+  store(profile: fromModels.Profile) {
     return this.apollo.mutate<fromModels.StoreProfile>({
       mutation: fromGraphql.store,
       variables: profile
     });
   }
 
-  update(profile: fromModels.Profile): Observable<any> {
+  update(profile: fromModels.Profile) {
     return this.apollo.mutate<fromModels.UpdateProfile>({
       mutation: fromGraphql.update,
       variables: profile
     });
   }
 
-  destroy(profile: fromModels.Profile): Observable<any> {
+  destroy(profile: fromModels.Profile) {
     return this.apollo.mutate<fromModels.DestroyProfile>({
       mutation: fromGraphql.destroy,
       variables: {

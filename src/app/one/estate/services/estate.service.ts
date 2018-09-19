@@ -5,8 +5,6 @@ import * as fromGraphql from './../graphql/estate.graphql';
 
 import * as fromModels from './../models';
 
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,21 +30,21 @@ export class EstateService {
     return this.queryRef.valueChanges;
   }
 
-  store(estate: fromModels.Estate): Observable<any> {
+  store(estate: fromModels.Estate) {
     return this.apollo.mutate<fromModels.StoreEstate>({
       mutation: fromGraphql.store,
       variables: estate
     });
   }
 
-  update(estate: fromModels.Estate): Observable<any> {
+  update(estate: fromModels.Estate) {
     return this.apollo.mutate<fromModels.UpdateEstate>({
       mutation: fromGraphql.update,
       variables: estate
     });
   }
 
-  destroy(estate: fromModels.Estate): Observable<any> {
+  destroy(estate: fromModels.Estate) {
     return this.apollo.mutate<fromModels.DestroyEstate>({
       mutation: fromGraphql.destroy,
       variables: {

@@ -5,8 +5,6 @@ import * as fromGraphql from './../graphql/office.graphql';
 
 import * as fromModels from './../models';
 
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,21 +30,21 @@ export class OfficeService {
     return this.queryRef.valueChanges;
   }
 
-  store(office: fromModels.Office): Observable<any> {
+  store(office: fromModels.Office) {
     return this.apollo.mutate<fromModels.StoreOffice>({
       mutation: fromGraphql.store,
       variables: office
     });
   }
 
-  update(office: fromModels.Office): Observable<any> {
+  update(office: fromModels.Office) {
     return this.apollo.mutate<fromModels.UpdateOffice>({
       mutation: fromGraphql.update,
       variables: office
     });
   }
 
-  destroy(office: fromModels.Office): Observable<any> {
+  destroy(office: fromModels.Office) {
     return this.apollo.mutate<fromModels.DestroyOffice>({
       mutation: fromGraphql.destroy,
       variables: {

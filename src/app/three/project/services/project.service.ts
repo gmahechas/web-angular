@@ -5,8 +5,6 @@ import * as fromGraphql from './../graphql/project.graphql';
 
 import * as fromModels from './../models';
 
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,21 +30,21 @@ export class ProjectService {
     return this.queryRef.valueChanges;
   }
 
-  store(project: fromModels.Project): Observable<any> {
+  store(project: fromModels.Project) {
     return this.apollo.mutate<fromModels.StoreProject>({
       mutation: fromGraphql.store,
       variables: project
     });
   }
 
-  update(project: fromModels.Project): Observable<any> {
+  update(project: fromModels.Project) {
     return this.apollo.mutate<fromModels.UpdateProject>({
       mutation: fromGraphql.update,
       variables: project
     });
   }
 
-  destroy(project: fromModels.Project): Observable<any> {
+  destroy(project: fromModels.Project) {
     return this.apollo.mutate<fromModels.DestroyProject>({
       mutation: fromGraphql.destroy,
       variables: {

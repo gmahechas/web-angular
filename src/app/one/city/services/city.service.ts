@@ -5,8 +5,6 @@ import * as fromGraphql from './../graphql/city.graphql';
 
 import * as fromModels from './../models';
 
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +21,7 @@ export class CityService {
       query: fromGraphql.pagination,
       variables: {
         ...searchCity.city,
-        estate_id : (searchCity.estate) ? searchCity.estate.estate_id : null,
+        estate_id: (searchCity.estate) ? searchCity.estate.estate_id : null,
         limit: searchCity.limit,
         page: searchCity.page
       }
@@ -32,21 +30,21 @@ export class CityService {
     return this.queryRef.valueChanges;
   }
 
-  store(city: fromModels.City): Observable<any> {
+  store(city: fromModels.City) {
     return this.apollo.mutate<fromModels.StoreCity>({
       mutation: fromGraphql.store,
       variables: city
     });
   }
 
-  update(city: fromModels.City): Observable<any> {
+  update(city: fromModels.City) {
     return this.apollo.mutate<fromModels.UpdateCity>({
       mutation: fromGraphql.update,
       variables: city
     });
   }
 
-  destroy(city: fromModels.City): Observable<any> {
+  destroy(city: fromModels.City) {
     return this.apollo.mutate<fromModels.DestroyCity>({
       mutation: fromGraphql.destroy,
       variables: {

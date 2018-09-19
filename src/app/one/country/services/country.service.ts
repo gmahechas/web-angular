@@ -5,8 +5,6 @@ import * as fromGraphql from './../graphql/country.graphql';
 
 import * as fromModels from './../models';
 
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,21 +29,21 @@ export class CountryService {
     return this.queryRef.valueChanges;
   }
 
-  store(country: fromModels.Country): Observable<any> {
+  store(country: fromModels.Country) {
     return this.apollo.mutate<fromModels.StoreCountry>({
       mutation: fromGraphql.store,
       variables: country
     });
   }
 
-  update(country: fromModels.Country): Observable<any> {
+  update(country: fromModels.Country) {
     return this.apollo.mutate<fromModels.UpdateCountry>({
       mutation: fromGraphql.update,
       variables: country
     });
   }
 
-  destroy(country: fromModels.Country): Observable<any> {
+  destroy(country: fromModels.Country) {
     return this.apollo.mutate<fromModels.DestroyCountry>({
       mutation: fromGraphql.destroy,
       variables: {
