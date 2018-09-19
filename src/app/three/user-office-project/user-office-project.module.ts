@@ -12,7 +12,6 @@ import * as fromContainers from './containers';
   ],
   declarations: [
     ...fromContainers.containers
-  ],
-  providers: []
+  ]
 })
 export class UserOfficeProjectModule { }

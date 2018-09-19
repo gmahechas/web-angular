@@ -5,17 +5,16 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from './../store';
 import * as fromCore from './../../../core/store';
 
-import { OfficeService } from './../services/office.service';
-
 import { Observable, of } from 'rxjs';
-import { tap, map, filter, take, switchMap, catchError } from 'rxjs/operators';
+import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class OfficeExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>,
-    private officeService: OfficeService
+    private store: Store<fromStore.State>
   ) { }
 
   hasInStore(office_id: string): Observable<boolean> {

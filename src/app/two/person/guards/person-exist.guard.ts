@@ -5,17 +5,16 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from './../store';
 import * as fromCore from './../../../core/store';
 
-import { PersonService } from './../services/person.service';
-
 import { Observable, of } from 'rxjs';
-import { tap, map, filter, take, switchMap, catchError } from 'rxjs/operators';
+import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PersonExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>,
-    private personService: PersonService
+    private store: Store<fromStore.State>
   ) { }
 
   hasInStore(person_id: string): Observable<boolean> {

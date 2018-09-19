@@ -13,7 +13,6 @@ import { OfficeModule } from './../../one/office/office.module';
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
 import * as fromSharedContainers from './shared/containers';
-import * as fromGuards from './guards';
 
 @NgModule({
   imports: [
@@ -28,9 +27,6 @@ import * as fromGuards from './guards';
     ...fromContainers.containers,
     ...fromComponents.components,
     ...fromSharedContainers.containers
-  ],
-  providers: [
-    ...fromGuards.guards
   ],
   exports: [
     ...fromSharedContainers.containers
