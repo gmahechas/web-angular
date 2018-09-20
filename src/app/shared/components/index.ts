@@ -10,6 +10,7 @@ import { PanelSharedComponent } from './panel-shared/panel-shared.component';
 import { CheckboxSharedComponent } from './checkbox-shared/checkbox-shared.component';
 import { InputSwitchSharedComponent } from './input-switch-shared/input-switch-shared.component';
 import { TreeSharedComponent } from './tree-shared/tree-shared.component';
+import { MessageSharedComponent } from './message-shared/message-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -23,7 +24,8 @@ export const components: any[] = [
   PanelSharedComponent,
   CheckboxSharedComponent,
   InputSwitchSharedComponent,
-  TreeSharedComponent
+  TreeSharedComponent,
+  MessageSharedComponent
 ];
 
 export * from './dropdown-shared/dropdown-shared.component';
@@ -38,3 +40,4 @@ export * from './panel-shared/panel-shared.component';
 export * from './checkbox-shared/checkbox-shared.component';
 export * from './input-switch-shared/input-switch-shared.component';
 export * from './tree-shared/tree-shared.component';
+export * from './message-shared/message-shared.component';

@@ -11,9 +11,7 @@
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-      <p *ngIf="error">
-        {{ error }}
-      </p>
+      <app-message-shared *ngIf="error" [severity]="'error'" [text]="error"></app-message-shared>
     </div>
   </div>
 </form>
