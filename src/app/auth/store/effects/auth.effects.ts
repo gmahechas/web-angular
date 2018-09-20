@@ -23,7 +23,7 @@ export class AuthEffects {
       this.authService.login(auth).pipe(
         map((token: fromModels.Token) => new fromActions.LoginSuccess(token)),
         catchError((errors) => {
-          return of(new fromActions.LoginFailure(errors));
+          return of(new fromActions.LoginFailure(errors.message));
         })
       )
     ));

@@ -9,4 +9,11 @@
       <app-button-shared [type]="'button'" [label]="'Olvide mi Contraseña'" [class]="'ui-button-secondary'"></app-button-shared>
     </div>
   </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p *ngIf="error">
+        {{ error }}
+      </p>
+    </div>
+  </div>
 </form>

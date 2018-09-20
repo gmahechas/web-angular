@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromStore from './../../store';
 
 import { Auth } from './../../models/auth.model';
@@ -11,6 +11,9 @@ import { Auth } from './../../models/auth.model';
   styles: []
 })
 export class IndexPageAuthComponent implements OnInit {
+
+  pending$ = this.store.pipe(select(fromStore.getPending));
+  error$ = this.store.pipe(select(fromStore.getError));
 
   constructor(
     private store: Store<fromStore.State>
