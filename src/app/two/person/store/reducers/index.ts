@@ -24,4 +24,4 @@ export interface State extends fromCore.State {
   person: PersonState;
 }
 
-export const getPersonState = createFeatureSelector<PersonState>('person');
+export const getPersonState = createFeatureSelector<State, PersonState>('person');

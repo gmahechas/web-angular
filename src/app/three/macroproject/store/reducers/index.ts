@@ -24,4 +24,4 @@ export interface State extends fromCore.State {
   macroproject: MacroprojectState;
 }
 
-export const getMacroprojectState = createFeatureSelector<MacroprojectState>('macroproject');
+export const getMacroprojectState = createFeatureSelector<State, MacroprojectState>('macroproject');

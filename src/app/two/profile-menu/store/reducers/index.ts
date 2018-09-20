@@ -15,4 +15,4 @@ export interface State extends fromCore.State {
   profile_menu: ProfileMenuState;
 }
 
-export const getProfileMenuState = createFeatureSelector<ProfileMenuState>('profile_menu');
+export const getProfileMenuState = createFeatureSelector<State, ProfileMenuState>('profile_menu');

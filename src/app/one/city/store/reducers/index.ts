@@ -24,4 +24,4 @@ export interface State extends fromCore.State {
   city: CityState;
 }
 
-export const getCityState = createFeatureSelector<CityState>('city');
+export const getCityState = createFeatureSelector<State, CityState>('city');

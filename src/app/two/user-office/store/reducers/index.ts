@@ -15,4 +15,4 @@ export interface State extends fromCore.State {
   user_office: UserOfficeState;
 }
 
-export const getUserOfficeState = createFeatureSelector<UserOfficeState>('user_office');
+export const getUserOfficeState = createFeatureSelector<State, UserOfficeState>('user_office');

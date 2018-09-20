@@ -24,4 +24,4 @@ export interface State extends fromCore.State {
   estate: EstateState;
 }
 
-export const getEstateState = createFeatureSelector<EstateState>('estate');
+export const getEstateState = createFeatureSelector<State, EstateState>('estate');

@@ -24,4 +24,4 @@ export interface State extends fromCore.State {
   project: ProjectState;
 }
 
-export const getProjectState = createFeatureSelector<ProjectState>('project');
+export const getProjectState = createFeatureSelector<State, ProjectState>('project');

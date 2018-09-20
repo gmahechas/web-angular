@@ -24,4 +24,4 @@ export interface State extends fromCore.State {
   profile: ProfileState;
 }
 
-export const getProfileState = createFeatureSelector<ProfileState>('profile');
+export const getProfileState = createFeatureSelector<State, ProfileState>('profile');

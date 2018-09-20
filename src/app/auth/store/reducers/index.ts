@@ -18,4 +18,4 @@ export interface State extends fromCore.State {
   auth: AuthState;
 }
 
-export const getAuthState = createFeatureSelector<AuthState>('auth');
+export const getAuthState = createFeatureSelector<State, AuthState>('auth');

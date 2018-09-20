@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector, createSelector, ActionReducer, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, ActionReducer, MetaReducer } from '@ngrx/store';
 
 import { storeFreeze } from 'ngrx-store-freeze';
 
@@ -18,15 +18,19 @@ export const reducers: ActionReducerMap<State> = {
   router: fromRouter.routerReducer
 };
 
-export const getRouterState = createFeatureSelector<fromRouter.RouterReducerState<RouterStateUrl>>('router');
-export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
+export const getRouterState = createFeatureSelector<State, fromRouter.RouterReducerState<RouterStateUrl>>('router');
+export const getLayoutState = createFeatureSelector<State, fromLayout.State>('layout');
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   return function (state: State, action: any): State {
-    console.log('state', state);
+    const result = reducer(state, action);
+    console.groupCollapsed(action.type);
+    console.log('prev state', state);
     console.log('action', action);
+    console.log('next state', result);
+    console.groupEnd();
 
-    return reducer(state, action);
+    return result;
   };
 }
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ storeFreeze] : [];
