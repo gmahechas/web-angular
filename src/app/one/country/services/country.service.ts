@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
- import * as fromGraphql from './../graphql';
-
-import { Observable } from 'rxjs';
+import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
 
@@ -12,14 +10,14 @@ import * as fromModels from './../models';
 export class CountryService {
 
   constructor(
-    private countryQueries: fromGraphql.CountryQueriesGQL,
+    private countryPagination: fromGraphql.CountryPaginationGQL,
     private countryStoreGQL: fromGraphql.CountryStoreGQL,
     private countryUpdateGQL: fromGraphql.CountryUpdateGQL,
     private countryDestroyGQL: fromGraphql.CountryDestroyGQL
   ) { }
 
-  load(searchCountry: fromModels.SearchCountry): Observable<any> {
-    return this.countryQueries.watch({
+  load(searchCountry: fromModels.SearchCountry) {
+    return this.countryPagination.watch({
       ...searchCountry.country,
       limit: searchCountry.limit,
       page: searchCountry.page
@@ -38,8 +36,8 @@ export class CountryService {
     return this.countryDestroyGQL.mutate(country);
   }
 
-  pagination(searchCountry: fromModels.SearchCountry): Observable<any> {
-    return this.countryQueries.fetch({
+  pagination(searchCountry: fromModels.SearchCountry) {
+    return this.countryPagination.fetch({
       country_id: searchCountry.country.country_id,
       country_name: searchCountry.country.country_name,
       country_code: searchCountry.country.country_code,

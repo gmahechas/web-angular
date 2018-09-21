@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { PaginationCountry } from '../models/pagination-country.model';
+
 import { Query } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
@@ -7,7 +9,7 @@ import gql from 'graphql-tag';
 @Injectable({
   providedIn: 'root',
 })
-export class CountryQueriesGQL extends Query {
+export class CountryPaginationGQL extends Query<PaginationCountry> {
 
   document: DocumentNode = gql`
     query paginationCountry(
