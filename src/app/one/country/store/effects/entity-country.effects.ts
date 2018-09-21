@@ -81,7 +81,8 @@ export class EntityCountryEffects {
       this.store.pipe(select(fromSelectors.getQuery))
     ),
     switchMap(([currentPage, perPage, searchCountry]: [number, number, fromModels.SearchCountry]) => {
-      return from(this.countryService.pagination({ ...searchCountry, limit: perPage, page: currentPage })).pipe(
+
+      return this.countryService.pagination({ ...searchCountry, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity(data)),
         catchError((errors) => of(new fromActions.LoadFailEntity(errors)))
       );
