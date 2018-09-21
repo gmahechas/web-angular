@@ -26,9 +26,13 @@ export class GraphqlModule {
     private httpLink: HttpLink,
     private store: Store<fromCore.State>
   ) {
-    const http = httpLink.create({
+    const link = httpLink.create({
       uri: environment.apilUrl + environment.graphqlUrl,
       method: 'POST'
+    });
+
+    const cache = new InMemoryCache({
+      addTypename: false
     });
 
     const tokenMiddleware = new ApolloLink((operation, forward) => {
@@ -52,10 +56,8 @@ export class GraphqlModule {
     });
 
     apollo.create({
-      link: from([/* errorMiddleware, tokenMiddleware,  */http]),
-      cache: new InMemoryCache({
-        addTypename: false
-      }),
+      link: from([/* errorMiddleware, tokenMiddleware,  */link]),
+      cache,
       defaultOptions: {
         watchQuery: {
           fetchPolicy: 'network-only'
