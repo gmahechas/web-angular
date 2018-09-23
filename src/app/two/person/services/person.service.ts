@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Apollo, QueryRef } from 'apollo-angular';
-import * as fromGraphql from './../graphql/person.graphql';
+import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
 
@@ -10,62 +9,40 @@ import * as fromModels from './../models';
 })
 export class PersonService {
 
-  queryRef: QueryRef<fromModels.PaginationPerson>;
-
   constructor(
-    private apollo: Apollo
+    private personPagination: fromGraphql.PersonPaginationGQL,
+    private personStoreGQL: fromGraphql.PersonStoreGQL,
+    private personUpdateGQL: fromGraphql.PersonUpdateGQL,
+    private personDestroyGQL: fromGraphql.PersonDestroyGQL
   ) { }
 
   load(searchPerson: fromModels.SearchPerson) {
-    this.queryRef = this.apollo.watchQuery<fromModels.PaginationPerson, fromModels.SearchPerson>({
-      query: fromGraphql.pagination,
-      variables: {
-        ...searchPerson.person,
-        limit: searchPerson.limit,
-        page: searchPerson.page
-      }
-    });
-
-    return this.queryRef.valueChanges;
+    return this.personPagination.watch({
+      ...searchPerson.person,
+      limit: searchPerson.limit,
+      page: searchPerson.page
+    }).valueChanges;
   }
 
   store(person: fromModels.Person) {
-    return this.apollo.mutate<fromModels.StorePerson>({
-      mutation: fromGraphql.store,
-      variables: person
-    });
+    return this.personStoreGQL.mutate(person);
   }
 
   update(person: fromModels.Person) {
-    return this.apollo.mutate<fromModels.UpdatePerson>({
-      mutation: fromGraphql.update,
-      variables: person
-    });
+    return this.personUpdateGQL.mutate(person);
   }
 
   destroy(person: fromModels.Person) {
-    return this.apollo.mutate<fromModels.DestroyPerson>({
-      mutation: fromGraphql.destroy,
-      variables: {
-        person_id: person.person_id
-      }
-    });
+    return this.personDestroyGQL.mutate(person);
   }
 
   pagination(searchPerson: fromModels.SearchPerson) {
-    return this.queryRef.fetchMore({
-      query: fromGraphql.pagination,
-      variables: {
-        person_id: searchPerson.person.person_id,
-        person_identification: searchPerson.person.person_identification,
-        person_names: searchPerson.person.person_names,
-        limit: searchPerson.limit,
-        page: searchPerson.page
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) { return prev; }
-        return fetchMoreResult;
-      }
+    return this.personPagination.fetch({
+      person_id: searchPerson.person.person_id,
+      person_identification: searchPerson.person.person_identification,
+      person_names: searchPerson.person.person_names,
+      limit: searchPerson.limit,
+      page: searchPerson.page
     });
   }
 
