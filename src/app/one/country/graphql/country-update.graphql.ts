@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { UpdateCountry } from '../models';
+import { UpdateCountry } from '../models/update-country.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
