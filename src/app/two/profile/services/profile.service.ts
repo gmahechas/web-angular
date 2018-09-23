@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Apollo, QueryRef } from 'apollo-angular';
-import * as fromGraphql from './../graphql/profile.graphql';
+import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
 
@@ -10,61 +9,39 @@ import * as fromModels from './../models';
 })
 export class ProfileService {
 
-  queryRef: QueryRef<fromModels.PaginationProfile>;
-
   constructor(
-    private apollo: Apollo
+    private profilePagination: fromGraphql.ProfilePaginationGQL,
+    private profileStoreGQL: fromGraphql.ProfileStoreGQL,
+    private profileUpdateGQL: fromGraphql.ProfileUpdateGQL,
+    private profileDestroyGQL: fromGraphql.ProfileDestroyGQL
   ) { }
 
   load(searchProfile: fromModels.SearchProfile) {
-    this.queryRef = this.apollo.watchQuery<fromModels.PaginationProfile, fromModels.SearchProfile>({
-      query: fromGraphql.pagination,
-      variables: {
-        ...searchProfile.profile,
-        limit: searchProfile.limit,
-        page: searchProfile.page
-      }
-    });
-
-    return this.queryRef.valueChanges;
+    return this.profilePagination.watch({
+      ...searchProfile.profile,
+      limit: searchProfile.limit,
+      page: searchProfile.page
+    }).valueChanges;
   }
 
   store(profile: fromModels.Profile) {
-    return this.apollo.mutate<fromModels.StoreProfile>({
-      mutation: fromGraphql.store,
-      variables: profile
-    });
+    return this.profileStoreGQL.mutate(profile);
   }
 
   update(profile: fromModels.Profile) {
-    return this.apollo.mutate<fromModels.UpdateProfile>({
-      mutation: fromGraphql.update,
-      variables: profile
-    });
+    return this.profileUpdateGQL.mutate(profile);
   }
 
   destroy(profile: fromModels.Profile) {
-    return this.apollo.mutate<fromModels.DestroyProfile>({
-      mutation: fromGraphql.destroy,
-      variables: {
-        profile_id: profile.profile_id
-      }
-    });
+    return this.profileDestroyGQL.mutate(profile);
   }
 
   pagination(searchProfile: fromModels.SearchProfile) {
-    return this.queryRef.fetchMore({
-      query: fromGraphql.pagination,
-      variables: {
-        profile_id: searchProfile.profile.profile_id,
-        profile_name: searchProfile.profile.profile_name,
-        limit: searchProfile.limit,
-        page: searchProfile.page
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) { return prev; }
-        return fetchMoreResult;
-      }
+    return this.profilePagination.fetch({
+      profile_id: searchProfile.profile.profile_id,
+      profile_name: searchProfile.profile.profile_name,
+      limit: searchProfile.limit,
+      page: searchProfile.page
     });
   }
 

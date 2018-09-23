@@ -49,7 +49,7 @@ export class FormProfileComponent implements OnChanges, OnInit {
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit(profileForm.value);
+      this.submitted.emit(profileForm.value.profile);
     }
 
   }
