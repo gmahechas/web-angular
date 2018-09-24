@@ -47,7 +47,8 @@ export class PersonExistGuard implements CanActivate {
           this.store.dispatch(new fromStore.LoadEntity({
             person: {
               person_id: person_id,
-              person_identification: ''
+              person_identification: '',
+              person_names: ''
             }
           }));
         }
