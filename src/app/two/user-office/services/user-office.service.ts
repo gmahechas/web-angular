@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
-import * as fromGraphql from './../graphql/user-office.graphql';
+import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
 
@@ -11,18 +10,15 @@ import * as fromModels from './../models';
 export class UserOfficeService {
 
   constructor(
-    private apollo: Apollo
+    private userOfficePagination: fromGraphql.UserOfficePaginationGQL
   ) { }
 
   load(searchUserOffice: fromModels.SearchUserOffice) {
-    return this.apollo.watchQuery<fromModels.PaginationUserOffice, fromModels.SearchUserOffice>({
-      query: fromGraphql.pagination,
-      variables: {
-        ...searchUserOffice.user_office,
-        user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
-        limit: searchUserOffice.limit,
-        page: searchUserOffice.page
-      }
+    return this.userOfficePagination.watch({
+      ...searchUserOffice.user_office,
+      user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
+      limit: searchUserOffice.limit,
+      page: searchUserOffice.page
     }).valueChanges;
   }
 
