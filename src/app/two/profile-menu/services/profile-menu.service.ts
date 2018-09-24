@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Apollo } from 'apollo-angular';
-import * as fromGraphql from './../graphql/profile-menu.graphql';
+import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
 
@@ -11,18 +10,15 @@ import * as fromModels from './../models';
 export class ProfileMenuService {
 
   constructor(
-    private apollo: Apollo
+    private profileMenuPagination: fromGraphql.ProfileMenuPaginationGQL
   ) { }
 
   load(searchProfileMenu: fromModels.SearchProfileMenu) {
-    return this.apollo.watchQuery<fromModels.PaginationProfileMenu, fromModels.SearchProfileMenu>({
-      query: fromGraphql.pagination,
-      variables: {
-        ...searchProfileMenu.profile_menu,
-        profile_id: (searchProfileMenu.profile) ? searchProfileMenu.profile.profile_id : null,
-        limit: searchProfileMenu.limit,
-        page: searchProfileMenu.page
-      }
+    return this.profileMenuPagination.watch({
+      ...searchProfileMenu.profile_menu,
+      profile_id: (searchProfileMenu.profile) ? searchProfileMenu.profile.profile_id : null,
+      limit: searchProfileMenu.limit,
+      page: searchProfileMenu.page
     }).valueChanges;
   }
 
