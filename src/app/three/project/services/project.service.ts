@@ -39,8 +39,7 @@ export class ProjectService {
 
   pagination(searchProject: fromModels.SearchProject) {
     return this.projectPagination.fetch({
-      project_id: searchProject.project.project_id,
-      project_name: searchProject.project.project_name,
+      ...searchProject.project,
       macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
       limit: searchProject.limit,
       page: searchProject.page

@@ -38,9 +38,7 @@ export class PersonService {
 
   pagination(searchPerson: fromModels.SearchPerson) {
     return this.personPagination.fetch({
-      person_id: searchPerson.person.person_id,
-      person_identification: searchPerson.person.person_identification,
-      person_names: searchPerson.person.person_names,
+      ...searchPerson.person,
       limit: searchPerson.limit,
       page: searchPerson.page
     });

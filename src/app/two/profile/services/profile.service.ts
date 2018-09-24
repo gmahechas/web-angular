@@ -38,8 +38,7 @@ export class ProfileService {
 
   pagination(searchProfile: fromModels.SearchProfile) {
     return this.profilePagination.fetch({
-      profile_id: searchProfile.profile.profile_id,
-      profile_name: searchProfile.profile.profile_name,
+      ...searchProfile.profile,
       limit: searchProfile.limit,
       page: searchProfile.page
     });

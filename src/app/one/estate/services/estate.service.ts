@@ -39,9 +39,7 @@ export class EstateService {
 
   pagination(searchEstate: fromModels.SearchEstate) {
     return this.estatePagination.fetch({
-      estate_id: searchEstate.estate.estate_id,
-      estate_name: searchEstate.estate.estate_name,
-      estate_code: searchEstate.estate.estate_code,
+      ...searchEstate.estate,
       country_id: (searchEstate.country) ? searchEstate.country.country_id : null,
       limit: searchEstate.limit,
       page: searchEstate.page

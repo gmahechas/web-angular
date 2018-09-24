@@ -39,9 +39,7 @@ export class CityService {
 
   pagination(searchCity: fromModels.SearchCity) {
     return this.cityPagination.fetch({
-      city_id: searchCity.city.city_id,
-      city_name: searchCity.city.city_name,
-      city_code: searchCity.city.city_code,
+      ...searchCity.city,
       estate_id: (searchCity.estate) ? searchCity.estate.estate_id : null,
       limit: searchCity.limit,
       page: searchCity.page

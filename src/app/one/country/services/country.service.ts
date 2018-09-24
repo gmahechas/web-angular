@@ -38,9 +38,7 @@ export class CountryService {
 
   pagination(searchCountry: fromModels.SearchCountry) {
     return this.countryPagination.fetch({
-      country_id: searchCountry.country.country_id,
-      country_name: searchCountry.country.country_name,
-      country_code: searchCountry.country.country_code,
+      ...searchCountry.country,
       limit: searchCountry.limit,
       page: searchCountry.page
     });

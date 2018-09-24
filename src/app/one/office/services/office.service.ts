@@ -39,8 +39,7 @@ export class OfficeService {
 
   pagination(searchOffice: fromModels.SearchOffice) {
     return this.officePagination.fetch({
-      office_id: searchOffice.office.office_id,
-      office_name: searchOffice.office.office_name,
+      ...searchOffice.office,
       city_id: (searchOffice.city) ? searchOffice.city.city_id : null,
       limit: searchOffice.limit,
       page: searchOffice.page

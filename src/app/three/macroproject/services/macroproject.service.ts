@@ -40,8 +40,7 @@ export class MacroprojectService {
 
   pagination(searchMacroproject: fromModels.SearchMacroproject) {
     return this.macroprojectPagination.fetch({
-      macroproject_id: searchMacroproject.macroproject.macroproject_id,
-      macroproject_name: searchMacroproject.macroproject.macroproject_name,
+      ...searchMacroproject.macroproject,
       city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id : null,
       office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id : null,
       limit: searchMacroproject.limit,
