@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Apollo, QueryRef } from 'apollo-angular';
-import * as fromGraphql from './../graphql/project.graphql';
+import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
 
@@ -10,63 +9,41 @@ import * as fromModels from './../models';
 })
 export class ProjectService {
 
-  queryRef: QueryRef<fromModels.PaginationProject>;
-
   constructor(
-    private apollo: Apollo
+    private projectPagination: fromGraphql.ProjectPaginationGQL,
+    private projectStoreGQL: fromGraphql.ProjectStoreGQL,
+    private projectUpdateGQL: fromGraphql.ProjectUpdateGQL,
+    private projectDestroyGQL: fromGraphql.ProjectDestroyGQL
   ) { }
 
   load(searchProject: fromModels.SearchProject) {
-    this.queryRef = this.apollo.watchQuery<fromModels.PaginationProject, fromModels.SearchProject>({
-      query: fromGraphql.pagination,
-      variables: {
-        ...searchProject.project,
-        macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
-        limit: searchProject.limit,
-        page: searchProject.page
-      }
-    });
-
-    return this.queryRef.valueChanges;
+    return this.projectPagination.watch({
+      ...searchProject.project,
+      macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
+      limit: searchProject.limit,
+      page: searchProject.page
+    }).valueChanges;
   }
 
   store(project: fromModels.Project) {
-    return this.apollo.mutate<fromModels.StoreProject>({
-      mutation: fromGraphql.store,
-      variables: project
-    });
+    return this.projectStoreGQL.mutate(project);
   }
 
   update(project: fromModels.Project) {
-    return this.apollo.mutate<fromModels.UpdateProject>({
-      mutation: fromGraphql.update,
-      variables: project
-    });
+    return this.projectUpdateGQL.mutate(project);
   }
 
   destroy(project: fromModels.Project) {
-    return this.apollo.mutate<fromModels.DestroyProject>({
-      mutation: fromGraphql.destroy,
-      variables: {
-        project_id: project.project_id
-      }
-    });
+    return this.projectDestroyGQL.mutate(project);
   }
 
   pagination(searchProject: fromModels.SearchProject) {
-    return this.queryRef.fetchMore({
-      query: fromGraphql.pagination,
-      variables: {
-        project_id: searchProject.project.project_id,
-        project_name: searchProject.project.project_name,
-        macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
-        limit: searchProject.limit,
-        page: searchProject.page
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) { return prev; }
-        return fetchMoreResult;
-      }
+    return this.projectPagination.fetch({
+      project_id: searchProject.project.project_id,
+      project_name: searchProject.project.project_name,
+      macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
+      limit: searchProject.limit,
+      page: searchProject.page
     });
   }
 
