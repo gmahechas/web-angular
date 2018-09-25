@@ -52,4 +52,5 @@ export class DropdownSharedComponent implements OnInit {
   onChange(event) {
     this.handleChange.emit(event.value);
   }
+
 }
