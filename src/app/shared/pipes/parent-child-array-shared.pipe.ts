@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'parentChildArray'
+  name: 'parentChildArrayShared'
 })
-export class ParentChildArrayPipe implements PipeTransform {
+export class ParentChildArraySharedPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     return null;

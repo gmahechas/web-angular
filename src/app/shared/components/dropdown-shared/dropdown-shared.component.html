@@ -10,7 +10,7 @@
     </ng-template>
     <ng-template let-item pTemplate="item">
       <span *ngFor="let option of options">
-        {{ setOption(item.value, option) }}
+        {{ item.value | fetchStringInArrayShared:option }}
       </span>
     </ng-template>
   </p-dropdown>

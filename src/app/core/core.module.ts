@@ -4,7 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
-import * as fromServices from './services'; // TODO:
+import * as fromServices from './services'; // TODO: providedIn
 
 @NgModule({
   imports: [

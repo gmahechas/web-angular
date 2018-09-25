@@ -1,5 +1,7 @@
-import { ParentChildArrayPipe } from './parent-child-array.pipe';
+import { ParentChildArraySharedPipe } from './parent-child-array-shared.pipe';
+import { FetchStringInArraySharedPipe } from './fetch-string-in-array-shared.pipe';
 
 export const pipes: any[] = [
-  ParentChildArrayPipe
+  ParentChildArraySharedPipe,
+  FetchStringInArraySharedPipe
 ];

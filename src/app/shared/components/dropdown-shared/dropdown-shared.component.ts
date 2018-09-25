@@ -43,24 +43,6 @@ export class DropdownSharedComponent implements OnInit {
     }
   }
 
-  setOption(value, option: string) {
-    const splitOption = option.split('.');
-    const optionsLength = splitOption.length;
-
-    // FIXME:
-    switch (optionsLength) {
-      case 1: return (value[splitOption[0]])
-        ? value[splitOption[0]] : option;
-      case 2: return (value[splitOption[0]][splitOption[1]])
-        ? value[splitOption[0]][splitOption[1]] : option;
-      case 3: return (value[splitOption[0]][splitOption[1]][splitOption[2]])
-        ? value[splitOption[0]][splitOption[1]][splitOption[2]] : option;
-      case 4: return (value[splitOption[0]][splitOption[1]][splitOption[2]][splitOption[3]])
-        ? value[splitOption[0]][splitOption[1]][splitOption[2]] : option;
-      default: return option;
-    }
-  }
-
   onChange(event) {
     this.handleChange.emit(event.value);
   }
