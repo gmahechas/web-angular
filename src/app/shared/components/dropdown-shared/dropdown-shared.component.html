@@ -5,7 +5,7 @@
     [style]="{'width':'100%'}">
     <ng-template let-selectedItem pTemplate="selectedItem">
       <span *ngFor="let option of options">
-        {{ setOption(selectedItem.value, option) }}
+        {{ selectedItem.value | fetchStringInArrayShared:option }}
       </span>
     </ng-template>
     <ng-template let-item pTemplate="item">
