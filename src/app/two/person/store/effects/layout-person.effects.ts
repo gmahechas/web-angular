@@ -89,7 +89,7 @@ export class LayoutPersonEffects {
         person: {
           person_id: String(data.storePerson.person_id),
           person_identification: data.storePerson.person_identification,
-          person_names: '' // TODO:
+          person_names: ''
         }
       }));
     })
