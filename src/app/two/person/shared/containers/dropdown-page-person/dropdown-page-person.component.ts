@@ -30,14 +30,13 @@ export class DropdownPagePersonComponent implements OnInit {
   }
 
   keyUp(event) {
-    // FIXME:
-    /*
-        this.store.dispatch(new fromStore.LoadEntityShared({
-          person: {
-
-          }
-        }));
-     */
+    this.store.dispatch(new fromStore.LoadEntityShared({
+      person: {
+        person_id: null,
+        person_identification: event,
+        person_names: null
+      }
+    }));
   }
 
   handleChange(event) {

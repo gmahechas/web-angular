@@ -17,6 +17,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() optionLabel: string;
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
   @Output() handleChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -26,10 +27,15 @@ export class DropdownSharedComponent implements OnInit {
   }
 
   onKeyUp(event) {
-    const key = event.target.value;
+    const key = event.key;
+    const value = event.target.value;
 
-    if (key.length >= 3) {
-      this.keyUp.emit(event.target.value);
+    if (value.length >= 3) {
+      if (key === this.keyboardKey) {
+        this.keyUp.emit(value);
+      } else if (this.keyboardKey === 'Any') {
+        this.keyUp.emit(value);
+      }
     }
   }
 
