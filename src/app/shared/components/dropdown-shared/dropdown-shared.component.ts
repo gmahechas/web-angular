@@ -11,7 +11,7 @@ export class DropdownSharedComponent implements OnInit {
 
   @Input() group: FormGroup;
   @Input() controlName: string;
-  @Input() configDropDown: any;
+  @Input() entityId: any;
   @Input() data: any[];
   @Input() options: string[];
   @Input() optionLabel: string;
@@ -36,7 +36,7 @@ export class DropdownSharedComponent implements OnInit {
   setOptions() {
     if (this.group.get(this.controlName).value) {
       return [this.group.get(this.controlName).value].concat(this.data.filter(
-        entity => entity[this.configDropDown.dataKey] !== this.group.get(this.controlName).value[this.configDropDown.dataKey]
+        entity => entity[this.entityId] !== this.group.get(this.controlName).value[this.entityId]
       ));
     } else {
       return this.data;

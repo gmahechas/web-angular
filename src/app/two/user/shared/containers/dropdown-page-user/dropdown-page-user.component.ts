@@ -4,10 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromStore from '../../../store';
 
-import { User } from './../../../models/user.model';
-
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-dropdown-page-user',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,17 +19,12 @@ export class DropdownPageUserComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
-  entities$: Observable<User[]>;
-  configDropDown: any;
+  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entityId = 'user_id';
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.entities$ = store.pipe(select(fromStore.getAllEntities));
-    this.configDropDown = {
-      dataKey: 'user_id'
-    };
-  }
+  ) { }
 
   ngOnInit() {
   }

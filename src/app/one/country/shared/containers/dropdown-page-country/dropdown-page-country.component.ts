@@ -4,10 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromStore from '../../../store';
 
-import { Country } from './../../../models/country.model';
-
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-dropdown-page-country',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,17 +19,12 @@ export class DropdownPageCountryComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
-  entities$: Observable<Country[]>;
-  configDropDown: any;
+  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entityId = 'country_id';
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
-    this.entities$ = store.pipe(select(fromStore.getAllEntities));
-    this.configDropDown = {
-      dataKey: 'country_id'
-    };
-  }
+  ) { }
 
   ngOnInit() {
   }
