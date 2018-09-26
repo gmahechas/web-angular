@@ -28,7 +28,7 @@ export class EntityCountryEffects {
       perPage = (perPage) ? perPage : searchCountry.search.limit;
       currentPage = (currentPage) ? currentPage : searchCountry.search.page;
       return this.countryService.load({ ...searchCountry.search, limit: perPage, page: currentPage }).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
           return of(new fromActions.LoadFailEntity(errors));
         })
@@ -83,7 +83,7 @@ export class EntityCountryEffects {
     switchMap(([currentPage, perPage, searchCountry]: [number, number, fromModels.SearchCountry]) => {
 
       return this.countryService.pagination({ ...searchCountry, limit: perPage, page: currentPage }).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromActions.LoadFailEntity(errors)))
       );
     })
@@ -107,7 +107,7 @@ export class EntityCountryEffects {
 
         return this.countryService.load({ ...searchCountry.search, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+          map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {
             return of(new fromActions.LoadFailEntity(errors));
           })

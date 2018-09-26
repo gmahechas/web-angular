@@ -26,7 +26,7 @@ export class LoadEntity implements Action {
 
 export class LoadSuccessEntity implements Action {
   readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: fromModels.PaginationCountry) { }
+  constructor(public payload: { entities: fromModels.PaginationCountry }) { }
 }
 
 export class LoadFailEntity implements Action {
