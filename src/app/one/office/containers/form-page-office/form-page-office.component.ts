@@ -39,4 +39,11 @@ export class FormPageOfficeComponent implements OnInit {
   onDestroy(office: Office) {
     this.store.dispatch(new fromStore.DestroyEntity({ entity: office }));
   }
+
+  onUserOffice(office: Office) {
+    this.store.dispatch(new fromCore.Go({
+      path: ['user-office', office.office_id]
+    }));
+  }
+
 }

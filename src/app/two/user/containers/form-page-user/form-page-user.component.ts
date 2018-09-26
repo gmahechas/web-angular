@@ -39,4 +39,11 @@ export class FormPageUserComponent implements OnInit {
   onDestroy(user: User) {
     this.store.dispatch(new fromStore.DestroyEntity({ entity: user }));
   }
+
+  onUserOffice(user: User) {
+    this.store.dispatch(new fromCore.Go({
+      path: ['user-office', user.user_id]
+    }));
+  }
+
 }
