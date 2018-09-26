@@ -42,7 +42,7 @@ export class EntityCountryEffects {
     map(action => action.payload),
     switchMap((country: { entity: fromModels.Country }) => {
       return this.countryService.store(country.entity).pipe(
-        map(({ data }) => new fromActions.StoreSuccessEntity(data)),
+        map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
     })
@@ -54,7 +54,7 @@ export class EntityCountryEffects {
     map(action => action.payload),
     switchMap((country: { entity: fromModels.Country }) => {
       return this.countryService.update(country.entity).pipe(
-        map(({ data }) => new fromActions.UpdateSuccessEntity(data)),
+        map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
     })
@@ -66,7 +66,7 @@ export class EntityCountryEffects {
     map(action => action.payload),
     switchMap((country: { entity: fromModels.Country }) => {
       return this.countryService.destroy(country.entity).pipe(
-        map(({ data }) => new fromActions.DestroySuccessEntity(data)),
+        map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
     })

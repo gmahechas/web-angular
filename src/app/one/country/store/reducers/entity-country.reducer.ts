@@ -26,20 +26,20 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
-      return adapter.addOne(action.payload.storeCountry, state);
+      return adapter.addOne(action.payload.entity.storeCountry, state);
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {
       return adapter.updateOne({
-        id: action.payload.updateCountry.country_id,
-        changes: action.payload.updateCountry
+        id: action.payload.entity.updateCountry.country_id,
+        changes: action.payload.entity.updateCountry
       },
         state
       );
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.destroyCountry.country_id, state);
+      return adapter.removeOne(action.payload.entity.destroyCountry.country_id, state);
     }
 
     default:

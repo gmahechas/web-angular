@@ -84,13 +84,13 @@ export class LayoutCountryEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.StoreCountry) => {
+    tap((data: { entity: fromModels.StoreCountry }) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           country: {
-            country_id: String(data.storeCountry.country_id),
-            country_name: data.storeCountry.country_name,
-            country_code: data.storeCountry.country_code,
+            country_id: String(data.entity.storeCountry.country_id),
+            country_name: data.entity.storeCountry.country_name,
+            country_code: data.entity.storeCountry.country_code,
           }
         }
       }));
@@ -101,7 +101,7 @@ export class LayoutCountryEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.UpdateCountry) => {
+    tap((data: { entity: fromModels.UpdateCountry }) => {
       this.store.dispatch(new fromCore.Go({ path: ['country'] }));
     })
   );
@@ -110,7 +110,7 @@ export class LayoutCountryEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.DestroyCountry) => {
+    tap((data: { entity: fromModels.DestroyCountry }) => {
       this.store.dispatch(new fromCore.Go({ path: ['country'] }));
     })
   );
