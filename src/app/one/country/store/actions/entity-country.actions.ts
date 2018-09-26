@@ -81,7 +81,7 @@ export class DestroyFailEntity implements Action {
 
 export class PaginateEntity implements Action {
   readonly type = EntityActionTypes.PaginateEntity;
-  constructor(public payload: number) { }
+  constructor(public payload: { page: number }) { }
 }
 
 export class LoadEntityShared implements Action {

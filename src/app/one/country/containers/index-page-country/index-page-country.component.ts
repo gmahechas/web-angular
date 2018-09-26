@@ -56,7 +56,7 @@ export class IndexPageCountryComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
