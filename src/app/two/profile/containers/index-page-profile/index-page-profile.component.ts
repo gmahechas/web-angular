@@ -40,9 +40,11 @@ export class IndexPageProfileComponent implements OnInit {
 
   onLoad(profileSearch: SearchProfile) {
     this.store.dispatch(new fromStore.LoadEntity({
-      profile: profileSearch.profile,
-      limit: 20,
-      page: 1
+      search: {
+        profile: profileSearch.profile,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -59,7 +61,7 @@ export class IndexPageProfileComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {

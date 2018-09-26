@@ -31,12 +31,14 @@ export class DropdownPageMacroprojectComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      macroproject: {
-        macroproject_id: '',
-        macroproject_name: event,
-      },
-      city: null,
-      office: null
+      search: {
+        macroproject: {
+          macroproject_id: '',
+          macroproject_name: event,
+        },
+        city: null,
+        office: null
+      }
     }));
   }
 

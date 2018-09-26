@@ -23,11 +23,11 @@ export class FormPageUserComponent implements OnInit {
   }
 
   onStore(user: User) {
-    this.store.dispatch(new fromStore.StoreEntity(user));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: user }));
   }
 
   onUpdate(user: User) {
-    this.store.dispatch(new fromStore.UpdateEntity(user));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: user }));
   }
 
   onCancel() {
@@ -37,6 +37,6 @@ export class FormPageUserComponent implements OnInit {
   }
 
   onDestroy(user: User) {
-    this.store.dispatch(new fromStore.DestroyEntity(user));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: user }));
   }
 }

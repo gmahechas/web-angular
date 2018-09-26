@@ -23,11 +23,11 @@ export class FormPageCityComponent implements OnInit {
   }
 
   onStore(city: City) {
-    this.store.dispatch(new fromStore.StoreEntity(city));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: city }));
   }
 
   onUpdate(city: City) {
-    this.store.dispatch(new fromStore.UpdateEntity(city));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: city }));
   }
 
   onCancel() {
@@ -37,6 +37,6 @@ export class FormPageCityComponent implements OnInit {
   }
 
   onDestroy(city: City) {
-    this.store.dispatch(new fromStore.DestroyEntity(city));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: city }));
   }
 }

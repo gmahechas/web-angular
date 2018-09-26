@@ -23,11 +23,11 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onStore(profile: Profile) {
-    this.store.dispatch(new fromStore.StoreEntity(profile));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: profile }));
   }
 
   onUpdate(profile: Profile) {
-    this.store.dispatch(new fromStore.UpdateEntity(profile));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: profile }));
   }
 
   onCancel() {
@@ -37,7 +37,7 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onDestroy(profile: Profile) {
-    this.store.dispatch(new fromStore.DestroyEntity(profile));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: profile }));
   }
 
   onProfileMenu(profile: Profile) {

@@ -27,11 +27,11 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.LoadSuccessEntity: {
       return {
         ...state,
-        total: action.payload.paginationUser.total,
-        perPage: action.payload.paginationUser.per_page,
-        currentPage: action.payload.paginationUser.current_page,
-        from: action.payload.paginationUser.from,
-        to: action.payload.paginationUser.to
+        total: action.payload.entities.paginationUser.total,
+        perPage: action.payload.entities.paginationUser.per_page,
+        currentPage: action.payload.entities.paginationUser.current_page,
+        from: action.payload.entities.paginationUser.from,
+        to: action.payload.entities.paginationUser.to
       };
     }
 

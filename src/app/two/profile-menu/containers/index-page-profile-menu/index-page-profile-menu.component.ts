@@ -18,8 +18,10 @@ export class IndexPageProfileMenuComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new fromStore.LoadEntity({
-      profile: {
-        profile_id: '1'
+      search: {
+        profile: {
+          profile_id: '1'
+        }
       }
     }));
   }

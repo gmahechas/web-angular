@@ -21,72 +21,72 @@ export enum EntityActionTypes {
 
 export class LoadEntity implements Action {
   readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: fromModels.SearchMacroproject) { }
+  constructor(public payload: { search: fromModels.SearchMacroproject }) { }
 }
 
 export class LoadSuccessEntity implements Action {
   readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: fromModels.PaginationMacroproject) { }
+  constructor(public payload: { entities: fromModels.PaginationMacroproject }) { }
 }
 
 export class LoadFailEntity implements Action {
   readonly type = EntityActionTypes.LoadFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class StoreEntity implements Action {
   readonly type = EntityActionTypes.StoreEntity;
-  constructor(public payload: fromModels.Macroproject) { }
+  constructor(public payload: { entity: fromModels.Macroproject }) { }
 }
 
 export class StoreSuccessEntity implements Action {
   readonly type = EntityActionTypes.StoreSuccessEntity;
-  constructor(public payload: fromModels.StoreMacroproject) { }
+  constructor(public payload: { entity: fromModels.StoreMacroproject }) { }
 }
 
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class UpdateEntity implements Action {
   readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: fromModels.Macroproject) { }
+  constructor(public payload: { entity: fromModels.Macroproject }) { }
 }
 
 export class UpdateSuccessEntity implements Action {
   readonly type = EntityActionTypes.UpdateSuccessEntity;
-  constructor(public payload: fromModels.UpdateMacroproject) { }
+  constructor(public payload: { entity: fromModels.UpdateMacroproject }) { }
 }
 
 export class UpdateFailEntity implements Action {
   readonly type = EntityActionTypes.UpdateFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class DestroyEntity implements Action {
   readonly type = EntityActionTypes.DestroyEntity;
-  constructor(public payload: fromModels.Macroproject) { }
+  constructor(public payload: { entity: fromModels.Macroproject }) { }
 }
 
 export class DestroySuccessEntity implements Action {
   readonly type = EntityActionTypes.DestroySuccessEntity;
-  constructor(public payload: fromModels.DestroyMacroproject) { }
+  constructor(public payload: { entity: fromModels.DestroyMacroproject }) { }
 }
 
 export class DestroyFailEntity implements Action {
   readonly type = EntityActionTypes.DestroyFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class PaginateEntity implements Action {
   readonly type = EntityActionTypes.PaginateEntity;
-  constructor(public payload: number) { }
+  constructor(public payload: { page: number }) { }
 }
 
 export class LoadEntityShared implements Action {
   readonly type = EntityActionTypes.LoadEntityShared;
-  constructor(public payload: fromModels.SearchMacroproject) { }
+  constructor(public payload: { search: fromModels.SearchMacroproject }) { }
 }
 
 export type EntityActions =

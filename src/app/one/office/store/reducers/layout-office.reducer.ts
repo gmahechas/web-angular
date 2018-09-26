@@ -1,7 +1,7 @@
 import { EntityActionTypes, EntityActions } from '../actions/entity-office.actions';
 
 export interface State {
-  error: string;
+  error: any;
 }
 
 const initialState: State = {
@@ -15,9 +15,10 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.StoreFailEntity:
     case EntityActionTypes.UpdateFailEntity:
     case EntityActionTypes.DestroyFailEntity: {
+      console.log(action.payload.error);
       return {
         ...state,
-        error: action.payload
+        error: action.payload.error
       };
     }
 

@@ -84,12 +84,14 @@ export class LayoutPersonEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.StorePerson) => {
+    tap((data: { entity: fromModels.StorePerson }) => {
       this.store.dispatch(new fromActions.LoadEntity({
-        person: {
-          person_id: String(data.storePerson.person_id),
-          person_identification: data.storePerson.person_identification,
-          person_names: ''
+        search: {
+          person: {
+            person_id: String(data.entity.storePerson.person_id),
+            person_identification: data.entity.storePerson.person_identification,
+            person_names: ''
+          }
         }
       }));
     })
@@ -99,7 +101,7 @@ export class LayoutPersonEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.UpdatePerson) => {
+    tap((data: { entity: fromModels.UpdatePerson }) => {
       this.store.dispatch(new fromCore.Go({ path: ['person'] }));
     })
   );
@@ -108,7 +110,7 @@ export class LayoutPersonEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.DestroyPerson) => {
+    tap((data: { entity: fromModels.DestroyPerson }) => {
       this.store.dispatch(new fromCore.Go({ path: ['person'] }));
     })
   );

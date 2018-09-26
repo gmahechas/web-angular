@@ -17,11 +17,11 @@ export class EntityProfileMenuEffects {
   loadEntity$ = this.actions$.pipe(
     ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
     map(action => action.payload),
-    switchMap((searchProfileMenu: fromModels.SearchProfileMenu) => {
-      return this.profileMenuService.load(searchProfileMenu).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+    switchMap(({ search }: { search: fromModels.SearchProfileMenu }) => {
+      return this.profileMenuService.load(search).pipe(
+        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
-          return of(new fromActions.LoadFailEntity(errors));
+          return of(new fromActions.LoadFailEntity({ error: errors }));
         })
       );
     })

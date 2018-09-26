@@ -31,13 +31,15 @@ export class DropdownPageUserComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      user: {
-        user_id: null,
-        username: event,
-        email: null
-      },
-      person: null,
-      profile: null
+      search: {
+        user: {
+          user_id: null,
+          username: event,
+          email: null
+        },
+        person: null,
+        profile: null
+      }
     }));
   }
 

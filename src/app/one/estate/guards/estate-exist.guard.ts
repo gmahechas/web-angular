@@ -45,12 +45,14 @@ export class EstateExistGuard implements CanActivate {
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadEntity({
-            estate: {
-              estate_id: estate_id,
-              estate_name: '',
-              estate_code: ''
-            },
-            country: null
+            search: {
+              estate: {
+                estate_id: estate_id,
+                estate_name: '',
+                estate_code: ''
+              },
+              country: null
+            }
           }));
         }
       }),

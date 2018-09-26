@@ -23,11 +23,11 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onStore(office: Office) {
-    this.store.dispatch(new fromStore.StoreEntity(office));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: office }));
   }
 
   onUpdate(office: Office) {
-    this.store.dispatch(new fromStore.UpdateEntity(office));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: office }));
   }
 
   onCancel() {
@@ -37,6 +37,6 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onDestroy(office: Office) {
-    this.store.dispatch(new fromStore.DestroyEntity(office));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: office }));
   }
 }

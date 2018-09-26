@@ -23,11 +23,11 @@ export class FormPageMacroprojectComponent implements OnInit {
   }
 
   onStore(macroproject: Macroproject) {
-    this.store.dispatch(new fromStore.StoreEntity(macroproject));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: macroproject }));
   }
 
   onUpdate(macroproject: Macroproject) {
-    this.store.dispatch(new fromStore.UpdateEntity(macroproject));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: macroproject }));
   }
 
   onCancel() {
@@ -37,6 +37,6 @@ export class FormPageMacroprojectComponent implements OnInit {
   }
 
   onDestroy(macroproject: Macroproject) {
-    this.store.dispatch(new fromStore.DestroyEntity(macroproject));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: macroproject }));
   }
 }

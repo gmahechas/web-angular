@@ -17,11 +17,11 @@ export class EntityUserOfficeEffects {
   loadEntity$ = this.actions$.pipe(
     ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
     map(action => action.payload),
-    switchMap((searchUserOffice: fromModels.SearchUserOffice) => {
-      return this.userOfficeService.load(searchUserOffice).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+    switchMap(({ search }: { search: fromModels.SearchUserOffice }) => {
+      return this.userOfficeService.load(search).pipe(
+        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
-          return of(new fromActions.LoadFailEntity(errors));
+          return of(new fromActions.LoadFailEntity({ error: errors }));
         })
       );
     })

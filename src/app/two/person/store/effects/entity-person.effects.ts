@@ -24,13 +24,13 @@ export class EntityPersonEffects {
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getCurrentPage))
     ),
-    switchMap(([searchPerson, perPage, currentPage]: [fromModels.SearchPerson, number, number]) => {
-      perPage = (perPage) ? perPage : searchPerson.limit;
-      currentPage = (currentPage) ? currentPage : searchPerson.page;
-      return this.personService.load({ ...searchPerson, limit: perPage, page: currentPage }).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+    switchMap(([{ search }, perPage, currentPage]: [{ search: fromModels.SearchPerson }, number, number]) => {
+      perPage = (perPage) ? perPage : search.limit;
+      currentPage = (currentPage) ? currentPage : search.page;
+      return this.personService.load({ ...search, limit: perPage, page: currentPage }).pipe(
+        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
-          return of(new fromActions.LoadFailEntity(errors));
+          return of(new fromActions.LoadFailEntity({ error: errors }));
         })
       );
     })
@@ -40,10 +40,10 @@ export class EntityPersonEffects {
   storeEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
     map(action => action.payload),
-    switchMap((person: fromModels.Person) => {
-      return this.personService.store(person).pipe(
-        map(({ data }) => new fromActions.StoreSuccessEntity(data)),
-        catchError((errors) => of(new fromActions.StoreFailEntity(errors)))
+    switchMap(({ entity }: { entity: fromModels.Person }) => {
+      return this.personService.store(entity).pipe(
+        map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
+        catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
     })
   );
@@ -52,10 +52,10 @@ export class EntityPersonEffects {
   updateEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
     map(action => action.payload),
-    switchMap((person: fromModels.Person) => {
-      return this.personService.update(person).pipe(
-        map(({ data }) => new fromActions.UpdateSuccessEntity(data)),
-        catchError((errors) => of(new fromActions.UpdateFailEntity(errors)))
+    switchMap(({ entity }: { entity: fromModels.Person }) => {
+      return this.personService.update(entity).pipe(
+        map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
+        catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
     })
   );
@@ -64,10 +64,10 @@ export class EntityPersonEffects {
   destroyEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
     map(action => action.payload),
-    switchMap((person: fromModels.Person) => {
-      return this.personService.destroy(person).pipe(
-        map(({ data }) => new fromActions.DestroySuccessEntity(data)),
-        catchError((errors) => of(new fromActions.DestroyFailEntity(errors)))
+    switchMap(({ entity }: { entity: fromModels.Person }) => {
+      return this.personService.destroy(entity).pipe(
+        map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
+        catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
     })
   );
@@ -80,10 +80,10 @@ export class EntityPersonEffects {
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getQuery))
     ),
-    switchMap(([currentPage, perPage, searchPerson]: [number, number, fromModels.SearchPerson]) => {
-      return from(this.personService.pagination({ ...searchPerson, limit: perPage, page: currentPage })).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity(data)),
-        catchError((errors) => of(new fromActions.LoadFailEntity(errors)))
+    switchMap(([{ page }, perPage, searchPerson]: [{ page: number }, number, fromModels.SearchPerson]) => {
+      return from(this.personService.pagination({ ...searchPerson, limit: perPage, page: page })).pipe(
+        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );
@@ -94,8 +94,8 @@ export class EntityPersonEffects {
       ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
       map(action => action.payload),
-      switchMap((searchPerson: fromModels.SearchPerson) => {
-        if (searchPerson === '') {
+      switchMap(({ search }: { search: fromModels.SearchPerson }) => {
+        if (search === '') {
           return EMPTY;
         }
 
@@ -104,11 +104,11 @@ export class EntityPersonEffects {
           skip(1)
         );
 
-        return this.personService.load({ ...searchPerson, limit: 20, page: 1 }).pipe(
+        return this.personService.load({ ...search, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromActions.LoadSuccessEntity(data)),
+          map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {
-            return of(new fromActions.LoadFailEntity(errors));
+            return of(new fromActions.LoadFailEntity({ error: errors }));
           })
         );
 

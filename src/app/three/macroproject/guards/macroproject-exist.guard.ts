@@ -45,12 +45,14 @@ export class MacroprojectExistGuard implements CanActivate {
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadEntity({
-            macroproject: {
-              macroproject_id: macroproject_id,
-              macroproject_name: '',
-            },
-            city: null,
-            office: null
+            search: {
+              macroproject: {
+                macroproject_id: macroproject_id,
+                macroproject_name: '',
+              },
+              city: null,
+              office: null
+            }
           }));
         }
       }),

@@ -43,10 +43,12 @@ export class IndexPageCityComponent implements OnInit {
 
   onLoad(citySearch: SearchCity) {
     this.store.dispatch(new fromStore.LoadEntity({
-      city: citySearch.city,
-      estate: citySearch.estate,
-      limit: 20,
-      page: 1
+      search: {
+        city: citySearch.city,
+        estate: citySearch.estate,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -63,7 +65,7 @@ export class IndexPageCityComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {

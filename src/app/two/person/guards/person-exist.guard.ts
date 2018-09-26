@@ -45,10 +45,12 @@ export class PersonExistGuard implements CanActivate {
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadEntity({
-            person: {
-              person_id: person_id,
-              person_identification: '',
-              person_names: ''
+            search: {
+              person: {
+                person_id: person_id,
+                person_identification: '',
+                person_names: ''
+              }
             }
           }));
         }

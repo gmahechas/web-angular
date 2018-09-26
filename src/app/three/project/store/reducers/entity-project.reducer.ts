@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: EntityActions): State {
   switch (action.type) {
 
     case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.paginationProject.data, state);
+      return adapter.addAll(action.payload.entities.paginationProject.data, state);
     }
 
     case EntityActionTypes.LoadFailEntity: {
@@ -26,20 +26,20 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
-      return adapter.addOne(action.payload.storeProject, state);
+      return adapter.addOne(action.payload.entity.storeProject, state);
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {
       return adapter.updateOne({
-        id: action.payload.updateProject.project_id,
-        changes: action.payload.updateProject
+        id: action.payload.entity.updateProject.project_id,
+        changes: action.payload.entity.updateProject
       },
         state
       );
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.destroyProject.project_id, state);
+      return adapter.removeOne(action.payload.entity.destroyProject.project_id, state);
     }
 
     default:

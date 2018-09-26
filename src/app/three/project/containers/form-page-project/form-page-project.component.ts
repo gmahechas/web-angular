@@ -23,11 +23,11 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onStore(project: Project) {
-    this.store.dispatch(new fromStore.StoreEntity(project));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: project }));
   }
 
   onUpdate(project: Project) {
-    this.store.dispatch(new fromStore.UpdateEntity(project));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: project }));
   }
 
   onCancel() {
@@ -37,6 +37,6 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onDestroy(project: Project) {
-    this.store.dispatch(new fromStore.DestroyEntity(project));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: project }));
   }
 }

@@ -11,7 +11,7 @@ import gql from 'graphql-tag';
 })
 export class OfficeDestroyGQL extends Mutation<DestroyOffice> {
 
-dicument: DocumentNode = gql`
+document: DocumentNode = gql`
   mutation destroyOffice($office_id: ID!) {
     destroyOffice(office_id: $office_id) {
       office_id

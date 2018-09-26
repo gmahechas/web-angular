@@ -43,10 +43,12 @@ export class IndexPageProjectComponent implements OnInit {
 
   onLoad(projectSearch: SearchProject) {
     this.store.dispatch(new fromStore.LoadEntity({
-      project: projectSearch.project,
-      macroproject: projectSearch.macroproject,
-      limit: 20,
-      page: 1
+      search: {
+        project: projectSearch.project,
+        macroproject: projectSearch.macroproject,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -63,7 +65,7 @@ export class IndexPageProjectComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {

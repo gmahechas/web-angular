@@ -31,12 +31,14 @@ export class DropdownPageEstateComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      estate: {
-        estate_id: null,
-        estate_name: event,
-        estate_code: ''
-      },
-      country: null
+      search: {
+        estate: {
+          estate_id: null,
+          estate_name: event,
+          estate_code: ''
+        },
+        country: null
+      }
     }));
   }
 

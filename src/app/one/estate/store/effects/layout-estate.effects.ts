@@ -84,14 +84,16 @@ export class LayoutEstateEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.StoreEstate) => {
+    tap((data: { entity: fromModels.StoreEstate }) => {
       this.store.dispatch(new fromActions.LoadEntity({
-        estate: {
-          estate_id: String(data.storeEstate.estate_id),
-          estate_name: data.storeEstate.estate_name,
-          estate_code: data.storeEstate.estate_code
-        },
-        country: data.storeEstate.country
+        search: {
+          estate: {
+            estate_id: String(data.entity.storeEstate.estate_id),
+            estate_name: data.entity.storeEstate.estate_name,
+            estate_code: data.entity.storeEstate.estate_code
+          },
+          country: data.entity.storeEstate.country
+        }
       }));
     })
   );
@@ -100,7 +102,7 @@ export class LayoutEstateEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.UpdateEstate) => {
+    tap((data: { entity: fromModels.UpdateEstate }) => {
       this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );
@@ -109,7 +111,7 @@ export class LayoutEstateEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: fromModels.DestroyEstate) => {
+    tap((data: { entity: fromModels.DestroyEstate }) => {
       this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );

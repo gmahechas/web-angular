@@ -10,17 +10,17 @@ export enum EntityActionTypes {
 
 export class LoadEntity implements Action {
   readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: fromModels.SearchUserOffice) { }
+  constructor(public payload: { search: fromModels.SearchUserOffice }) { }
 }
 
 export class LoadSuccessEntity implements Action {
   readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: fromModels.PaginationUserOffice) { }
+  constructor(public payload: { entities: fromModels.PaginationUserOffice }) { }
 }
 
 export class LoadFailEntity implements Action {
   readonly type = EntityActionTypes.LoadFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export type EntityActions =

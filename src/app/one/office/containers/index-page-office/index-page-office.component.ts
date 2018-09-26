@@ -41,10 +41,12 @@ export class IndexPageOfficeComponent implements OnInit {
 
   onLoad(officeSearch: SearchOffice) {
     this.store.dispatch(new fromStore.LoadEntity({
-      office: officeSearch.office,
-      city: officeSearch.city,
-      limit: 20,
-      page: 1
+      search: {
+        office: officeSearch.office,
+        city: officeSearch.city,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -61,7 +63,7 @@ export class IndexPageOfficeComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {

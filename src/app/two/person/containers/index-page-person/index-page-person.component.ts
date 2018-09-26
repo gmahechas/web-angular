@@ -52,9 +52,11 @@ export class IndexPagePersonComponent implements OnInit {
 
   onLoad(personSearch: SearchPerson) {
     this.store.dispatch(new fromStore.LoadEntity({
-      person: personSearch.person,
-      limit: 20,
-      page: 1
+      search: {
+        person: personSearch.person,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -71,7 +73,7 @@ export class IndexPagePersonComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {

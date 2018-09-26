@@ -44,11 +44,13 @@ export class IndexPageMacroprojectComponent implements OnInit {
 
   onLoad(macroprojectSearch: SearchMacroproject) {
     this.store.dispatch(new fromStore.LoadEntity({
-      macroproject: macroprojectSearch.macroproject,
-      city: macroprojectSearch.city,
-      office: macroprojectSearch.office,
-      limit: 20,
-      page: 1
+      search: {
+        macroproject: macroprojectSearch.macroproject,
+        city: macroprojectSearch.city,
+        office: macroprojectSearch.office,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -65,7 +67,7 @@ export class IndexPageMacroprojectComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {

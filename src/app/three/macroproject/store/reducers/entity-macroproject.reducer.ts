@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: EntityActions): State {
   switch (action.type) {
 
     case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.paginationMacroproject.data, state);
+      return adapter.addAll(action.payload.entities.paginationMacroproject.data, state);
     }
 
     case EntityActionTypes.LoadFailEntity: {
@@ -26,20 +26,20 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
-      return adapter.addOne(action.payload.storeMacroproject, state);
+      return adapter.addOne(action.payload.entity.storeMacroproject, state);
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {
       return adapter.updateOne({
-        id: action.payload.updateMacroproject.macroproject_id,
-        changes: action.payload.updateMacroproject
+        id: action.payload.entity.updateMacroproject.macroproject_id,
+        changes: action.payload.entity.updateMacroproject
       },
         state
       );
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.destroyMacroproject.macroproject_id, state);
+      return adapter.removeOne(action.payload.entity.destroyMacroproject.macroproject_id, state);
     }
 
     default:

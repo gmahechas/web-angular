@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: EntityActions): State {
   switch (action.type) {
 
     case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.paginationUserOffice.data, state);
+      return adapter.addAll(action.payload.entities.paginationUserOffice.data, state);
     }
 
     case EntityActionTypes.LoadFailEntity: {

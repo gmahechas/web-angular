@@ -45,12 +45,14 @@ export class CityExistGuard implements CanActivate {
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadEntity({
-            city: {
-              city_id: city_id,
-              city_name: '',
-              city_code: ''
-            },
-            estate: null
+            search: {
+              city: {
+                city_id: city_id,
+                city_name: '',
+                city_code: ''
+              },
+              estate: null
+            }
           }));
         }
       }),

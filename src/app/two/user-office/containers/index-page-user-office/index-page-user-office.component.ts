@@ -18,8 +18,10 @@ export class IndexPageUserOfficeComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new fromStore.LoadEntity({
-      user: {
-        user_id: '1'
+      search: {
+        user: {
+          user_id: '1'
+        }
       }
     }));
   }

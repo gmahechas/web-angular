@@ -45,13 +45,15 @@ export class UserExistGuard implements CanActivate {
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadEntity({
-            user: {
-              user_id: user_id,
-              username: '',
-              email: ''
-            },
-            person: null,
-            profile: null
+            search: {
+              user: {
+                user_id: user_id,
+                username: '',
+                email: ''
+              },
+              person: null,
+              profile: null
+            }
           }));
         }
       }),

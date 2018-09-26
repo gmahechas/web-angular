@@ -23,11 +23,11 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onStore(estate: Estate) {
-    this.store.dispatch(new fromStore.StoreEntity(estate));
+    this.store.dispatch(new fromStore.StoreEntity({ entity: estate }));
   }
 
   onUpdate(estate: Estate) {
-    this.store.dispatch(new fromStore.UpdateEntity(estate));
+    this.store.dispatch(new fromStore.UpdateEntity({ entity: estate }));
   }
 
   onCancel() {
@@ -37,7 +37,7 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onDestroy(estate: Estate) {
-    this.store.dispatch(new fromStore.DestroyEntity(estate));
+    this.store.dispatch(new fromStore.DestroyEntity({ entity: estate }));
   }
 
 }

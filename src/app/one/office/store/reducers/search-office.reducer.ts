@@ -26,7 +26,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: action.payload
+        query: action.payload.search
       };
     }
 

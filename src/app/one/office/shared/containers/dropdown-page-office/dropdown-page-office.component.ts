@@ -31,11 +31,13 @@ export class DropdownPageOfficeComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      office: {
-        office_id: '',
-        office_name: event
-      },
-      city: null
+      search: {
+        office: {
+          office_id: '',
+          office_name: event
+        },
+        city: null
+      }
     }));
   }
 

@@ -21,8 +21,8 @@ export function createApollo(httpLink: HttpLink) {
   const link = httpLink.create({ uri: environment.apilUrl + environment.graphqlUrl });
   return {
     link: from([
-      tokenMiddleware,
-      errorMiddleware,
+/*       tokenMiddleware,
+      errorMiddleware, */
       link
     ]),
     cache: new InMemoryCache({

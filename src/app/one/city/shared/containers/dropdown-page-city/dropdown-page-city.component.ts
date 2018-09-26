@@ -31,12 +31,14 @@ export class DropdownPageCityComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      city: {
-        city_id: null,
-        city_name: event,
-        city_code: ''
-      },
-      estate: null
+      search: {
+        city: {
+          city_id: null,
+          city_name: event,
+          city_code: ''
+        },
+        estate: null
+      }
     }));
   }
 

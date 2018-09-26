@@ -45,9 +45,11 @@ export class ProfileExistGuard implements CanActivate {
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadEntity({
-            profile: {
-              profile_id: profile_id,
-              profile_name: ''
+            search: {
+              profile: {
+                profile_id: profile_id,
+                profile_name: ''
+              }
             }
           }));
         }

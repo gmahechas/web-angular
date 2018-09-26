@@ -31,9 +31,11 @@ export class DropdownPageProfileComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      profile: {
-        profile_id: null,
-        profile_name: event
+      search: {
+        profile: {
+          profile_id: null,
+          profile_name: event
+        }
       }
     }));
   }

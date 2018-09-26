@@ -17,7 +17,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
-        error: action.payload
+        error: action.payload.error
       };
     }
 

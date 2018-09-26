@@ -42,10 +42,12 @@ export class IndexPageEstateComponent implements OnInit {
 
   onLoad(estateSearch: SearchEstate) {
     this.store.dispatch(new fromStore.LoadEntity({
-      estate: estateSearch.estate,
-      country: estateSearch.country,
-      limit: 20,
-      page: 1
+      search: {
+        estate: estateSearch.estate,
+        country: estateSearch.country,
+        limit: 20,
+        page: 1
+      }
     }));
   }
 
@@ -62,7 +64,7 @@ export class IndexPageEstateComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity(event.page + 1));
+    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
