@@ -21,7 +21,7 @@ export enum EntityActionTypes {
 
 export class LoadEntity implements Action {
   readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: fromModels.SearchCountry) { }
+  constructor(public payload: { search: fromModels.SearchCountry }) { }
 }
 
 export class LoadSuccessEntity implements Action {
@@ -86,7 +86,7 @@ export class PaginateEntity implements Action {
 
 export class LoadEntityShared implements Action {
   readonly type = EntityActionTypes.LoadEntityShared;
-  constructor(public payload: fromModels.SearchCountry) { }
+  constructor(public payload: { search: fromModels.SearchCountry }) { }
 }
 
 export type EntityActions =

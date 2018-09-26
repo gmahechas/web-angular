@@ -40,7 +40,7 @@ export class IndexPageCountryComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(countrySearch: SearchCountry) {
-    this.store.dispatch(new fromStore.LoadEntity({ country: countrySearch.country, limit: 20, page: 1 }));
+    this.store.dispatch(new fromStore.LoadEntity({ search: { country: countrySearch.country, limit: 20, page: 1 } }));
   }
 
   onCreate() {

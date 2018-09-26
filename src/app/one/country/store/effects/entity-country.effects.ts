@@ -24,10 +24,10 @@ export class EntityCountryEffects {
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getCurrentPage))
     ),
-    switchMap(([searchCountry, perPage, currentPage]: [fromModels.SearchCountry, number, number]) => {
-      perPage = (perPage) ? perPage : searchCountry.limit;
-      currentPage = (currentPage) ? currentPage : searchCountry.page;
-      return this.countryService.load({ ...searchCountry, limit: perPage, page: currentPage }).pipe(
+    switchMap(([searchCountry, perPage, currentPage]: [{ search: fromModels.SearchCountry }, number, number]) => {
+      perPage = (perPage) ? perPage : searchCountry.search.limit;
+      currentPage = (currentPage) ? currentPage : searchCountry.search.page;
+      return this.countryService.load({ ...searchCountry.search, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity(data)),
         catchError((errors) => {
           return of(new fromActions.LoadFailEntity(errors));
@@ -95,7 +95,7 @@ export class EntityCountryEffects {
       ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
       map(action => action.payload),
-      switchMap((searchCountry: fromModels.SearchCountry) => {
+      switchMap((searchCountry: { search: fromModels.SearchCountry }) => {
         if (searchCountry === '') {
           return EMPTY;
         }
@@ -105,7 +105,7 @@ export class EntityCountryEffects {
           skip(1)
         );
 
-        return this.countryService.load({ ...searchCountry, limit: 20, page: 1 }).pipe(
+        return this.countryService.load({ ...searchCountry.search, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity(data)),
           catchError((errors) => {

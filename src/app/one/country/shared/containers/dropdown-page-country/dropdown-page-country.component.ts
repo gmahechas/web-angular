@@ -31,10 +31,12 @@ export class DropdownPageCountryComponent implements OnInit {
 
   keyUp(event) {
     this.store.dispatch(new fromStore.LoadEntityShared({
-      country: {
-        country_id: null,
-        country_name: event,
-        country_code: ''
+      search: {
+        country: {
+          country_id: null,
+          country_name: event,
+          country_code: ''
+        }
       }
     }));
   }

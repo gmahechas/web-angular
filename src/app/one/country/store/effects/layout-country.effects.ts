@@ -86,10 +86,12 @@ export class LayoutCountryEffects {
     map(action => action.payload),
     tap((data: fromModels.StoreCountry) => {
       this.store.dispatch(new fromActions.LoadEntity({
-        country: {
-          country_id: String(data.storeCountry.country_id),
-          country_name: data.storeCountry.country_name,
-          country_code: data.storeCountry.country_code,
+        search: {
+          country: {
+            country_id: String(data.storeCountry.country_id),
+            country_name: data.storeCountry.country_name,
+            country_code: data.storeCountry.country_code,
+          }
         }
       }));
     })
