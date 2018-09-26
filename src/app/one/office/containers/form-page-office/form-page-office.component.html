@@ -1,10 +1,10 @@
 <app-form-office *ngIf="!(office$ | async) as office" (submitted)="onStore($event)">
-    <div class="form-title">Agregar Oficina</div>
+    <div class="form-title">Agregar Sucursal</div>
     <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
   </app-form-office>
 
   <app-form-office *ngIf="(office$ | async) as office" (submitted)="onUpdate($event)" [office]="office">
-    <div class="form-title">Editar Oficina</div>
+    <div class="form-title">Editar Sucursal</div>
     <app-button-shared [type]="'button'" [label]="'Eliminar'" [class]="'ui-button-secondary'" (click)="onDestroy(office)"></app-button-shared>
     <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
     <app-button-shared [type]="'button'" [label]="'Usuarios'" [class]="'ui-button-secondary'" (click)="onUserOffice(office)"></app-button-shared>
