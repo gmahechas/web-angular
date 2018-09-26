@@ -40,8 +40,8 @@ export class EntityCountryEffects {
   storeEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
     map(action => action.payload),
-    switchMap((country: fromModels.Country) => {
-      return this.countryService.store(country).pipe(
+    switchMap((country: { entity: fromModels.Country }) => {
+      return this.countryService.store(country.entity).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity(data)),
         catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
@@ -52,8 +52,8 @@ export class EntityCountryEffects {
   updateEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
     map(action => action.payload),
-    switchMap((country: fromModels.Country) => {
-      return this.countryService.update(country).pipe(
+    switchMap((country: { entity: fromModels.Country }) => {
+      return this.countryService.update(country.entity).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity(data)),
         catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
@@ -64,8 +64,8 @@ export class EntityCountryEffects {
   destroyEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
     map(action => action.payload),
-    switchMap((country: fromModels.Country) => {
-      return this.countryService.destroy(country).pipe(
+    switchMap((country: { entity: fromModels.Country }) => {
+      return this.countryService.destroy(country.entity).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity(data)),
         catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );

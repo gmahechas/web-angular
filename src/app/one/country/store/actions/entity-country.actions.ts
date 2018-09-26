@@ -36,7 +36,7 @@ export class LoadFailEntity implements Action {
 
 export class StoreEntity implements Action {
   readonly type = EntityActionTypes.StoreEntity;
-  constructor(public payload: fromModels.Country) { }
+  constructor(public payload: { entity: fromModels.Country }) { }
 }
 
 export class StoreSuccessEntity implements Action {
@@ -51,7 +51,7 @@ export class StoreFailEntity implements Action {
 
 export class UpdateEntity implements Action {
   readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: fromModels.Country) { }
+  constructor(public payload: { entity: fromModels.Country }) { }
 }
 
 export class UpdateSuccessEntity implements Action {
@@ -66,7 +66,7 @@ export class UpdateFailEntity implements Action {
 
 export class DestroyEntity implements Action {
   readonly type = EntityActionTypes.DestroyEntity;
-  constructor(public payload: fromModels.Country) { }
+  constructor(public payload: { entity: fromModels.Country }) { }
 }
 
 export class DestroySuccessEntity implements Action {
