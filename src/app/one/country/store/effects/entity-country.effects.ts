@@ -30,7 +30,7 @@ export class EntityCountryEffects {
       return this.countryService.load({ ...searchCountry.search, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
-          return of(new fromActions.LoadFailEntity(errors));
+          return of(new fromActions.LoadFailEntity({ error: errors }));
         })
       );
     })
@@ -43,7 +43,7 @@ export class EntityCountryEffects {
     switchMap((country: fromModels.Country) => {
       return this.countryService.store(country).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity(data)),
-        catchError((errors) => of(new fromActions.StoreFailEntity(errors)))
+        catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
     })
   );
@@ -55,7 +55,7 @@ export class EntityCountryEffects {
     switchMap((country: fromModels.Country) => {
       return this.countryService.update(country).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity(data)),
-        catchError((errors) => of(new fromActions.UpdateFailEntity(errors)))
+        catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
     })
   );
@@ -67,7 +67,7 @@ export class EntityCountryEffects {
     switchMap((country: fromModels.Country) => {
       return this.countryService.destroy(country).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity(data)),
-        catchError((errors) => of(new fromActions.DestroyFailEntity(errors)))
+        catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
     })
   );
@@ -84,7 +84,7 @@ export class EntityCountryEffects {
 
       return this.countryService.pagination({ ...searchCountry, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromActions.LoadFailEntity(errors)))
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );
@@ -109,7 +109,7 @@ export class EntityCountryEffects {
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {
-            return of(new fromActions.LoadFailEntity(errors));
+            return of(new fromActions.LoadFailEntity({ error: errors }));
           })
         );
 

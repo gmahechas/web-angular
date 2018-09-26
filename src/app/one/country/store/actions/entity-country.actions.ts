@@ -31,7 +31,7 @@ export class LoadSuccessEntity implements Action {
 
 export class LoadFailEntity implements Action {
   readonly type = EntityActionTypes.LoadFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class StoreEntity implements Action {
@@ -46,7 +46,7 @@ export class StoreSuccessEntity implements Action {
 
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -61,7 +61,7 @@ export class UpdateSuccessEntity implements Action {
 
 export class UpdateFailEntity implements Action {
   readonly type = EntityActionTypes.UpdateFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class DestroyEntity implements Action {
@@ -76,7 +76,7 @@ export class DestroySuccessEntity implements Action {
 
 export class DestroyFailEntity implements Action {
   readonly type = EntityActionTypes.DestroyFailEntity;
-  constructor(public payload: any) { }
+  constructor(public payload: { error: any }) { }
 }
 
 export class PaginateEntity implements Action {
