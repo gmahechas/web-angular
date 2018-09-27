@@ -10,7 +10,7 @@ import * as fromModels from './../../models';
 
 import { CountryService } from '../../services/country.service';
 
-import { of, asyncScheduler, EMPTY, Observable } from 'rxjs';
+import { of, asyncScheduler, EMPTY, Observable, from } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
 
 @Injectable()
@@ -81,7 +81,7 @@ export class EntityCountryEffects {
       this.store.pipe(select(fromSelectors.getQuery))
     ),
     switchMap(([{ page }, perPage, searchCountry]: [{ page: number }, number, fromModels.SearchCountry]) => {
-      return this.countryService.pagination({ ...searchCountry, limit: perPage, page: page }).pipe(
+      return from(this.countryService.pagination({ ...searchCountry, limit: perPage, page: page })).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
@@ -95,7 +95,7 @@ export class EntityCountryEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload),
       switchMap(({ search }: { search: fromModels.SearchCountry }) => {
-        if (search === '' ) {
+        if (search === '') {
           return EMPTY;
         }
 
