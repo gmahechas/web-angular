@@ -84,15 +84,15 @@ export class LayoutMacroprojectEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.StoreMacroproject }) => {
+    tap(({ entity }: { entity: fromModels.StoreMacroproject }) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           macroproject: {
-            macroproject_id: String(data.entity.storeMacroproject.macroproject_id),
-            macroproject_name: data.entity.storeMacroproject.macroproject_name
+            macroproject_id: String(entity.storeMacroproject.macroproject_id),
+            macroproject_name: entity.storeMacroproject.macroproject_name
           },
-          city: data.entity.storeMacroproject.city,
-          office: data.entity.storeMacroproject.office
+          city: entity.storeMacroproject.city,
+          office: entity.storeMacroproject.office
         }
       }));
     })
@@ -102,7 +102,7 @@ export class LayoutMacroprojectEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.UpdateMacroproject }) => {
+    tap(({ entity }: { entity: fromModels.UpdateMacroproject }) => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
     })
   );
@@ -111,7 +111,7 @@ export class LayoutMacroprojectEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.DestroyMacroproject }) => {
+    tap(({ entity }: { entity: fromModels.DestroyMacroproject }) => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
     })
   );

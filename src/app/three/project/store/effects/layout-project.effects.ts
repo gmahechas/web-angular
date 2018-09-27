@@ -84,14 +84,14 @@ export class LayoutProjectEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.StoreProject }) => {
+    tap(({ entity }: { entity: fromModels.StoreProject }) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           project: {
-            project_id: String(data.entity.storeProject.project_id),
-            project_name: data.entity.storeProject.project_name
+            project_id: String(entity.storeProject.project_id),
+            project_name: entity.storeProject.project_name
           },
-          macroproject: data.entity.storeProject.macroproject
+          macroproject: entity.storeProject.macroproject
         }
       }));
     })
@@ -101,7 +101,7 @@ export class LayoutProjectEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.UpdateProject }) => {
+    tap(({ entity }: { entity: fromModels.UpdateProject }) => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));
     })
   );
@@ -110,7 +110,7 @@ export class LayoutProjectEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.DestroyProject }) => {
+    tap(({ entity }: { entity: fromModels.DestroyProject }) => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));
     })
   );

@@ -84,14 +84,14 @@ export class LayoutOfficeEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.StoreOffice }) => {
+    tap(({ entity }: { entity: fromModels.StoreOffice }) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           office: {
-            office_id: String(data.entity.storeOffice.office_id),
-            office_name: data.entity.storeOffice.office_name
+            office_id: String(entity.storeOffice.office_id),
+            office_name: entity.storeOffice.office_name
           },
-          city: data.entity.storeOffice.city
+          city: entity.storeOffice.city
         }
       }));
     })
@@ -101,7 +101,7 @@ export class LayoutOfficeEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.UpdateOffice }) => {
+    tap(({ entity }: { entity: fromModels.UpdateOffice }) => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));
     })
   );
@@ -110,7 +110,7 @@ export class LayoutOfficeEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.DestroyOffice }) => {
+    tap(({ entity }: { entity: fromModels.DestroyOffice }) => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));
     })
   );

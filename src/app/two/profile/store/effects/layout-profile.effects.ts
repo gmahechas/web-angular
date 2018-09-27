@@ -84,12 +84,12 @@ export class LayoutProfileEffects {
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.StoreProfile }) => {
+    tap(({ entity }: { entity: fromModels.StoreProfile }) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           profile: {
-            profile_id: String(data.entity.storeProfile.profile_id),
-            profile_name: data.entity.storeProfile.profile_name
+            profile_id: String(entity.storeProfile.profile_id),
+            profile_name: entity.storeProfile.profile_name
           }
         }
       }));
@@ -100,7 +100,7 @@ export class LayoutProfileEffects {
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.UpdateProfile }) => {
+    tap(({ entity }: { entity: fromModels.UpdateProfile }) => {
       this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
     })
   );
@@ -109,7 +109,7 @@ export class LayoutProfileEffects {
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     map(action => action.payload),
-    tap((data: { entity: fromModels.DestroyProfile }) => {
+    tap(({ entity }: { entity: fromModels.DestroyProfile }) => {
       this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
     })
   );

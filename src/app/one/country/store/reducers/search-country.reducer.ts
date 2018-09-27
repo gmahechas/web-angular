@@ -11,8 +11,8 @@ const initialState: State = {
   query: {
     country: {
       country_id: '',
-      country_code: '',
-      country_name: ''
+      country_name: '',
+      country_code: ''
     }
   }
 };
