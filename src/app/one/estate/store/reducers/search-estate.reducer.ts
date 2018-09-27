@@ -27,7 +27,10 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: action.payload.search
+        query: {
+          estate: action.payload.search.estate,
+          country: action.payload.search.country
+        }
       };
     }
 
