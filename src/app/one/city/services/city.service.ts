@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -9,6 +10,8 @@ import * as fromModels from './../models';
 })
 export class CityService {
 
+  queryRef: QueryRef<fromModels.PaginationCity>;
+
   constructor(
     private cityPagination: fromGraphql.CityPaginationGQL,
     private cityStoreGQL: fromGraphql.CityStoreGQL,
@@ -17,12 +20,14 @@ export class CityService {
   ) { }
 
   load(searchCity: fromModels.SearchCity) {
-    return this.cityPagination.watch({
+    this.queryRef = this.cityPagination.watch({
       ...searchCity.city,
       estate_id: (searchCity.estate) ? searchCity.estate.estate_id : null,
       limit: searchCity.limit,
       page: searchCity.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(city: fromModels.City) {
@@ -38,11 +43,21 @@ export class CityService {
   }
 
   pagination(searchCity: fromModels.SearchCity) {
-    return this.cityPagination.fetch({
-      ...searchCity.city,
-      estate_id: (searchCity.estate) ? searchCity.estate.estate_id : null,
-      limit: searchCity.limit,
-      page: searchCity.page
+
+    return this.queryRef.fetchMore({
+      query: this.cityPagination.document,
+      variables: {
+        city_id: searchCity.city.city_id,
+        city_name: searchCity.city.city_name,
+        city_code: searchCity.city.city_code,
+        estate_id: (searchCity.estate) ? searchCity.estate.estate_id : null,
+        limit: searchCity.limit,
+        page: searchCity.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -9,6 +10,8 @@ import * as fromModels from './../models';
 })
 export class PersonService {
 
+  queryRef: QueryRef<fromModels.PaginationPerson>;
+
   constructor(
     private personPagination: fromGraphql.PersonPaginationGQL,
     private personStoreGQL: fromGraphql.PersonStoreGQL,
@@ -17,11 +20,13 @@ export class PersonService {
   ) { }
 
   load(searchPerson: fromModels.SearchPerson) {
-    return this.personPagination.watch({
+    this.queryRef = this.personPagination.watch({
       ...searchPerson.person,
       limit: searchPerson.limit,
       page: searchPerson.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(person: fromModels.Person) {
@@ -37,10 +42,19 @@ export class PersonService {
   }
 
   pagination(searchPerson: fromModels.SearchPerson) {
-    return this.personPagination.fetch({
-      ...searchPerson.person,
-      limit: searchPerson.limit,
-      page: searchPerson.page
+    return this.queryRef.fetchMore({
+      query: this.personPagination.document,
+      variables: {
+        person_id: searchPerson.person.person_id,
+        person_identification: searchPerson.person.person_identification,
+        person_names: searchPerson.person.person_names,
+        limit: searchPerson.limit,
+        page: searchPerson.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -9,6 +10,8 @@ import * as fromModels from './../models';
 })
 export class OfficeService {
 
+  queryRef: QueryRef<fromModels.PaginationOffice>;
+
   constructor(
     private officePagination: fromGraphql.OfficePaginationGQL,
     private officeStoreGQL: fromGraphql.OfficeStoreGQL,
@@ -17,12 +20,14 @@ export class OfficeService {
   ) { }
 
   load(searchOffice: fromModels.SearchOffice) {
-    return this.officePagination.watch({
+    this.queryRef = this.officePagination.watch({
       ...searchOffice.office,
       city_id: (searchOffice.city) ? searchOffice.city.city_id : null,
       limit: searchOffice.limit,
       page: searchOffice.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(office: fromModels.Office) {
@@ -38,11 +43,20 @@ export class OfficeService {
   }
 
   pagination(searchOffice: fromModels.SearchOffice) {
-    return this.officePagination.fetch({
-      ...searchOffice.office,
-      city_id: (searchOffice.city) ? searchOffice.city.city_id : null,
-      limit: searchOffice.limit,
-      page: searchOffice.page
+
+    return this.queryRef.fetchMore({
+      query: this.officePagination.document,
+      variables: {
+        office_id: searchOffice.office.office_id,
+        office_name: searchOffice.office.office_name,
+        city_id: (searchOffice.city) ? searchOffice.city.city_id : null,
+        limit: searchOffice.limit,
+        page: searchOffice.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

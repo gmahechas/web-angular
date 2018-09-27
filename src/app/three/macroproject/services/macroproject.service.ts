@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -8,6 +9,8 @@ import * as fromModels from './../models';
   providedIn: 'root'
 })
 export class MacroprojectService {
+
+  queryRef: QueryRef<fromModels.PaginationMacroproject>;
 
   constructor(
     private macroprojectPagination: fromGraphql.MacroprojectPaginationGQL,
@@ -19,8 +22,8 @@ export class MacroprojectService {
   load(searchMacroproject: fromModels.SearchMacroproject) {
     return this.macroprojectPagination.watch({
       ...searchMacroproject.macroproject,
-      city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id :  null,
-      office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id :  null,
+      city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id : null,
+      office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id : null,
       limit: searchMacroproject.limit,
       page: searchMacroproject.page
     }).valueChanges;
@@ -39,12 +42,20 @@ export class MacroprojectService {
   }
 
   pagination(searchMacroproject: fromModels.SearchMacroproject) {
-    return this.macroprojectPagination.fetch({
-      ...searchMacroproject.macroproject,
-      city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id : null,
-      office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id : null,
-      limit: searchMacroproject.limit,
-      page: searchMacroproject.page
+    return this.queryRef.fetchMore({
+      query: this.macroprojectPagination.document,
+      variables: {
+        macroproject_id: searchMacroproject.macroproject.macroproject_id,
+        macroproject_name: searchMacroproject.macroproject.macroproject_name,
+        city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id : null,
+        office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id : null,
+        limit: searchMacroproject.limit,
+        page: searchMacroproject.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

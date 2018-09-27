@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -8,6 +9,8 @@ import * as fromModels from './../models';
   providedIn: 'root'
 })
 export class ProjectService {
+
+  queryRef: QueryRef<fromModels.PaginationProject>;
 
   constructor(
     private projectPagination: fromGraphql.ProjectPaginationGQL,
@@ -38,11 +41,19 @@ export class ProjectService {
   }
 
   pagination(searchProject: fromModels.SearchProject) {
-    return this.projectPagination.fetch({
-      ...searchProject.project,
-      macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
-      limit: searchProject.limit,
-      page: searchProject.page
+    return this.queryRef.fetchMore({
+      query: this.projectPagination.document,
+      variables: {
+        project_id: searchProject.project.project_id,
+        project_name: searchProject.project.project_name,
+        macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
+        limit: searchProject.limit,
+        page: searchProject.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

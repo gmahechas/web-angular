@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -9,6 +10,8 @@ import * as fromModels from './../models';
 })
 export class EstateService {
 
+  queryRef: QueryRef<fromModels.PaginationEstate>;
+
   constructor(
     private estatePagination: fromGraphql.EstatePaginationGQL,
     private estateStoreGQL: fromGraphql.EstateStoreGQL,
@@ -17,12 +20,14 @@ export class EstateService {
   ) { }
 
   load(searchEstate: fromModels.SearchEstate) {
-    return this.estatePagination.watch({
+    this.queryRef = this.estatePagination.watch({
       ...searchEstate.estate,
       country_id: (searchEstate.country) ? searchEstate.country.country_id : null,
       limit: searchEstate.limit,
       page: searchEstate.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(estate: fromModels.Estate) {
@@ -38,11 +43,21 @@ export class EstateService {
   }
 
   pagination(searchEstate: fromModels.SearchEstate) {
-    return this.estatePagination.fetch({
-      ...searchEstate.estate,
-      country_id: (searchEstate.country) ? searchEstate.country.country_id : null,
-      limit: searchEstate.limit,
-      page: searchEstate.page
+
+    return this.queryRef.fetchMore({
+      query: this.estatePagination.document,
+      variables: {
+        estate_id: searchEstate.estate.estate_id,
+        estate_name: searchEstate.estate.estate_name,
+        estate_code: searchEstate.estate.estate_code,
+        country_id: (searchEstate.country) ? searchEstate.country.country_id : null,
+        limit: searchEstate.limit,
+        page: searchEstate.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

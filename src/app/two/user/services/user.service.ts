@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from './../graphql';
 
 import * as fromModels from './../models';
@@ -9,6 +10,8 @@ import * as fromModels from './../models';
 })
 export class UserService {
 
+  queryRef: QueryRef<fromModels.PaginationUser>;
+
   constructor(
     private userPagination: fromGraphql.UserPaginationGQL,
     private userStoreGQL: fromGraphql.UserStoreGQL,
@@ -17,13 +20,15 @@ export class UserService {
   ) { }
 
   load(searchUser: fromModels.SearchUser) {
-    return this.userPagination.watch({
+    this.queryRef = this.userPagination.watch({
       ...searchUser.user,
       person_id: (searchUser.person) ? searchUser.person.person_id : null,
       profile_id: (searchUser.profile) ? searchUser.profile.profile_id : null,
       limit: searchUser.limit,
       page: searchUser.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(user: fromModels.User) {
@@ -39,12 +44,21 @@ export class UserService {
   }
 
   pagination(searchUser: fromModels.SearchUser) {
-    return this.userPagination.fetch({
-      ...searchUser.user,
-      person_id: (searchUser.person) ? searchUser.person.person_id : null,
-      profile_id: (searchUser.profile) ? searchUser.profile.profile_id : null,
-      limit: searchUser.limit,
-      page: searchUser.page
+    return this.queryRef.fetchMore({
+      query: this.userPagination,
+      variables: {
+        user_id: searchUser.user.user_id,
+        username: searchUser.user.username,
+        email: searchUser.user.email,
+        person_id: (searchUser.person) ? searchUser.person.person_id : null,
+        profile_id: (searchUser.profile) ? searchUser.profile.profile_id : null,
+        limit: searchUser.limit,
+        page: searchUser.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 
