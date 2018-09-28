@@ -6,8 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import * as fromPrime from './prime';
 import * as fromComponents from './components';
 import * as fromPipes from './pipes';
-import { FetchStringInArraySharedPipe } from './pipes/fetch-string-in-array-shared.pipe';
-import { ParentChildArraySharedPipe } from './pipes/parent-child-array-shared.pipe';
 
 @NgModule({
   imports: [
@@ -17,9 +15,7 @@ import { ParentChildArraySharedPipe } from './pipes/parent-child-array-shared.pi
   ],
   declarations: [
     ...fromComponents.components,
-    ...fromPipes.pipes,
-    FetchStringInArraySharedPipe,
-    ParentChildArraySharedPipe
+    ...fromPipes.pipes
   ],
   exports: [
     CommonModule,
