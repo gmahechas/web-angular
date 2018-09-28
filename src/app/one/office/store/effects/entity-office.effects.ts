@@ -19,15 +19,15 @@ export class EntityOfficeEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload),
+    map(action => action.payload.search),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getCurrentPage))
     ),
-    switchMap(([{ search }, perPage, currentPage]: [{ search: fromModels.SearchOffice }, number, number]) => {
-      perPage = (perPage) ? perPage : search.limit;
-      currentPage = (currentPage) ? currentPage : search.page;
-      return this.officeService.load({ ...search, limit: perPage, page: currentPage }).pipe(
+    switchMap(([searchOffice, perPage, currentPage]: [fromModels.SearchOffice, number, number]) => {
+      perPage = (perPage) ? perPage : searchOffice.limit;
+      currentPage = (currentPage) ? currentPage : searchOffice.page;
+      return this.officeService.load({ ...searchOffice, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
           return of(new fromActions.LoadFailEntity({ error: errors }));
@@ -39,9 +39,9 @@ export class EntityOfficeEffects {
   @Effect()
   storeEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Office }) => {
-      return this.officeService.store(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((office: fromModels.Office) => {
+      return this.officeService.store(office).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
@@ -51,9 +51,9 @@ export class EntityOfficeEffects {
   @Effect()
   updateEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Office }) => {
-      return this.officeService.update(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((office: fromModels.Office) => {
+      return this.officeService.update(office).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
@@ -63,9 +63,9 @@ export class EntityOfficeEffects {
   @Effect()
   destroyEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Office }) => {
-      return this.officeService.destroy(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((office: fromModels.Office) => {
+      return this.officeService.destroy(office).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
@@ -75,13 +75,13 @@ export class EntityOfficeEffects {
   @Effect()
   paginateEntity$ = this.actions$.pipe(
     ofType<fromActions.PaginateEntity>(fromActions.EntityActionTypes.PaginateEntity),
-    map(action => action.payload),
+    map(action => action.payload.page),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getQuery))
     ),
-    switchMap(([{ page }, perPage, searchOffice]: [{ page: number }, number, fromModels.SearchOffice]) => {
-      return from(this.officeService.pagination({ ...searchOffice, limit: perPage, page: page })).pipe(
+    switchMap(([currentPage, perPage, searchOffice]: [number, number, fromModels.SearchOffice]) => {
+      return from(this.officeService.pagination({ ...searchOffice, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
@@ -93,9 +93,9 @@ export class EntityOfficeEffects {
     this.actions$.pipe(
       ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload),
-      switchMap(({ search }: { search: fromModels.SearchOffice }) => {
-        if (search === '') {
+      map(action => action.payload.search),
+      switchMap((searchOffice: fromModels.SearchOffice) => {
+        if (searchOffice === '') {
           return EMPTY;
         }
 
@@ -104,7 +104,7 @@ export class EntityOfficeEffects {
           skip(1)
         );
 
-        return this.officeService.load({ ...search, limit: 20, page: 1 }).pipe(
+        return this.officeService.load({ ...searchOffice, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {

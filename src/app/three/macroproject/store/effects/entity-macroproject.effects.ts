@@ -19,15 +19,15 @@ export class EntityMacroprojectEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload),
+    map(action => action.payload.search),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getCurrentPage))
     ),
-    switchMap(([{ search }, perPage, currentPage]: [{ search: fromModels.SearchMacroproject }, number, number]) => {
-      perPage = (perPage) ? perPage : search.limit;
-      currentPage = (currentPage) ? currentPage : search.page;
-      return this.macroprojectService.load({ ...search, limit: perPage, page: currentPage }).pipe(
+    switchMap(([searchMacroproject, perPage, currentPage]: [fromModels.SearchMacroproject, number, number]) => {
+      perPage = (perPage) ? perPage : searchMacroproject.limit;
+      currentPage = (currentPage) ? currentPage : searchMacroproject.page;
+      return this.macroprojectService.load({ ...searchMacroproject, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
           return of(new fromActions.LoadFailEntity({ error: errors }));
@@ -39,9 +39,9 @@ export class EntityMacroprojectEffects {
   @Effect()
   storeEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Macroproject }) => {
-      return this.macroprojectService.store(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((macroproject: fromModels.Macroproject) => {
+      return this.macroprojectService.store(macroproject).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
@@ -51,9 +51,9 @@ export class EntityMacroprojectEffects {
   @Effect()
   updateEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Macroproject }) => {
-      return this.macroprojectService.update(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((macroproject: fromModels.Macroproject) => {
+      return this.macroprojectService.update(macroproject).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
@@ -63,9 +63,9 @@ export class EntityMacroprojectEffects {
   @Effect()
   destroyEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Macroproject }) => {
-      return this.macroprojectService.destroy(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((macroproject: fromModels.Macroproject) => {
+      return this.macroprojectService.destroy(macroproject).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
@@ -75,13 +75,13 @@ export class EntityMacroprojectEffects {
   @Effect()
   paginateEntity$ = this.actions$.pipe(
     ofType<fromActions.PaginateEntity>(fromActions.EntityActionTypes.PaginateEntity),
-    map(action => action.payload),
+    map(action => action.payload.page),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getQuery))
     ),
-    switchMap(([{ page }, perPage, searchMacroproject]: [{ page: number }, number, fromModels.SearchMacroproject]) => {
-      return from(this.macroprojectService.pagination({ ...searchMacroproject, limit: perPage, page: page })).pipe(
+    switchMap(([currentPage, perPage, searchMacroproject]: [number, number, fromModels.SearchMacroproject]) => {
+      return from(this.macroprojectService.pagination({ ...searchMacroproject, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
@@ -93,9 +93,9 @@ export class EntityMacroprojectEffects {
     this.actions$.pipe(
       ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload),
-      switchMap(({ search }: { search: fromModels.SearchMacroproject }) => {
-        if (search === '') {
+      map(action => action.payload.search),
+      switchMap((searchMacroproject: fromModels.SearchMacroproject) => {
+        if (searchMacroproject === '') {
           return EMPTY;
         }
 
@@ -104,7 +104,7 @@ export class EntityMacroprojectEffects {
           skip(1)
         );
 
-        return this.macroprojectService.load({ ...search, limit: 20, page: 1 }).pipe(
+        return this.macroprojectService.load({ ...searchMacroproject, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {

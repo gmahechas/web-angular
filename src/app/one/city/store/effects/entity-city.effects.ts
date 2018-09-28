@@ -19,15 +19,15 @@ export class EntityCityEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload),
+    map(action => action.payload.search),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getCurrentPage))
     ),
-    switchMap(([{ search }, perPage, currentPage]: [{ search: fromModels.SearchCity }, number, number]) => {
-      perPage = (perPage) ? perPage : search.limit;
-      currentPage = (currentPage) ? currentPage : search.page;
-      return this.cityService.load({ ...search, limit: perPage, page: currentPage }).pipe(
+    switchMap(([searchCity, perPage, currentPage]: [fromModels.SearchCity, number, number]) => {
+      perPage = (perPage) ? perPage : searchCity.limit;
+      currentPage = (currentPage) ? currentPage : searchCity.page;
+      return this.cityService.load({ ...searchCity, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
           return of(new fromActions.LoadFailEntity({ error: errors }));
@@ -39,9 +39,9 @@ export class EntityCityEffects {
   @Effect()
   storeEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.City }) => {
-      return this.cityService.store(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((city: fromModels.City) => {
+      return this.cityService.store(city).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
@@ -51,9 +51,9 @@ export class EntityCityEffects {
   @Effect()
   updateEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.City }) => {
-      return this.cityService.update(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((city: fromModels.City) => {
+      return this.cityService.update(city).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
@@ -63,9 +63,9 @@ export class EntityCityEffects {
   @Effect()
   destroyEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.City }) => {
-      return this.cityService.destroy(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((city: fromModels.City) => {
+      return this.cityService.destroy(city).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
@@ -75,13 +75,14 @@ export class EntityCityEffects {
   @Effect()
   paginateEntity$ = this.actions$.pipe(
     ofType<fromActions.PaginateEntity>(fromActions.EntityActionTypes.PaginateEntity),
-    map(action => action.payload),
+    map(action => action.payload.page),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getQuery))
     ),
-    switchMap(([{ page }, perPage, searchCity]: [{ page: number }, number, fromModels.SearchCity]) => {
-      return from(this.cityService.pagination({ ...searchCity, limit: perPage, page: page })).pipe(
+    switchMap(([currentPage, perPage, searchCity]: [number, number, fromModels.SearchCity]) => {
+      return from(this.cityService.pagination({ ...searchCity, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
@@ -93,9 +94,9 @@ export class EntityCityEffects {
     this.actions$.pipe(
       ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload),
-      switchMap(({ search }: { search: fromModels.SearchCity }) => {
-        if (search === '') {
+      map(action => action.payload.search),
+      switchMap((searchCity: fromModels.SearchCity) => {
+        if (searchCity === '') {
           return EMPTY;
         }
 
@@ -104,7 +105,7 @@ export class EntityCityEffects {
           skip(1)
         );
 
-        return this.cityService.load({ ...search, limit: 20, page: 1 }).pipe(
+        return this.cityService.load({ ...searchCity, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {

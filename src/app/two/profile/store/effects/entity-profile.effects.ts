@@ -19,15 +19,15 @@ export class EntityProfileEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload),
+    map(action => action.payload.search),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getCurrentPage))
     ),
-    switchMap(([{ search }, perPage, currentPage]: [{ search: fromModels.SearchProfile }, number, number]) => {
-      perPage = (perPage) ? perPage : search.limit;
-      currentPage = (currentPage) ? currentPage : search.page;
-      return this.profileService.load({ ...search, limit: perPage, page: currentPage }).pipe(
+    switchMap(([searchProfile, perPage, currentPage]: [fromModels.SearchProfile, number, number]) => {
+      perPage = (perPage) ? perPage : searchProfile.limit;
+      currentPage = (currentPage) ? currentPage : searchProfile.page;
+      return this.profileService.load({ ...searchProfile, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => {
           return of(new fromActions.LoadFailEntity({ error: errors }));
@@ -39,9 +39,9 @@ export class EntityProfileEffects {
   @Effect()
   storeEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Profile }) => {
-      return this.profileService.store(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((profile: fromModels.Profile) => {
+      return this.profileService.store(profile).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
       );
@@ -51,9 +51,9 @@ export class EntityProfileEffects {
   @Effect()
   updateEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Profile }) => {
-      return this.profileService.update(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((profile: fromModels.Profile) => {
+      return this.profileService.update(profile).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
       );
@@ -63,9 +63,9 @@ export class EntityProfileEffects {
   @Effect()
   destroyEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload),
-    switchMap(({ entity }: { entity: fromModels.Profile }) => {
-      return this.profileService.destroy(entity).pipe(
+    map(action => action.payload.entity),
+    switchMap((profile: fromModels.Profile) => {
+      return this.profileService.destroy(profile).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
         catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
       );
@@ -75,13 +75,13 @@ export class EntityProfileEffects {
   @Effect()
   paginateEntity$ = this.actions$.pipe(
     ofType<fromActions.PaginateEntity>(fromActions.EntityActionTypes.PaginateEntity),
-    map(action => action.payload),
+    map(action => action.payload.page),
     withLatestFrom(
       this.store.pipe(select(fromSelectors.getPerPage)),
       this.store.pipe(select(fromSelectors.getQuery))
     ),
-    switchMap(([{ page }, perPage, searchProfile]: [{ page: number }, number, fromModels.SearchProfile]) => {
-      return from(this.profileService.pagination({ ...searchProfile, limit: perPage, page: page })).pipe(
+    switchMap(([currentPage, perPage, searchProfile]: [number, number, fromModels.SearchProfile]) => {
+      return from(this.profileService.pagination({ ...searchProfile, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
@@ -93,9 +93,9 @@ export class EntityProfileEffects {
     this.actions$.pipe(
       ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload),
-      switchMap(({ search }: { search: fromModels.SearchProfile }) => {
-        if (search === '') {
+      map(action => action.payload.search),
+      switchMap((searchProfile: fromModels.SearchProfile) => {
+        if (searchProfile === '') {
           return EMPTY;
         }
 
@@ -104,7 +104,7 @@ export class EntityProfileEffects {
           skip(1)
         );
 
-        return this.profileService.load({ ...search, limit: 20, page: 1 }).pipe(
+        return this.profileService.load({ ...searchProfile, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
           catchError((errors) => {
