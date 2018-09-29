@@ -9,7 +9,15 @@ export const routes: Routes = [
     path: '', component: fromContainers.IndexPageProfileComponent,
     children: [
       { path: 'create', component: fromContainers.FormPageProfileComponent },
-      { path: ':profile_id', component: fromContainers.FormPageProfileComponent, canActivate: [ProfileExistGuard] }
+      {
+        path: ':profile_id', component: fromContainers.FormPageProfileComponent, canActivate: [ProfileExistGuard], children: [
+          {
+            path: 'profile-menu',
+            loadChildren: '../profile-menu/profile-menu.module#ProfileMenuModule',
+            outlet: 'router-outlet-profile-menu'
+          }
+        ]
+      }
     ]
   }
 ];
