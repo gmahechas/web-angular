@@ -18,7 +18,6 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   data$ = this.store.pipe(select(fromStore.getAllEntities));
-  profile: Profile;
 
   constructor(
     private store: Store<fromStore.State>
@@ -27,10 +26,9 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.store.pipe(
       select(fromProfile.getSelectedByRouter),
-      filter(profile => profile !== undefined)
+      filter(entity => entity !== undefined)
     ).subscribe(
       (profile: Profile) => {
-        this.profile = profile;
         this.store.dispatch(new fromStore.LoadEntity({
           search: {
             profile: {
