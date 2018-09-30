@@ -4,9 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import * as fromContainers from './containers';
 
 const routes: Routes = [
-  {
-    path: ':user_id', component: fromContainers.IndexPageUserOfficeComponent
-  }
+  { path: 'user/:user_id', component: fromContainers.IndexPageUserOfficeComponent },
+  { path: 'office/:office_id', component: fromContainers.IndexPageUserOfficeComponent }
 ];
 
 @NgModule({

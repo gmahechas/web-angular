@@ -17,6 +17,7 @@ export class UserOfficeService {
     return this.userOfficePagination.watch({
       ...searchUserOffice.user_office,
       user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
+      office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,
       limit: searchUserOffice.limit,
       page: searchUserOffice.page
     }).valueChanges;

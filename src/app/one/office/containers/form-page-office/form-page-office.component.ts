@@ -42,7 +42,7 @@ export class FormPageOfficeComponent implements OnInit {
 
   onUserOffice(office: Office) {
     this.store.dispatch(new fromCore.Go({
-      path: ['user-office', office.office_id]
+      path: ['office', office.office_id, { outlets: { 'router-outlet-user-office': ['user-office', 'office', office.office_id] } }]
     }));
   }
 

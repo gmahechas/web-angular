@@ -9,7 +9,15 @@ export const routes: Routes = [
     path: '', component: fromContainers.IndexPageUserComponent,
     children: [
       { path: 'create', component: fromContainers.FormPageUserComponent },
-      { path: ':user_id', component: fromContainers.FormPageUserComponent, canActivate: [UserExistGuard] }
+      {
+        path: ':user_id', component: fromContainers.FormPageUserComponent, canActivate: [UserExistGuard], children: [
+          {
+            path: 'user-office',
+            loadChildren: '../user-office/user-office.module#UserOfficeModule',
+            outlet: 'router-outlet-user-office'
+          }
+        ]
+      }
     ]
   }
 ];
