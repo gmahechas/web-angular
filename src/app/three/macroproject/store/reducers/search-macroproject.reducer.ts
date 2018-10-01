@@ -49,6 +49,10 @@ export function reducer(state = initialState, action: EntityActions): State {
       };
     }
 
+    case EntityActionTypes.ResetSearch: {
+      return initialState;
+    }
+
     default:
       return state;
   }

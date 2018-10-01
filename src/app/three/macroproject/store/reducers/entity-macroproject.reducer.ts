@@ -38,6 +38,10 @@ export function reducer(state = initialState, action: EntityActions): State {
       );
     }
 
+    case EntityActionTypes.ResetSearch: {
+      return adapter.removeAll(state);
+    }
+
     case EntityActionTypes.DestroySuccessEntity: {
       return adapter.removeOne(action.payload.entity.destroyMacroproject.macroproject_id, state);
     }

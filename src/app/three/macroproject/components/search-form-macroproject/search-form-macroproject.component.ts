@@ -14,6 +14,7 @@ export class SearchFormMacroprojectComponent implements OnChanges, OnInit {
   @Input() query: SearchMacroproject;
   @Output() search: EventEmitter<SearchMacroproject> = new EventEmitter<SearchMacroproject>();
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   searchFormMacroproject: FormGroup = this.formBuilder.group({
     macroproject: this.formBuilder.group({
@@ -48,5 +49,9 @@ export class SearchFormMacroprojectComponent implements OnChanges, OnInit {
 
   onCreate() {
     this.create.emit(true);
+  }
+
+  onReset() {
+    this.resetSearch.emit(true);
   }
 }
