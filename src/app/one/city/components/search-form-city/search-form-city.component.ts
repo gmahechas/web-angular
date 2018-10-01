@@ -14,6 +14,7 @@ export class SearchFormCityComponent implements OnChanges, OnInit {
   @Input() query: SearchCity;
   @Output() search: EventEmitter<SearchCity> = new EventEmitter<SearchCity>();
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   searchFormCity: FormGroup = this.formBuilder.group({
     city: this.formBuilder.group({
@@ -48,5 +49,9 @@ export class SearchFormCityComponent implements OnChanges, OnInit {
 
   onCreate() {
     this.create.emit(true);
+  }
+
+  onReset() {
+    this.resetSearch.emit(true);
   }
 }

@@ -3,7 +3,7 @@
     <app-panel-shared>
       <div class="panel-header">Buscar Ciudades</div>
       <div class="panel-content">
-        <app-search-form-city [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-city>
+        <app-search-form-city [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-city>
       </div>
     </app-panel-shared>
   </div>
