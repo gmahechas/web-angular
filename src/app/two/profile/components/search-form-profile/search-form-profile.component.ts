@@ -14,6 +14,7 @@ export class SearchFormProfileComponent implements OnChanges, OnInit {
   @Input() query: SearchProfile;
   @Output() search: EventEmitter<SearchProfile> = new EventEmitter<SearchProfile>();
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   searchFormProfile: FormGroup = this.formBuilder.group({
     profile: this.formBuilder.group({
@@ -44,5 +45,9 @@ export class SearchFormProfileComponent implements OnChanges, OnInit {
 
   onCreate() {
     this.create.emit(true);
+  }
+
+  onReset() {
+    this.resetSearch.emit(true);
   }
 }

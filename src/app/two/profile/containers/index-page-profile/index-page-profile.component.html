@@ -3,7 +3,7 @@
       <app-panel-shared>
         <div class="panel-header">Buscar Perfil</div>
         <div class="panel-content">
-          <app-search-form-profile [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-profile>
+          <app-search-form-profile [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-profile>
         </div>
       </app-panel-shared>
     </div>

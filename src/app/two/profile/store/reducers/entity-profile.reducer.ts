@@ -42,6 +42,10 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.removeOne(action.payload.entity.destroyProfile.profile_id, state);
     }
 
+    case EntityActionTypes.ResetSearch: {
+      return adapter.removeAll(state);
+    }
+
     default:
       return state;
   }
