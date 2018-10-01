@@ -6,7 +6,7 @@ export interface SearchEstate {
     estate_name?: string;
     estate_code?: string;
   };
-  country?: Country;
+  country?: Country | null;
   limit?: number;
   page?: number;
 }

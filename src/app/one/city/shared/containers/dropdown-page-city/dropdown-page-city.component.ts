@@ -33,7 +33,7 @@ export class DropdownPageCityComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadEntityShared({
       search: {
         city: {
-          city_id: null,
+          city_id: '',
           city_name: event,
           city_code: ''
         },

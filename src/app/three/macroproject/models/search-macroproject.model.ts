@@ -6,8 +6,8 @@ export interface SearchMacroproject {
     macroproject_id?: string;
     macroproject_name?: string;
   };
-  city?: City;
-  office?: Office;
+  city?: City | null;
+  office?: Office | null;
   limit?: number;
   page?: number;
 }

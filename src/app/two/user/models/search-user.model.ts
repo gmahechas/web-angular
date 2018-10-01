@@ -7,8 +7,8 @@ export interface SearchUser {
     username?: string;
     email?: string;
   };
-  person?: Person;
-  profile?: Profile;
+  person?: Person | null;
+  profile?: Profile | null;
   limit?: number;
   page?: number;
 }

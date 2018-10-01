@@ -5,7 +5,7 @@ export interface SearchProject {
     project_id?: string;
     project_name?: string;
   };
-  macroproject?: Macroproject;
+  macroproject?: Macroproject | null;
   limit?: number;
   page?: number;
 }

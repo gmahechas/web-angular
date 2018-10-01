@@ -33,7 +33,7 @@ export class DropdownPageEstateComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadEntityShared({
       search: {
         estate: {
-          estate_id: null,
+          estate_id: '',
           estate_name: event,
           estate_code: ''
         },

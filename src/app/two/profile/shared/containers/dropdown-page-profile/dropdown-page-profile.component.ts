@@ -33,7 +33,7 @@ export class DropdownPageProfileComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadEntityShared({
       search: {
         profile: {
-          profile_id: null,
+          profile_id: '',
           profile_name: event
         }
       }

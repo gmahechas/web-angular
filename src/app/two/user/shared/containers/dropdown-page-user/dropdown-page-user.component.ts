@@ -33,9 +33,9 @@ export class DropdownPageUserComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadEntityShared({
       search: {
         user: {
-          user_id: null,
+          user_id: '',
           username: event,
-          email: null
+          email: ''
         },
         person: null,
         profile: null

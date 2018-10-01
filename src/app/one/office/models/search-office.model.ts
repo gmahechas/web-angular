@@ -5,7 +5,7 @@ export interface SearchOffice {
     office_id?: string;
     office_name?: string;
   };
-  city?: City;
+  city?: City | null;
   limit?: number;
   page?: number;
 }

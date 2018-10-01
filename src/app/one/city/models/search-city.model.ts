@@ -6,7 +6,7 @@ export interface SearchCity {
     city_name?: string;
     city_code?: string;
   };
-  estate?: Estate;
+  estate?: Estate | null;
   limit?: number;
   page?: number;
 }
