@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '../../../../core/store';
 import * as fromActions from '../actions';
 
-import * as fromModels from './../../models';
-
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProjectEffects {
@@ -71,43 +69,13 @@ export class LayoutProjectEffects {
 
   // Redirects
   @Effect({ dispatch: false })
-  loadEntity$ = this.actions$.pipe(
+  successRedirect$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadEntity,
+      fromActions.EntityActionTypes.StoreSuccessEntity,
+      fromActions.EntityActionTypes.UpdateSuccessEntity,
+      fromActions.EntityActionTypes.DestroySuccessEntity
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['project'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  storeSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload.entity),
-    tap((data: fromModels.StoreProject) => {
-      this.store.dispatch(new fromActions.LoadEntity({
-        search: {
-          project: {
-            project_id: String(data.storeProject.project_id),
-            project_name: data.storeProject.project_name
-          },
-          macroproject: data.storeProject.macroproject
-        }
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['project'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  destroySuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));
     })

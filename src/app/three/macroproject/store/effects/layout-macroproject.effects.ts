@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '../../../../core/store';
 import * as fromActions from '../actions';
 
-import * as fromModels from './../../models';
-
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutMacroprojectEffects {
@@ -71,44 +69,13 @@ export class LayoutMacroprojectEffects {
 
   // Redirects
   @Effect({ dispatch: false })
-  loadEntity$ = this.actions$.pipe(
+  successRedirect$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadEntity,
+      fromActions.EntityActionTypes.StoreSuccessEntity,
+      fromActions.EntityActionTypes.UpdateSuccessEntity,
+      fromActions.EntityActionTypes.DestroySuccessEntity
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  storeSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload.entity),
-    tap((data: fromModels.StoreMacroproject) => {
-      this.store.dispatch(new fromActions.LoadEntity({
-        search: {
-          macroproject: {
-            macroproject_id: String(data.storeMacroproject.macroproject_id),
-            macroproject_name: data.storeMacroproject.macroproject_name
-          },
-          city: data.storeMacroproject.city,
-          office: data.storeMacroproject.office
-        }
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  destroySuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
     })

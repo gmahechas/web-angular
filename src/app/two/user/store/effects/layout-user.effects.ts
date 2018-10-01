@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '../../../../core/store';
 import * as fromActions from '../actions';
 
-import * as fromModels from './../../models';
-
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutUserEffects {
@@ -71,47 +69,15 @@ export class LayoutUserEffects {
 
   // Redirects
   @Effect({ dispatch: false })
-  loadEntity$ = this.actions$.pipe(
+  successRedirect$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadEntity,
+      fromActions.EntityActionTypes.StoreSuccessEntity,
+      fromActions.EntityActionTypes.UpdateSuccessEntity,
+      fromActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['user'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  storeSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload.entity),
-    tap((data: fromModels.StoreUser) => {
-      this.store.dispatch(new fromActions.LoadEntity({
-        search: {
-          user: {
-            user_id: String(data.storeUser.user_id),
-            username: data.storeUser.username,
-            email: data.storeUser.email
-          },
-          person: data.storeUser.person,
-          profile: data.storeUser.profile
-        }
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['user'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  destroySuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['user'] }));
+      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
     })
   );
 

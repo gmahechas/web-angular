@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '../../../../core/store';
 import * as fromActions from '../actions';
 
-import * as fromModels from './../../models';
-
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProfileEffects {
@@ -71,45 +69,14 @@ export class LayoutProfileEffects {
 
   // Redirects
   @Effect({ dispatch: false })
-  loadEntity$ = this.actions$.pipe(
+  successRedirect$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadEntity,
+      fromActions.EntityActionTypes.StoreSuccessEntity,
+      fromActions.EntityActionTypes.UpdateSuccessEntity,
+      fromActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  storeSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload.entity),
-    tap((data: fromModels.StoreProfile) => {
-      this.store.dispatch(new fromActions.LoadEntity({
-        search: {
-          profile: {
-            profile_id: String(data.storeProfile.profile_id),
-            profile_name: data.storeProfile.profile_name
-          }
-        }
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateProfile }) => {
-      this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  destroySuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyProfile }) => {
       this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
     })
   );

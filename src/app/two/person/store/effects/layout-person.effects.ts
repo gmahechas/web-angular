@@ -5,9 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '../../../../core/store';
 import * as fromActions from '../actions';
 
-import * as fromModels from './../../models';
-
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutPersonEffects {
@@ -71,43 +69,13 @@ export class LayoutPersonEffects {
 
   // Redirects
   @Effect({ dispatch: false })
-  loadEntity$ = this.actions$.pipe(
+  successRedirect$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadEntity,
+      fromActions.EntityActionTypes.StoreSuccessEntity,
+      fromActions.EntityActionTypes.UpdateSuccessEntity,
+      fromActions.EntityActionTypes.DestroySuccessEntity
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['person'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  storeSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload.entity),
-    tap((data: fromModels.StorePerson) => {
-      this.store.dispatch(new fromActions.LoadEntity({
-        search: {
-          person: {
-            person_id: String(data.storePerson.person_id),
-            person_identification: data.storePerson.person_identification,
-            person_names: ''
-          }
-        }
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['person'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  destroySuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['person'] }));
     })

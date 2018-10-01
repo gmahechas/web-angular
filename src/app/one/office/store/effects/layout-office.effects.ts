@@ -71,43 +71,13 @@ export class LayoutOfficeEffects {
 
   // Redirects
   @Effect({ dispatch: false })
-  loadEntity$ = this.actions$.pipe(
+  successRedirect$ = this.actions$.pipe(
     ofType(
       fromActions.EntityActionTypes.LoadEntity,
+      fromActions.EntityActionTypes.StoreSuccessEntity,
+      fromActions.EntityActionTypes.UpdateSuccessEntity,
+      fromActions.EntityActionTypes.DestroySuccessEntity
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['office'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  storeSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload.entity),
-    tap((data: fromModels.StoreOffice) => {
-      this.store.dispatch(new fromActions.LoadEntity({
-        search: {
-          office: {
-            office_id: String(data.storeOffice.office_id),
-            office_name: data.storeOffice.office_name
-          },
-          city: data.storeOffice.city
-        }
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateSuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['office'] }));
-    })
-  );
-
-  @Effect({ dispatch: false })
-  destroySuccessEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));
     })

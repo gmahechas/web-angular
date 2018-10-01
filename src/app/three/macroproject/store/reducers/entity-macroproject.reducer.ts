@@ -26,7 +26,8 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
-      return adapter.addOne(action.payload.entity.storeMacroproject, state);
+      const newState = adapter.removeAll(state);
+      return adapter.addOne(action.payload.entity.storeMacroproject, newState);
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {
@@ -38,12 +39,12 @@ export function reducer(state = initialState, action: EntityActions): State {
       );
     }
 
-    case EntityActionTypes.ResetSearch: {
-      return adapter.removeAll(state);
-    }
-
     case EntityActionTypes.DestroySuccessEntity: {
       return adapter.removeOne(action.payload.entity.destroyMacroproject.macroproject_id, state);
+    }
+
+    case EntityActionTypes.ResetSearch: {
+      return adapter.removeAll(state);
     }
 
     default:
