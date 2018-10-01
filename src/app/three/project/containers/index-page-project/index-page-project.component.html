@@ -3,7 +3,7 @@
       <app-panel-shared>
         <div class="panel-header">Buscar Proyecto:</div>
         <div class="panel-content">
-          <app-search-form-project [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-project>
+          <app-search-form-project [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-project>
         </div>
       </app-panel-shared>
     </div>

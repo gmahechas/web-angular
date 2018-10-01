@@ -74,4 +74,7 @@ export class IndexPageProjectComponent implements OnInit {
     }));
   }
 
+  onResetSearch() {
+    this.store.dispatch(new fromStore.ResetSearch());
+  }
 }
