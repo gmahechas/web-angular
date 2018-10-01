@@ -3,7 +3,7 @@
     <app-panel-shared>
       <div class="panel-header">Buscar Estados</div>
       <div class="panel-content">
-        <app-search-form-estate [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-estate>
+        <app-search-form-estate [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-estate>
       </div>
     </app-panel-shared>
   </div>

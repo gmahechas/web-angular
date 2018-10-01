@@ -14,6 +14,7 @@ export class SearchFormEstateComponent implements OnChanges, OnInit {
   @Input() query: SearchEstate;
   @Output() search: EventEmitter<SearchEstate> = new EventEmitter<SearchEstate>();
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   searchFormEstate: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
@@ -21,7 +22,7 @@ export class SearchFormEstateComponent implements OnChanges, OnInit {
       estate_name: this.formBuilder.control(''),
       estate_code: this.formBuilder.control(''),
     }),
-    country: this.formBuilder.control('')
+    country: this.formBuilder.control(null)
   });
 
   constructor(
@@ -48,5 +49,9 @@ export class SearchFormEstateComponent implements OnChanges, OnInit {
 
   onCreate() {
     this.create.emit(true);
+  }
+
+  onReset() {
+    this.resetSearch.emit(true);
   }
 }

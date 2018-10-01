@@ -36,7 +36,7 @@
       <div class="ui-grid-col-7">
         <app-button-shared [type]="'submit'" [label]="'Buscar'" [disabled]="searchFormEstate.invalid" [class]="'ui-button-secondary'"></app-button-shared>
         <app-button-shared [type]="'button'" [label]="'Agregar'" [class]="'ui-button-secondary'" (click)="onCreate()"></app-button-shared>
-        <app-button-shared [type]="'button'" [label]="'Limpiar'" [class]="'ui-button-secondary'" (click)="searchFormEstate.reset()"></app-button-shared>
+        <app-button-shared [type]="'button'" [label]="'Limpiar'" [class]="'ui-button-secondary'" (click)="onReset()"></app-button-shared>
       </div>
     </div>
   </div>
