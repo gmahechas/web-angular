@@ -65,4 +65,7 @@ export class IndexPageCountryComponent implements OnInit {
     }));
   }
 
+  onResetSearch() {
+    this.store.dispatch(new fromStore.ResetSearch());
+  }
 }

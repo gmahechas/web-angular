@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Estate] Destroy Fail Entity',
   PaginateEntity = '[Estate] Paginate Entity',
   LoadEntityShared = '[Estate] Load Entity Shared',
-  ResetSearch = '[Estate] Reset Search',
+  ResetSearch = '[Estate] Reset Search'
 }
 
 export class LoadEntity implements Action {
