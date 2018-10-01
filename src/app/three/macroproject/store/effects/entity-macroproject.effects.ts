@@ -95,7 +95,12 @@ export class EntityMacroprojectEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchMacroproject: fromModels.SearchMacroproject) => {
-        if (searchMacroproject === '') {
+        if (
+          searchMacroproject.macroproject.macroproject_id === '' &&
+          searchMacroproject.macroproject.macroproject_name === '' &&
+          searchMacroproject.city === null &&
+          searchMacroproject.office === null
+        ) {
           return EMPTY;
         }
 

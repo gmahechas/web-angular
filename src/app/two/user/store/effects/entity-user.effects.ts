@@ -95,7 +95,13 @@ export class EntityUserEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchUser: fromModels.SearchUser) => {
-        if (searchUser === '') {
+        if (
+          searchUser.user.user_id === '' &&
+          searchUser.user.username === '' &&
+          searchUser.user.email === '' &&
+          searchUser.person === null &&
+          searchUser.profile === null
+          ) {
           return EMPTY;
         }
 

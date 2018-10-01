@@ -96,7 +96,13 @@ export class EntityEstateEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchEstate: fromModels.SearchEstate) => {
-        if (searchEstate === '') {
+        console.log(searchEstate);
+        if (
+          searchEstate.estate.estate_id === '' &&
+          searchEstate.estate.estate_name === '' &&
+          searchEstate.estate.estate_code === '' &&
+          searchEstate.country === null
+        ) {
           return EMPTY;
         }
 

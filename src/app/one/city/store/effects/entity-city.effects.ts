@@ -96,7 +96,12 @@ export class EntityCityEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchCity: fromModels.SearchCity) => {
-        if (searchCity === '') {
+        if (
+          searchCity.city.city_id === '' &&
+          searchCity.city.city_name === '' &&
+          searchCity.city.city_code === '' &&
+          searchCity.estate === null
+          ) {
           return EMPTY;
         }
 

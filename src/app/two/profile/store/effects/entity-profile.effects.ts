@@ -95,7 +95,10 @@ export class EntityProfileEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchProfile: fromModels.SearchProfile) => {
-        if (searchProfile === '') {
+        if (
+          searchProfile.profile.profile_id === '' &&
+          searchProfile.profile.profile_name === ''
+        ) {
           return EMPTY;
         }
 

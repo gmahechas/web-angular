@@ -95,7 +95,11 @@ export class EntityPersonEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchPerson: fromModels.SearchPerson) => {
-        if (searchPerson === '') {
+        if (
+          searchPerson.person.person_id === '' &&
+          searchPerson.person.person_identification === '' &&
+          searchPerson.person.person_names === ''
+        ) {
           return EMPTY;
         }
 

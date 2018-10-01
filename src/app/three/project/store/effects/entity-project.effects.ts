@@ -95,7 +95,11 @@ export class EntityProjectEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchProject: fromModels.SearchProject) => {
-        if (searchProject === '') {
+        if (
+          searchProject.project.project_id === '' &&
+          searchProject.project.project_name === '' &&
+          searchProject.macroproject === null
+        ) {
           return EMPTY;
         }
 

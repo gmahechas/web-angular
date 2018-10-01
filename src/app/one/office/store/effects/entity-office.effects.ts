@@ -95,7 +95,11 @@ export class EntityOfficeEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchOffice: fromModels.SearchOffice) => {
-        if (searchOffice === '') {
+        if (
+          searchOffice.office.office_id === '' &&
+          searchOffice.office.office_name === '' &&
+          searchOffice.city === null
+          ) {
           return EMPTY;
         }
 
