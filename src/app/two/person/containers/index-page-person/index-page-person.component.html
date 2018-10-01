@@ -3,7 +3,7 @@
       <app-panel-shared>
         <div class="panel-header">Buscar Persona</div>
         <div class="panel-content">
-          <app-search-form-person [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-person>
+          <app-search-form-person [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-person>
         </div>
       </app-panel-shared>
     </div>

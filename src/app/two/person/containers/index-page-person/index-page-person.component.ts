@@ -82,4 +82,7 @@ export class IndexPagePersonComponent implements OnInit {
     }));
   }
 
+  onResetSearch() {
+    this.store.dispatch(new fromStore.ResetSearch());
+  }
 }
