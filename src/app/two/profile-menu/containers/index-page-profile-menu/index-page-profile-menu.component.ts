@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
@@ -10,7 +10,7 @@ import * as fromStore from './../../store';
   templateUrl: './index-page-profile-menu.component.html',
   styles: []
 })
-export class IndexPageProfileMenuComponent implements OnInit {
+export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
 
@@ -27,5 +27,9 @@ export class IndexPageProfileMenuComponent implements OnInit {
         }
       }
     }));
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new fromStore.ResetSearch());
   }
 }

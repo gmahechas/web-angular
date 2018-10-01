@@ -5,7 +5,8 @@ import * as fromModels from '../../models';
 export enum EntityActionTypes {
   LoadEntity = '[Profile Menu] Load Entity ',
   LoadSuccessEntity = '[Profile Menu] Load Success Entity',
-  LoadFailEntity = '[Profile Menu] Load Fail Entity'
+  LoadFailEntity = '[Profile Menu] Load Fail Entity',
+  ResetSearch = '[Profile Menu] Reset Search'
 }
 
 export class LoadEntity implements Action {
@@ -23,7 +24,12 @@ export class LoadFailEntity implements Action {
   constructor(public payload: { error: any }) { }
 }
 
+export class ResetSearch implements Action {
+  readonly type = EntityActionTypes.ResetSearch;
+}
+
 export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
-  | LoadFailEntity;
+  | LoadFailEntity
+  | ResetSearch;

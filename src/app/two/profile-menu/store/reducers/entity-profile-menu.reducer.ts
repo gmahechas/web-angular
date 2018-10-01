@@ -25,6 +25,10 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.removeAll(state);
     }
 
+    case EntityActionTypes.ResetSearch: {
+      return adapter.removeAll(state);
+    }
+
     default:
       return state;
   }

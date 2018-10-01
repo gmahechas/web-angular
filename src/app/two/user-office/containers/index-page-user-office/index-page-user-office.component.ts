@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
@@ -6,10 +6,11 @@ import * as fromStore from './../../store';
 
 @Component({
   selector: 'app-index-page-user-office',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './index-page-user-office.component.html',
   styles: []
 })
-export class IndexPageUserOfficeComponent implements OnInit {
+export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
 
@@ -45,4 +46,7 @@ export class IndexPageUserOfficeComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.store.dispatch(new fromStore.ResetSearch());
+  }
 }
