@@ -61,7 +61,7 @@ export class LayoutCityEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,16 +83,16 @@ export class LayoutCityEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreCity }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreCity) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           city: {
-            city_id: String(entity.storeCity.city_id),
-            city_name: entity.storeCity.city_name,
-            city_code: entity.storeCity.city_code
+            city_id: String(data.storeCity.city_id),
+            city_name: data.storeCity.city_name,
+            city_code: data.storeCity.city_code
           },
-          estate: entity.storeCity.estate
+          estate: data.storeCity.estate
         }
       }));
     })
@@ -101,8 +101,7 @@ export class LayoutCityEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateCity }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['city'] }));
     })
   );
@@ -110,8 +109,7 @@ export class LayoutCityEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyCity }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['city'] }));
     })
   );

@@ -61,7 +61,7 @@ export class LayoutMacroprojectEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,16 +83,16 @@ export class LayoutMacroprojectEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreMacroproject }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreMacroproject) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           macroproject: {
-            macroproject_id: String(entity.storeMacroproject.macroproject_id),
-            macroproject_name: entity.storeMacroproject.macroproject_name
+            macroproject_id: String(data.storeMacroproject.macroproject_id),
+            macroproject_name: data.storeMacroproject.macroproject_name
           },
-          city: entity.storeMacroproject.city,
-          office: entity.storeMacroproject.office
+          city: data.storeMacroproject.city,
+          office: data.storeMacroproject.office
         }
       }));
     })
@@ -101,8 +101,7 @@ export class LayoutMacroprojectEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateMacroproject }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
     })
   );
@@ -110,8 +109,7 @@ export class LayoutMacroprojectEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyMacroproject }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
     })
   );

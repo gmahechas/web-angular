@@ -61,7 +61,7 @@ export class LayoutEstateEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,16 +83,16 @@ export class LayoutEstateEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreEstate }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreEstate) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           estate: {
-            estate_id: String(entity.storeEstate.estate_id),
-            estate_name: entity.storeEstate.estate_name,
-            estate_code: entity.storeEstate.estate_code
+            estate_id: String(data.storeEstate.estate_id),
+            estate_name: data.storeEstate.estate_name,
+            estate_code: data.storeEstate.estate_code
           },
-          country: entity.storeEstate.country
+          country: data.storeEstate.country
         }
       }));
     })
@@ -101,8 +101,7 @@ export class LayoutEstateEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateEstate }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );
@@ -110,8 +109,7 @@ export class LayoutEstateEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyEstate }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
     })
   );

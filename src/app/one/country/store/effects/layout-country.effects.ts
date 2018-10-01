@@ -61,7 +61,7 @@ export class LayoutCountryEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,14 +83,14 @@ export class LayoutCountryEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreCountry }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreCountry) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           country: {
-            country_id: String(entity.storeCountry.country_id),
-            country_name: entity.storeCountry.country_name,
-            country_code: entity.storeCountry.country_code,
+            country_id: String(data.storeCountry.country_id),
+            country_name: data.storeCountry.country_name,
+            country_code: data.storeCountry.country_code
           }
         }
       }));
@@ -100,8 +100,7 @@ export class LayoutCountryEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateCountry }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['country'] }));
     })
   );
@@ -109,8 +108,7 @@ export class LayoutCountryEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyCountry }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['country'] }));
     })
   );

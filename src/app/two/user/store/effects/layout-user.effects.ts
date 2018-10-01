@@ -61,7 +61,7 @@ export class LayoutUserEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,17 +83,17 @@ export class LayoutUserEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreUser }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreUser) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           user: {
-            user_id: String(entity.storeUser.user_id),
-            username: entity.storeUser.username,
-            email: entity.storeUser.email
+            user_id: String(data.storeUser.user_id),
+            username: data.storeUser.username,
+            email: data.storeUser.email
           },
-          person: entity.storeUser.person,
-          profile: entity.storeUser.profile
+          person: data.storeUser.person,
+          profile: data.storeUser.profile
         }
       }));
     })
@@ -102,8 +102,7 @@ export class LayoutUserEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateUser }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['user'] }));
     })
   );
@@ -111,8 +110,7 @@ export class LayoutUserEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyUser }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['user'] }));
     })
   );

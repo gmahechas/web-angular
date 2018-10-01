@@ -61,7 +61,7 @@ export class LayoutProjectEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,15 +83,15 @@ export class LayoutProjectEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreProject }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreProject) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           project: {
-            project_id: String(entity.storeProject.project_id),
-            project_name: entity.storeProject.project_name
+            project_id: String(data.storeProject.project_id),
+            project_name: data.storeProject.project_name
           },
-          macroproject: entity.storeProject.macroproject
+          macroproject: data.storeProject.macroproject
         }
       }));
     })
@@ -100,8 +100,7 @@ export class LayoutProjectEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateProject }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));
     })
   );
@@ -109,8 +108,7 @@ export class LayoutProjectEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyProject }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));
     })
   );

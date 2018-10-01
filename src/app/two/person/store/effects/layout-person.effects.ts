@@ -61,7 +61,7 @@ export class LayoutPersonEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,13 +83,13 @@ export class LayoutPersonEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StorePerson }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StorePerson) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           person: {
-            person_id: String(entity.storePerson.person_id),
-            person_identification: entity.storePerson.person_identification,
+            person_id: String(data.storePerson.person_id),
+            person_identification: data.storePerson.person_identification,
             person_names: ''
           }
         }
@@ -100,8 +100,7 @@ export class LayoutPersonEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdatePerson }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['person'] }));
     })
   );
@@ -109,8 +108,7 @@ export class LayoutPersonEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyPerson }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['person'] }));
     })
   );

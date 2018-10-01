@@ -61,7 +61,7 @@ export class LayoutProfileEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,13 +83,13 @@ export class LayoutProfileEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreProfile }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreProfile) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           profile: {
-            profile_id: String(entity.storeProfile.profile_id),
-            profile_name: entity.storeProfile.profile_name
+            profile_id: String(data.storeProfile.profile_id),
+            profile_name: data.storeProfile.profile_name
           }
         }
       }));

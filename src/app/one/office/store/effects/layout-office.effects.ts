@@ -61,7 +61,7 @@ export class LayoutOfficeEffects {
       fromActions.EntityActionTypes.UpdateFailEntity,
       fromActions.EntityActionTypes.DestroyFailEntity
     ),
-    tap(action => {
+    tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
       this.store.dispatch(new fromCore.ShowMessages([
         { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
@@ -83,15 +83,15 @@ export class LayoutOfficeEffects {
   @Effect({ dispatch: false })
   storeSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.StoreSuccessEntity>(fromActions.EntityActionTypes.StoreSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.StoreOffice }) => {
+    map(action => action.payload.entity),
+    tap((data: fromModels.StoreOffice) => {
       this.store.dispatch(new fromActions.LoadEntity({
         search: {
           office: {
-            office_id: String(entity.storeOffice.office_id),
-            office_name: entity.storeOffice.office_name
+            office_id: String(data.storeOffice.office_id),
+            office_name: data.storeOffice.office_name
           },
-          city: entity.storeOffice.city
+          city: data.storeOffice.city
         }
       }));
     })
@@ -100,8 +100,7 @@ export class LayoutOfficeEffects {
   @Effect({ dispatch: false })
   updateSuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.UpdateSuccessEntity>(fromActions.EntityActionTypes.UpdateSuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.UpdateOffice }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));
     })
   );
@@ -109,8 +108,7 @@ export class LayoutOfficeEffects {
   @Effect({ dispatch: false })
   destroySuccessEntity$ = this.actions$.pipe(
     ofType<fromActions.DestroySuccessEntity>(fromActions.EntityActionTypes.DestroySuccessEntity),
-    map(action => action.payload),
-    tap(({ entity }: { entity: fromModels.DestroyOffice }) => {
+    tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));
     })
   );
