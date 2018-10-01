@@ -3,7 +3,7 @@
       <app-panel-shared>
         <div class="panel-header">Buscar Sucursal</div>
         <div class="panel-content">
-          <app-search-form-office [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()"></app-search-form-office>
+          <app-search-form-office [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-office>
         </div>
       </app-panel-shared>
     </div>
