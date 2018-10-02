@@ -4,7 +4,7 @@ export interface State {
   error: string;
 }
 
-const initialState: State = {
+export const initialState: State = {
   error: ''
 };
 

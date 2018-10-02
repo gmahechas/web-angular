@@ -8,7 +8,7 @@ export interface State {
   to: number;
 }
 
-const initialState: State = {
+export const initialState: State = {
   total: null,
   perPage: null,
   currentPage: null,

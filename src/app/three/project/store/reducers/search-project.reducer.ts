@@ -6,7 +6,7 @@ export interface State {
   query: SearchProject;
 }
 
-const initialState: State = {
+export const initialState: State = {
   loaded: false,
   query: {
     project: {

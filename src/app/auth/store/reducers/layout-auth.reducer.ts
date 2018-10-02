@@ -5,7 +5,7 @@ export interface State {
   pending: boolean;
 }
 
-const initialState: State = {
+export const initialState: State = {
   error: null,
   pending: false
 };

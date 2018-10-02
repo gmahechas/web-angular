@@ -6,7 +6,7 @@ export interface State {
   query: SearchUserOffice;
 }
 
-const initialState: State = {
+export const initialState: State = {
   loaded: false,
   query: {
     user_office: {

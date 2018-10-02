@@ -6,7 +6,7 @@ export interface State {
   query: SearchCountry;
 }
 
-const initialState: State = {
+export const initialState: State = {
   loaded: false,
   query: {
     country: {

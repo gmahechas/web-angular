@@ -6,7 +6,7 @@ export interface State {
   query: SearchMacroproject;
 }
 
-const initialState: State = {
+export const initialState: State = {
   loaded: false,
   query: {
     macroproject: {

@@ -6,7 +6,7 @@ export interface State {
   query: SearchProfileMenu;
 }
 
-const initialState: State = {
+export const initialState: State = {
   loaded: false,
   query: {
     profile_menu: {

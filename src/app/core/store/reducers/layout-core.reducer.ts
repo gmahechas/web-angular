@@ -8,7 +8,7 @@ export interface State {
   progressBar: boolean;
 }
 
-const initialState: State = {
+export  const initialState: State = {
   showSidebar: false,
   menuItems: [
     {
