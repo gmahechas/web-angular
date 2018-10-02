@@ -77,7 +77,7 @@ export class LayoutUserEffects {
       fromActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+      this.store.dispatch(new fromCore.Go({ path: ['user'] }));
     })
   );
 

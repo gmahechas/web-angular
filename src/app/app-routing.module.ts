@@ -8,7 +8,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', loadChildren: './zero/dashboard/dashboard.module#DashboardModule', canLoad: [/* AuthGuard */] },
   { path: 'country', loadChildren: './one/country/country.module#CountryModule', canLoad: [/* AuthGuard */] },
-  { path: 'estate', loadChildren: './one/estate/estate.module#EstateModule', canLoad: [AuthGuard] },
+  { path: 'estate', loadChildren: './one/estate/estate.module#EstateModule', canLoad: [/* AuthGuard */] },
   { path: 'city', loadChildren: './one/city/city.module#CityModule', canLoad: [/* AuthGuard */] },
   { path: 'company', loadChildren: './one/company/company.module#CompanyModule', canLoad: [/* AuthGuard */] },
   { path: 'office', loadChildren: './one/office/office.module#OfficeModule', canLoad: [/* AuthGuard */] },
