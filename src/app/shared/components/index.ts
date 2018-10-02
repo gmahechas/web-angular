@@ -11,8 +11,6 @@ import { CheckboxSharedComponent } from './checkbox-shared/checkbox-shared.compo
 import { InputSwitchSharedComponent } from './input-switch-shared/input-switch-shared.component';
 import { TreeSharedComponent } from './tree-shared/tree-shared.component';
 import { MessageSharedComponent } from './message-shared/message-shared.component';
-import { DynamicFormSharedComponent } from './form-shared/dynamic-form-shared/dynamic-form-shared.component';
-import { DynamicFormQuestionSharedComponent } from './form-shared/dynamic-form-question-shared/dynamic-form-question-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -28,8 +26,6 @@ export const components: any[] = [
   InputSwitchSharedComponent,
   TreeSharedComponent,
   MessageSharedComponent,
-  DynamicFormSharedComponent,
-  DynamicFormQuestionSharedComponent
 ];
 
 export * from './dropdown-shared/dropdown-shared.component';
@@ -45,5 +41,3 @@ export * from './checkbox-shared/checkbox-shared.component';
 export * from './input-switch-shared/input-switch-shared.component';
 export * from './tree-shared/tree-shared.component';
 export * from './message-shared/message-shared.component';
-export * from './form-shared/dynamic-form-shared/dynamic-form-shared.component';
-export * from './form-shared/dynamic-form-question-shared/dynamic-form-question-shared.component';
