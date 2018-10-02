@@ -1,5 +1,5 @@
 <div class="ui-g">
   <div class="ui-g-4 ui-g-offset-4">
-    <app-login-form-auth [pending]="pending$ | async" [error]="error$ | async" (submitted)="login($event)"></app-login-form-auth>
+    <app-form-auth [pending]="pending$ | async" [error]="error$ | async" (submitted)="login($event)"></app-form-auth>
   </div>
 </div>

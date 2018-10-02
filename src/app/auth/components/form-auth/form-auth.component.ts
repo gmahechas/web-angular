@@ -3,25 +3,25 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Auth } from '../../models/auth.model';
 
 @Component({
-  selector: 'app-login-form-auth',
+  selector: 'app-form-auth',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './login-form-auth.component.html',
+  templateUrl: './form-auth.component.html',
   styles: []
 })
-export class LoginFormAuthComponent implements OnInit {
+export class FormAuthComponent implements OnInit {
 
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
-      this.loginForm.disable();
+      this.authForm.disable();
     } else {
-      this.loginForm.enable();
+      this.authForm.enable();
     }
   }
   @Input() error: string | null;
   @Output() submitted: EventEmitter<Auth> = new EventEmitter<Auth>();
 
-  loginForm: FormGroup = this.formBuilder.group({
+  authForm: FormGroup = this.formBuilder.group({
     auth: this.formBuilder.group({
       username: this.formBuilder.control('', [Validators.required]),
       password: this.formBuilder.control('', [Validators.required])
@@ -35,7 +35,7 @@ export class LoginFormAuthComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(loginForm: FormGroup) {
-    this.submitted.emit(loginForm.value.auth);
+  login(authForm: FormGroup) {
+    this.submitted.emit(authForm.value.auth);
   }
 }

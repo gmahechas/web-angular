@@ -1,7 +1,7 @@
-import { LoginFormAuthComponent } from './login-form-auth/login-form-auth.component';
+import { FormAuthComponent } from './form-auth/form-auth.component';
 
 export const components: any[] = [
-    LoginFormAuthComponent
+    FormAuthComponent
 ];
 
-export * from './login-form-auth/login-form-auth.component';
+export * from './form-auth/form-auth.component';
