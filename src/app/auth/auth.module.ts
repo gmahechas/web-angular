@@ -9,7 +9,6 @@ import { SharedModule } from './../shared/shared.module';
 
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
-import { FormAuthComponent } from './components/form-auth/form-auth.component';
 
 @NgModule({
   imports: [
@@ -20,8 +19,7 @@ import { FormAuthComponent } from './components/form-auth/form-auth.component';
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components,
-    FormAuthComponent
+    ...fromComponents.components
   ]
 })
 export class AuthModule { }
