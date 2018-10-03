@@ -1,16 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValidationErrorsSharedComponent } from './validation-errors-shared.component';
+import { MessageModule } from 'primeng/message';
 
-describe('ValidationErrorsSharedComponent', () => {
+import { ValidationErrorsSharedComponent } from '../validation-errors-shared/validation-errors-shared.component';
+
+fdescribe('ValidationErrorsSharedComponent', () => {
   let component: ValidationErrorsSharedComponent;
   let fixture: ComponentFixture<ValidationErrorsSharedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ValidationErrorsSharedComponent ]
+      imports: [MessageModule],
+      declarations: [ValidationErrorsSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

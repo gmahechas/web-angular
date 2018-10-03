@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { CheckboxSharedComponent } from './checkbox-shared.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CheckboxSharedComponent } from '../checkbox-shared/checkbox-shared.component';
 
 describe('CheckboxSharedComponent', () => {
   let component: CheckboxSharedComponent;
@@ -8,6 +10,7 @@ describe('CheckboxSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, CheckboxModule],
       declarations: [ CheckboxSharedComponent ]
     })
     .compileComponents();

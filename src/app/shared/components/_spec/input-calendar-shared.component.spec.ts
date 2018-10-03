@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputCalendarSharedComponent } from './input-calendar-shared.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputCalendarSharedComponent } from '../input-calendar-shared/input-calendar-shared.component';
 
 describe('InputCalendarSharedComponent', () => {
   let component: InputCalendarSharedComponent;
@@ -8,6 +9,7 @@ describe('InputCalendarSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [CalendarModule],
       declarations: [ InputCalendarSharedComponent ]
     })
     .compileComponents();

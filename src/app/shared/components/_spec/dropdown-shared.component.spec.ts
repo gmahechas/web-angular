@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { DropdownSharedComponent } from './dropdown-shared.component';
+import { DropdownModule } from 'primeng/dropdown';
+
+import { FetchStringInArraySharedPipe } from '../../pipes/fetch-string-in-array-shared.pipe';
+import { DropdownSharedComponent } from '../dropdown-shared/dropdown-shared.component';
 
 describe('DropdownSharedComponent', () => {
   let component: DropdownSharedComponent;
@@ -8,9 +12,10 @@ describe('DropdownSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DropdownSharedComponent ]
+      imports: [ReactiveFormsModule, DropdownModule],
+      declarations: [FetchStringInArraySharedPipe, DropdownSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

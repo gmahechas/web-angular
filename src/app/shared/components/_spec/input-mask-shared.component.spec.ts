@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { InputMaskSharedComponent } from './input-mask-shared.component';
+import { InputMaskModule } from 'primeng/inputmask';
+
+import { InputMaskSharedComponent } from '../input-mask-shared/input-mask-shared.component';
 
 describe('InputMaskSharedComponent', () => {
   let component: InputMaskSharedComponent;
@@ -8,9 +11,10 @@ describe('InputMaskSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputMaskSharedComponent ]
+      imports: [ReactiveFormsModule, InputMaskModule],
+      declarations: [InputMaskSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

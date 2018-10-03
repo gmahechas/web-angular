@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TreeSharedComponent } from './tree-shared.component';
+import { TreeModule } from 'primeng/tree';
+
+import { TreeSharedComponent } from '../tree-shared/tree-shared.component';
 
 describe('TreeSharedComponent', () => {
   let component: TreeSharedComponent;
@@ -8,9 +10,10 @@ describe('TreeSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TreeSharedComponent ]
+      imports: [TreeModule],
+      declarations: [TreeSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageSharedComponent } from './message-shared.component';
+import { MessageModule } from 'primeng/message';
+
+import { MessageSharedComponent } from '../message-shared/message-shared.component';
 
 describe('MessageSharedComponent', () => {
   let component: MessageSharedComponent;
@@ -8,9 +10,10 @@ describe('MessageSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageSharedComponent ]
+      imports: [MessageModule],
+      declarations: [MessageSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

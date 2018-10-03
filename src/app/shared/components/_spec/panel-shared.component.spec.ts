@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { PanelSharedComponent } from './panel-shared.component';
+import { PanelModule } from 'primeng/panel';
+
+import { PanelSharedComponent } from '../panel-shared/panel-shared.component';
 
 describe('PanelSharedComponent', () => {
   let component: PanelSharedComponent;
@@ -8,9 +11,10 @@ describe('PanelSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PanelSharedComponent ]
+      imports: [BrowserAnimationsModule, PanelModule],
+      declarations: [PanelSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

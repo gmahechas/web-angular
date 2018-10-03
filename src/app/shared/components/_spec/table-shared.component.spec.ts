@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableSharedComponent } from './table-shared.component';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+
+import { TableSharedComponent } from '../table-shared/table-shared.component';
+import { FetchStringInArraySharedPipe } from '../../pipes/fetch-string-in-array-shared.pipe';
 
 describe('TableSharedComponent', () => {
   let component: TableSharedComponent;
@@ -8,9 +12,10 @@ describe('TableSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableSharedComponent ]
+      imports: [TableModule, PaginatorModule],
+      declarations: [TableSharedComponent, FetchStringInArraySharedPipe]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

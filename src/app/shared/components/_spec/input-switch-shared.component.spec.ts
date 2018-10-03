@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { InputSwitchSharedComponent } from './input-switch-shared.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
+import { InputSwitchSharedComponent } from '../input-switch-shared/input-switch-shared.component';
 
 describe('InputSwitchSharedComponent', () => {
   let component: InputSwitchSharedComponent;
@@ -8,9 +11,10 @@ describe('InputSwitchSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputSwitchSharedComponent ]
+      imports: [ReactiveFormsModule, InputSwitchModule],
+      declarations: [InputSwitchSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
