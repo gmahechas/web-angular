@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { InputPasswordSharedComponent } from '../input-password-shared/input-password-shared.component';
 
@@ -9,7 +8,6 @@ describe('InputPasswordSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
       declarations: [InputPasswordSharedComponent]
     })
       .compileComponents();

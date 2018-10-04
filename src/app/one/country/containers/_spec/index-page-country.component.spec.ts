@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndexPageCountryComponent } from './index-page-country.component';
+import { IndexPageCountryComponent } from '../index-page-country/index-page-country.component';
 
 describe('IndexPageCountryComponent', () => {
   let component: IndexPageCountryComponent;
@@ -8,9 +8,9 @@ describe('IndexPageCountryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndexPageCountryComponent ]
+      declarations: [IndexPageCountryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

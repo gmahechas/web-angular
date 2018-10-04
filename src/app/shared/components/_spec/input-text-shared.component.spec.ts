@@ -1,9 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { InputTextModule } from 'primeng/inputtext';
-import { KeyFilterModule } from 'primeng/keyfilter';
-import { TooltipModule } from 'primeng/tooltip';
 
 import { InputTextSharedComponent } from '../input-text-shared/input-text-shared.component';
 
@@ -13,7 +8,6 @@ describe('InputTextSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, InputTextModule, KeyFilterModule, TooltipModule],
       declarations: [InputTextSharedComponent]
     })
       .compileComponents();

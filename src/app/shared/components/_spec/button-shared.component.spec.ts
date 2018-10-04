@@ -1,7 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ButtonModule } from 'primeng/button';
-
 import { ButtonSharedComponent } from '../button-shared/button-shared.component';
 
 describe('ButtonSharedComponent', () => {
@@ -10,10 +8,9 @@ describe('ButtonSharedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ButtonModule],
-      declarations: [ ButtonSharedComponent ]
+      declarations: [ButtonSharedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

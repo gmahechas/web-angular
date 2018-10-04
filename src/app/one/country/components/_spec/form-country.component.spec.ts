@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormCountryComponent } from './form-country.component';
+import { FormCountryComponent } from '../form-country/form-country.component';
 
-describe('FormCountryComponent', () => {
+fdescribe('FormCountryComponent', () => {
   let component: FormCountryComponent;
   let fixture: ComponentFixture<FormCountryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormCountryComponent ]
+      declarations: [FormCountryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
