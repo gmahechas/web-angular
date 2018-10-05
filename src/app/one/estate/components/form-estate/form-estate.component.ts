@@ -2,7 +2,6 @@ import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetect
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { Estate } from '@web/app/one/estate/models/estate.model';
-import { Country } from '@web/app/one/country/models/country.model';
 
 @Component({
   selector: 'app-form-estate',
@@ -13,7 +12,7 @@ import { Country } from '@web/app/one/country/models/country.model';
 export class FormEstateComponent implements OnChanges, OnInit {
 
   @Input() estate: Estate;
-  @Output() submitted: EventEmitter<{ estate: Estate, country: Country }> = new EventEmitter<{ estate: Estate, country: Country }>();
+  @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
 
   estateForm: FormGroup = this.formBuilder.group({
     estate: this.formBuilder.group({
