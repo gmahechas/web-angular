@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from './store';
+import { reducers, effects } from '@app/app/two/user/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '../../shared/shared.module';
-import { UserRoutingModule } from './user-routing.module';
-import { PersonModule } from '../person/person.module';
-import { ProfileModule } from '../profile/profile.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { UserRoutingModule } from '@app/app/two/user/user-routing.module';
+import { PersonModule } from '@app/app/two/person/person.module';
+import { ProfileModule } from '@app/app/two/profile/profile.module';
 
-import * as fromContainers from './containers';
-import * as fromComponents from './components';
-import * as fromSharedContainers from './shared/containers';
+import * as fromContainers from '@app/app/two/user/containers';
+import * as fromComponents from '@app/app/two/user/components';
+import * as fromShared from '@app/app/two/user/shared';
 
 @NgModule({
   imports: [
@@ -25,10 +25,10 @@ import * as fromSharedContainers from './shared/containers';
   declarations: [
     ...fromContainers.containers,
     ...fromComponents.components,
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ],
   exports: [
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ]
 })
 export class UserModule { }

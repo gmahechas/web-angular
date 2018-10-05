@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from './containers';
-import { CityExistGuard } from './guards/city-exist.guard';
+import * as fromContainers from '@app/app/one/city/containers';
+import { CityExistGuard } from '@app/app/one/city/guards/city-exist.guard';
 
 export const routes: Routes = [
   {

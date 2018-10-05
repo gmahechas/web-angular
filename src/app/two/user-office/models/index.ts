@@ -1,3 +1,3 @@
-export * from './user-office.model';
-export * from './search-user-office.model';
-export * from './pagination-user-office.model';
+export * from '@app/app/two/user-office/models/user-office.model';
+export * from '@app/app/two/user-office/models/search-user-office.model';
+export * from '@app/app/two/user-office/models/pagination-user-office.model';

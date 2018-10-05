@@ -1,7 +1,7 @@
-import { IndexPageCoreComponent } from './index-page-core/index-page-core.component';
+import { IndexPageCoreComponent } from '@app/app/core/containers/index-page-core/index-page-core.component';
 
 export const containers: any[] = [
   IndexPageCoreComponent
 ];
 
-export * from './index-page-core/index-page-core.component';
+export * from '@app/app/core/containers/index-page-core/index-page-core.component';

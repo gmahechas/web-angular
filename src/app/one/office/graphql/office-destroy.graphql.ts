@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { DestroyOffice } from '../models/destroy-office.model';
+import { DestroyOffice } from '@app/app/one/office/models/destroy-office.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

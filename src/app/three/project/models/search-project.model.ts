@@ -1,4 +1,4 @@
-import { Macroproject } from './../../macroproject/models/macroproject.model';
+import { Macroproject } from '@app/app/three/macroproject/models/macroproject.model';
 
 export interface SearchProject {
   project?: {

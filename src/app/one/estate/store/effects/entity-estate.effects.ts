@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
-import * as fromReducers from './../reducers';
-import * as fromSelectors from '../selectors';
-import * as fromActions from '../actions';
+import * as fromReducers from '@app/app/one/estate/store/reducers';
+import * as fromSelectors from '@app/app/one/estate/store/selectors';
+import * as fromActions from '@app/app/one/estate/store/actions';
 
-import * as fromModels from './../../models';
+import * as fromModels from '@app/app/one/estate/models';
 
-import { EstateService } from '../../services/estate.service';
+import { EstateService } from '@app/app/one/estate/services/estate.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';

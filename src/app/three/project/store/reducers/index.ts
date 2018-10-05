@@ -1,10 +1,10 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromEntity from './entity-project.reducer';
-import * as fromSearch from './search-project.reducer';
-import * as fromPagination from './pagination-project.reducer';
-import * as fromLayout from './layout-project.reducer';
-import * as fromCore from '../../../../core/store';
+import * as fromEntity from '@app/app/three/project/store/reducers/entity-project.reducer';
+import * as fromSearch from '@app/app/three/project/store/reducers/search-project.reducer';
+import * as fromPagination from '@app/app/three/project/store/reducers/pagination-project.reducer';
+import * as fromLayout from '@app/app/three/project/store/reducers/layout-project.reducer';
+import * as fromCore from '@app/app/core/store';
 
 export interface ProjectState {
   entity: fromEntity.State;

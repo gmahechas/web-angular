@@ -1,6 +1,4 @@
-import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
-
-import { Token } from './../../models/token.model';
+import { AuthActions, AuthActionTypes } from '@app/app/auth/store/actions/auth.actions';
 
 export interface State {
   loggedIn: boolean;

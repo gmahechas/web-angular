@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Country } from './../../models/country.model';
-import { EntityActionTypes, EntityActions } from '../actions/entity-country.actions';
+import { Country } from '@app/app/one/country/models/country.model';
+import { EntityActionTypes, EntityActions } from '@app/app/one/country/store/actions/entity-country.actions';
 
 export interface State extends EntityState<Country> {
 

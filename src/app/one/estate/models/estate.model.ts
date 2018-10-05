@@ -1,4 +1,4 @@
-import { Country } from './../../country/models/country.model';
+import { Country } from '@app/app/one/country/models/country.model';
 
 export interface Estate {
   estate_id?: number;

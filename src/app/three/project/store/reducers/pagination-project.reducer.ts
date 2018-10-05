@@ -1,4 +1,4 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-project.actions';
+import { EntityActionTypes, EntityActions } from '@app/app/three/project/store/actions/entity-project.actions';
 
 export interface State {
   total: number;

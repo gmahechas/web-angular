@@ -1,5 +1,5 @@
-import { Company } from './../../company/models/company.model';
-import { City } from '../../city/models';
+import { Company } from '@app/app/one/company/models/company.model';
+import { City } from '@app/app/one/city/models';
 
 export interface Office {
   office_id?: number;

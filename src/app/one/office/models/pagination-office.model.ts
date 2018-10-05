@@ -1,4 +1,4 @@
-import { Office } from './office.model';
+import { Office } from '@app/app/one/office/models/office.model';
 
 export interface PaginationOffice {
   paginationOffice: {

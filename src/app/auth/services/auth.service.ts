@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { Auth } from '../models/auth.model';
-import { Token } from './../models/token.model';
+import { Auth } from '@app/app/auth/models/auth.model';
+import { Token } from '@app/app/auth/models/token.model';
 
-import { environment } from './../../../environments/environment';
+import { environment } from '@app/environments/environment';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-macroproject.actions';
-import { SearchMacroproject } from '../../models/search-macroproject.model';
+import { EntityActionTypes, EntityActions } from '@app/app/three/macroproject/store/actions/entity-macroproject.actions';
+import { SearchMacroproject } from '@app/app/three/macroproject/models/search-macroproject.model';
 
 export interface State {
   loaded: boolean;

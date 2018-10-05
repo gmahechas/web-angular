@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { DestroyUser } from '../models/destroy-user.model';
+import { DestroyUser } from '@app/app/two/user/models/destroy-user.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from './containers';
+import * as fromContainers from '@app/app/two/user-office/containers';
 
 const routes: Routes = [
   { path: 'user/:user_id', component: fromContainers.IndexPageUserOfficeComponent },

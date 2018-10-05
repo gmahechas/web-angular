@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from './../../store';
-import * as fromCore from './../../../../core/store';
+import * as fromStore from '@app/app/three/macroproject/store';
+import * as fromCore from '@app/app/core/store';
 
-import { Macroproject } from './../../models/macroproject.model';
-import { SearchMacroproject } from './../../models/search-macroproject.model';
+import { Macroproject } from '@app/app/three/macroproject/models/macroproject.model';
+import { SearchMacroproject } from '@app/app/three/macroproject/models/search-macroproject.model';
 
 @Component({
   selector: 'app-index-page-macroproject',

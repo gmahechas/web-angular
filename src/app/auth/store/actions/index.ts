@@ -1,1 +1,1 @@
-export * from './auth.actions';
+export * from '@app/app/auth/store/actions/auth.actions';

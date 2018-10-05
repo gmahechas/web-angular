@@ -1,5 +1,5 @@
-import { IndexPageDashboardComponent } from './index-page-dashboard/index-page-dashboard.component';
+import { IndexPageDashboardComponent } from '@app/app/zero/dashboard/containers/index-page-dashboard/index-page-dashboard.component';
 
 export const containers: any[] = [IndexPageDashboardComponent];
 
-export * from './index-page-dashboard/index-page-dashboard.component';
+export * from '@app/app/zero/dashboard/containers/index-page-dashboard/index-page-dashboard.component';

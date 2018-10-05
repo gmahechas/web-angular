@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '../reducers';
-import * as fromSearch from '../reducers/search-user.reducer';
+import * as fromFeature from '@app/app/two/user/store/reducers';
+import * as fromSearch from '@app/app/two/user/store/reducers/search-user.reducer';
 
 export const getSearchState = createSelector(
     fromFeature.getUserState,

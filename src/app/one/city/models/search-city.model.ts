@@ -1,4 +1,4 @@
-import { Estate } from './../../estate/models/estate.model';
+import { Estate } from '@app/app/one/estate/models/estate.model';
 
 export interface SearchCity {
   city?: {

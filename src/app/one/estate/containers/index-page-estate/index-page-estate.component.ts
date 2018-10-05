@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from './../../store';
-import * as fromCore from './../../../../core/store';
+import * as fromStore from '@app/app/one/estate/store';
+import * as fromCore from '@app/app/core/store';
 
-import { Estate } from './../../models/estate.model';
-import { SearchEstate } from './../../models/search-estate.model';
+import { Estate } from '@app/app/one/estate/models/estate.model';
+import { SearchEstate } from '@app/app/one/estate/models/search-estate.model';
 
 @Component({
   selector: 'app-index-page-estate',

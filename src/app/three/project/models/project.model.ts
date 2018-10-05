@@ -1,4 +1,4 @@
-import { Macroproject } from '../../macroproject/models';
+import { Macroproject } from '@app/app/three/macroproject/models';
 
 export interface Project {
   project_id?: number;

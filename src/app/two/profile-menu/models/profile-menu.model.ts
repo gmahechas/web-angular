@@ -1,5 +1,5 @@
-import { Profile } from './../../profile/models/profile.model';
-import { Menu } from '../../menu/models/menu.model';
+import { Profile } from '@app/app/two/profile/models/profile.model';
+import { Menu } from '@app/app/two/menu/models/menu.model';
 
 export interface ProfileMenu {
   profile_menu_id?: number;

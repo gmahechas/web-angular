@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromCore from './../reducers';
-import * as fromLayout from './../reducers/layout-core.reducer';
+import * as fromCore from '@app/app/core/store/reducers';
+import * as fromLayout from '@app/app/core/store/reducers/layout-core.reducer';
 
 export const getShowSidebar = createSelector(
   fromCore.getLayoutState,

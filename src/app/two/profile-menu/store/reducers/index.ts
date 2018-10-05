@@ -1,8 +1,8 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromEntity from './entity-profile-menu.reducer';
-import * as fromSearch from './search-profile-menu.reducer';
-import * as fromCore from '../../../../core/store';
+import * as fromEntity from '@app/app/two/profile-menu/store/reducers/entity-profile-menu.reducer';
+import * as fromSearch from '@app/app/two/profile-menu/store/reducers/search-profile-menu.reducer';
+import * as fromCore from '@app/app/core/store';
 
 export interface ProfileMenuState {
   entity: fromEntity.State;

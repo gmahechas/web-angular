@@ -1,2 +1,2 @@
-export * from './auth.model';
-export * from './token.model';
+export * from '@app/app/auth/models/auth.model';
+export * from '@app/app/auth/models/token.model';

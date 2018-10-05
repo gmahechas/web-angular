@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-country.actions';
-import { SearchCountry } from '../../models/search-country.model';
+import { EntityActionTypes, EntityActions } from '@app/app/one/country/store/actions/entity-country.actions';
+import { SearchCountry } from '@app/app/one/country/models/search-country.model';
 
 export interface State {
   loaded: boolean;

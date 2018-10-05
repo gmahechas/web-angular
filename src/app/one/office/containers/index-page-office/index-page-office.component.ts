@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from './../../store';
-import * as fromCore from './../../../../core/store';
+import * as fromStore from '@app/app/one/office/store';
+import * as fromCore from '@app/app/core/store';
 
-import { Office } from './../../models/office.model';
-import { SearchOffice } from './../../models/search-office.model';
+import { Office } from '@app/app/one/office/models/office.model';
+import { SearchOffice } from '@app/app/one/office/models/search-office.model';
 
 @Component({
   selector: 'app-index-page-office',

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
-import * as fromReducers from './../reducers';
-import * as fromSelectors from '../selectors';
-import * as fromActions from '../actions';
+import * as fromReducers from '@app/app/three/macroproject/store/reducers';
+import * as fromSelectors from '@app/app/three/macroproject/store/selectors';
+import * as fromActions from '@app/app/three/macroproject/store/actions';
 
-import * as fromModels from './../../models';
+import * as fromModels from '@app/app/three/macroproject/models';
 
-import { MacroprojectService } from '../../services/macroproject.service';
+import { MacroprojectService } from '@app/app/three/macroproject/services/macroproject.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';

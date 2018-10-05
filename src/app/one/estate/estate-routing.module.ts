@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from './containers';
-import { EstateExistGuard } from './guards/estate-exist.guard';
+import * as fromContainers from '@app/app/one/estate/containers';
+import { EstateExistGuard } from '@app/app/one/estate/guards/estate-exist.guard';
 
 export const routes: Routes = [
   {

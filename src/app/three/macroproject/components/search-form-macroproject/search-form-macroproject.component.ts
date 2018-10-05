@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SearchMacroproject } from './../../models/search-macroproject.model';
+import { SearchMacroproject } from '@app/app/three/macroproject/models/search-macroproject.model';
 
 @Component({
   selector: 'app-search-form-macroproject',

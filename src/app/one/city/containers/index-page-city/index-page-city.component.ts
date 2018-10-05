@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from './../../store';
-import * as fromCore from './../../../../core/store';
+import * as fromStore from '@app/app/one/city/store';
+import * as fromCore from '@app/app/core/store';
 
-import { City } from './../../models/city.model';
-import { SearchCity } from './../../models/search-city.model';
+import { City } from '@app/app/one/city/models/city.model';
+import { SearchCity } from '@app/app/one/city/models/search-city.model';
 
 @Component({
   selector: 'app-index-page-city',

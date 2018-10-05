@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-person.actions';
-import { SearchPerson } from '../../models/search-person.model';
+import { EntityActionTypes, EntityActions } from '@app/app/two/person/store/actions/entity-person.actions';
+import { SearchPerson } from '@app/app/two/person/models/search-person.model';
 
 export interface State {
   loaded: boolean;

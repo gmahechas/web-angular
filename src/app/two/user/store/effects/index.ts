@@ -1,10 +1,10 @@
-import { EntityUserEffects } from './entity-user.effects';
-import { LayoutUserEffects } from './layout-user.effects';
+import { EntityUserEffects } from '@app/app/two/user/store/effects/entity-user.effects';
+import { LayoutUserEffects } from '@app/app/two/user/store/effects/layout-user.effects';
 
 export const effects: any[] = [
     EntityUserEffects,
     LayoutUserEffects
 ];
 
-export * from './entity-user.effects';
-export * from './layout-user.effects';
+export * from '@app/app/two/user/store/effects/entity-user.effects';
+export * from '@app/app/two/user/store/effects/layout-user.effects';

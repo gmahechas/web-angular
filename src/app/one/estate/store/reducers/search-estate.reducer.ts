@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-estate.actions';
-import { SearchEstate } from '../../models/search-estate.model';
+import { EntityActionTypes, EntityActions } from '@app/app/one/estate/store/actions/entity-estate.actions';
+import { SearchEstate } from '@app/app/one/estate/models/search-estate.model';
 
 export interface State {
   loaded: boolean;

@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '../reducers';
-import * as fromEntity from '../reducers/entity-user.reducer';
-import * as fromCore from './../../../../core/store';
+import * as fromFeature from '@app/app/two/user/store/reducers';
+import * as fromEntity from '@app/app/two/user/store/reducers/entity-user.reducer';
+import * as fromCore from '@app/app/core/store';
 
 export const getEntityState = createSelector(
   fromFeature.getUserState,

@@ -1,4 +1,4 @@
-import { City } from './../../../one/city/models/city.model';
+import { City } from '@app/app/one/city/models/city.model';
 
 export interface Person {
   person_id?: number;

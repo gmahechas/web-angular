@@ -5,20 +5,20 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects, metaReducers } from './core/store';
+import { reducers, effects, metaReducers } from '@app/app/core/store';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-import { CustomRouterStateSerializer } from './shared/router-utils';
+import { CustomRouterStateSerializer } from '@app/app/shared/router-utils';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { GraphqlModule } from './graphql/graphql.module';
-import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './auth/auth.module';
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
+import { GraphqlModule } from '@app/app/graphql/graphql.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { AuthModule } from '@app/app/auth/auth.module';
+import { AppRoutingModule } from '@app/app/app-routing.module';
+import { CoreModule } from '@app/app/core/core.module';
 
-import { environment } from '../environments/environment';
+import { environment } from '@app/environments/environment';
 
-import { IndexPageCoreComponent } from './core/containers/index-page-core/index-page-core.component';
+import { IndexPageCoreComponent } from '@app/app/core/containers/index-page-core/index-page-core.component';
 
 @NgModule({
   imports: [

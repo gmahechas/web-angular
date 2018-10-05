@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '../../shared/shared.module';
-import { UserOfficeProjectRoutingModule } from './user-office-project-routing.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { UserOfficeProjectRoutingModule } from '@app/app/three/user-office-project/user-office-project-routing.module';
 
-import * as fromContainers from './containers';
+import * as fromContainers from '@app/app/three/user-office-project/containers';
 
 @NgModule({
   imports: [

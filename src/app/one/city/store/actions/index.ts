@@ -1,1 +1,1 @@
-export * from './entity-city.actions';
+export * from '@app/app/one/city/store/actions/entity-city.actions';

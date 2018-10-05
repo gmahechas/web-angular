@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { UpdateEstate } from '../models/update-estate.model';
+import { UpdateEstate } from '@app/app/one/estate/models/update-estate.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

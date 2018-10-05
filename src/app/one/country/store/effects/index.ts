@@ -1,10 +1,10 @@
-import { EntityCountryEffects } from './entity-country.effects';
-import { LayoutCountryEffects } from './layout-country.effects';
+import { EntityCountryEffects } from '@app/app/one/country/store/effects/entity-country.effects';
+import { LayoutCountryEffects } from '@app/app/one/country/store/effects/layout-country.effects';
 
 export const effects: any[] = [
     EntityCountryEffects,
     LayoutCountryEffects
 ];
 
-export * from './entity-country.effects';
-export * from './layout-country.effects';
+export * from '@app/app/one/country/store/effects/entity-country.effects';
+export * from '@app/app/one/country/store/effects/layout-country.effects';

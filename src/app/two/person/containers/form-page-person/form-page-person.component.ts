@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from './../../store';
-import * as fromCore from './../../../../core/store';
+import * as fromStore from '@app/app/two/person/store';
+import * as fromCore from '@app/app/core/store';
 
-import { Person } from './../../models/person.model';
+import { Person } from '@app/app/two/person/models/person.model';
 
 @Component({
   selector: 'app-form-page-person',

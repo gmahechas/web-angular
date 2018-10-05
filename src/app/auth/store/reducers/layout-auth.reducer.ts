@@ -1,4 +1,4 @@
-import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
+import { AuthActions, AuthActionTypes } from '@app/app/auth/store/actions/auth.actions';
 
 export interface State {
   error: string | null;

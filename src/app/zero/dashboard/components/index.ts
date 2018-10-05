@@ -1,7 +1,7 @@
-import { WelcomeDashboardComponent } from './welcome-dashboard/welcome-dashboard.component';
+import { WelcomeDashboardComponent } from '@app/app/zero/dashboard/components/welcome-dashboard/welcome-dashboard.component';
 
 export const components: any[] = [
     WelcomeDashboardComponent
 ];
 
-export * from './welcome-dashboard/welcome-dashboard.component';
+export * from '@app/app/zero/dashboard/components/welcome-dashboard/welcome-dashboard.component';

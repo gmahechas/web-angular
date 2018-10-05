@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from './store';
+import { reducers, effects } from '@app/app/two/person/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '../../shared/shared.module';
-import { PersonRoutingModule } from './person-routing.module';
-import { CityModule } from '../../one/city/city.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { PersonRoutingModule } from '@app/app/two/person/person-routing.module';
+import { CityModule } from '@app/app/one/city/city.module';
 
-import * as fromContainers from './containers';
-import * as fromComponents from './components';
-import * as fromSharedContainers from './shared/containers';
+import * as fromContainers from '@app/app/two/person/containers';
+import * as fromComponents from '@app/app/two/person/components';
+import * as fromShared from '@app/app/two/person/shared';
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import * as fromSharedContainers from './shared/containers';
   declarations: [
     ...fromContainers.containers,
     ...fromComponents.components,
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ],
   exports: [
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ]
 })
 export class PersonModule { }

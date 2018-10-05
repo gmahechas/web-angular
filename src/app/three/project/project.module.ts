@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from './store';
+import { reducers, effects } from '@app/app/three/project/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '../../shared/shared.module';
-import { ProjectRoutingModule } from './project-routing.module';
-import { MacroprojectModule } from './../macroproject/macroproject.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { ProjectRoutingModule } from '@app/app/three/project/project-routing.module';
+import { MacroprojectModule } from '@app/app/three/macroproject/macroproject.module';
 
-import * as fromContainers from './containers';
-import * as fromComponents from './components';
-import * as fromSharedContainers from './shared/containers';
+import * as fromContainers from '@app/app/three/project/containers';
+import * as fromComponents from '@app/app/three/project/components';
+import * as fromShared from '@app/app/three/project/shared';
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import * as fromSharedContainers from './shared/containers';
   declarations: [
     ...fromContainers.containers,
     ...fromComponents.components,
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ],
   exports: [
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ]
 })
 export class ProjectModule { }

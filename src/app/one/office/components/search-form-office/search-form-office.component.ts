@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SearchOffice } from './../../models/search-office.model';
+import { SearchOffice } from '@app/app/one/office/models/search-office.model';
 
 @Component({
   selector: 'app-search-form-office',

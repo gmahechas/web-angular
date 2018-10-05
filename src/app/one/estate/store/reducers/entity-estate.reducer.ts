@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Estate } from './../../models/estate.model';
-import { EntityActionTypes, EntityActions } from '../actions/entity-estate.actions';
+import { Estate } from '@app/app/one/estate/models/estate.model';
+import { EntityActionTypes, EntityActions } from '@app/app/one/estate/store/actions/entity-estate.actions';
 
 export interface State extends EntityState<Estate> {
 

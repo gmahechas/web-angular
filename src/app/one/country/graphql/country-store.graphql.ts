@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { StoreCountry } from '../models/store-country.model';
+import { StoreCountry } from '@app/app/one/country/models/store-country.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

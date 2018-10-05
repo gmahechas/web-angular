@@ -1,4 +1,4 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-office.actions';
+import { EntityActionTypes, EntityActions } from '@app/app/one/office/store/actions/entity-office.actions';
 
 export interface State {
   total: number;

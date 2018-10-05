@@ -1,4 +1,4 @@
-import { ProfileMenu } from './profile-menu.model';
+import { ProfileMenu } from '@app/app/two/profile-menu/models/profile-menu.model';
 
 export interface PaginationProfileMenu {
   paginationProfileMenu: {

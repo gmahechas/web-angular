@@ -1,4 +1,4 @@
-import { City } from './../../city/models/city.model';
+import { City } from '@app/app/one/city/models/city.model';
 
 export interface SearchOffice {
   office?: {

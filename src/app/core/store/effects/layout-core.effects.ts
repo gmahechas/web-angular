@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import * as fromActions from '../actions';
+import * as fromActions from '@app/app/core/store/actions';
 
 import { Message } from 'primeng/api';
 import { MessageService } from 'primeng/api';

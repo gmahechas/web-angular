@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from './store';
+import { reducers, effects } from '@app/app/one/estate/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '../../shared/shared.module';
-import { EstateRoutingModule } from './estate-routing.module';
-import { CountryModule } from '../country/country.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { EstateRoutingModule } from '@app/app/one/estate/estate-routing.module';
+import { CountryModule } from '@app/app/one/country/country.module';
 
-import * as fromContainers from './containers';
-import * as fromComponents from './components';
-import * as fromSharedContainers from './shared/containers';
+import * as fromContainers from '@app/app/one/estate/containers';
+import * as fromComponents from '@app/app/one/estate/components';
+import * as fromShared from '@app/app/one/estate/shared';
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import * as fromSharedContainers from './shared/containers';
   declarations: [
     ...fromContainers.containers,
     ...fromComponents.components,
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ],
   exports: [
-    ...fromSharedContainers.containers
+    ...fromShared.shared
   ]
 })
 export class EstateModule { }

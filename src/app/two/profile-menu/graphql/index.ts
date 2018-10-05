@@ -1,1 +1,1 @@
-export * from './profile-menu-pagination.graphql';
+export * from '@app/app/two/profile-menu/graphql/profile-menu-pagination.graphql';

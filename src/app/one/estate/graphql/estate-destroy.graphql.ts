@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { DestroyEstate } from '../models/destroy-estate.model';
+import { DestroyEstate } from '@app/app/one/estate/models/destroy-estate.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

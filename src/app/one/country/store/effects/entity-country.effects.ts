@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
-import * as fromReducers from './../reducers';
-import * as fromSelectors from '../selectors';
-import * as fromActions from '../actions';
+import * as fromReducers from '@app/app/one/country/store/reducers';
+import * as fromSelectors from '@app/app/one/country/store/selectors';
+import * as fromActions from '@app/app/one/country/store/actions';
 
-import * as fromModels from './../../models';
+import * as fromModels from '@app/app/one/country/models';
 
-import { CountryService } from '../../services/country.service';
+import { CountryService } from '@app/app/one/country/services/country.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';

@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Office } from './../../models/office.model';
-import { EntityActionTypes, EntityActions } from '../actions/entity-office.actions';
+import { Office } from '@app/app/one/office/models/office.model';
+import { EntityActionTypes, EntityActions } from '@app/app/one/office/store/actions/entity-office.actions';
 
 export interface State extends EntityState<Office> {
 

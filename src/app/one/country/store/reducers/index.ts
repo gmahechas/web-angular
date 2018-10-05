@@ -1,10 +1,10 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromEntity from './entity-country.reducer';
-import * as fromSearch from './search-country.reducer';
-import * as fromPagination from './pagination-country.reducer';
-import * as fromLayout from './layout-country.reducer';
-import * as fromCore from '../../../../core/store';
+import * as fromEntity from '@app/app/one/country/store/reducers/entity-country.reducer';
+import * as fromSearch from '@app/app/one/country/store/reducers/search-country.reducer';
+import * as fromPagination from '@app/app/one/country/store/reducers/pagination-country.reducer';
+import * as fromLayout from '@app/app/one/country/store/reducers/layout-country.reducer';
+import * as fromCore from '@app/app/core/store';
 
 export interface CountryState {
   entity: fromEntity.State;

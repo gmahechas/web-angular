@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@app/app/shared/shared.module';
 
-import * as fromContainers from './containers';
-import * as fromComponents from './components';
-import * as fromServices from './services'; // TODO: providedIn
+import * as fromContainers from '@app/app/core/containers';
+import * as fromComponents from '@app/app/core/components';
+import * as fromServices from '@app/app/core/services'; // TODO: providedIn
 
 @NgModule({
   imports: [

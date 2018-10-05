@@ -1,10 +1,10 @@
-import { EntityProjectEffects } from './entity-project.effects';
-import { LayoutProjectEffects } from './layout-project.effects';
+import { EntityProjectEffects } from '@app/app/three/project/store/effects/entity-project.effects';
+import { LayoutProjectEffects } from '@app/app/three/project/store/effects/layout-project.effects';
 
 export const effects: any[] = [
     EntityProjectEffects,
     LayoutProjectEffects
 ];
 
-export * from './entity-project.effects';
-export * from './layout-project.effects';
+export * from '@app/app/three/project/store/effects/entity-project.effects';
+export * from '@app/app/three/project/store/effects/layout-project.effects';

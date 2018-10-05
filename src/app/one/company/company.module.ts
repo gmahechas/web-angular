@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from './../../shared/shared.module';
-import { CompanyRoutingModule } from './company-routing.module';
+import { SharedModule } from '@app/app/shared/shared.module';
+import { CompanyRoutingModule } from '@app/app/one/company/company-routing.module';
 
-import * as fromContainers from './containers';
-import * as fromComponents from './components';
+import * as fromContainers from '@app/app/one/company/containers';
+import * as fromComponents from '@app/app/one/company/components';
 
 @NgModule({
   imports: [

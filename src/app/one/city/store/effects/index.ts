@@ -1,10 +1,10 @@
-import { EntityCityEffects } from './entity-city.effects';
-import { LayoutCityEffects } from './layout-city.effects';
+import { EntityCityEffects } from '@app/app/one/city/store/effects/entity-city.effects';
+import { LayoutCityEffects } from '@app/app/one/city/store/effects/layout-city.effects';
 
 export const effects: any[] = [
     EntityCityEffects,
     LayoutCityEffects
 ];
 
-export * from './entity-city.effects';
-export * from './layout-city.effects';
+export * from '@app/app/one/city/store/effects/entity-city.effects';
+export * from '@app/app/one/city/store/effects/layout-city.effects';

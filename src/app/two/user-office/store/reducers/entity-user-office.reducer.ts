@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { UserOffice } from './../../models/user-office.model';
-import { EntityActionTypes, EntityActions } from '../actions/entity-user-office.actions';
+import { UserOffice } from '@app/app/two/user-office/models/user-office.model';
+import { EntityActionTypes, EntityActions } from '@app/app/two/user-office/store/actions/entity-user-office.actions';
 
 export interface State extends EntityState<UserOffice> {
 

@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '../actions/entity-project.actions';
-import { SearchProject } from '../../models/search-project.model';
+import { EntityActionTypes, EntityActions } from '@app/app/three/project/store/actions/entity-project.actions';
+import { SearchProject } from '@app/app/three/project/models/search-project.model';
 
 export interface State {
   loaded: boolean;

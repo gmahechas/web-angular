@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { UpdateOffice } from '../models/update-office.model';
+import { UpdateOffice } from '@app/app/one/office/models/update-office.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

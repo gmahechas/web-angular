@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { Profile } from './../../models/profile.model';
+import { Profile } from '@app/app/two/profile/models/profile.model';
 
 @Component({
   selector: 'app-form-profile',

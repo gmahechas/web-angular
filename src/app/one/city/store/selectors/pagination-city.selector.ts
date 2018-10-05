@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '../reducers';
-import * as fromPagination from '../reducers/pagination-city.reducer';
+import * as fromFeature from '@app/app/one/city/store/reducers';
+import * as fromPagination from '@app/app/one/city/store/reducers/pagination-city.reducer';
 
 export const getPaginationState = createSelector(
     fromFeature.getCityState,

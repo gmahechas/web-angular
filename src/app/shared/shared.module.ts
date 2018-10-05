@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-import * as fromPrime from './prime';
-import * as fromComponents from './components';
-import * as fromPipes from './pipes';
+import * as fromPrime from '@app/app/shared/prime';
+import * as fromComponents from '@app/app/shared/components';
+import * as fromPipes from '@app/app/shared/pipes';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { StoreMacroproject } from '../models/store-macroproject.model';
+import { StoreMacroproject } from '@app/app/three/macroproject/models/store-macroproject.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

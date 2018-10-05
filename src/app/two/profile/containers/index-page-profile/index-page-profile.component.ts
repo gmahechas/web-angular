@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from './../../store';
-import * as fromCore from './../../../../core/store';
+import * as fromStore from '@app/app/two/profile/store';
+import * as fromCore from '@app/app/core/store';
 
-import { Profile } from './../../models/profile.model';
-import { SearchProfile } from './../../models/search-profile.model';
+import { Profile } from '@app/app/two/profile/models/profile.model';
+import { SearchProfile } from '@app/app/two/profile/models/search-profile.model';
 
 @Component({
   selector: 'app-index-page-profile',

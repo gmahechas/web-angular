@@ -1,5 +1,5 @@
-import { City } from '../../../one/city/models';
-import { Office } from './../../../one/office/models/office.model';
+import { City } from '@app/app/one/city/models';
+import { Office } from '@app/app/one/office/models/office.model';
 
 export interface SearchMacroproject {
   macroproject?: {
