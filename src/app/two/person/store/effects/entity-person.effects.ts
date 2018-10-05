@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
-import * as fromReducers from '@app/app/two/person/store/reducers';
-import * as fromSelectors from '@app/app/two/person/store/selectors';
-import * as fromActions from '@app/app/two/person/store/actions';
+import * as fromReducers from '@web/app/two/person/store/reducers';
+import * as fromSelectors from '@web/app/two/person/store/selectors';
+import * as fromActions from '@web/app/two/person/store/actions';
 
-import * as fromModels from '@app/app/two/person/models';
+import * as fromModels from '@web/app/two/person/models';
 
-import { PersonService } from '@app/app/two/person/services/person.service';
+import { PersonService } from '@web/app/two/person/services/person.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
 import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';

@@ -1,1 +1,1 @@
-export * from '@app/app/two/user/store/actions/entity-user.actions';
+export * from '@web/app/two/user/store/actions/entity-user.actions';

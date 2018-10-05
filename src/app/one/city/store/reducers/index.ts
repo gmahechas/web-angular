@@ -1,10 +1,10 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromEntity from '@app/app/one/city/store/reducers/entity-city.reducer';
-import * as fromSearch from '@app/app/one/city/store/reducers/search-city.reducer';
-import * as fromPagination from '@app/app/one/city/store/reducers/pagination-city.reducer';
-import * as fromLayout from '@app/app/one/city/store/reducers/layout-city.reducer';
-import * as fromCore from '@app/app/core/store';
+import * as fromEntity from '@web/app/one/city/store/reducers/entity-city.reducer';
+import * as fromSearch from '@web/app/one/city/store/reducers/search-city.reducer';
+import * as fromPagination from '@web/app/one/city/store/reducers/pagination-city.reducer';
+import * as fromLayout from '@web/app/one/city/store/reducers/layout-city.reducer';
+import * as fromCore from '@web/app/core/store';
 
 export interface CityState {
   entity: fromEntity.State;

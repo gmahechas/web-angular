@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '@app/app/three/macroproject/store/reducers';
-import * as fromEntity from '@app/app/three/macroproject/store/reducers/entity-macroproject.reducer';
-import * as fromCore from '@app/app/core/store';
+import * as fromFeature from '@web/app/three/macroproject/store/reducers';
+import * as fromEntity from '@web/app/three/macroproject/store/reducers/entity-macroproject.reducer';
+import * as fromCore from '@web/app/core/store';
 
 export const getEntityState = createSelector(
   fromFeature.getMacroprojectState,

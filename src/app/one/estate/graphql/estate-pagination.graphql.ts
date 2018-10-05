@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PaginationEstate } from '@app/app/one/estate/models/pagination-estate.model';
+import { PaginationEstate } from '@web/app/one/estate/models/pagination-estate.model';
 
 import { Query } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

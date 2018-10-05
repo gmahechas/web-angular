@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/two/profile-menu/store';
+import * as fromStore from '@web/app/two/profile-menu/store';
 
 @Component({
   selector: 'app-index-page-profile-menu',

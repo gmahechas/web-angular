@@ -1,4 +1,4 @@
-import { EntityActionTypes, EntityActions } from '@app/app/one/city/store/actions/entity-city.actions';
+import { EntityActionTypes, EntityActions } from '@web/app/one/city/store/actions/entity-city.actions';
 
 export interface State {
   error: string;

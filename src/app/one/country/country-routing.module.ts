@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from '@app/app/one/country/containers';
-import { CountryExistGuard } from '@app/app/one/country/guards/country-exist.guard';
+import * as fromContainers from '@web/app/one/country/containers';
+import { CountryExistGuard } from '@web/app/one/country/guards/country-exist.guard';
 
 export const routes: Routes = [
   {

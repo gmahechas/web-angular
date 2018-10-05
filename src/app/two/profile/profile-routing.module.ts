@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from '@app/app/two/profile/containers';
-import { ProfileExistGuard } from '@app/app/two/profile/guards/profile-exist.guard';
+import * as fromContainers from '@web/app/two/profile/containers';
+import { ProfileExistGuard } from '@web/app/two/profile/guards/profile-exist.guard';
 
 export const routes: Routes = [
   {
@@ -13,7 +13,7 @@ export const routes: Routes = [
         path: ':profile_id', component: fromContainers.FormPageProfileComponent, canActivate: [ProfileExistGuard], children: [
           {
             path: 'profile-menu',
-            loadChildren: '@app/app/two/profile-menu/profile-menu.module#ProfileMenuModule',
+            loadChildren: '@web/app/two/profile-menu/profile-menu.module#ProfileMenuModule',
             outlet: 'router-outlet-profile-menu'
           }
         ]

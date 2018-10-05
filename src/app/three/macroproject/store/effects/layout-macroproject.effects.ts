@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
-import * as fromCore from '@app/app/core/store';
-import * as fromActions from '@app/app/three/macroproject/store/actions';
+import * as fromCore from '@web/app/core/store';
+import * as fromActions from '@web/app/three/macroproject/store/actions';
 
 import { tap } from 'rxjs/operators';
 

@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '@app/app/one/country/store/reducers';
-import * as fromPagination from '@app/app/one/country/store/reducers/pagination-country.reducer';
+import * as fromFeature from '@web/app/one/country/store/reducers';
+import * as fromPagination from '@web/app/one/country/store/reducers/pagination-country.reducer';
 
 export const getPaginationState = createSelector(
     fromFeature.getCountryState,

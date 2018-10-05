@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/three/project/store';
+import * as fromStore from '@web/app/three/project/store';
 
 @Component({
   selector: 'app-dropdown-page-project',

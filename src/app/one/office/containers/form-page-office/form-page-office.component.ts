@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/one/office/store';
-import * as fromCore from '@app/app/core/store';
+import * as fromStore from '@web/app/one/office/store';
+import * as fromCore from '@web/app/core/store';
 
-import { Office } from '@app/app/one/office/models/office.model';
+import { Office } from '@web/app/one/office/models/office.model';
 
 @Component({
   selector: 'app-form-page-office',

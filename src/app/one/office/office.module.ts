@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from '@app/app/one/office/store';
+import { reducers, effects } from '@web/app/one/office/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '@app/app/shared/shared.module';
-import { OfficeRoutingModule } from '@app/app/one/office/office-routing.module';
-import { CityModule } from '@app/app/one/city/city.module';
+import { SharedModule } from '@web/app/shared/shared.module';
+import { OfficeRoutingModule } from '@web/app/one/office/office-routing.module';
+import { CityModule } from '@web/app/one/city/city.module';
 
-import * as fromContainers from '@app/app/one/office/containers';
-import * as fromComponents from '@app/app/one/office/components';
-import * as fromShared from '@app/app/one/office/shared';
+import * as fromContainers from '@web/app/one/office/containers';
+import * as fromComponents from '@web/app/one/office/components';
+import * as fromShared from '@web/app/one/office/shared';
 
 @NgModule({
   imports: [

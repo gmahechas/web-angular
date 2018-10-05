@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/three/project/store';
-import * as fromCore from '@app/app/core/store';
+import * as fromStore from '@web/app/three/project/store';
+import * as fromCore from '@web/app/core/store';
 
-import { Project } from '@app/app/three/project/models/project.model';
-import { SearchProject } from '@app/app/three/project/models/search-project.model';
+import { Project } from '@web/app/three/project/models/project.model';
+import { SearchProject } from '@web/app/three/project/models/search-project.model';
 
 @Component({
   selector: 'app-index-page-project',

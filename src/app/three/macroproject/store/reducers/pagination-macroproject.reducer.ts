@@ -1,4 +1,4 @@
-import { EntityActionTypes, EntityActions } from '@app/app/three/macroproject/store/actions/entity-macroproject.actions';
+import { EntityActionTypes, EntityActions } from '@web/app/three/macroproject/store/actions/entity-macroproject.actions';
 
 export interface State {
   total: number;

@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@app/app/two/user-office/store/actions/entity-user-office.actions';
-import { SearchUserOffice } from '@app/app/two/user-office/models/search-user-office.model';
+import { EntityActionTypes, EntityActions } from '@web/app/two/user-office/store/actions/entity-user-office.actions';
+import { SearchUserOffice } from '@web/app/two/user-office/models/search-user-office.model';
 
 export interface State {
   loaded: boolean;

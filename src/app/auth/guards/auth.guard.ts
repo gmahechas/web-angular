@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanLoad, CanActivate } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/auth/store';
+import * as fromStore from '@web/app/auth/store';
 
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';

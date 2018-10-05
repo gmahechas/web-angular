@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/three/macroproject/store';
-import * as fromCore from '@app/app/core/store';
+import * as fromStore from '@web/app/three/macroproject/store';
+import * as fromCore from '@web/app/core/store';
 
-import { Macroproject } from '@app/app/three/macroproject/models/macroproject.model';
+import { Macroproject } from '@web/app/three/macroproject/models/macroproject.model';
 
 @Component({
   selector: 'app-form-page-macroproject',

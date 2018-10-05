@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PaginationCity } from '@app/app/one/city/models/pagination-city.model';
+import { PaginationCity } from '@web/app/one/city/models/pagination-city.model';
 
 import { Query } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

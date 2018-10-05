@@ -6,7 +6,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink, from } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 
-import { environment } from '@app/environments/environment';
+import { environment } from '@web/environments/environment';
 
 const tokenMiddleware = new ApolloLink((operation, forward) => {
   // console.log(operation);

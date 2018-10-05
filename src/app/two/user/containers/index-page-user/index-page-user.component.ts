@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/two/user/store';
-import * as fromCore from '@app/app/core/store';
+import * as fromStore from '@web/app/two/user/store';
+import * as fromCore from '@web/app/core/store';
 
-import { User } from '@app/app/two/user/models/user.model';
-import { SearchUser } from '@app/app/two/user/models/search-user.model';
+import { User } from '@web/app/two/user/models/user.model';
+import { SearchUser } from '@web/app/two/user/models/search-user.model';
 
 @Component({
   selector: 'app-index-page-user',

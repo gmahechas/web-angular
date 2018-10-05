@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import * as fromActions from '@app/app/two/profile-menu/store/actions';
+import * as fromActions from '@web/app/two/profile-menu/store/actions';
 
-import * as fromModels from '@app/app/two/profile-menu/models';
+import * as fromModels from '@web/app/two/profile-menu/models';
 
-import { ProfileMenuService } from '@app/app/two/profile-menu/services/profile-menu.service';
+import { ProfileMenuService } from '@web/app/two/profile-menu/services/profile-menu.service';
 
 import { of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';

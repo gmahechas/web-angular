@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import * as fromModels from '@app/app/three/project/models';
+import * as fromModels from '@web/app/three/project/models';
 
 export enum EntityActionTypes {
   LoadEntity = '[Project] Load Entity ',

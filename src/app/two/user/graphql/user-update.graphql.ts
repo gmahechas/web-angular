@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { UpdateUser } from '@app/app/two/user/models/update-user.model';
+import { UpdateUser } from '@web/app/two/user/models/update-user.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

@@ -1,8 +1,8 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { Estate } from '@app/app/one/estate/models/estate.model';
-import { Country } from '@app/app/one/country/models/country.model';
+import { Estate } from '@web/app/one/estate/models/estate.model';
+import { Country } from '@web/app/one/country/models/country.model';
 
 @Component({
   selector: 'app-form-estate',

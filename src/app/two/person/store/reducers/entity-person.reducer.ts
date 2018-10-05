@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Person } from '@app/app/two/person/models/person.model';
-import { EntityActionTypes, EntityActions } from '@app/app/two/person/store/actions/entity-person.actions';
+import { Person } from '@web/app/two/person/models/person.model';
+import { EntityActionTypes, EntityActions } from '@web/app/two/person/store/actions/entity-person.actions';
 
 export interface State extends EntityState<Person> {
 

@@ -2,11 +2,11 @@ import { ActionReducerMap, createFeatureSelector, ActionReducer, MetaReducer } f
 
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import * as fromLayout from '@app/app/core/store/reducers/layout-core.reducer';
+import * as fromLayout from '@web/app/core/store/reducers/layout-core.reducer';
 import * as fromRouter from '@ngrx/router-store';
-import { RouterStateUrl } from '@app/app/shared/router-utils';
+import { RouterStateUrl } from '@web/app/shared/router-utils';
 
-import { environment } from '@app/environments/environment';
+import { environment } from '@web/environments/environment';
 
 export interface State {
   layout: fromLayout.State;

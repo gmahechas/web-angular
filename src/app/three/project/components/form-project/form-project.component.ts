@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { Project } from '@app/app/three/project/models/project.model';
+import { Project } from '@web/app/three/project/models/project.model';
 
 @Component({
   selector: 'app-form-project',

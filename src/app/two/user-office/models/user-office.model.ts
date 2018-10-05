@@ -1,5 +1,5 @@
-import { User } from '@app/app/two/user/models/user.model';
-import { Office } from '@app/app/one/office/models/office.model';
+import { User } from '@web/app/two/user/models/user.model';
+import { Office } from '@web/app/one/office/models/office.model';
 
 export interface UserOffice {
   user_office_id?: number;

@@ -1,4 +1,4 @@
-import { EntityActionTypes, EntityActions } from '@app/app/one/country/store/actions/entity-country.actions';
+import { EntityActionTypes, EntityActions } from '@web/app/one/country/store/actions/entity-country.actions';
 
 export interface State {
   total: number;

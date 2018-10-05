@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Auth } from '@app/app/auth/models/auth.model';
+import { Auth } from '@web/app/auth/models/auth.model';
 
 @Component({
   selector: 'app-form-auth',

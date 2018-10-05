@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from '@app/app/auth/containers';
+import * as fromContainers from '@web/app/auth/containers';
 
 export const routes: Routes = [
   {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PaginationMacroproject } from '@app/app/three/macroproject/models/pagination-macroproject.model';
+import { PaginationMacroproject } from '@web/app/three/macroproject/models/pagination-macroproject.model';
 
 import { Query } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/auth/store';
+import * as fromStore from '@web/app/auth/store';
 
-import { Auth } from '@app/app/auth/models/auth.model';
+import { Auth } from '@web/app/auth/models/auth.model';
 
 @Component({
   selector: 'app-index-page-auth',

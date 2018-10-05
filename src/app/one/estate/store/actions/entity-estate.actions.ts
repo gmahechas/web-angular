@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import * as fromModels from '@app/app/one/estate/models';
+import * as fromModels from '@web/app/one/estate/models';
 
 export enum EntityActionTypes {
   LoadEntity = '[Estate] Load Entity ',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SearchPerson } from '@app/app/two/person/models/search-person.model';
+import { SearchPerson } from '@web/app/two/person/models/search-person.model';
 
 @Component({
   selector: 'app-search-form-person',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SearchProfile } from '@app/app/two/profile/models/search-profile.model';
+import { SearchProfile } from '@web/app/two/profile/models/search-profile.model';
 
 @Component({
   selector: 'app-search-form-profile',

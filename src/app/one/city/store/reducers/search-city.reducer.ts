@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@app/app/one/city/store/actions/entity-city.actions';
-import { SearchCity } from '@app/app/one/city/models/search-city.model';
+import { EntityActionTypes, EntityActions } from '@web/app/one/city/store/actions/entity-city.actions';
+import { SearchCity } from '@web/app/one/city/models/search-city.model';
 
 export interface State {
   loaded: boolean;

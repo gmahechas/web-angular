@@ -1,1 +1,1 @@
-export * from '@app/app/one/country/store/actions/entity-country.actions';
+export * from '@web/app/one/country/store/actions/entity-country.actions';

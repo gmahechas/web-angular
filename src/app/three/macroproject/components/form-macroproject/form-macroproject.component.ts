@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { Macroproject } from '@app/app/three/macroproject/models/macroproject.model';
+import { Macroproject } from '@web/app/three/macroproject/models/macroproject.model';
 
 @Component({
   selector: 'app-form-macroproject',

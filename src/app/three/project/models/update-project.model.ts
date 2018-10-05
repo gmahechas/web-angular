@@ -1,4 +1,4 @@
-import { Project } from '@app/app/three/project/models/project.model';
+import { Project } from '@web/app/three/project/models/project.model';
 
 export interface UpdateProject {
   updateProject: Project;

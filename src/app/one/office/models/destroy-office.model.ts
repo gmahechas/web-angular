@@ -1,4 +1,4 @@
-import { Office } from '@app/app/one/office/models/office.model';
+import { Office } from '@web/app/one/office/models/office.model';
 
 export interface DestroyOffice {
   destroyOffice: Office;

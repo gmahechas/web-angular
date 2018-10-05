@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { QueryRef } from 'apollo-angular';
-import * as fromGraphql from '@app/app/three/macroproject/graphql';
+import * as fromGraphql from '@web/app/three/macroproject/graphql';
 
-import * as fromModels from '@app/app/three/macroproject/models';
+import * as fromModels from '@web/app/three/macroproject/models';
 
 @Injectable({
   providedIn: 'root'

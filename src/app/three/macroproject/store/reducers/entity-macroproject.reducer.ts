@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Macroproject } from '@app/app/three/macroproject/models/macroproject.model';
-import { EntityActionTypes, EntityActions } from '@app/app/three/macroproject/store/actions/entity-macroproject.actions';
+import { Macroproject } from '@web/app/three/macroproject/models/macroproject.model';
+import { EntityActionTypes, EntityActions } from '@web/app/three/macroproject/store/actions/entity-macroproject.actions';
 
 export interface State extends EntityState<Macroproject> {
 

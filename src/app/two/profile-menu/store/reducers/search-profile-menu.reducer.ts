@@ -1,5 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@app/app/two/profile-menu/store/actions/entity-profile-menu.actions';
-import { SearchProfileMenu } from '@app/app/two/profile-menu/models/search-profile-menu.model';
+import { EntityActionTypes, EntityActions } from '@web/app/two/profile-menu/store/actions/entity-profile-menu.actions';
+import { SearchProfileMenu } from '@web/app/two/profile-menu/models/search-profile-menu.model';
 
 export interface State {
   loaded: boolean;

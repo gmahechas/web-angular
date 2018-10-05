@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
-import * as fromStore from '@app/app/core/store';
-import * as fromActions from '@app/app/auth/store/actions';
+import * as fromStore from '@web/app/core/store';
+import * as fromActions from '@web/app/auth/store/actions';
 
-import * as fromModels from '@app/app/auth/models';
+import * as fromModels from '@web/app/auth/models';
 
-import { AuthService } from '@app/app/auth/services/auth.service';
+import { AuthService } from '@web/app/auth/services/auth.service';
 
 import { of, defer } from 'rxjs';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';

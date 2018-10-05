@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PaginationUserOffice } from '@app/app/two/user-office/models/pagination-user-office.model';
+import { PaginationUserOffice } from '@web/app/two/user-office/models/pagination-user-office.model';
 
 import { Query } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

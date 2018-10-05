@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import * as fromActions from '@app/app/two/user-office/store/actions';
+import * as fromActions from '@web/app/two/user-office/store/actions';
 
-import * as fromModels from '@app/app/two/user-office/models';
+import * as fromModels from '@web/app/two/user-office/models';
 
-import { UserOfficeService } from '@app/app/two/user-office/services/user-office.service';
+import { UserOfficeService } from '@web/app/two/user-office/services/user-office.service';
 
 import { of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';

@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '@app/app/auth/store/reducers';
-import * as fromAuth from '@app/app/auth/store/reducers/auth.reducer';
+import * as fromFeature from '@web/app/auth/store/reducers';
+import * as fromAuth from '@web/app/auth/store/reducers/auth.reducer';
 
 export const getStatusState = createSelector(
   fromFeature.getAuthState,

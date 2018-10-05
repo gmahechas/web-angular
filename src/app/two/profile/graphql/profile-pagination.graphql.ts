@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PaginationProfile } from '@app/app/two/profile/models/pagination-profile.model';
+import { PaginationProfile } from '@web/app/two/profile/models/pagination-profile.model';
 
 import { Query } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

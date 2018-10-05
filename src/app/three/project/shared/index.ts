@@ -1,7 +1,7 @@
-import { DropdownPageProjectComponent } from '@app/app/three/project/shared/dropdown-page-project/dropdown-page-project.component';
+import { DropdownPageProjectComponent } from '@web/app/three/project/shared/dropdown-page-project/dropdown-page-project.component';
 
 export const shared: any[] = [
   DropdownPageProjectComponent
 ];
 
-export * from '@app/app/three/project/shared/dropdown-page-project/dropdown-page-project.component';
+export * from '@web/app/three/project/shared/dropdown-page-project/dropdown-page-project.component';

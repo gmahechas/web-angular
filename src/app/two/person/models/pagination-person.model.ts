@@ -1,4 +1,4 @@
-import { Person } from '@app/app/two/person/models/person.model';
+import { Person } from '@web/app/two/person/models/person.model';
 
 export interface PaginationPerson {
   paginationPerson: {

@@ -1,4 +1,4 @@
-import { LayoutActionTypes, LayoutActions } from '@app/app/core/store/actions/layout-core.actions';
+import { LayoutActionTypes, LayoutActions } from '@web/app/core/store/actions/layout-core.actions';
 
 export interface State {
   showSidebar: boolean;

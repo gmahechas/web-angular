@@ -1,7 +1,7 @@
-import { FormCompanyComponent } from '@app/app/one/company/components/form-company/form-company.component';
+import { FormCompanyComponent } from '@web/app/one/company/components/form-company/form-company.component';
 
 export const components: any[] = [
   FormCompanyComponent
 ];
 
-export * from '@app/app/one/company/components/form-company/form-company.component';
+export * from '@web/app/one/company/components/form-company/form-company.component';

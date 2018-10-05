@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { City } from '@app/app/one/city/models/city.model';
-import { EntityActionTypes, EntityActions } from '@app/app/one/city/store/actions/entity-city.actions';
+import { City } from '@web/app/one/city/models/city.model';
+import { EntityActionTypes, EntityActions } from '@web/app/one/city/store/actions/entity-city.actions';
 
 export interface State extends EntityState<City> {
 

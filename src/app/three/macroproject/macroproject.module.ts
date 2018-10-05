@@ -2,17 +2,17 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from '@app/app/three/macroproject/store';
+import { reducers, effects } from '@web/app/three/macroproject/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '@app/app/shared/shared.module';
-import { MacroprojectRoutingModule } from '@app/app/three/macroproject/macroproject-routing.module';
-import { CityModule } from '@app/app/one/city/city.module';
-import { OfficeModule } from '@app/app/one/office/office.module';
+import { SharedModule } from '@web/app/shared/shared.module';
+import { MacroprojectRoutingModule } from '@web/app/three/macroproject/macroproject-routing.module';
+import { CityModule } from '@web/app/one/city/city.module';
+import { OfficeModule } from '@web/app/one/office/office.module';
 
-import * as fromContainers from '@app/app/three/macroproject/containers';
-import * as fromComponents from '@app/app/three/macroproject/components';
-import * as fromShared from '@app/app/three/macroproject/shared';
+import * as fromContainers from '@web/app/three/macroproject/containers';
+import * as fromComponents from '@web/app/three/macroproject/components';
+import * as fromShared from '@web/app/three/macroproject/shared';
 
 @NgModule({
   imports: [

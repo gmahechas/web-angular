@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from '@app/app/auth/store';
+import { reducers, effects } from '@web/app/auth/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { AuthRoutingModule } from '@app/app/auth/auth-routing.module';
-import { SharedModule } from '@app/app/shared/shared.module';
+import { AuthRoutingModule } from '@web/app/auth/auth-routing.module';
+import { SharedModule } from '@web/app/shared/shared.module';
 
-import * as fromContainers from '@app/app/auth/containers';
-import * as fromComponents from '@app/app/auth/components';
+import * as fromContainers from '@web/app/auth/containers';
+import * as fromComponents from '@web/app/auth/components';
 
 @NgModule({
   imports: [

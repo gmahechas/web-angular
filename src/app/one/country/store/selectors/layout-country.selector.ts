@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '@app/app/one/country/store/reducers';
-import * as fromLayout from '@app/app/one/country/store/reducers/layout-country.reducer';
+import * as fromFeature from '@web/app/one/country/store/reducers';
+import * as fromLayout from '@web/app/one/country/store/reducers/layout-country.reducer';
 
 export const getLayoutState = createSelector(
   fromFeature.getCountryState,

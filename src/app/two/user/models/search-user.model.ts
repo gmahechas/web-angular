@@ -1,5 +1,5 @@
-import { Profile } from '@app/app/two/profile/models/profile.model';
-import { Person } from '@app/app/two/person/models/person.model';
+import { Profile } from '@web/app/two/profile/models/profile.model';
+import { Person } from '@web/app/two/person/models/person.model';
 
 export interface SearchUser {
   user?: {

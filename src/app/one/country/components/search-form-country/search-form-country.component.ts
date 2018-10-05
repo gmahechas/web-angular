@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SearchCountry } from '@app/app/one/country/models/search-country.model';
+import { SearchCountry } from '@web/app/one/country/models/search-country.model';
 
 @Component({
   selector: 'app-search-form-country',

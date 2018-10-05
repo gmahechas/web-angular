@@ -1,5 +1,5 @@
-import { Office } from '@app/app/one/office/models/office.model';
-import { City } from '@app/app/one/city/models/city.model';
+import { Office } from '@web/app/one/office/models/office.model';
+import { City } from '@web/app/one/city/models/city.model';
 
 export interface Macroproject {
   macroproject_id?: number;

@@ -1,4 +1,4 @@
-import { Profile } from '@app/app/two/profile/models/profile.model';
+import { Profile } from '@web/app/two/profile/models/profile.model';
 
 export interface PaginationProfile {
   paginationProfile: {

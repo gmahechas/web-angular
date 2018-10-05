@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from '@app/app/two/profile-menu/containers';
+import * as fromContainers from '@web/app/two/profile-menu/containers';
 
 export const routes: Routes = [
   {

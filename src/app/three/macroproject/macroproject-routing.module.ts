@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import * as fromContainers from '@app/app/three/macroproject/containers';
-import { MacroprojectExistGuard } from '@app/app/three/macroproject/guards/macroproject-exist.guard';
+import * as fromContainers from '@web/app/three/macroproject/containers';
+import { MacroprojectExistGuard } from '@web/app/three/macroproject/guards/macroproject-exist.guard';
 
 export const routes: Routes = [
   {

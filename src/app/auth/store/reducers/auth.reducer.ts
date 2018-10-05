@@ -1,4 +1,4 @@
-import { AuthActions, AuthActionTypes } from '@app/app/auth/store/actions/auth.actions';
+import { AuthActions, AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
 
 export interface State {
   loggedIn: boolean;

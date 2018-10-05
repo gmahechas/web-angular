@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@app/app/two/user-office/store';
+import * as fromStore from '@web/app/two/user-office/store';
 
 @Component({
   selector: 'app-index-page-user-office',

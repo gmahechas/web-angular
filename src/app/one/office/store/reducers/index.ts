@@ -1,10 +1,10 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromEntity from '@app/app/one/office/store/reducers/entity-office.reducer';
-import * as fromSearch from '@app/app/one/office/store/reducers/search-office.reducer';
-import * as fromPagination from '@app/app/one/office/store/reducers/pagination-office.reducer';
-import * as fromLayout from '@app/app/one/office/store/reducers/layout-office.reducer';
-import * as fromCore from '@app/app/core/store';
+import * as fromEntity from '@web/app/one/office/store/reducers/entity-office.reducer';
+import * as fromSearch from '@web/app/one/office/store/reducers/search-office.reducer';
+import * as fromPagination from '@web/app/one/office/store/reducers/pagination-office.reducer';
+import * as fromLayout from '@web/app/one/office/store/reducers/layout-office.reducer';
+import * as fromCore from '@web/app/core/store';
 
 export interface OfficeState {
   entity: fromEntity.State;

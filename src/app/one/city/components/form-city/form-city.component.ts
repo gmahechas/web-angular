@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { City } from '@app/app/one/city/models/city.model';
+import { City } from '@web/app/one/city/models/city.model';
 
 @Component({
   selector: 'app-form-city',

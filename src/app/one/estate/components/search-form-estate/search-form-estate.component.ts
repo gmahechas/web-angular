@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { SearchEstate } from '@app/app/one/estate/models/search-estate.model';
+import { SearchEstate } from '@web/app/one/estate/models/search-estate.model';
 
 @Component({
   selector: 'app-search-form-estate',

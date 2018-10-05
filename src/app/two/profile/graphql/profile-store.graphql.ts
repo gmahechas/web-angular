@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { StoreProfile } from '@app/app/two/profile/models/store-profile.model';
+import { StoreProfile } from '@web/app/two/profile/models/store-profile.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';

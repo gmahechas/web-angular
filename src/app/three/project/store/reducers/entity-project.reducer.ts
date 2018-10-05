@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Project } from '@app/app/three/project/models/project.model';
-import { EntityActionTypes, EntityActions } from '@app/app/three/project/store/actions/entity-project.actions';
+import { Project } from '@web/app/three/project/models/project.model';
+import { EntityActionTypes, EntityActions } from '@web/app/three/project/store/actions/entity-project.actions';
 
 export interface State extends EntityState<Project> {
 

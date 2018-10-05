@@ -1,7 +1,7 @@
-import { IndexPageUserOfficeComponent } from '@app/app/two/user-office/containers/index-page-user-office/index-page-user-office.component';
+import { IndexPageUserOfficeComponent } from '@web/app/two/user-office/containers/index-page-user-office/index-page-user-office.component';
 
 export const containers: any[] = [
   IndexPageUserOfficeComponent
 ];
 
-export * from '@app/app/two/user-office/containers/index-page-user-office/index-page-user-office.component';
+export * from '@web/app/two/user-office/containers/index-page-user-office/index-page-user-office.component';

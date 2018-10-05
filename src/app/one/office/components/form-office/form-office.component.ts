@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { Office } from '@app/app/one/office/models/office.model';
+import { Office } from '@web/app/one/office/models/office.model';
 
 @Component({
   selector: 'app-form-office',

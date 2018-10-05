@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '@app/app/three/macroproject/store/reducers';
-import * as fromPagination from '@app/app/three/macroproject/store/reducers/pagination-macroproject.reducer';
+import * as fromFeature from '@web/app/three/macroproject/store/reducers';
+import * as fromPagination from '@web/app/three/macroproject/store/reducers/pagination-macroproject.reducer';
 
 export const getPaginationState = createSelector(
     fromFeature.getMacroprojectState,

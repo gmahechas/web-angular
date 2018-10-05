@@ -19,7 +19,7 @@
       "esnext.asynciterable"
     ],
     "paths": {
-      "@app/*" : ["src/*"]
+      "@web/*" : ["src/*"]
     }
   }
 }

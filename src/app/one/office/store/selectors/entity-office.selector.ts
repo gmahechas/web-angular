@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 
-import * as fromFeature from '@app/app/one/office/store/reducers';
-import * as fromEntity from '@app/app/one/office/store/reducers/entity-office.reducer';
-import * as fromCore from '@app/app/core/store';
+import * as fromFeature from '@web/app/one/office/store/reducers';
+import * as fromEntity from '@web/app/one/office/store/reducers/entity-office.reducer';
+import * as fromCore from '@web/app/core/store';
 
 export const getEntityState = createSelector(
   fromFeature.getOfficeState,

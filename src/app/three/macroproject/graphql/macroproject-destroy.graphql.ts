@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { DestroyMacroproject } from '@app/app/three/macroproject/models/destroy-macroproject.model';
+import { DestroyMacroproject } from '@web/app/three/macroproject/models/destroy-macroproject.model';
 
 import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
