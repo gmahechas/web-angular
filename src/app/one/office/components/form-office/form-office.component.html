@@ -1,11 +1,10 @@
-<form [formGroup]="officeForm" (ngSubmit)="onSubmit(officeForm)">
-  <app-panel-shared>
-    <div class="panel-header">
-      <ng-content select=".form-title"></ng-content>
-    </div>
-    <div class="panel-content">
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="officeForm" (ngSubmit)="onSubmit(officeForm)">
       <div class="ui-grid">
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Sucursal *:</div>
           <div class="ui-grid-col-6">
@@ -15,7 +14,6 @@
             <app-validation-errors-shared [control]="officeForm.get('office.office_name')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Ciudad *:</div>
           <div class="ui-grid-col-6">
@@ -25,7 +23,6 @@
             <app-validation-errors-shared [control]="officeForm.get('city')"></app-validation-errors-shared>
           </div>
         </div>
-
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-10 ui-g-offset-2">
@@ -33,6 +30,6 @@
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>
-    </div>
-  </app-panel-shared>
-</form>
+    </form>
+  </div>
+</app-panel-shared>

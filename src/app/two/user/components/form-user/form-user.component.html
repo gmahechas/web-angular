@@ -1,11 +1,10 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
-  <app-panel-shared>
-    <div class="panel-header">
-      <ng-content select=".form-title"></ng-content>
-    </div>
-    <div class="panel-content">
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
       <div class="ui-grid">
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Usuario *:</div>
           <div class="ui-grid-col-6">
@@ -15,7 +14,6 @@
             <app-validation-errors-shared [control]="userForm.get('user.username')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Email *:</div>
           <div class="ui-grid-col-6">
@@ -25,7 +23,6 @@
             <app-validation-errors-shared [control]="userForm.get('user.email')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Persona *:</div>
           <div class="ui-grid-col-6">
@@ -36,17 +33,16 @@
             <app-validation-errors-shared [control]="userForm.get('person')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Perfil *:</div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-profile [group]="userForm" [controlName]="'profile'" [options]="['profile_name']" [optionLabel]="'profile_name'"></app-dropdown-page-profile>
+            <app-dropdown-page-profile [group]="userForm" [controlName]="'profile'" [options]="['profile_name']"
+              [optionLabel]="'profile_name'"></app-dropdown-page-profile>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="userForm.get('person')"></app-validation-errors-shared>
           </div>
         </div>
-
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-10 ui-g-offset-2">
@@ -54,6 +50,6 @@
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>
-    </div>
-  </app-panel-shared>
-</form>
+    </form>
+  </div>
+</app-panel-shared>

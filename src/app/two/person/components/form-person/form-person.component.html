@@ -1,11 +1,10 @@
-<form [formGroup]="personForm" (ngSubmit)="onSubmit(personForm)">
-  <app-panel-shared>
-    <div class="panel-header">
-      <ng-content select=".form-title"></ng-content>
-    </div>
-    <div class="panel-content">
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit(personForm)">
       <div class="ui-grid">
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Tipo de Persona *:</div>
           <div class="ui-grid-col-6">
@@ -15,7 +14,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_business_type')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Tipo de Identificacion *:</div>
           <div class="ui-grid-col-6">
@@ -25,7 +23,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_identification_type')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Identificacion *:</div>
           <div class="ui-grid-col-6">
@@ -35,7 +32,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_identification')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Primer Nombre *:</div>
           <div class="ui-grid-col-6">
@@ -45,7 +41,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_first_name')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Segundo Nombre *:</div>
           <div class="ui-grid-col-6">
@@ -55,7 +50,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_second_name')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Primer Apellido *:</div>
           <div class="ui-grid-col-6">
@@ -65,7 +59,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_first_surname')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Segundo Apellido *:</div>
           <div class="ui-grid-col-6">
@@ -75,7 +68,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_second_surname')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Razon Social *:</div>
           <div class="ui-grid-col-6">
@@ -85,7 +77,6 @@
             <app-validation-errors-shared [control]="personForm.get('person.person_legal_name')"></app-validation-errors-shared>
           </div>
         </div>
-
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Ciudad *:</div>
           <div class="ui-grid-col-6">
@@ -95,7 +86,6 @@
             <app-validation-errors-shared [control]="personForm.get('city')"></app-validation-errors-shared>
           </div>
         </div>
-
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-10 ui-g-offset-2">
@@ -103,6 +93,6 @@
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>
-    </div>
-  </app-panel-shared>
-</form>
+    </form>
+  </div>
+</app-panel-shared>

@@ -1,9 +1,9 @@
-<form [formGroup]="cityForm" (ngSubmit)="onSubmit(cityForm)">
-  <app-panel-shared>
-    <div class="panel-header">
-      <ng-content select=".form-title"></ng-content>
-    </div>
-    <div class="panel-content">
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="cityForm" (ngSubmit)="onSubmit(cityForm)">
       <div class="ui-grid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Ciudad *:</div>
@@ -26,7 +26,8 @@
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">Estado *:</div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']" [optionLabel]="'estate_name'"></app-dropdown-page-estate>
+            <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']"
+              [optionLabel]="'estate_name'"></app-dropdown-page-estate>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="cityForm.get('estate')"></app-validation-errors-shared>
@@ -39,6 +40,6 @@
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>
-    </div>
-  </app-panel-shared>
-</form>
+    </form>
+  </div>
+</app-panel-shared>

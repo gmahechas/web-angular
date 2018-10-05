@@ -1,17 +1,13 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <app-panel-shared>
-      <div class="panel-header">Buscar Paises</div>
-      <div class="panel-content">
-        <app-search-form-country [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-country>
-      </div>
-    </app-panel-shared>
+    <app-search-form-country [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-country>
   </div>
 </div>
 <div class="ui-g">
   <div class="ui-g-4">
     <app-table-shared [data]="data$ | async" [totalRecords]="total$ | async" [rows]="perPage$ | async" [first]="from$ | async"
-      [to]="to$ | async" [configTable]="configTable" (rowSelect)="onEdit($event)" (rowUnselect)="onCancel()" (pageChange)="onPaginate($event)">
+      [to]="to$ | async" [configTable]="configTable" (rowSelect)="onEdit($event)" (rowUnselect)="onCancel()"
+      (pageChange)="onPaginate($event)">
     </app-table-shared>
   </div>
   <div class="ui-g-4">
