@@ -5,6 +5,3 @@ export const effects: any[] = [
     EntityProjectEffects,
     LayoutProjectEffects
 ];
-
-export * from '@web/app/three/project/store/effects/entity-project.effects';
-export * from '@web/app/three/project/store/effects/layout-project.effects';

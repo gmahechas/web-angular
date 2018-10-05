@@ -5,6 +5,3 @@ export const effects: any[] = [
     EntityEstateEffects,
     LayoutEstateEffects
 ];
-
-export * from '@web/app/one/estate/store/effects/entity-estate.effects';
-export * from '@web/app/one/estate/store/effects/layout-estate.effects';

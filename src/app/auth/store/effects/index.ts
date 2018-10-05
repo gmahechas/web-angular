@@ -5,6 +5,3 @@ export const effects: any[] = [
   AuthEffects,
   LayoutAuthEffects
 ];
-
-export * from '@web/app/auth/store/effects/auth.effects';
-export * from '@web/app/auth/store/effects/layout-auth.effects';

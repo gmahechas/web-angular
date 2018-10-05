@@ -5,6 +5,3 @@ export const effects: any[] = [
     EntityPersonEffects,
     LayoutPersonEffects
 ];
-
-export * from '@web/app/two/person/store/effects/entity-person.effects';
-export * from '@web/app/two/person/store/effects/layout-person.effects';

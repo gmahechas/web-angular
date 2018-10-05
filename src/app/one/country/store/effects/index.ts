@@ -5,6 +5,3 @@ export const effects: any[] = [
     EntityCountryEffects,
     LayoutCountryEffects
 ];
-
-export * from '@web/app/one/country/store/effects/entity-country.effects';
-export * from '@web/app/one/country/store/effects/layout-country.effects';

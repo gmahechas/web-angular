@@ -5,6 +5,3 @@ export const effects: any[] = [
     EntityOfficeEffects,
     LayoutOfficeEffects
 ];
-
-export * from '@web/app/one/office/store/effects/entity-office.effects';
-export * from '@web/app/one/office/store/effects/layout-office.effects';

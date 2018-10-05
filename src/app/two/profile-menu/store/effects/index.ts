@@ -3,5 +3,3 @@ import { EntityProfileMenuEffects } from '@web/app/two/profile-menu/store/effect
 export const effects: any[] = [
   EntityProfileMenuEffects
 ];
-
-export * from '@web/app/two/profile-menu/store/effects/entity-profile-menu.effects';
