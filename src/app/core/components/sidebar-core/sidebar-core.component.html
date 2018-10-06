@@ -1,4 +1,4 @@
 <p-sidebar [(visible)]="showSidebar" [style]="{'width':'25%'}" (onHide)="onHide()">
   <h1>Menu</h1>
-  <p-panelMenu [model]="menuItems" [style]="{'width':'100%'}" [multiple]="false"></p-panelMenu>
+  <app-panel-menu-core [menuItems]="menuItems"></app-panel-menu-core>
 </p-sidebar>
