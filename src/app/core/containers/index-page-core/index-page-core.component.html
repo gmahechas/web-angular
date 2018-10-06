@@ -1,4 +1,4 @@
-<app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" (hide)="opencloseSidebar($event)">
+<app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'25%'}" (hide)="opencloseSidebar($event)">
   <h1>Menu</h1>
   <app-panel-menu-core [menuItems]="menuItems"></app-panel-menu-core>
 </app-sidebar-shared>

@@ -10,6 +10,7 @@ export class SidebarSharedComponent implements OnInit {
 
   @Input() showSidebar: boolean;
   @Input() position: string;
+  @Input() style: any;
   @Output() hide: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
