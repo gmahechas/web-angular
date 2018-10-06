@@ -13,6 +13,7 @@ import { Country } from '@web/app/one/country/models/country.model';
 })
 export class FormPageCountryComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   country$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
