@@ -96,13 +96,11 @@ export class EntityCountryEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchCountry: fromModels.SearchCountry) => {
-        console.log(searchCountry.country);
         if (
           searchCountry.country.country_id === '' &&
           searchCountry.country.country_name === '' &&
           searchCountry.country.country_code === ''
         ) {
-          console.log('Vacio');
           return EMPTY;
         }
 

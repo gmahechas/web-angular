@@ -96,7 +96,6 @@ export class EntityEstateEffects {
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchEstate: fromModels.SearchEstate) => {
-        console.log(searchEstate);
         if (
           searchEstate.estate.estate_id === '' &&
           searchEstate.estate.estate_name === '' &&
