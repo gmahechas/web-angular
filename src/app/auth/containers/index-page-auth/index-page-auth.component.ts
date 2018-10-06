@@ -22,7 +22,7 @@ export class IndexPageAuthComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(event: Auth) {
-    this.store.dispatch(new fromStore.Login(event));
+  login(auth: Auth) {
+    this.store.dispatch(new fromStore.Login({ auth }));
   }
 }

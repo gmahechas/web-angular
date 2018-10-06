@@ -9,7 +9,7 @@ export const environment = {
   oauthUrl: '/oauth/token',
   oauth: {
     client_id: 1,
-    client_secret: 'AgV2nCEgGpwE3HW47MLIPd4QlbdeLaHo6nHPqJCq'
+    client_secret: 'n2sHnOHhftGziNun0D81hD63YaQPzsyaZxWCDLrj'
   }
 };
 

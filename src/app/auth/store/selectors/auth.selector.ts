@@ -8,7 +8,12 @@ export const getStatusState = createSelector(
   (state: fromFeature.AuthState) => state.status
 );
 
-export const getLoggedIn = createSelector(
+export const getUser = createSelector(
   getStatusState,
-  fromAuth.getLoggedIn
+  fromAuth.getUser
+);
+
+export const getLoggedIn = createSelector(
+  getUser,
+  user => !!user
 );

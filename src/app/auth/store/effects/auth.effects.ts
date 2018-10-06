@@ -18,25 +18,23 @@ export class AuthEffects {
   @Effect()
   login$ = this.actions$.pipe(
     ofType<fromActions.Login>(fromActions.AuthActionTypes.Login),
-    map(action => action.payload),
+    map(action => action.payload.auth),
     exhaustMap((auth: fromModels.Auth) =>
       this.authService.login(auth).pipe(
-        map((token: fromModels.Token) => new fromActions.LoginSuccess(token)),
-        catchError((errors) => {
-          return of(new fromActions.LoginFailure(errors.message));
-        })
+        map((token: fromModels.Token) => new fromActions.LoginSuccess({ token })),
+        catchError(errors => of(new fromActions.LoginFailure({ errors })))
       )
     ));
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
     ofType<fromActions.LoginSuccess>(fromActions.AuthActionTypes.LoginSuccess),
-    map(action => action.payload),
+    map(action => action.payload.token),
     tap((token: fromModels.Token) => {
       this.authService.setToken(token);
-      this.store.dispatch(new fromStore.Go({
-        path: ['dashboard']
-      }));
+      /*        this.store.dispatch(new fromStore.Go({
+               path: ['dashboard']
+             })); */
     })
   );
 
@@ -75,14 +73,14 @@ export class AuthEffects {
       )
     ));
 
-    @Effect({ dispatch: false })
-    refreshTokenSuccess$ = this.actions$.pipe(
-      ofType<fromActions.RefreshTokenSuccess>(fromActions.AuthActionTypes.RefreshTokenSuccess),
-      map(action => action.payload),
-      tap((token: fromModels.Token) => {
-        this.authService.setToken(token);
-      })
-    );
+  @Effect({ dispatch: false })
+  refreshTokenSuccess$ = this.actions$.pipe(
+    ofType<fromActions.RefreshTokenSuccess>(fromActions.AuthActionTypes.RefreshTokenSuccess),
+    map(action => action.payload),
+    tap((token: fromModels.Token) => {
+      this.authService.setToken(token);
+    })
+  );
 
   @Effect({ dispatch: false })
   init$ = defer(() => {

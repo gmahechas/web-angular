@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   setToken(token: Token) {
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('mavatec', JSON.stringify({ token: token }));
   }
 
   getToken(): Token {
