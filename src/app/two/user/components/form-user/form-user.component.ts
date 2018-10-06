@@ -11,6 +11,14 @@ import { User } from '@web/app/two/user/models/user.model';
 })
 export class FormUserComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.userForm.disable();
+    } else {
+      this.userForm.enable();
+    }
+  }
   @Input() user: User;
   @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 

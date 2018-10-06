@@ -13,6 +13,7 @@ import { Profile } from '@web/app/two/profile/models/profile.model';
 })
 export class FormPageProfileComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   profile$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

@@ -13,6 +13,7 @@ import { Person } from '@web/app/two/person/models/person.model';
 })
 export class FormPagePersonComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   person$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

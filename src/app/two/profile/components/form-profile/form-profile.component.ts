@@ -11,6 +11,14 @@ import { Profile } from '@web/app/two/profile/models/profile.model';
 })
 export class FormProfileComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.profileForm.disable();
+    } else {
+      this.profileForm.enable();
+    }
+  }
   @Input() profile: Profile;
   @Output() submitted: EventEmitter<Profile> = new EventEmitter<Profile>();
 

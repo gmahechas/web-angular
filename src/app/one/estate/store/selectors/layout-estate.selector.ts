@@ -12,3 +12,8 @@ export const getError = createSelector(
   getLayoutState,
   fromLayout.getError
 );
+
+export const getPending = createSelector(
+  getLayoutState,
+  fromLayout.getPending
+);

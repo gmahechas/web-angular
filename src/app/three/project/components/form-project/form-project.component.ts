@@ -11,6 +11,14 @@ import { Project } from '@web/app/three/project/models/project.model';
 })
 export class FormProjectComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.projectForm.disable();
+    } else {
+      this.projectForm.enable();
+    }
+  }
   @Input() project: Project;
   @Output() submitted: EventEmitter<Project> = new EventEmitter<Project>();
 

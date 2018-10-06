@@ -2,10 +2,12 @@ import { EntityActionTypes, EntityActions } from '@web/app/three/project/store/a
 
 export interface State {
   error: string;
+  pending: boolean;
 }
 
 export const initialState: State = {
-  error: ''
+  error: '',
+  pending: false
 };
 
 export function reducer(state = initialState, action: EntityActions): State {
@@ -17,7 +19,29 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
-        error: action.payload.error
+        error: action.payload.error,
+        pending: false
+      };
+    }
+
+    case EntityActionTypes.LoadEntity:
+    case EntityActionTypes.PaginateEntity:
+    case EntityActionTypes.StoreEntity:
+    case EntityActionTypes.UpdateEntity:
+    case EntityActionTypes.DestroyEntity: {
+      return {
+        ...state,
+        pending: true
+      };
+    }
+
+    case EntityActionTypes.LoadSuccessEntity:
+    case EntityActionTypes.StoreSuccessEntity:
+    case EntityActionTypes.UpdateSuccessEntity:
+    case EntityActionTypes.DestroySuccessEntity: {
+      return {
+        ...state,
+        pending: false
       };
     }
 
@@ -28,3 +52,4 @@ export function reducer(state = initialState, action: EntityActions): State {
 }
 
 export const getError = (state: State) => state.error;
+export const getPending = (state: State) => state.pending;

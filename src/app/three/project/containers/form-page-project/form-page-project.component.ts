@@ -13,6 +13,7 @@ import { Project } from '@web/app/three/project/models/project.model';
 })
 export class FormPageProjectComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   project$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

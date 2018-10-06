@@ -13,6 +13,7 @@ import { Estate } from '@web/app/one/estate/models/estate.model';
 })
 export class FormPageEstateComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   estate$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

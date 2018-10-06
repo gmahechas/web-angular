@@ -11,6 +11,14 @@ import { City } from '@web/app/one/city/models/city.model';
 })
 export class FormCityComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.cityForm.disable();
+    } else {
+      this.cityForm.enable();
+    }
+  }
   @Input() city: City;
   @Output() submitted: EventEmitter<City> = new EventEmitter<City>();
 

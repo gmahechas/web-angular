@@ -13,6 +13,7 @@ import { Macroproject } from '@web/app/three/macroproject/models/macroproject.mo
 })
 export class FormPageMacroprojectComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   macroproject$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

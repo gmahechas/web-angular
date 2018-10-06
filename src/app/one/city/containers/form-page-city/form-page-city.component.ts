@@ -13,6 +13,7 @@ import { City } from '@web/app/one/city/models/city.model';
 })
 export class FormPageCityComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   city$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

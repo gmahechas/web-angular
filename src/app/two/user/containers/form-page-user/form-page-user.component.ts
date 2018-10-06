@@ -13,6 +13,7 @@ import { User } from '@web/app/two/user/models/user.model';
 })
 export class FormPageUserComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   user$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(

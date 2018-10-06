@@ -11,6 +11,14 @@ import { Macroproject } from '@web/app/three/macroproject/models/macroproject.mo
 })
 export class FormMacroprojectComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.macroprojectForm.disable();
+    } else {
+      this.macroprojectForm.enable();
+    }
+  }
   @Input() macroproject: Macroproject;
   @Output() submitted: EventEmitter<Macroproject> = new EventEmitter<Macroproject>();
 

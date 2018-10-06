@@ -13,6 +13,7 @@ import { Office } from '@web/app/one/office/models/office.model';
 })
 export class FormPageOfficeComponent implements OnInit {
 
+  pending$ = this.store.pipe(select(fromStore.getPending));
   office$ = this.store.pipe(select(fromStore.getSelectedByRouter));
 
   constructor(
