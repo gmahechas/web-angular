@@ -1,6 +1,5 @@
-<app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'25%'}" (hide)="opencloseSidebar($event)">
-  <h1>Menu</h1>
-  <app-panel-menu-core [menuItems]="menuItems"></app-panel-menu-core>
+<app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'75%'}" (hide)="opencloseSidebar($event)">
+  <app-menu-core [menuItems]="menuItems"></app-menu-core>
 </app-sidebar-shared>
 <app-header-core (clickOpen)="opencloseSidebar($event)"></app-header-core>
 <app-message-core></app-message-core>
