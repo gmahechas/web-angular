@@ -11,6 +11,7 @@ import { CheckboxSharedComponent } from '@web/app/shared/components/checkbox-sha
 import { InputSwitchSharedComponent } from '@web/app/shared/components/input-switch-shared/input-switch-shared.component';
 import { TreeSharedComponent } from '@web/app/shared/components/tree-shared/tree-shared.component';
 import { MessageSharedComponent } from '@web/app/shared/components/message-shared/message-shared.component';
+import { SidebarSharedComponent } from '@web/app/shared/components/sidebar-shared/sidebar-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -26,18 +27,5 @@ export const components: any[] = [
   InputSwitchSharedComponent,
   TreeSharedComponent,
   MessageSharedComponent,
+  SidebarSharedComponent
 ];
-
-export * from '@web/app/shared/components/dropdown-shared/dropdown-shared.component';
-export * from '@web/app/shared/components/button-shared/button-shared.component';
-export * from '@web/app/shared/components/input-calendar-shared/input-calendar-shared.component';
-export * from '@web/app/shared/components/input-mask-shared/input-mask-shared.component';
-export * from '@web/app/shared/components/input-password-shared/input-password-shared.component';
-export * from '@web/app/shared/components/input-text-shared/input-text-shared.component';
-export * from '@web/app/shared/components/table-shared/table-shared.component';
-export * from '@web/app/shared/components/validation-errors-shared/validation-errors-shared.component';
-export * from '@web/app/shared/components/panel-shared/panel-shared.component';
-export * from '@web/app/shared/components/checkbox-shared/checkbox-shared.component';
-export * from '@web/app/shared/components/input-switch-shared/input-switch-shared.component';
-export * from '@web/app/shared/components/tree-shared/tree-shared.component';
-export * from '@web/app/shared/components/message-shared/message-shared.component';

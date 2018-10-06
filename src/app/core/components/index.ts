@@ -1,4 +1,3 @@
-import { SidebarCoreComponent } from '@web/app/core/components/sidebar-core/sidebar-core.component';
 import { HeaderCoreComponent } from '@web/app/core/components/header-core/header-core.component';
 import { BlockCoreComponent } from '@web/app/core/components/block-core/block-core.component';
 import { NotFoundCoreComponent } from '@web/app/core/components/not-found-core/not-found-core.component';
@@ -10,7 +9,6 @@ import { MessageCoreComponent } from '@web/app/core/components/message-core/mess
 import { PanelMenuCoreComponent } from '@web/app/core/components/panel-menu-core/panel-menu-core.component'; // Pending
 
 export const components: any[] = [
-  SidebarCoreComponent,
   HeaderCoreComponent,
   BlockCoreComponent,
   NotFoundCoreComponent,
@@ -22,7 +20,6 @@ export const components: any[] = [
   PanelMenuCoreComponent
 ];
 
-export * from '@web/app/core/components/sidebar-core/sidebar-core.component';
 export * from '@web/app/core/components/header-core/header-core.component';
 export * from '@web/app/core/components/block-core/block-core.component';
 export * from '@web/app/core/components/not-found-core/not-found-core.component';

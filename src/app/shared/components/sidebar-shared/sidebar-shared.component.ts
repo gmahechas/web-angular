@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-sidebar-core',
+  selector: 'app-sidebar-shared',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './sidebar-core.component.html',
+  templateUrl: './sidebar-shared.component.html',
   styles: []
 })
-export class SidebarCoreComponent implements OnInit {
+export class SidebarSharedComponent implements OnInit {
 
-  @Input() menuItems: any;
   @Input() showSidebar: boolean;
+  @Input() position: string;
   @Output() hide: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
