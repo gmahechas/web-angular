@@ -4,8 +4,6 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/core/store';
 import * as fromAuth from '@web/app/auth/store';
 
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-index-page-core',
   templateUrl: './index-page-core.component.html',
@@ -13,20 +11,17 @@ import { Observable } from 'rxjs';
 })
 export class IndexPageCoreComponent implements OnInit {
 
-  loggedIn$: Observable<boolean>;
-  showSidebar: Observable<boolean>;
+  loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+  showSidebar = this.store.pipe(select(fromStore.getShowSidebar));
   menuItems: any[]; // TODO
-  menuItems$: Observable<any[]>;
-  blockedDocument$: Observable<boolean>;
-  showSpinner$: Observable<boolean>;
-  progressBar$: Observable<boolean>;
+  menuItems$ = this.store.pipe(select(fromStore.getMenuItems));
+  blockedDocument$ = this.store.pipe(select(fromStore.getBlockedDocument));
+  showSpinner$ = this.store.pipe(select(fromStore.getShowSpinner));
+  progressBar$ = this.store.pipe(select(fromStore.getProgressBar));
 
   constructor(
     private store: Store<fromStore.State>
   ) {
-    this.loggedIn$ = store.pipe(select(fromAuth.getLoggedIn));
-    this.showSidebar = store.pipe(select(fromStore.getShowSidebar));
-    this.menuItems$ = store.pipe(select(fromStore.getMenuItems));
     this.menuItems = [
       {
         icon: '',
@@ -85,9 +80,6 @@ export class IndexPageCoreComponent implements OnInit {
         command: (() => this.opencloseSidebar(false))
       },
     ];
-    this.blockedDocument$ = store.pipe(select(fromStore.getBlockedDocument));
-    this.showSpinner$ = store.pipe(select(fromStore.getShowSpinner));
-    this.progressBar$ = store.pipe(select(fromStore.getProgressBar));
   }
 
   ngOnInit() {
