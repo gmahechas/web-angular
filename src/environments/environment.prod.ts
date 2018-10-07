@@ -5,6 +5,6 @@ export const environment = {
   oauthUrl: '/oauth/token',
   oauth: {
     client_id: 1,
-    client_secret: 'n2sHnOHhftGziNun0D81hD63YaQPzsyaZxWCDLrj'
+    client_secret: 'an4tzjXQpEMVefeyId1vLLpgfPmJ2OBYqCKusQSv'
   }
 };

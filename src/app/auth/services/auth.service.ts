@@ -16,7 +16,7 @@ export class AuthService {
   ) { }
 
   login(auth: Auth) {
-    return this.httpClient.post(
+    return this.httpClient.post<Token>(
       environment.apilUrl + environment.oauthUrl, {
         grant_type: 'password',
         ...environment.oauth,
@@ -34,6 +34,10 @@ export class AuthService {
         refresh_token: refreshToken.refresh_token
       }
     );
+  }
+
+  currentUser(auth: Auth, token: Token) {
+
   }
 
   setToken(token: Token) {
