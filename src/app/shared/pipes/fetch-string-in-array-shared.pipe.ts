@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { at } from 'lodash';
+import { get } from 'lodash';
 
 @Pipe({
   name: 'fetchStringInArrayShared'
@@ -8,7 +8,7 @@ import { at } from 'lodash';
 export class FetchStringInArraySharedPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return at(value, args);
+    return get(value, args, args);
   }
 
 }
