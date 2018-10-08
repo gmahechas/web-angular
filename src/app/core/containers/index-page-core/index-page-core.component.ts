@@ -21,7 +21,9 @@ export class IndexPageCoreComponent implements OnInit {
 
   constructor(
     private store: Store<fromStore.State>
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.menuItems = [
       {
         icon: '',
@@ -80,9 +82,6 @@ export class IndexPageCoreComponent implements OnInit {
         command: (() => this.opencloseSidebar(false))
       },
     ];
-  }
-
-  ngOnInit() {
   }
 
   opencloseSidebar(event: boolean) {

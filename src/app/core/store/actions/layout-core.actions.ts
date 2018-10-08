@@ -12,6 +12,7 @@ export enum LayoutActionTypes {
   ShowProgressBar = '[Layout] Open Progress Bar',
   CloseProgressBar = '[Layout] Close Progress Bar',
   ShowMessages = '[Layout] Show Messages',
+  GetMenu = '[Layout] Get Menu'
 }
 
 export class OpenSidebar implements Action {
@@ -51,6 +52,10 @@ export class ShowMessages implements Action {
   constructor(public payload: Message[]) { }
 }
 
+export class GetMenu implements Action {
+  readonly type = LayoutActionTypes.ShowMessages;
+}
+
 export type LayoutActions =
   | OpenSidebar
   | CloseSidebar
@@ -60,4 +65,5 @@ export type LayoutActions =
   | CloseSpinner
   | ShowProgressBar
   | CloseProgressBar
-  | ShowMessages;
+  | ShowMessages
+  | GetMenu;
