@@ -8,9 +8,7 @@ import { TreeNode } from 'primeng/api';
 export class ParentChildArraySharedPipe implements PipeTransform {
 
   transform(objects: any): any {
-
     const newObjects: TreeNode[] = [];
-
     objects.map(object => {
       newObjects.push({
         label: object.menu.menu_name,
