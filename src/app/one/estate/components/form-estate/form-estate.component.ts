@@ -11,7 +11,14 @@ import { Estate } from '@web/app/one/estate/models/estate.model';
 })
 export class FormEstateComponent implements OnChanges, OnInit {
 
-  @Input() pending: boolean;
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.estateForm.disable();
+    } else {
+      this.estateForm.enable();
+    }
+  }
   @Input() estate: Estate;
   @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
 
