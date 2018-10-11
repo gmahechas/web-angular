@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-tree-shared',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tree-shared.component.html',
   styles: []
 })
@@ -21,7 +22,7 @@ export class TreeSharedComponent implements OnInit {
     this.select.emit(event.node);
   }
 
-  onUnselect(event) {
+  nodeUnselect(event) {
     this.unSelect.emit(event.node);
   }
 }
