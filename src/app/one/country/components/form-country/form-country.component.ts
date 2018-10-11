@@ -11,7 +11,14 @@ import { Country } from '@web/app/one/country/models/country.model';
 })
 export class FormCountryComponent implements OnChanges, OnInit {
 
-  @Input() pending: boolean;
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.countryForm.disable();
+    } else {
+      this.countryForm.enable();
+    }
+  }
   @Input() country: Country;
   @Output() submitted: EventEmitter<Country> = new EventEmitter<Country>();
 
