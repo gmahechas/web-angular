@@ -4,8 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/two/profile-menu/store';
 
-import { TreeNode } from 'primeng/api';
-
 @Component({
   selector: 'app-index-page-profile-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +13,6 @@ import { TreeNode } from 'primeng/api';
 export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
-  selection: TreeNode[];
 
   constructor(
     private store: Store<fromStore.State>,
@@ -23,10 +20,6 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.selection = [
-      { label: 'Modulo 1' }
-    ];
-
     this.store.dispatch(new fromStore.LoadEntity({
       search: {
         profile: {
