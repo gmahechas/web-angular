@@ -11,14 +11,7 @@ import { Office } from '@web/app/one/office/models/office.model';
 })
 export class FormOfficeComponent implements OnChanges, OnInit {
 
-  @Input()
-  set pending(isPending: boolean) {
-    if (isPending) {
-      this.officeForm.disable();
-    } else {
-      this.officeForm.enable();
-    }
-  }
+  @Input() pending: boolean;
   @Input() office: Office;
   @Output() submitted: EventEmitter<Office> = new EventEmitter<Office>();
 

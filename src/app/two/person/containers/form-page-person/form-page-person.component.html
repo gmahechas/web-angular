@@ -1,11 +1,11 @@
 <app-form-person *ngIf="!(person$ | async) as person" [pending]="pending$ | async" (submitted)="onStore($event)">
   <div class="form-title">Agregar Persona</div>
-  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" [disabled]="pending$ | async" (click)="onCancel()"></app-button-shared>
 </app-form-person>
 
 <app-form-person *ngIf="(person$ | async) as person" [pending]="pending$ | async" (submitted)="onUpdate($event)"
   [person]="person">
   <div class="form-title">Editar Persona</div>
-  <app-button-shared [type]="'button'" [label]="'Eliminar'" [class]="'ui-button-secondary'" (click)="onDestroy(person)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="'Eliminar'" [class]="'ui-button-secondary'" [disabled]="pending$ | async" (click)="onDestroy(person)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" [disabled]="pending$ | async" (click)="onCancel()"></app-button-shared>
 </app-form-person>
