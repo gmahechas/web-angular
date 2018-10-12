@@ -1,3 +1,5 @@
-<div *ngIf="(data$ | async) as data">
-  <div>{{ data | json }}</div>
+<div class="ui-g">
+  <div class="ui-g-12" *ngIf="(data$ | async) as data">
+    <app-edit-user-office *ngFor="let item of data" [user_office]="item"></app-edit-user-office>
+  </div>
 </div>

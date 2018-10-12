@@ -8,6 +8,7 @@ import { SharedModule } from '@web/app/shared/shared.module';
 import { UserOfficeRoutingModule } from '@web/app/two/user-office/user-office-routing.module';
 
 import * as fromContainers from '@web/app/two/user-office/containers';
+import * as fromComponents from '@web/app/two/user-office/components';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import * as fromContainers from '@web/app/two/user-office/containers';
     EffectsModule.forFeature(effects)
   ],
   declarations: [
-    ...fromContainers.containers
+    ...fromContainers.containers,
+    ...fromComponents.components
   ]
 })
 export class UserOfficeModule { }
