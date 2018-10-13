@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -14,9 +14,14 @@ export class CheckboxSharedComponent implements OnInit {
   @Input() checked: boolean;
   @Input() binary: boolean;
   @Input() label: string;
+  @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChange() {
+    this.change.emit(this.checked);
   }
 }

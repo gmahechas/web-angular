@@ -1,5 +1,11 @@
-<div [formGroup]="group">
-  <div [formGroupName]="groupName">
-    <p-checkbox [formControlName]="controlName" [binary]="binary" [label]="label"></p-checkbox>
+<ng-container *ngIf="group; then withForm; else withOutForm"></ng-container>
+<ng-template #withForm>
+  <div [formGroup]="group">
+    <div [formGroupName]="groupName">
+      <p-checkbox [formControlName]="controlName" [binary]="binary" [label]="label"></p-checkbox>
+    </div>
   </div>
-</div>
+</ng-template>
+<ng-template #withOutForm>
+  <p-checkbox [(ngModel)]="checked" [binary]="binary" [label]="label" (onChange)="onChange()"></p-checkbox>
+</ng-template>

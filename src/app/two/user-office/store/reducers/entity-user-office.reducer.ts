@@ -25,6 +25,19 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.removeAll(state);
     }
 
+    case EntityActionTypes.UpdateSuccessEntity: {
+      return adapter.updateOne({
+        id: action.payload.entity.updateUserOffice.user_office_id,
+        changes: action.payload.entity.updateUserOffice
+      },
+        state
+      );
+    }
+
+    case EntityActionTypes.DestroySuccessEntity: {
+      return adapter.removeOne(action.payload.entity.destroyUserOffice.user_office_id, state);
+    }
+
     case EntityActionTypes.ResetSearch: {
       return adapter.removeAll(state);
     }

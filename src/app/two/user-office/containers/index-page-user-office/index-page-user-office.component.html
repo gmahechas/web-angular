@@ -1,5 +1,5 @@
 <div class="ui-g">
   <div class="ui-g-12" *ngIf="(data$ | async) as data">
-    <app-edit-user-office *ngFor="let item of data" [user_office]="item"></app-edit-user-office>
+    <app-edit-user-office *ngFor="let userOffice of data" [userOffice]="userOffice" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-edit-user-office>
   </div>
 </div>

@@ -10,7 +10,9 @@ import * as fromModels from '@web/app/two/user-office/models';
 export class UserOfficeService {
 
   constructor(
-    private userOfficePagination: fromGraphql.UserOfficePaginationGQL
+    private userOfficePagination: fromGraphql.UserOfficePaginationGQL,
+    private userOfficeUpdate: fromGraphql.UserOfficeUpdateGQL,
+    private userOfficeDestroy: fromGraphql.UserOfficeDestroyGQL
   ) { }
 
   load(searchUserOffice: fromModels.SearchUserOffice) {
@@ -21,6 +23,14 @@ export class UserOfficeService {
       limit: searchUserOffice.limit,
       page: searchUserOffice.page
     }).valueChanges;
+  }
+
+  update(userOffice: fromModels.UserOffice) {
+    return this.userOfficeUpdate.mutate(userOffice);
+  }
+
+  destroy(userOffice: fromModels.UserOffice) {
+    return this.userOfficeDestroy.mutate(userOffice);
   }
 
 }

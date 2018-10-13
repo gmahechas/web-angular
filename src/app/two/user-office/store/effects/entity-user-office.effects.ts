@@ -27,6 +27,30 @@ export class EntityUserOfficeEffects {
     })
   );
 
+  @Effect()
+  updateEntity$ = this.actions$.pipe(
+    ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
+    map(action => action.payload.entity),
+    switchMap((userOffice: fromModels.UserOffice) => {
+      return this.userOfficeService.update(userOffice).pipe(
+        map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
+        catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
+      );
+    })
+  );
+
+  @Effect()
+  destroyEntity$ = this.actions$.pipe(
+    ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
+    map(action => action.payload.entity),
+    switchMap((userOffice: fromModels.UserOffice) => {
+      return this.userOfficeService.destroy(userOffice).pipe(
+        map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
+        catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
+      );
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private userOfficeService: UserOfficeService,

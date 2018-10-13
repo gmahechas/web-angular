@@ -1,39 +1,19 @@
 import { Injectable } from '@angular/core';
 
-import { PaginationUserOffice } from '@web/app/two/user-office/models/pagination-user-office.model';
+import { DestroyUserOffice } from '@web/app/two/user-office/models/destroy-user-office.model';
 
-import { Query } from 'apollo-angular';
+import { Mutation } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserOfficePaginationGQL extends Query<PaginationUserOffice> {
+export class UserOfficeDestroyGQL extends Mutation<DestroyUserOffice> {
 
-document: DocumentNode = gql`
-  query paginationUserOffice(
-    $user_office_id: ID,
-    $user_office_status: String,
-    $user_id: ID,
-    $office_id: ID,
-    $limit: Int,
-    $page: Int
-  ) {
-    paginationUserOffice(
-      user_office_id: $user_office_id,
-      user_office_status: $user_office_status,
-      user_id: $user_id,
-      office_id: $office_id,
-      limit: $limit,
-      page: $page
-    ) {
-      total
-      per_page
-      current_page
-      from
-      to
-      data {
+  document: DocumentNode = gql`
+    mutation destroyUserOffice($user_office_id: ID!) {
+      destroyUserOffice(user_office_id: $user_office_id) {
         user_office_id
         user_office_status
         user_office_created_at
@@ -79,6 +59,6 @@ document: DocumentNode = gql`
         }
       }
     }
-  }
-`;
+  `;
+
 }

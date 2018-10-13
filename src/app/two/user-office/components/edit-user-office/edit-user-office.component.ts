@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { UserOffice } from '@web/app/two/user-office/models/user-office.model';
 
@@ -9,11 +9,24 @@ import { UserOffice } from '@web/app/two/user-office/models/user-office.model';
 })
 export class EditUserOfficeComponent implements OnInit {
 
-  @Input() user_office: UserOffice;
+  @Input() userOffice: UserOffice;
+  @Output() edit: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
+  @Output() delete: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  handleChange(event) {
+    this.userOffice = {
+      ...this.userOffice,
+      user_office_status: event
+    };
+    this.edit.emit(this.userOffice);
+  }
+
+  handleDelete() {
+    this.delete.emit(this.userOffice);
+  }
 }
