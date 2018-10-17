@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Auth } from '@web/app/auth/models/auth.model';
 import { Token } from '@web/app/auth/models/token.model';
+import { User } from '@web/app/two/user/models/user.model';
 
 export enum AuthActionTypes {
   Login = '[Auth] Login',
@@ -20,7 +21,7 @@ export class Login implements Action {
 
 export class LoginSuccess implements Action {
   readonly type = AuthActionTypes.LoginSuccess;
-  constructor(public payload: { auth: Auth, token: Token }) { }
+  constructor(public payload: { token: Token, user: User }) { }
 }
 
 export class LoginFailure implements Action {

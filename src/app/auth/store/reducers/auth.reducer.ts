@@ -19,14 +19,15 @@ export function reducer(state = initialState, action: AuthActions): State {
 
     case AuthActionTypes.LoginSuccess: {
       return {
-        ...state
+        ...state,
+        user: action.payload.user
       };
     }
 
+    case AuthActionTypes.LoginFailure:
+    case AuthActionTypes.LoginRedirect:
     case AuthActionTypes.Logout: {
-      return {
-        ...state
-      };
+      return initialState;
     }
 
     default:

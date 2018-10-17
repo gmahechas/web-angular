@@ -22,7 +22,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     return this.store.pipe(select(fromStore.getLoggedIn),
       map(logged => {
         if (!logged) {
-          this.store.dispatch(new fromStore.LoginRedirect());
+          this.store.dispatch(new fromStore.LoginRedirect);
           return false;
         }
         return true;
@@ -36,7 +36,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     return this.store.pipe(select(fromStore.getLoggedIn),
       map(logged => {
         if (!logged) {
-          this.store.dispatch(new fromStore.LoginRedirect());
+          this.store.dispatch(new fromStore.LoginRedirect);
           return false;
         }
         return true;
