@@ -1,9 +1,11 @@
+
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Auth } from '@web/app/auth/models/auth.model';
 import { Token } from '@web/app/auth/models/token.model';
 import { User } from '@web/app/two/user/models/user.model';
+import { Company } from '@web/app/one/company/models/company.model';
 
 import { environment } from '@web/environments/environment';
 
@@ -17,11 +19,10 @@ export class AuthService {
   ) { }
 
   login(auth: Auth) {
-    return this.httpClient.post<{ token: Token, user: User }>(environment.apilUrl + environment.loginUrl, auth);
+    return this.httpClient.post<{ token: Token, user: User, company: Company }>(environment.apilUrl + environment.loginUrl, auth);
   }
 
   refreshToken(refreshToken: Token) {
-    console.log('refresh->', refreshToken);
     return this.httpClient.post(environment.apilUrl + environment.loginUrl, { refresh_token: refreshToken.refresh_token }
     );
   }

@@ -21,7 +21,7 @@ export class AuthEffects {
     map(action => action.payload.auth),
     exhaustMap((auth: fromModels.Auth) =>
       this.authService.login(auth).pipe(
-        map(({ token, user }) => new fromActions.LoginSuccess({ token, user })),
+        map(({ token, user, company }) => new fromActions.LoginSuccess({ token, user, company })),
         catchError(errors => of(new fromActions.LoginFailure({ errors })))
       )
     ));
@@ -30,7 +30,7 @@ export class AuthEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType<fromActions.LoginSuccess>(fromActions.AuthActionTypes.LoginSuccess),
     map(action => action.payload),
-    tap(({ token, user }) => {
+    tap(({ token, user, company }) => {
       this.authService.setToken(token);
       this.store.dispatch(new fromStore.Go({
         path: ['dashboard']
