@@ -1,5 +1,4 @@
 import { SidebarModule } from 'primeng/sidebar'; // Sidebar
-import { PanelMenuModule } from 'primeng/panelmenu'; // PanelMenu
 import { ButtonModule } from 'primeng/button'; // Button
 import { TableModule } from 'primeng/table'; // Table
 import { PaginatorModule } from 'primeng/paginator'; // Paginator
@@ -22,7 +21,6 @@ import { TreeModule } from 'primeng/tree';
 
 export const prime: any[] = [
   SidebarModule,
-  PanelMenuModule,
   ButtonModule,
   TableModule,
   PaginatorModule,

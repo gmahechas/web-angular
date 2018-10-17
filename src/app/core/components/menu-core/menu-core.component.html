@@ -1,2 +1,7 @@
 <h1>Menu</h1>
-<p-panelMenu [model]="menuItems" [style]="{'width':'100%'}" [multiple]="false"></p-panelMenu>
+
+<ul>
+  <li *ngFor="let profile_menu of profile.profile_menus" (click)="onNavigate(profile_menu)">
+    {{ profile_menu.menu.menu_name }}
+  </li>
+</ul>

@@ -22,8 +22,3 @@ export const getCompany = createSelector(
   getStatusState,
   fromAuth.getCompany
 );
-
-export const getLoggedIn = createSelector(
-  getUser,
-  user => !!user
-);

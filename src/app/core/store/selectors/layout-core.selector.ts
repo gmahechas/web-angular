@@ -8,11 +8,6 @@ export const getShowSidebar = createSelector(
   fromLayout.getShowSidebar
 );
 
-export const getMenuItems = createSelector(
-  fromCore.getLayoutState,
-  fromLayout.getMenuItems
-);
-
 export const getBlockedDocument = createSelector(
   fromCore.getLayoutState,
   fromLayout.getBlockedDocument

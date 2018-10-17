@@ -11,10 +11,9 @@ import * as fromAuth from '@web/app/auth/store';
 })
 export class IndexPageCoreComponent implements OnInit {
 
-  loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+  user$ = this.store.pipe(select(fromAuth.getUser));
+  company$ = this.store.pipe(select(fromAuth.getCompany));
   showSidebar = this.store.pipe(select(fromStore.getShowSidebar));
-  menuItems: any[]; // TODO
-  menuItems$ = this.store.pipe(select(fromStore.getMenuItems));
   blockedDocument$ = this.store.pipe(select(fromStore.getBlockedDocument));
   showSpinner$ = this.store.pipe(select(fromStore.getShowSpinner));
   progressBar$ = this.store.pipe(select(fromStore.getProgressBar));
@@ -24,64 +23,6 @@ export class IndexPageCoreComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.menuItems = [
-      {
-        icon: '',
-        label: 'Inicio',
-        routerLink: 'dashboard',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Paises',
-        routerLink: 'country',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Estados',
-        routerLink: 'estate',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Ciudades',
-        routerLink: 'city',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Empresa',
-        routerLink: 'company',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Sucursales',
-        routerLink: 'office',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Personas',
-        routerLink: 'person',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Perfiles',
-        routerLink: 'profile',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Usuarios',
-        routerLink: 'user',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Macro Proyectos',
-        routerLink: 'macroproject',
-        command: (() => this.opencloseSidebar(false))
-      },
-      {
-        label: 'Proyectos',
-        routerLink: 'project',
-        command: (() => this.opencloseSidebar(false))
-      },
-    ];
   }
 
   opencloseSidebar(event: boolean) {
@@ -90,5 +31,10 @@ export class IndexPageCoreComponent implements OnInit {
     } else if (!event) {
       this.store.dispatch(new fromStore.CloseSidebar());
     }
+  }
+
+  handleNavigate(profileMenu) {
+    this.store.dispatch(new fromStore.Go({ path: [profileMenu.menu.menu_uri] }));
+    this.store.dispatch(new fromStore.CloseSidebar());
   }
 }

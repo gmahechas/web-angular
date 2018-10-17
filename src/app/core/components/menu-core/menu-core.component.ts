@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { Profile } from '@web/app/two/profile/models/profile.model';
+import { ProfileMenu } from '@web/app/two/profile-menu/models';
 
 @Component({
   selector: 'app-menu-core',
@@ -7,11 +10,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MenuCoreComponent implements OnInit {
 
-  @Input() menuItems: any;
+  @Input() profile: Profile;
+  @Output() navigate: EventEmitter<ProfileMenu> = new EventEmitter<ProfileMenu>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onNavigate(profileMenu: ProfileMenu) {
+    this.navigate.emit(profileMenu);
+  }
 }

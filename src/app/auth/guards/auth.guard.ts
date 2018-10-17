@@ -19,9 +19,9 @@ export class AuthGuard implements CanLoad, CanActivate {
 
   canLoad(): Observable<boolean> {
 
-    return this.store.pipe(select(fromStore.getLoggedIn),
-      map(logged => {
-        if (!logged) {
+    return this.store.pipe(select(fromStore.getUser),
+      map(user => {
+        if (!user) {
           this.store.dispatch(new fromStore.LoginRedirect);
           return false;
         }
@@ -33,9 +33,9 @@ export class AuthGuard implements CanLoad, CanActivate {
 
   canActivate(): Observable<boolean> {
 
-    return this.store.pipe(select(fromStore.getLoggedIn),
-      map(logged => {
-        if (!logged) {
+    return this.store.pipe(select(fromStore.getUser),
+      map(user => {
+        if (!user) {
           this.store.dispatch(new fromStore.LoginRedirect);
           return false;
         }
