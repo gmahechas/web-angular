@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -15,6 +15,8 @@ import { SharedModule } from '@web/app/shared/shared.module';
 import { AuthModule } from '@web/app/auth/auth.module';
 import { AppRoutingModule } from '@web/app/app-routing.module';
 import { CoreModule } from '@web/app/core/core.module';
+
+import { TokenInterceptor } from '@web/app/auth/interceptors/token-interceptor';
 
 import { environment } from '@web/environments/environment';
 
@@ -41,7 +43,10 @@ import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core
     EffectsModule.forRoot(effects),
     CoreModule.forRoot()
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [IndexPageCoreComponent]
 })
 export class AppModule { }
