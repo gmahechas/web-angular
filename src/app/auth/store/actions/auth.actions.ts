@@ -9,10 +9,13 @@ export enum AuthActionTypes {
   LoginSuccess = '[Auth] Login Success',
   LoginFailure = '[Auth] Login Failure',
   LoginRedirect = '[Auth] Login Redirect',
-  Logout = '[Auth] Logout',
   RefreshToken = '[Auth] Refresh Token',
   RefreshTokenSuccess = '[Auth] Refresh Token Success',
   RefreshTokenFailure = '[Auth] Refresh Token Failure',
+  CheckLogin = '[Auth] Check Login',
+  CheckLoginSuccess = '[Auth] Check Login Success',
+  CheckLoginFailure = '[Auth] Check Login Failure',
+  Logout = '[Auth] Logout',
 }
 
 export class Login implements Action {
@@ -34,10 +37,6 @@ export class LoginRedirect implements Action {
   readonly type = AuthActionTypes.LoginRedirect;
 }
 
-export class Logout implements Action {
-  readonly type = AuthActionTypes.Logout;
-}
-
 export class RefreshToken implements Action {
   readonly type = AuthActionTypes.RefreshToken;
   constructor(public payload: Token) { }
@@ -53,12 +52,16 @@ export class RefreshTokenFailure implements Action {
   constructor(public payload: string) { }
 }
 
+export class Logout implements Action {
+  readonly type = AuthActionTypes.Logout;
+}
+
 export type AuthActions =
   | Login
   | LoginSuccess
   | LoginFailure
   | LoginRedirect
-  | Logout
   | RefreshToken
   | RefreshTokenSuccess
-  | RefreshTokenFailure;
+  | RefreshTokenFailure
+  | Logout;

@@ -4,6 +4,8 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/core/store';
 import * as fromAuth from '@web/app/auth/store';
 
+import { ProfileMenu } from '@web/app/two/profile-menu/models';
+
 @Component({
   selector: 'app-index-page-core',
   templateUrl: './index-page-core.component.html',
@@ -33,7 +35,7 @@ export class IndexPageCoreComponent implements OnInit {
     }
   }
 
-  handleNavigate(profileMenu) {
+  handleNavigate(profileMenu: ProfileMenu) {
     this.store.dispatch(new fromStore.Go({ path: [profileMenu.menu.menu_uri] }));
     this.store.dispatch(new fromStore.CloseSidebar());
   }
