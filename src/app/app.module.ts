@@ -46,8 +46,8 @@ import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true } // FIXME:
   ],
   bootstrap: [IndexPageCoreComponent]
 })

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/auth/store';
@@ -17,21 +17,22 @@ export class TokenInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: Token = JSON.parse(localStorage.getItem('mavatec'));
-    return this.store.pipe(
-      take(1),
-      select(fromStore.getToken),
-      switchMap((_token: Token) => {
-        const request = req.clone({
-          setHeaders: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': (token) ? token.token_type.concat(' ', token.access_token) : ''
-          }
-        });
-        return next.handle(request);
-      })
-    );
+    if (req.url !== 'http://local.dev.co/laravel/api/public/api/auth/refresh') {
+      return this.store.pipe(
+        take(1),
+        select(fromStore.getToken),
+        switchMap((_token: Token) => {
+          const request = req.clone({
+            setHeaders: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': (_token) ? _token.token_type.concat(' ', _token.access_token) : ''
+            }
+          });
+          return next.handle(request);
+        })
+      );
+    }
   }
 
 }

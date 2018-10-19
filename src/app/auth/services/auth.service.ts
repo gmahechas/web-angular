@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   refreshToken(token: Token) {
-    return this.httpClient.post<{ token: Token}>(environment.apilUrl + environment.loginUrl, { refresh_token: token.refresh_token });
+    return this.httpClient.post<Token>(environment.apilUrl + environment.refreshUrl, { refresh_token: token.refresh_token });
   }
 
   currentUser(auth: Auth, token: Token) {

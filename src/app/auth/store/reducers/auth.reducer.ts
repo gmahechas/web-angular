@@ -33,8 +33,16 @@ export function reducer(state = initialState, action: AuthActions): State {
       };
     }
 
+    case AuthActionTypes.RefreshTokenSuccess: {
+      return {
+        ...state,
+        token: action.payload.token
+      };
+    }
+
     case AuthActionTypes.LoginFailure:
     case AuthActionTypes.LoginRedirect:
+    case AuthActionTypes.RefreshTokenFailure:
     case AuthActionTypes.Logout: {
       return initialState;
     }

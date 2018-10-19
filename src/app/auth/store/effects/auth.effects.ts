@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/core/store';
 import * as fromActions from '@web/app/auth/store/actions';
+import * as fromSelectors from '@web/app/auth/store/selectors';
 
 import * as fromModels from '@web/app/auth/models';
 
 import { AuthService } from '@web/app/auth/services/auth.service';
 
 import { of, defer } from 'rxjs';
-import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
+import { tap, map, switchMap, catchError, withLatestFrom, take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects {
@@ -19,7 +20,7 @@ export class AuthEffects {
   login$ = this.actions$.pipe(
     ofType<fromActions.Login>(fromActions.AuthActionTypes.Login),
     map(action => action.payload.auth),
-    exhaustMap((auth: fromModels.Auth) =>
+    switchMap((auth: fromModels.Auth) =>
       this.authService.login(auth).pipe(
         map(({ token, user, company }) => new fromActions.LoginSuccess({ token, user, company })),
         catchError(errors => of(new fromActions.LoginFailure({ errors })))
@@ -50,6 +51,23 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
+  refreshToken$ = this.actions$.pipe(
+    ofType<fromActions.RefreshToken>(fromActions.AuthActionTypes.RefreshToken),
+    tap((token) => {
+      console.log('Update :) ::::', token);
+    })
+  );
+
+  /*   @Effect({ dispatch: false })
+    refreshTokenSuccess$ = this.actions$.pipe(
+      ofType<fromActions.RefreshTokenSuccess>(fromActions.AuthActionTypes.RefreshTokenSuccess),
+      map(action => action.payload),
+      tap((token: fromModels.Token) => {
+        this.authService.setToken(token);
+      })
+    ); */
+
+  @Effect({ dispatch: false })
   logout$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.Logout),
     tap(authed => {
@@ -57,28 +75,6 @@ export class AuthEffects {
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
-    })
-  );
-
-  @Effect()
-  refreshToken$ = this.actions$.pipe(
-    ofType<fromActions.RefreshToken>(fromActions.AuthActionTypes.RefreshToken),
-    map(action => action.payload),
-    exhaustMap((token: fromModels.Token) =>
-      this.authService.refreshToken(token).pipe(
-        map((newToken: fromModels.Token) => new fromActions.RefreshTokenSuccess(newToken)),
-        catchError((errors) => {
-          return of(new fromActions.RefreshTokenFailure(errors));
-        })
-      )
-    ));
-
-  @Effect({ dispatch: false })
-  refreshTokenSuccess$ = this.actions$.pipe(
-    ofType<fromActions.RefreshTokenSuccess>(fromActions.AuthActionTypes.RefreshTokenSuccess),
-    map(action => action.payload),
-    tap((token: fromModels.Token) => {
-      this.authService.setToken(token);
     })
   );
 

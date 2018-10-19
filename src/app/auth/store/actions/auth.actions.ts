@@ -39,17 +39,17 @@ export class LoginRedirect implements Action {
 
 export class RefreshToken implements Action {
   readonly type = AuthActionTypes.RefreshToken;
-  constructor(public payload: Token) { }
+  constructor(public payload: { token: Token }) { }
 }
 
 export class RefreshTokenSuccess implements Action {
   readonly type = AuthActionTypes.RefreshTokenSuccess;
-  constructor(public payload: Token) { }
+  constructor(public payload: { token: Token }) { }
 }
 
 export class RefreshTokenFailure implements Action {
   readonly type = AuthActionTypes.RefreshTokenFailure;
-  constructor(public payload: string) { }
+  constructor(public payload: { errors: any }) { }
 }
 
 export class Logout implements Action {
