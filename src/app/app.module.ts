@@ -17,6 +17,7 @@ import { AppRoutingModule } from '@web/app/app-routing.module';
 import { CoreModule } from '@web/app/core/core.module';
 
 import { TokenInterceptor } from '@web/app/auth/interceptors/token-interceptor';
+import { RefreshTokenInterceptor } from '@web/app/auth/interceptors/refresh-token-interceptor';
 
 import { environment } from '@web/environments/environment';
 
@@ -45,7 +46,8 @@ import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true }
   ],
   bootstrap: [IndexPageCoreComponent]
 })
