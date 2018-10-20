@@ -20,7 +20,7 @@ export class EntityUserOfficeEffects {
     switchMap(({ search }: { search: fromModels.SearchUserOffice }) => {
       return this.userOfficeService.load(search).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -32,7 +32,7 @@ export class EntityUserOfficeEffects {
     switchMap((userOffice: fromModels.UserOffice) => {
       return this.userOfficeService.update(userOffice).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -44,7 +44,7 @@ export class EntityUserOfficeEffects {
     switchMap((userOffice: fromModels.UserOffice) => {
       return this.userOfficeService.destroy(userOffice).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.DestroyFailEntity({ error })))
       );
     })
   );

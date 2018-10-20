@@ -20,7 +20,7 @@ export class EntityProfileMenuEffects {
     switchMap(({ search }: { search: fromModels.SearchProfileMenu }) => {
       return this.profileMenuService.load(search).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
       );
     })
   );

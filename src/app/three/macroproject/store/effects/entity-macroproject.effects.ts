@@ -29,7 +29,7 @@ export class EntityMacroprojectEffects {
       currentPage = (currentPage) ? currentPage : searchMacroproject.page;
       return this.macroprojectService.load({ ...searchMacroproject, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -41,7 +41,7 @@ export class EntityMacroprojectEffects {
     switchMap((macroproject: fromModels.Macroproject) => {
       return this.macroprojectService.store(macroproject).pipe(
         map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -53,7 +53,7 @@ export class EntityMacroprojectEffects {
     switchMap((macroproject: fromModels.Macroproject) => {
       return this.macroprojectService.update(macroproject).pipe(
         map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -65,7 +65,7 @@ export class EntityMacroprojectEffects {
     switchMap((macroproject: fromModels.Macroproject) => {
       return this.macroprojectService.destroy(macroproject).pipe(
         map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -81,7 +81,7 @@ export class EntityMacroprojectEffects {
     switchMap(([currentPage, perPage, searchMacroproject]: [number, number, fromModels.SearchMacroproject]) => {
       return from(this.macroprojectService.pagination({ ...searchMacroproject, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -110,11 +110,8 @@ export class EntityMacroprojectEffects {
         return this.macroprojectService.load({ ...searchMacroproject, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromActions.LoadFailEntity({ error })))
         );
-
       })
     )
 
