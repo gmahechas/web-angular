@@ -43,7 +43,6 @@ export class AuthEffects {
   loginRedirect$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.LoginRedirect),
     tap(() => {
-      this.authService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
@@ -58,31 +57,15 @@ export class AuthEffects {
     })
   );
 
-  /*   @Effect({ dispatch: false })
-    refreshTokenSuccess$ = this.actions$.pipe(
-      ofType<fromActions.RefreshTokenSuccess>(fromActions.AuthActionTypes.RefreshTokenSuccess),
-      map(action => action.payload),
-      tap((token: fromModels.Token) => {
-        this.authService.setToken(token);
-      })
-    ); */
-
-  @Effect({ dispatch: false })
-  logout$ = this.actions$.pipe(
-    ofType(fromActions.AuthActionTypes.Logout),
-    tap(authed => {
-      this.authService.removeToken();
-      this.store.dispatch(new fromStore.Go({
-        path: ['auth']
-      }));
-    })
-  );
-
   @Effect({ dispatch: false })
   init$ = defer(() => {
     return of(this.authService.getToken());
   }).pipe(
-    tap((token: fromModels.Token) => console.log(token))
+    tap((token: fromModels.Token) => {
+      if (token) {
+        console.log('Lo intento');
+      }
+    })
   );
 
   constructor(
