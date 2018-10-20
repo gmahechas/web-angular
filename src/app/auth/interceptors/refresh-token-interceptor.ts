@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 
-import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/auth/store';
-
 import { AuthService } from '@web/app/auth/services/auth.service';
 
 import { Token } from '@web/app/auth/models/token.model';
 
 import { Observable } from 'rxjs';
-import { tap, take, catchError, switchMap, flatMap } from 'rxjs/operators';
-
+import { catchError, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class RefreshTokenInterceptor implements HttpInterceptor {
 
   constructor(
-    private store: Store<fromStore.State>,
     private authService: AuthService
   ) { }
 
@@ -24,35 +19,20 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((errors: HttpErrorResponse) => {
-
-        if (errors.status === 401) {
-          return this.store.pipe(
-            take(1),
-            select(fromStore.getToken),
-            switchMap((_token: Token) => {
-              console.log(_token);
-              return this.authService.refreshToken(_token)
-                .pipe(
-                  switchMap(_token2 => {
-                    console.log('2', _token2);
-                    this.store.dispatch(new fromStore.RefreshToken({ token: _token2 }));
-                    const newrequest = req.clone({
-                      setHeaders: {
-                        'Authorization': (_token2) ? _token2.token_type.concat(' ', _token2.access_token) : ''
-                      }
-                    });
-                    return next.handle(newrequest);
-                  })
-                );
-            })
-          );
-        }
-        return Observable.throw(errors);
+        const token: Token = this.authService.getToken();
+        return this.authService.refreshToken(token).pipe(
+          mergeMap((_token: Token) => {
+            this.authService.setToken(_token);
+            const request = req.clone({
+              setHeaders: {
+                'Authorization': (_token) ? _token.token_type.concat(' ', _token.access_token) : ''
+              }
+            });
+            return next.handle(request);
+          })
+        );
       })
     );
-
-
-
   }
 
 }
