@@ -29,9 +29,7 @@ export class EntityUserEffects {
       currentPage = (currentPage) ? currentPage : searchUser.page;
       return this.userService.load({ ...searchUser, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );
@@ -101,7 +99,7 @@ export class EntityUserEffects {
           searchUser.user.email === '' &&
           searchUser.person === null &&
           searchUser.profile === null
-          ) {
+        ) {
           return EMPTY;
         }
 

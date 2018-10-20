@@ -20,9 +20,7 @@ export class EntityUserOfficeEffects {
     switchMap(({ search }: { search: fromModels.SearchUserOffice }) => {
       return this.userOfficeService.load(search).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );

@@ -29,9 +29,7 @@ export class EntityCountryEffects {
       currentPage = (currentPage) ? currentPage : searchCountry.page;
       return this.countryService.load({ ...searchCountry, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );

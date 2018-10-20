@@ -29,9 +29,7 @@ export class EntityOfficeEffects {
       currentPage = (currentPage) ? currentPage : searchOffice.page;
       return this.officeService.load({ ...searchOffice, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );
@@ -99,7 +97,7 @@ export class EntityOfficeEffects {
           searchOffice.office.office_id === '' &&
           searchOffice.office.office_name === '' &&
           searchOffice.city === null
-          ) {
+        ) {
           return EMPTY;
         }
 

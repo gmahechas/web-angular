@@ -29,9 +29,7 @@ export class EntityMacroprojectEffects {
       currentPage = (currentPage) ? currentPage : searchMacroproject.page;
       return this.macroprojectService.load({ ...searchMacroproject, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );

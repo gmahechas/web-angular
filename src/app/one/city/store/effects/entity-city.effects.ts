@@ -29,9 +29,7 @@ export class EntityCityEffects {
       currentPage = (currentPage) ? currentPage : searchCity.page;
       return this.cityService.load({ ...searchCity, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );
@@ -101,7 +99,7 @@ export class EntityCityEffects {
           searchCity.city.city_name === '' &&
           searchCity.city.city_code === '' &&
           searchCity.estate === null
-          ) {
+        ) {
           return EMPTY;
         }
 

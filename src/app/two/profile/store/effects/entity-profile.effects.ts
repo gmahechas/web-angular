@@ -29,9 +29,7 @@ export class EntityProfileEffects {
       currentPage = (currentPage) ? currentPage : searchProfile.page;
       return this.profileService.load({ ...searchProfile, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );

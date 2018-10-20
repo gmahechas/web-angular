@@ -29,9 +29,7 @@ export class EntityProjectEffects {
       currentPage = (currentPage) ? currentPage : searchProject.page;
       return this.projectService.load({ ...searchProject, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => {
-          return of(new fromActions.LoadFailEntity({ error: errors }));
-        })
+        catchError((errors) => of(new fromActions.LoadFailEntity({ error: errors })))
       );
     })
   );
