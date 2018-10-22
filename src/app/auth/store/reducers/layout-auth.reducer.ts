@@ -13,7 +13,8 @@ export const initialState: State = {
 export function reducer(state = initialState, action: AuthActions): State {
 
   switch (action.type) {
-    case AuthActionTypes.Login: {
+    case AuthActionTypes.Auth:
+    case AuthActionTypes.CheckAuth: {
       return {
         ...state,
         error: null,
@@ -21,14 +22,23 @@ export function reducer(state = initialState, action: AuthActions): State {
       };
     }
 
-    case AuthActionTypes.LoginSuccess: {
+    case AuthActionTypes.AuthSuccess:
+    case AuthActionTypes.CheckAuthSuccess: {
       return initialState;
     }
 
-    case AuthActionTypes.LoginFailure: {
+    case AuthActionTypes.AuthFailure: {
       return {
         ...state,
-        error: action.payload.errors.error.error,
+        error: action.payload.error.error.error,
+        pending: false
+      };
+    }
+
+    case AuthActionTypes.CheckAuthFailure: {
+      return {
+        ...state,
+        error: action.payload.error.networkError.error.error,
         pending: false
       };
     }

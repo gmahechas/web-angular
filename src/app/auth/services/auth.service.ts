@@ -1,9 +1,12 @@
-
 import { Injectable } from '@angular/core';
+
+import { QueryRef } from 'apollo-angular';
+import * as fromGraphql from '@web/app/auth/graphql';
 
 import { HttpClient } from '@angular/common/http';
 import { Auth } from '@web/app/auth/models/auth.model';
 import { Token } from '@web/app/auth/models/token.model';
+import { CheckAuth } from '@web/app/auth/models/check-auth.model';
 import { User } from '@web/app/two/user/models/user.model';
 import { Company } from '@web/app/one/company/models/company.model';
 
@@ -14,8 +17,11 @@ import { environment } from '@web/environments/environment';
 })
 export class AuthService {
 
+  queryRef: QueryRef<CheckAuth>;
+
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private checkAuthGQL: fromGraphql.CheckAuthGQL
   ) { }
 
   login(auth: Auth) {
@@ -26,8 +32,8 @@ export class AuthService {
     return this.httpClient.post<Token>(environment.apilUrl + environment.refreshUrl, { refresh_token: token.refresh_token });
   }
 
-  currentUser(auth: Auth, token: Token) {
-
+  checkAuth() {
+    return this.checkAuthGQL.watch().valueChanges;
   }
 
   setToken(token: Token) {

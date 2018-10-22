@@ -17,8 +17,8 @@ export const routes: Routes = [
   { path: 'user', loadChildren: '@web/app/two/user/user.module#UserModule', canLoad: [AuthGuard] },
   { path: 'macroproject', loadChildren: '@web/app/three/macroproject/macroproject.module#MacroprojectModule', canLoad: [AuthGuard] },
   { path: 'project', loadChildren: '@web/app/three/project/project.module#ProjectModule', canLoad: [AuthGuard] },
-  { path: 'not-found', component: NotFoundCoreComponent },
-  { path: '**', redirectTo: 'not-found' },
+  { path: 'not-found', component: NotFoundCoreComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'not-found', canActivate: [AuthGuard] },
 ];
 
 @NgModule({

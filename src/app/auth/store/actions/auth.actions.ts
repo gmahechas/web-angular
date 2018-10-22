@@ -1,55 +1,51 @@
 import { Action } from '@ngrx/store';
-import { Auth } from '@web/app/auth/models/auth.model';
-import { Token } from '@web/app/auth/models/token.model';
+
+import * as fromModels from '@web/app/auth/models';
 import { User } from '@web/app/two/user/models/user.model';
 import { Company } from '@web/app/one/company/models/company.model';
 
 export enum AuthActionTypes {
-  Login = '[Auth] Login',
-  LoginSuccess = '[Auth] Login Success',
-  LoginFailure = '[Auth] Login Failure',
-  LoginRedirect = '[Auth] Login Redirect',
-  RefreshToken = '[Auth] Refresh Token',
-  RefreshTokenSuccess = '[Auth] Refresh Token Success',
-  RefreshTokenFailure = '[Auth] Refresh Token Failure',
-  CheckLogin = '[Auth] Check Login',
-  CheckLoginSuccess = '[Auth] Check Login Success',
-  CheckLoginFailure = '[Auth] Check Login Failure',
+  Auth = '[Auth] Auth',
+  AuthSuccess = '[Auth] Auth Success',
+  AuthFailure = '[Auth] Auth Failure',
+  CheckAuth = '[Auth] Check Auth',
+  CheckAuthSuccess = '[Auth] Check Auth Success',
+  CheckAuthFailure = '[Auth] Check Auth Failure',
+  AuthRedirect = '[Auth] Auth Redirect',
   Logout = '[Auth] Logout',
 }
 
-export class Login implements Action {
-  readonly type = AuthActionTypes.Login;
-  constructor(public payload: { auth: Auth }) { }
+export class Auth implements Action {
+  readonly type = AuthActionTypes.Auth;
+  constructor(public payload: { auth: fromModels.Auth }) { }
 }
 
-export class LoginSuccess implements Action {
-  readonly type = AuthActionTypes.LoginSuccess;
-  constructor(public payload: { token: Token, user: User, company: Company }) { }
+export class AuthSuccess implements Action {
+  readonly type = AuthActionTypes.AuthSuccess;
+  constructor(public payload: { token: fromModels.Token, user: User, company: Company }) { }
 }
 
-export class LoginFailure implements Action {
-  readonly type = AuthActionTypes.LoginFailure;
-  constructor(public payload: { errors: any }) { }
+export class AuthFailure implements Action {
+  readonly type = AuthActionTypes.AuthFailure;
+  constructor(public payload: { error: any }) { }
 }
 
-export class LoginRedirect implements Action {
-  readonly type = AuthActionTypes.LoginRedirect;
+export class CheckAuth implements Action {
+  readonly type = AuthActionTypes.CheckAuth;
 }
 
-export class RefreshToken implements Action {
-  readonly type = AuthActionTypes.RefreshToken;
-  constructor(public payload: { token: Token }) { }
+export class CheckAuthSuccess implements Action {
+  readonly type = AuthActionTypes.CheckAuthSuccess;
+  constructor(public payload: fromModels.CheckAuth) { }
 }
 
-export class RefreshTokenSuccess implements Action {
-  readonly type = AuthActionTypes.RefreshTokenSuccess;
-  constructor(public payload: { token: Token }) { }
+export class CheckAuthFailure implements Action {
+  readonly type = AuthActionTypes.CheckAuthFailure;
+  constructor(public payload: { error: any }) { }
 }
 
-export class RefreshTokenFailure implements Action {
-  readonly type = AuthActionTypes.RefreshTokenFailure;
-  constructor(public payload: { errors: any }) { }
+export class AuthRedirect implements Action {
+  readonly type = AuthActionTypes.AuthRedirect;
 }
 
 export class Logout implements Action {
@@ -57,11 +53,11 @@ export class Logout implements Action {
 }
 
 export type AuthActions =
-  | Login
-  | LoginSuccess
-  | LoginFailure
-  | LoginRedirect
-  | RefreshToken
-  | RefreshTokenSuccess
-  | RefreshTokenFailure
+  | Auth
+  | AuthSuccess
+  | AuthFailure
+  | CheckAuth
+  | CheckAuthSuccess
+  | CheckAuthFailure
+  | AuthRedirect
   | Logout;

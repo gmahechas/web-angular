@@ -11,9 +11,10 @@ import { tap } from 'rxjs/operators';
 export class LayoutAuthEffects {
 
   @Effect({ dispatch: false })
-  login$ = this.actions$.pipe(
+  auth$ = this.actions$.pipe(
     ofType(
-      fromActions.AuthActionTypes.Login
+      fromActions.AuthActionTypes.Auth,
+      fromActions.AuthActionTypes.CheckAuth
     ),
     tap(() => {
       this.store.dispatch(new fromCore.ShowSpinner);
@@ -21,9 +22,10 @@ export class LayoutAuthEffects {
   );
 
   @Effect({ dispatch: false })
-  loginSuccess$ = this.actions$.pipe(
+  authSuccess$ = this.actions$.pipe(
     ofType(
-      fromActions.AuthActionTypes.LoginSuccess
+      fromActions.AuthActionTypes.AuthSuccess,
+      fromActions.AuthActionTypes.CheckAuthSuccess
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
@@ -31,9 +33,10 @@ export class LayoutAuthEffects {
   );
 
   @Effect({ dispatch: false })
-  loginFailure$ = this.actions$.pipe(
+  authFailure$ = this.actions$.pipe(
     ofType(
-      fromActions.AuthActionTypes.LoginFailure
+      fromActions.AuthActionTypes.AuthFailure,
+      fromActions.AuthActionTypes.CheckAuthFailure
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);

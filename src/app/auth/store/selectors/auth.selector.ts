@@ -8,11 +8,6 @@ export const getStatusState = createSelector(
   (state: fromFeature.AuthState) => state.status
 );
 
-export const getToken = createSelector(
-  getStatusState,
-  fromAuth.getToken
-);
-
 export const getUser = createSelector(
   getStatusState,
   fromAuth.getUser

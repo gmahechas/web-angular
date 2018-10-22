@@ -1,35 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as fromStore from '@web/app/core/store';
 import * as fromActions from '@web/app/auth/store/actions';
-import * as fromSelectors from '@web/app/auth/store/selectors';
 
 import * as fromModels from '@web/app/auth/models';
 
 import { AuthService } from '@web/app/auth/services/auth.service';
 
 import { of, defer } from 'rxjs';
-import { tap, map, switchMap, catchError, withLatestFrom, take } from 'rxjs/operators';
+import { tap, map, switchMap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects {
 
   @Effect()
-  login$ = this.actions$.pipe(
-    ofType<fromActions.Login>(fromActions.AuthActionTypes.Login),
+  auth$ = this.actions$.pipe(
+    ofType<fromActions.Auth>(fromActions.AuthActionTypes.Auth),
     map(action => action.payload.auth),
     switchMap((auth: fromModels.Auth) =>
       this.authService.login(auth).pipe(
-        map(({ token, user, company }) => new fromActions.LoginSuccess({ token, user, company })),
-        catchError(errors => of(new fromActions.LoginFailure({ errors })))
+        map(({ token, user, company }) => new fromActions.AuthSuccess({ token, user, company })),
+        catchError(error => of(new fromActions.AuthFailure({ error })))
       )
     ));
 
   @Effect({ dispatch: false })
-  loginSuccess$ = this.actions$.pipe(
-    ofType<fromActions.LoginSuccess>(fromActions.AuthActionTypes.LoginSuccess),
+  authSuccess$ = this.actions$.pipe(
+    ofType<fromActions.AuthSuccess>(fromActions.AuthActionTypes.AuthSuccess),
     map(action => action.payload),
     tap(({ token, user, company }) => {
       this.authService.setToken(token);
@@ -39,10 +38,32 @@ export class AuthEffects {
     })
   );
 
+  @Effect()
+  checkAuth$ = this.actions$.pipe(
+    ofType<fromActions.CheckAuth>(fromActions.AuthActionTypes.CheckAuth),
+    switchMap(() => {
+      return this.authService.checkAuth().pipe(
+        map(({ data }) => new fromActions.CheckAuthSuccess(data)),
+        catchError(error => of(new fromActions.CheckAuthFailure({ error })))
+      );
+    })
+  );
+
   @Effect({ dispatch: false })
-  loginRedirect$ = this.actions$.pipe(
-    ofType(fromActions.AuthActionTypes.LoginRedirect),
+  checkAuthSuccess$ = this.actions$.pipe(
+    ofType(fromActions.AuthActionTypes.CheckAuthSuccess),
     tap(() => {
+      this.store.dispatch(new fromStore.Go({
+        path: ['dashboard']
+      }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  checkAuthFailure$ = this.actions$.pipe(
+    ofType(fromActions.AuthActionTypes.CheckAuthFailure),
+    tap(() => {
+      this.authService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
@@ -50,10 +71,12 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  refreshToken$ = this.actions$.pipe(
-    ofType<fromActions.RefreshToken>(fromActions.AuthActionTypes.RefreshToken),
-    tap((token) => {
-      console.log('Update :) ::::', token);
+  authRedirect$ = this.actions$.pipe(
+    ofType(fromActions.AuthActionTypes.AuthRedirect),
+    tap(() => {
+      this.store.dispatch(new fromStore.Go({
+        path: ['auth']
+      }));
     })
   );
 
@@ -63,7 +86,7 @@ export class AuthEffects {
   }).pipe(
     tap((token: fromModels.Token) => {
       if (token) {
-        console.log('Lo intento');
+        this.store.dispatch(new fromActions.CheckAuth);
       }
     })
   );

@@ -7,7 +7,6 @@ import * as fromStore from '@web/app/auth/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -18,11 +17,11 @@ export class AuthGuard implements CanLoad, CanActivate {
   ) { }
 
   canLoad(): Observable<boolean> {
-
+    console.log('canLoad');
     return this.store.pipe(select(fromStore.getUser),
       map(user => {
         if (!user) {
-          this.store.dispatch(new fromStore.LoginRedirect);
+          this.store.dispatch(new fromStore.AuthRedirect);
           return false;
         }
         return true;
@@ -32,11 +31,11 @@ export class AuthGuard implements CanLoad, CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-
+    console.log('canActivate');
     return this.store.pipe(select(fromStore.getUser),
       map(user => {
         if (!user) {
-          this.store.dispatch(new fromStore.LoginRedirect);
+          this.store.dispatch(new fromStore.AuthRedirect);
           return false;
         }
         return true;

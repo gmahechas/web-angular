@@ -9,7 +9,7 @@ import gql from 'graphql-tag';
 @Injectable({
   providedIn: 'root',
 })
-export class CityPaginationGQL extends Query<CheckAuth> {
+export class CheckAuthGQL extends Query<CheckAuth> {
 
 document: DocumentNode = gql`
   query {
