@@ -35,6 +35,9 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                 }
               });
               return next.handle(request);
+            }),
+            catchError(() => {
+              return Observable.throw('Error');
             })
           );
         } else {
