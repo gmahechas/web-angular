@@ -7,6 +7,8 @@ import { Token } from '@web/app/auth/models/token.model';
 
 import { Observable } from 'rxjs';
 
+import { environment } from '@web/environments/environment';
+
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
@@ -15,15 +17,20 @@ export class TokenInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: Token = this.authService.getToken();
-    const request = req.clone({
-      setHeaders: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': (token) ? token.token_type.concat(' ', token.access_token) : ''
-      }
-    });
-    return next.handle(request);
+    if (
+      req.url !== environment.api.concat(environment.login) &&
+      req.url !== environment.api.concat(environment.refresh)
+    ) {
+      const token: Token = this.authService.getToken();
+      const request = req.clone({
+        setHeaders: {
+          'Authorization': (token) ? token.token_type.concat(' ', token.access_token) : ''
+        }
+      });
+      return next.handle(request);
+    } else {
+      return next.handle(req);
+    }
   }
 
 }

@@ -7,7 +7,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { environment } from '@web/environments/environment';
 
 export function createApollo(httpLink: HttpLink) {
-  const link = httpLink.create({ uri: environment.apilUrl + environment.graphqlUrl });
+  const link = httpLink.create({ uri: environment.api.concat(environment.graphql) });
   return {
     link: link,
     cache: new InMemoryCache({

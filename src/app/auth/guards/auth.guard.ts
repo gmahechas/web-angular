@@ -17,7 +17,6 @@ export class AuthGuard implements CanLoad, CanActivate {
   ) { }
 
   canLoad(): Observable<boolean> {
-    console.log('canLoad');
     return this.store.pipe(select(fromStore.getUser),
       map(user => {
         if (!user) {
@@ -31,7 +30,6 @@ export class AuthGuard implements CanLoad, CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    console.log('canActivate');
     return this.store.pipe(select(fromStore.getUser),
       map(user => {
         if (!user) {

@@ -25,11 +25,11 @@ export class AuthService {
   ) { }
 
   login(auth: Auth) {
-    return this.httpClient.post<{ token: Token, user: User, company: Company }>(environment.apilUrl + environment.loginUrl, auth);
+    return this.httpClient.post<{ token: Token, user: User, company: Company }>(environment.api.concat(environment.login), auth);
   }
 
   refreshToken(token: Token) {
-    return this.httpClient.post<Token>(environment.apilUrl + environment.refreshUrl, { refresh_token: token.refresh_token });
+    return this.httpClient.post<Token>(environment.api.concat(environment.refresh), { refresh_token: token.refresh_token });
   }
 
   checkAuth() {

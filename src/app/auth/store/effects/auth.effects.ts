@@ -44,7 +44,7 @@ export class AuthEffects {
     switchMap(() => {
       return this.authService.checkAuth().pipe(
         map(({ data }) => new fromActions.CheckAuthSuccess(data)),
-        catchError(error => of(new fromActions.CheckAuthFailure({ error })))
+        catchError((error) => of(new fromActions.CheckAuthFailure({ error })))
       );
     })
   );

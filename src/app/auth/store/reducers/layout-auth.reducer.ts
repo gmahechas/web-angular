@@ -30,7 +30,7 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.AuthFailure: {
       return {
         ...state,
-        error: action.payload.error.error.error,
+        error: 'Error de Autenticacion',
         pending: false
       };
     }
@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.CheckAuthFailure: {
       return {
         ...state,
-        error: action.payload.error.networkError.error.error,
+        error: 'Su Sesion ha expiro',
         pending: false
       };
     }
