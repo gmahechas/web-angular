@@ -107,6 +107,16 @@ export class AuthEffects {
   authRedirect$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.AuthRedirect),
     tap(() => {
+      this.store.dispatch(new fromStore.Go({
+        path: ['auth']
+      }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  expiredAuth$ = this.actions$.pipe(
+    ofType(fromActions.AuthActionTypes.ExpiredAuth),
+    tap(() => {
       this.authService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']

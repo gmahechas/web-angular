@@ -40,8 +40,8 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
               });
               return next.handle(request);
             }),
-            catchError(() => {
-              this.store.dispatch(new fromAuth.AuthRedirect);
+            catchError((error) => {
+              this.store.dispatch(new fromAuth.ExpiredAuth);
               return Observable.throw('Error');
             })
           );

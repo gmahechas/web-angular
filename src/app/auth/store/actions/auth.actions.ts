@@ -15,6 +15,7 @@ export enum AuthActionTypes {
   LogoutAuthSuccess = '[Auth] Logout Auth Success',
   LogoutAuthFailure = '[Auth] Logout Auth Failure',
   AuthRedirect = '[Auth] Auth Redirect',
+  ExpiredAuth = '[Auth] Expired Auth',
 }
 
 export class Auth implements Action {
@@ -58,8 +59,13 @@ export class LogoutAuthFailure implements Action {
   readonly type = AuthActionTypes.LogoutAuthFailure;
   constructor(public payload: { error: any }) { }
 }
+
 export class AuthRedirect implements Action {
   readonly type = AuthActionTypes.AuthRedirect;
+}
+
+export class ExpiredAuth implements Action {
+  readonly type = AuthActionTypes.ExpiredAuth;
 }
 
 export type AuthActions =
@@ -72,4 +78,5 @@ export type AuthActions =
   | LogoutAuth
   | LogoutAuthSuccess
   | LogoutAuthFailure
-  | AuthRedirect;
+  | AuthRedirect
+  | ExpiredAuth;

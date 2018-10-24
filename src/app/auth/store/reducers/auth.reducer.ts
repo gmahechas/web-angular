@@ -23,7 +23,8 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.CheckAuthFailure:
     case AuthActionTypes.LogoutAuthSuccess:
     case AuthActionTypes.LogoutAuthFailure:
-    case AuthActionTypes.AuthRedirect: {
+    case AuthActionTypes.AuthRedirect:
+    case AuthActionTypes.ExpiredAuth: {
       return initialState;
     }
 
