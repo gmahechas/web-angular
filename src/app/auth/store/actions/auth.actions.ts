@@ -11,8 +11,10 @@ export enum AuthActionTypes {
   CheckAuth = '[Auth] Check Auth',
   CheckAuthSuccess = '[Auth] Check Auth Success',
   CheckAuthFailure = '[Auth] Check Auth Failure',
+  LogoutAuth = '[Auth] Logout Auth',
+  LogoutAuthSuccess = '[Auth] Logout Auth Success',
+  LogoutAuthFailure = '[Auth] Logout Auth Failure',
   AuthRedirect = '[Auth] Auth Redirect',
-  Logout = '[Auth] Logout',
 }
 
 export class Auth implements Action {
@@ -44,12 +46,20 @@ export class CheckAuthFailure implements Action {
   constructor(public payload: { error: any }) { }
 }
 
-export class AuthRedirect implements Action {
-  readonly type = AuthActionTypes.AuthRedirect;
+export class LogoutAuth implements Action {
+  readonly type = AuthActionTypes.LogoutAuth;
 }
 
-export class Logout implements Action {
-  readonly type = AuthActionTypes.Logout;
+export class LogoutAuthSuccess implements Action {
+  readonly type = AuthActionTypes.LogoutAuthSuccess;
+}
+
+export class LogoutAuthFailure implements Action {
+  readonly type = AuthActionTypes.LogoutAuthFailure;
+  constructor(public payload: { error: any }) { }
+}
+export class AuthRedirect implements Action {
+  readonly type = AuthActionTypes.AuthRedirect;
 }
 
 export type AuthActions =
@@ -59,5 +69,7 @@ export type AuthActions =
   | CheckAuth
   | CheckAuthSuccess
   | CheckAuthFailure
-  | AuthRedirect
-  | Logout;
+  | LogoutAuth
+  | LogoutAuthSuccess
+  | LogoutAuthFailure
+  | AuthRedirect;

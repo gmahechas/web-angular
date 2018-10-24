@@ -11,6 +11,7 @@ export class HeaderCoreComponent implements OnInit {
 
   @Input() company: Company;
   @Output() clickOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() clickLogout: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -21,4 +22,7 @@ export class HeaderCoreComponent implements OnInit {
     this.clickOpen.emit(event);
   }
 
+  logout() {
+    this.clickLogout.emit(true);
+  }
 }

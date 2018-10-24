@@ -17,11 +17,10 @@ import { environment } from '@web/environments/environment';
 })
 export class AuthService {
 
-  queryRef: QueryRef<CheckAuth>;
-
   constructor(
     private httpClient: HttpClient,
-    private checkAuthGQL: fromGraphql.CheckAuthGQL
+    private checkAuthGQL: fromGraphql.CheckAuthGQL,
+    private logoutAuthGQL: fromGraphql.LogoutAuthGQL
   ) { }
 
   login(auth: Auth) {
@@ -34,6 +33,10 @@ export class AuthService {
 
   checkAuth() {
     return this.checkAuthGQL.watch().valueChanges;
+  }
+
+  logout() {
+    return this.logoutAuthGQL.watch().valueChanges;
   }
 
   setToken(token: Token) {

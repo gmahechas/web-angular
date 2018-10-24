@@ -70,10 +70,44 @@ export class AuthEffects {
     })
   );
 
+  @Effect()
+  logoutAuth$ = this.actions$.pipe(
+    ofType<fromActions.LogoutAuth>(fromActions.AuthActionTypes.LogoutAuth),
+    switchMap(() => {
+      return this.authService.logout().pipe(
+        map(({ data }) => new fromActions.LogoutAuthSuccess()),
+        catchError((error) => of(new fromActions.LogoutAuthFailure({ error })))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  logoutAuthSuccess$ = this.actions$.pipe(
+    ofType(fromActions.AuthActionTypes.LogoutAuthSuccess),
+    tap(() => {
+      this.authService.removeToken();
+      this.store.dispatch(new fromStore.Go({
+        path: ['auth']
+      }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  logoutAuthFailure$ = this.actions$.pipe(
+    ofType(fromActions.AuthActionTypes.LogoutAuthFailure),
+    tap(() => {
+      this.authService.removeToken();
+      this.store.dispatch(new fromStore.Go({
+        path: ['auth']
+      }));
+    })
+  );
+
   @Effect({ dispatch: false })
   authRedirect$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.AuthRedirect),
     tap(() => {
+      this.authService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));

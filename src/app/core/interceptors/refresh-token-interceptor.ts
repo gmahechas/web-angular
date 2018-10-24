@@ -3,6 +3,9 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 
 import { AuthService } from '@web/app/auth/services/auth.service';
 
+import { Store } from '@ngrx/store';
+import * as fromAuth from '@web/app/auth/store';
+
 import { Token } from '@web/app/auth/models/token.model';
 
 import { Observable } from 'rxjs';
@@ -14,6 +17,7 @@ import { environment } from '@web/environments/environment';
 export class RefreshTokenInterceptor implements HttpInterceptor {
 
   constructor(
+    private store: Store<fromAuth.State>,
     private authService: AuthService
   ) { }
 
@@ -37,6 +41,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
               return next.handle(request);
             }),
             catchError(() => {
+              this.store.dispatch(new fromAuth.AuthRedirect);
               return Observable.throw('Error');
             })
           );

@@ -1,3 +1,4 @@
-<p-sidebar [(visible)]="showSidebar" [position]="(position) ? position : 'left'" [style]="style" (onHide)="onHide()">
+<p-sidebar [(visible)]="showSidebar" [position]="(position) ? position : 'left'" [style]="style" (onHide)="onHide()"
+  [baseZIndex]="10000">
   <ng-content></ng-content>
 </p-sidebar>

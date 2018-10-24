@@ -1,6 +1,5 @@
 import { AuthActions, AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
 
-import { Token } from '@web/app/auth/models/token.model';
 import { User } from '@web/app/two/user/models/user.model';
 import { Company } from '@web/app/one/company/models/company.model';
 
@@ -22,8 +21,9 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.AuthFailure:
     case AuthActionTypes.CheckAuth:
     case AuthActionTypes.CheckAuthFailure:
-    case AuthActionTypes.AuthRedirect:
-    case AuthActionTypes.Logout: {
+    case AuthActionTypes.LogoutAuthSuccess:
+    case AuthActionTypes.LogoutAuthFailure:
+    case AuthActionTypes.AuthRedirect: {
       return initialState;
     }
 

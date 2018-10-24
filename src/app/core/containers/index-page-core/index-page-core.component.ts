@@ -39,4 +39,9 @@ export class IndexPageCoreComponent implements OnInit {
     this.store.dispatch(new fromStore.Go({ path: [profileMenu.menu.menu_uri] }));
     this.store.dispatch(new fromStore.CloseSidebar());
   }
+
+  handleLogout($event) {
+    this.store.dispatch(new fromAuth.LogoutAuth());
+  }
+
 }
