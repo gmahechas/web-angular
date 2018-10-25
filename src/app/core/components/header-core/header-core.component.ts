@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
+
 import { Company } from '@web/app/one/company/models/company.model';
+import { User } from '@web/app/two/user/models';
 
 @Component({
   selector: 'app-header-core',
@@ -10,6 +12,7 @@ import { Company } from '@web/app/one/company/models/company.model';
 export class HeaderCoreComponent implements OnInit {
 
   @Input() company: Company;
+  @Input() user: User;
   @Output() clickOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickLogout: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -2,7 +2,7 @@
   <app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'100%'}" (hide)="opencloseSidebar($event)">
     <app-menu-core [profile]="user.profile" (navigate)="handleNavigate($event)"></app-menu-core>
   </app-sidebar-shared>
-  <app-header-core [company]="company$ | async" (clickOpen)="opencloseSidebar($event)" (clickLogout)="handleLogout()"></app-header-core>
+  <app-header-core [company]="company$ | async" [user]="user" (clickOpen)="opencloseSidebar($event)" (clickLogout)="handleLogout()"></app-header-core>
 </div>
 <app-message-core></app-message-core>
 <app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>

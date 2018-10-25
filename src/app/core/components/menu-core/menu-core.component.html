@@ -1,7 +1,8 @@
 <h1>Menu</h1>
-
-<ul>
-  <li *ngFor="let profile_menu of profile.profile_menus" (click)="onNavigate(profile_menu)">
-    {{ profile_menu.menu.menu_name }}
-  </li>
-</ul>
+<div class="ui-g">
+  <div class="ui-g-1">
+    <div *ngFor="let profile_menu of profile.profile_menus" (click)="onNavigate(profile_menu)">
+      <span>{{ profile_menu.menu.menu_name }}</span><br>
+    </div>
+  </div>
+</div>
