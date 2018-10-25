@@ -22,7 +22,7 @@ export class FormProfileComponent implements OnChanges, OnInit {
   @Input() profile: Profile;
   @Output() submitted: EventEmitter<Profile> = new EventEmitter<Profile>();
 
-  profileForm: FormGroup = this.formBuilder.group({
+  profileForm = this.formBuilder.group({
     profile: this.formBuilder.group({
       profile_name: this.formBuilder.control('', [Validators.required])
     })
@@ -46,18 +46,18 @@ export class FormProfileComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(profileForm: FormGroup) {
+  onSubmit() {
 
     if (this.profile) {
-      if (profileForm.dirty) {
+      if (this.profileForm.dirty) {
         const updated = {
           profile_id: this.profile.profile_id,
-          ...profileForm.value.profile
+          ...this.profileForm.value.profile
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit(profileForm.value.profile);
+      this.submitted.emit(this.profileForm.value.profile);
     }
 
   }

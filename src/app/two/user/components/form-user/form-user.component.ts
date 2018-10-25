@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@web/app/two/user/models/user.model';
 
@@ -22,7 +22,7 @@ export class FormUserComponent implements OnChanges, OnInit {
   @Input() user: User;
   @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 
-  userForm: FormGroup = this.formBuilder.group({
+  userForm = this.formBuilder.group({
     user: this.formBuilder.group({
       username: this.formBuilder.control('', [Validators.required]),
       email: this.formBuilder.control('', [Validators.required])
@@ -52,23 +52,23 @@ export class FormUserComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(userForm: FormGroup) {
+  onSubmit() {
 
     if (this.user) {
-      if (userForm.dirty) {
+      if (this.userForm.dirty) {
         const updated = {
           user_id: this.user.user_id,
-          ...userForm.value.user,
-          person_id: userForm.value.person.person_id,
-          profile_id: userForm.value.profile.profile_id
+          ...this.userForm.value.user,
+          person_id: this.userForm.value.person.person_id,
+          profile_id: this.userForm.value.profile.profile_id
         };
         this.submitted.emit(updated);
       }
     } else {
       this.submitted.emit({
-        ...userForm.value.user,
-        person_id: userForm.value.person.person_id,
-        profile_id: userForm.value.profile.profile_id
+        ...this.userForm.value.user,
+        person_id: this.userForm.value.person.person_id,
+        profile_id: this.userForm.value.profile.profile_id
       });
     }
 

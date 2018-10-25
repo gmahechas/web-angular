@@ -1,4 +1,4 @@
-<form [formGroup]="authForm" (ngSubmit)="login(authForm)">
+<form [formGroup]="authForm" (ngSubmit)="login()">
   <app-input-text-shared [group]="authForm" [groupName]="'auth'" [controlName]="'username'" [placeholder]="'Usuario'"></app-input-text-shared>
   <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'" [placeholder]="'Contraseña'"></app-input-password-shared>
   <div class="ui-g">

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
 import { Auth } from '@web/app/auth/models/auth.model';
 
 @Component({
@@ -21,7 +22,7 @@ export class FormAuthComponent implements OnInit {
   @Input() error: string | null;
   @Output() submitted: EventEmitter<Auth> = new EventEmitter<Auth>();
 
-  authForm: FormGroup = this.formBuilder.group({
+  authForm = this.formBuilder.group({
     auth: this.formBuilder.group({
       username: this.formBuilder.control('', [Validators.required]),
       password: this.formBuilder.control('', [Validators.required])
@@ -35,7 +36,7 @@ export class FormAuthComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(authForm: FormGroup) {
-    this.submitted.emit(authForm.value.auth);
+  login() {
+    this.submitted.emit(this.authForm.value.auth);
   }
 }

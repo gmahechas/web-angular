@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Estate } from '@web/app/one/estate/models/estate.model';
 
@@ -22,7 +22,7 @@ export class FormEstateComponent implements OnChanges, OnInit {
   @Input() estate: Estate;
   @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
 
-  estateForm: FormGroup = this.formBuilder.group({
+  estateForm = this.formBuilder.group({
     estate: this.formBuilder.group({
       estate_name: this.formBuilder.control('', [Validators.required]),
       estate_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
@@ -50,19 +50,19 @@ export class FormEstateComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(estateForm: FormGroup) {
+  onSubmit() {
 
     if (this.estate) {
-      if (estateForm.dirty) {
+      if (this.estateForm.dirty) {
         const updated = {
           estate_id: this.estate.estate_id,
-          ...estateForm.value.estate,
-          country_id: estateForm.value.country.country_id
+          ...this.estateForm.value.estate,
+          country_id: this.estateForm.value.country.country_id
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit({ ...estateForm.value.estate, country_id: estateForm.value.country.country_id });
+      this.submitted.emit({ ...this.estateForm.value.estate, country_id: this.estateForm.value.country.country_id });
     }
 
   }

@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Country } from '@web/app/one/country/models/country.model';
 
@@ -22,7 +22,7 @@ export class FormCountryComponent implements OnChanges, OnInit {
   @Input() country: Country;
   @Output() submitted: EventEmitter<Country> = new EventEmitter<Country>();
 
-  countryForm: FormGroup = this.formBuilder.group({
+  countryForm = this.formBuilder.group({
     country: this.formBuilder.group({
       country_name: this.formBuilder.control('', [Validators.required]),
       country_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
@@ -48,18 +48,18 @@ export class FormCountryComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(countryForm: FormGroup) {
+  onSubmit() {
 
     if (this.country) {
-      if (countryForm.dirty) {
+      if (this.countryForm.dirty) {
         const updated = {
           country_id: this.country.country_id,
-          ...countryForm.value.country
+          ...this.countryForm.value.country
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit(countryForm.value.country);
+      this.submitted.emit(this.countryForm.value.country);
     }
 
   }

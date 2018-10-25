@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Project } from '@web/app/three/project/models/project.model';
 
@@ -22,7 +22,7 @@ export class FormProjectComponent implements OnChanges, OnInit {
   @Input() project: Project;
   @Output() submitted: EventEmitter<Project> = new EventEmitter<Project>();
 
-  projectForm: FormGroup = this.formBuilder.group({
+  projectForm = this.formBuilder.group({
     project: this.formBuilder.group({
       project_name: this.formBuilder.control('', [Validators.required]),
       project_address: this.formBuilder.control('', [Validators.required]),
@@ -52,19 +52,19 @@ export class FormProjectComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(projectForm: FormGroup) {
+  onSubmit() {
 
     if (this.project) {
-      if (projectForm.dirty) {
+      if (this.projectForm.dirty) {
         const updated = {
           project_id: this.project.project_id,
-          ...projectForm.value.project,
-          macroproject_id: projectForm.value.macroproject.macroproject_id
+          ...this.projectForm.value.project,
+          macroproject_id: this.projectForm.value.macroproject.macroproject_id
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit({ ...projectForm.value.project, macroproject_id: projectForm.value.macroproject.macroproject_id });
+      this.submitted.emit({ ...this.projectForm.value.project, macroproject_id: this.projectForm.value.macroproject.macroproject_id });
     }
 
   }

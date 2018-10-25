@@ -22,7 +22,7 @@ export class FormPersonComponent implements OnChanges, OnInit {
   @Input() person: Person;
   @Output() submitted: EventEmitter<Person> = new EventEmitter<Person>();
 
-  personForm: FormGroup = this.formBuilder.group({
+  personForm = this.formBuilder.group({
     person: this.formBuilder.group({
       person_business_type: this.formBuilder.control('', [Validators.required]),
       person_identification_type: this.formBuilder.control('', [Validators.required]),
@@ -62,19 +62,19 @@ export class FormPersonComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(personForm: FormGroup) {
+  onSubmit() {
 
     if (this.person) {
-      if (personForm.dirty) {
+      if (this.personForm.dirty) {
         const updated = {
           person_id: this.person.person_id,
-          ...personForm.value.person,
-          city_id: personForm.value.city.city_id
+          ...this.personForm.value.person,
+          city_id: this.personForm.value.city.city_id
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit({ ...personForm.value.person, city_id: personForm.value.city.city_id });
+      this.submitted.emit({ ...this.personForm.value.person, city_id: this.personForm.value.city.city_id });
     }
 
   }

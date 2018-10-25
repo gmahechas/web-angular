@@ -48,19 +48,19 @@ export class FormOfficeComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(officeForm: FormGroup) {
+  onSubmit() {
 
     if (this.office) {
-      if (officeForm.dirty) {
+      if (this.officeForm.dirty) {
         const updated = {
           office_id: this.office.office_id,
-          ...officeForm.value.office,
-          city_id: officeForm.value.city.city_id
+          ...this.officeForm.value.office,
+          city_id: this.officeForm.value.city.city_id
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit({ ...officeForm.value.office, city_id: officeForm.value.city.city_id });
+      this.submitted.emit({ ...this.officeForm.value.office, city_id: this.officeForm.value.city.city_id });
     }
 
   }

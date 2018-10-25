@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Macroproject } from '@web/app/three/macroproject/models/macroproject.model';
 
@@ -22,7 +22,7 @@ export class FormMacroprojectComponent implements OnChanges, OnInit {
   @Input() macroproject: Macroproject;
   @Output() submitted: EventEmitter<Macroproject> = new EventEmitter<Macroproject>();
 
-  macroprojectForm: FormGroup = this.formBuilder.group({
+  macroprojectForm = this.formBuilder.group({
     macroproject: this.formBuilder.group({
       macroproject_name: this.formBuilder.control(''),
       macroproject_address: this.formBuilder.control(''),
@@ -54,23 +54,23 @@ export class FormMacroprojectComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(macroprojectForm: FormGroup) {
+  onSubmit() {
 
     if (this.macroproject) {
-      if (macroprojectForm.dirty) {
+      if (this.macroprojectForm.dirty) {
         const updated = {
           macroproject_id: this.macroproject.macroproject_id,
-          ...macroprojectForm.value.macroproject,
-          city_id: macroprojectForm.value.city.city_id,
-          office_id: macroprojectForm.value.office.office_id
+          ...this.macroprojectForm.value.macroproject,
+          city_id: this.macroprojectForm.value.city.city_id,
+          office_id: this.macroprojectForm.value.office.office_id
         };
         this.submitted.emit(updated);
       }
     } else {
       this.submitted.emit({
-        ...macroprojectForm.value.macroproject,
-        city_id: macroprojectForm.value.city.city_id,
-        office_id: macroprojectForm.value.office.office_id
+        ...this.macroprojectForm.value.macroproject,
+        city_id: this.macroprojectForm.value.city.city_id,
+        office_id: this.macroprojectForm.value.office.office_id
       });
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { City } from '@web/app/one/city/models/city.model';
 
@@ -22,7 +22,7 @@ export class FormCityComponent implements OnChanges, OnInit {
   @Input() city: City;
   @Output() submitted: EventEmitter<City> = new EventEmitter<City>();
 
-  cityForm: FormGroup = this.formBuilder.group({
+  cityForm = this.formBuilder.group({
     city: this.formBuilder.group({
       city_name: this.formBuilder.control('', [Validators.required]),
       city_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
@@ -50,19 +50,19 @@ export class FormCityComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(cityForm: FormGroup) {
+  onSubmit() {
 
     if (this.city) {
-      if (cityForm.dirty) {
+      if (this.cityForm.dirty) {
         const updated = {
           city_id: this.city.city_id,
-          ...cityForm.value.city,
-          estate_id: cityForm.value.estate.estate_id
+          ...this.cityForm.value.city,
+          estate_id: this.cityForm.value.estate.estate_id
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit({ ...cityForm.value.city, estate_id: cityForm.value.estate.estate_id });
+      this.submitted.emit({ ...this.cityForm.value.city, estate_id: this.cityForm.value.estate.estate_id });
     }
 
   }
