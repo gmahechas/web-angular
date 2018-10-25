@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { SearchOffice } from '@web/app/one/office/models/search-office.model';
 
@@ -16,7 +16,7 @@ export class SearchFormOfficeComponent implements OnChanges, OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  searchFormOffice: FormGroup = this.formBuilder.group({
+  searchFormOffice = this.formBuilder.group({
     office: this.formBuilder.group({
       office_id: this.formBuilder.control(''),
       office_name: this.formBuilder.control('')
@@ -41,8 +41,8 @@ export class SearchFormOfficeComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(searchFormOffice: FormGroup) {
-    this.search.emit(searchFormOffice.value);
+  onSubmit() {
+    this.search.emit(this.searchFormOffice.value);
   }
 
   onCreate() {

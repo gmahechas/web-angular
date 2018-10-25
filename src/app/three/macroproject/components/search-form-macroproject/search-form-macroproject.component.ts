@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { SearchMacroproject } from '@web/app/three/macroproject/models/search-macroproject.model';
 
@@ -16,7 +16,7 @@ export class SearchFormMacroprojectComponent implements OnChanges, OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  searchFormMacroproject: FormGroup = this.formBuilder.group({
+  searchFormMacroproject = this.formBuilder.group({
     macroproject: this.formBuilder.group({
       macroproject_id: this.formBuilder.control(''),
       macroproject_name: this.formBuilder.control('')
@@ -43,8 +43,8 @@ export class SearchFormMacroprojectComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(searchFormMacroproject: FormGroup) {
-    this.search.emit(searchFormMacroproject.value);
+  onSubmit() {
+    this.search.emit(this.searchFormMacroproject.value);
   }
 
   onCreate() {

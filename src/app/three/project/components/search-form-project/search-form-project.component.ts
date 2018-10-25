@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { SearchProject } from '@web/app/three/project/models/search-project.model';
 
@@ -16,7 +16,7 @@ export class SearchFormProjectComponent implements OnChanges, OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  searchFormProject: FormGroup = this.formBuilder.group({
+  searchFormProject = this.formBuilder.group({
     project: this.formBuilder.group({
       project_id: this.formBuilder.control(''),
       project_name: this.formBuilder.control('')
@@ -41,8 +41,8 @@ export class SearchFormProjectComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(searchFormProject: FormGroup) {
-    this.search.emit(searchFormProject.value);
+  onSubmit() {
+    this.search.emit(this.searchFormProject.value);
   }
 
   onCreate() {

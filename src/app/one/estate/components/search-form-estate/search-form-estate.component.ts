@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { SearchEstate } from '@web/app/one/estate/models/search-estate.model';
 
@@ -16,7 +16,7 @@ export class SearchFormEstateComponent implements OnChanges, OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  searchFormEstate: FormGroup = this.formBuilder.group({
+  searchFormEstate = this.formBuilder.group({
     estate: this.formBuilder.group({
       estate_id: this.formBuilder.control(''),
       estate_name: this.formBuilder.control(''),
@@ -43,8 +43,8 @@ export class SearchFormEstateComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(searchFormEstate: FormGroup) {
-    this.search.emit(searchFormEstate.value);
+  onSubmit() {
+    this.search.emit(this.searchFormEstate.value);
   }
 
   onCreate() {

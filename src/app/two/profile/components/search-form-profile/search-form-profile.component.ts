@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import { SearchProfile } from '@web/app/two/profile/models/search-profile.model';
 
@@ -16,7 +16,7 @@ export class SearchFormProfileComponent implements OnChanges, OnInit {
   @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  searchFormProfile: FormGroup = this.formBuilder.group({
+  searchFormProfile = this.formBuilder.group({
     profile: this.formBuilder.group({
       profile_id: this.formBuilder.control(''),
       profile_name: this.formBuilder.control('')
@@ -39,8 +39,8 @@ export class SearchFormProfileComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
 
-  onSubmit(searchFormProfile: FormGroup) {
-    this.search.emit(searchFormProfile.value);
+  onSubmit() {
+    this.search.emit(this.searchFormProfile.value);
   }
 
   onCreate() {
