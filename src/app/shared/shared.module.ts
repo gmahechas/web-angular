@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -10,6 +11,7 @@ import * as fromPipes from '@web/app/shared/pipes';
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
     ReactiveFormsModule,
     ...fromPrime.prime
   ],
@@ -19,6 +21,7 @@ import * as fromPipes from '@web/app/shared/pipes';
   ],
   exports: [
     CommonModule,
+    TranslateModule,
     ReactiveFormsModule,
     ...fromPrime.prime,
     ...fromComponents.components,

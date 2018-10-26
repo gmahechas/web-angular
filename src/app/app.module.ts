@@ -10,7 +10,8 @@ import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router
 import { CustomRouterStateSerializer } from '@web/app/shared/router-utils';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { GraphqlModule } from '@web/app/graphql/graphql.module';
+import { AppLangModule } from '@web/app/app-lang.module';
+import { AppGraphqlModule } from '@web/app/app-graphql.module';
 import { SharedModule } from '@web/app/shared/shared.module';
 import { AuthModule } from '@web/app/auth/auth.module';
 import { AppRoutingModule } from '@web/app/app-routing.module';
@@ -27,7 +28,8 @@ import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    GraphqlModule,
+    AppLangModule,
+    AppGraphqlModule,
     SharedModule,
     AuthModule,
     AppRoutingModule,

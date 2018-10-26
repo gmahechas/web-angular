@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/auth/graphql';
 
 import { HttpClient } from '@angular/common/http';
+
 import { Auth } from '@web/app/auth/models/auth.model';
 import { Token } from '@web/app/auth/models/token.model';
-import { CheckAuth } from '@web/app/auth/models/check-auth.model';
 import { User } from '@web/app/two/user/models/user.model';
 import { Company } from '@web/app/one/company/models/company.model';
 

@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Office } from '@web/app/one/office/models/office.model';
 
@@ -22,7 +22,7 @@ export class FormOfficeComponent implements OnChanges, OnInit {
   @Input() office: Office;
   @Output() submitted: EventEmitter<Office> = new EventEmitter<Office>();
 
-  officeForm: FormGroup = this.formBuilder.group({
+  officeForm = this.formBuilder.group({
     office: this.formBuilder.group({
       office_name: this.formBuilder.control('', [Validators.required]),
     }),

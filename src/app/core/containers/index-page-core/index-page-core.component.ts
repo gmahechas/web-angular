@@ -44,4 +44,7 @@ export class IndexPageCoreComponent implements OnInit {
     this.store.dispatch(new fromAuth.LogoutAuth());
   }
 
+  changeLang(lang) {
+    this.store.dispatch(new fromStore.ChangeLang({ lang }));
+  }
 }

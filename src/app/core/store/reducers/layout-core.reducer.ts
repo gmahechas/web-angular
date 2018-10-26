@@ -5,13 +5,15 @@ export interface State {
   blockedDocument: boolean;
   showSpinner: boolean;
   progressBar: boolean;
+  lang: string;
 }
 
-export  const initialState: State = {
+export const initialState: State = {
   showSidebar: false,
   blockedDocument: false,
   showSpinner: false,
-  progressBar: false
+  progressBar: false,
+  lang: null
 };
 
 export function reducer(state: State = initialState, action: LayoutActions): State {
@@ -65,6 +67,13 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
         progressBar: false,
       };
 
+    case LayoutActionTypes.SetDefaultLang:
+    case LayoutActionTypes.ChangeLang:
+      return {
+        ...state,
+        lang: action.payload.lang
+      };
+
     default:
       return state;
   }
@@ -74,3 +83,4 @@ export const getShowSidebar = (state: State) => state.showSidebar;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
 export const getShowSpinner = (state: State) => state.showSpinner;
 export const getProgressBar = (state: State) => state.progressBar;
+export const getLang = (state: State) => state.lang;

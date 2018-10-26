@@ -31,4 +31,4 @@ export function createApollo(httpLink: HttpLink) {
     },
   ]
 })
-export class GraphqlModule { }
+export class AppGraphqlModule { }

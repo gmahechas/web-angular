@@ -22,3 +22,8 @@ export const getProgressBar = createSelector(
   fromCore.getLayoutState,
   fromLayout.getProgressBar
 );
+
+export const getLang = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getLang
+);

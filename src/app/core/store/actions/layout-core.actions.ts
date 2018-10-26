@@ -1,7 +1,5 @@
 import { Action } from '@ngrx/store';
 
-import { Message } from 'primeng/api';
-
 export enum LayoutActionTypes {
   OpenSidebar = '[Layout] Open Sidebar',
   CloseSidebar = '[Layout] Close Sidebar',
@@ -12,7 +10,9 @@ export enum LayoutActionTypes {
   ShowProgressBar = '[Layout] Open Progress Bar',
   CloseProgressBar = '[Layout] Close Progress Bar',
   ShowMessages = '[Layout] Show Messages',
-  GetMenu = '[Layout] Get Menu'
+  GetMenu = '[Layout] Get Menu',
+  SetDefaultLang = '[Layout] Set Default Lang',
+  ChangeLang = '[Layout] Get Menu'
 }
 
 export class OpenSidebar implements Action {
@@ -49,11 +49,21 @@ export class CloseProgressBar implements Action {
 
 export class ShowMessages implements Action {
   readonly type = LayoutActionTypes.ShowMessages;
-  constructor(public payload: Message[]) { }
+  constructor(public payload: any[]) { }
 }
 
 export class GetMenu implements Action {
   readonly type = LayoutActionTypes.ShowMessages;
+}
+
+export class SetDefaultLang implements Action {
+  readonly type = LayoutActionTypes.SetDefaultLang;
+  constructor(public payload: { lang: string }) { }
+}
+
+export class ChangeLang implements Action {
+  readonly type = LayoutActionTypes.ChangeLang;
+  constructor(public payload: { lang: string }) { }
 }
 
 export type LayoutActions =
@@ -66,4 +76,6 @@ export type LayoutActions =
   | ShowProgressBar
   | CloseProgressBar
   | ShowMessages
-  | GetMenu;
+  | GetMenu
+  | SetDefaultLang
+  | ChangeLang;
