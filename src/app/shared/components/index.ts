@@ -12,6 +12,7 @@ import { InputSwitchSharedComponent } from '@web/app/shared/components/input-swi
 import { TreeSharedComponent } from '@web/app/shared/components/tree-shared/tree-shared.component';
 import { MessageSharedComponent } from '@web/app/shared/components/message-shared/message-shared.component';
 import { SidebarSharedComponent } from '@web/app/shared/components/sidebar-shared/sidebar-shared.component';
+import { TranslateSharedComponent } from '@web/app/shared/components/translate-shared/translate-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -27,5 +28,6 @@ export const components: any[] = [
   InputSwitchSharedComponent,
   TreeSharedComponent,
   MessageSharedComponent,
-  SidebarSharedComponent
+  SidebarSharedComponent,
+  TranslateSharedComponent
 ];

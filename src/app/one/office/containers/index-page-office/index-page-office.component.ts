@@ -29,9 +29,9 @@ export class IndexPageOfficeComponent implements OnInit {
     this.configTable = {
       dataKey: 'office_id',
       cols: [
-        { fields: ['office_id'], header: 'Id', style: { 'width': '30%' } },
-        { fields: ['office_name'], header: 'Sucursal', style: { 'width': '35%' } },
-        { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '35%' } },
+        { fields: ['office_id'], header: ['office.model.office_id'], style: { 'width': '30%' } },
+        { fields: ['office_name'], header: ['office.model.office_name'], style: { 'width': '35%' } },
+        { fields: ['city.city_name'], header: ['city.singular'], style: { 'width': '35%' } },
       ],
       selectionMode: 'single'
     };

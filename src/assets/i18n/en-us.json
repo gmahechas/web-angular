@@ -1,3 +1,144 @@
 {
-
+  "search": {
+    "verb": "search",
+    "present_participle": "searching",
+    "present": {
+      "first": "search",
+      "second": "search",
+      "third": "searches"
+    },
+    "past": {
+      "first": "searched",
+      "second": "searched",
+      "third": "searched"
+    },
+    "future": {
+      "first": "will search",
+      "second": "will search",
+      "third": "will search"
+    }
+  },
+  "save": {
+    "verb": "save"
+  },
+  "create": {
+    "verb": "create"
+  },
+  "update": {
+    "verb": "update"
+  },
+  "edit": {
+    "verb": "edit"
+  },
+  "delete": {
+    "verb": "delete"
+  },
+  "cancel": {
+    "verb": "cancel"
+  },
+  "clean": {
+    "verb": "clean"
+  },
+  "auth":  {
+    "singIn": "sing in",
+    "singOut": "sing out",
+    "forgotPassword": "forgot your password"
+  },
+  "country": {
+    "singular": "country",
+    "plural": "countries",
+    "model": {
+      "country_id": "id",
+      "country_name": "country",
+      "country_code": "code"
+    }
+  },
+  "estate": {
+    "singular": "state",
+    "plural": "states",
+    "model": {
+      "estate_id": "id",
+      "estate_name": "state",
+      "estate_code": "code"
+    }
+  },
+  "city": {
+    "singular": "city",
+    "plural": "cities",
+    "model": {
+      "city_id": "id",
+      "city_name": "city",
+      "city_code": "code"
+    }
+  },
+  "company": {
+    "singular": "company",
+    "plural": "companies",
+    "model": {
+      "company_id": "id",
+      "company_name": "company"
+    }
+  },
+  "office": {
+    "singular": "office",
+    "plural": "offices",
+    "model": {
+      "office_id": "id",
+      "office_name": "office"
+    }
+  },
+  "person": {
+    "singular": "person",
+    "plural": "persons",
+    "model": {
+      "person_id": "id",
+      "person_business_type": "business type",
+      "person_identification_type": "person identification type",
+      "person_identification": "identification",
+      "person_first_name": "first name",
+      "person_second_name": "second name",
+      "person_first_surname": "first surname",
+      "person_second_surname": "second surname",
+      "person_legal_name": "legal name",
+      "person_name": "name"
+    }
+  },
+  "profile": {
+    "singular": "profile",
+    "plural": "profiles",
+    "model": {
+      "profile_id": "id",
+      "profile_name": "profile"
+    }
+  },
+  "user": {
+    "singular": "user",
+    "plural": "users",
+    "model": {
+      "user_id": "id",
+      "username": "username",
+      "email": "email",
+      "password": "password"
+    }
+  },
+  "macroproject": {
+    "singular": "macroproject",
+    "plural": "macroprojects",
+    "model": {
+      "macroproject_id": "id",
+      "macroproject_name": "macroproject",
+      "macroproject_address": "address",
+      "macroproject_phone": "phone"
+    }
+  },
+  "project": {
+    "singular": "project",
+    "plural": "projects",
+    "model": {
+      "project_id": "id",
+      "project_name": "project",
+      "project_address": "address",
+      "project_phone": "phone"
+    }
+  }
 }

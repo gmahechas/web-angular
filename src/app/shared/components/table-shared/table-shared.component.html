@@ -4,14 +4,16 @@
     (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns" [ngStyle]="col.style">{{col.header}}</th>
+        <th *ngFor="let col of columns" [ngStyle]="col.style">
+          <app-translate-shared [strings]="col.header"></app-translate-shared>
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData">
         <td *ngFor="let col of columns" [ngStyle]="col.style">
           <span *ngFor="let field of col.fields">
-            {{ rowData | fetchStringInArrayShared: field }}
+            {{ rowData | fetchStringInArrayShared:field }}
           </span>
         </td>
       </tr>

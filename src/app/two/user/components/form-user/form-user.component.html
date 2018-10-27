@@ -6,7 +6,9 @@
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <div class="ui-grid">
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Usuario *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['user.model.username']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="userForm" [groupName]="'user'" [controlName]="'username'"></app-input-text-shared>
           </div>
@@ -15,7 +17,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Email *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['user.model.email']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="userForm" [groupName]="'user'" [controlName]="'email'"></app-input-text-shared>
           </div>
@@ -24,7 +28,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Persona *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['person.singular']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-dropdown-page-person [group]="userForm" [controlName]="'person'" [options]="['person_first_name', 'person_second_name']"
               [optionLabel]="'person_identification'"></app-dropdown-page-person>
@@ -34,7 +40,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Perfil *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['profile.singular']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-dropdown-page-profile [group]="userForm" [controlName]="'profile'" [options]="['profile_name']"
               [optionLabel]="'profile_name'"></app-dropdown-page-profile>
@@ -46,7 +54,7 @@
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-10 ui-g-offset-2">
-          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="userForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="userForm.invalid"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

@@ -12,7 +12,7 @@ export class InputPasswordSharedComponent implements OnInit {
   @Input() group: FormGroup;
   @Input() groupName: string;
   @Input() controlName: string;
-  @Input() placeholder: string;
+  @Input() placeholder: string[];
 
   constructor() { }
 

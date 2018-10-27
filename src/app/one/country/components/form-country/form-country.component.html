@@ -6,7 +6,9 @@
     <form [formGroup]="countryForm" (ngSubmit)="onSubmit()">
       <div class="ui-grid">
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Pais *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['country.model.country_name']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_name'"></app-input-text-shared>
           </div>
@@ -15,7 +17,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Codigo *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['country.model.country_code']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="countryForm" [groupName]="'country'" [controlName]="'country_code'"></app-input-text-shared>
           </div>
@@ -25,7 +29,7 @@
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-10 ui-g-offset-2">
-            <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="countryForm.invalid"></app-button-shared>
+            <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="countryForm.invalid"></app-button-shared>
             <ng-content select="app-button-shared"></ng-content>
           </div>
         </div>

@@ -1,11 +1,15 @@
 <app-form-macroproject *ngIf="!(macroproject$ | async) as macroproject" [pending]="pending$ | async" (submitted)="onStore($event)">
-  <div class="form-title">Agregar Macro Proyecto</div>
-  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <div class="form-title">
+    <app-translate-shared [strings]="['create.verb', 'macroproject.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-macroproject>
 
 <app-form-macroproject *ngIf="(macroproject$ | async) as macroproject" [pending]="pending$ | async" (submitted)="onUpdate($event)"
   [macroproject]="macroproject">
-  <div class="form-title">Editar Macro Proyecto</div>
-  <app-button-shared [type]="'button'" [label]="'Eliminar'" [class]="'ui-button-secondary'" (click)="onDestroy(macroproject)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="'Cancelar'" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <div class="form-title">
+    <app-translate-shared [strings]="['edit.verb', 'macroproject.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(macroproject)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-macroproject>

@@ -1,12 +1,16 @@
 <app-panel-shared>
-  <div class="panel-header">Buscar Proyecto:</div>
+  <div class="panel-header">
+    <app-translate-shared [strings]="['search.verb', 'project.plural']"></app-translate-shared>
+  </div>
   <div class="panel-content">
     <form [formGroup]="searchFormProject" (ngSubmit)="onSubmit()">
       <div class="ui-grid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-1">
             <div class="ui-grid-row">
-              <div class="ui-grid-col-3">Id:</div>
+              <div class="ui-grid-col-3">
+                <app-translate-shared [strings]="['project.model.project_id']"></app-translate-shared>
+              </div>
               <div class="ui-grid-col-9">
                 <app-input-text-shared [group]="searchFormProject" [groupName]="'project'" [controlName]="'project_id'"></app-input-text-shared>
               </div>
@@ -14,7 +18,9 @@
           </div>
           <div class="ui-grid-col-1">
             <div class="ui-grid-row">
-              <div class="ui-grid-col-3">Proyecto:</div>
+              <div class="ui-grid-col-3">
+                <app-translate-shared [strings]="['project.model.project_name']"></app-translate-shared>
+              </div>
               <div class="ui-grid-col-9">
                 <app-input-text-shared [group]="searchFormProject" [groupName]="'project'" [controlName]="'project_name'"></app-input-text-shared>
               </div>
@@ -22,7 +28,9 @@
           </div>
           <div class="ui-grid-col-2">
             <div class="ui-grid-row">
-              <div class="ui-grid-col-3">Macro Proyecto:</div>
+              <div class="ui-grid-col-3">
+                <app-translate-shared [strings]="['macroproject.singular']"></app-translate-shared>
+              </div>
               <div class="ui-grid-col-9">
                 <app-dropdown-page-macroproject [group]="searchFormProject" [controlName]="'macroproject'" [options]="['macroproject_name']"
                   [optionLabel]="'macroproject_name'"></app-dropdown-page-macroproject>
@@ -30,9 +38,10 @@
             </div>
           </div>
           <div class="ui-grid-col-7">
-            <app-button-shared [type]="'submit'" [label]="'Buscar'" [disabled]="searchFormProject.invalid" [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="'Agregar'" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="'Limpiar'" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
+            <app-button-shared [type]="'submit'" [label]="['search.verb']" [disabled]="searchFormProject.invalid"
+              [class]="'ui-button-secondary'"></app-button-shared>
+            <app-button-shared [type]="'button'" [label]="['create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
+            <app-button-shared [type]="'button'" [label]="['clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
           </div>
         </div>
       </div>

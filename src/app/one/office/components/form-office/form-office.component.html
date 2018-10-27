@@ -6,7 +6,9 @@
     <form [formGroup]="officeForm" (ngSubmit)="onSubmit()">
       <div class="ui-grid">
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Sucursal *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['office.model.office_name']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="officeForm" [groupName]="'office'" [controlName]="'office_name'"></app-input-text-shared>
           </div>
@@ -15,7 +17,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Ciudad *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['city.singular']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-dropdown-page-city [group]="officeForm" [controlName]="'city'" [options]="['city_name']" [optionLabel]="'city_name'"></app-dropdown-page-city>
           </div>
@@ -26,7 +30,7 @@
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-10 ui-g-offset-2">
-          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="officeForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="officeForm.invalid"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

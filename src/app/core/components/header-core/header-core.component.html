@@ -8,6 +8,6 @@
     {{ company.company_name }}
   </div>
   <div class="ui-g-1">
-    <span (click)="logout()">Salir</span>
+    <app-translate-shared [strings]="['auth.singOut']" (click)="logout()"></app-translate-shared>
   </div>
 </div>

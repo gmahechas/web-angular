@@ -29,10 +29,10 @@ export class IndexPagePersonComponent implements OnInit {
     this.configTable = {
       dataKey: 'person_id',
       cols: [
-        { fields: ['person_id'], header: 'Id', style: { 'width': '5%' } },
-        { fields: ['person_business_type'], header: 'Tipo', style: { 'width': '5%' } },
-        { fields: ['person_identification_type'], header: 'Tipo Ident', style: { 'width': '5%' } },
-        { fields: ['person_identification'], header: 'Identificacion', style: { 'width': '20%' } },
+        { fields: ['person_id'], header: ['person.model.person_id'], style: { 'width': '5%' } },
+        { fields: ['person_business_type'], header: ['person.model.person_business_type'], style: { 'width': '15%' } },
+        { fields: ['person_identification_type'], header: ['person.model.person_identification_type'], style: { 'width': '15%' } },
+        { fields: ['person_identification'], header: ['person.model.person_identification'], style: { 'width': '20%' } },
         {
           fields: [
             'person_first_name',
@@ -40,9 +40,9 @@ export class IndexPagePersonComponent implements OnInit {
             'person_first_surname',
             'person_second_surname',
             'person_legal_name'
-          ], header: 'Nombres', style: { 'width': '50%' }
+          ], header: ['person.model.person_name'], style: { 'width': '30%' }
         },
-        { fields: ['city.city_name'], header: 'Ciudad', style: { 'width': '15%' } },
+        { fields: ['city.city_name'], header: ['person.singular'], style: { 'width': '15%' } },
       ],
       selectionMode: 'single'
     };

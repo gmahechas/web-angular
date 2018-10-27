@@ -6,7 +6,9 @@
     <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
       <div class="ui-grid">
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Proyecto</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['project.model.project_name']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_name'"></app-input-text-shared>
           </div>
@@ -15,7 +17,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Direccion</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['project.model.project_address']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_address'"></app-input-text-shared>
           </div>
@@ -24,7 +28,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Telefono</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['project.model.project_phone']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_phone'"></app-input-text-shared>
           </div>
@@ -33,7 +39,9 @@
           </div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-2">Macro Proyecto *:</div>
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['macroproject.singular']"></app-translate-shared>
+          </div>
           <div class="ui-grid-col-6">
             <app-dropdown-page-macroproject [group]="projectForm" [controlName]="'macroproject'" [options]="['macroproject_name']"
               [optionLabel]="'macroproject_name'"></app-dropdown-page-macroproject>
@@ -45,7 +53,7 @@
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-10 ui-g-offset-2">
-          <app-button-shared [type]="'submit'" [label]="'Guardar'" [class]="'ui-button-secondary'" [disabled]="projectForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="projectForm.invalid"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

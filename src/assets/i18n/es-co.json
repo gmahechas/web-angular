@@ -1,3 +1,144 @@
 {
-
+  "search": {
+    "verb": "buscar",
+    "present_participle": "buscando",
+    "present": {
+      "first": "busco",
+      "second": "buscas",
+      "third": "busca"
+    },
+    "past": {
+      "first": "busco",
+      "second": "buscas",
+      "third": "busca"
+    },
+    "future": {
+      "first": "buscare",
+      "second": "buscaras",
+      "third": "buscara"
+    }
+  },
+  "save": {
+    "verb": "guardar"
+  },
+  "create": {
+    "verb": "crear"
+  },
+  "update": {
+    "verb": "actualizar"
+  },
+  "edit": {
+    "verb": "editar"
+  },
+  "delete": {
+    "verb": "borrar"
+  },
+  "cancel": {
+    "verb": "cancelar"
+  },
+  "clean": {
+    "verb": "limpiar"
+  },
+  "auth": {
+    "singIn": "iniciar sesion",
+    "singOut": "cerrar sesion",
+    "forgotPassword": "olvide mi contraseña"
+  },
+  "country": {
+    "singular": "pais",
+    "plural": "paises",
+    "model": {
+      "country_id": "id",
+      "country_name": "pais",
+      "country_code": "codigo"
+    }
+  },
+  "estate": {
+    "singular": "departamento",
+    "plural": "departamentos",
+    "model": {
+      "estate_id": "id",
+      "estate_name": "departamento",
+      "estate_code": "codigo"
+    }
+  },
+  "city": {
+    "singular": "ciudad",
+    "plural": "ciudades",
+    "model": {
+      "city_id": "id",
+      "city_name": "ciudad",
+      "city_code": "codigo"
+    }
+  },
+  "company": {
+    "singular": "empresa",
+    "plural": "empresas",
+    "model": {
+      "company_id": "id",
+      "company_name": "empresa"
+    }
+  },
+  "office": {
+    "singular": "sucursal",
+    "plural": "sucursales",
+    "model": {
+      "office_id": "id",
+      "office_name": "sucursal"
+    }
+  },
+  "person": {
+    "singular": "tercero",
+    "plural": "terceros",
+    "model": {
+      "person_id": "id",
+      "person_business_type": "tipo de tercero",
+      "person_identification_type": "tipo de identificacion",
+      "person_identification": "identificacion",
+      "person_first_name": "primer nombre",
+      "person_second_name": "segundo nombre",
+      "person_first_surname": "primer apellido",
+      "person_second_surname": "segundo apellido",
+      "person_legal_name": "razon social",
+      "person_name": "nombre"
+    }
+  },
+  "profile": {
+    "singular": "perfil",
+    "plural": "perfiles",
+    "model": {
+      "profile_id": "id",
+      "profile_name": "perfil"
+    }
+  },
+  "user": {
+    "singular": "usuario",
+    "plural": "usuarios",
+    "model": {
+      "user_id": "id",
+      "username": "usuario",
+      "email": "correo electronico",
+      "password": "contraseña"
+    }
+  },
+  "macroproject": {
+    "singular": "macro proyecto",
+    "plural": "macro proyectos",
+    "model": {
+      "macroproject_id": "id",
+      "macroproject_name": "macro proyecto",
+      "macroproject_address": "direccion",
+      "macroproject_phone": "telefono"
+    }
+  },
+  "project": {
+    "singular": "proyecto",
+    "plural": "proyectos",
+    "model": {
+      "project_id": "id",
+      "project_name": "project",
+      "project_address": "direccion",
+      "project_phone": "telefono"
+    }
+  }
 }

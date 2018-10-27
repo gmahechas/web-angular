@@ -29,9 +29,9 @@ export class IndexPageCountryComponent implements OnInit {
     this.configTable = {
       dataKey: 'country_id',
       cols: [
-        { fields: ['country_id'], header: 'Id', style: { width: '10%' } },
-        { fields: ['country_name'], header: 'Pais', style: { width: '70%' } },
-        { fields: ['country_code'], header: 'Codigo', style: { width: '20%' } },
+        { fields: ['country_id'], header: ['country.model.country_id'], style: { width: '10%' } },
+        { fields: ['country_name'], header: ['country.model.country_name'], style: { width: '70%' } },
+        { fields: ['country_code'], header: ['country.model.country_code'], style: { width: '20%' } },
       ],
       selectionMode: 'single'
     };
