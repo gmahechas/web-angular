@@ -12,7 +12,7 @@
   </div>
   <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(profile)"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['Permisos']" [class]="'ui-button-secondary'" (click)="onProfileMenu(profile)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['profile_menu.plural']" [class]="'ui-button-secondary'" (click)="onProfileMenu(profile)"></app-button-shared>
 </app-form-profile>
 
 <router-outlet name="router-outlet-profile-menu"></router-outlet>

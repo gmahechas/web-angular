@@ -111,6 +111,10 @@
       "profile_name": "profile"
     }
   },
+  "profile_menu": {
+    "singular": "permit",
+    "plural": "permits"
+  },
   "user": {
     "singular": "user",
     "plural": "users",
