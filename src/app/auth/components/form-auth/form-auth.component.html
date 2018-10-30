@@ -16,7 +16,7 @@
         <app-translate-shared [strings]="['user.model.password']"></app-translate-shared>
       </div>
       <div class="ui-grid-col-5">
-        <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'" [placeholder]="['user.model.password']"></app-input-password-shared>
+        <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'"></app-input-password-shared>
       </div>
       <div class="ui-grid-col-4">
         <app-validation-errors-shared [control]="authForm.get('auth.password')"></app-validation-errors-shared>
