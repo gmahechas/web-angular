@@ -1,17 +1,39 @@
 <form [formGroup]="authForm" (ngSubmit)="login()">
-  <app-input-text-shared [group]="authForm" [groupName]="'auth'" [controlName]="'username'" [placeholder]="['user.model.username']"></app-input-text-shared>
-  <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'" [placeholder]="['user.model.password']"></app-input-password-shared>
-  <div class="ui-g">
-    <div class="ui-g-5">
-      <app-button-shared [type]="'submit'" [label]="['auth.singIn']" [disabled]="authForm.invalid" [class]="'ui-button-secondary'"></app-button-shared>
+  <div class="ui-grid">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-3">
+        <app-translate-shared [strings]="['user.model.username']"></app-translate-shared>
+      </div>
+      <div class="ui-grid-col-5">
+        <app-input-text-shared [group]="authForm" [groupName]="'auth'" [controlName]="'username'"></app-input-text-shared>
+      </div>
+      <div class="ui-grid-col-4">
+        <app-validation-errors-shared [control]="authForm.get('auth.username')"></app-validation-errors-shared>
+      </div>
     </div>
-    <div class="ui-g-7">
-      <app-button-shared [type]="'button'" [label]="['auth.forgotPassword']" [class]="'ui-button-secondary'"></app-button-shared>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-3">
+        <app-translate-shared [strings]="['user.model.password']"></app-translate-shared>
+      </div>
+      <div class="ui-grid-col-5">
+        <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'" [placeholder]="['user.model.password']"></app-input-password-shared>
+      </div>
+      <div class="ui-grid-col-4">
+        <app-validation-errors-shared [control]="authForm.get('auth.password')"></app-validation-errors-shared>
+      </div>
     </div>
-  </div>
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <app-message-shared *ngIf="error" [severity]="'error'" [text]="error"></app-message-shared>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6">
+        <app-button-shared [type]="'submit'" [label]="['auth.singIn']" [disabled]="authForm.invalid" [class]="'ui-button-secondary'"></app-button-shared>
+      </div>
+      <div class="ui-grid-col-6">
+        <app-button-shared [type]="'button'" [label]="['auth.forgotPassword']" [class]="'ui-button-secondary'"></app-button-shared>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-12">
+        <app-message-shared *ngIf="error" [severity]="'error'" [text]="error"></app-message-shared>
+      </div>
     </div>
   </div>
 </form>
