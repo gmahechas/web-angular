@@ -1,8 +1,7 @@
-<h1>Menu</h1>
 <div class="ui-g">
   <div class="ui-g-1">
     <div *ngFor="let profile_menu of profile.profile_menus" (click)="onNavigate(profile_menu)">
-      <span>{{ profile_menu.menu.menu_name }}</span><br>
+      <app-translate-shared [strings]="[profile_menu.menu.menu_name]"></app-translate-shared><br>
     </div>
   </div>
 </div>
