@@ -42,7 +42,7 @@ export class IndexPagePersonComponent implements OnInit {
             'person_legal_name'
           ], header: ['person.model.person_name'], style: { 'width': '30%' }
         },
-        { fields: ['city.city_name'], header: ['person.singular'], style: { 'width': '15%' } },
+        { fields: ['city.city_name'], header: ['city.singular'], style: { 'width': '15%' } },
       ],
       selectionMode: 'single'
     };
