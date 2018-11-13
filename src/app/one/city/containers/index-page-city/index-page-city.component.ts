@@ -7,8 +7,6 @@ import * as fromCore from '@web/app/core/store';
 import { City } from '@web/app/one/city/models/city.model';
 import { SearchCity } from '@web/app/one/city/models/search-city.model';
 
-import { take } from 'rxjs/operators';
-
 @Component({
   selector: 'app-index-page-city',
   templateUrl: './index-page-city.component.html',
@@ -16,7 +14,7 @@ import { take } from 'rxjs/operators';
 })
 export class IndexPageCityComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
+  query$ = this.store.pipe(select(fromStore.getQuery));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));

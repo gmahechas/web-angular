@@ -7,8 +7,6 @@ import * as fromCore from '@web/app/core/store';
 import { Country } from '@web/app/one/country/models/country.model';
 import { SearchCountry } from '@web/app/one/country/models/search-country.model';
 
-import { take } from 'rxjs/operators';
-
 @Component({
   selector: 'app-index-page-country',
   templateUrl: './index-page-country.component.html',
@@ -16,7 +14,7 @@ import { take } from 'rxjs/operators';
 })
 export class IndexPageCountryComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
+  query$ = this.store.pipe(select(fromStore.getQuery));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));

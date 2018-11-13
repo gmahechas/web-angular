@@ -7,8 +7,6 @@ import * as fromCore from '@web/app/core/store';
 import { Person } from '@web/app/two/person/models/person.model';
 import { SearchPerson } from '@web/app/two/person/models/search-person.model';
 
-import { take } from 'rxjs/operators';
-
 @Component({
   selector: 'app-index-page-person',
   templateUrl: './index-page-person.component.html',
@@ -16,7 +14,7 @@ import { take } from 'rxjs/operators';
 })
 export class IndexPagePersonComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
+  query$ = this.store.pipe(select(fromStore.getQuery));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));
