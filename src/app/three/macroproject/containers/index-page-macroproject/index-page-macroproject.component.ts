@@ -7,6 +7,8 @@ import * as fromCore from '@web/app/core/store';
 import { Macroproject } from '@web/app/three/macroproject/models/macroproject.model';
 import { SearchMacroproject } from '@web/app/three/macroproject/models/search-macroproject.model';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-macroproject',
   templateUrl: './index-page-macroproject.component.html',
@@ -14,7 +16,7 @@ import { SearchMacroproject } from '@web/app/three/macroproject/models/search-ma
 })
 export class IndexPageMacroprojectComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));

@@ -7,6 +7,8 @@ import * as fromCore from '@web/app/core/store';
 import { Estate } from '@web/app/one/estate/models/estate.model';
 import { SearchEstate } from '@web/app/one/estate/models/search-estate.model';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-estate',
   templateUrl: './index-page-estate.component.html',
@@ -14,7 +16,7 @@ import { SearchEstate } from '@web/app/one/estate/models/search-estate.model';
 })
 export class IndexPageEstateComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));

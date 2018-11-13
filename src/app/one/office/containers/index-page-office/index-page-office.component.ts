@@ -7,6 +7,8 @@ import * as fromCore from '@web/app/core/store';
 import { Office } from '@web/app/one/office/models/office.model';
 import { SearchOffice } from '@web/app/one/office/models/search-office.model';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-office',
   templateUrl: './index-page-office.component.html',
@@ -14,7 +16,7 @@ import { SearchOffice } from '@web/app/one/office/models/search-office.model';
 })
 export class IndexPageOfficeComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));

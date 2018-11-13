@@ -7,6 +7,8 @@ import * as fromCore from '@web/app/core/store';
 import { Profile } from '@web/app/two/profile/models/profile.model';
 import { SearchProfile } from '@web/app/two/profile/models/search-profile.model';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-profile',
   templateUrl: './index-page-profile.component.html',
@@ -14,7 +16,7 @@ import { SearchProfile } from '@web/app/two/profile/models/search-profile.model'
 })
 export class IndexPageProfileComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromStore.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromStore.getAllEntities));
   total$ = this.store.pipe(select(fromStore.getTotal));
