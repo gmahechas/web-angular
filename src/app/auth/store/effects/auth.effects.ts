@@ -8,6 +8,7 @@ import * as fromActions from '@web/app/auth/store/actions';
 import * as fromModels from '@web/app/auth/models';
 
 import { AuthService } from '@web/app/auth/services/auth.service';
+import { LocalStorageService } from '@web/app/core/services/local-storage.service';
 
 import { of, defer } from 'rxjs';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
@@ -31,7 +32,7 @@ export class AuthEffects {
     ofType<fromActions.AuthSuccess>(fromActions.AuthActionTypes.AuthSuccess),
     map(action => action.payload),
     tap(({ token, user, company }) => {
-      this.authService.setToken(token);
+      this.localStorageService.setToken(token);
       this.store.dispatch(new fromStore.Go({
         path: ['dashboard']
       }));
@@ -63,7 +64,7 @@ export class AuthEffects {
   checkAuthFailure$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.CheckAuthFailure),
     tap(() => {
-      this.authService.removeToken();
+      this.localStorageService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
@@ -85,7 +86,7 @@ export class AuthEffects {
   logoutAuthSuccess$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.LogoutAuthSuccess),
     tap(() => {
-      this.authService.removeToken();
+      this.localStorageService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
@@ -96,7 +97,7 @@ export class AuthEffects {
   logoutAuthFailure$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.LogoutAuthFailure),
     tap(() => {
-      this.authService.removeToken();
+      this.localStorageService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
@@ -117,7 +118,7 @@ export class AuthEffects {
   expiredAuth$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.ExpiredAuth),
     tap(() => {
-      this.authService.removeToken();
+      this.localStorageService.removeToken();
       this.store.dispatch(new fromStore.Go({
         path: ['auth']
       }));
@@ -126,7 +127,7 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   init$ = defer(() => {
-    return of(this.authService.getToken());
+    return of(this.localStorageService.getToken());
   }).pipe(
     tap((token: fromModels.Token) => {
       if (token) {
@@ -138,6 +139,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private localStorageService: LocalStorageService,
     private store: Store<fromStore.State>
   ) { }
 }

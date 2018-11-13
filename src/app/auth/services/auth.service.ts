@@ -38,15 +38,4 @@ export class AuthService {
     return this.logoutAuthGQL.watch().valueChanges;
   }
 
-  setToken(token: Token) {
-    localStorage.setItem('mavatec', JSON.stringify(token));
-  }
-
-  getToken(): Token {
-    return JSON.parse(localStorage.getItem('mavatec'));
-  }
-
-  removeToken() {
-    localStorage.removeItem('mavatec');
-  }
 }

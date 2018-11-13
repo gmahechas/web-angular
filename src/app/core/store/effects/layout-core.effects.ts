@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromReducers from '@web/app/core/store/reducers';
 import * as fromActions from '@web/app/core/store/actions';
 
-import { CoreService } from '@web/app/core/services/core.service';
+import { LocalStorageService } from '@web/app/core/services/local-storage.service';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -44,13 +44,13 @@ export class LayoutCoreEffects {
 
   @Effect({ dispatch: false })
   init$ = defer(() => {
-    return of(this.coreService.getLang());
+    return of(this.localStorageService.getLang());
   }).pipe(
     tap((lang: string) => {
       if (lang) {
         this.store.dispatch(new fromActions.SetDefaultLang({ lang }));
       } else {
-        this.coreService.setLang('es-co');
+        this.localStorageService.setLang('es-co');
         this.store.dispatch(new fromActions.SetDefaultLang({ lang: 'es-co' }));
       }
     })
@@ -58,7 +58,7 @@ export class LayoutCoreEffects {
 
   constructor(
     private actions$: Actions,
-    private coreService: CoreService,
+    private localStorageService: LocalStorageService,
     private store: Store<fromReducers.State>,
     private messageService: MessageService,
     private translate: TranslateService

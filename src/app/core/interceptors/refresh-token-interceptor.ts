@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from '@web/app/auth/services/auth.service';
+import { LocalStorageService } from '@web/app/core/services/local-storage.service';
 
 import { Store } from '@ngrx/store';
 import * as fromAuth from '@web/app/auth/store';
@@ -18,7 +19,8 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
 
   constructor(
     private store: Store<fromAuth.State>,
-    private authService: AuthService
+    private authService: AuthService,
+    private localStorageService: LocalStorageService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,10 +31,10 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
           req.body.operationName !== null &&
           errors.error.error !== 'invalid_request'
         ) {
-          const token: Token = this.authService.getToken();
+          const token: Token = this.localStorageService.getToken();
           return this.authService.refreshToken(token).pipe(
             mergeMap((_token: Token) => {
-              this.authService.setToken(_token);
+              this.localStorageService.setToken(_token);
               const request = req.clone({
                 setHeaders: {
                   'Authorization': (_token) ? _token.token_type.concat(' ', _token.access_token) : ''
