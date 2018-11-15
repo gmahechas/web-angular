@@ -5,7 +5,7 @@ import { AuthGuard } from '@web/app/auth/guards/auth.guard';
 import { NotFoundCoreComponent } from '@web/app/core/components/not-found-core/not-found-core.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full', canLoad: [AuthGuard] },
   { path: 'dashboard', loadChildren: '@web/app/zero/dashboard/dashboard.module#DashboardModule', canLoad: [AuthGuard] },
   { path: 'country', loadChildren: '@web/app/one/country/country.module#CountryModule', canLoad: [AuthGuard] },
   { path: 'estate', loadChildren: '@web/app/one/estate/estate.module#EstateModule', canLoad: [AuthGuard] },
@@ -22,7 +22,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 
