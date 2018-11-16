@@ -1,5 +1,5 @@
 import { Office } from '@web/app/features/b/office/models/office.model';
-import { City } from '@web/app/features/b/city/models/city.model';
+import { City } from '@web/app/features/a/city/models/city.model';
 
 export interface Macroproject {
   macroproject_id?: number;

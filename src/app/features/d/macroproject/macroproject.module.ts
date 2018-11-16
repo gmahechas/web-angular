@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@web/app/shared/shared.module';
 import { MacroprojectRoutingModule } from '@web/app/features/d/macroproject/macroproject-routing.module';
-import { CityModule } from '@web/app/features/b/city/city.module';
+import { CityModule } from '@web/app/features/a/city/city.module';
 import { OfficeModule } from '@web/app/features/b/office/office.module';
 
 import * as fromContainers from '@web/app/features/d/macroproject/containers';

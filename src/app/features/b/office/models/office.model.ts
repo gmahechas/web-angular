@@ -1,5 +1,5 @@
 import { Company } from '@web/app/features/b/company/models/company.model';
-import { City } from '@web/app/features/b/city/models';
+import { City } from '@web/app/features/a/city/models';
 
 export interface Office {
   office_id?: number;

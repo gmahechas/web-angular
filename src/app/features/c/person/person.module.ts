@@ -6,7 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@web/app/shared/shared.module';
 import { PersonRoutingModule } from '@web/app/features/c/person/person-routing.module';
-import { CityModule } from '@web/app/features/b/city/city.module';
+import { CityModule } from '@web/app/features/a/city/city.module';
 
 import * as fromContainers from '@web/app/features/c/person/containers';
 import * as fromComponents from '@web/app/features/c/person/components';

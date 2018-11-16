@@ -7,9 +7,9 @@ import { NotFoundCoreComponent } from '@web/app/core/components/not-found-core/n
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full', canLoad: [AuthGuard] },
   { path: 'dashboard', loadChildren: '@web/app/dashboard/dashboard.module#DashboardModule', canLoad: [AuthGuard] },
-  { path: 'country', loadChildren: '@web/app/features/b/country/country.module#CountryModule', canLoad: [AuthGuard] },
-  { path: 'estate', loadChildren: '@web/app/features/b/estate/estate.module#EstateModule', canLoad: [AuthGuard] },
-  { path: 'city', loadChildren: '@web/app/features/b/city/city.module#CityModule', canLoad: [AuthGuard] },
+  { path: 'country', loadChildren: '@web/app/features/a/country/country.module#CountryModule', canLoad: [AuthGuard] },
+  { path: 'estate', loadChildren: '@web/app/features/a/estate/estate.module#EstateModule', canLoad: [AuthGuard] },
+  { path: 'city', loadChildren: '@web/app/features/a/city/city.module#CityModule', canLoad: [AuthGuard] },
   { path: 'company', loadChildren: '@web/app/features/b/company/company.module#CompanyModule', canLoad: [AuthGuard] },
   { path: 'office', loadChildren: '@web/app/features/b/office/office.module#OfficeModule', canLoad: [AuthGuard] },
   { path: 'person', loadChildren: '@web/app/features/c/person/person.module#PersonModule', canLoad: [AuthGuard] },

@@ -1,4 +1,4 @@
-import { City } from '@web/app/features/b/city/models';
+import { City } from '@web/app/features/a/city/models';
 import { Office } from '@web/app/features/b/office/models/office.model';
 
 export interface SearchMacroproject {
