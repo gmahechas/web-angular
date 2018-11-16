@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@web/app/shared/shared.module';
-import { DashboardRoutingModule } from '@web/app/zero/dashboard/dashboard-routing.module';
+import { DashboardRoutingModule } from '@web/app/features/a/dashboard/dashboard-routing.module';
 
-import * as fromContainers from '@web/app/zero/dashboard/containers';
-import * as fromComponents from '@web/app/zero/dashboard/components';
+import * as fromContainers from '@web/app/features/a/dashboard/containers';
+import * as fromComponents from '@web/app/features/a/dashboard/components';
 
 @NgModule({
   imports: [
