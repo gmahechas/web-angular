@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Profile } from '@web/app/two/profile/models/profile.model';
-import { ProfileMenu } from '@web/app/two/profile-menu/models';
+import { Profile } from '@web/app/features/c/profile/models/profile.model';
+import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
 
 @Component({
   selector: 'app-menu-core',

@@ -1,7 +1,7 @@
 import { AuthActions, AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
 
-import { User } from '@web/app/two/user/models/user.model';
-import { Company } from '@web/app/one/company/models/company.model';
+import { User } from '@web/app/features/c/user/models/user.model';
+import { Company } from '@web/app/features/b/company/models/company.model';
 
 export interface State {
   user: User | null;

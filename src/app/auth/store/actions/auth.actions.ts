@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
 import * as fromModels from '@web/app/auth/models';
-import { User } from '@web/app/two/user/models/user.model';
-import { Company } from '@web/app/one/company/models/company.model';
+import { User } from '@web/app/features/c/user/models/user.model';
+import { Company } from '@web/app/features/b/company/models/company.model';
 
 export enum AuthActionTypes {
   Auth = '[Auth] Auth',

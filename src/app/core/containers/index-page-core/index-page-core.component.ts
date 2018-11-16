@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/core/store';
 import * as fromAuth from '@web/app/auth/store';
 
-import { ProfileMenu } from '@web/app/two/profile-menu/models';
+import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
 
 @Component({
   selector: 'app-index-page-core',

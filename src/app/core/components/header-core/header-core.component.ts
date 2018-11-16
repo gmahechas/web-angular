@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { Company } from '@web/app/one/company/models/company.model';
-import { User } from '@web/app/two/user/models';
+import { Company } from '@web/app/features/b/company/models/company.model';
+import { User } from '@web/app/features/c/user/models';
 
 @Component({
   selector: 'app-header-core',
