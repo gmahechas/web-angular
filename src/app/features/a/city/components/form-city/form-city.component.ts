@@ -27,6 +27,7 @@ export class FormCityComponent implements OnChanges, OnInit {
       city_name: this.formBuilder.control('', [Validators.required]),
       city_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
     }),
+    country: this.formBuilder.control(''),
     estate: this.formBuilder.control('', [Validators.required])
   });
 
@@ -42,6 +43,7 @@ export class FormCityComponent implements OnChanges, OnInit {
           city_name: this.city.city_name,
           city_code: this.city.city_code
         },
+        country: this.city.estate.country,
         estate: this.city.estate
       });
     }
@@ -67,4 +69,12 @@ export class FormCityComponent implements OnChanges, OnInit {
 
   }
 
+  changeCountry(event) {
+    if (event === null) {
+      this.cityForm.controls['estate'].reset();
+      this.cityForm.controls['estate'].disable({ onlySelf: true });
+    } else {
+      this.cityForm.controls['estate'].enable();
+    }
+  }
 }

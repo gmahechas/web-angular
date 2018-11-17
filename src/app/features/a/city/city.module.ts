@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@web/app/shared/shared.module';
 import { CityRoutingModule } from '@web/app/features/a/city/city-routing.module';
+import { CountryModule } from '../country/country.module';
 import { EstateModule } from '@web/app/features/a/estate/estate.module';
 
 import * as fromContainers from '@web/app/features/a/city/containers';
@@ -18,6 +19,7 @@ import * as fromShared from '@web/app/features/a/city/shared';
     CityRoutingModule,
     StoreModule.forFeature('city', reducers),
     EffectsModule.forFeature(effects),
+    CountryModule,
     EstateModule,
   ],
   declarations: [

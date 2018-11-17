@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromStore from '@web/app/features/a/estate/store';
 
+import { Country } from '@web/app/features/a/country/models/country.model';
+
 @Component({
   selector: 'app-dropdown-page-estate',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,6 +21,7 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Input() showClear: boolean;
+  @Input() country: Country;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromStore.getAllEntities));
   entityId = 'estate_id';
@@ -38,7 +41,7 @@ export class DropdownPageEstateComponent implements OnInit {
           estate_name: event,
           estate_code: ''
         },
-        country: null
+        country: (this.country) ? this.country : null
       }
     }));
   }
