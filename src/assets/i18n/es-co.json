@@ -44,6 +44,9 @@
     "singOut": "cerrar sesion",
     "forgotPassword": "olvide mi contraseña"
   },
+  "dashboard": {
+    "singular": "inicio"
+  },
   "country": {
     "singular": "pais",
     "plural": "paises",
