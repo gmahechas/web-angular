@@ -9,12 +9,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class InputTextSharedComponent implements OnInit {
 
-  blockSpecial: RegExp = /^[^]+$/;
+  noFilter: RegExp = /^[^]+$/;
 
   @Input() group: FormGroup;
   @Input() groupName: string;
   @Input() controlName: string;
-  @Input() label: string;
   @Input() placeholder: string;
   @Input() keyFilter: string;
   @Input() toolTip: string;

@@ -1,5 +1,5 @@
 <div [formGroup]="group">
   <div [formGroupName]="groupName">
-    <p-inputMask [formControlName]="controlName" [mask]="mask" [placeholder]="placeholder"></p-inputMask>
+    <p-inputMask [formControlName]="controlName" [mask]="mask" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"></p-inputMask>
   </div>
 </div>
