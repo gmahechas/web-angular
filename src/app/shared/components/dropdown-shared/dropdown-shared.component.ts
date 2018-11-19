@@ -19,6 +19,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() filterPlaceholder: string;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() showClear: boolean;
+  @Input() isConditional: boolean;
   @Output() keyUp: EventEmitter<string> = new EventEmitter<string>();
   @Output() handleChange: EventEmitter<any> = new EventEmitter<any>();
 
