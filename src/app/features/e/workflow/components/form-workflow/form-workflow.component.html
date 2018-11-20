@@ -1,0 +1,39 @@
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="workflowForm" (ngSubmit)="onSubmit()">
+      <div class="ui-grid">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['workflow.model.workflow_name']"></app-translate-shared>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="workflowForm" [groupName]="'workflow'" [controlName]="'workflow_name'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="workflowForm.get('workflow.workflow_name')"></app-validation-errors-shared>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['workflow.model.workflow_description']"></app-translate-shared>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="workflowForm" [groupName]="'workflow'" [controlName]="'workflow_description'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="workflowForm.get('workflow.workflow_description')"></app-validation-errors-shared>
+          </div>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="workflowForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-panel-shared>

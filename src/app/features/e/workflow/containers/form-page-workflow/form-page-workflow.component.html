@@ -1,0 +1,15 @@
+<app-form-workflow *ngIf="!(workflow$ | async) as workflow" [pending]="pending$ | async" (submitted)="onStore($event)">
+  <div class="form-title">
+    <app-translate-shared [strings]="['create.verb', 'workflow.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+</app-form-workflow>
+
+<app-form-workflow *ngIf="(workflow$ | async) as workflow" [pending]="pending$ | async" (submitted)="onUpdate($event)"
+  [workflow]="workflow">
+  <div class="form-title">
+      <app-translate-shared [strings]="['edit.verb', 'workflow.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(workflow)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+</app-form-workflow>

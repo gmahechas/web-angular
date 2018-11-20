@@ -147,5 +147,14 @@
       "project_address": "direccion",
       "project_phone": "telefono"
     }
+  },
+  "workflow": {
+    "singular": "flujo de trabajo",
+    "plural": "flujos de trabajo",
+    "model": {
+      "workflow_id": "id",
+      "workflow_name": "flujo",
+      "workflow_description": "descripcion"
+    }
   }
 }

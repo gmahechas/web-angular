@@ -147,5 +147,14 @@
       "project_address": "address",
       "project_phone": "phone"
     }
+  },
+  "workflow": {
+    "singular": "workflow",
+    "plural": "workflows",
+    "model": {
+      "workflow_id": "id",
+      "workflow_name": "flow",
+      "workflow_description": "description"
+    }
   }
 }

@@ -17,6 +17,7 @@ export const routes: Routes = [
   { path: 'user', loadChildren: '@web/app/features/c/user/user.module#UserModule', canLoad: [AuthGuard] },
   { path: 'macroproject', loadChildren: '@web/app/features/d/macroproject/macroproject.module#MacroprojectModule', canLoad: [AuthGuard] },
   { path: 'project', loadChildren: '@web/app/features/d/project/project.module#ProjectModule', canLoad: [AuthGuard] },
+  { path: 'workflow', loadChildren: '@web/app/features/e/workflow/workflow.module#WorkflowModule', canLoad: [AuthGuard] },
   { path: 'not-found', component: NotFoundCoreComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'not-found', canActivate: [AuthGuard] },
 ];
