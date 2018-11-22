@@ -5,7 +5,8 @@ import * as fromContainers from '@web/app/features/c/user-office/containers';
 
 const routes: Routes = [
   { path: 'user/:user_id', component: fromContainers.IndexPageUserOfficeComponent },
-  { path: 'office/:office_id', component: fromContainers.IndexPageUserOfficeComponent }
+  { path: 'office/:office_id', component: fromContainers.IndexPageUserOfficeComponent },
+  { path: 'select', component: fromContainers.SelectOfficePageUserOfficeComponent },
 ];
 
 @NgModule({

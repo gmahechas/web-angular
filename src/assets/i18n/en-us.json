@@ -39,6 +39,12 @@
   "clean": {
     "verb": "clean"
   },
+  "change": {
+    "verb": "change"
+  },
+  "select": {
+    "verb": "select"
+  },
   "auth":  {
     "singIn": "sing in",
     "singOut": "sing out",

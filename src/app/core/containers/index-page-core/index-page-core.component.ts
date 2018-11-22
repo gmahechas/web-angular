@@ -44,6 +44,10 @@ export class IndexPageCoreComponent implements OnInit {
     this.store.dispatch(new fromAuth.LogoutAuth());
   }
 
+  gotoSelectOffice() {
+    this.store.dispatch(new fromStore.Go({ path: ['user-office', 'select'] }));
+  }
+
   changeLang(lang) {
     this.store.dispatch(new fromStore.ChangeLang({ lang }));
   }
