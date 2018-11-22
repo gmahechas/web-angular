@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/auth/store';
+import * as fromAuth from '@web/app/auth/store';
 
 import { Auth } from '@web/app/auth/models/auth.model';
 
@@ -12,17 +12,17 @@ import { Auth } from '@web/app/auth/models/auth.model';
 })
 export class IndexPageAuthComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  error$ = this.store.pipe(select(fromStore.getError));
+  pending$ = this.store.pipe(select(fromAuth.getPending));
+  error$ = this.store.pipe(select(fromAuth.getError));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromAuth.State>
   ) { }
 
   ngOnInit() {
   }
 
   login(auth: Auth) {
-    this.store.dispatch(new fromStore.Auth({ auth }));
+    this.store.dispatch(new fromAuth.Auth({ auth }));
   }
 }

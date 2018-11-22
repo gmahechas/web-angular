@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/project/store';
+import * as fromProject from '@web/app/features/d/project/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Project } from '@web/app/features/d/project/models/project.model';
@@ -14,17 +14,17 @@ import { SearchProject } from '@web/app/features/d/project/models/search-project
 })
 export class IndexPageProjectComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromProject.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromProject.getAllEntities));
+  total$ = this.store.pipe(select(fromProject.getTotal));
+  perPage$ = this.store.pipe(select(fromProject.getPerPage));
+  from$ = this.store.pipe(select(fromProject.getFrom));
+  to$ = this.store.pipe(select(fromProject.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProject.State>
   ) {
     this.configTable = {
       dataKey: 'project_id',
@@ -42,7 +42,7 @@ export class IndexPageProjectComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(projectSearch: SearchProject) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromProject.LoadEntity({
       search: {
         project: projectSearch.project,
         macroproject: projectSearch.macroproject,
@@ -65,7 +65,7 @@ export class IndexPageProjectComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromProject.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -75,6 +75,6 @@ export class IndexPageProjectComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromProject.ResetSearch());
   }
 }

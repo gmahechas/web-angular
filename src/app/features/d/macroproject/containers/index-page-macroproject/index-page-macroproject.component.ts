@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/macroproject/store';
+import * as fromMacroproject from '@web/app/features/d/macroproject/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
@@ -14,17 +14,17 @@ import { SearchMacroproject } from '@web/app/features/d/macroproject/models/sear
 })
 export class IndexPageMacroprojectComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromMacroproject.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromMacroproject.getAllEntities));
+  total$ = this.store.pipe(select(fromMacroproject.getTotal));
+  perPage$ = this.store.pipe(select(fromMacroproject.getPerPage));
+  from$ = this.store.pipe(select(fromMacroproject.getFrom));
+  to$ = this.store.pipe(select(fromMacroproject.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromMacroproject.State>
   ) {
     this.configTable = {
       dataKey: 'macroproject_id',
@@ -43,7 +43,7 @@ export class IndexPageMacroprojectComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(macroprojectSearch: SearchMacroproject) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromMacroproject.LoadEntity({
       search: {
         macroproject: macroprojectSearch.macroproject,
         city: macroprojectSearch.city,
@@ -67,7 +67,7 @@ export class IndexPageMacroprojectComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromMacroproject.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -77,6 +77,6 @@ export class IndexPageMacroprojectComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromMacroproject.ResetSearch());
   }
 }

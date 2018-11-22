@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/user/store';
+import * as fromUser from '@web/app/features/c/user/store';
 import * as fromCore from '@web/app/core/store';
 
 import { User } from '@web/app/features/c/user/models/user.model';
@@ -14,17 +14,17 @@ import { SearchUser } from '@web/app/features/c/user/models/search-user.model';
 })
 export class IndexPageUserComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromUser.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromUser.getAllEntities));
+  total$ = this.store.pipe(select(fromUser.getTotal));
+  perPage$ = this.store.pipe(select(fromUser.getPerPage));
+  from$ = this.store.pipe(select(fromUser.getFrom));
+  to$ = this.store.pipe(select(fromUser.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromUser.State>
   ) {
     this.configTable = {
       dataKey: 'user_id',
@@ -51,7 +51,7 @@ export class IndexPageUserComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(userSearch: SearchUser) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromUser.LoadEntity({
       search: {
         user: userSearch.user,
         person: userSearch.person,
@@ -75,7 +75,7 @@ export class IndexPageUserComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromUser.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -85,6 +85,6 @@ export class IndexPageUserComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromUser.ResetSearch());
   }
 }

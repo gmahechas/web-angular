@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/b/office/store';
+import * as fromOffice from '@web/app/features/b/office/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Office } from '@web/app/features/b/office/models/office.model';
@@ -14,17 +14,17 @@ import { SearchOffice } from '@web/app/features/b/office/models/search-office.mo
 })
 export class IndexPageOfficeComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromOffice.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromOffice.getAllEntities));
+  total$ = this.store.pipe(select(fromOffice.getTotal));
+  perPage$ = this.store.pipe(select(fromOffice.getPerPage));
+  from$ = this.store.pipe(select(fromOffice.getFrom));
+  to$ = this.store.pipe(select(fromOffice.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromOffice.State>
   ) {
     this.configTable = {
       dataKey: 'office_id',
@@ -40,7 +40,7 @@ export class IndexPageOfficeComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(officeSearch: SearchOffice) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromOffice.LoadEntity({
       search: {
         office: officeSearch.office,
         city: officeSearch.city,
@@ -63,7 +63,7 @@ export class IndexPageOfficeComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromOffice.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -73,6 +73,6 @@ export class IndexPageOfficeComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromOffice.ResetSearch());
   }
 }

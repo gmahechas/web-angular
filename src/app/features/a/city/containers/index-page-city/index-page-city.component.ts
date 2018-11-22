@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/city/store';
+import * as fromCity from '@web/app/features/a/city/store';
 import * as fromCore from '@web/app/core/store';
 
 import { City } from '@web/app/features/a/city/models/city.model';
@@ -14,17 +14,17 @@ import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
 })
 export class IndexPageCityComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromCity.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromCity.getAllEntities));
+  total$ = this.store.pipe(select(fromCity.getTotal));
+  perPage$ = this.store.pipe(select(fromCity.getPerPage));
+  from$ = this.store.pipe(select(fromCity.getFrom));
+  to$ = this.store.pipe(select(fromCity.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromCity.State>
   ) {
     this.configTable = {
       dataKey: 'city_id',
@@ -42,7 +42,7 @@ export class IndexPageCityComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(citySearch: SearchCity) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromCity.LoadEntity({
       search: {
         city: citySearch.city,
         estate: citySearch.estate,
@@ -65,7 +65,7 @@ export class IndexPageCityComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromCity.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -75,7 +75,7 @@ export class IndexPageCityComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromCity.ResetSearch());
   }
 
 }

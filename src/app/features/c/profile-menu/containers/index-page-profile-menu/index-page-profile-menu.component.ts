@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/profile-menu/store';
+import * as fromProfileMenu from '@web/app/features/c/profile-menu/store';
 
 @Component({
   selector: 'app-index-page-profile-menu',
@@ -12,15 +12,15 @@ import * as fromStore from '@web/app/features/c/profile-menu/store';
 })
 export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
+  data$ = this.store.pipe(select(fromProfileMenu.getAllEntities));
 
   constructor(
-    private store: Store<fromStore.State>,
+    private store: Store<fromProfileMenu.State>,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromProfileMenu.LoadEntity({
       search: {
         profile: {
           profile_id: this.route.snapshot.params.profile_id
@@ -38,6 +38,6 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromProfileMenu.ResetSearch());
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/user-office/store';
+import * as fromUserOffice from '@web/app/features/c/user-office/store';
 
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 
@@ -14,10 +14,10 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 })
 export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
+  data$ = this.store.pipe(select(fromUserOffice.getAllEntities));
 
   constructor(
-    private store: Store<fromStore.State>,
+    private store: Store<fromUserOffice.State>,
     private route: ActivatedRoute
   ) { }
 
@@ -27,7 +27,7 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
         case 'user_id': {
 
           setTimeout(() => {
-            this.store.dispatch(new fromStore.LoadEntity({
+            this.store.dispatch(new fromUserOffice.LoadEntity({
               search: {
                 user: {
                   user_id: this.route.snapshot.params[key]
@@ -39,7 +39,7 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
         }
         case 'office_id': {
           setTimeout(() => {
-            this.store.dispatch(new fromStore.LoadEntity({
+            this.store.dispatch(new fromUserOffice.LoadEntity({
               search: {
                 office: {
                   office_id: this.route.snapshot.params[key]
@@ -54,14 +54,14 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   }
 
   onEdit(userOffice: UserOffice) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: userOffice }));
+    this.store.dispatch(new fromUserOffice.UpdateEntity({ entity: userOffice }));
   }
 
   onDelete(userOffice: UserOffice) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: userOffice }));
+    this.store.dispatch(new fromUserOffice.DestroyEntity({ entity: userOffice }));
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromUserOffice.ResetSearch());
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/person/store';
+import * as fromPerson from '@web/app/features/c/person/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Person } from '@web/app/features/c/person/models/person.model';
@@ -14,17 +14,17 @@ import { SearchPerson } from '@web/app/features/c/person/models/search-person.mo
 })
 export class IndexPagePersonComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromPerson.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromPerson.getAllEntities));
+  total$ = this.store.pipe(select(fromPerson.getTotal));
+  perPage$ = this.store.pipe(select(fromPerson.getPerPage));
+  from$ = this.store.pipe(select(fromPerson.getFrom));
+  to$ = this.store.pipe(select(fromPerson.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromPerson.State>
   ) {
     this.configTable = {
       dataKey: 'person_id',
@@ -51,7 +51,7 @@ export class IndexPagePersonComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(personSearch: SearchPerson) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromPerson.LoadEntity({
       search: {
         person: personSearch.person,
         limit: 20,
@@ -73,7 +73,7 @@ export class IndexPagePersonComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromPerson.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -83,6 +83,6 @@ export class IndexPagePersonComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromPerson.ResetSearch());
   }
 }

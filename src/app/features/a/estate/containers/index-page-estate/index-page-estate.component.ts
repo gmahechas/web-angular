@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/estate/store';
+import * as fromEstate from '@web/app/features/a/estate/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Estate } from '@web/app/features/a/estate/models/estate.model';
@@ -14,17 +14,17 @@ import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.mo
 })
 export class IndexPageEstateComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromEstate.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromEstate.getAllEntities));
+  total$ = this.store.pipe(select(fromEstate.getTotal));
+  perPage$ = this.store.pipe(select(fromEstate.getPerPage));
+  from$ = this.store.pipe(select(fromEstate.getFrom));
+  to$ = this.store.pipe(select(fromEstate.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromEstate.State>
   ) {
     this.configTable = {
       dataKey: 'estate_id',
@@ -41,7 +41,7 @@ export class IndexPageEstateComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(estateSearch: SearchEstate) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromEstate.LoadEntity({
       search: {
         estate: estateSearch.estate,
         country: estateSearch.country,
@@ -64,7 +64,7 @@ export class IndexPageEstateComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromEstate.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -74,6 +74,6 @@ export class IndexPageEstateComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromEstate.ResetSearch());
   }
 }

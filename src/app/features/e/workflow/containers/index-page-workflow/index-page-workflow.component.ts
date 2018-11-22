@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/e/workflow/store';
+import * as fromWorkflow from '@web/app/features/e/workflow/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
@@ -16,17 +16,17 @@ import { take } from 'rxjs/operators';
 })
 export class IndexPageWorkflowComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery, take(1)));
+  query$ = this.store.pipe(select(fromWorkflow.getQuery, take(1)));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromWorkflow.getAllEntities));
+  total$ = this.store.pipe(select(fromWorkflow.getTotal));
+  perPage$ = this.store.pipe(select(fromWorkflow.getPerPage));
+  from$ = this.store.pipe(select(fromWorkflow.getFrom));
+  to$ = this.store.pipe(select(fromWorkflow.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromWorkflow.State>
   ) {
     this.configTable = {
       dataKey: 'workflow_id',
@@ -42,7 +42,7 @@ export class IndexPageWorkflowComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(workflowSearch: SearchWorkflow) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromWorkflow.LoadEntity({
       search: {
         workflow: workflowSearch.workflow,
         limit: 20,
@@ -64,7 +64,7 @@ export class IndexPageWorkflowComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromWorkflow.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -74,6 +74,6 @@ export class IndexPageWorkflowComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromWorkflow.ResetSearch());
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/profile/store';
+import * as fromProfile from '@web/app/features/c/profile/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Profile } from '@web/app/features/c/profile/models/profile.model';
@@ -14,17 +14,17 @@ import { SearchProfile } from '@web/app/features/c/profile/models/search-profile
 })
 export class IndexPageProfileComponent implements OnInit {
 
-  query$ = this.store.pipe(select(fromStore.getQuery));
+  query$ = this.store.pipe(select(fromProfile.getQuery));
 
-  data$ = this.store.pipe(select(fromStore.getAllEntities));
-  total$ = this.store.pipe(select(fromStore.getTotal));
-  perPage$ = this.store.pipe(select(fromStore.getPerPage));
-  from$ = this.store.pipe(select(fromStore.getFrom));
-  to$ = this.store.pipe(select(fromStore.getTo));
+  data$ = this.store.pipe(select(fromProfile.getAllEntities));
+  total$ = this.store.pipe(select(fromProfile.getTotal));
+  perPage$ = this.store.pipe(select(fromProfile.getPerPage));
+  from$ = this.store.pipe(select(fromProfile.getFrom));
+  to$ = this.store.pipe(select(fromProfile.getTo));
   configTable: any;
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProfile.State>
   ) {
     this.configTable = {
       dataKey: 'profile_id',
@@ -39,7 +39,7 @@ export class IndexPageProfileComponent implements OnInit {
   ngOnInit() { }
 
   onLoad(profileSearch: SearchProfile) {
-    this.store.dispatch(new fromStore.LoadEntity({
+    this.store.dispatch(new fromProfile.LoadEntity({
       search: {
         profile: profileSearch.profile,
         limit: 20,
@@ -61,7 +61,7 @@ export class IndexPageProfileComponent implements OnInit {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromStore.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(new fromProfile.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
@@ -71,6 +71,6 @@ export class IndexPageProfileComponent implements OnInit {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromStore.ResetSearch());
+    this.store.dispatch(new fromProfile.ResetSearch());
   }
 }
