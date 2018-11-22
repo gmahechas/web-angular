@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/macroproject/store';
+import * as fromMacroproject from '@web/app/features/d/macroproject/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
@@ -13,22 +13,22 @@ import { Macroproject } from '@web/app/features/d/macroproject/models/macroproje
 })
 export class FormPageMacroprojectComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  macroproject$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromMacroproject.getPending));
+  macroproject$ = this.store.pipe(select(fromMacroproject.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromMacroproject.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(macroproject: Macroproject) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: macroproject }));
+    this.store.dispatch(new fromMacroproject.StoreEntity({ entity: macroproject }));
   }
 
   onUpdate(macroproject: Macroproject) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: macroproject }));
+    this.store.dispatch(new fromMacroproject.UpdateEntity({ entity: macroproject }));
   }
 
   onCancel() {
@@ -38,6 +38,6 @@ export class FormPageMacroprojectComponent implements OnInit {
   }
 
   onDestroy(macroproject: Macroproject) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: macroproject }));
+    this.store.dispatch(new fromMacroproject.DestroyEntity({ entity: macroproject }));
   }
 }

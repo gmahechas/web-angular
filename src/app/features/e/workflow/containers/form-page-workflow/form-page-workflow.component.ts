@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/e/workflow/store';
+import * as fromWorkflow from '@web/app/features/e/workflow/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
@@ -13,22 +13,22 @@ import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
 })
 export class FormPageWorkflowComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  workflow$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromWorkflow.getPending));
+  workflow$ = this.store.pipe(select(fromWorkflow.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromWorkflow.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(workflow: Workflow) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: workflow }));
+    this.store.dispatch(new fromWorkflow.StoreEntity({ entity: workflow }));
   }
 
   onUpdate(workflow: Workflow) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: workflow }));
+    this.store.dispatch(new fromWorkflow.UpdateEntity({ entity: workflow }));
   }
 
   onCancel() {
@@ -38,6 +38,6 @@ export class FormPageWorkflowComponent implements OnInit {
   }
 
   onDestroy(workflow: Workflow) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: workflow }));
+    this.store.dispatch(new fromWorkflow.DestroyEntity({ entity: workflow }));
   }
 }

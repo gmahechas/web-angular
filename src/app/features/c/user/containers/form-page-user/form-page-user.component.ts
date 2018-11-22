@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/user/store';
+import * as fromUser from '@web/app/features/c/user/store';
 import * as fromCore from '@web/app/core/store';
 
 import { User } from '@web/app/features/c/user/models/user.model';
@@ -13,22 +13,22 @@ import { User } from '@web/app/features/c/user/models/user.model';
 })
 export class FormPageUserComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  user$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromUser.getPending));
+  user$ = this.store.pipe(select(fromUser.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromUser.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(user: User) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: user }));
+    this.store.dispatch(new fromUser.StoreEntity({ entity: user }));
   }
 
   onUpdate(user: User) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: user }));
+    this.store.dispatch(new fromUser.UpdateEntity({ entity: user }));
   }
 
   onCancel() {
@@ -38,7 +38,7 @@ export class FormPageUserComponent implements OnInit {
   }
 
   onDestroy(user: User) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: user }));
+    this.store.dispatch(new fromUser.DestroyEntity({ entity: user }));
   }
 
   onUserOffice(user: User) {

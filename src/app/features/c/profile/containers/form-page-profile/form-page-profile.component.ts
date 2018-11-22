@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/profile/store';
+import * as fromProfile from '@web/app/features/c/profile/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Profile } from '@web/app/features/c/profile/models/profile.model';
@@ -13,22 +13,22 @@ import { Profile } from '@web/app/features/c/profile/models/profile.model';
 })
 export class FormPageProfileComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  profile$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromProfile.getPending));
+  profile$ = this.store.pipe(select(fromProfile.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProfile.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(profile: Profile) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: profile }));
+    this.store.dispatch(new fromProfile.StoreEntity({ entity: profile }));
   }
 
   onUpdate(profile: Profile) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: profile }));
+    this.store.dispatch(new fromProfile.UpdateEntity({ entity: profile }));
   }
 
   onCancel() {
@@ -38,7 +38,7 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onDestroy(profile: Profile) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: profile }));
+    this.store.dispatch(new fromProfile.DestroyEntity({ entity: profile }));
   }
 
   onProfileMenu(profile: Profile) {

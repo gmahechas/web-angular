@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/project/store';
+import * as fromProject from '@web/app/features/d/project/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Project } from '@web/app/features/d/project/models/project.model';
@@ -13,22 +13,22 @@ import { Project } from '@web/app/features/d/project/models/project.model';
 })
 export class FormPageProjectComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  project$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromProject.getPending));
+  project$ = this.store.pipe(select(fromProject.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProject.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(project: Project) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: project }));
+    this.store.dispatch(new fromProject.StoreEntity({ entity: project }));
   }
 
   onUpdate(project: Project) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: project }));
+    this.store.dispatch(new fromProject.UpdateEntity({ entity: project }));
   }
 
   onCancel() {
@@ -38,6 +38,6 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onDestroy(project: Project) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: project }));
+    this.store.dispatch(new fromProject.DestroyEntity({ entity: project }));
   }
 }

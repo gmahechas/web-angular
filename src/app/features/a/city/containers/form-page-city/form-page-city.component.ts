@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/city/store';
+import * as fromCity from '@web/app/features/a/city/store';
 import * as fromCore from '@web/app/core/store';
 
 import { City } from '@web/app/features/a/city/models/city.model';
@@ -13,22 +13,22 @@ import { City } from '@web/app/features/a/city/models/city.model';
 })
 export class FormPageCityComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  city$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromCity.getPending));
+  city$ = this.store.pipe(select(fromCity.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromCity.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(city: City) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: city }));
+    this.store.dispatch(new fromCity.StoreEntity({ entity: city }));
   }
 
   onUpdate(city: City) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: city }));
+    this.store.dispatch(new fromCity.UpdateEntity({ entity: city }));
   }
 
   onCancel() {
@@ -38,6 +38,6 @@ export class FormPageCityComponent implements OnInit {
   }
 
   onDestroy(city: City) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: city }));
+    this.store.dispatch(new fromCity.DestroyEntity({ entity: city }));
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/country/store';
+import * as fromCountry from '@web/app/features/a/country/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Country } from '@web/app/features/a/country/models/country.model';
@@ -13,22 +13,22 @@ import { Country } from '@web/app/features/a/country/models/country.model';
 })
 export class FormPageCountryComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  country$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromCountry.getPending));
+  country$ = this.store.pipe(select(fromCountry.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromCountry.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(country: Country) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: country }));
+    this.store.dispatch(new fromCountry.StoreEntity({ entity: country }));
   }
 
   onUpdate(country: Country) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: country }));
+    this.store.dispatch(new fromCountry.UpdateEntity({ entity: country }));
   }
 
   onCancel() {
@@ -38,6 +38,6 @@ export class FormPageCountryComponent implements OnInit {
   }
 
   onDestroy(country: Country) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: country }));
+    this.store.dispatch(new fromCountry.DestroyEntity({ entity: country }));
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/estate/store';
+import * as fromEstate from '@web/app/features/a/estate/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Estate } from '@web/app/features/a/estate/models/estate.model';
@@ -13,22 +13,22 @@ import { Estate } from '@web/app/features/a/estate/models/estate.model';
 })
 export class FormPageEstateComponent implements OnInit {
 
-  pending$ = this.store.pipe(select(fromStore.getPending));
-  estate$ = this.store.pipe(select(fromStore.getSelectedByRouter));
+  pending$ = this.store.pipe(select(fromEstate.getPending));
+  estate$ = this.store.pipe(select(fromEstate.getSelectedByRouter));
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromEstate.State>
   ) { }
 
   ngOnInit() {
   }
 
   onStore(estate: Estate) {
-    this.store.dispatch(new fromStore.StoreEntity({ entity: estate }));
+    this.store.dispatch(new fromEstate.StoreEntity({ entity: estate }));
   }
 
   onUpdate(estate: Estate) {
-    this.store.dispatch(new fromStore.UpdateEntity({ entity: estate }));
+    this.store.dispatch(new fromEstate.UpdateEntity({ entity: estate }));
   }
 
   onCancel() {
@@ -38,7 +38,7 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onDestroy(estate: Estate) {
-    this.store.dispatch(new fromStore.DestroyEntity({ entity: estate }));
+    this.store.dispatch(new fromEstate.DestroyEntity({ entity: estate }));
   }
 
 }
