@@ -1,23 +1,37 @@
 import { LayoutActionTypes, LayoutActions } from '@web/app/core/store/actions/layout-core.actions';
 
+import { Office } from '@web/app/features/b/office/models/office.model';
+import { Project } from '@web/app/features/d/project/models/project.model';
+
 export interface State {
+  lang: string;
   showSidebar: boolean;
   blockedDocument: boolean;
   showSpinner: boolean;
   progressBar: boolean;
-  lang: string;
+  office: Office;
+  project: Project;
 }
 
 export const initialState: State = {
+  lang: null,
   showSidebar: false,
   blockedDocument: false,
   showSpinner: false,
   progressBar: false,
-  lang: null
+  office: null,
+  project: null
 };
 
 export function reducer(state: State = initialState, action: LayoutActions): State {
   switch (action.type) {
+
+    case LayoutActionTypes.SetDefaultLang:
+    case LayoutActionTypes.ChangeLang:
+      return {
+        ...state,
+        lang: action.payload.lang
+      };
 
     case LayoutActionTypes.OpenSidebar:
       return {
@@ -67,11 +81,16 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
         progressBar: false,
       };
 
-    case LayoutActionTypes.SetDefaultLang:
-    case LayoutActionTypes.ChangeLang:
+    case LayoutActionTypes.SetOffice:
       return {
         ...state,
-        lang: action.payload.lang
+        office: action.payload.office
+      };
+
+      case LayoutActionTypes.SetProject:
+      return {
+        ...state,
+        project: action.payload.project
       };
 
     default:
@@ -79,8 +98,8 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
   }
 }
 
+export const getLang = (state: State) => state.lang;
 export const getShowSidebar = (state: State) => state.showSidebar;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
 export const getShowSpinner = (state: State) => state.showSpinner;
 export const getProgressBar = (state: State) => state.progressBar;
-export const getLang = (state: State) => state.lang;

@@ -16,15 +16,6 @@ import { map, tap } from 'rxjs/operators';
 export class LayoutCoreEffects {
 
   @Effect({ dispatch: false })
-  showMessages$ = this.actions$.pipe(
-    ofType(fromActions.LayoutActionTypes.ShowMessages),
-    map((action: fromActions.ShowMessages) => action.payload),
-    tap((message: any[]) => {
-      this.messageService.addAll(message);
-    })
-  );
-
-  @Effect({ dispatch: false })
   setDefaultLang$ = this.actions$.pipe(
     ofType(fromActions.LayoutActionTypes.SetDefaultLang),
     map((action: fromActions.SetDefaultLang) => action.payload.lang),
@@ -43,16 +34,61 @@ export class LayoutCoreEffects {
   );
 
   @Effect({ dispatch: false })
+  setOffice$ = this.actions$.pipe(
+    ofType(fromActions.LayoutActionTypes.SetOffice),
+    map((action: fromActions.SetOffice) => action.payload.office),
+    tap((office) => {
+      this.localStorageService.setOffice(office);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  setProject$ = this.actions$.pipe(
+    ofType(fromActions.LayoutActionTypes.SetProject),
+    map((action: fromActions.SetProject) => action.payload.project),
+    tap((project) => {
+      this.localStorageService.setProject(project);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  showMessages$ = this.actions$.pipe(
+    ofType(fromActions.LayoutActionTypes.ShowMessages),
+    map((action: fromActions.ShowMessages) => action.payload),
+    tap((message: any[]) => {
+      this.messageService.addAll(message);
+    })
+  );
+
+  @Effect({ dispatch: false })
   init$ = defer(() => {
-    return of(this.localStorageService.getLang());
+    return of([
+      this.localStorageService.getLang(),
+      this.localStorageService.getOffice(),
+      this.localStorageService.getProject()
+    ]);
   }).pipe(
-    tap((lang: string) => {
+    tap(([lang, office, project]) => {
+
       if (lang) {
         this.store.dispatch(new fromActions.SetDefaultLang({ lang }));
       } else {
         this.localStorageService.setLang('es-co');
         this.store.dispatch(new fromActions.SetDefaultLang({ lang: 'es-co' }));
       }
+
+      if (office) {
+        this.store.dispatch(new fromActions.SetOffice({ office }));
+      } else {
+        this.localStorageService.setOffice(null);
+      }
+
+      if (project) {
+        this.store.dispatch(new fromActions.SetProject({ project }));
+      } else {
+        this.localStorageService.setProject(null);
+      }
+
     })
   );
 

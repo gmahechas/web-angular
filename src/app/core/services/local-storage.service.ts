@@ -29,4 +29,20 @@ export class LocalStorageService {
     return localStorage.getItem('app_lang');
   }
 
+  setOffice(office) {
+    localStorage.setItem('app_office', office);
+  }
+
+  getOffice() {
+    return localStorage.getItem('app_office');
+  }
+
+  setProject(project) {
+    localStorage.setItem('app_project', project);
+  }
+
+  getProject() {
+    return localStorage.getItem('app_project');
+  }
+
 }
