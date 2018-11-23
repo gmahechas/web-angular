@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '@web/app/auth/guards/auth.guard';
+import { HaveOfficeCoreGuard } from '@web/app/core/guards/have-office-core.guard';
+
 import { NotFoundCoreComponent } from '@web/app/core/components/not-found-core/not-found-core.component';
 
 export const routes: Routes = [
