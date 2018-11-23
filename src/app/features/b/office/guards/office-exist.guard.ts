@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/b/office/store';
+import * as fromOffice from '@web/app/features/b/office/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class OfficeExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromOffice.State>
   ) { }
 
   hasInStore(office_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromOffice.getEntities),
       map(entities => !!entities[office_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class OfficeExistGuard implements CanActivate {
 
   checkStore(office_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromOffice.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromOffice.LoadEntity({
             search: {
               office: {
                 office_id: office_id,

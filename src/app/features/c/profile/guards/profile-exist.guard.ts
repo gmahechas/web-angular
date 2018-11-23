@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/profile/store';
+import * as fromProfile from '@web/app/features/c/profile/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class ProfileExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProfile.State>
   ) { }
 
   hasInStore(profile_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromProfile.getEntities),
       map(entities => !!entities[profile_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class ProfileExistGuard implements CanActivate {
 
   checkStore(profile_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromProfile.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromProfile.LoadEntity({
             search: {
               profile: {
                 profile_id: profile_id,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/macroproject/store';
+import * as fromMacroproject from '@web/app/features/d/macroproject/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class MacroprojectExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromMacroproject.State>
   ) { }
 
   hasInStore(macroproject_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromMacroproject.getEntities),
       map(entities => !!entities[macroproject_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class MacroprojectExistGuard implements CanActivate {
 
   checkStore(macroproject_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromMacroproject.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromMacroproject.LoadEntity({
             search: {
               macroproject: {
                 macroproject_id: macroproject_id,

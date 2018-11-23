@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/project/store';
+import * as fromProject from '@web/app/features/d/project/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class ProjectExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProject.State>
   ) { }
 
   hasInStore(project_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromProject.getEntities),
       map(entities => !!entities[project_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class ProjectExistGuard implements CanActivate {
 
   checkStore(project_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromProject.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromProject.LoadEntity({
             search: {
               project: {
                 project_id: project_id,

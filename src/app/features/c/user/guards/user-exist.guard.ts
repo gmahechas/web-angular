@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/user/store';
+import * as fromUser from '@web/app/features/c/user/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class UserExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromUser.State>
   ) { }
 
   hasInStore(user_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromUser.getEntities),
       map(entities => !!entities[user_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class UserExistGuard implements CanActivate {
 
   checkStore(user_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromUser.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromUser.LoadEntity({
             search: {
               user: {
                 user_id: user_id,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/e/workflow/store';
+import * as fromWorkflow from '@web/app/features/e/workflow/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class WorkflowExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromWorkflow.State>
   ) { }
 
   hasInStore(workflow_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromWorkflow.getEntities),
       map(entities => !!entities[workflow_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class WorkflowExistGuard implements CanActivate {
 
   checkStore(workflow_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromWorkflow.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromWorkflow.LoadEntity({
             search: {
               workflow: {
                 workflow_id: workflow_id,

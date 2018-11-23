@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/estate/store';
+import * as fromEstate from '@web/app/features/a/estate/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 export class EstateExistGuard implements CanActivate {
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromEstate.State>
   ) { }
 
   hasInStore(estate_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getEntities),
+      select(fromEstate.getEntities),
       map(entities => !!entities[estate_id]),
       take(1)
     );
@@ -41,10 +41,10 @@ export class EstateExistGuard implements CanActivate {
 
   checkStore(estate_id: string): Observable<boolean> {
     return this.store.pipe(
-      select(fromStore.getLoaded),
+      select(fromEstate.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromStore.LoadEntity({
+          this.store.dispatch(new fromEstate.LoadEntity({
             search: {
               estate: {
                 estate_id: estate_id,
