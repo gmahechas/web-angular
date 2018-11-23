@@ -103,3 +103,5 @@ export const getShowSidebar = (state: State) => state.showSidebar;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
 export const getShowSpinner = (state: State) => state.showSpinner;
 export const getProgressBar = (state: State) => state.progressBar;
+export const getOffice = (state: State) => state.office;
+export const getProject = (state: State) => state.project;
