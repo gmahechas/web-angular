@@ -9,6 +9,14 @@ export class LocalStorageService {
 
   constructor() { }
 
+  setLang(lang: string) {
+    localStorage.setItem('app_lang', lang);
+  }
+
+  getLang() {
+    return localStorage.getItem('app_lang');
+  }
+
   setToken(token: Token) {
     localStorage.setItem('app_token', JSON.stringify(token));
   }
@@ -19,14 +27,6 @@ export class LocalStorageService {
 
   removeToken() {
     localStorage.removeItem('app_token');
-  }
-
-  setLang(lang: string) {
-    localStorage.setItem('app_lang', lang);
-  }
-
-  getLang() {
-    return localStorage.getItem('app_lang');
   }
 
   setOffice(office) {
