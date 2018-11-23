@@ -23,6 +23,11 @@ export const getShowSpinner = createSelector(
   fromLayout.getShowSpinner
 );
 
+export const getProgressBar = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getProgressBar
+);
+
 export const getOffice = createSelector(
   fromCore.getLayoutState,
   fromLayout.getOffice
