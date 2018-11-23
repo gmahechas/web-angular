@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
-import * as fromActions from '@web/app/features/c/profile/store/actions';
+import * as fromProfileActions from '@web/app/features/c/profile/store/actions';
 
 import { tap } from 'rxjs/operators';
 
@@ -14,12 +14,12 @@ export class LayoutProfileEffects {
   @Effect({ dispatch: false })
   entity$ = this.actions$.pipe(
     ofType(
-      fromActions.EntityActionTypes.LoadEntity,
-      fromActions.EntityActionTypes.StoreEntity,
-      fromActions.EntityActionTypes.UpdateEntity,
-      fromActions.EntityActionTypes.DestroyEntity,
-      fromActions.EntityActionTypes.PaginateEntity,
-      fromActions.EntityActionTypes.LoadEntityShared
+      fromProfileActions.EntityActionTypes.LoadEntity,
+      fromProfileActions.EntityActionTypes.StoreEntity,
+      fromProfileActions.EntityActionTypes.UpdateEntity,
+      fromProfileActions.EntityActionTypes.DestroyEntity,
+      fromProfileActions.EntityActionTypes.PaginateEntity,
+      fromProfileActions.EntityActionTypes.LoadEntityShared
     ),
     tap(() => {
       this.store.dispatch(new fromCore.ShowSpinner);
@@ -29,7 +29,7 @@ export class LayoutProfileEffects {
   @Effect({ dispatch: false })
   loadSuccessEntity$ = this.actions$.pipe(
     ofType(
-      fromActions.EntityActionTypes.LoadSuccessEntity
+      fromProfileActions.EntityActionTypes.LoadSuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
@@ -39,9 +39,9 @@ export class LayoutProfileEffects {
   @Effect({ dispatch: false })
   success$ = this.actions$.pipe(
     ofType(
-      fromActions.EntityActionTypes.StoreSuccessEntity,
-      fromActions.EntityActionTypes.UpdateSuccessEntity,
-      fromActions.EntityActionTypes.DestroySuccessEntity
+      fromProfileActions.EntityActionTypes.StoreSuccessEntity,
+      fromProfileActions.EntityActionTypes.UpdateSuccessEntity,
+      fromProfileActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
@@ -56,10 +56,10 @@ export class LayoutProfileEffects {
   @Effect({ dispatch: false })
   fail$ = this.actions$.pipe(
     ofType(
-      fromActions.EntityActionTypes.LoadFailEntity,
-      fromActions.EntityActionTypes.StoreFailEntity,
-      fromActions.EntityActionTypes.UpdateFailEntity,
-      fromActions.EntityActionTypes.DestroyFailEntity
+      fromProfileActions.EntityActionTypes.LoadFailEntity,
+      fromProfileActions.EntityActionTypes.StoreFailEntity,
+      fromProfileActions.EntityActionTypes.UpdateFailEntity,
+      fromProfileActions.EntityActionTypes.DestroyFailEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
@@ -75,10 +75,10 @@ export class LayoutProfileEffects {
   @Effect({ dispatch: false })
   successRedirect$ = this.actions$.pipe(
     ofType(
-      fromActions.EntityActionTypes.LoadEntity,
-      fromActions.EntityActionTypes.StoreSuccessEntity,
-      fromActions.EntityActionTypes.UpdateSuccessEntity,
-      fromActions.EntityActionTypes.DestroySuccessEntity
+      fromProfileActions.EntityActionTypes.LoadEntity,
+      fromProfileActions.EntityActionTypes.StoreSuccessEntity,
+      fromProfileActions.EntityActionTypes.UpdateSuccessEntity,
+      fromProfileActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['profile'] }));

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/a/city/store';
+import * as fromCity from '@web/app/features/a/city/store';
 
 @Component({
   selector: 'app-dropdown-page-city',
@@ -20,18 +20,18 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() filterPlaceholder: string;
   @Input() showClear: boolean;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromCity.getAllEntities));
   entityId = 'city_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromCity.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromCity.LoadEntityShared({
       search: {
         city: {
           city_id: '',

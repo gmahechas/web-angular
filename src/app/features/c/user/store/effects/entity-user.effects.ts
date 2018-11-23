@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
-import * as fromReducers from '@web/app/features/c/user/store/reducers';
-import * as fromSelectors from '@web/app/features/c/user/store/selectors';
-import * as fromActions from '@web/app/features/c/user/store/actions';
+import * as fromUserReducers from '@web/app/features/c/user/store/reducers';
+import * as fromUserSelectors from '@web/app/features/c/user/store/selectors';
+import * as fromUserActions from '@web/app/features/c/user/store/actions';
 
 import * as fromModels from '@web/app/features/c/user/models';
 
@@ -18,70 +18,70 @@ export class EntityUserEffects {
 
   @Effect()
   loadEntity$ = this.actions$.pipe(
-    ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
+    ofType<fromUserActions.LoadEntity>(fromUserActions.EntityActionTypes.LoadEntity),
     map(action => action.payload.search),
     withLatestFrom(
-      this.store.pipe(select(fromSelectors.getPerPage)),
-      this.store.pipe(select(fromSelectors.getCurrentPage))
+      this.store.pipe(select(fromUserSelectors.getPerPage)),
+      this.store.pipe(select(fromUserSelectors.getCurrentPage))
     ),
     switchMap(([searchUser, perPage, currentPage]: [fromModels.SearchUser, number, number]) => {
       perPage = (perPage) ? perPage : searchUser.limit;
       currentPage = (currentPage) ? currentPage : searchUser.page;
       return this.userService.load({ ...searchUser, limit: perPage, page: currentPage }).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
+        map(({ data }) => new fromUserActions.LoadSuccessEntity({ entities: data })),
+        catchError((error) => of(new fromUserActions.LoadFailEntity({ error })))
       );
     })
   );
 
   @Effect()
   storeEntity$ = this.actions$.pipe(
-    ofType<fromActions.StoreEntity>(fromActions.EntityActionTypes.StoreEntity),
+    ofType<fromUserActions.StoreEntity>(fromUserActions.EntityActionTypes.StoreEntity),
     map(action => action.payload.entity),
     switchMap((user: fromModels.User) => {
       return this.userService.store(user).pipe(
-        map(({ data }) => new fromActions.StoreSuccessEntity({ entity: data })),
-        catchError((error) => of(new fromActions.StoreFailEntity({ error })))
+        map(({ data }) => new fromUserActions.StoreSuccessEntity({ entity: data })),
+        catchError((error) => of(new fromUserActions.StoreFailEntity({ error })))
       );
     })
   );
 
   @Effect()
   updateEntity$ = this.actions$.pipe(
-    ofType<fromActions.UpdateEntity>(fromActions.EntityActionTypes.UpdateEntity),
+    ofType<fromUserActions.UpdateEntity>(fromUserActions.EntityActionTypes.UpdateEntity),
     map(action => action.payload.entity),
     switchMap((user: fromModels.User) => {
       return this.userService.update(user).pipe(
-        map(({ data }) => new fromActions.UpdateSuccessEntity({ entity: data })),
-        catchError((error) => of(new fromActions.UpdateFailEntity({ error })))
+        map(({ data }) => new fromUserActions.UpdateSuccessEntity({ entity: data })),
+        catchError((error) => of(new fromUserActions.UpdateFailEntity({ error })))
       );
     })
   );
 
   @Effect()
   destroyEntity$ = this.actions$.pipe(
-    ofType<fromActions.DestroyEntity>(fromActions.EntityActionTypes.DestroyEntity),
+    ofType<fromUserActions.DestroyEntity>(fromUserActions.EntityActionTypes.DestroyEntity),
     map(action => action.payload.entity),
     switchMap((user: fromModels.User) => {
       return this.userService.destroy(user).pipe(
-        map(({ data }) => new fromActions.DestroySuccessEntity({ entity: data })),
-        catchError((error) => of(new fromActions.DestroyFailEntity({ error })))
+        map(({ data }) => new fromUserActions.DestroySuccessEntity({ entity: data })),
+        catchError((error) => of(new fromUserActions.DestroyFailEntity({ error })))
       );
     })
   );
 
   @Effect()
   paginateEntity$ = this.actions$.pipe(
-    ofType<fromActions.PaginateEntity>(fromActions.EntityActionTypes.PaginateEntity),
+    ofType<fromUserActions.PaginateEntity>(fromUserActions.EntityActionTypes.PaginateEntity),
     map(action => action.payload.page),
     withLatestFrom(
-      this.store.pipe(select(fromSelectors.getPerPage)),
-      this.store.pipe(select(fromSelectors.getQuery))
+      this.store.pipe(select(fromUserSelectors.getPerPage)),
+      this.store.pipe(select(fromUserSelectors.getQuery))
     ),
     switchMap(([currentPage, perPage, searchUser]: [number, number, fromModels.SearchUser]) => {
       return from(this.userService.pagination({ ...searchUser, limit: perPage, page: currentPage })).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
+        map(({ data }) => new fromUserActions.LoadSuccessEntity({ entities: data })),
+        catchError((error) => of(new fromUserActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -89,7 +89,7 @@ export class EntityUserEffects {
   @Effect()
   loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromActions.LoadEntityShared>(fromActions.EntityActionTypes.LoadEntityShared),
+      ofType<fromUserActions.LoadEntityShared>(fromUserActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
       map(action => action.payload.search),
       switchMap((searchUser: fromModels.SearchUser) => {
@@ -104,14 +104,14 @@ export class EntityUserEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromUserActions.EntityActionTypes.LoadEntityShared),
           skip(1)
         );
 
         return this.userService.load({ ...searchUser, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromActions.LoadFailEntity({ error })))
+          map(({ data }) => new fromUserActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(new fromUserActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -119,6 +119,6 @@ export class EntityUserEffects {
   constructor(
     private actions$: Actions,
     private userService: UserService,
-    private store: Store<fromReducers.State>
+    private store: Store<fromUserReducers.State>
   ) { }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/e/workflow/store';
+import * as fromWorkflow from '@web/app/features/e/workflow/store';
 
 @Component({
   selector: 'app-dropdown-page-workflow',
@@ -19,18 +19,18 @@ export class DropdownPageWorkflowComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromWorkflow.getAllEntities));
   entityId = 'workflow_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromWorkflow.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromWorkflow.LoadEntityShared({
       search: {
         workflow: {
           workflow_id: '',

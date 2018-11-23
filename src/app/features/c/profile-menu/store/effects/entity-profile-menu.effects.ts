@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import * as fromActions from '@web/app/features/c/profile-menu/store/actions';
+import * as fromProfileMenuActions from '@web/app/features/c/profile-menu/store/actions';
 
 import * as fromModels from '@web/app/features/c/profile-menu/models';
 
@@ -15,12 +15,12 @@ export class EntityProfileMenuEffects {
 
   @Effect()
   loadEntity$ = this.actions$.pipe(
-    ofType<fromActions.LoadEntity>(fromActions.EntityActionTypes.LoadEntity),
+    ofType<fromProfileMenuActions.LoadEntity>(fromProfileMenuActions.EntityActionTypes.LoadEntity),
     map(action => action.payload),
     switchMap(({ search }: { search: fromModels.SearchProfileMenu }) => {
       return this.profileMenuService.load(search).pipe(
-        map(({ data }) => new fromActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromActions.LoadFailEntity({ error })))
+        map(({ data }) => new fromProfileMenuActions.LoadSuccessEntity({ entities: data })),
+        catchError((error) => of(new fromProfileMenuActions.LoadFailEntity({ error })))
       );
     })
   );

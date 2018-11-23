@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/profile/store';
+import * as fromProfile from '@web/app/features/c/profile/store';
 
 @Component({
   selector: 'app-dropdown-page-profile',
@@ -20,18 +20,18 @@ export class DropdownPageProfileComponent implements OnInit {
   @Input() filterPlaceholder: string;
   @Input() showClear: boolean;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromProfile.getAllEntities));
   entityId = 'profile_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromProfile.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromProfile.LoadEntityShared({
       search: {
         profile: {
           profile_id: '',

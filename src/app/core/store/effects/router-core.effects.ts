@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import * as fromActions from '@web/app/core/store/actions';
+import * as fromCoreActions from '@web/app/core/store/actions';
 
 import { map, tap } from 'rxjs/operators';
 
@@ -13,8 +13,8 @@ export class RouterCoreEffects {
 
   @Effect({ dispatch: false })
   go$ = this.actions$.pipe(
-    ofType(fromActions.RouterActionTypes.Go),
-    map((action: fromActions.Go) => action.payload),
+    ofType(fromCoreActions.RouterActionTypes.Go),
+    map((action: fromCoreActions.Go) => action.payload),
     tap(({ path, query: queryParams, extras }) => {
       this.router.navigate(path, { queryParams, ...extras });
     })
@@ -22,13 +22,13 @@ export class RouterCoreEffects {
 
   @Effect({ dispatch: false })
   back$ = this.actions$.pipe(
-    ofType(fromActions.RouterActionTypes.Back),
+    ofType(fromCoreActions.RouterActionTypes.Back),
     tap(() => this.location.back())
   );
 
   @Effect({ dispatch: false })
   forward$ = this.actions$.pipe(
-    ofType(fromActions.RouterActionTypes.Forward),
+    ofType(fromCoreActions.RouterActionTypes.Forward),
     tap(() => this.location.forward())
   );
 
