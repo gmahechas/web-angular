@@ -55,7 +55,7 @@ export class AuthEffects {
     ofType(fromActions.AuthActionTypes.CheckAuthSuccess),
     tap(() => {
       this.store.dispatch(new fromStore.Go({
-        path: ['dashboard']
+        path: ['user-office', 'select']
       }));
     })
   );
