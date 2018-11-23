@@ -13,8 +13,7 @@ export enum LayoutActionTypes {
   CloseProgressBar = '[Layout] Close Progress Bar',
   SetOffice = '[Layout] Set Office',
   SetProject = '[Layout] Set Project',
-  ShowMessages = '[Layout] Show Messages',
-  GetMenu = '[Layout] Get Menu'
+  ShowMessages = '[Layout] Show Messages'
 }
 
 export class SetDefaultLang implements Action {
@@ -71,11 +70,7 @@ export class SetProject implements Action {
 
 export class ShowMessages implements Action {
   readonly type = LayoutActionTypes.ShowMessages;
-  constructor(public payload: any[]) { }
-}
-
-export class GetMenu implements Action {
-  readonly type = LayoutActionTypes.ShowMessages;
+  constructor(public payload: { messages: any[] }) { }
 }
 
 export type LayoutActions =
@@ -91,5 +86,4 @@ export type LayoutActions =
   | CloseProgressBar
   | SetOffice
   | SetProject
-  | ShowMessages
-  | GetMenu;
+  | ShowMessages;

@@ -43,9 +43,11 @@ export class LayoutUserOfficeEffects {
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
-      this.store.dispatch(new fromCore.ShowMessages([
-        { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
-      ]));
+      this.store.dispatch(new fromCore.ShowMessages({
+        messages: [
+          { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
+        ]
+      }));
     })
   );
 
@@ -59,9 +61,11 @@ export class LayoutUserOfficeEffects {
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
-      this.store.dispatch(new fromCore.ShowMessages([
-        { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
-      ]));
+      this.store.dispatch(new fromCore.ShowMessages({
+        messages: [
+          { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
+        ]
+      }));
     })
   );
 

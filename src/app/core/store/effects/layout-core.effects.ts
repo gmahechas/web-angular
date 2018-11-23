@@ -54,7 +54,7 @@ export class LayoutCoreEffects {
   @Effect({ dispatch: false })
   showMessages$ = this.actions$.pipe(
     ofType(fromActions.LayoutActionTypes.ShowMessages),
-    map((action: fromActions.ShowMessages) => action.payload),
+    map((action: fromActions.ShowMessages) => action.payload.messages),
     tap((message: any[]) => {
       this.messageService.addAll(message);
     })
