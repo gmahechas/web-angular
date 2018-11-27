@@ -34,24 +34,6 @@ export class LayoutCoreEffects {
   );
 
   @Effect({ dispatch: false })
-  setOffice$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetOffice),
-    map((action: fromCoreActions.SetOffice) => action.payload.office),
-    tap((office) => {
-      this.localStorageService.setOffice(office);
-    })
-  );
-
-  @Effect({ dispatch: false })
-  setProject$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetProject),
-    map((action: fromCoreActions.SetProject) => action.payload.project),
-    tap((project) => {
-      this.localStorageService.setProject(project);
-    })
-  );
-
-  @Effect({ dispatch: false })
   showMessages$ = this.actions$.pipe(
     ofType(fromCoreActions.LayoutActionTypes.ShowMessages),
     map((action: fromCoreActions.ShowMessages) => action.payload.messages),
@@ -78,13 +60,13 @@ export class LayoutCoreEffects {
       }
 
       if (office) {
-        this.store.dispatch(new fromCoreActions.SetOffice({ office }));
+        this.store.dispatch(new fromCoreActions.SetOffice({ office: JSON.parse(office) }));
       } else {
         this.localStorageService.setOffice(null);
       }
 
       if (project) {
-        this.store.dispatch(new fromCoreActions.SetProject({ project }));
+        this.store.dispatch(new fromCoreActions.SetProject({ project: JSON.parse(project) }));
       } else {
         this.localStorageService.setProject(null);
       }

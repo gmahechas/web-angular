@@ -9,8 +9,8 @@ export interface State {
   blockedDocument: boolean;
   showSpinner: boolean;
   progressBar: boolean;
-  office: Office;
-  project: Project;
+  office: Office | null;
+  project: Project | null;
 }
 
 export const initialState: State = {
