@@ -10,5 +10,5 @@ export interface Office {
   company_id?: number;
   company?: Company;
   city_id?: number;
-  city: City;
+  city?: City;
 }

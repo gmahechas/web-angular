@@ -13,12 +13,8 @@ export const initialState: State = {
       user_office_id: '',
       user_office_status: ''
     },
-    user: {
-      user_id: ''
-    },
-    office: {
-      office_id: ''
-    }
+    user: null,
+    office: null
   }
 };
 

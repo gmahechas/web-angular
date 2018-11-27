@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
+import { Action } from '@ngrx/store';
 import * as fromUserOfficeActions from '@web/app/features/c/user-office/store/actions';
 
 import * as fromModels from '@web/app/features/c/user-office/models';
 
 import { UserOfficeService } from '@web/app/features/c/user-office/services/user-office.service';
 
-import { of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
+import { map, switchMap, catchError, debounceTime, skip, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class EntityUserOfficeEffects {
@@ -48,6 +49,35 @@ export class EntityUserOfficeEffects {
       );
     })
   );
+
+  @Effect()
+  loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
+    this.actions$.pipe(
+      ofType<fromUserOfficeActions.LoadEntityShared>(fromUserOfficeActions.EntityActionTypes.LoadEntityShared),
+      debounceTime(debounce, scheduler),
+      map(action => action.payload.search),
+      switchMap((searchUserOffice: fromModels.SearchUserOffice) => {
+        if (
+          searchUserOffice.user_office.user_office_id === '' &&
+          searchUserOffice.user_office.user_office_status === '' &&
+          searchUserOffice.user === null &&
+          searchUserOffice.office === null
+        ) {
+          return EMPTY;
+        }
+
+        const nextSearch$ = this.actions$.pipe(
+          ofType(fromUserOfficeActions.EntityActionTypes.LoadEntityShared),
+          skip(1)
+        );
+
+        return this.userOfficeService.load({ ...searchUserOffice, limit: 20, page: 1 }).pipe(
+          takeUntil(nextSearch$),
+          map(({ data }) => new fromUserOfficeActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(new fromUserOfficeActions.LoadFailEntity({ error })))
+        );
+      })
+    )
 
   constructor(
     private actions$: Actions,

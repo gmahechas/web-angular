@@ -14,7 +14,7 @@ export class UserOfficePaginationGQL extends Query<PaginationUserOffice> {
 document: DocumentNode = gql`
   query paginationUserOffice(
     $user_office_id: ID,
-    $user_office_status: String,
+    $user_office_status: Boolean,
     $user_id: ID,
     $office_id: ID,
     $limit: Int,
