@@ -1,7 +1,7 @@
 import { LayoutActionTypes, LayoutActions } from '@web/app/core/store/actions/layout-core.actions';
 
-import { Office } from '@web/app/features/b/office/models/office.model';
-import { Project } from '@web/app/features/d/project/models/project.model';
+import { UserOffice } from '@web/app/features/c/user-office/models';
+import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
 
 export interface State {
   lang: string;
@@ -9,8 +9,8 @@ export interface State {
   blockedDocument: boolean;
   showSpinner: boolean;
   progressBar: boolean;
-  office: Office;
-  project: Project;
+  userOffice: UserOffice;
+  userOfficeProject: UserOfficeProject;
 }
 
 export const initialState: State = {
@@ -19,8 +19,8 @@ export const initialState: State = {
   blockedDocument: false,
   showSpinner: false,
   progressBar: false,
-  office: null,
-  project: null
+  userOffice: null,
+  userOfficeProject: null
 };
 
 export function reducer(state: State = initialState, action: LayoutActions): State {
@@ -81,16 +81,16 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
         progressBar: false,
       };
 
-    case LayoutActionTypes.SetOffice:
+    case LayoutActionTypes.SetUserOffice:
       return {
         ...state,
-        office: action.payload.office
+        userOffice: action.payload.userOffice
       };
 
-      case LayoutActionTypes.SetProject:
+      case LayoutActionTypes.SetUserOfficeProject:
       return {
         ...state,
-        project: action.payload.project
+        userOfficeProject: action.payload.userOfficeProject
       };
 
     default:
@@ -103,5 +103,5 @@ export const getShowSidebar = (state: State) => state.showSidebar;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
 export const getShowSpinner = (state: State) => state.showSpinner;
 export const getProgressBar = (state: State) => state.progressBar;
-export const getOffice = (state: State) => state.office;
-export const getProject = (state: State) => state.project;
+export const getUserOffice = (state: State) => state.userOffice;
+export const getUserOfficeProject = (state: State) => state.userOfficeProject;

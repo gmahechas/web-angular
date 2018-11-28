@@ -11,8 +11,8 @@ export enum LayoutActionTypes {
   CloseSpinner = '[Layout] Close Spinner',
   ShowProgressBar = '[Layout] Open Progress Bar',
   CloseProgressBar = '[Layout] Close Progress Bar',
-  SetOffice = '[Layout] Set Office',
-  SetProject = '[Layout] Set Project',
+  SetUserOffice = '[Layout] Set User Office',
+  SetUserOfficeProject = '[Layout] Set User Office Project',
   ShowMessages = '[Layout] Show Messages'
 }
 
@@ -58,14 +58,14 @@ export class CloseProgressBar implements Action {
   readonly type = LayoutActionTypes.CloseProgressBar;
 }
 
-export class SetOffice implements Action {
-  readonly type = LayoutActionTypes.SetOffice;
-  constructor(public payload: { office: any }) { }
+export class SetUserOffice implements Action {
+  readonly type = LayoutActionTypes.SetUserOffice;
+  constructor(public payload: { userOffice: any }) { }
 }
 
-export class SetProject implements Action {
-  readonly type = LayoutActionTypes.SetProject;
-  constructor(public payload: { project: any }) { }
+export class SetUserOfficeProject implements Action {
+  readonly type = LayoutActionTypes.SetUserOfficeProject;
+  constructor(public payload: { userOfficeProject: any }) { }
 }
 
 export class ShowMessages implements Action {
@@ -84,6 +84,6 @@ export type LayoutActions =
   | CloseSpinner
   | ShowProgressBar
   | CloseProgressBar
-  | SetOffice
-  | SetProject
+  | SetUserOffice
+  | SetUserOfficeProject
   | ShowMessages;

@@ -87,8 +87,8 @@ export class AuthEffects {
     ofType(fromAuthActions.AuthActionTypes.LogoutAuthSuccess),
     tap(() => {
       this.localStorageService.removeToken();
-      this.localStorageService.setOffice(null);
-      this.localStorageService.setProject(null);
+      this.localStorageService.setUserOffice(null);
+      this.localStorageService.setUserOfficeProject(null);
       this.store.dispatch(new fromCore.Go({
         path: ['auth']
       }));

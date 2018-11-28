@@ -29,20 +29,20 @@ export class LocalStorageService {
     localStorage.removeItem('app_token');
   }
 
-  setOffice(office) {
-    localStorage.setItem('app_office', JSON.stringify(office));
+  setUserOffice(userOffice) {
+    localStorage.setItem('app_user_office', JSON.stringify(userOffice));
   }
 
-  getOffice() {
-    return JSON.parse(localStorage.getItem('app_office'));
+  getUserOffice() {
+    return JSON.parse(localStorage.getItem('app_user_office'));
   }
 
-  setProject(project) {
-    localStorage.setItem('app_project', JSON.stringify(project));
+  setUserOfficeProject(project) {
+    localStorage.setItem('app_user_office_project', JSON.stringify(project));
   }
 
-  getProject() {
-    return JSON.parse(localStorage.getItem('app_project'));
+  getUserOfficeProject() {
+    return JSON.parse(localStorage.getItem('app_user_office_project'));
   }
 
 }

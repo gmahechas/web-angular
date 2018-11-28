@@ -20,8 +20,8 @@ export class SelectOfficePageUserOfficeComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectOffice(office) {
-    this.store.dispatch(new fromCore.SetOffice({ office }));
+  selectUserOffice(userOffice) {
+    this.store.dispatch(new fromCore.SetUserOffice({ userOffice }));
   }
 
 }

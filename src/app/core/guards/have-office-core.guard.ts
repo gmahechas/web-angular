@@ -17,9 +17,9 @@ export class HaveOfficeCoreGuard implements CanLoad, CanActivate {
   ) { }
 
   canLoad(): Observable<boolean> {
-    return this.store.pipe(select(fromCore.getOffice),
-      map(office => {
-        if (!office) {
+    return this.store.pipe(select(fromCore.getUserOffice),
+      map(userOffice => {
+        if (!userOffice) {
           this.store.dispatch(new fromCore.Go({ path: ['user-office', 'select-office'] }));
           return false;
         }
@@ -30,9 +30,9 @@ export class HaveOfficeCoreGuard implements CanLoad, CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    return this.store.pipe(select(fromCore.getOffice),
-      map(office => {
-        if (!office) {
+    return this.store.pipe(select(fromCore.getUserOffice),
+      map(userOffice => {
+        if (!userOffice) {
           this.store.dispatch(new fromCore.Go({ path: ['user-office', 'select-office'] }));
           return false;
         }

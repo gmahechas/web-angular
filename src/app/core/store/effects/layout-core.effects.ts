@@ -36,21 +36,21 @@ export class LayoutCoreEffects {
   );
 
   @Effect({ dispatch: false })
-  setOffice$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetOffice),
-    map((action: fromCoreActions.SetOffice) => action.payload.office),
-    tap((office) => {
-      this.localStorageService.setOffice(office);
+  setUserOffice$ = this.actions$.pipe(
+    ofType(fromCoreActions.LayoutActionTypes.SetUserOffice),
+    map((action: fromCoreActions.SetUserOffice) => action.payload.userOffice),
+    tap((userOffice) => {
+      this.localStorageService.setUserOffice(userOffice);
       this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
     })
   );
 
   @Effect({ dispatch: false })
-  setProject$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetProject),
-    map((action: fromCoreActions.SetProject) => action.payload.project),
-    tap((project) => {
-      this.localStorageService.setProject(project);
+  setUserOfficeProject$ = this.actions$.pipe(
+    ofType(fromCoreActions.LayoutActionTypes.SetUserOfficeProject),
+    map((action: fromCoreActions.SetUserOfficeProject) => action.payload.userOfficeProject),
+    tap((userOfficeProject) => {
+      this.localStorageService.setUserOfficeProject(userOfficeProject);
     })
   );
 
@@ -67,18 +67,18 @@ export class LayoutCoreEffects {
   init$ = defer(() => {
     return of([
       this.localStorageService.getLang(),
-      this.localStorageService.getOffice(),
-      this.localStorageService.getProject()
+      this.localStorageService.getUserOffice(),
+      this.localStorageService.getUserOfficeProject()
     ]);
   }).pipe(
-    tap(([lang, office, project]) => {
+    tap(([lang, userOffice, userOfficeProject]) => {
       if (lang) {
         this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang }));
       } else {
         this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang: 'es-co' }));
       }
-      this.store.dispatch(new fromCoreActions.SetOffice({ office }));
-      this.store.dispatch(new fromCoreActions.SetProject({ project }));
+      this.store.dispatch(new fromCoreActions.SetUserOffice({ userOffice }));
+      this.store.dispatch(new fromCoreActions.SetUserOfficeProject({ userOfficeProject }));
     })
   );
 
