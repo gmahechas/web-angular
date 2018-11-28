@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { Company } from '@web/app/features/b/company/models/company.model';
+import { Office } from '@web/app/features/b/office/models';
 import { User } from '@web/app/features/c/user/models';
 
 @Component({
@@ -12,6 +13,7 @@ import { User } from '@web/app/features/c/user/models';
 export class HeaderCoreComponent implements OnInit {
 
   @Input() company: Company;
+  @Input() office: Office;
   @Input() user: User;
   @Output() clickOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickSelectOffice: EventEmitter<boolean> = new EventEmitter<boolean>();

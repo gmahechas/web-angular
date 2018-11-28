@@ -3,8 +3,10 @@
     <button pButton (click)="handlerClick(true)" class="ui-button-secondary" icon="pi pi-bars"></button>
   </div>
   <div class="ui-g-10">
-    {{ company.company_name }} - {{ user.person.person_first_name }} {{ user.person.person_second_name }} {{ user.person.person_first_surname }} {{
-    user.person.person_second_surname }}
+    {{ company.company_name }} /
+    {{ office.office_name }} /
+    {{ user.person.person_first_name }} {{ user.person.person_second_name }}
+    {{ user.person.person_first_surname }} {{ user.person.person_second_surname }}
     <span (click)="selectOffice()">(Seleccion Oficina)</span>
   </div>
   <div class="ui-g-1">
