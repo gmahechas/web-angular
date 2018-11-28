@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromUserOffice from '@web/app/features/c/user-office/store';
 
-import { User } from '@web/app/features/c/user/models/user.model';
+import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 
 @Component({
   selector: 'app-dropdown-page-user-office',
@@ -20,7 +20,7 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   @Input() optionLabel: string;
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
-  @Input() user: User;
+  @Input() userOffice: UserOffice;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));
   entityId = 'user_office_id';
@@ -30,17 +30,19 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new fromUserOffice.LoadEntityShared({
+      search: {
+        user_office: {
+          user_office_id: '',
+          user_office_status: (this.userOffice.user_office_status) ? this.userOffice.user_office_status : null
+        },
+        user: (this.userOffice.user) ? this.userOffice.user : null,
+        office: (this.userOffice.office) ? this.userOffice.office : null
+      }
+    }));
   }
 
   keyUp(event) {
-/*     this.store.dispatch(new fromUserOffice.LoadEntityShared({
-      search: {
-        user-office: {
-          // TODO:
-        },
-        // TODO:
-      }
-    })); */
   }
 
   handleChange(event) {

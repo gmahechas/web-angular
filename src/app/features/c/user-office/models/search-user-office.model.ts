@@ -4,7 +4,7 @@ import { Office } from '@web/app/features/b/office/models/office.model';
 export interface SearchUserOffice {
   user_office?: {
     user_office_id?: string;
-    user_office_status?: string;
+    user_office_status?: boolean | null;
   };
   user?: User | null;
   office?: Office | null;

@@ -20,6 +20,7 @@ export class LayoutCoreEffects {
     ofType(fromCoreActions.LayoutActionTypes.SetDefaultLang),
     map((action: fromCoreActions.SetDefaultLang) => action.payload.lang),
     tap((lang: string) => {
+      this.localStorageService.setLang(lang);
       this.translate.setDefaultLang(lang);
     })
   );
@@ -29,7 +30,27 @@ export class LayoutCoreEffects {
     ofType(fromCoreActions.LayoutActionTypes.ChangeLang),
     map((action: fromCoreActions.ChangeLang) => action.payload.lang),
     tap((lang: string) => {
+      this.localStorageService.setLang(lang);
       this.translate.use(lang);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  setOffice$ = this.actions$.pipe(
+    ofType(fromCoreActions.LayoutActionTypes.SetOffice),
+    map((action: fromCoreActions.SetOffice) => action.payload.office),
+    tap((office) => {
+      this.localStorageService.setOffice(office);
+      this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  setProject$ = this.actions$.pipe(
+    ofType(fromCoreActions.LayoutActionTypes.SetProject),
+    map((action: fromCoreActions.SetProject) => action.payload.project),
+    tap((project) => {
+      this.localStorageService.setProject(project);
     })
   );
 
@@ -51,26 +72,13 @@ export class LayoutCoreEffects {
     ]);
   }).pipe(
     tap(([lang, office, project]) => {
-
       if (lang) {
         this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang }));
       } else {
-        this.localStorageService.setLang('es-co');
         this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang: 'es-co' }));
       }
-
-      if (office) {
-        this.store.dispatch(new fromCoreActions.SetOffice({ office: JSON.parse(office) }));
-      } else {
-        this.localStorageService.setOffice(JSON.parse(office));
-      }
-
-      if (project) {
-        this.store.dispatch(new fromCoreActions.SetProject({ project: JSON.parse(project) }));
-      } else {
-        this.localStorageService.setProject(JSON.parse(office));
-      }
-
+      this.store.dispatch(new fromCoreActions.SetOffice({ office }));
+      this.store.dispatch(new fromCoreActions.SetProject({ project }));
     })
   );
 

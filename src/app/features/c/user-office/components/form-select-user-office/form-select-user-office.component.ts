@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { User } from '@web/app/features/c/user/models/user.model';
+import { Office } from '@web/app/features/b/office/models';
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 
 @Component({
@@ -10,7 +12,9 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 })
 export class FormSelectUserOfficeComponent implements OnInit {
 
-  @Input() userOffice: UserOffice;
+  @Input() user: User;
+  @Output() selectedOffice: EventEmitter<Office> = new EventEmitter<Office>();
+  userOffice: UserOffice;
 
   userOfficeForm = this.formBuilder.group({
     userOffice: this.formBuilder.control('', [Validators.required])
@@ -21,9 +25,14 @@ export class FormSelectUserOfficeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userOffice = {
+      user_office_status: true,
+      user: this.user
+    };
   }
 
   onSubmit() {
+    this.selectedOffice.emit(this.userOfficeForm.value.userOffice.office);
   }
 
 }

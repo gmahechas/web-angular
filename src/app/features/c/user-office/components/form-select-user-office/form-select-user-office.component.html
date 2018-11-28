@@ -10,8 +10,8 @@
             <app-translate-shared [strings]="['office.singular']"></app-translate-shared>
           </div>
           <div class="ui-grid-col-6">
-            <app-dropdown-page-user-office [group]="userOfficeForm" [controlName]="'userOffice'" [options]="['office_name']"
-              [optionLabel]="'profile_name'"></app-dropdown-page-user-office>
+            <app-dropdown-page-user-office [group]="userOfficeForm" [controlName]="'userOffice'" [options]="['office.office_name']"
+              [optionLabel]="'office.office_name'" [userOffice]="userOffice"></app-dropdown-page-user-office>
           </div>
           <div class="ui-grid-col-2">
             <app-button-shared [type]="'submit'" [label]="['select.verb']" [class]="'ui-button-secondary'" [disabled]="userOfficeForm.invalid"></app-button-shared>

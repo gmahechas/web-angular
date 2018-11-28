@@ -59,7 +59,7 @@ export class EntityUserOfficeEffects {
       switchMap((searchUserOffice: fromModels.SearchUserOffice) => {
         if (
           searchUserOffice.user_office.user_office_id === '' &&
-          searchUserOffice.user_office.user_office_status === '' &&
+          searchUserOffice.user_office.user_office_status === null &&
           searchUserOffice.user === null &&
           searchUserOffice.office === null
         ) {

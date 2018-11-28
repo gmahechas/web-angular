@@ -11,7 +11,7 @@ export const initialState: State = {
   query: {
     user_office: {
       user_office_id: '',
-      user_office_status: ''
+      user_office_status: null
     },
     user: null,
     office: null

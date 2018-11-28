@@ -30,19 +30,19 @@ export class LocalStorageService {
   }
 
   setOffice(office) {
-    localStorage.setItem('app_office', office);
+    localStorage.setItem('app_office', JSON.stringify(office));
   }
 
   getOffice() {
-    return localStorage.getItem('app_office');
+    return JSON.parse(localStorage.getItem('app_office'));
   }
 
   setProject(project) {
-    localStorage.setItem('app_project', project);
+    localStorage.setItem('app_project', JSON.stringify(project));
   }
 
   getProject() {
-    return localStorage.getItem('app_project');
+    return JSON.parse(localStorage.getItem('app_project'));
   }
 
 }
