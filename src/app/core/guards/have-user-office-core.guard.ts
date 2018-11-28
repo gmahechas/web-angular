@@ -10,7 +10,7 @@ import { map, take } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class HaveOfficeCoreGuard implements CanLoad, CanActivate {
+export class HaveUserOfficeCoreGuard implements CanLoad, CanActivate {
 
   constructor(
     private store: Store<fromCore.State>
