@@ -12,6 +12,7 @@ export class EditUserOfficeComponent implements OnInit {
   @Input() userOffice: UserOffice;
   @Output() edit: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
   @Output() delete: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
+  @Output() gotoUserOfficeProject: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
 
   constructor() { }
 
@@ -28,5 +29,9 @@ export class EditUserOfficeComponent implements OnInit {
 
   handleDelete() {
     this.delete.emit(this.userOffice);
+  }
+
+  onUserOfficeProject(userOffice: UserOffice) {
+    this.gotoUserOfficeProject.emit(userOffice);
   }
 }

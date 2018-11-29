@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUserOffice from '@web/app/features/c/user-office/store';
+import * as fromCore from '@web/app/core/store';
 
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 
@@ -59,6 +60,48 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   onDelete(userOffice: UserOffice) {
     this.store.dispatch(new fromUserOffice.DestroyEntity({ entity: userOffice }));
+  }
+
+  onUserOfficeProject(userOffice: UserOffice) {
+
+    this.route.snapshot.paramMap.keys.forEach(key => {
+      switch (key) {
+        case 'user_id': {
+          this.store.dispatch(new fromCore.Go({
+            path: [
+              'user', userOffice.user_id,
+              {
+                outlets: {
+                  'router-outlet-user-office': ['user-office', 'user', userOffice.user_id, {
+                    outlets: {
+                      'router-outlet-user-office-project': [userOffice.user_id, 'user-office-project', userOffice.user_office_id]
+                    }
+                  }],
+                }
+              }
+            ]
+          }));
+          break;
+        }
+        case 'office_id': {
+          this.store.dispatch(new fromCore.Go({
+            path: [
+              'office', userOffice.office_id,
+              {
+                outlets: {
+                  'router-outlet-user-office': ['user-office', 'office', userOffice.office_id, {
+                    outlets: {
+                      'router-outlet-user-office-project': [userOffice.office_id, 'user-office-project', userOffice.user_office_id]
+                    }
+                  }],
+                }
+              }
+            ]
+          }));
+          break;
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
