@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'user/:user_id', component: fromContainers.IndexPageUserOfficeComponent, children: [
       {
-        path: ':user_id/user-office-project',
+        path: 'user-office-project',
         loadChildren: '@web/app/features/d/user-office-project/user-office-project.module#UserOfficeProjectModule',
         outlet: 'router-outlet-user-office-project'
       }
@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'office/:office_id', component: fromContainers.IndexPageUserOfficeComponent, children: [
       {
-        path: ':office_id/user-office-project',
+        path: 'user-office-project',
         loadChildren: '@web/app/features/d/user-office-project/user-office-project.module#UserOfficeProjectModule',
         outlet: 'router-outlet-user-office-project'
       }

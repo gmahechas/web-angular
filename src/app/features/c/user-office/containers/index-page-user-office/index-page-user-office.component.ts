@@ -74,7 +74,8 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
                 outlets: {
                   'router-outlet-user-office': ['user-office', 'user', userOffice.user_id, {
                     outlets: {
-                      'router-outlet-user-office-project': [userOffice.user_id, 'user-office-project', userOffice.user_office_id]
+                      'router-outlet-user-office-project':
+                        ['user-office-project', 'user', userOffice.user_id, userOffice.user_office_id]
                     }
                   }],
                 }
@@ -91,7 +92,8 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
                 outlets: {
                   'router-outlet-user-office': ['user-office', 'office', userOffice.office_id, {
                     outlets: {
-                      'router-outlet-user-office-project': [userOffice.office_id, 'user-office-project', userOffice.user_office_id]
+                      'router-outlet-user-office-project':
+                        ['user-office-project', 'office', userOffice.office_id, userOffice.user_office_id]
                     }
                   }],
                 }
