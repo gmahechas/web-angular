@@ -12,4 +12,7 @@
   </div>
   <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(project)"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['user.plural']" [class]="'ui-button-secondary'" (click)="onUserOfficeProject(project)"></app-button-shared>
 </app-form-project>
+
+<router-outlet name="router-outlet-user-office-project"></router-outlet>

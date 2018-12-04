@@ -9,6 +9,9 @@ const routes: Routes = [
   },
   {
     path: 'office/:office_id/:user_office_id', component: fromContainers.IndexPageUserOfficeProjectComponent
+  },
+  {
+    path: 'project/:project_id', component: fromContainers.IndexPageUserOfficeProjectComponent
   }
 ];
 

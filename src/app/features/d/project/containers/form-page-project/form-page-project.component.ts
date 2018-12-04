@@ -40,4 +40,14 @@ export class FormPageProjectComponent implements OnInit {
   onDestroy(project: Project) {
     this.store.dispatch(new fromProject.DestroyEntity({ entity: project }));
   }
+
+  onUserOfficeProject(project: Project) {
+    this.store.dispatch(new fromCore.Go({
+      path: ['project', project.project_id, {
+        outlets: {
+          'router-outlet-user-office-project': ['user-office-project', 'project', project.project_id]
+        }
+      }]
+    }));
+  }
 }
