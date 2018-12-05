@@ -16,9 +16,6 @@ document: DocumentNode = gql`
     destroyOffice(office_id: $office_id) {
       office_id
       office_name
-      office_created_at
-      office_updated_at
-      office_deleted_at
       city_id
     }
   }

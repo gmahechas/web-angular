@@ -41,17 +41,11 @@ document: DocumentNode = gql`
         person_first_surname
         person_second_surname
         person_legal_name
-        person_created_at
-        person_updated_at
-        person_deleted_at
         city_id
         city {
           city_id
           city_name
           city_code
-          city_created_at
-          city_updated_at
-          city_deleted_at
         }
       }
     }

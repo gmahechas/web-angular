@@ -33,9 +33,6 @@ export class WorkflowPaginationGQL extends Query<PaginationWorkflow> {
           workflow_id
           workflow_name
           workflow_description
-          workflow_created_at
-          workflow_updated_at
-          workflow_deleted_at
         }
       }
     }

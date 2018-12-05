@@ -39,9 +39,6 @@ document: DocumentNode = gql`
         user_id
         username
         email
-        user_created_at
-        user_updated_at
-        user_deleted_at
         person_id
         person {
           person_id
@@ -52,17 +49,11 @@ document: DocumentNode = gql`
           person_second_name
           person_first_surname
           person_second_surname
-          person_created_at
-          person_updated_at
-          person_deleted_at
         }
         profile_id
         profile {
           profile_id
           profile_name
-          profile_created_at
-          profile_updated_at
-          profile_deleted_at
         }
       }
     }

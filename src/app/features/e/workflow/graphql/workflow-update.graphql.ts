@@ -17,9 +17,6 @@ export class WorkflowUpdateGQL extends Mutation<UpdateWorkflow> {
           workflow_id
           workflow_name
           workflow_description
-          workflow_created_at
-          workflow_updated_at
-          workflow_deleted_at
         }
     }
   `;

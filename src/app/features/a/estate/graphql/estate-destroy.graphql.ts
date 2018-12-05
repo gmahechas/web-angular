@@ -17,9 +17,6 @@ export class EstateDestroyGQL extends Mutation<DestroyEstate> {
         estate_id
         estate_name
         estate_code
-        estate_created_at
-        estate_updated_at
-        estate_deleted_at
         country_id
       }
     }

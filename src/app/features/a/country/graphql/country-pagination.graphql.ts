@@ -35,9 +35,6 @@ export class CountryPaginationGQL extends Query<PaginationCountry> {
           country_id
           country_name
           country_code
-          country_created_at
-          country_updated_at
-          country_deleted_at
         }
       }
     }

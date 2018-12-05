@@ -16,9 +16,6 @@ document: DocumentNode = gql`
     destroyProfile(profile_id: $profile_id) {
       profile_id
       profile_name
-      profile_created_at
-      profile_updated_at
-      profile_deleted_at
     }
   }
 `;

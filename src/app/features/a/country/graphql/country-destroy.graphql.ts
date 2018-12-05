@@ -17,9 +17,6 @@ export class CountryDestroyGQL extends Mutation<DestroyCountry> {
         country_id
         country_name
         country_code
-        country_created_at
-        country_updated_at
-        country_deleted_at
       }
     }
   `;

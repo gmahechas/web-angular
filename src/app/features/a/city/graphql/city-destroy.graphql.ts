@@ -17,9 +17,6 @@ document: DocumentNode = gql`
       city_id
       city_name
       city_code
-      city_created_at
-      city_updated_at
-      city_deleted_at
       estate_id
     }
   }

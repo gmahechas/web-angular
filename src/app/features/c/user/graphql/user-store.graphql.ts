@@ -17,9 +17,6 @@ document: DocumentNode = gql`
       user_id
       username
       email
-      user_created_at
-      user_updated_at
-      user_deleted_at
       person_id
       profile_id
     }

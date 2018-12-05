@@ -36,9 +36,6 @@ document: DocumentNode = gql`
       data {
         user_office_id
         user_office_status
-        user_office_created_at
-        user_office_updated_at
-        user_office_deleted_at
         user_id
         user {
           user_id
@@ -46,9 +43,6 @@ document: DocumentNode = gql`
           email
           password
           remember_token
-          user_created_at
-          user_updated_at
-          user_deleted_at
           person_id
           person {
             person_id
@@ -60,9 +54,6 @@ document: DocumentNode = gql`
             person_first_surname
             person_second_surname
             person_legal_name
-            person_created_at
-            person_updated_at
-            person_deleted_at
             city_id
           }
           profile_id
@@ -71,9 +62,6 @@ document: DocumentNode = gql`
         office {
           office_id
           office_name
-          office_created_at
-          office_updated_at
-          office_deleted_at
           company_id
           city_id
         }

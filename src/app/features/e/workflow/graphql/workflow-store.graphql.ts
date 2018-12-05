@@ -17,9 +17,6 @@ export class WorkflowStoreGQL extends Mutation<StoreWorkflow> {
         workflow_id
         workflow_name
         workflow_description
-        workflow_created_at
-        workflow_updated_at
-        workflow_deleted_at
       }
     }
   `;
