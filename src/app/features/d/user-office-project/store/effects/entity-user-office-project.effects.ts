@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Store, select, Action } from '@ngrx/store';
-import * as fromUserOfficeProjectReducers from '@web/app/features/d/user-office-project/store/reducers';
-import * as fromUserOfficeProjectSelectors from '@web/app/features/d/user-office-project/store/selectors';
+import { Action } from '@ngrx/store';
 import * as fromUserOfficeProjectActions from '@web/app/features/d/user-office-project/store/actions';
 
 import * as fromModels from '@web/app/features/d/user-office-project/models';
@@ -11,7 +9,7 @@ import * as fromModels from '@web/app/features/d/user-office-project/models';
 import { UserOfficeProjectService } from '@web/app/features/d/user-office-project/services/user-office-project.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
-import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
+import { map, switchMap, catchError, debounceTime, skip, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class EntityUserOfficeProjectEffects {
@@ -19,15 +17,9 @@ export class EntityUserOfficeProjectEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromUserOfficeProjectActions.LoadEntity>(fromUserOfficeProjectActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload.search),
-    withLatestFrom(
-      this.store.pipe(select(fromUserOfficeProjectSelectors.getPerPage)),
-      this.store.pipe(select(fromUserOfficeProjectSelectors.getCurrentPage))
-    ),
-    switchMap(([searchUserOfficeProject, perPage, currentPage]: [fromModels.SearchUserOfficeProject, number, number]) => {
-      perPage = (perPage) ? perPage : searchUserOfficeProject.limit;
-      currentPage = (currentPage) ? currentPage : searchUserOfficeProject.page;
-      return this.userOfficeProjectService.load({ ...searchUserOfficeProject, limit: perPage, page: currentPage }).pipe(
+    map(action => action.payload),
+    switchMap(({ search }: { search: fromModels.SearchUserOfficeProject }) => {
+      return this.userOfficeProjectService.load(search).pipe(
         map(({ data }) => new fromUserOfficeProjectActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromUserOfficeProjectActions.LoadFailEntity({ error: errors })))
       );
@@ -82,7 +74,7 @@ export class EntityUserOfficeProjectEffects {
           searchUserOfficeProject.user_office_project.user_office_project_status === '' &&
           searchUserOfficeProject.user_office === '' &&
           searchUserOfficeProject.project === ''
-          ) {
+        ) {
           return EMPTY;
         }
 
@@ -104,7 +96,6 @@ export class EntityUserOfficeProjectEffects {
 
   constructor(
     private actions$: Actions,
-    private userOfficeProjectService: UserOfficeProjectService,
-    private store: Store<fromUserOfficeProjectReducers.State>
+    private userOfficeProjectService: UserOfficeProjectService
   ) { }
 }

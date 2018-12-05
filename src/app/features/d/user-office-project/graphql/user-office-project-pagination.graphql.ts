@@ -15,8 +15,7 @@ export class UserOfficeProjectPaginationGQL extends Query<PaginationUserOfficePr
     query paginationUserOfficeProject(
       $user_office_project_id: ID,
       $user_office_project_status: Boolean,
-      $user_office_id: ID,
-      $project_id: ID,
+      $user_office_id: ID, $project_id: ID,
       $limit: Int,
       $page: Int
     ) {
@@ -36,11 +35,40 @@ export class UserOfficeProjectPaginationGQL extends Query<PaginationUserOfficePr
         data {
           user_office_project_id
           user_office_project_status
-          user_office_project_created_at
-          user_office_project_updated_at
-          user_office_project_deleted_at
           user_office_id
+          user_office {
+            user_office_id
+            user_office_status
+            user_id
+            user {
+              user_id
+              username
+              email
+              person_id
+              person {
+                person_id
+                person_business_type
+                person_identification_type
+                person_identification
+                person_first_name
+                person_second_name
+                person_first_surname
+                person_second_surname
+                person_legal_name
+                city_id
+              }
+              profile_id
+            }
+            office_id
+          }
           project_id
+          project {
+            project_id
+            project_name
+            project_address
+            project_phone
+            macroproject_id
+          }
         }
       }
     }

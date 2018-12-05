@@ -20,7 +20,7 @@ export class UserOfficeProjectService {
     return this.userOfficeProjectPagination.watch({
       ...searchUserOfficeProject.user_office_project,
       user_office_id: (searchUserOfficeProject.user_office) ? searchUserOfficeProject.user_office.user_office_id : null,
-      project: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,
+      project_id: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,
       limit: searchUserOfficeProject.limit,
       page: searchUserOfficeProject.page
     }).valueChanges;

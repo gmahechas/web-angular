@@ -3,21 +3,21 @@ import { Action } from '@ngrx/store';
 import * as fromModels from '@web/app/features/d/user-office-project/models';
 
 export enum EntityActionTypes {
-  LoadEntity = '[UserOfficeProject] Load Entity ',
-  LoadSuccessEntity = '[UserOfficeProject] Load Success Entity',
-  LoadFailEntity = '[UserOfficeProject] Load Fail Entity',
-  StoreEntity = '[UserOfficeProject] Store Entity',
-  StoreSuccessEntity = '[UserOfficeProject] Store Success Entity',
-  StoreFailEntity = '[UserOfficeProject] Store Fail Entity',
-  UpdateEntity = '[UserOfficeProject] Update Entity',
-  UpdateSuccessEntity = '[UserOfficeProject] Update Success Entity',
-  UpdateFailEntity = '[UserOfficeProject] Update Fail Entity',
-  DestroyEntity = '[UserOfficeProject] Destroy Entity',
-  DestroySuccessEntity = '[UserOfficeProject] Destroy Success Entity',
-  DestroyFailEntity = '[UserOfficeProject] Destroy Fail Entity',
-  PaginateEntity = '[UserOfficeProject] Paginate Entity',
-  LoadEntityShared = '[UserOfficeProject] Load Entity Shared',
-  ResetSearch = '[UserOfficeProject] Reset Search'
+  LoadEntity = '[User Office Project] Load Entity ',
+  LoadSuccessEntity = '[User Office Project] Load Success Entity',
+  LoadFailEntity = '[User Office Project] Load Fail Entity',
+  StoreEntity = '[User Office Project] Store Entity',
+  StoreSuccessEntity = '[User Office Project] Store Success Entity',
+  StoreFailEntity = '[User Office Project] Store Fail Entity',
+  UpdateEntity = '[User Office Project] Update Entity',
+  UpdateSuccessEntity = '[User Office Project] Update Success Entity',
+  UpdateFailEntity = '[User Office Project] Update Fail Entity',
+  DestroyEntity = '[User Office Project] Destroy Entity',
+  DestroySuccessEntity = '[User Office Project] Destroy Success Entity',
+  DestroyFailEntity = '[User Office Project] Destroy Fail Entity',
+  PaginateEntity = '[User Office Project] Paginate Entity',
+  LoadEntityShared = '[User Office Project] Load Entity Shared',
+  ResetSearch = '[User Office Project] Reset Search'
 }
 
 export class LoadEntity implements Action {

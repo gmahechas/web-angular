@@ -2,21 +2,18 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/d/user-office-project/store/reducers/entity-user-office-project.reducer';
 import * as fromSearch from '@web/app/features/d/user-office-project/store/reducers/search-user-office-project.reducer';
-import * as fromPagination from '@web/app/features/d/user-office-project/store/reducers/pagination-user-office-project.reducer';
 import * as fromLayout from '@web/app/features/d/user-office-project/store/reducers/layout-user-office-project.reducer';
 import * as fromCore from '@web/app/core/store';
 
 export interface UserOfficeProjectState {
   entity: fromEntity.State;
   search: fromSearch.State;
-  pagination: fromPagination.State;
   layout: fromLayout.State;
 }
 
 export const reducers: ActionReducerMap<UserOfficeProjectState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
 

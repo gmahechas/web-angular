@@ -71,20 +71,6 @@ export class LayoutUserOfficeProjectEffects {
     })
   );
 
-  // Redirects
-  @Effect({ dispatch: false })
-  successRedirect$ = this.actions$.pipe(
-    ofType(
-      fromUserOfficeProjectActions.EntityActionTypes.LoadEntity,
-      fromUserOfficeProjectActions.EntityActionTypes.StoreSuccessEntity,
-      fromUserOfficeProjectActions.EntityActionTypes.UpdateSuccessEntity,
-      fromUserOfficeProjectActions.EntityActionTypes.DestroySuccessEntity
-    ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['userOfficeProject'] }));
-    })
-  );
-
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>

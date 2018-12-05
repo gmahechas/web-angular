@@ -23,35 +23,37 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.route.snapshot.paramMap.keys.forEach(key => {
-      switch (key) {
-        case 'user_id': {
 
-          setTimeout(() => {
-            this.store.dispatch(new fromUserOffice.LoadEntity({
-              search: {
-                user: {
-                  user_id: this.route.snapshot.params[key]
-                }
+    const key = this.route.snapshot.paramMap.keys[0];
+    const val = this.route.snapshot.params[key];
+
+    switch (key) {
+      case 'user_id': {
+        setTimeout(() => {
+          this.store.dispatch(new fromUserOffice.LoadEntity({
+            search: {
+              user: {
+                user_id: val
               }
-            }));
-          });
-          break;
-        }
-        case 'office_id': {
-          setTimeout(() => {
-            this.store.dispatch(new fromUserOffice.LoadEntity({
-              search: {
-                office: {
-                  office_id: this.route.snapshot.params[key]
-                }
-              }
-            }));
-          });
-          break;
-        }
+            }
+          }));
+        });
+        break;
       }
-    });
+      case 'office_id': {
+        setTimeout(() => {
+          this.store.dispatch(new fromUserOffice.LoadEntity({
+            search: {
+              office: {
+                office_id: val
+              }
+            }
+          }));
+        });
+        break;
+      }
+    }
+
   }
 
   onEdit(userOffice: UserOffice) {
