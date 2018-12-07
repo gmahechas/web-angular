@@ -30,9 +30,7 @@ export class IndexPagePersonComponent implements OnInit {
       dataKey: 'person_id',
       cols: [
         { fields: ['person_id'], header: ['person.model.person_id'], style: { 'width': '5%' } },
-        { fields: ['person_business_type'], header: ['person.model.person_business_type'], style: { 'width': '15%' } },
-        { fields: ['person_identification_type'], header: ['person.model.person_identification_type'], style: { 'width': '15%' } },
-        { fields: ['person_identification'], header: ['person.model.person_identification'], style: { 'width': '20%' } },
+        { fields: ['person_identification'], header: ['person.model.person_identification'], style: { 'width': '25%' } },
         {
           fields: [
             'person_first_name',
@@ -40,9 +38,9 @@ export class IndexPagePersonComponent implements OnInit {
             'person_first_surname',
             'person_second_surname',
             'person_legal_name'
-          ], header: ['person.model.person_name'], style: { 'width': '30%' }
+          ], header: ['person.model.person_name'], style: { 'width': '70%' }
         },
-        { fields: ['city.city_name'], header: ['city.singular'], style: { 'width': '15%' } },
+
       ],
       selectionMode: 'single'
     };
