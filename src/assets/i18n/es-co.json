@@ -45,6 +45,9 @@
   "select": {
     "verb": "seleccionar"
   },
+  "type": {
+    "verb": "tipo"
+  },
   "auth": {
     "singIn": "iniciar sesion",
     "singOut": "cerrar sesion",
@@ -94,6 +97,15 @@
     "model": {
       "office_id": "id",
       "office_name": "sucursal"
+    }
+  },
+  "type_person": {
+    "singular": "tipo de contribuyente",
+    "plural": "tipos de contribuyentes",
+    "model": {
+      "type_person_id": "id",
+      "type_person_code": "codigo",
+      "type_person_description": "tipo de contribuyente"
     }
   },
   "person": {

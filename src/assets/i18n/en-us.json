@@ -45,6 +45,9 @@
   "select": {
     "verb": "select"
   },
+  "type": {
+    "verb": "type"
+  },
   "auth":  {
     "singIn": "sing in",
     "singOut": "sing out",
@@ -94,6 +97,15 @@
     "model": {
       "office_id": "id",
       "office_name": "office"
+    }
+  },
+  "type_person": {
+    "singular": "type of taxpayer",
+    "plural": "types of taxpayers",
+    "model": {
+      "type_person_id": "id",
+      "type_person_code": "code",
+      "type_person_description": "type of taxpayer"
     }
   },
   "person": {
