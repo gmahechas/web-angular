@@ -49,6 +49,11 @@ export const routes: Routes = [
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
+    path: 'type_person_identification',
+    loadChildren: '@web/app/features/c/type-person-identification/type-person-identification.module#TypePersonIdentificationModule',
+    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+  },
+  {
     path: 'person',
     loadChildren: '@web/app/features/c/person/person.module#PersonModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]

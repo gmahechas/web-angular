@@ -45,9 +45,6 @@
   "select": {
     "verb": "seleccionar"
   },
-  "type": {
-    "verb": "tipo"
-  },
   "auth": {
     "singIn": "iniciar sesion",
     "singOut": "cerrar sesion",
@@ -106,6 +103,15 @@
       "type_person_id": "id",
       "type_person_code": "codigo",
       "type_person_description": "tipo de contribuyente"
+    }
+  },
+  "type_person_identification": {
+    "singular": "tipo de identificacion",
+    "plural": "tipos de identificaciones",
+    "model": {
+      "type_person_identification_id": "id",
+      "type_person_identification_code": "codigo",
+      "type_person_identification_description": "tipo de identificacion"
     }
   },
   "person": {
