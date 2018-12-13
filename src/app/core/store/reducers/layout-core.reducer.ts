@@ -99,6 +99,16 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       };
     }
 
+    case AuthActionTypes.LogoutAuthSuccess:
+    case AuthActionTypes.CheckAuthFailure: {
+      return {
+        ...state,
+        company: null,
+        userOffice: null,
+        userOfficeProject: null
+      };
+    }
+
     case LayoutActionTypes.SetUserOffice:
       return {
         ...state,
