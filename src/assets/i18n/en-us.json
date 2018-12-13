@@ -119,8 +119,6 @@
     "plural": "persons",
     "model": {
       "person_id": "id",
-      "person_business_type": "business type",
-      "person_identification_type": "person identification type",
       "person_identification": "identification",
       "person_first_name": "first name",
       "person_second_name": "second name",

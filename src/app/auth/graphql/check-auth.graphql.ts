@@ -19,19 +19,29 @@ export class CheckAuthGQL extends Query<CheckAuth> {
           username
           email
           person_id
-          profile_id
           person {
             person_id
-            person_business_type,
-            person_identification_type,
             person_identification
             person_first_name
             person_second_name
             person_first_surname
             person_second_surname
             person_legal_name
+            type_person_id
+            type_person {
+              type_person_id
+              type_person_code
+              type_person_description
+            }
+            type_person_identification_id
+            type_person_identification {
+              type_person_identification_id
+              type_person_identification_code
+              type_person_identification_description
+            }
             city_id
           }
+          profile_id
           profile {
             profile_id
             profile_name

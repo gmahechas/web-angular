@@ -7,24 +7,26 @@
       <div class="ui-grid">
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['person.model.person_business_type']"></app-translate-shared>
+            <app-translate-shared [strings]="['type_person.singular']"></app-translate-shared>
           </div>
           <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_business_type'"></app-input-text-shared>
+            <app-dropdown-page-type-person [group]="personForm" [controlName]="'type_person'" [options]="['type_person_description']"
+              [optionLabel]="'type_person_description'"></app-dropdown-page-type-person>
           </div>
           <div class="ui-grid-col-4">
-            <app-validation-errors-shared [control]="personForm.get('person.person_business_type')"></app-validation-errors-shared>
+            <app-validation-errors-shared [control]="personForm.get('type_person')"></app-validation-errors-shared>
           </div>
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['person.model.person_identification_type']"></app-translate-shared>
+            <app-translate-shared [strings]="['type_person_identification.singular']"></app-translate-shared>
           </div>
           <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification_type'"></app-input-text-shared>
+            <app-dropdown-page-type-person-identification [group]="personForm" [controlName]="'type_person_identification'"
+              [options]="['type_person_identification_description']" [optionLabel]="'type_person_identification_description'"></app-dropdown-page-type-person-identification>
           </div>
           <div class="ui-grid-col-4">
-            <app-validation-errors-shared [control]="personForm.get('person.person_identification_type')"></app-validation-errors-shared>
+            <app-validation-errors-shared [control]="personForm.get('type_person_identification')"></app-validation-errors-shared>
           </div>
         </div>
         <div class="ui-grid-row">

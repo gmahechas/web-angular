@@ -26,8 +26,6 @@ export class UserOfficeUpdateGQL extends Mutation<UpdateUserOffice> {
           person_id
           person {
             person_id
-            person_business_type
-            person_identification_type
             person_identification
             person_first_name
             person_second_name

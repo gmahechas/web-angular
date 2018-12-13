@@ -24,8 +24,6 @@ export class FormPersonComponent implements OnChanges, OnInit {
 
   personForm = this.formBuilder.group({
     person: this.formBuilder.group({
-      person_business_type: this.formBuilder.control('', [Validators.required]),
-      person_identification_type: this.formBuilder.control('', [Validators.required]),
       person_identification: this.formBuilder.control('', [Validators.required]),
       person_first_name: this.formBuilder.control(''),
       person_second_name: this.formBuilder.control(''),
@@ -33,6 +31,8 @@ export class FormPersonComponent implements OnChanges, OnInit {
       person_second_surname: this.formBuilder.control(''),
       person_legal_name: this.formBuilder.control('')
     }),
+    type_person: this.formBuilder.control('', [Validators.required]),
+    type_person_identification: this.formBuilder.control('', [Validators.required]),
     city: this.formBuilder.control('', [Validators.required])
   });
 
@@ -45,8 +45,6 @@ export class FormPersonComponent implements OnChanges, OnInit {
       this.personForm.reset();
       this.personForm.setValue({
         person: {
-          person_business_type: this.person.person_business_type,
-          person_identification_type: this.person.person_identification_type,
           person_identification: this.person.person_identification,
           person_first_name: this.person.person_first_name,
           person_second_name: this.person.person_second_name,
@@ -54,6 +52,8 @@ export class FormPersonComponent implements OnChanges, OnInit {
           person_second_surname: this.person.person_second_surname,
           person_legal_name: this.person.person_legal_name
         },
+        type_person: this.person.type_person,
+        type_person_identification: this.person.type_person_identification,
         city: this.person.city
       });
     }
@@ -69,6 +69,8 @@ export class FormPersonComponent implements OnChanges, OnInit {
         const updated = {
           person_id: this.person.person_id,
           ...this.personForm.value.person,
+          type_person_id: this.personForm.value.type_person.type_person_id,
+          type_person_identification_id: this.personForm.value.type_person_identification.type_person_identification_id,
           city_id: this.personForm.value.city.city_id
         };
         this.submitted.emit(updated);

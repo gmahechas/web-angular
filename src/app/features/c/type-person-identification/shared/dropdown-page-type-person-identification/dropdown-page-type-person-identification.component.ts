@@ -20,7 +20,7 @@ export class DropdownPageTypePersonIdentificationComponent implements OnInit {
   @Input() filterPlaceholder: string;
   @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromStore.getAllEntities));
-  entityId = 'typePersonIdentification_id';
+  entityId = 'type_person_identification_id';
 
   constructor(
     private store: Store<fromStore.State>
