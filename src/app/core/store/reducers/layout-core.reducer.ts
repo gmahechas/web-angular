@@ -1,5 +1,7 @@
 import { LayoutActionTypes, LayoutActions } from '@web/app/core/store/actions/layout-core.actions';
+import { AuthActionTypes, AuthActions } from '@web/app/auth/store/actions/auth.actions';
 
+import { Company } from '@web/app/features/b/company/models/company.model';
 import { UserOffice } from '@web/app/features/c/user-office/models';
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
 
@@ -9,8 +11,9 @@ export interface State {
   blockedDocument: boolean;
   showSpinner: boolean;
   progressBar: boolean;
-  userOffice: UserOffice;
-  userOfficeProject: UserOfficeProject;
+  company: Company | null;
+  userOffice: UserOffice | null;
+  userOfficeProject: UserOfficeProject | null;
 }
 
 export const initialState: State = {
@@ -19,11 +22,12 @@ export const initialState: State = {
   blockedDocument: false,
   showSpinner: false,
   progressBar: false,
+  company: null,
   userOffice: null,
   userOfficeProject: null
 };
 
-export function reducer(state: State = initialState, action: LayoutActions): State {
+export function reducer(state: State = initialState, action: LayoutActions | AuthActions): State {
   switch (action.type) {
 
     case LayoutActionTypes.SetDefaultLang:
@@ -81,13 +85,27 @@ export function reducer(state: State = initialState, action: LayoutActions): Sta
         progressBar: false,
       };
 
+    case AuthActionTypes.AuthSuccess: {
+      return {
+        ...state,
+        company: action.payload.company
+      };
+    }
+
+    case AuthActionTypes.CheckAuthSuccess: {
+      return {
+        ...state,
+        company: action.payload.checkAuth.company
+      };
+    }
+
     case LayoutActionTypes.SetUserOffice:
       return {
         ...state,
         userOffice: action.payload.userOffice
       };
 
-      case LayoutActionTypes.SetUserOfficeProject:
+    case LayoutActionTypes.SetUserOfficeProject:
       return {
         ...state,
         userOfficeProject: action.payload.userOfficeProject
@@ -103,5 +121,6 @@ export const getShowSidebar = (state: State) => state.showSidebar;
 export const getBlockedDocument = (state: State) => state.blockedDocument;
 export const getShowSpinner = (state: State) => state.showSpinner;
 export const getProgressBar = (state: State) => state.progressBar;
+export const getCompany = (state: State) => state.company;
 export const getUserOffice = (state: State) => state.userOffice;
 export const getUserOfficeProject = (state: State) => state.userOfficeProject;

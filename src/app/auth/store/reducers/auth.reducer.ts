@@ -1,16 +1,13 @@
 import { AuthActions, AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
 
 import { User } from '@web/app/features/c/user/models/user.model';
-import { Company } from '@web/app/features/b/company/models/company.model';
 
 export interface State {
   user: User | null;
-  company: Company | null;
 }
 
 export const initialState: State = {
-  user: null,
-  company: null
+  user: null
 };
 
 export function reducer(state = initialState, action: AuthActions): State {
@@ -31,16 +28,14 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.AuthSuccess: {
       return {
         ...state,
-        user: action.payload.user,
-        company: action.payload.company
+        user: action.payload.user
       };
     }
 
     case AuthActionTypes.CheckAuthSuccess: {
       return {
         ...state,
-        user: action.payload.checkAuth.user,
-        company: action.payload.checkAuth.company
+        user: action.payload.checkAuth.user
       };
     }
 
@@ -51,4 +46,3 @@ export function reducer(state = initialState, action: AuthActions): State {
 }
 
 export const getUser = (state: State) => state.user;
-export const getCompany = (state: State) => state.company;

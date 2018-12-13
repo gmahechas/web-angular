@@ -12,8 +12,3 @@ export const getUser = createSelector(
   getStatusState,
   fromAuth.getUser
 );
-
-export const getCompany = createSelector(
-  getStatusState,
-  fromAuth.getCompany
-);

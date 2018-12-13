@@ -28,6 +28,11 @@ export const getProgressBar = createSelector(
   fromLayout.getProgressBar
 );
 
+export const getCompany = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getCompany
+);
+
 export const getUserOffice = createSelector(
   fromCore.getLayoutState,
   fromLayout.getUserOffice

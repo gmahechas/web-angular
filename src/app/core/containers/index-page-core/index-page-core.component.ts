@@ -14,7 +14,7 @@ import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
 export class IndexPageCoreComponent implements OnInit {
 
   user$ = this.store.pipe(select(fromAuth.getUser));
-  company$ = this.store.pipe(select(fromAuth.getCompany));
+  company$ = this.store.pipe(select(fromCore.getCompany));
   userOffice$ = this.store.pipe(select(fromCore.getUserOffice));
   showSidebar = this.store.pipe(select(fromCore.getShowSidebar));
   blockedDocument$ = this.store.pipe(select(fromCore.getBlockedDocument));
