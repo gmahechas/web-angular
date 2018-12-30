@@ -31,9 +31,9 @@ export class IndexPageTypePersonComponent implements OnInit {
     this.configTable = {
       dataKey: 'type_person_id',
       cols: [
-        { fields: ['type_person_id'], header: ['type_person.model.type_person_id'], style: { 'width': '10%' } },
-        { fields: ['type_person_code'], header: ['type_person.model.type_person_code'], style: { 'width': '20%' } },
-        { fields: ['type_person_description'], header: ['type_person.model.type_person_description'], style: { 'width': '70%' } },
+        { fields: ['type_person_id'], header: ['type_person.model.type_person_id'], style: { width: '5%' } },
+        { fields: ['type_person_code'], header: ['type_person.model.type_person_code'], style: { width: '25%' } },
+        { fields: ['type_person_description'], header: ['type_person.model.type_person_description'], style: { width: '70%' } },
       ],
       selectionMode: 'single'
     };

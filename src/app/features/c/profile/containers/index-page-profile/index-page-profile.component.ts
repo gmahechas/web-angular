@@ -29,8 +29,8 @@ export class IndexPageProfileComponent implements OnInit {
     this.configTable = {
       dataKey: 'profile_id',
       cols: [
-        { fields: ['profile_id'], header: ['profile.model.profile_id'], style: { width: '10%' } },
-        { fields: ['profile_name'], header: ['profile.model.profile_name'], style: { width: '90%' } }
+        { fields: ['profile_id'], header: ['profile.model.profile_id'], style: { width: '5%' } },
+        { fields: ['profile_name'], header: ['profile.model.profile_name'], style: { width: '95%' } }
       ],
       selectionMode: 'single'
     };

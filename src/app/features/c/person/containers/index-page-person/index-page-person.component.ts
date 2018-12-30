@@ -29,8 +29,8 @@ export class IndexPagePersonComponent implements OnInit {
     this.configTable = {
       dataKey: 'person_id',
       cols: [
-        { fields: ['person_id'], header: ['person.model.person_id'], style: { 'width': '5%' } },
-        { fields: ['person_identification'], header: ['person.model.person_identification'], style: { 'width': '25%' } },
+        { fields: ['person_id'], header: ['person.model.person_id'], style: { width: '5%' } },
+        { fields: ['person_identification'], header: ['person.model.person_identification'], style: { width: '25%' } },
         {
           fields: [
             'person_first_name',

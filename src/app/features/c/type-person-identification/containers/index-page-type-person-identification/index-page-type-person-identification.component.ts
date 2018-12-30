@@ -36,17 +36,17 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit {
         {
           fields: ['type_person_identification_id'],
           header: ['type_person_identification.model.type_person_identification_id'],
-          style: { 'width': '10%' }
+          style: { width: '5%' }
         },
         {
           fields: ['type_person_identification_code'],
           header: ['type_person_identification.model.type_person_identification_code'],
-          style: { 'width': '20%' }
+          style: { width: '25%' }
         },
         {
           fields: ['type_person_identification_description'],
           header: ['type_person_identification.model.type_person_identification_description'],
-          style: { 'width': '70%' }
+          style: { width: '70%' }
         },
       ],
       selectionMode: 'single'

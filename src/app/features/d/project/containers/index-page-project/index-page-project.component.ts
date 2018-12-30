@@ -29,11 +29,11 @@ export class IndexPageProjectComponent implements OnInit {
     this.configTable = {
       dataKey: 'project_id',
       cols: [
-        { fields: ['project_id'], header: ['project.model.project_id'], style: { 'width': '5%' } },
-        { fields: ['project_name'], header: ['project.model.project_name'], style: { 'width': '25%' } },
-        { fields: ['project_address'], header: ['project.model.project_address'], style: { 'width': '25%' } },
-        { fields: ['project_phone'], header: ['project.model.project_phone'], style: { 'width': '15%' } },
-        { fields: ['macroproject.macroproject_name'], header: ['macroproject.singular'], style: { 'width': '30%' } },
+        { fields: ['project_id'], header: ['project.model.project_id'], style: { width: '5%' } },
+        { fields: ['project_name'], header: ['project.model.project_name'], style: { width: '25%' } },
+        { fields: ['project_address'], header: ['project.model.project_address'], style: { width: '25%' } },
+        { fields: ['project_phone'], header: ['project.model.project_phone'], style: { width: '15%' } },
+        { fields: ['macroproject.macroproject_name'], header: ['macroproject.singular'], style: { width: '30%' } },
       ],
       selectionMode: 'single'
     };

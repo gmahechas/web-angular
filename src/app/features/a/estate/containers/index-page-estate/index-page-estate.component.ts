@@ -29,10 +29,10 @@ export class IndexPageEstateComponent implements OnInit {
     this.configTable = {
       dataKey: 'estate_id',
       cols: [
-        { fields: ['estate_id'], header: ['estate.model.estate_id'], style: { 'width': '10%' } },
-        { fields: ['estate_name'], header: ['estate.model.estate_name'], style: { 'width': '40%' } },
-        { fields: ['estate_code'], header: ['estate.model.estate_code'], style: { 'width': '10%' } },
-        { fields: ['country.country_name'], header: ['country.singular'], style: { 'width': '40%' } }
+        { fields: ['estate_id'], header: ['estate.model.estate_id'], style: { width: '5%' } },
+        { fields: ['estate_name'], header: ['estate.model.estate_name'], style: { width: '40%' } },
+        { fields: ['estate_code'], header: ['estate.model.estate_code'], style: { width: '15%' } },
+        { fields: ['country.country_name'], header: ['country.singular'], style: { width: '40%' } }
       ],
       selectionMode: 'single'
     };

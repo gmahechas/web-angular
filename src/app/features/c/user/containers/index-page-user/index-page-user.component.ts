@@ -29,10 +29,10 @@ export class IndexPageUserComponent implements OnInit {
     this.configTable = {
       dataKey: 'user_id',
       cols: [
-        { fields: ['user_id'], header: ['user.model.user_id'], style: { 'width': '5%' } },
-        { fields: ['username'], header: ['user.model.username'], style: { 'width': '20%' } },
-        { fields: ['profile.profile_name'], header: ['profile.singular'], style: { 'width': '25%' } },
-        { fields: ['email'], header: ['user.model.email'], style: { 'width': '50%' } },
+        { fields: ['user_id'], header: ['user.model.user_id'], style: { width: '5%' } },
+        { fields: ['username'], header: ['user.model.username'], style: { width: '20%' } },
+        { fields: ['profile.profile_name'], header: ['profile.singular'], style: { width: '25%' } },
+        { fields: ['email'], header: ['user.model.email'], style: { width: '50%' } },
         {
           fields: [
             'person.person_first_name',

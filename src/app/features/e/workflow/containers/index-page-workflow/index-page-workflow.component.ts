@@ -31,9 +31,9 @@ export class IndexPageWorkflowComponent implements OnInit {
     this.configTable = {
       dataKey: 'workflow_id',
       cols: [
-        { fields: ['workflow_id'], header: ['workflow.model.workflow_id'], style: { 'width': '10%' } },
-        { fields: ['workflow_name'], header: ['workflow.model.workflow_name'], style: { 'width': '20%' } },
-        { fields: ['workflow_description'], header: ['workflow.model.workflow_description'], style: { 'width': '70%' } },
+        { fields: ['workflow_id'], header: ['workflow.model.workflow_id'], style: { width: '5%' } },
+        { fields: ['workflow_name'], header: ['workflow.model.workflow_name'], style: { width: '25%' } },
+        { fields: ['workflow_description'], header: ['workflow.model.workflow_description'], style: { width: '70%' } },
       ],
       selectionMode: 'single'
     };

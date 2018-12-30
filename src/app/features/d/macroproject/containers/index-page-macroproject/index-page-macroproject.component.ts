@@ -29,12 +29,12 @@ export class IndexPageMacroprojectComponent implements OnInit {
     this.configTable = {
       dataKey: 'macroproject_id',
       cols: [
-        { fields: ['macroproject_id'], header: ['macroproject.model.macroproject_id'], style: { 'width': '5%' } },
-        { fields: ['macroproject_name'], header: ['macroproject.model.macroproject_name'], style: { 'width': '20%' } },
-        { fields: ['macroproject_address'], header: ['macroproject.model.macroproject_address'], style: { 'width': '20%' } },
-        { fields: ['macroproject_phone'], header: ['macroproject.model.macroproject_phone'], style: { 'width': '15%' } },
-        { fields: ['city.city_name'], header: ['city.singular'], style: { 'width': '20%' } },
-        { fields: ['office.office_name'], header: ['office.singular'], style: { 'width': '20%' } },
+        { fields: ['macroproject_id'], header: ['macroproject.model.macroproject_id'], style: { width: '5%' } },
+        { fields: ['macroproject_name'], header: ['macroproject.model.macroproject_name'], style: { width: '20%' } },
+        { fields: ['macroproject_address'], header: ['macroproject.model.macroproject_address'], style: { width: '20%' } },
+        { fields: ['macroproject_phone'], header: ['macroproject.model.macroproject_phone'], style: { width: '15%' } },
+        { fields: ['city.city_name'], header: ['city.singular'], style: { width: '20%' } },
+        { fields: ['office.office_name'], header: ['office.singular'], style: { width: '20%' } },
       ],
       selectionMode: 'single'
     };
