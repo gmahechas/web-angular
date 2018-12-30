@@ -21,13 +21,13 @@ export class ValidationErrorsSharedComponent implements OnInit {
 
   get showText() {
     const texts: string[] = [];
-    if (this.control.errors['required']) {
+    if (this.control.hasError('required')) {
       texts.push('field.verb', 'required.verb');
     }
-    if (this.control.errors['minlength']) {
+    if (this.control.hasError('minlength')) {
       texts.push('minimum.verb', String(this.control.errors['minlength'].requiredLength), 'letter.verb');
     }
-    if (this.control.errors['maxlength']) {
+    if (this.control.hasError('maxlength')) {
       texts.push('maximum.verb', String(this.control.errors['maxlength'].requiredLength), 'letter.verb');
     }
     return texts;
