@@ -25,7 +25,7 @@ export class FormCountryComponent implements OnChanges, OnInit {
   countryForm = this.formBuilder.group({
     country: this.formBuilder.group({
       country_name: this.formBuilder.control('', [Validators.required]),
-      country_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2)])
+      country_code: this.formBuilder.control('', [Validators.required, Validators.minLength(2), Validators.maxLength(4)])
     })
   });
 

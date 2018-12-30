@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MessageSharedComponent implements OnInit {
 
   @Input() severity: 'success' | 'info' | 'warn' | 'error';
-  @Input() text: string;
+  @Input() text: string[];
 
   constructor() { }
 

@@ -1,1 +1,1 @@
-<app-message-shared *ngIf="invalid" [severity]="'error'" [text]="control.errors['required'] ? 'Campo Requerido' : control.errors['minlength'] ? 'Minimo ' + control.errors['minlength'].requiredLength +  ' letras' : ''"></app-message-shared>
+<app-message-shared *ngIf="invalid" [severity]="'error'" [text]="showText"></app-message-shared>

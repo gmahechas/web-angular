@@ -45,6 +45,21 @@
   "select": {
     "verb": "seleccionar"
   },
+  "field": {
+    "verb": "campo"
+  },
+  "letter": {
+    "verb": "letra"
+  },
+  "minimum": {
+    "verb": "minimo"
+  },
+  "maximum": {
+    "verb": "maximo"
+  },
+  "required": {
+    "verb": "obligatorio"
+  },
   "auth": {
     "singIn": "iniciar sesion",
     "singOut": "cerrar sesion",

@@ -45,6 +45,21 @@
   "select": {
     "verb": "select"
   },
+  "field": {
+    "verb": "field"
+  },
+  "letter": {
+    "verb": "letter"
+  },
+  "minimum": {
+    "verb": "minimum"
+  },
+  "maximum": {
+    "verb": "maximum"
+  },
+  "required": {
+    "verb": "required"
+  },
   "auth":  {
     "singIn": "sing in",
     "singOut": "sing out",
