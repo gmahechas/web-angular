@@ -1,7 +1,8 @@
 import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { Person } from '@web/app/features/c/person/models/person.model';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-form-person',
@@ -24,7 +25,11 @@ export class FormPersonComponent implements OnChanges, OnInit {
 
   personForm = this.formBuilder.group({
     person: this.formBuilder.group({
-      person_identification: this.formBuilder.control('', [Validators.required]),
+      person_identification: ['', {
+        validators: [Validators.required],
+        asyncValidators: [this.validateIdentification.bind(this)],
+        updateOn: 'blur'
+      }],
       person_first_name: this.formBuilder.control(''),
       person_second_name: this.formBuilder.control(''),
       person_first_surname: this.formBuilder.control(''),
@@ -81,4 +86,7 @@ export class FormPersonComponent implements OnChanges, OnInit {
 
   }
 
+  validateIdentification(control: AbstractControl) {
+    return of((control.value !== '1110451561') ? null : { invalidIdentification: true });
+  }
 }

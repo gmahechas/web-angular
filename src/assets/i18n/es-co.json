@@ -60,6 +60,9 @@
   "required": {
     "verb": "obligatorio"
   },
+  "invalid": {
+    "verb": "invalido"
+  },
   "auth": {
     "singIn": "iniciar sesion",
     "singOut": "cerrar sesion",

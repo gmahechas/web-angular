@@ -30,6 +30,9 @@ export class ValidationErrorsSharedComponent implements OnInit {
     if (this.control.hasError('maxlength')) {
       texts.push('maximum.verb', String(this.control.errors['maxlength'].requiredLength), 'letter.verb');
     }
+    if (this.control.hasError('invalidIdentification')) {
+      texts.push('person.model.person_identification', 'invalid.verb');
+    }
     return texts;
   }
 
