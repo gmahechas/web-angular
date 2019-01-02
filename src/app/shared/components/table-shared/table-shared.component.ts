@@ -8,11 +8,17 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 })
 export class TableSharedComponent implements OnInit {
 
+  selectedRows: any;
   @Input() data: any[];
   @Input() totalRecords: number;
   @Input() rows: number;
   @Input() first: number; // not used yet
   @Input() to: number; // not used yet
+  @Input() set selectRows(rows: any) {
+    if (rows) {
+      this.selectedRows = rows;
+    }
+  }
   @Input() configTable: any;
   @Output() rowSelect: EventEmitter<any> = new EventEmitter<any>();
   @Output() rowUnselect: EventEmitter<any> = new EventEmitter<any>();
