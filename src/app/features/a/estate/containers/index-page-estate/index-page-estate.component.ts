@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromEstate from '@web/app/features/a/estate/store';
@@ -7,12 +7,18 @@ import * as fromCore from '@web/app/core/store';
 import { Estate } from '@web/app/features/a/estate/models/estate.model';
 import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-estate',
   templateUrl: './index-page-estate.component.html',
   styles: []
 })
-export class IndexPageEstateComponent implements OnInit {
+export class IndexPageEstateComponent implements OnInit, OnDestroy {
+
+  subscription: Subscription;
+  selected: any;
 
   query$ = this.store.pipe(select(fromEstate.getQuery));
 
@@ -38,7 +44,18 @@ export class IndexPageEstateComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromEstate.getSelectedEntity), take(1)).subscribe(
+      (estate: Estate) => {
+        if (estate) {
+          this.selected = estate;
+          this.store.dispatch(new fromCore.Go({
+            path: ['estate', estate.estate_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(estateSearch: SearchEstate) {
     this.store.dispatch(new fromEstate.LoadEntity({
@@ -52,12 +69,14 @@ export class IndexPageEstateComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromEstate.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', 'create']
     }));
   }
 
   onEdit(estate: Estate) {
+    this.store.dispatch(new fromEstate.SelectEntity({ entity: estate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', estate.estate_id]
     }));
@@ -68,6 +87,7 @@ export class IndexPageEstateComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromEstate.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate']
     }));
@@ -75,5 +95,9 @@ export class IndexPageEstateComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromEstate.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

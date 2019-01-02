@@ -32,6 +32,7 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromEstate.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate']
     }));
@@ -40,5 +41,4 @@ export class FormPageEstateComponent implements OnInit {
   onDestroy(estate: Estate) {
     this.store.dispatch(new fromEstate.DestroyEntity({ entity: estate }));
   }
-
 }
