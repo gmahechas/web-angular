@@ -18,6 +18,7 @@ import { take } from 'rxjs/operators';
 export class IndexPageCountryComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
+  selected: any;
 
   query$ = this.store.pipe(select(fromCountry.getQuery));
 
@@ -27,7 +28,6 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   from$ = this.store.pipe(select(fromCountry.getFrom));
   to$ = this.store.pipe(select(fromCountry.getTo));
   configTable: any;
-  selected: any;
 
   constructor(
     private store: Store<fromCountry.State>
@@ -57,7 +57,13 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onLoad(countrySearch: SearchCountry) {
-    this.store.dispatch(new fromCountry.LoadEntity({ search: { country: countrySearch.country, limit: 20, page: 1 } }));
+    this.store.dispatch(new fromCountry.LoadEntity({
+      search: {
+        country: countrySearch.country,
+        limit: 20,
+        page: 1
+      }
+    }));
   }
 
   onCreate() {

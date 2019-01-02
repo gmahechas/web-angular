@@ -1,8 +1,6 @@
-import { SelectEntity } from './../actions/entity-country.actions';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { EntityActionTypes, EntityActions } from '@web/app/features/a/country/store/actions/entity-country.actions';
-
 import { Country } from '@web/app/features/a/country/models/country.model';
+import { EntityActionTypes, EntityActions } from '@web/app/features/a/country/store/actions/entity-country.actions';
 
 export interface State extends EntityState<Country> {
   selectedEntity: Country | null;
