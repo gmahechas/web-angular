@@ -1,9 +1,11 @@
+import { SelectEntity } from './../actions/entity-country.actions';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Country } from '@web/app/features/a/country/models/country.model';
 import { EntityActionTypes, EntityActions } from '@web/app/features/a/country/store/actions/entity-country.actions';
 
-export interface State extends EntityState<Country> {
+import { Country } from '@web/app/features/a/country/models/country.model';
 
+export interface State extends EntityState<Country> {
+  selectedEntity: Country | null;
 }
 
 export const adapter: EntityAdapter<Country> = createEntityAdapter<Country>({
@@ -11,7 +13,9 @@ export const adapter: EntityAdapter<Country> = createEntityAdapter<Country>({
   sortComparer: false
 });
 
-export const initialState: State = adapter.getInitialState();
+export const initialState: State = adapter.getInitialState({
+  selectedEntity: null,
+});
 
 export function reducer(state = initialState, action: EntityActions): State {
 
@@ -30,12 +34,19 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.addOne(action.payload.entity.storeCountry, newState);
     }
 
+    case EntityActionTypes.SelectEntity: {
+      return {
+        ...state,
+        selectedEntity: action.payload.entity
+      };
+    }
+
     case EntityActionTypes.UpdateSuccessEntity: {
       return adapter.updateOne({
         id: action.payload.entity.updateCountry.country_id,
         changes: action.payload.entity.updateCountry
       },
-        state
+        { ...state, selectedEntity: null }
       );
     }
 
@@ -44,7 +55,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.ResetSearch: {
-      return adapter.removeAll(state);
+      return adapter.removeAll({ ...state, selectedEntity: null });
     }
 
     default:
@@ -52,3 +63,5 @@ export function reducer(state = initialState, action: EntityActions): State {
   }
 
 }
+
+export const getSelectedEntity = (state: State) => state.selectedEntity;
