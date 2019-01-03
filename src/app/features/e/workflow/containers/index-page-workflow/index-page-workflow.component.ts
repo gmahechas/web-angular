@@ -20,7 +20,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selected: any;
 
-  query$ = this.store.pipe(select(fromWorkflow.getQuery, take(1)));
+  query$ = this.store.pipe(select(fromWorkflow.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromWorkflow.getAllEntities));
   total$ = this.store.pipe(select(fromWorkflow.getTotal));
