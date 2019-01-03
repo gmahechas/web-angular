@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromProject from '@web/app/features/d/project/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { Project } from '@web/app/features/d/project/models/project.model';
 import { SearchProject } from '@web/app/features/d/project/models/search-project.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-project',
   templateUrl: './index-page-project.component.html',
   styles: []
 })
-export class IndexPageProjectComponent implements OnInit {
+export class IndexPageProjectComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromProject.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromProject.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromProject.getAllEntities));
   total$ = this.store.pipe(select(fromProject.getTotal));
@@ -39,7 +45,18 @@ export class IndexPageProjectComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromProject.getSelectedEntity), take(1)).subscribe(
+      (project: Project) => {
+        if (project) {
+          this.selected = project;
+          this.store.dispatch(new fromCore.Go({
+            path: ['project', project.project_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(projectSearch: SearchProject) {
     this.store.dispatch(new fromProject.LoadEntity({
@@ -53,12 +70,14 @@ export class IndexPageProjectComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromProject.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', 'create']
     }));
   }
 
   onEdit(project: Project) {
+    this.store.dispatch(new fromProject.SelectEntity({ entity: project }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', project.project_id]
     }));
@@ -69,6 +88,7 @@ export class IndexPageProjectComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromProject.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['project']
     }));
@@ -76,5 +96,9 @@ export class IndexPageProjectComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromProject.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

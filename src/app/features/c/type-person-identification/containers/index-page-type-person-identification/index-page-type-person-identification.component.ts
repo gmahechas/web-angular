@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromTypePersonIdentification from '@web/app/features/c/type-person-identification/store';
@@ -9,6 +9,7 @@ import {
   SearchTypePersonIdentification
 } from '@web/app/features/c/type-person-identification/models/search-type-person-identification.model';
 
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +17,10 @@ import { take } from 'rxjs/operators';
   templateUrl: './index-page-type-person-identification.component.html',
   styles: []
 })
-export class IndexPageTypePersonIdentificationComponent implements OnInit {
+export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDestroy {
+
+  subscription: Subscription;
+  selected: any;
 
   query$ = this.store.pipe(select(fromTypePersonIdentification.getQuery, take(1)));
 
@@ -53,7 +57,18 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromTypePersonIdentification.getSelectedEntity), take(1)).subscribe(
+      (type_person_identification: TypePersonIdentification) => {
+        if (type_person_identification) {
+          this.selected = type_person_identification;
+          this.store.dispatch(new fromCore.Go({
+            path: ['type_person_identification', type_person_identification.type_person_identification_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(typePersonIdentificationSearch: SearchTypePersonIdentification) {
     this.store.dispatch(new fromTypePersonIdentification.LoadEntity({
@@ -66,12 +81,14 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person_identification', 'create']
     }));
   }
 
   onEdit(typePersonIdentification: TypePersonIdentification) {
+    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: typePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person_identification', typePersonIdentification.type_person_identification_id]
     }));
@@ -82,6 +99,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person_identification']
     }));
@@ -89,5 +107,9 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromTypePersonIdentification.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

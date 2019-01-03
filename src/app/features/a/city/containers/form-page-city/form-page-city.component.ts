@@ -32,6 +32,7 @@ export class FormPageCityComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromCity.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['city']
     }));

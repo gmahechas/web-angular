@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUser from '@web/app/features/c/user/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { User } from '@web/app/features/c/user/models/user.model';
 import { SearchUser } from '@web/app/features/c/user/models/search-user.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-user',
   templateUrl: './index-page-user.component.html',
   styles: []
 })
-export class IndexPageUserComponent implements OnInit {
+export class IndexPageUserComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromUser.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromUser.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromUser.getAllEntities));
   total$ = this.store.pipe(select(fromUser.getTotal));
@@ -48,7 +54,18 @@ export class IndexPageUserComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromUser.getSelectedEntity), take(1)).subscribe(
+      (user: User) => {
+        if (user) {
+          this.selected = user;
+          this.store.dispatch(new fromCore.Go({
+            path: ['user', user.user_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(userSearch: SearchUser) {
     this.store.dispatch(new fromUser.LoadEntity({
@@ -63,12 +80,14 @@ export class IndexPageUserComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromUser.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', 'create']
     }));
   }
 
   onEdit(user: User) {
+    this.store.dispatch(new fromUser.SelectEntity({ entity: user }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', user.user_id]
     }));
@@ -79,6 +98,7 @@ export class IndexPageUserComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromUser.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['user']
     }));
@@ -86,5 +106,9 @@ export class IndexPageUserComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromUser.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

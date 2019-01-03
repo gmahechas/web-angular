@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromPerson from '@web/app/features/c/person/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { Person } from '@web/app/features/c/person/models/person.model';
 import { SearchPerson } from '@web/app/features/c/person/models/search-person.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-person',
   templateUrl: './index-page-person.component.html',
   styles: []
 })
-export class IndexPagePersonComponent implements OnInit {
+export class IndexPagePersonComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromPerson.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromPerson.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromPerson.getAllEntities));
   total$ = this.store.pipe(select(fromPerson.getTotal));
@@ -46,7 +52,18 @@ export class IndexPagePersonComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromPerson.getSelectedEntity), take(1)).subscribe(
+      (person: Person) => {
+        if (person) {
+          this.selected = person;
+          this.store.dispatch(new fromCore.Go({
+            path: ['person', person.person_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(personSearch: SearchPerson) {
     this.store.dispatch(new fromPerson.LoadEntity({
@@ -59,12 +76,14 @@ export class IndexPagePersonComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromPerson.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['person', 'create']
     }));
   }
 
   onEdit(person: Person) {
+    this.store.dispatch(new fromPerson.SelectEntity({ entity: person }));
     this.store.dispatch(new fromCore.Go({
       path: ['person', person.person_id]
     }));
@@ -75,6 +94,7 @@ export class IndexPagePersonComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromPerson.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['person']
     }));
@@ -82,5 +102,9 @@ export class IndexPagePersonComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromPerson.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

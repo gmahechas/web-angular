@@ -32,6 +32,7 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromProfile.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile']
     }));

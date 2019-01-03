@@ -20,7 +20,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selected: any;
 
-  query$ = this.store.pipe(select(fromEstate.getQuery));
+  query$ = this.store.pipe(select(fromEstate.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromEstate.getAllEntities));
   total$ = this.store.pipe(select(fromEstate.getTotal));

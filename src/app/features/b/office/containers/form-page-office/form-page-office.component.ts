@@ -32,6 +32,7 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromOffice.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['office']
     }));

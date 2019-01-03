@@ -20,11 +20,14 @@ export function reducer(state = initialState, action: EntityActions): State {
   switch (action.type) {
 
     case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationEstate.data, state);
+      return adapter.addAll(
+        action.payload.entities.paginationEstate.data,
+        { ...state, selectedEntity: null }
+      );
     }
 
     case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
+      return adapter.removeAll({ ...state, selectedEntity: null });
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
@@ -49,7 +52,10 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyEstate.estate_id, state);
+      return adapter.removeOne(
+        action.payload.entity.destroyEstate.estate_id,
+        { ...state, selectedEntity: null }
+      );
     }
 
     case EntityActionTypes.ResetSearch: {

@@ -9,6 +9,7 @@ export enum EntityActionTypes {
   StoreEntity = '[Macroproject] Store Entity',
   StoreSuccessEntity = '[Macroproject] Store Success Entity',
   StoreFailEntity = '[Macroproject] Store Fail Entity',
+  SelectEntity = '[Macroproject] Select Entity',
   UpdateEntity = '[Macroproject] Update Entity',
   UpdateSuccessEntity = '[Macroproject] Update Success Entity',
   UpdateFailEntity = '[Macroproject] Update Fail Entity',
@@ -48,6 +49,11 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
+}
+
+export class SelectEntity implements Action {
+  readonly type = EntityActionTypes.SelectEntity;
+  constructor(public payload: { entity: fromModels.Macroproject }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -101,6 +107,7 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
+  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity

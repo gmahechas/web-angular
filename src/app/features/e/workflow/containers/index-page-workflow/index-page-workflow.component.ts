@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromWorkflow from '@web/app/features/e/workflow/store';
@@ -7,6 +7,7 @@ import * as fromCore from '@web/app/core/store';
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
 import { SearchWorkflow } from '@web/app/features/e/workflow/models/search-workflow.model';
 
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +15,10 @@ import { take } from 'rxjs/operators';
   templateUrl: './index-page-workflow.component.html',
   styles: []
 })
-export class IndexPageWorkflowComponent implements OnInit {
+export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
+
+  subscription: Subscription;
+  selected: any;
 
   query$ = this.store.pipe(select(fromWorkflow.getQuery, take(1)));
 
@@ -39,7 +43,18 @@ export class IndexPageWorkflowComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromWorkflow.getSelectedEntity), take(1)).subscribe(
+      (workflow: Workflow) => {
+        if (workflow) {
+          this.selected = workflow;
+          this.store.dispatch(new fromCore.Go({
+            path: ['workflow', workflow.workflow_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(workflowSearch: SearchWorkflow) {
     this.store.dispatch(new fromWorkflow.LoadEntity({
@@ -52,12 +67,14 @@ export class IndexPageWorkflowComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', 'create']
     }));
   }
 
   onEdit(workflow: Workflow) {
+    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: workflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', workflow.workflow_id]
     }));
@@ -68,6 +85,7 @@ export class IndexPageWorkflowComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow']
     }));
@@ -75,5 +93,9 @@ export class IndexPageWorkflowComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromWorkflow.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

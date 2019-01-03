@@ -78,7 +78,8 @@ export class LayoutWorkflowEffects {
       fromWorkflowActions.EntityActionTypes.LoadEntity,
       fromWorkflowActions.EntityActionTypes.StoreSuccessEntity,
       fromWorkflowActions.EntityActionTypes.UpdateSuccessEntity,
-      fromWorkflowActions.EntityActionTypes.DestroySuccessEntity
+      fromWorkflowActions.EntityActionTypes.DestroySuccessEntity,
+      fromWorkflowActions.EntityActionTypes.ResetSearch
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['workflow'] }));

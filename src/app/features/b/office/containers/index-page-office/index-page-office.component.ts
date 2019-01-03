@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromOffice from '@web/app/features/b/office/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { Office } from '@web/app/features/b/office/models/office.model';
 import { SearchOffice } from '@web/app/features/b/office/models/search-office.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-office',
   templateUrl: './index-page-office.component.html',
   styles: []
 })
-export class IndexPageOfficeComponent implements OnInit {
+export class IndexPageOfficeComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromOffice.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromOffice.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromOffice.getAllEntities));
   total$ = this.store.pipe(select(fromOffice.getTotal));
@@ -37,7 +43,18 @@ export class IndexPageOfficeComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromOffice.getSelectedEntity), take(1)).subscribe(
+      (office: Office) => {
+        if (office) {
+          this.selected = office;
+          this.store.dispatch(new fromCore.Go({
+            path: ['office', office.office_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(officeSearch: SearchOffice) {
     this.store.dispatch(new fromOffice.LoadEntity({
@@ -51,12 +68,14 @@ export class IndexPageOfficeComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromOffice.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', 'create']
     }));
   }
 
   onEdit(office: Office) {
+    this.store.dispatch(new fromOffice.SelectEntity({ entity: office }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', office.office_id]
     }));
@@ -67,6 +86,7 @@ export class IndexPageOfficeComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromOffice.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['office']
     }));
@@ -74,5 +94,9 @@ export class IndexPageOfficeComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromOffice.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

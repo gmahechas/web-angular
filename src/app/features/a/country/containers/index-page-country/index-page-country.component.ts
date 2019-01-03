@@ -20,7 +20,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selected: any;
 
-  query$ = this.store.pipe(select(fromCountry.getQuery));
+  query$ = this.store.pipe(select(fromCountry.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromCountry.getAllEntities));
   total$ = this.store.pipe(select(fromCountry.getTotal));

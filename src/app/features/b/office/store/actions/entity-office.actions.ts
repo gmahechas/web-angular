@@ -9,6 +9,7 @@ export enum EntityActionTypes {
   StoreEntity = '[Office] Store Entity',
   StoreSuccessEntity = '[Office] Store Success Entity',
   StoreFailEntity = '[Office] Store Fail Entity',
+  SelectEntity = '[Office] Select Entity',
   UpdateEntity = '[Office] Update Entity',
   UpdateSuccessEntity = '[Office] Update Success Entity',
   UpdateFailEntity = '[Office] Update Fail Entity',
@@ -48,6 +49,11 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
+}
+
+export class SelectEntity implements Action {
+  readonly type = EntityActionTypes.SelectEntity;
+  constructor(public payload: { entity: fromModels.Office }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -101,6 +107,7 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
+  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity

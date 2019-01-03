@@ -32,6 +32,7 @@ export class FormPageTypePersonIdentificationComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['typePersonIdentification']
     }));

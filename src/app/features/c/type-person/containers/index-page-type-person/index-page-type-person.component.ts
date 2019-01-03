@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromTypePerson from '@web/app/features/c/type-person/store';
@@ -7,6 +7,7 @@ import * as fromCore from '@web/app/core/store';
 import { TypePerson } from '@web/app/features/c/type-person/models/type-person.model';
 import { SearchTypePerson } from '@web/app/features/c/type-person/models/search-type-person.model';
 
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +15,10 @@ import { take } from 'rxjs/operators';
   templateUrl: './index-page-type-person.component.html',
   styles: []
 })
-export class IndexPageTypePersonComponent implements OnInit {
+export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
+
+  subscription: Subscription;
+  selected: any;
 
   query$ = this.store.pipe(select(fromTypePerson.getQuery, take(1)));
 
@@ -39,7 +43,18 @@ export class IndexPageTypePersonComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromTypePerson.getSelectedEntity), take(1)).subscribe(
+      (type_person: TypePerson) => {
+        if (type_person) {
+          this.selected = type_person;
+          this.store.dispatch(new fromCore.Go({
+            path: ['type_person', type_person.type_person_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(typePersonSearch: SearchTypePerson) {
     this.store.dispatch(new fromTypePerson.LoadEntity({
@@ -52,12 +67,14 @@ export class IndexPageTypePersonComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromTypePerson.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person', 'create']
     }));
   }
 
   onEdit(typePerson: TypePerson) {
+    this.store.dispatch(new fromTypePerson.SelectEntity({ entity: typePerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person', typePerson.type_person_id]
     }));
@@ -68,6 +85,7 @@ export class IndexPageTypePersonComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromTypePerson.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person']
     }));
@@ -75,5 +93,9 @@ export class IndexPageTypePersonComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromTypePerson.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

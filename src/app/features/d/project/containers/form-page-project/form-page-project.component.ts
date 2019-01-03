@@ -32,6 +32,7 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromProject.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['project']
     }));

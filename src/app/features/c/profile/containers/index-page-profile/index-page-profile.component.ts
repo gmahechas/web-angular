@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '@web/app/features/c/profile/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { Profile } from '@web/app/features/c/profile/models/profile.model';
 import { SearchProfile } from '@web/app/features/c/profile/models/search-profile.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-profile',
   templateUrl: './index-page-profile.component.html',
   styles: []
 })
-export class IndexPageProfileComponent implements OnInit {
+export class IndexPageProfileComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromProfile.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromProfile.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromProfile.getAllEntities));
   total$ = this.store.pipe(select(fromProfile.getTotal));
@@ -36,7 +42,18 @@ export class IndexPageProfileComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromProfile.getSelectedEntity), take(1)).subscribe(
+      (profile: Profile) => {
+        if (profile) {
+          this.selected = profile;
+          this.store.dispatch(new fromCore.Go({
+            path: ['profile', profile.profile_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(profileSearch: SearchProfile) {
     this.store.dispatch(new fromProfile.LoadEntity({
@@ -49,12 +66,14 @@ export class IndexPageProfileComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromProfile.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', 'create']
     }));
   }
 
   onEdit(profile: Profile) {
+    this.store.dispatch(new fromProfile.SelectEntity({ entity: profile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', profile.profile_id]
     }));
@@ -65,6 +84,7 @@ export class IndexPageProfileComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromProfile.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile']
     }));
@@ -72,5 +92,9 @@ export class IndexPageProfileComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromProfile.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromCity from '@web/app/features/a/city/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { City } from '@web/app/features/a/city/models/city.model';
 import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-city',
   templateUrl: './index-page-city.component.html',
   styles: []
 })
-export class IndexPageCityComponent implements OnInit {
+export class IndexPageCityComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromCity.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromCity.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromCity.getAllEntities));
   total$ = this.store.pipe(select(fromCity.getTotal));
@@ -39,7 +45,18 @@ export class IndexPageCityComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromCity.getSelectedEntity), take(1)).subscribe(
+      (city: City) => {
+        if (city) {
+          this.selected = city;
+          this.store.dispatch(new fromCore.Go({
+            path: ['city', city.city_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(citySearch: SearchCity) {
     this.store.dispatch(new fromCity.LoadEntity({
@@ -53,12 +70,14 @@ export class IndexPageCityComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromCity.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['city', 'create']
     }));
   }
 
   onEdit(city: City) {
+    this.store.dispatch(new fromCity.SelectEntity({ entity: city }));
     this.store.dispatch(new fromCore.Go({
       path: ['city', city.city_id]
     }));
@@ -69,6 +88,7 @@ export class IndexPageCityComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromCity.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['city']
     }));
@@ -78,4 +98,7 @@ export class IndexPageCityComponent implements OnInit {
     this.store.dispatch(new fromCity.ResetSearch());
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

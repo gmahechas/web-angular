@@ -78,7 +78,8 @@ export class LayoutCityEffects {
       fromCityActions.EntityActionTypes.LoadEntity,
       fromCityActions.EntityActionTypes.StoreSuccessEntity,
       fromCityActions.EntityActionTypes.UpdateSuccessEntity,
-      fromCityActions.EntityActionTypes.DestroySuccessEntity
+      fromCityActions.EntityActionTypes.DestroySuccessEntity,
+      fromCityActions.EntityActionTypes.ResetSearch
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['city'] }));

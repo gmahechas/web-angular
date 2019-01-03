@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import * as fromMacroproject from '@web/app/features/d/macroproject/store';
@@ -7,14 +7,20 @@ import * as fromCore from '@web/app/core/store';
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
 import { SearchMacroproject } from '@web/app/features/d/macroproject/models/search-macroproject.model';
 
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-index-page-macroproject',
   templateUrl: './index-page-macroproject.component.html',
   styles: []
 })
-export class IndexPageMacroprojectComponent implements OnInit {
+export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
 
-  query$ = this.store.pipe(select(fromMacroproject.getQuery));
+  subscription: Subscription;
+  selected: any;
+
+  query$ = this.store.pipe(select(fromMacroproject.getQuery), take(1));
 
   data$ = this.store.pipe(select(fromMacroproject.getAllEntities));
   total$ = this.store.pipe(select(fromMacroproject.getTotal));
@@ -40,7 +46,18 @@ export class IndexPageMacroprojectComponent implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.subscription = this.store.pipe(select(fromMacroproject.getSelectedEntity), take(1)).subscribe(
+      (macroproject: Macroproject) => {
+        if (macroproject) {
+          this.selected = macroproject;
+          this.store.dispatch(new fromCore.Go({
+            path: ['macroproject', macroproject.macroproject_id]
+          }));
+        }
+      }
+    );
+  }
 
   onLoad(macroprojectSearch: SearchMacroproject) {
     this.store.dispatch(new fromMacroproject.LoadEntity({
@@ -55,12 +72,14 @@ export class IndexPageMacroprojectComponent implements OnInit {
   }
 
   onCreate() {
+    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject', 'create']
     }));
   }
 
   onEdit(macroproject: Macroproject) {
+    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: macroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject', macroproject.macroproject_id]
     }));
@@ -71,6 +90,7 @@ export class IndexPageMacroprojectComponent implements OnInit {
   }
 
   onCancel() {
+    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: null }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject']
     }));
@@ -78,5 +98,9 @@ export class IndexPageMacroprojectComponent implements OnInit {
 
   onResetSearch() {
     this.store.dispatch(new fromMacroproject.ResetSearch());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
