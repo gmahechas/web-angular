@@ -42,3 +42,8 @@ export const getUserOfficeProject = createSelector(
   fromCore.getLayoutState,
   fromLayout.getUserOfficeProject
 );
+
+export const getSelectedMenus = createSelector(
+  fromCore.getLayoutState,
+  fromLayout.getSelectedMenus
+);

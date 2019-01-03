@@ -4,6 +4,7 @@ import { AuthActionTypes, AuthActions } from '@web/app/auth/store/actions/auth.a
 import { Company } from '@web/app/features/b/company/models/company.model';
 import { UserOffice } from '@web/app/features/c/user-office/models';
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
+import { ProfileMenu } from '@web/app/features/c/profile-menu/models/profile-menu.model';
 
 export interface State {
   lang: string;
@@ -14,6 +15,7 @@ export interface State {
   company: Company | null;
   userOffice: UserOffice | null;
   userOfficeProject: UserOfficeProject | null;
+  selectedMenus: ProfileMenu[];
 }
 
 export const initialState: State = {
@@ -24,7 +26,8 @@ export const initialState: State = {
   progressBar: false,
   company: null,
   userOffice: null,
-  userOfficeProject: null
+  userOfficeProject: null,
+  selectedMenus: []
 };
 
 export function reducer(state: State = initialState, action: LayoutActions | AuthActions): State {
@@ -121,6 +124,12 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
         userOfficeProject: action.payload.userOfficeProject
       };
 
+    case LayoutActionTypes.AddSelectedMenu:
+      return {
+        ...state,
+        selectedMenus: [...state.selectedMenus, action.payload.profile_menu]
+      };
+
     default:
       return state;
   }
@@ -134,3 +143,4 @@ export const getProgressBar = (state: State) => state.progressBar;
 export const getCompany = (state: State) => state.company;
 export const getUserOffice = (state: State) => state.userOffice;
 export const getUserOfficeProject = (state: State) => state.userOfficeProject;
+export const getSelectedMenus = (state: State) => state.selectedMenus;

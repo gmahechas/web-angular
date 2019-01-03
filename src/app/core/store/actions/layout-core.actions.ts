@@ -13,6 +13,7 @@ export enum LayoutActionTypes {
   CloseProgressBar = '[Layout] Close Progress Bar',
   SetUserOffice = '[Layout] Set User Office',
   SetUserOfficeProject = '[Layout] Set User Office Project',
+  AddSelectedMenu = '[Layout] Add Selected Menu',
   ShowMessages = '[Layout] Show Messages'
 }
 
@@ -68,6 +69,11 @@ export class SetUserOfficeProject implements Action {
   constructor(public payload: { userOfficeProject: any }) { }
 }
 
+export class AddSelectedMenu implements Action {
+  readonly type = LayoutActionTypes.AddSelectedMenu;
+  constructor(public payload: { profile_menu: any }) { }
+}
+
 export class ShowMessages implements Action {
   readonly type = LayoutActionTypes.ShowMessages;
   constructor(public payload: { messages: any[] }) { }
@@ -86,4 +92,5 @@ export type LayoutActions =
   | CloseProgressBar
   | SetUserOffice
   | SetUserOfficeProject
+  | AddSelectedMenu
   | ShowMessages;
