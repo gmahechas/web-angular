@@ -16,9 +16,9 @@ export const {
   selectTotal: getTotalEntities, // total
 } = fromEntity.adapter.getSelectors(getEntityState);
 
-export const getSelectedEntity = createSelector(
+export const getSelected = createSelector(
   getEntityState,
-  fromEntity.getSelectedEntity
+  fromEntity.getSelected
 );
 
 export const getSelectedByRouter = createSelector(

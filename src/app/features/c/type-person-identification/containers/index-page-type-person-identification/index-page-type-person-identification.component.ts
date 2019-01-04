@@ -20,7 +20,7 @@ import { take } from 'rxjs/operators';
 export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  selected: any;
+  selectedEntity: TypePersonIdentification;
 
   query$ = this.store.pipe(select(fromTypePersonIdentification.getQuery, take(1)));
 
@@ -58,12 +58,12 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   ngOnInit() {
-    this.subscription = this.store.pipe(select(fromTypePersonIdentification.getSelectedEntity), take(1)).subscribe(
-      (type_person_identification: TypePersonIdentification) => {
-        if (type_person_identification) {
-          this.selected = type_person_identification;
+    this.subscription = this.store.pipe(select(fromTypePersonIdentification.getSelected), take(1)).subscribe(
+      (selected: { selectedEntity: TypePersonIdentification | null }) => {
+        if (selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['type_person_identification', type_person_identification.type_person_identification_id]
+            path: ['type_person_identification', selected.selectedEntity.type_person_identification_id]
           }));
         }
       }

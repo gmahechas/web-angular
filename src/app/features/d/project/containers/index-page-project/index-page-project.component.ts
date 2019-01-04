@@ -18,7 +18,7 @@ import { take } from 'rxjs/operators';
 export class IndexPageProjectComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  selected: any;
+  selectedEntity: Project;
 
   query$ = this.store.pipe(select(fromProject.getQuery), take(1));
 
@@ -46,12 +46,12 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.store.pipe(select(fromProject.getSelectedEntity), take(1)).subscribe(
-      (project: Project) => {
-        if (project) {
-          this.selected = project;
+    this.subscription = this.store.pipe(select(fromProject.getSelected), take(1)).subscribe(
+      (selected: { selectedEntity: Project | null }) => {
+        if (selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['project', project.project_id]
+            path: ['project', selected.selectedEntity.project_id]
           }));
         }
       }

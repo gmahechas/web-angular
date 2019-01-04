@@ -18,7 +18,7 @@ import { take } from 'rxjs/operators';
 export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  selected: any;
+  selectedEntity: Workflow;
 
   query$ = this.store.pipe(select(fromWorkflow.getQuery), take(1));
 
@@ -44,12 +44,12 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.store.pipe(select(fromWorkflow.getSelectedEntity), take(1)).subscribe(
-      (workflow: Workflow) => {
-        if (workflow) {
-          this.selected = workflow;
+    this.subscription = this.store.pipe(select(fromWorkflow.getSelected), take(1)).subscribe(
+      (selected: { selectedEntity: Workflow | null }) => {
+        if (selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['workflow', workflow.workflow_id]
+            path: ['workflow', selected.selectedEntity.workflow_id]
           }));
         }
       }

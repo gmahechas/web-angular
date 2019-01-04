@@ -3,7 +3,9 @@ import { Macroproject } from '@web/app/features/d/macroproject/models/macroproje
 import { EntityActionTypes, EntityActions } from '@web/app/features/d/macroproject/store/actions/entity-macroproject.actions';
 
 export interface State extends EntityState<Macroproject> {
-  selectedEntity: Macroproject | null;
+  selected: {
+    selectedEntity: Macroproject | null;
+  };
 }
 
 export const adapter: EntityAdapter<Macroproject> = createEntityAdapter<Macroproject>({
@@ -12,7 +14,9 @@ export const adapter: EntityAdapter<Macroproject> = createEntityAdapter<Macropro
 });
 
 export const initialState: State = adapter.getInitialState({
-  selectedEntity: null,
+  selected: {
+    selectedEntity: null
+  }
 });
 
 export function reducer(state = initialState, action: EntityActions): State {
@@ -22,12 +26,12 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.LoadSuccessEntity: {
       return adapter.addAll(
         action.payload.entities.paginationMacroproject.data,
-        { ...state, selectedEntity: null }
+        { ...state, selected: { selectedEntity: null } }
       );
     }
 
     case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll({ ...state, selectedEntity: null });
+      return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
@@ -38,7 +42,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.SelectEntity: {
       return {
         ...state,
-        selectedEntity: action.payload.entity
+        selected: { selectedEntity: action.payload.entity }
       };
     }
 
@@ -47,19 +51,19 @@ export function reducer(state = initialState, action: EntityActions): State {
         id: action.payload.entity.updateMacroproject.macroproject_id,
         changes: action.payload.entity.updateMacroproject
       },
-        { ...state, selectedEntity: null }
+        { ...state, selected: { selectedEntity: null } }
       );
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
       return adapter.removeOne(
         action.payload.entity.destroyMacroproject.macroproject_id,
-        { ...state, selectedEntity: null }
+        { ...state, selected: { selectedEntity: null } }
       );
     }
 
     case EntityActionTypes.ResetSearch: {
-      return adapter.removeAll({ ...state, selectedEntity: null });
+      return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
     }
 
     default:
@@ -68,4 +72,4 @@ export function reducer(state = initialState, action: EntityActions): State {
 
 }
 
-export const getSelectedEntity = (state: State) => state.selectedEntity;
+export const getSelected = (state: State) => state.selected;

@@ -18,7 +18,7 @@ import { take } from 'rxjs/operators';
 export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  selected: any;
+  selectedEntity: Macroproject;
 
   query$ = this.store.pipe(select(fromMacroproject.getQuery), take(1));
 
@@ -47,12 +47,12 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.store.pipe(select(fromMacroproject.getSelectedEntity), take(1)).subscribe(
-      (macroproject: Macroproject) => {
-        if (macroproject) {
-          this.selected = macroproject;
+    this.subscription = this.store.pipe(select(fromMacroproject.getSelected), take(1)).subscribe(
+      (selected: { selectedEntity: Macroproject | null }) => {
+        if (selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['macroproject', macroproject.macroproject_id]
+            path: ['macroproject', selected.selectedEntity.macroproject_id]
           }));
         }
       }

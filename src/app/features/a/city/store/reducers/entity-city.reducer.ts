@@ -3,7 +3,9 @@ import { City } from '@web/app/features/a/city/models/city.model';
 import { EntityActionTypes, EntityActions } from '@web/app/features/a/city/store/actions/entity-city.actions';
 
 export interface State extends EntityState<City> {
-  selectedEntity: City | null;
+  selected: {
+    selectedEntity: City | null;
+  };
 }
 
 export const adapter: EntityAdapter<City> = createEntityAdapter<City>({
@@ -12,7 +14,9 @@ export const adapter: EntityAdapter<City> = createEntityAdapter<City>({
 });
 
 export const initialState: State = adapter.getInitialState({
-  selectedEntity: null,
+  selected: {
+    selectedEntity: null
+  }
 });
 
 export function reducer(state = initialState, action: EntityActions): State {
@@ -22,12 +26,12 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.LoadSuccessEntity: {
       return adapter.addAll(
         action.payload.entities.paginationCity.data,
-        { ...state, selectedEntity: null }
+        { ...state, selected: { selectedEntity: null } }
       );
     }
 
     case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll({ ...state, selectedEntity: null });
+      return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
@@ -38,7 +42,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.SelectEntity: {
       return {
         ...state,
-        selectedEntity: action.payload.entity
+        selected: { selectedEntity: action.payload.entity }
       };
     }
 
@@ -47,19 +51,19 @@ export function reducer(state = initialState, action: EntityActions): State {
         id: action.payload.entity.updateCity.city_id,
         changes: action.payload.entity.updateCity
       },
-        { ...state, selectedEntity: null }
+        { ...state, selected: { selectedEntity: null } }
       );
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
       return adapter.removeOne(
         action.payload.entity.destroyCity.city_id,
-        { ...state, selectedEntity: null }
+        { ...state, selected: { selectedEntity: null } }
       );
     }
 
     case EntityActionTypes.ResetSearch: {
-      return adapter.removeAll({ ...state, selectedEntity: null });
+      return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
     }
 
     default:
@@ -68,4 +72,4 @@ export function reducer(state = initialState, action: EntityActions): State {
 
 }
 
-export const getSelectedEntity = (state: State) => state.selectedEntity;
+export const getSelected = (state: State) => state.selected;
