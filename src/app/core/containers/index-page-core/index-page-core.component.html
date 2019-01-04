@@ -1,8 +1,10 @@
 <div *ngIf="(user$ | async) as user">
   <app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'100%'}" (hide)="opencloseSidebar($event)">
-    <app-menu-core [profile]="user.profile" (navigate)="handleNavigate($event)"></app-menu-core>
+    <app-menu-core [profile]="user.profile" (navigate)="handleNavigateFromSide($event)"></app-menu-core>
   </app-sidebar-shared>
-  <app-header-core *ngIf="(userOffice$ | async) as userOffice" [company]="company$ | async" [office]="userOffice.office" [user]="user" (clickOpen)="opencloseSidebar($event)" (clickSelectOffice)="gotoSelectOffice()" (clickLogout)="handleLogout()"></app-header-core>
+  <app-header-core *ngIf="(userOffice$ | async) as userOffice" [company]="company$ | async" [office]="userOffice.office"
+    [user]="user" (clickOpen)="opencloseSidebar($event)" (clickSelectOffice)="gotoSelectOffice()" (clickLogout)="handleLogout()"></app-header-core>
+  <app-tab-menu-core [profileMenus]="selectedMenus$ | async" (navigate)="handleNavigateFromTab($event)"></app-tab-menu-core>
 </div>
 <app-message-core></app-message-core>
 <app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>

@@ -20,6 +20,7 @@ export class IndexPageCoreComponent implements OnInit {
   blockedDocument$ = this.store.pipe(select(fromCore.getBlockedDocument));
   showSpinner$ = this.store.pipe(select(fromCore.getShowSpinner));
   progressBar$ = this.store.pipe(select(fromCore.getProgressBar));
+  selectedMenus$ = this.store.pipe(select(fromCore.getSelectedMenus));
 
   constructor(
     private store: Store<fromCore.State>
@@ -36,9 +37,14 @@ export class IndexPageCoreComponent implements OnInit {
     }
   }
 
-  handleNavigate(profileMenu: ProfileMenu) {
+  handleNavigateFromSide(profileMenu: ProfileMenu) {
+    this.store.dispatch(new fromCore.AddSelectedMenu({ profile_menu: profileMenu }));
     this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
     this.store.dispatch(new fromCore.CloseSidebar());
+  }
+
+  handleNavigateFromTab(profileMenu: ProfileMenu) {
+    this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
   }
 
   handleLogout($event) {
