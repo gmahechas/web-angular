@@ -18,7 +18,7 @@ import { take } from 'rxjs/operators';
 export class IndexPageOfficeComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  selected: any;
+  selectedEntity: Office;
 
   query$ = this.store.pipe(select(fromOffice.getQuery), take(1));
 
@@ -44,12 +44,12 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.store.pipe(select(fromOffice.getSelectedEntity), take(1)).subscribe(
-      (office: Office) => {
-        if (office) {
-          this.selected = office;
+    this.subscription = this.store.pipe(select(fromOffice.getSelected), take(1)).subscribe(
+      (selected: { selectedEntity: Office | null }) => {
+        if (selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['office', office.office_id]
+            path: ['office', selected.selectedEntity.office_id]
           }));
         }
       }
