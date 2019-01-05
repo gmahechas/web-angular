@@ -27,7 +27,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.addAll(
         action.payload.entities.paginationUser.data,
         { ...state, selected: { selectedEntity: null } }
-        );
+      );
     }
 
     case EntityActionTypes.LoadFailEntity: {
@@ -37,13 +37,6 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.StoreSuccessEntity: {
       const newState = adapter.removeAll(state);
       return adapter.addOne(action.payload.entity.storeUser, newState);
-    }
-
-    case EntityActionTypes.SelectEntity: {
-      return {
-        ...state,
-        selected: { selectedEntity: action.payload.entity }
-      };
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {
@@ -59,11 +52,18 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.removeOne(
         action.payload.entity.destroyUser.user_id,
         { ...state, selected: { selectedEntity: null } }
-        );
+      );
     }
 
     case EntityActionTypes.ResetSearch: {
       return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
+    }
+
+    case EntityActionTypes.SelectEntity: {
+      return {
+        ...state,
+        selected: { selectedEntity: action.payload.entity }
+      };
     }
 
     default:

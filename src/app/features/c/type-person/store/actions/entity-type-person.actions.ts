@@ -9,7 +9,6 @@ export enum EntityActionTypes {
   StoreEntity = '[TypePerson] Store Entity',
   StoreSuccessEntity = '[TypePerson] Store Success Entity',
   StoreFailEntity = '[TypePerson] Store Fail Entity',
-  SelectEntity = '[TypePerson] Select Entity',
   UpdateEntity = '[TypePerson] Update Entity',
   UpdateSuccessEntity = '[TypePerson] Update Success Entity',
   UpdateFailEntity = '[TypePerson] Update Fail Entity',
@@ -18,7 +17,8 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[TypePerson] Destroy Fail Entity',
   PaginateEntity = '[TypePerson] Paginate Entity',
   LoadEntityShared = '[TypePerson] Load Entity Shared',
-  ResetSearch = '[TypePerson] Reset Search'
+  ResetSearch = '[TypePerson] Reset Search',
+  SelectEntity = '[TypePerson] Select Entity'
 }
 
 export class LoadEntity implements Action {
@@ -49,11 +49,6 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
-}
-
-export class SelectEntity implements Action {
-  readonly type = EntityActionTypes.SelectEntity;
-  constructor(public payload: { entity: fromModels.TypePerson }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -100,6 +95,11 @@ export class ResetSearch implements Action {
   readonly type = EntityActionTypes.ResetSearch;
 }
 
+export class SelectEntity implements Action {
+  readonly type = EntityActionTypes.SelectEntity;
+  constructor(public payload: { entity: fromModels.TypePerson }) { }
+}
+
 export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
@@ -107,7 +107,6 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
-  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity
@@ -116,4 +115,5 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | ResetSearch;
+  | ResetSearch
+  | SelectEntity;

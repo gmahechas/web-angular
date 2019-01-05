@@ -9,7 +9,6 @@ export enum EntityActionTypes {
   StoreEntity = '[TypePersonIdentification] Store Entity',
   StoreSuccessEntity = '[TypePersonIdentification] Store Success Entity',
   StoreFailEntity = '[TypePersonIdentification] Store Fail Entity',
-  SelectEntity = '[TypePersonIdentification] Select Entity',
   UpdateEntity = '[TypePersonIdentification] Update Entity',
   UpdateSuccessEntity = '[TypePersonIdentification] Update Success Entity',
   UpdateFailEntity = '[TypePersonIdentification] Update Fail Entity',
@@ -18,7 +17,8 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[TypePersonIdentification] Destroy Fail Entity',
   PaginateEntity = '[TypePersonIdentification] Paginate Entity',
   LoadEntityShared = '[TypePersonIdentification] Load Entity Shared',
-  ResetSearch = '[TypePersonIdentification] Reset Search'
+  ResetSearch = '[TypePersonIdentification] Reset Search',
+  SelectEntity = '[TypePersonIdentification] Select Entity'
 }
 
 export class LoadEntity implements Action {
@@ -49,11 +49,6 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
-}
-
-export class SelectEntity implements Action {
-  readonly type = EntityActionTypes.SelectEntity;
-  constructor(public payload: { entity: fromModels.TypePersonIdentification }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -100,6 +95,11 @@ export class ResetSearch implements Action {
   readonly type = EntityActionTypes.ResetSearch;
 }
 
+export class SelectEntity implements Action {
+  readonly type = EntityActionTypes.SelectEntity;
+  constructor(public payload: { entity: fromModels.TypePersonIdentification }) { }
+}
+
 export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
@@ -107,7 +107,6 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
-  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity
@@ -116,4 +115,5 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | ResetSearch;
+  | ResetSearch
+  | SelectEntity;

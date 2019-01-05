@@ -39,13 +39,6 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.addOne(action.payload.entity.storeEstate, newState);
     }
 
-    case EntityActionTypes.SelectEntity: {
-      return {
-        ...state,
-        selected: { selectedEntity: action.payload.entity }
-      };
-    }
-
     case EntityActionTypes.UpdateSuccessEntity: {
       return adapter.updateOne({
         id: action.payload.entity.updateEstate.estate_id,
@@ -64,6 +57,13 @@ export function reducer(state = initialState, action: EntityActions): State {
 
     case EntityActionTypes.ResetSearch: {
       return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
+    }
+
+    case EntityActionTypes.SelectEntity: {
+      return {
+        ...state,
+        selected: { selectedEntity: action.payload.entity }
+      };
     }
 
     default:

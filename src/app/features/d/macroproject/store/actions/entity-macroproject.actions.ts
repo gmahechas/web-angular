@@ -9,7 +9,6 @@ export enum EntityActionTypes {
   StoreEntity = '[Macroproject] Store Entity',
   StoreSuccessEntity = '[Macroproject] Store Success Entity',
   StoreFailEntity = '[Macroproject] Store Fail Entity',
-  SelectEntity = '[Macroproject] Select Entity',
   UpdateEntity = '[Macroproject] Update Entity',
   UpdateSuccessEntity = '[Macroproject] Update Success Entity',
   UpdateFailEntity = '[Macroproject] Update Fail Entity',
@@ -18,7 +17,8 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Macroproject] Destroy Fail Entity',
   PaginateEntity = '[Macroproject] Paginate Entity',
   LoadEntityShared = '[Macroproject] Load Entity Shared',
-  ResetSearch = '[Macroproject] Reset Search'
+  ResetSearch = '[Macroproject] Reset Search',
+  SelectEntity = '[Macroproject] Select Entity'
 }
 
 export class LoadEntity implements Action {
@@ -49,11 +49,6 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
-}
-
-export class SelectEntity implements Action {
-  readonly type = EntityActionTypes.SelectEntity;
-  constructor(public payload: { entity: fromModels.Macroproject }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -100,6 +95,11 @@ export class ResetSearch implements Action {
   readonly type = EntityActionTypes.ResetSearch;
 }
 
+export class SelectEntity implements Action {
+  readonly type = EntityActionTypes.SelectEntity;
+  constructor(public payload: { entity: fromModels.Macroproject }) { }
+}
+
 export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
@@ -107,7 +107,6 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
-  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity
@@ -116,4 +115,5 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | ResetSearch;
+  | ResetSearch
+  | SelectEntity;
