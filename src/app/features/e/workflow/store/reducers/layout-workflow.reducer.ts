@@ -1,11 +1,18 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/e/workflow/store/actions/entity-workflow.actions';
+import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
 
 export interface State {
+  selected: {
+    selectedEntity: Workflow | null;
+  };
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
+  selected: {
+    selectedEntity: null
+  },
   error: '',
   pending: false
 };
@@ -13,6 +20,14 @@ export const initialState: State = {
 export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
+
+    case EntityActionTypes.SelectEntity: {
+      return {
+        ...state,
+        selected: { selectedEntity: action.payload.entity }
+      };
+    }
+
     case EntityActionTypes.LoadFailEntity:
     case EntityActionTypes.StoreFailEntity:
     case EntityActionTypes.UpdateFailEntity:
@@ -51,5 +66,6 @@ export function reducer(state = initialState, action: EntityActions): State {
 
 }
 
+export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.pending;

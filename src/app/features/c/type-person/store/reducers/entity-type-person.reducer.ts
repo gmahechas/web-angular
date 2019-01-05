@@ -2,36 +2,25 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { TypePerson } from '@web/app/features/c/type-person/models/type-person.model';
 import { EntityActionTypes, EntityActions } from '@web/app/features/c/type-person/store/actions/entity-type-person.actions';
 
-export interface State extends EntityState<TypePerson> {
-  selected: {
-    selectedEntity: TypePerson | null;
-  };
-}
+export interface State extends EntityState<TypePerson> { }
 
 export const adapter: EntityAdapter<TypePerson> = createEntityAdapter<TypePerson>({
   selectId: (entity: TypePerson) => entity.type_person_id,
   sortComparer: false
 });
 
-export const initialState: State = adapter.getInitialState({
-  selected: {
-    selectedEntity: null
-  }
-});
+export const initialState: State = adapter.getInitialState();
 
 export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
     case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(
-        action.payload.entities.paginationTypePerson.data,
-        { ...state, selected: { selectedEntity: null } }
-      );
+      return adapter.addAll(action.payload.entities.paginationTypePerson.data, state);
     }
 
     case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
+      return adapter.removeAll(state);
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
@@ -44,26 +33,16 @@ export function reducer(state = initialState, action: EntityActions): State {
         id: action.payload.entity.updateTypePerson.type_person_id,
         changes: action.payload.entity.updateTypePerson
       },
-        { ...state, selected: { selectedEntity: null } }
+        state
       );
     }
 
     case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(
-        action.payload.entity.destroyTypePerson.type_person_id,
-        { ...state, selected: { selectedEntity: null } }
-      );
+      return adapter.removeOne(action.payload.entity.destroyTypePerson.type_person_id, state);
     }
 
     case EntityActionTypes.ResetSearch: {
-      return adapter.removeAll({ ...state, selected: { selectedEntity: null } });
-    }
-
-    case EntityActionTypes.SelectEntity: {
-      return {
-        ...state,
-        selected: { selectedEntity: action.payload.entity }
-      };
+      return adapter.removeAll(state);
     }
 
     default:
@@ -71,5 +50,3 @@ export function reducer(state = initialState, action: EntityActions): State {
   }
 
 }
-
-export const getSelected = (state: State) => state.selected;
