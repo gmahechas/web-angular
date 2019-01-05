@@ -9,7 +9,7 @@ export enum EntityActionTypes {
   StoreEntity = '[Profile] Store Entity',
   StoreSuccessEntity = '[Profile] Store Success Entity',
   StoreFailEntity = '[Profile] Store Fail Entity',
-  SelectEntity = '[Estate] Select Entity',
+  SelectEntity = '[Profile] Select Entity',
   UpdateEntity = '[Profile] Update Entity',
   UpdateSuccessEntity = '[Profile] Update Success Entity',
   UpdateFailEntity = '[Profile] Update Fail Entity',
