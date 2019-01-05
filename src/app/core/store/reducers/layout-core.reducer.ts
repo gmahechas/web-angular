@@ -127,7 +127,9 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
     case LayoutActionTypes.AddSelectedMenu:
       return {
         ...state,
-        selectedMenus: [...state.selectedMenus, action.payload.profile_menu]
+        selectedMenus: (state.selectedMenus.includes(action.payload.profile_menu)) ?
+          [...state.selectedMenus] :
+          [...state.selectedMenus, action.payload.profile_menu]
       };
 
     default:
