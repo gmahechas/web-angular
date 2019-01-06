@@ -44,6 +44,7 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onProfileMenu(profile: Profile) {
+    this.store.dispatch(new fromProfile.SetSelected({ selected: { selectedEntity: profile, gotoProfileMenu: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', profile.profile_id, { outlets: { 'router-outlet-profile-menu': ['profile-menu', profile.profile_id] } }]
     }));

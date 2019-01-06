@@ -65,7 +65,8 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
             path: [
               'user',
               selected.selectedEntity.user_id,
-              { outlets: { 'router-outlet-user-office': ['user-office', 'user', selected.selectedEntity.user_id] } }]
+              { outlets: { 'router-outlet-user-office': ['user-office', 'user', selected.selectedEntity.user_id] } }
+            ]
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;

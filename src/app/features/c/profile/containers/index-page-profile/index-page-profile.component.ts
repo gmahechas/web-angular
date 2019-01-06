@@ -46,7 +46,17 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromProfile.getSelected), take(1)).subscribe(
       (selected: SelectedProfile) => {
-        if (selected.selectedEntity) {
+
+        if (selected.gotoProfileMenu && selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
+          this.store.dispatch(new fromCore.Go({
+            path: [
+              'profile',
+              selected.selectedEntity.profile_id,
+              { outlets: { 'router-outlet-profile-menu': ['profile-menu', selected.selectedEntity.profile_id] } }
+            ]
+          }));
+        } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
             path: ['profile', selected.selectedEntity.profile_id]
