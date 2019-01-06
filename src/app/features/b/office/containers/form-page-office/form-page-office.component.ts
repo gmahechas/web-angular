@@ -5,7 +5,7 @@ import * as fromOffice from '@web/app/features/b/office/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Office } from '@web/app/features/b/office/models/office.model';
-import { initialStateSelected } from '@web/app/features/b/office/models/selected-office.model';
+import { initialStateSelectedOffice } from '@web/app/features/b/office/models/selected-office.model';
 
 @Component({
   selector: 'app-form-page-office',
@@ -33,7 +33,7 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelected }));
+    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelectedOffice }));
     this.store.dispatch(new fromCore.Go({
       path: ['office']
     }));

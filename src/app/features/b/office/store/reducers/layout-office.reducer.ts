@@ -1,5 +1,5 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/b/office/store/actions/entity-office.actions';
-import { SelectedOffice, initialStateSelected } from '@web/app/features/b/office/models/selected-office.model';
+import { SelectedOffice, initialStateSelectedOffice } from '@web/app/features/b/office/models/selected-office.model';
 
 export interface State {
   selected: SelectedOffice;
@@ -8,7 +8,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  selected: initialStateSelected,
+  selected: initialStateSelectedOffice,
   error: '',
   pending: false
 };
@@ -30,7 +30,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
-        selected: initialStateSelected,
+        selected: initialStateSelectedOffice,
         error: action.payload.error,
         pending: false
       };
@@ -53,7 +53,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroySuccessEntity: {
       return {
         ...state,
-        selected: initialStateSelected,
+        selected: initialStateSelectedOffice,
         pending: false
       };
     }

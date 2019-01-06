@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Office } from '@web/app/features/b/office/models/office.model';
 import { SearchOffice } from '@web/app/features/b/office/models/search-office.model';
-import { initialStateSelected } from '@web/app/features/b/office/models/selected-office.model';
+import { initialStateSelectedOffice } from '@web/app/features/b/office/models/selected-office.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -77,14 +77,14 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelected }));
+    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelectedOffice }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', 'create']
     }));
   }
 
   onEdit(office: Office) {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: { ...initialStateSelected, selectedEntity: office } }));
+    this.store.dispatch(new fromOffice.SetSelected({ selected: { ...initialStateSelectedOffice, selectedEntity: office } }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', office.office_id]
     }));
@@ -95,7 +95,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelected }));
+    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelectedOffice }));
     this.store.dispatch(new fromCore.Go({
       path: ['office']
     }));

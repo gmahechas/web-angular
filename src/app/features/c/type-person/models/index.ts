@@ -4,3 +4,4 @@ export * from '@web/app/features/c/type-person/models/pagination-type-person.mod
 export * from '@web/app/features/c/type-person/models/store-type-person.model';
 export * from '@web/app/features/c/type-person/models/update-type-person.model';
 export * from '@web/app/features/c/type-person/models/destroy-type-person.model';
+export * from '@web/app/features/c/type-person/models/selected-type-person.model';

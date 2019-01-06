@@ -4,3 +4,4 @@ export * from '@web/app/features/d/macroproject/models/pagination-macroproject.m
 export * from '@web/app/features/d/macroproject/models/store-macroproject.model';
 export * from '@web/app/features/d/macroproject/models/update-macroproject.model';
 export * from '@web/app/features/d/macroproject/models/destroy-macroproject.model';
+export * from '@web/app/features/d/macroproject/models/selected-macroproject.model';
