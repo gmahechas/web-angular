@@ -30,6 +30,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
+        selected: initialStateSelectedCountry,
         error: action.payload.error,
         pending: false
       };
@@ -52,8 +53,13 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroySuccessEntity: {
       return {
         ...state,
+        selected: initialStateSelectedCountry,
         pending: false
       };
+    }
+
+    case EntityActionTypes.ResetSearch: {
+      return initialState;
     }
 
     default:
