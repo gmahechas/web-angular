@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Country } from '@web/app/features/a/country/models/country.model';
 import { SearchCountry } from '@web/app/features/a/country/models/search-country.model';
-import { initialStateSelectedCountry } from '@web/app/features/a/country/models/selected-country.model';
+import { SelectedCountry, initialStateSelectedCountry } from '@web/app/features/a/country/models/selected-country.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromCountry.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Country | null }) => {
+      (selected: SelectedCountry) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

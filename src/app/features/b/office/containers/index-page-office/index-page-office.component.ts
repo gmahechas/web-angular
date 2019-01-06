@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Office } from '@web/app/features/b/office/models/office.model';
 import { SearchOffice } from '@web/app/features/b/office/models/search-office.model';
-import { initialStateSelectedOffice } from '@web/app/features/b/office/models/selected-office.model';
+import { SelectedOffice, initialStateSelectedOffice } from '@web/app/features/b/office/models/selected-office.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromOffice.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Office | null, gotoUserOffice: boolean }) => {
+      (selected: SelectedOffice) => {
 
         if (selected.gotoUserOffice && selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;

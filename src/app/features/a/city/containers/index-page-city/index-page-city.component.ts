@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { City } from '@web/app/features/a/city/models/city.model';
 import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
-import { initialStateSelectedCity } from '@web/app/features/a/city/models/selected-city.model';
+import { SelectedCity, initialStateSelectedCity } from '@web/app/features/a/city/models/selected-city.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -48,7 +48,7 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromCity.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: City | null }) => {
+      (selected: SelectedCity) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

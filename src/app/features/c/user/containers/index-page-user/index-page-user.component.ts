@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { User } from '@web/app/features/c/user/models/user.model';
 import { SearchUser } from '@web/app/features/c/user/models/search-user.model';
-import { initialStateSelectedUser } from '@web/app/features/c/user/models/selected-user.model';
+import { SelectedUser, initialStateSelectedUser } from '@web/app/features/c/user/models/selected-user.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -57,7 +57,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromUser.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: User | null }) => {
+      (selected: SelectedUser) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

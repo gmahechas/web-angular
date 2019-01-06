@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
 import { SearchWorkflow } from '@web/app/features/e/workflow/models/search-workflow.model';
-import { initialStateSelectedWorkflow } from '@web/app/features/e/workflow/models/selected-workflow.model';
+import { SelectedWorkflow, initialStateSelectedWorkflow } from '@web/app/features/e/workflow/models/selected-workflow.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromWorkflow.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Workflow | null }) => {
+      (selected: SelectedWorkflow) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

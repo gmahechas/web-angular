@@ -6,7 +6,10 @@ import * as fromCore from '@web/app/core/store';
 
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
 import { SearchMacroproject } from '@web/app/features/d/macroproject/models/search-macroproject.model';
-import { initialStateSelectedMacroproject } from '@web/app/features/d/macroproject/models/selected-macroproject.model';
+import {
+  SelectedMacroproject,
+  initialStateSelectedMacroproject
+} from '@web/app/features/d/macroproject/models/selected-macroproject.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -49,7 +52,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromMacroproject.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Macroproject | null }) => {
+      (selected: SelectedMacroproject) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

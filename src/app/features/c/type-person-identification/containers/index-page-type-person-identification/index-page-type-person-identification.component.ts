@@ -9,6 +9,7 @@ import {
   SearchTypePersonIdentification
 } from '@web/app/features/c/type-person-identification/models/search-type-person-identification.model';
 import {
+  SelectedTypePersonIdentification,
   initialStateSelectedTypePersonIdentification
 } from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
 
@@ -62,7 +63,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromTypePersonIdentification.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: TypePersonIdentification | null }) => {
+      (selected: SelectedTypePersonIdentification) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { TypePerson } from '@web/app/features/c/type-person/models/type-person.model';
 import { SearchTypePerson } from '@web/app/features/c/type-person/models/search-type-person.model';
-import { initialStateSelectedTypePerson } from '@web/app/features/c/type-person/models/selected-type-person.model';
+import { SelectedTypePerson, initialStateSelectedTypePerson } from '@web/app/features/c/type-person/models/selected-type-person.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromTypePerson.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: TypePerson | null }) => {
+      (selected: SelectedTypePerson) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

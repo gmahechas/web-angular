@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Estate } from '@web/app/features/a/estate/models/estate.model';
 import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.model';
-import { initialStateSelectedEstate } from '@web/app/features/a/estate/models/selected-estate.model';
+import { SelectedEstate, initialStateSelectedEstate } from '@web/app/features/a/estate/models/selected-estate.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -47,7 +47,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromEstate.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Estate | null }) => {
+      (selected: SelectedEstate) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

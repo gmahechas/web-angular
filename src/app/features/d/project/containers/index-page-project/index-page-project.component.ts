@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Project } from '@web/app/features/d/project/models/project.model';
 import { SearchProject } from '@web/app/features/d/project/models/search-project.model';
-import { initialStateSelectedProject } from '@web/app/features/d/project/models/selected-project.model';
+import { SelectedProject, initialStateSelectedProject } from '@web/app/features/d/project/models/selected-project.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -48,7 +48,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromProject.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Project | null }) => {
+      (selected: SelectedProject) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

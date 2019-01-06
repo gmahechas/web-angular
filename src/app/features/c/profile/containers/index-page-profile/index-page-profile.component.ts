@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Profile } from '@web/app/features/c/profile/models/profile.model';
 import { SearchProfile } from '@web/app/features/c/profile/models/search-profile.model';
-import { initialStateSelectedProfile } from '@web/app/features/c/profile/models/selected-profile.model';
+import { SelectedProfile, initialStateSelectedProfile } from '@web/app/features/c/profile/models/selected-profile.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -45,7 +45,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromProfile.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Profile | null }) => {
+      (selected: SelectedProfile) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
