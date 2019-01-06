@@ -47,7 +47,9 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromOffice.getSelected), take(1)).subscribe(
       (selected: { selectedEntity: Office | null, gotoUserOffice: boolean }) => {
+
         if (selected.gotoUserOffice && selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
             path: [
               'office',
@@ -61,6 +63,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
             path: ['office', selected.selectedEntity.office_id]
           }));
         }
+
       }
     );
   }
