@@ -58,7 +58,16 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromUser.getSelected), take(1)).subscribe(
       (selected: SelectedUser) => {
-        if (selected.selectedEntity) {
+
+        if (selected.gotoUserOffice && selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
+          this.store.dispatch(new fromCore.Go({
+            path: [
+              'user',
+              selected.selectedEntity.user_id,
+              { outlets: { 'router-outlet-user-office': ['user-office', 'user', selected.selectedEntity.user_id] } }]
+          }));
+        } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
             path: ['user', selected.selectedEntity.user_id]

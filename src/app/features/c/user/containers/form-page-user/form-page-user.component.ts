@@ -44,6 +44,7 @@ export class FormPageUserComponent implements OnInit {
   }
 
   onUserOffice(user: User) {
+    this.store.dispatch(new fromUser.SetSelected({ selected: { selectedEntity: user, gotoUserOffice: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', user.user_id, { outlets: { 'router-outlet-user-office': ['user-office', 'user', user.user_id] } }]
     }));
