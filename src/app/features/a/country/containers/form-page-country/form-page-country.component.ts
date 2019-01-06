@@ -5,6 +5,7 @@ import * as fromCountry from '@web/app/features/a/country/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Country } from '@web/app/features/a/country/models/country.model';
+import { initialStateSelectedCountry } from '@web/app/features/a/country/models/selected-country.model';
 
 @Component({
   selector: 'app-form-page-country',
@@ -32,7 +33,7 @@ export class FormPageCountryComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromCountry.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromCountry.SetSelected({ selected: initialStateSelectedCountry }));
     this.store.dispatch(new fromCore.Go({
       path: ['country']
     }));

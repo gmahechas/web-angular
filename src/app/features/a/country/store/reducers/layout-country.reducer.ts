@@ -1,18 +1,14 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/a/country/store/actions/entity-country.actions';
-import { Country } from '@web/app/features/a/country/models/country.model';
+import { SelectedCountry, initialStateSelectedCountry } from '@web/app/features/a/country/models/selected-country.model';
 
 export interface State {
-  selected: {
-    selectedEntity: Country | null;
-  };
+  selected: SelectedCountry;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
-  selected: {
-    selectedEntity: null
-  },
+  selected: initialStateSelectedCountry,
   error: '',
   pending: false
 };
@@ -21,10 +17,10 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.SelectEntity: {
+    case EntityActionTypes.SetSelected: {
       return {
         ...state,
-        selected: { selectedEntity: action.payload.entity }
+        selected: action.payload.selected
       };
     }
 

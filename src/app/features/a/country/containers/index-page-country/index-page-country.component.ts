@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Country } from '@web/app/features/a/country/models/country.model';
 import { SearchCountry } from '@web/app/features/a/country/models/search-country.model';
+import { initialStateSelectedCountry } from '@web/app/features/a/country/models/selected-country.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -67,14 +68,14 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromCountry.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromCountry.SetSelected({ selected: initialStateSelectedCountry }));
     this.store.dispatch(new fromCore.Go({
       path: ['country', 'create']
     }));
   }
 
   onEdit(country: Country) {
-    this.store.dispatch(new fromCountry.SelectEntity({ entity: country }));
+    this.store.dispatch(new fromCountry.SetSelected({ selected: { ...initialStateSelectedCountry, selectedEntity: country } }));
     this.store.dispatch(new fromCore.Go({
       path: ['country', country.country_id]
     }));
@@ -85,7 +86,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromCountry.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromCountry.SetSelected({ selected: initialStateSelectedCountry }));
     this.store.dispatch(new fromCore.Go({
       path: ['country']
     }));
