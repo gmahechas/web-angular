@@ -5,6 +5,9 @@ import * as fromTypePersonIdentification from '@web/app/features/c/type-person-i
 import * as fromCore from '@web/app/core/store';
 
 import { TypePersonIdentification } from '@web/app/features/c/type-person-identification/models/type-person-identification.model';
+import {
+  initialStateSelectedTypePersonIdentification
+} from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
 
 @Component({
   selector: 'app-form-page-type-person-identification',
@@ -32,7 +35,7 @@ export class FormPageTypePersonIdentificationComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['typePersonIdentification']
     }));

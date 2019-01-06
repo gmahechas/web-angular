@@ -1,18 +1,14 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/a/city/store/actions/entity-city.actions';
-import { City } from '@web/app/features/a/city/models/city.model';
+import { SelectedCity, initialStateSelectedCity } from '@web/app/features/a/city/models/selected-city.model';
 
 export interface State {
-  selected: {
-    selectedEntity: City | null;
-  };
+  selected: SelectedCity;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
-  selected: {
-    selectedEntity: null
-  },
+  selected: initialStateSelectedCity,
   error: '',
   pending: false
 };
@@ -21,10 +17,10 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.SelectEntity: {
+    case EntityActionTypes.SetSelected: {
       return {
         ...state,
-        selected: { selectedEntity: action.payload.entity }
+        selected: action.payload.selected
       };
     }
 
@@ -34,6 +30,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
+        selected: initialStateSelectedCity,
         error: action.payload.error,
         pending: false
       };
@@ -56,8 +53,13 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroySuccessEntity: {
       return {
         ...state,
+        selected: initialStateSelectedCity,
         pending: false
       };
+    }
+
+    case EntityActionTypes.ResetSearch: {
+      return initialState;
     }
 
     default:

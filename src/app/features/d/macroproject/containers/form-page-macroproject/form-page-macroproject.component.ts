@@ -5,6 +5,7 @@ import * as fromMacroproject from '@web/app/features/d/macroproject/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
+import { initialStateSelectedMacroproject } from '@web/app/features/d/macroproject/models/selected-macroproject.model';
 
 @Component({
   selector: 'app-form-page-macroproject',
@@ -32,7 +33,7 @@ export class FormPageMacroprojectComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromMacroproject.SetSelected({ selected: initialStateSelectedMacroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject']
     }));

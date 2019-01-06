@@ -2,20 +2,18 @@ import {
   EntityActionTypes,
   EntityActions
 } from '@web/app/features/c/type-person-identification/store/actions/entity-type-person-identification.actions';
-import { TypePersonIdentification } from '@web/app/features/c/type-person-identification/models/type-person-identification.model';
+import {
+  SelectedTypePersonIdentification, initialStateSelectedTypePersonIdentification
+} from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
 
 export interface State {
-  selected: {
-    selectedEntity: TypePersonIdentification | null;
-  };
+  selected: SelectedTypePersonIdentification;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
-  selected: {
-    selectedEntity: null
-  },
+  selected: initialStateSelectedTypePersonIdentification,
   error: '',
   pending: false
 };
@@ -24,10 +22,10 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.SelectEntity: {
+    case EntityActionTypes.SetSelect: {
       return {
         ...state,
-        selected: { selectedEntity: action.payload.entity }
+        selected: action.payload.selected
       };
     }
 
@@ -37,6 +35,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
+        selected: initialStateSelectedTypePersonIdentification,
         error: action.payload.error,
         pending: true
       };
@@ -59,8 +58,13 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroySuccessEntity: {
       return {
         ...state,
+        selected: initialStateSelectedTypePersonIdentification,
         pending: false
       };
+    }
+
+    case EntityActionTypes.ResetSearch: {
+      return initialState;
     }
 
     default:

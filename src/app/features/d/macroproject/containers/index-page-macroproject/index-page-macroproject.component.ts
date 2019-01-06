@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
 import { SearchMacroproject } from '@web/app/features/d/macroproject/models/search-macroproject.model';
+import { initialStateSelectedMacroproject } from '@web/app/features/d/macroproject/models/selected-macroproject.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -72,14 +73,16 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromMacroproject.SetSelected({ selected: initialStateSelectedMacroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject', 'create']
     }));
   }
 
   onEdit(macroproject: Macroproject) {
-    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: macroproject }));
+    this.store.dispatch(new fromMacroproject.SetSelected({
+      selected: { ...initialStateSelectedMacroproject, selectedEntity: macroproject }
+    }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject', macroproject.macroproject_id]
     }));
@@ -90,7 +93,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromMacroproject.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromMacroproject.SetSelected({ selected: initialStateSelectedMacroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject']
     }));

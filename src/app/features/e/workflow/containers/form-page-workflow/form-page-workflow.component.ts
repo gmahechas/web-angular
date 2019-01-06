@@ -5,6 +5,7 @@ import * as fromWorkflow from '@web/app/features/e/workflow/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
+import { initialStateSelectedWorkflow } from '@web/app/features/e/workflow/models/selected-workflow.model';
 
 @Component({
   selector: 'app-form-page-workflow',
@@ -32,7 +33,7 @@ export class FormPageWorkflowComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromWorkflow.SetSelected({ selected: initialStateSelectedWorkflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow']
     }));

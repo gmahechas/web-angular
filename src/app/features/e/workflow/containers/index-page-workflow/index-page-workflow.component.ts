@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
 import { SearchWorkflow } from '@web/app/features/e/workflow/models/search-workflow.model';
+import { initialStateSelectedWorkflow } from '@web/app/features/e/workflow/models/selected-workflow.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -67,14 +68,14 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromWorkflow.SetSelected({ selected: initialStateSelectedWorkflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', 'create']
     }));
   }
 
   onEdit(workflow: Workflow) {
-    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: workflow }));
+    this.store.dispatch(new fromWorkflow.SetSelected({ selected: { ...initialStateSelectedWorkflow, selectedEntity: workflow } }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', workflow.workflow_id]
     }));
@@ -85,7 +86,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromWorkflow.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromWorkflow.SetSelected({ selected: initialStateSelectedWorkflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow']
     }));

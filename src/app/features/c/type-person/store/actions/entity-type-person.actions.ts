@@ -18,7 +18,7 @@ export enum EntityActionTypes {
   PaginateEntity = '[TypePerson] Paginate Entity',
   LoadEntityShared = '[TypePerson] Load Entity Shared',
   ResetSearch = '[TypePerson] Reset Search',
-  SelectEntity = '[TypePerson] Select Entity'
+  SetSelected = '[TypePerson] Set Selected'
 }
 
 export class LoadEntity implements Action {
@@ -95,9 +95,9 @@ export class ResetSearch implements Action {
   readonly type = EntityActionTypes.ResetSearch;
 }
 
-export class SelectEntity implements Action {
-  readonly type = EntityActionTypes.SelectEntity;
-  constructor(public payload: { entity: fromModels.TypePerson }) { }
+export class SetSelected implements Action {
+  readonly type = EntityActionTypes.SetSelected;
+  constructor(public payload: { selected: fromModels.SelectedTypePerson }) { }
 }
 
 export type EntityActions =
@@ -116,4 +116,4 @@ export type EntityActions =
   | PaginateEntity
   | LoadEntityShared
   | ResetSearch
-  | SelectEntity;
+  | SetSelected;

@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Project } from '@web/app/features/d/project/models/project.model';
 import { SearchProject } from '@web/app/features/d/project/models/search-project.model';
+import { initialStateSelectedProject } from '@web/app/features/d/project/models/selected-project.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -70,14 +71,14 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromProject.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromProject.SetSelected({ selected: initialStateSelectedProject }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', 'create']
     }));
   }
 
   onEdit(project: Project) {
-    this.store.dispatch(new fromProject.SelectEntity({ entity: project }));
+    this.store.dispatch(new fromProject.SetSelected({ selected: { ...initialStateSelectedProject, selectedEntity: project } }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', project.project_id]
     }));
@@ -88,7 +89,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromProject.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromProject.SetSelected({ selected: initialStateSelectedProject }));
     this.store.dispatch(new fromCore.Go({
       path: ['project']
     }));

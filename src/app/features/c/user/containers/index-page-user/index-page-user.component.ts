@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { User } from '@web/app/features/c/user/models/user.model';
 import { SearchUser } from '@web/app/features/c/user/models/search-user.model';
+import { initialStateSelectedUser } from '@web/app/features/c/user/models/selected-user.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -80,14 +81,14 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromUser.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromUser.SetSelected({ selected: initialStateSelectedUser }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', 'create']
     }));
   }
 
   onEdit(user: User) {
-    this.store.dispatch(new fromUser.SelectEntity({ entity: user }));
+    this.store.dispatch(new fromUser.SetSelected({ selected: { ...initialStateSelectedUser, selectedEntity: user } }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', user.user_id]
     }));
@@ -98,7 +99,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromUser.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromUser.SetSelected({ selected: initialStateSelectedUser }));
     this.store.dispatch(new fromCore.Go({
       path: ['user']
     }));

@@ -5,6 +5,7 @@ import * as fromProject from '@web/app/features/d/project/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Project } from '@web/app/features/d/project/models/project.model';
+import { initialStateSelectedProject } from '@web/app/features/d/project/models/selected-project.model';
 
 @Component({
   selector: 'app-form-page-project',
@@ -32,7 +33,7 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromProject.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromProject.SetSelected({ selected: initialStateSelectedProject }));
     this.store.dispatch(new fromCore.Go({
       path: ['project']
     }));

@@ -5,6 +5,7 @@ import * as fromCity from '@web/app/features/a/city/store';
 import * as fromCore from '@web/app/core/store';
 
 import { City } from '@web/app/features/a/city/models/city.model';
+import { initialStateSelectedCity } from '@web/app/features/a/city/models/selected-city.model';
 
 @Component({
   selector: 'app-form-page-city',
@@ -32,7 +33,7 @@ export class FormPageCityComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromCity.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromCity.SetSelected({ selected: initialStateSelectedCity }));
     this.store.dispatch(new fromCore.Go({
       path: ['city']
     }));

@@ -5,6 +5,7 @@ import * as fromUser from '@web/app/features/c/user/store';
 import * as fromCore from '@web/app/core/store';
 
 import { User } from '@web/app/features/c/user/models/user.model';
+import { initialStateSelectedUser } from '@web/app/features/c/user/models/selected-user.model';
 
 @Component({
   selector: 'app-form-page-user',
@@ -32,7 +33,7 @@ export class FormPageUserComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromUser.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromUser.SetSelected({ selected: initialStateSelectedUser }));
     this.store.dispatch(new fromCore.Go({
       path: ['user']
     }));

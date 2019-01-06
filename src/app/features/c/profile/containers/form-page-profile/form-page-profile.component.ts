@@ -5,6 +5,7 @@ import * as fromProfile from '@web/app/features/c/profile/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Profile } from '@web/app/features/c/profile/models/profile.model';
+import { initialStateSelectedProfile } from '@web/app/features/c/profile/models/selected-profile.model';
 
 @Component({
   selector: 'app-form-page-profile',
@@ -32,7 +33,7 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromProfile.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromProfile.SetSelected({ selected: initialStateSelectedProfile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile']
     }));

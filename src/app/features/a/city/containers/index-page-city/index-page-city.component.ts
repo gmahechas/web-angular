@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { City } from '@web/app/features/a/city/models/city.model';
 import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
+import { initialStateSelectedCity } from '@web/app/features/a/city/models/selected-city.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -70,14 +71,14 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromCity.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromCity.SetSelected({ selected: initialStateSelectedCity }));
     this.store.dispatch(new fromCore.Go({
       path: ['city', 'create']
     }));
   }
 
   onEdit(city: City) {
-    this.store.dispatch(new fromCity.SelectEntity({ entity: city }));
+    this.store.dispatch(new fromCity.SetSelected({ selected: { ...initialStateSelectedCity, selectedEntity: city } }));
     this.store.dispatch(new fromCore.Go({
       path: ['city', city.city_id]
     }));
@@ -88,7 +89,7 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromCity.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromCity.SetSelected({ selected: initialStateSelectedCity }));
     this.store.dispatch(new fromCore.Go({
       path: ['city']
     }));

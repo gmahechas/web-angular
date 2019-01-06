@@ -8,6 +8,9 @@ import { TypePersonIdentification } from '@web/app/features/c/type-person-identi
 import {
   SearchTypePersonIdentification
 } from '@web/app/features/c/type-person-identification/models/search-type-person-identification.model';
+import {
+  initialStateSelectedTypePersonIdentification
+} from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -81,14 +84,16 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   onCreate() {
-    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person_identification', 'create']
     }));
   }
 
   onEdit(typePersonIdentification: TypePersonIdentification) {
-    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: typePersonIdentification }));
+    this.store.dispatch(new fromTypePersonIdentification.SetSelect({
+      selected: { ...initialStateSelectedTypePersonIdentification, selectedEntity: typePersonIdentification }
+    }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person_identification', typePersonIdentification.type_person_identification_id]
     }));
@@ -99,7 +104,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePersonIdentification.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['type_person_identification']
     }));

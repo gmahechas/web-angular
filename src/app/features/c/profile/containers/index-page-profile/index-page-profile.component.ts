@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Profile } from '@web/app/features/c/profile/models/profile.model';
 import { SearchProfile } from '@web/app/features/c/profile/models/search-profile.model';
+import { initialStateSelectedProfile } from '@web/app/features/c/profile/models/selected-profile.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -66,14 +67,14 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromProfile.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromProfile.SetSelected({ selected: initialStateSelectedProfile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', 'create']
     }));
   }
 
   onEdit(profile: Profile) {
-    this.store.dispatch(new fromProfile.SelectEntity({ entity: profile }));
+    this.store.dispatch(new fromProfile.SetSelected({ selected: { ...initialStateSelectedProfile, selectedEntity: profile } }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', profile.profile_id]
     }));
@@ -84,7 +85,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromProfile.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromProfile.SetSelected({ selected: initialStateSelectedProfile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile']
     }));

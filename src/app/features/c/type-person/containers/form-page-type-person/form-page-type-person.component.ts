@@ -5,6 +5,7 @@ import * as fromTypePerson from '@web/app/features/c/type-person/store';
 import * as fromCore from '@web/app/core/store';
 
 import { TypePerson } from '@web/app/features/c/type-person/models/type-person.model';
+import { initialStateSelectedTypePerson } from '@web/app/features/c/type-person/models/selected-type-person.model';
 
 @Component({
   selector: 'app-form-page-type-person',
@@ -32,7 +33,7 @@ export class FormPageTypePersonComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePerson.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromTypePerson.SetSelected({ selected: initialStateSelectedTypePerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['typePerson']
     }));
