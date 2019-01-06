@@ -5,6 +5,7 @@ import * as fromEstate from '@web/app/features/a/estate/store';
 import * as fromCore from '@web/app/core/store';
 
 import { Estate } from '@web/app/features/a/estate/models/estate.model';
+import { initialStateSelectedEstate } from '@web/app/features/a/estate/models/selected-estate.model';
 
 @Component({
   selector: 'app-form-page-estate',
@@ -32,7 +33,7 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromEstate.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromEstate.SetSelected({ selected: initialStateSelectedEstate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate']
     }));

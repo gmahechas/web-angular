@@ -6,6 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Estate } from '@web/app/features/a/estate/models/estate.model';
 import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.model';
+import { initialStateSelectedEstate } from '@web/app/features/a/estate/models/selected-estate.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -69,14 +70,14 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromEstate.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromEstate.SetSelected({ selected: initialStateSelectedEstate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', 'create']
     }));
   }
 
   onEdit(estate: Estate) {
-    this.store.dispatch(new fromEstate.SelectEntity({ entity: estate }));
+    this.store.dispatch(new fromEstate.SetSelected({ selected: { ...initialStateSelectedEstate, selectedEntity: estate } }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', estate.estate_id]
     }));
@@ -87,7 +88,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.store.dispatch(new fromEstate.SelectEntity({ entity: null }));
+    this.store.dispatch(new fromEstate.SetSelected({ selected: initialStateSelectedEstate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate']
     }));

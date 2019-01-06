@@ -1,18 +1,14 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/a/estate/store/actions/entity-estate.actions';
-import { Estate } from '@web/app/features/a/estate/models/estate.model';
+import { SelectedEstate, initialStateSelectedEstate } from '@web/app/features/a/estate/models/selected-estate.model';
 
 export interface State {
-  selected: {
-    selectedEntity: Estate | null;
-  };
+  selected: SelectedEstate;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
-  selected: {
-    selectedEntity: null
-  },
+  selected: initialStateSelectedEstate,
   error: '',
   pending: false
 };
@@ -21,10 +17,10 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.SelectEntity: {
+    case EntityActionTypes.SetSelected: {
       return {
         ...state,
-        selected: { selectedEntity: action.payload.entity }
+        selected: action.payload.selected
       };
     }
 
@@ -34,6 +30,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
+        selected: initialStateSelectedEstate,
         error: action.payload.error,
         pending: false
       };
@@ -56,8 +53,13 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroySuccessEntity: {
       return {
         ...state,
+        selected: initialStateSelectedEstate,
         pending: false
       };
+    }
+
+    case EntityActionTypes.ResetSearch: {
+      return initialState;
     }
 
     default:
