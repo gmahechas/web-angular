@@ -1,6 +1,8 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Office } from '@web/app/features/b/office/models/office.model';
 import { EntityActionTypes, EntityActions } from '@web/app/features/b/office/store/actions/entity-office.actions';
+
+import { Office } from '@web/app/features/b/office/models/office.model';
+import { initialStateSelected } from '@web/app/features/b/office/models/selected-office.model';
 
 export interface State extends EntityState<Office> { }
 
