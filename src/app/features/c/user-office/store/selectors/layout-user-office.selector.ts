@@ -8,11 +8,6 @@ export const getLayoutState = createSelector(
   (state: fromFeature.UserOfficeState) => state.layout
 );
 
-export const getSelected = createSelector(
-  getLayoutState,
-  fromLayout.getSelected
-);
-
 export const getError = createSelector(
   getLayoutState,
   fromLayout.getError

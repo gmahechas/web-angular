@@ -1,14 +1,11 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/c/user-office/store/actions/entity-user-office.actions';
-import { SelectedUserOffice, initialStateSelectedUserOffice } from '@web/app/features/c/user-office/models/selected-user-office.model';
 
 export interface State {
-  selected: SelectedUserOffice;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
-  selected: initialStateSelectedUserOffice,
   error: '',
   pending: false
 };
@@ -16,14 +13,6 @@ export const initialState: State = {
 export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: action.payload.selected
-      };
-    }
-
     case EntityActionTypes.LoadFailEntity:
     // case EntityActionTypes.StoreFailEntity:
     case EntityActionTypes.UpdateFailEntity:
@@ -61,6 +50,5 @@ export function reducer(state = initialState, action: EntityActions): State {
 
 }
 
-export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.pending;
