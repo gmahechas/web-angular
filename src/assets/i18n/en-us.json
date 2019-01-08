@@ -63,6 +63,9 @@
   "invalid": {
     "verb": "invalid"
   },
+  "error": {
+    "verb": "error"
+  },
   "auth":  {
     "singIn": "sing in",
     "singOut": "sing out",
