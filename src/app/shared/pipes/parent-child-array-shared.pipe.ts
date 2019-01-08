@@ -19,7 +19,6 @@ export class ParentChildArraySharedPipe implements PipeTransform {
       });
     });
 
-    console.log(newObjects);
     return this.nested(newObjects, id, parent_id);
   }
 
