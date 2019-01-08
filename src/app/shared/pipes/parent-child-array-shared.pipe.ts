@@ -13,7 +13,7 @@ export class ParentChildArraySharedPipe implements PipeTransform {
 
     objects.map(object => {
       newObjects.push({
-        label: get(object, label, label),
+        label: (label) ? get(object, label, label) : null,
         data: object,
         children: []
       });

@@ -1,6 +1,6 @@
 <div *ngIf="(user$ | async) as user">
   <app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'100%'}" (hide)="opencloseSidebar($event)">
-    <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id':'menu.menu_name'"
+    <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
       (navigate)="handleNavigateFromSide($event)"></app-menu-core>
   </app-sidebar-shared>
   <app-header-core *ngIf="(userOffice$ | async) as userOffice" [company]="company$ | async" [office]="userOffice.office"
