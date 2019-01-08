@@ -1,7 +1,3 @@
 <div class="ui-g">
-  <div class="ui-g-1">
-    <div *ngFor="let profile_menu of profile.profile_menus" (click)="onNavigate(profile_menu)">
-      <app-translate-shared [strings]="[profile_menu.menu.menu_name]"></app-translate-shared><br>
-    </div>
-  </div>
+  <app-bar-menu-core class="ui-g-2" *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options" (navigate)="onNavigate($event)"></app-bar-menu-core>
 </div>

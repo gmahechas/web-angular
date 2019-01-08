@@ -71,6 +71,9 @@
   "dashboard": {
     "singular": "inicio"
   },
+  "config": {
+    "singular": "configuracion"
+  },
   "country": {
     "singular": "pais",
     "plural": "paises",

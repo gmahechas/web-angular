@@ -1,0 +1,3 @@
+<div *ngFor="let option of options" (click)="handleNavigate(option)">
+  <app-translate-shared [strings]="[option.label]"></app-translate-shared><br>
+</div>

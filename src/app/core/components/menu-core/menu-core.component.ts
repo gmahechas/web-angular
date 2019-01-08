@@ -1,24 +1,32 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { Profile } from '@web/app/features/c/profile/models/profile.model';
-import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
+import { ProfileMenu } from '@web/app/features/c/profile-menu/models/profile-menu.model';
+import { ParentChild } from '@web/app/core/models/parent-child.model';
 
 @Component({
   selector: 'app-menu-core',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-core.component.html',
   styles: []
 })
 export class MenuCoreComponent implements OnInit {
 
-  @Input() profile: Profile;
+  bars: { bar: number, options: ParentChild[] }[] = [];
+  @Input() options: ParentChild[];
   @Output() navigate: EventEmitter<ProfileMenu> = new EventEmitter<ProfileMenu>();
 
   constructor() { }
 
   ngOnInit() {
+    this.bars.push({ bar: 0, options: this.options });
   }
 
-  onNavigate(profileMenu: ProfileMenu) {
-    this.navigate.emit(profileMenu);
+  onNavigate(option: { bar: number, option: ParentChild }) {
+    if (option.option.data.menu.menu_uri) {
+      this.navigate.emit(option.option.data);
+    } else {
+      this.bars.splice((option.bar + 1), this.bars.length);
+      this.bars.push({ bar: this.bars.length, options: option.option.children });
+    }
   }
 }
