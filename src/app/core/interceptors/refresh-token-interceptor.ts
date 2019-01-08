@@ -9,7 +9,7 @@ import * as fromAuth from '@web/app/auth/store';
 
 import { Token } from '@web/app/auth/models/token.model';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
 
 import { environment } from '@web/environments/environment';
@@ -44,11 +44,11 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             }),
             catchError((error) => {
               this.store.dispatch(new fromAuth.ExpiredAuth);
-              return Observable.throw('Error');
+              return throwError('Error');
             })
           );
         } else {
-          return Observable.throw('Error');
+          return throwError('Error');
         }
       })
     );

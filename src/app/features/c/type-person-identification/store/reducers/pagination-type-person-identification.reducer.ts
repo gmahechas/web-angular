@@ -1,4 +1,7 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/c/type-person-identification/store/actions/entity-type-person-identification.actions';
+import {
+  EntityActionTypes,
+  EntityActions
+} from '@web/app/features/c/type-person-identification/store/actions/entity-type-person-identification.actions';
 
 export interface State {
   total: number;

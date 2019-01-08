@@ -5,7 +5,9 @@ import { reducers, effects } from '@web/app/features/c/type-person-identificatio
 import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@web/app/shared/shared.module';
-import { TypePersonIdentificationRoutingModule } from '@web/app/features/c/type-person-identification/type-person-identification-routing.module';
+import {
+  TypePersonIdentificationRoutingModule
+} from '@web/app/features/c/type-person-identification/type-person-identification-routing.module';
 
 import * as fromContainers from '@web/app/features/c/type-person-identification/containers';
 import * as fromComponents from '@web/app/features/c/type-person-identification/components';
