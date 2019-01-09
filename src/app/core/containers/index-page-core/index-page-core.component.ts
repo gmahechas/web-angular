@@ -44,6 +44,7 @@ export class IndexPageCoreComponent implements OnInit {
   }
 
   handleNavigateFromTab(profileMenu: ProfileMenu) {
+    this.store.dispatch(new fromCore.ChangeSelectedMenu({ profile_menu_id: profileMenu.profile_menu_id }));
     this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
   }
 

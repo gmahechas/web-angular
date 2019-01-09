@@ -14,6 +14,7 @@ export enum LayoutActionTypes {
   SetUserOffice = '[Layout] Set User Office',
   SetUserOfficeProject = '[Layout] Set User Office Project',
   AddSelectedMenu = '[Layout] Add Selected Menu',
+  ChangeSelectedMenu = '[Layout] Change Selected Menu',
   ShowMessages = '[Layout] Show Messages'
 }
 
@@ -74,6 +75,11 @@ export class AddSelectedMenu implements Action {
   constructor(public payload: { profile_menu: any }) { }
 }
 
+export class ChangeSelectedMenu implements Action {
+  readonly type = LayoutActionTypes.ChangeSelectedMenu;
+  constructor(public payload: { profile_menu_id: number }) { }
+}
+
 export class ShowMessages implements Action {
   readonly type = LayoutActionTypes.ShowMessages;
   constructor(public payload: { messages: any[] }) { }
@@ -93,4 +99,5 @@ export type LayoutActions =
   | SetUserOffice
   | SetUserOfficeProject
   | AddSelectedMenu
+  | ChangeSelectedMenu
   | ShowMessages;

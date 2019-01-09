@@ -15,7 +15,10 @@ export interface State {
   company: Company | null;
   userOffice: UserOffice | null;
   userOfficeProject: UserOfficeProject | null;
-  selectedMenus: ProfileMenu[];
+  selectedMenus: {
+    selected: number | null,
+    profileMenus: ProfileMenu[];
+  };
 }
 
 export const initialState: State = {
@@ -27,7 +30,10 @@ export const initialState: State = {
   company: null,
   userOffice: null,
   userOfficeProject: null,
-  selectedMenus: []
+  selectedMenus: {
+    selected: null,
+    profileMenus: []
+  }
 };
 
 export function reducer(state: State = initialState, action: LayoutActions | AuthActions): State {
@@ -127,10 +133,23 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
     case LayoutActionTypes.AddSelectedMenu:
       return {
         ...state,
-        selectedMenus: (state.selectedMenus.includes(action.payload.profile_menu)) ?
-          [...state.selectedMenus] :
-          [...state.selectedMenus, action.payload.profile_menu]
+        selectedMenus: {
+          selected: action.payload.profile_menu.profile_menu_id,
+          profileMenus: (state.selectedMenus.profileMenus.includes(action.payload.profile_menu)) ?
+            [...state.selectedMenus.profileMenus] :
+            [...state.selectedMenus.profileMenus, action.payload.profile_menu]
+        }
       };
+
+    case LayoutActionTypes.ChangeSelectedMenu: {
+      return {
+        ...state,
+        selectedMenus: {
+          selected: action.payload.profile_menu_id,
+          profileMenus: state.selectedMenus.profileMenus
+        }
+      };
+    }
 
     default:
       return state;
