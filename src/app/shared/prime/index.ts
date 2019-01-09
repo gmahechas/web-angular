@@ -19,6 +19,7 @@ import { CheckboxModule } from 'primeng/checkbox'; // Checkbox True - False
 import { InputSwitchModule } from 'primeng/inputswitch'; // True - False
 import { TreeModule } from 'primeng/tree';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { ListboxModule } from 'primeng/listbox';
 
 export const prime: any[] = [
   SidebarModule,
@@ -41,5 +42,6 @@ export const prime: any[] = [
   CheckboxModule,
   InputSwitchModule,
   TreeModule,
-  SplitButtonModule
+  SplitButtonModule,
+  ListboxModule
 ];
