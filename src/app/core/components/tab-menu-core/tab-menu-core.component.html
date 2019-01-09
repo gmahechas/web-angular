@@ -1,2 +1,3 @@
 <app-button-shared *ngFor="let profile_menu of profileMenus" [type]="'button'" [label]="[profile_menu.menu.menu_name]"
-  [class]="'ui-button-raised ui-button-secondary'" (click)="onClick(profile_menu)"></app-button-shared>
+  [class]="'ui-button-raised ui-button-secondary'" [titleCase]="profile_menu.menu.menu_title_case" [upperCase]="profile_menu.menu.menu_upper_case"
+  (click)="onClick(profile_menu)"></app-button-shared>

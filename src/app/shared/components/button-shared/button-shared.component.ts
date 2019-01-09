@@ -14,6 +14,9 @@ export class ButtonSharedComponent implements OnInit {
   @Input() iconPos: string;
   @Input() disabled: boolean;
   @Input() class: string;
+  @Input() lowerCase: boolean;
+  @Input() titleCase: boolean;
+  @Input() upperCase: boolean;
 
   constructor() { }
 
