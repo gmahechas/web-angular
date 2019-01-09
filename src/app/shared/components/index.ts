@@ -14,7 +14,6 @@ import { MessageSharedComponent } from '@web/app/shared/components/message-share
 import { SidebarSharedComponent } from '@web/app/shared/components/sidebar-shared/sidebar-shared.component';
 import { TranslateSharedComponent } from '@web/app/shared/components/translate-shared/translate-shared.component';
 import { SplitButtonSharedComponent } from '@web/app/shared/components/split-button-shared/split-button-shared.component';
-import { TransformTextSharedComponent } from '@web/app/shared/components/transform-text-shared/transform-text-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -32,6 +31,5 @@ export const components: any[] = [
   MessageSharedComponent,
   SidebarSharedComponent,
   TranslateSharedComponent,
-  SplitButtonSharedComponent,
-  TransformTextSharedComponent
+  SplitButtonSharedComponent
 ];

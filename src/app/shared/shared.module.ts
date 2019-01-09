@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, LowerCasePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +26,7 @@ import * as fromPipes from '@web/app/shared/pipes';
     ...fromPrime.prime,
     ...fromComponents.components,
     ...fromPipes.pipes
-  ]
+  ],
+  providers: [LowerCasePipe, TitleCasePipe, UpperCasePipe]
 })
 export class SharedModule { }

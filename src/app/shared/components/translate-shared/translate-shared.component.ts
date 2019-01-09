@@ -9,6 +9,9 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class TranslateSharedComponent implements OnInit {
 
   @Input() strings: string[];
+  @Input() lowerCase: boolean;
+  @Input() titleCase: boolean;
+  @Input() upperCase: boolean;
 
   constructor() { }
 

@@ -1,3 +1,4 @@
 <div *ngFor="let option of options" (click)="handleNavigate(option)">
-  <app-translate-shared [strings]="[option.data.menu.menu_name]"></app-translate-shared><br>
+  <app-translate-shared [strings]="[option.data.menu.menu_name]" [titleCase]="option.data.menu.menu_title_case"
+    [upperCase]="option.data.menu.menu_upper_case"></app-translate-shared><br>
 </div>

@@ -1,1 +1,1 @@
-<app-transform-text-shared [text]="strings | myTranslate"></app-transform-text-shared>
+{{ strings | myTranslate | transformTextShared:lowerCase:titleCase:upperCase }}

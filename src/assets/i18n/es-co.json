@@ -175,11 +175,11 @@
     }
   },
   "macroproject": {
-    "singular": "macro proyecto",
-    "plural": "macro proyectos",
+    "singular": "macroproyecto",
+    "plural": "macroproyectos",
     "model": {
       "macroproject_id": "id",
-      "macroproject_name": "macro proyecto",
+      "macroproject_name": "macroproyecto",
       "macroproject_address": "direccion",
       "macroproject_phone": "telefono"
     }
