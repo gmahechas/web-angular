@@ -1,3 +1,5 @@
 <div class="ui-g">
-  <app-bar-menu-core class="ui-g-2" *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options" (navigate)="onNavigate($event)"></app-bar-menu-core>
+  <app-bar-menu-core class="ui-g-2" *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options" [selected]="bar.selected" (navigate)="onNavigate($event)"></app-bar-menu-core>
 </div>
+
+<!-- {{ bars | json }} -->
