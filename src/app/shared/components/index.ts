@@ -15,6 +15,7 @@ import { SidebarSharedComponent } from '@web/app/shared/components/sidebar-share
 import { TranslateSharedComponent } from '@web/app/shared/components/translate-shared/translate-shared.component';
 import { SplitButtonSharedComponent } from '@web/app/shared/components/split-button-shared/split-button-shared.component';
 import { ListboxSharedComponent } from '@web/app/shared/components/listbox-shared/listbox-shared.component';
+import { TabMenuSharedComponent } from '@web/app/shared/components/tab-menu-shared/tab-menu-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -33,5 +34,6 @@ export const components: any[] = [
   SidebarSharedComponent,
   TranslateSharedComponent,
   SplitButtonSharedComponent,
-  ListboxSharedComponent
+  ListboxSharedComponent,
+  TabMenuSharedComponent
 ];

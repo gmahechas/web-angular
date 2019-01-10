@@ -20,6 +20,7 @@ import { InputSwitchModule } from 'primeng/inputswitch'; // True - False
 import { TreeModule } from 'primeng/tree';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ListboxModule } from 'primeng/listbox';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 export const prime: any[] = [
   SidebarModule,
@@ -43,5 +44,6 @@ export const prime: any[] = [
   InputSwitchModule,
   TreeModule,
   SplitButtonModule,
-  ListboxModule
+  ListboxModule,
+  TabMenuModule
 ];
