@@ -1,4 +1,2 @@
-<div class="ui-g-12" *ngFor="let option of options" (click)="handleNavigate(option)" [class]="(selected === option.data.profile_menu_id) ? 'selected_tim' : ''">
-  <app-translate-shared [strings]="[option.data.menu.menu_name]" [titleCase]="option.data.menu.menu_title_case"
-    [upperCase]="option.data.menu.menu_upper_case"></app-translate-shared><br>
-</div>
+<app-listbox-shared [options]="options" [optionLabel]="'data.menu.menu_name'" [titleCaseLabel]="'value.data.menu.menu_title_case'"
+  [upperCaseLabel]="'value.data.menu.menu_upper_case'" (handleClick)="handleNavigate($event)"></app-listbox-shared>

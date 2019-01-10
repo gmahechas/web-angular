@@ -8,6 +8,8 @@ export class ListboxSharedComponent implements OnInit {
 
   @Input() options: any;
   @Input() optionLabel: string;
+  @Input() titleCaseLabel: string;
+  @Input() upperCaseLabel: string;
   @Output() handleClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }

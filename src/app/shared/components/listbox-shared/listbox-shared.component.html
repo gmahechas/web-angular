@@ -1,1 +1,6 @@
-<p-listbox [options]="options" [optionLabel]="optionLabel" (onChange)="onClick($event)"></p-listbox>
+<p-listbox [options]="options" [optionLabel]="optionLabel" (onChange)="onClick($event)" [style]="{'width':'100%'}">
+  <ng-template let-option let-i="index" pTemplate="item">
+    <app-translate-shared [strings]="[option.label]" [titleCase]="option | fetchStringInArrayShared:titleCaseLabel"
+      [upperCase]="option | fetchStringInArrayShared:upperCaseLabel"></app-translate-shared>
+  </ng-template>
+</p-listbox>
