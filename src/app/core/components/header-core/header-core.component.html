@@ -8,9 +8,9 @@
       {{ office.office_name | transformTextShared:false:false:true }} <span style="font-weight: 400; margin: 0 10px 0 10px;">&#124;</span>
     </span>
     {{ user.person.person_first_name }} {{ user.person.person_second_name }}
-    {{ user.person.person_first_surname }} {{ user.person.person_second_surname }} <span style="font-weight: 400; margin: 0 10px 0 10px;">&#124;</span>
+    {{ user.person.person_first_surname }} {{ user.person.person_second_surname }}
   </div>
   <div class="ui-g-1">
-    <app-translate-shared [strings]="['auth.singOut']" (click)="logout()"></app-translate-shared>
+    <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
   </div>
 </div>
