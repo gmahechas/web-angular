@@ -44,6 +44,11 @@ export const routes: Routes = [
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
+    path: 'department',
+    loadChildren: '@web/app/features/b/department/department.module#DepartmentModule',
+    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+  },
+  {
     path: 'type_person',
     loadChildren: '@web/app/features/c/type-person/type-person.module#TypePersonModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]

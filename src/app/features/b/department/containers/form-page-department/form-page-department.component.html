@@ -1,0 +1,15 @@
+<app-form-department *ngIf="!(department$ | async) as department" [pending]="pending$ | async" (submitted)="onStore($event)">
+    <div class="form-title">
+      <app-translate-shared [strings]="['create.verb', 'department.singular']"></app-translate-shared>
+    </div>
+    <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  </app-form-department>
+  
+  <app-form-department *ngIf="(department$ | async) as department" [pending]="pending$ | async" (submitted)="onUpdate($event)" [department]="department">
+    <div class="form-title">
+      <app-translate-shared [strings]="['edit.verb', 'department.singular']"></app-translate-shared>
+    </div>
+    <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(department)"></app-button-shared>
+    <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  </app-form-department>
+  

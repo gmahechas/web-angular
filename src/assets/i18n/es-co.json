@@ -120,6 +120,15 @@
       "office_name": "sucursal"
     }
   },
+  "department": {
+    "singular": "dependencia",
+    "plural": "dependencias",
+    "model": {
+      "department_id": "id",
+      "department_name": "dependencia",
+      "department_description": "descripcion"
+    }
+  },
   "type_person": {
     "singular": "tipo de contribuyente",
     "plural": "tipos de contribuyentes",

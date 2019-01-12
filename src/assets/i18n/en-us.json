@@ -120,6 +120,15 @@
       "office_name": "office"
     }
   },
+  "department": {
+    "singular": "department",
+    "plural": "departments",
+    "model": {
+      "department_id": "id",
+      "department_name": "department",
+      "department_description": "description"
+    }
+  },
   "type_person": {
     "singular": "type of taxpayer",
     "plural": "types of taxpayers",
