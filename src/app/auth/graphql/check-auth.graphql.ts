@@ -27,6 +27,9 @@ export class CheckAuthGQL extends Query<CheckAuth> {
             person_first_surname
             person_second_surname
             person_legal_name
+            person_address
+            person_email
+            person_phone
             type_person_id
             type_person {
               type_person_id
@@ -39,7 +42,6 @@ export class CheckAuthGQL extends Query<CheckAuth> {
               type_person_identification_code
               type_person_identification_description
             }
-            city_id
           }
           profile_id
           profile {

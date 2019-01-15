@@ -153,11 +153,15 @@
     "model": {
       "person_id": "id",
       "person_identification": "identificacion",
+      "person_identification_date_issue": "fecha de expedicion",
       "person_first_name": "primer nombre",
       "person_second_name": "segundo nombre",
       "person_first_surname": "primer apellido",
       "person_second_surname": "segundo apellido",
       "person_legal_name": "razon social",
+      "person_address": "direccion",
+      "person_email": "correo electronico",
+      "person_phone": "telefono",
       "person_name": "nombre"
     }
   },

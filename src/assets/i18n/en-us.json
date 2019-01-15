@@ -153,11 +153,15 @@
     "model": {
       "person_id": "id",
       "person_identification": "identification",
+      "person_identification_date_issue": "identification issue date",
       "person_first_name": "first name",
       "person_second_name": "second name",
       "person_first_surname": "first surname",
       "person_second_surname": "second surname",
       "person_legal_name": "legal name",
+      "person_address": "address",
+      "person_email": "email",
+      "person_phone": "phone",
       "person_name": "name"
     }
   },

@@ -36,7 +36,7 @@ export class DropdownPagePersonComponent implements OnInit {
         person: {
           person_id: '',
           person_identification: event,
-          person_names: null
+          person_names: ''
         }
       }
     }));

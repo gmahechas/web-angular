@@ -16,11 +16,15 @@ document: DocumentNode = gql`
     destroyPerson(person_id: $person_id) {
       person_id
       person_identification
+      person_identification_date_issue(format: "Y-m-d")
       person_first_name
       person_second_name
       person_first_surname
       person_second_surname
       person_legal_name
+      person_address
+      person_email
+      person_phone
       type_person_id
       type_person {
         type_person_id
@@ -33,8 +37,14 @@ document: DocumentNode = gql`
         type_person_identification_code
         type_person_identification_description
       }
-      city_id
-      city {
+      city_issue_id
+      city_issue {
+        city_id
+        city_name
+        city_code
+      }
+      city_location_id
+      city_location {
         city_id
         city_name
         city_code
