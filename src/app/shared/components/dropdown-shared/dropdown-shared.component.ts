@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class DropdownSharedComponent implements OnInit {
 
   @Input() group: FormGroup;
+  @Input() groupName: string;
   @Input() controlName: string;
   @Input() entityId: any;
   @Input() data: any[];

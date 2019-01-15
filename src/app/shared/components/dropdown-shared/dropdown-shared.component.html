@@ -1,17 +1,43 @@
-<div [formGroup]="group">
-  <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
-    [optionLabel]="optionLabel" filter="true" (keyup)="onKeyUp($event)" [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
-    (onChange)="onChange($event)" [options]="setOptions()" [style]="{'width':'100%'}" [showClear]="(showClear) ? true : false"
-    [autoDisplayFirst]="false">
-    <ng-template let-selectedItem pTemplate="selectedItem">
-      <span *ngFor="let option of options">
-        {{ selectedItem.value | fetchStringInArrayShared:option }}
-      </span>
-    </ng-template>
-    <ng-template let-item pTemplate="item">
-      <span *ngFor="let option of options">
-        {{ item.value | fetchStringInArrayShared:option }}
-      </span>
-    </ng-template>
-  </p-dropdown>
-</div>
+<ng-container *ngIf="groupName; then withGroupName; else withoutGroupName"></ng-container>
+
+<ng-template #withGroupName>
+  <div [formGroup]="group">
+    <div [formGroupName]="groupName">
+      <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
+        [optionLabel]="optionLabel" filter="true" (keyup)="onKeyUp($event)" [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
+        (onChange)="onChange($event)" [options]="setOptions()" [style]="{'width':'100%'}" [showClear]="(showClear) ? true : false"
+        [autoDisplayFirst]="false">
+        <ng-template let-selectedItem pTemplate="selectedItem">
+          <span *ngFor="let option of options">
+            {{ selectedItem.value | fetchStringInArrayShared:option }}
+          </span>
+        </ng-template>
+        <ng-template let-item pTemplate="item">
+          <span *ngFor="let option of options">
+            {{ item.value | fetchStringInArrayShared:option }}
+          </span>
+        </ng-template>
+      </p-dropdown>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #withoutGroupName>
+  <div [formGroup]="group">
+    <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
+      [optionLabel]="optionLabel" filter="true" (keyup)="onKeyUp($event)" [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
+      (onChange)="onChange($event)" [options]="setOptions()" [style]="{'width':'100%'}" [showClear]="(showClear) ? true : false"
+      [autoDisplayFirst]="false">
+      <ng-template let-selectedItem pTemplate="selectedItem">
+        <span *ngFor="let option of options">
+          {{ selectedItem.value | fetchStringInArrayShared:option }}
+        </span>
+      </ng-template>
+      <ng-template let-item pTemplate="item">
+        <span *ngFor="let option of options">
+          {{ item.value | fetchStringInArrayShared:option }}
+        </span>
+      </ng-template>
+    </p-dropdown>
+  </div>
+</ng-template>
