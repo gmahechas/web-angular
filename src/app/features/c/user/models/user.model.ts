@@ -7,11 +7,11 @@ export interface  User {
   email?: string;
   password?: string;
   remember_token?: string;
-  user_created_at?: string;
-  user_updated_at?: string;
-  user_deleted_at?: string;
   person_id?: number;
   person?: Person;
   profile_id?: number;
   profile?: Profile;
+  user_created_at?: string;
+  user_updated_at?: string;
+  user_deleted_at?: string;
 }
