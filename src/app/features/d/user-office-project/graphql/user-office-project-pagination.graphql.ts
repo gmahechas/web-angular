@@ -15,7 +15,8 @@ export class UserOfficeProjectPaginationGQL extends Query<PaginationUserOfficePr
     query paginationUserOfficeProject(
       $user_office_project_id: ID,
       $user_office_project_status: Boolean,
-      $user_office_id: ID, $project_id: ID,
+      $user_office_id: ID,
+      $project_id: ID,
       $limit: Int,
       $page: Int
     ) {

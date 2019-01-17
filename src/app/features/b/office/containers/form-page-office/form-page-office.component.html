@@ -13,6 +13,9 @@
   <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(office)"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="['user.plural']" [class]="'ui-button-secondary'" (click)="onUserOffice(office)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['department.plural']" [class]="'ui-button-secondary'" (click)="onOfficeDepartment(office)"></app-button-shared>
 </app-form-office>
 
 <router-outlet name="router-outlet-user-office"></router-outlet>
+
+<router-outlet name="router-outlet-user-department"></router-outlet>

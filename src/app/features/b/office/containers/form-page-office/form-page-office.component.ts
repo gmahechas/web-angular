@@ -50,4 +50,11 @@ export class FormPageOfficeComponent implements OnInit {
     }));
   }
 
+  onOfficeDepartment(office: Office) {
+    this.store.dispatch(new fromCore.Go({
+      path: ['office', office.office_id, {
+        outlets: { 'router-outlet-user-office': ['office-department', 'office', office.office_id] }
+      }]
+    }));
+  }
 }
