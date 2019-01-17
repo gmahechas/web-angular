@@ -28,11 +28,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: {
-          user: action.payload.search.user,
-          person: action.payload.search.person,
-          profile: action.payload.search.profile
-        }
+        query: { ...state.query, ...action.payload.search }
       };
     }
 

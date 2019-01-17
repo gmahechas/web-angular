@@ -26,10 +26,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: {
-          office: action.payload.search.office,
-          city: action.payload.search.city
-        }
+        query: { ...state.query, ...action.payload.search }
       };
     }
 

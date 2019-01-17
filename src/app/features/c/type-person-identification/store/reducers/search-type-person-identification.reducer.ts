@@ -29,9 +29,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: {
-          type_person_identification: action.payload.search.type_person_identification
-        }
+        query: { ...state.query, ...action.payload.search }
       };
     }
 

@@ -26,10 +26,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: {
-          project: action.payload.search.project,
-          macroproject: action.payload.search.macroproject
-        }
+        query: { ...state.query, ...action.payload.search }
       };
     }
 

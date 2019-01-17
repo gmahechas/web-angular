@@ -26,9 +26,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return {
         ...state,
         loaded: false,
-        query: {
-          country: action.payload.search.country
-        }
+        query: { ...state.query, ...action.payload.search }
       };
     }
 
