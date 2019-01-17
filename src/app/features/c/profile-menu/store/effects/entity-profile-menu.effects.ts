@@ -16,8 +16,8 @@ export class EntityProfileMenuEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromProfileMenuActions.LoadEntity>(fromProfileMenuActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload),
-    switchMap(({ search }: { search: fromModels.SearchProfileMenu }) => {
+    map(action => action.payload.search),
+    switchMap((search: fromModels.SearchProfileMenu) => {
       return this.profileMenuService.load(search).pipe(
         map(({ data }) => new fromProfileMenuActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromProfileMenuActions.LoadFailEntity({ error })))

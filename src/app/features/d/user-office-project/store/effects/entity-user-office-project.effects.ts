@@ -17,8 +17,8 @@ export class EntityUserOfficeProjectEffects {
   @Effect()
   loadEntity$ = this.actions$.pipe(
     ofType<fromUserOfficeProjectActions.LoadEntity>(fromUserOfficeProjectActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload),
-    switchMap(({ search }: { search: fromModels.SearchUserOfficeProject }) => {
+    map(action => action.payload.search),
+    switchMap((search: fromModels.SearchUserOfficeProject) => {
       return this.userOfficeProjectService.load(search).pipe(
         map(({ data }) => new fromUserOfficeProjectActions.LoadSuccessEntity({ entities: data })),
         catchError((errors) => of(new fromUserOfficeProjectActions.LoadFailEntity({ error: errors })))
