@@ -3,7 +3,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUserOfficeProject from '@web/app/features/d/user-office-project/store';
-import * as fromCore from '@web/app/core/store';
+
+import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
 
 import { Subscription } from 'rxjs';
 
@@ -60,6 +61,14 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
       }
 
     });
+  }
+
+  onEdit(userOfficeProject: UserOfficeProject) {
+    this.store.dispatch(new fromUserOfficeProject.UpdateEntity({ entity: userOfficeProject }));
+  }
+
+  onDelete(userOfficeProject: UserOfficeProject) {
+    this.store.dispatch(new fromUserOfficeProject.DestroyEntity({ entity: userOfficeProject }));
   }
 
   ngOnDestroy() {

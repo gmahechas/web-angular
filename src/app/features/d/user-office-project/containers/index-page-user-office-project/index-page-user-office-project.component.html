@@ -1,3 +1,5 @@
-<p>
-  {{ data$ | async | json }}
-</p>
+<div class="ui-g-12" *ngIf="(data$ | async) as data">
+  <app-edit-form-user-office-project *ngFor="let userOfficeProject of data" [userOfficeProject]="userOfficeProject"
+    (edit)="onEdit($event)" (delete)="onDelete($event)"></app-edit-form-user-office-project>
+  <app-create-form-user-office-project></app-create-form-user-office-project>
+</div>

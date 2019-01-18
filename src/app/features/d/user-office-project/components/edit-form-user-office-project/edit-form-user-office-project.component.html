@@ -1,0 +1,9 @@
+<div class="ui-g-12">
+  <div class="ui-g-3">{{ userOfficeProject.project.project_name }}</div>
+  <div class="ui-g-3">
+    <app-checkbox-shared [checked]="userOfficeProject.user_office_project_status" [binary]="true" (change)="handleChange($event)"></app-checkbox-shared>
+  </div>
+  <div class="ui-g-2">
+    <app-checkbox-shared (click)="handleDelete()"></app-checkbox-shared>
+  </div>
+</div>
