@@ -1,0 +1,13 @@
+<div class="ui-g-12">
+    <div class="ui-g-3">{{ userOffice.office.office_name }}</div>
+    <div class="ui-g-2">{{ userOffice.user.username }}</div>
+    <div class="ui-g-2">
+      <app-button-shared [type]="'button'" [label]="['project.plural']" [class]="'ui-button-secondary'" (click)="onUserOfficeProject(userOffice)"></app-button-shared>
+    </div>
+    <div class="ui-g-3">
+      <app-checkbox-shared [checked]="userOffice.user_office_status" [binary]="true" (change)="handleChange($event)"></app-checkbox-shared>
+    </div>
+    <div class="ui-g-2">
+      <app-checkbox-shared (click)="handleDelete()"></app-checkbox-shared>
+    </div>
+  </div>

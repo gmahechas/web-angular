@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 
 @Component({
-  selector: 'app-edit-user-office',
-  templateUrl: './edit-user-office.component.html',
+  selector: 'app-edit-form-user-office',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './edit-form-user-office.component.html',
   styles: []
 })
-export class EditUserOfficeComponent implements OnInit {
+export class EditFormUserOfficeComponent implements OnInit {
 
   @Input() userOffice: UserOffice;
   @Output() edit: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
@@ -34,4 +35,5 @@ export class EditUserOfficeComponent implements OnInit {
   onUserOfficeProject(userOffice: UserOffice) {
     this.gotoUserOfficeProject.emit(userOffice);
   }
+
 }
