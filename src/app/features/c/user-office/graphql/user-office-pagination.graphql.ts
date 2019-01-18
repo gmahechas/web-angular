@@ -41,8 +41,6 @@ document: DocumentNode = gql`
           user_id
           username
           email
-          password
-          remember_token
           person_id
           person {
             person_id

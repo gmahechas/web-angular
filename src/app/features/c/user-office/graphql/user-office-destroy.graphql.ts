@@ -21,18 +21,23 @@ export class UserOfficeDestroyGQL extends Mutation<DestroyUserOffice> {
           user_id
           username
           email
-          password
-          remember_token
           person_id
           person {
             person_id
             person_identification
+            person_identification_date_issue
             person_first_name
             person_second_name
             person_first_surname
             person_second_surname
             person_legal_name
-            city_id
+            person_address
+            person_email
+            person_phone
+            type_person_id
+            type_person_identification_id
+            city_issue_id
+            city_location_id
           }
           profile_id
         }

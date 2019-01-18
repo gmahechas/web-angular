@@ -54,7 +54,6 @@ export class UserOfficeProjectPaginationGQL extends Query<PaginationUserOfficePr
                 person_first_surname
                 person_second_surname
                 person_legal_name
-                city_id
               }
               profile_id
             }
