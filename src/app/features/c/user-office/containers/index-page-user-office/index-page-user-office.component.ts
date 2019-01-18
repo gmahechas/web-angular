@@ -27,32 +27,11 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
     const key = this.route.snapshot.paramMap.keys[0];
     const val = this.route.snapshot.params[key];
 
-    switch (key) {
-      case 'user_id': {
-        setTimeout(() => {
-          this.store.dispatch(new fromUserOffice.LoadEntity({
-            search: {
-              user: {
-                user_id: val
-              }
-            }
-          }));
-        });
-        break;
-      }
-      case 'office_id': {
-        setTimeout(() => {
-          this.store.dispatch(new fromUserOffice.LoadEntity({
-            search: {
-              office: {
-                office_id: val
-              }
-            }
-          }));
-        });
-        break;
-      }
-    }
+    setTimeout(() => {
+      this.store.dispatch(new fromUserOffice.LoadEntity({
+        search: { [key.split('_')[0]]: { [key]: val } }
+      }));
+    });
 
   }
 
@@ -66,46 +45,24 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   onUserOfficeProject(userOffice: UserOffice) {
 
-    this.route.snapshot.paramMap.keys.forEach(key => {
-      switch (key) {
-        case 'user_id': {
-          this.store.dispatch(new fromCore.Go({
-            path: [
-              'user', userOffice.user_id,
-              {
-                outlets: {
-                  'router-outlet-user-office': ['user-office', 'user', userOffice.user_id, {
-                    outlets: {
-                      'router-outlet-user-office-project':
-                        ['user-office-project', 'user', userOffice.user_id, userOffice.user_office_id]
-                    }
-                  }],
-                }
+    const key = this.route.snapshot.paramMap.keys[0];
+
+    this.store.dispatch(new fromCore.Go({
+      path: [
+        key.split('_')[0], userOffice[key],
+        {
+          outlets: {
+            'router-outlet-user-office': ['user-office', key.split('_')[0], userOffice[key], {
+              outlets: {
+                'router-outlet-user-office-project':
+                  ['user-office-project', key.split('_')[0], userOffice[key], userOffice.user_office_id]
               }
-            ]
-          }));
-          break;
+            }],
+          }
         }
-        case 'office_id': {
-          this.store.dispatch(new fromCore.Go({
-            path: [
-              'office', userOffice.office_id,
-              {
-                outlets: {
-                  'router-outlet-user-office': ['user-office', 'office', userOffice.office_id, {
-                    outlets: {
-                      'router-outlet-user-office-project':
-                        ['user-office-project', 'office', userOffice.office_id, userOffice.user_office_id]
-                    }
-                  }],
-                }
-              }
-            ]
-          }));
-          break;
-        }
-      }
-    });
+      ]
+    }));
+
   }
 
   ngOnDestroy() {
