@@ -1,3 +1,5 @@
-<p-calendar [locale]="es" [dateFormat]="dateFormat" [showButtonBar]="showButtonBar" [inline]="inline" [hourFormat]="hourFormat"
-  [showIcon]="showIcon" [minDate]="minDate" [maxDate]="maxDate" [disabledDates]="invalidDates" [monthNavigator]="monthNavigator"
-  [yearNavigator]="yearNavigator" [yearRange]="yearRange" [showTime]="showTime" readonlyInput="true"></p-calendar>
+<div [formGroup]="group">
+  <div [formGroupName]="groupName">
+    <p-calendar [formControlName]="controlName" [locale]="es" [dateFormat]="dateFormat" [dataType]="dataType" [readonlyInput]="true"></p-calendar>
+  </div>
+</div>

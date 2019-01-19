@@ -34,7 +34,8 @@
             <app-translate-shared [strings]="['person.model.person_identification_date_issue']"></app-translate-shared>
           </div>
           <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification_date_issue'"></app-input-text-shared>
+            <app-input-calendar-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification_date_issue'"
+              [dataType]="'string'" [dateFormat]="'yy-mm-dd'"></app-input-calendar-shared>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="personForm.get('person.person_identification_date_issue')"></app-validation-errors-shared>

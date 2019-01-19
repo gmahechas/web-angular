@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input-calendar-shared',
@@ -9,21 +10,11 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class InputCalendarSharedComponent implements OnInit {
 
   es: any;
+  @Input() group: FormGroup;
+  @Input() groupName: string;
+  @Input() controlName: string;
+  @Input() dataType: string;
   @Input() dateFormat: string;
-  @Input() showButtonBar: boolean;
-  @Input() inline: boolean;
-  @Input() hourFormat: number;
-  @Input() showIcon: boolean;
-  @Input() inputMinDate: string;
-  @Input() inputMaxDate: string;
-  minDate: Date;
-  maxDate: Date;
-  @Input() inputInvalidDates: string[];
-  invalidDates: Date[] = [];
-  @Input() monthNavigator: boolean;
-  @Input() yearNavigator: boolean;
-  @Input() yearRange: string;
-  @Input() showTime: boolean;
 
   constructor() { }
 
@@ -40,13 +31,9 @@ export class InputCalendarSharedComponent implements OnInit {
       ],
       monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
       today: 'Hoy',
-      clear: 'Borrar'
+      clear: 'Borrar',
+      dateFormat: 'yy-mm-dd'
     };
-
-    this.minDate = new Date(this.inputMinDate);
-    this.maxDate = new Date(this.inputMaxDate);
-
-    this.inputInvalidDates.map(date => this.invalidDates.push(new Date(date)));
   }
 
 }
