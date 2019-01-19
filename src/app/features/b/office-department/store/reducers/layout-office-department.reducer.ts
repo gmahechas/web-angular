@@ -1,5 +1,8 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/b/office-department/store/actions/entity-office-department.actions';
-import { SelectedOfficeDepartment, initialStateSelectedOfficeDepartment } from '@web/app/features/b/office-department/models/selected-office-department.model';
+import {
+  SelectedOfficeDepartment,
+  initialStateSelectedOfficeDepartment
+} from '@web/app/features/b/office-department/models/selected-office-department.model';
 
 export interface State {
   selected: SelectedOfficeDepartment;
@@ -61,7 +64,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.ResetSearch: {
       return initialState;
     }
-    
+
     default:
       return state;
   }
