@@ -6,6 +6,8 @@ import * as fromLayout from '@web/app/core/store/reducers/layout-core.reducer';
 import * as fromRouter from '@ngrx/router-store';
 import { RouterStateUrl } from '@web/app/shared/router-utils';
 
+import { AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
+
 import { environment } from '@web/environments/environment';
 
 export interface State {
@@ -33,4 +35,13 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
     return result;
   };
 }
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ storeFreeze] : [];
+
+export function clearState(reducer: ActionReducer<State>): ActionReducer<State> {
+  return function (state: State, action: any): State {
+    if (action.type === AuthActionTypes.LogoutAuthSuccess) {
+      console.log('Reset state here');
+    }
+    return reducer(state, action);
+  };
+}
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ /* clearState, */ storeFreeze] : [];
