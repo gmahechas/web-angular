@@ -26,7 +26,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   subscription: Subscription;
   selectedEntity: TypePersonIdentification;
 
-  query$ = this.store.pipe(select(fromTypePersonIdentification.getQuery, take(1)));
+  query$ = this.store.pipe(select(fromTypePersonIdentification.getQuery));
 
   data$ = this.store.pipe(select(fromTypePersonIdentification.getAllEntities));
   total$ = this.store.pipe(select(fromTypePersonIdentification.getTotal));

@@ -21,7 +21,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selectedEntity: Office;
 
-  query$ = this.store.pipe(select(fromOffice.getQuery), take(1));
+  query$ = this.store.pipe(select(fromOffice.getQuery));
 
   data$ = this.store.pipe(select(fromOffice.getAllEntities));
   total$ = this.store.pipe(select(fromOffice.getTotal));

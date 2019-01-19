@@ -21,7 +21,7 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selectedEntity: Department;
 
-  query$ = this.store.pipe(select(fromDepartment.getQuery, take(1)));
+  query$ = this.store.pipe(select(fromDepartment.getQuery));
 
   data$ = this.store.pipe(select(fromDepartment.getAllEntities));
   total$ = this.store.pipe(select(fromDepartment.getTotal));

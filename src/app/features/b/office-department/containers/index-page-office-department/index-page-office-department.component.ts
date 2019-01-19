@@ -20,7 +20,6 @@ export class IndexPageOfficeDepartmentComponent implements OnInit {
 
   data$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
 
-
   constructor(
     private store: Store<fromOfficeDepartment.State>
   ) { }

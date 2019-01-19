@@ -21,7 +21,7 @@ export class IndexPagePersonComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selectedEntity: Person;
 
-  query$ = this.store.pipe(select(fromPerson.getQuery), take(1));
+  query$ = this.store.pipe(select(fromPerson.getQuery));
 
   data$ = this.store.pipe(select(fromPerson.getAllEntities));
   total$ = this.store.pipe(select(fromPerson.getTotal));

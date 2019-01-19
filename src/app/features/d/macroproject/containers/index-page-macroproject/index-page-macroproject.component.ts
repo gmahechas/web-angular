@@ -24,7 +24,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   selectedEntity: Macroproject;
 
-  query$ = this.store.pipe(select(fromMacroproject.getQuery), take(1));
+  query$ = this.store.pipe(select(fromMacroproject.getQuery));
 
   data$ = this.store.pipe(select(fromMacroproject.getAllEntities));
   total$ = this.store.pipe(select(fromMacroproject.getTotal));
