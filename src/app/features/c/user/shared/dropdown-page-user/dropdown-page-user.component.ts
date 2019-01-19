@@ -35,8 +35,7 @@ export class DropdownPageUserComponent implements OnInit {
       search: {
         user: {
           user_id: '',
-          username: event,
-          email: ''
+          username: event
         },
         person: null,
         profile: null

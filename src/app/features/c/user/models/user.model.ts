@@ -4,9 +4,7 @@ import { Person } from '@web/app/features/c/person/models/person.model';
 export interface  User {
   user_id?: number;
   username?: string;
-  email?: string;
   password?: string;
-  remember_token?: string;
   person_id?: number;
   person?: Person;
   profile_id?: number;

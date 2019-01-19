@@ -17,7 +17,6 @@ export class CheckAuthGQL extends Query<CheckAuth> {
         user {
           user_id
           username
-          email
           person_id
           person {
             person_id

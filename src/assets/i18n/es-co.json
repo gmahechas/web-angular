@@ -183,7 +183,6 @@
     "model": {
       "user_id": "id",
       "username": "usuario",
-      "email": "correo electronico",
       "password": "contraseña"
     }
   },

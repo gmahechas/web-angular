@@ -40,7 +40,6 @@ document: DocumentNode = gql`
         user {
           user_id
           username
-          email
           person_id
           person {
             person_id

@@ -24,8 +24,7 @@ export class FormUserComponent implements OnChanges, OnInit {
 
   userForm = this.formBuilder.group({
     user: this.formBuilder.group({
-      username: this.formBuilder.control('', [Validators.required]),
-      email: this.formBuilder.control('', [Validators.required])
+      username: this.formBuilder.control('', [Validators.required])
     }),
     person: this.formBuilder.control('', [Validators.required]),
     profile: this.formBuilder.control('', [Validators.required])
@@ -40,8 +39,7 @@ export class FormUserComponent implements OnChanges, OnInit {
       this.userForm.reset();
       this.userForm.setValue({
         user: {
-          username: this.user.username,
-          email: this.user.email
+          username: this.user.username
         },
         person: this.user.person,
         profile: this.user.profile

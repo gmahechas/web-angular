@@ -96,7 +96,6 @@ export class EntityUserEffects {
         if (
           searchUser.user.user_id === '' &&
           searchUser.user.username === '' &&
-          searchUser.user.email === '' &&
           searchUser.person === null &&
           searchUser.profile === null
         ) {

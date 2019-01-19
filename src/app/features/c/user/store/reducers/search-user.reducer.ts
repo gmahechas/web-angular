@@ -11,8 +11,7 @@ export const initialState: State = {
   query: {
     user: {
       user_id: '',
-      username: '',
-      email: ''
+      username: ''
     },
     person: null,
     profile: null

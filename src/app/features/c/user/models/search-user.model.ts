@@ -5,7 +5,6 @@ export interface SearchUser {
   user?: {
     user_id?: string;
     username?: string;
-    email?: string;
   };
   person?: Person | null;
   profile?: Profile | null;

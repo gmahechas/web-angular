@@ -49,7 +49,6 @@ export class UserService {
       variables: {
         user_id: searchUser.user.user_id,
         username: searchUser.user.username,
-        email: searchUser.user.email,
         person_id: (searchUser.person) ? searchUser.person.person_id : null,
         profile_id: (searchUser.profile) ? searchUser.profile.profile_id : null,
         limit: searchUser.limit,

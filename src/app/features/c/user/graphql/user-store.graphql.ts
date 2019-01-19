@@ -12,11 +12,10 @@ import gql from 'graphql-tag';
 export class UserStoreGQL extends Mutation<StoreUser> {
 
 document: DocumentNode = gql`
-  mutation storeUser($username: String, $email: String, $password: String, $person_id: ID, $profile_id: ID) {
-    storeUser(username: $username, email: $email, password: $password, person_id: $person_id, profile_id: $profile_id) {
+  mutation storeUser($username: String, $password: String, $person_id: ID, $profile_id: ID) {
+    storeUser(username: $username, password: $password, person_id: $person_id, profile_id: $profile_id) {
       user_id
       username
-      email
       person_id
       profile_id
     }

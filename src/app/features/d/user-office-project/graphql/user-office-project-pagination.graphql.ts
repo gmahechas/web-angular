@@ -44,7 +44,6 @@ export class UserOfficeProjectPaginationGQL extends Query<PaginationUserOfficePr
             user {
               user_id
               username
-              email
               person_id
               person {
                 person_id

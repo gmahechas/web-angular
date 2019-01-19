@@ -15,7 +15,6 @@ document: DocumentNode = gql`
   query paginationUser(
     $user_id: ID,
     $username: String,
-    $email: String,
     $person_id: ID,
     $profile_id: ID,
     $limit: Int,
@@ -24,7 +23,6 @@ document: DocumentNode = gql`
     paginationUser(
       user_id: $user_id,
       username: $username,
-      email: $email,
       person_id: $person_id,
       profile_id: $profile_id,
       limit: $limit,
@@ -38,7 +36,6 @@ document: DocumentNode = gql`
       data {
         user_id
         username
-        email
         person_id
         person {
           person_id

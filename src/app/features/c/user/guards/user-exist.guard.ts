@@ -48,8 +48,7 @@ export class UserExistGuard implements CanActivate {
             search: {
               user: {
                 user_id: user_id,
-                username: '',
-                email: ''
+                username: ''
               },
               person: null,
               profile: null

@@ -19,8 +19,7 @@ export class SearchFormUserComponent implements OnChanges, OnInit {
   searchFormUser = this.formBuilder.group({
     user: this.formBuilder.group({
       user_id: this.formBuilder.control(''),
-      username: this.formBuilder.control(''),
-      email: this.formBuilder.control('')
+      username: this.formBuilder.control('')
     }),
     person: this.formBuilder.control(''),
     profile: this.formBuilder.control('')
@@ -34,8 +33,7 @@ export class SearchFormUserComponent implements OnChanges, OnInit {
     this.searchFormUser.setValue({
       user: {
         user_id: this.query.user.user_id,
-        username: this.query.user.username,
-        email: this.query.user.email
+        username: this.query.user.username
       },
       person: this.query.person,
       profile: this.query.profile

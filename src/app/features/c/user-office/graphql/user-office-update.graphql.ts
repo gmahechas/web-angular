@@ -20,7 +20,6 @@ export class UserOfficeUpdateGQL extends Mutation<UpdateUserOffice> {
         user {
           user_id
           username
-          email
           person_id
           person {
             person_id

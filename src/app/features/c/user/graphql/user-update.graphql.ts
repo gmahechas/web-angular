@@ -13,16 +13,21 @@ export class UserUpdateGQL extends Mutation<UpdateUser> {
 
 document: DocumentNode = gql`
   mutation updateUser(
-    $user_id: ID!, $username: String, $email: String,
-    $password: String, $person_id: ID, $profile_id: ID
+    $user_id: ID!,
+    $username: String,
+    $password: String,
+    $person_id: ID,
+    $profile_id: ID
     ) {
       updateUser(
-        user_id: $user_id, username: $username, email: $email,
-        password: $password, person_id: $person_id, profile_id: $profile_id
+        user_id: $user_id,
+        username: $username,
+        password: $password,
+        person_id: $person_id,
+        profile_id: $profile_id
         ) {
         user_id
         username
-        email
         person_id
         person {
           person_id

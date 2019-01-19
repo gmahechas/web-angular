@@ -20,7 +20,6 @@ export class UserOfficeDestroyGQL extends Mutation<DestroyUserOffice> {
         user {
           user_id
           username
-          email
           person_id
           person {
             person_id

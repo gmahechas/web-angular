@@ -16,7 +16,6 @@ document: DocumentNode = gql`
     destroyUser(user_id: $user_id) {
       user_id
       username
-      email
       person_id
       profile_id
     }
