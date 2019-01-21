@@ -10,10 +10,7 @@ import * as fromModels from '@web/app/features/e/context/models';
 export class ContextService {
 
   constructor(
-    private contextPagination: fromGraphql.ContextPaginationGQL,
-    private contextStoreGQL: fromGraphql.ContextStoreGQL,
-    private contextUpdateGQL: fromGraphql.ContextUpdateGQL,
-    private contextDestroyGQL: fromGraphql.ContextDestroyGQL
+    private contextPagination: fromGraphql.ContextPaginationGQL
   ) { }
 
   load(searchContext: fromModels.SearchContext) {
@@ -22,18 +19,6 @@ export class ContextService {
       limit: searchContext.limit,
       page: searchContext.page
     }).valueChanges;
-  }
-
-  store(context: fromModels.Context) {
-    return this.contextStoreGQL.mutate(context);
-  }
-
-  update(context: fromModels.Context) {
-    return this.contextUpdateGQL.mutate(context);
-  }
-
-  destroy(context: fromModels.Context) {
-    return this.contextDestroyGQL.mutate(context);
   }
 
 }

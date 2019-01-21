@@ -35,42 +35,6 @@ export class EntityContextEffects {
   );
 
   @Effect()
-  storeEntity$ = this.actions$.pipe(
-    ofType<fromContextActions.StoreEntity>(fromContextActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload.entity),
-    switchMap((context: fromModels.Context) => {
-      return this.contextService.store(context).pipe(
-        map(({ data }) => new fromContextActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromContextActions.StoreFailEntity({ error: errors })))
-      );
-    })
-  );
-
-  @Effect()
-  updateEntity$ = this.actions$.pipe(
-    ofType<fromContextActions.UpdateEntity>(fromContextActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload.entity),
-    switchMap((context: fromModels.Context) => {
-      return this.contextService.update(context).pipe(
-        map(({ data }) => new fromContextActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromContextActions.UpdateFailEntity({ error: errors })))
-      );
-    })
-  );
-
-  @Effect()
-  destroyEntity$ = this.actions$.pipe(
-    ofType<fromContextActions.DestroyEntity>(fromContextActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload.entity),
-    switchMap((context: fromModels.Context) => {
-      return this.contextService.destroy(context).pipe(
-        map(({ data }) => new fromContextActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromContextActions.DestroyFailEntity({ error: errors })))
-      );
-    })
-  );
-
-  @Effect()
   loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
       ofType<fromContextActions.LoadEntityShared>(fromContextActions.EntityActionTypes.LoadEntityShared),
