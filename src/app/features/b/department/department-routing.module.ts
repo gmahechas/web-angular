@@ -9,7 +9,15 @@ export const routes: Routes = [
     path: '', component: fromContainers.IndexPageDepartmentComponent,
     children: [
       { path: 'create', component: fromContainers.FormPageDepartmentComponent },
-      { path: ':department_id', component: fromContainers.FormPageDepartmentComponent, canActivate: [DepartmentExistGuard] }
+      {
+        path: ':department_id', component: fromContainers.FormPageDepartmentComponent, canActivate: [DepartmentExistGuard], children: [
+          {
+            path: 'office-department',
+            loadChildren: '@web/app/features/b/office-department/office-department.module#OfficeDepartmentModule',
+            outlet: 'router-outlet-user-department'
+          }
+        ]
+      }
     ]
   }
 ];

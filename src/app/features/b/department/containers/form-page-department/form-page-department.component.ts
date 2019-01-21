@@ -42,4 +42,12 @@ export class FormPageDepartmentComponent implements OnInit {
   onDestroy(department: Department) {
     this.store.dispatch(new fromDepartment.DestroyEntity({ entity: department }));
   }
+
+  onOfficeDepartment(department: Department) {
+    this.store.dispatch(new fromCore.Go({
+      path: ['department', department.department_id, {
+        outlets: { 'router-outlet-user-department': ['office-department', 'department', department.department_id] }
+      }]
+    }));
+  }
 }
