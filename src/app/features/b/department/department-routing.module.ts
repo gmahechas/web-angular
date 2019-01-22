@@ -14,7 +14,7 @@ export const routes: Routes = [
           {
             path: 'office-department',
             loadChildren: '@web/app/features/b/office-department/office-department.module#OfficeDepartmentModule',
-            outlet: 'router-outlet-user-department'
+            outlet: 'router-outlet-department'
           }
         ]
       }
