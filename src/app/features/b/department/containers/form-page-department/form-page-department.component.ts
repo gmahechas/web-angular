@@ -46,7 +46,7 @@ export class FormPageDepartmentComponent implements OnInit {
   onOfficeDepartment(department: Department) {
     this.store.dispatch(new fromCore.Go({
       path: ['department', department.department_id, {
-        outlets: { 'router-outlet-department': ['office-department', 'department', department.department_id] }
+        outlets: { 'router-outlet-user-department': ['office-department', 'department', department.department_id] }
       }]
     }));
   }
