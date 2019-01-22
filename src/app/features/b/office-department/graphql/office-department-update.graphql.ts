@@ -14,34 +14,23 @@ export class OfficeDepartmentUpdateGQL extends Mutation<UpdateOfficeDepartment> 
   document: DocumentNode = gql`
     mutation updateOfficeDepartment(
       $office_department_id: ID!,
-      $office_department_status: Boolean,
-      $office_id: ID,
-      $department_id: ID
+      $office_department_status: Boolean
     ) {
       updateOfficeDepartment(
         office_department_id: $office_department_id,
-        office_department_status: $office_department_status,
-        office_id: $office_id,
-        department_id: $department_id
+        office_department_status: $office_department_status
       ) {
-        total
-        per_page
-        current_page
-        from
-        to
-        data {
-          office_department_id
-          office_department_status
+        office_department_id
+        office_department_status
+        office_id
+        office {
           office_id
-          office {
-            office_id
-            office_name
-          }
+          office_name
+        }
+        department_id
+        department {
           department_id
-          department {
-            department_id
-            department_name
-          }
+          department_name
         }
       }
     }

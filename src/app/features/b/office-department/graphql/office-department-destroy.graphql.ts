@@ -14,24 +14,17 @@ export class OfficeDepartmentDestroyGQL extends Mutation<DestroyOfficeDepartment
   document: DocumentNode = gql`
     mutation destroyOfficeDepartment($office_department_id: ID!) {
       destroyOfficeDepartment(office_department_id: $office_department_id) {
-        total
-        per_page
-        current_page
-        from
-        to
-        data {
-          office_department_id
-          office_department_status
+        office_department_id
+        office_department_status
+        office_id
+        office {
           office_id
-          office {
-            office_id
-            office_name
-          }
+          office_name
+        }
+        department_id
+        department {
           department_id
-          department {
-            department_id
-            department_name
-          }
+          department_name
         }
       }
     }

@@ -1,1 +1,4 @@
-<h1>Department Office</h1>
+<div class="ui-g-12" *ngIf="(data$ | async) as data">
+  <app-edit-form-office-department *ngFor="let officeDepartment of data" [officeDepartment]="officeDepartment" (edit)="onEdit($event)"
+    (delete)="onDelete($event)"></app-edit-form-office-department>
+</div>

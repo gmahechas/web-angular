@@ -1,64 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromOfficeDepartment from '@web/app/features/b/office-department/store';
 import * as fromCore from '@web/app/core/store';
 
 import { OfficeDepartment } from '@web/app/features/b/office-department/models/office-department.model';
-import { SearchOfficeDepartment } from '@web/app/features/b/office-department/models/search-office-department.model';
-import { initialStateSelectedOfficeDepartment } from '@web/app/features/b/office-department/models/selected-office-department.model';
-
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index-page-office-department',
   templateUrl: './index-page-office-department.component.html',
   styles: []
 })
-export class IndexPageOfficeDepartmentComponent implements OnInit {
+export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
 
   constructor(
-    private store: Store<fromOfficeDepartment.State>
+    private store: Store<fromOfficeDepartment.State>,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-  }
+    const key = this.route.snapshot.paramMap.keys[0];
+    const val = this.route.snapshot.params[key];
 
-  onLoad(officeDepartmentSearch: SearchOfficeDepartment) {
-
-  }
-
-  onCreate() {
-    this.store.dispatch(new fromOfficeDepartment.SetSelected({ selected: initialStateSelectedOfficeDepartment }));
-    this.store.dispatch(new fromCore.Go({
-      path: ['office_department', 'create']
-    }));
+    setTimeout(() => {
+      this.store.dispatch(new fromOfficeDepartment.LoadEntity({
+        search: { [key.split('_')[0]]: { [key]: val } }
+      }));
+    });
   }
 
   onEdit(officeDepartment: OfficeDepartment) {
-    this.store.dispatch(new fromOfficeDepartment.SetSelected({
-      selected: { ...initialStateSelectedOfficeDepartment, selectedEntity: officeDepartment }
-    }));
-    this.store.dispatch(new fromCore.Go({
-      path: ['office_department', officeDepartment.office_department_id]
-    }));
+    this.store.dispatch(new fromOfficeDepartment.UpdateEntity({ entity: officeDepartment }));
   }
 
-  onPaginate(event) {
-    this.store.dispatch(new fromOfficeDepartment.PaginateEntity({ page: event.page + 1 }));
+  onDelete(officeDepartment: OfficeDepartment) {
+    this.store.dispatch(new fromOfficeDepartment.DestroyEntity({ entity: officeDepartment }));
   }
 
-  onCancel() {
-    this.store.dispatch(new fromOfficeDepartment.SetSelected({ selected: initialStateSelectedOfficeDepartment }));
-    this.store.dispatch(new fromCore.Go({
-      path: ['office_department']
-    }));
-  }
-
-  onResetSearch() {
+  ngOnDestroy() {
     this.store.dispatch(new fromOfficeDepartment.ResetSearch());
   }
 
