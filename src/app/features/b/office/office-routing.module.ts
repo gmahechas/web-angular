@@ -14,12 +14,12 @@ export const routes: Routes = [
           {
             path: 'user-office',
             loadChildren: '@web/app/features/c/user-office/user-office.module#UserOfficeModule',
-            outlet: 'router-outlet-office'
+            outlet: 'router-outlet-user-office'
           },
           {
             path: 'office-department',
             loadChildren: '@web/app/features/b/office-department/office-department.module#OfficeDepartmentModule',
-            outlet: 'router-outlet-office'
+            outlet: 'router-outlet-user-department'
           }
         ]
       }
