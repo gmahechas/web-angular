@@ -14,7 +14,7 @@ export const routes: Routes = [
           {
             path: 'user-office',
             loadChildren: '@web/app/features/c/user-office/user-office.module#UserOfficeModule',
-            outlet: 'router-outlet-user-office'
+            outlet: 'router-outlet-user'
           }
         ]
       }
