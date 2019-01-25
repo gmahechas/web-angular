@@ -214,5 +214,22 @@
       "workflow_name": "flow",
       "workflow_description": "description"
     }
+  },
+  "day": {
+    "singular": "day",
+    "plural": "days",
+    "model": {
+      "day_id": "id",
+      "day_code": "code",
+      "day_name": "day"
+    }
+  },
+  "schedule": {
+    "singular": "schedule",
+    "plural": "schedules",
+    "model": {
+      "schedule_id": "id",
+      "schedule_name": "schedule"
+    }
   }
 }

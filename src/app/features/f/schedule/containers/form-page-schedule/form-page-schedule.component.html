@@ -1,0 +1,15 @@
+<app-form-schedule *ngIf="!(schedule$ | async) as schedule" [pending]="pending$ | async" (submitted)="onStore($event)">
+    <div class="form-title">
+      <app-translate-shared [strings]="['create.verb', 'schedule.singular']"></app-translate-shared>
+    </div>
+    <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  </app-form-schedule>
+  
+  <app-form-schedule *ngIf="(schedule$ | async) as schedule" [pending]="pending$ | async" (submitted)="onUpdate($event)" [schedule]="schedule">
+    <div class="form-title">
+      <app-translate-shared [strings]="['edit.verb', 'schedule.singular']"></app-translate-shared>
+    </div>
+    <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(schedule)"></app-button-shared>
+    <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  </app-form-schedule>
+  

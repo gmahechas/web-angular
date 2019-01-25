@@ -18,6 +18,7 @@ export const routes: Routes = [
     loadChildren: '@web/app/dashboard/dashboard.module#DashboardModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
+  /* A */
   {
     path: 'country',
     loadChildren: '@web/app/features/a/country/country.module#CountryModule',
@@ -33,6 +34,7 @@ export const routes: Routes = [
     loadChildren: '@web/app/features/a/city/city.module#CityModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
+  /* B */
   {
     path: 'company',
     loadChildren: '@web/app/features/b/company/company.module#CompanyModule',
@@ -48,6 +50,7 @@ export const routes: Routes = [
     loadChildren: '@web/app/features/b/department/department.module#DepartmentModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
+  /* C */
   {
     path: 'type_person',
     loadChildren: '@web/app/features/c/type-person/type-person.module#TypePersonModule',
@@ -78,6 +81,7 @@ export const routes: Routes = [
     loadChildren: '@web/app/features/c/user-office/user-office.module#UserOfficeModule',
     canLoad: [AuthGuard]
   },
+  /* D */
   {
     path: 'macroproject',
     loadChildren: '@web/app/features/d/macroproject/macroproject.module#MacroprojectModule',
@@ -88,9 +92,16 @@ export const routes: Routes = [
     loadChildren: '@web/app/features/d/project/project.module#ProjectModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
+  /* E */
   {
     path: 'workflow',
     loadChildren: '@web/app/features/e/workflow/workflow.module#WorkflowModule',
+    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+  },
+  /* F */
+  {
+    path: 'schedule',
+    loadChildren: '@web/app/features/f/schedule/schedule.module#ScheduleModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
