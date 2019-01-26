@@ -1,1 +1,9 @@
-<p-tabMenu [model]="items"></p-tabMenu>
+<p-tabMenu [model]="items" [activeItem]="active">
+  <ng-template pTemplate="item" let-item>
+    <div style="position: relative; text-align: center;">
+      <div class="ui-menuitem-text" (click)="onClick(item)">
+        <app-translate-shared [strings]="[item.menu.menu_name]" [titleCase]="true"></app-translate-shared>
+      </div>
+    </div>
+  </ng-template>
+</p-tabMenu>

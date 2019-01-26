@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-tab-menu-shared',
@@ -7,11 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TabMenuSharedComponent implements OnInit {
 
+  @Input() active: any;
   @Input() items: any;
+  @Output() navigate: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onClick(item) {
+    this.navigate.emit(item);
+  }
 }

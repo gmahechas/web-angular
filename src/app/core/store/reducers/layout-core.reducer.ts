@@ -16,7 +16,7 @@ export interface State {
   userOffice: UserOffice | null;
   userOfficeProject: UserOfficeProject | null;
   selectedMenus: {
-    selected: number | null,
+    selected: ProfileMenu | null,
     profileMenus: ProfileMenu[];
   };
 }
@@ -134,7 +134,7 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       return {
         ...state,
         selectedMenus: {
-          selected: action.payload.profile_menu.profile_menu_id,
+          selected: action.payload.profile_menu,
           profileMenus: (state.selectedMenus.profileMenus.includes(action.payload.profile_menu)) ?
             [...state.selectedMenus.profileMenus] :
             [...state.selectedMenus.profileMenus, action.payload.profile_menu]
@@ -145,7 +145,7 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       return {
         ...state,
         selectedMenus: {
-          selected: action.payload.profile_menu_id,
+          selected: action.payload.profile_menu,
           profileMenus: state.selectedMenus.profileMenus
         }
       };

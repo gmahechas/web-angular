@@ -5,7 +5,8 @@
   </app-sidebar-shared>
   <app-header-core *ngIf="(userOffice$ | async) as userOffice" [company]="company$ | async" [office]="userOffice.office"
     [user]="user" (clickOpen)="opencloseSidebar($event)" (clickSelectOffice)="gotoSelectOffice()" (clickLogout)="handleLogout()"></app-header-core>
-  <app-tab-menu-core [selectedMenus]="(selectedMenus$ | async)" (navigate)="handleNavigateFromTab($event)"></app-tab-menu-core>
+  <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus" [active]="selectedMenus.selected"
+    (navigate)="handleNavigateFromTab($event)"></app-tab-menu-shared>
 </div>
 <app-message-core></app-message-core>
 <app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>

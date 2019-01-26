@@ -7,7 +7,6 @@ import { ProgressBarCoreComponent } from '@web/app/core/components/progress-bar-
 import { ToastCoreComponent } from '@web/app/core/components/toast-core/toast-core.component';
 import { ConfirmCoreComponent } from '@web/app/core/components/confirm-core/confirm-core.component';
 import { MessageCoreComponent } from '@web/app/core/components/message-core/message-core.component';
-import { TabMenuCoreComponent } from '@web/app/core/components/tab-menu-core/tab-menu-core.component';
 import { BarMenuCoreComponent } from '@web/app/core/components/bar-menu-core/bar-menu-core.component';
 
 export const components: any[] = [
@@ -20,7 +19,6 @@ export const components: any[] = [
   ToastCoreComponent,
   ConfirmCoreComponent,
   MessageCoreComponent,
-  TabMenuCoreComponent,
   BarMenuCoreComponent
 ];
 
@@ -33,5 +31,4 @@ export * from '@web/app/core/components/progress-bar-core/progress-bar-core.comp
 export * from '@web/app/core/components/toast-core/toast-core.component';
 export * from '@web/app/core/components/confirm-core/confirm-core.component';
 export * from '@web/app/core/components/message-core/message-core.component';
-export * from '@web/app/core/components/tab-menu-core/tab-menu-core.component';
 export * from '@web/app/core/components/bar-menu-core/bar-menu-core.component';

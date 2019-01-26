@@ -77,7 +77,7 @@ export class AddSelectedMenu implements Action {
 
 export class ChangeSelectedMenu implements Action {
   readonly type = LayoutActionTypes.ChangeSelectedMenu;
-  constructor(public payload: { profile_menu_id: number }) { }
+  constructor(public payload: { profile_menu: any }) { }
 }
 
 export class ShowMessages implements Action {
