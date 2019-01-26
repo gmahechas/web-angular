@@ -1,0 +1,67 @@
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="hourRangeForm" (ngSubmit)="onSubmit()">
+      <div class="ui-grid">
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['hour_range.model.hour_range_name']"></app-translate-shared>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_name'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_name')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['hour_range.model.hour_range_description']"></app-translate-shared>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_description'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_description')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['hour_range.model.hour_range_start']"></app-translate-shared>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_start'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_start')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <app-translate-shared [strings]="['hour_range.model.hour_range_end']"></app-translate-shared>
+          </div>
+          <div class="ui-grid-col-6">
+            <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_end'"></app-input-text-shared>
+          </div>
+          <div class="ui-grid-col-4">
+            <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_end')"></app-validation-errors-shared>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-10 ui-g-offset-2">
+          <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="hourRangeForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-panel-shared>

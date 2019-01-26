@@ -1,0 +1,15 @@
+<app-form-hour-range *ngIf="!(hourRange$ | async) as hourRange" [pending]="pending$ | async" (submitted)="onStore($event)">
+    <div class="form-title">
+      <app-translate-shared [strings]="['create.verb', 'hour_range.singular']"></app-translate-shared>
+    </div>
+    <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  </app-form-hour-range>
+  
+  <app-form-hour-range *ngIf="(hourRange$ | async) as hourRange" [pending]="pending$ | async" (submitted)="onUpdate($event)" [hourRange]="hourRange">
+    <div class="form-title">
+      <app-translate-shared [strings]="['edit.verb', 'hour_range.singular']"></app-translate-shared>
+    </div>
+    <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(hourRange)"></app-button-shared>
+    <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  </app-form-hour-range>
+  

@@ -231,5 +231,16 @@
       "schedule_id": "id",
       "schedule_name": "horario"
     }
+  },
+  "hour_range": {
+    "singular": "rango de hora",
+    "plural": "rangos de horas",
+    "model": {
+      "hour_range_id": "id",
+      "hour_range_name": "nombre",
+      "hour_range_description": "descripcion",
+      "hour_range_start": "hora de inicio",
+      "hour_range_end": "hora de finalizacion"
+    }
   }
 }

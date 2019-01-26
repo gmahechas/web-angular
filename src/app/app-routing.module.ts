@@ -105,6 +105,11 @@ export const routes: Routes = [
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
+    path: 'hour_range',
+    loadChildren: '@web/app/features/f/hour-range/hour-range.module#HourRangeModule',
+    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+  },
+  {
     path: 'not-found',
     component: NotFoundCoreComponent,
     canActivate: [AuthGuard, HaveUserOfficeCoreGuard]

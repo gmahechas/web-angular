@@ -231,5 +231,16 @@
       "schedule_id": "id",
       "schedule_name": "schedule"
     }
+  },
+  "hour_range": {
+    "singular": "hour range",
+    "plural": "ranges of hours",
+    "model": {
+      "hour_range_id": "id",
+      "hour_range_name": "name",
+      "hour_range_description": "description",
+      "hour_range_start": "start time",
+      "hour_range_end": "end time"
+    }
   }
 }
