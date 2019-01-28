@@ -151,6 +151,18 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       };
     }
 
+    case LayoutActionTypes.RemoveSelectedMenu: {
+      const oldRecipes = [...state.selectedMenus.profileMenus];
+      oldRecipes.splice(action.payload.index, 1);
+      return {
+        ...state,
+        selectedMenus: {
+          selected: state.selectedMenus.selected,
+          profileMenus: oldRecipes
+        }
+      };
+    }
+
     default:
       return state;
   }

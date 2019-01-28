@@ -48,6 +48,10 @@ export class IndexPageCoreComponent implements OnInit {
     this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
   }
 
+  removeMenuFromTab(index: number) {
+    this.store.dispatch(new fromCore.RemoveSelectedMenu({ index }));
+  }
+
   handleLogout($event) {
     this.store.dispatch(new fromAuth.LogoutAuth());
   }
