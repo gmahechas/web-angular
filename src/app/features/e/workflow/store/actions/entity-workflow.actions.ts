@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Workflow] Destroy Fail Entity',
   PaginateEntity = '[Workflow] Paginate Entity',
   LoadEntityShared = '[Workflow] Load Entity Shared',
-  Reset = '[Workflow] Reset Search',
+  Reset = '[Workflow] Reset',
   SetSelected = '[Workflow] Set Selected'
 }
 

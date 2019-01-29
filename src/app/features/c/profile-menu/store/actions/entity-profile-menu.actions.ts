@@ -6,7 +6,7 @@ export enum EntityActionTypes {
   LoadEntity = '[Profile Menu] Load Entity ',
   LoadSuccessEntity = '[Profile Menu] Load Success Entity',
   LoadFailEntity = '[Profile Menu] Load Fail Entity',
-  Reset = '[Profile Menu] Reset Search'
+  Reset = '[Profile Menu] Reset'
 }
 
 export class LoadEntity implements Action {

@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Macroproject] Destroy Fail Entity',
   PaginateEntity = '[Macroproject] Paginate Entity',
   LoadEntityShared = '[Macroproject] Load Entity Shared',
-  Reset = '[Macroproject] Reset Search',
+  Reset = '[Macroproject] Reset',
   SetSelected = '[Macroproject] Set Selected'
 }
 

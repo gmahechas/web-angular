@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Context] Destroy Fail Entity',
   PaginateEntity = '[Context] Paginate Entity',
   LoadEntityShared = '[Context] Load Entity Shared',
-  Reset = '[Context] Reset Search',
+  Reset = '[Context] Reset',
   SetSelected = '[Context] Set Selected'
 }
 

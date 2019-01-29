@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Office] Destroy Fail Entity',
   PaginateEntity = '[Office] Paginate Entity',
   LoadEntityShared = '[Office] Load Entity Shared',
-  Reset = '[Office] Reset Search',
+  Reset = '[Office] Reset',
   SetSelected = '[Office] Set Selected'
 }
 

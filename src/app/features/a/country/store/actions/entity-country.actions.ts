@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Country] Destroy Fail Entity',
   PaginateEntity = '[Country] Paginate Entity',
   LoadEntityShared = '[Country] Load Entity Shared',
-  Reset = '[Country] Reset Search',
+  Reset = '[Country] Reset',
   SetSelected = '[Country] Set Selected'
 }
 

@@ -6,7 +6,7 @@ export enum EntityActionTypes {
   LoadSuccessEntity = '[Day] Load Success Entity',
   LoadFailEntity = '[Day] Load Fail Entity',
   LoadEntityShared = '[Day] Load Entity Shared',
-  Reset = '[Day] Reset Search'
+  Reset = '[Day] Reset'
 }
 
 export class LoadSuccessEntity implements Action {

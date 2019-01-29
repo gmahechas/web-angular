@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[HourRange] Destroy Fail Entity',
   PaginateEntity = '[HourRange] Paginate Entity',
   LoadEntityShared = '[HourRange] Load Entity Shared',
-  Reset = '[HourRange] Reset Search',
+  Reset = '[HourRange] Reset',
   SetSelected = '[HourRange] Set Selected'
 }
 
