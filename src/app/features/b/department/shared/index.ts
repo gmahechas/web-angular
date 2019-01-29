@@ -1,7 +1,7 @@
-import { DropdownPageDepartmentComponent } from '@web/app/features/b/department/shared/dropdown-page-department/dropdown-page-department.component';
+import {
+  DropdownPageDepartmentComponent
+} from '@web/app/features/b/department/shared/dropdown-page-department/dropdown-page-department.component';
 
 export const shared: any[] = [
   DropdownPageDepartmentComponent
 ];
-
-export * from '@web/app/features/b/department/shared/dropdown-page-department/dropdown-page-department.component';

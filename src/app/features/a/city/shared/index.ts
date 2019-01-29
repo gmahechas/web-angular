@@ -3,5 +3,3 @@ import { DropdownPageCityComponent } from '@web/app/features/a/city/shared/dropd
 export const shared: any[] = [
   DropdownPageCityComponent
 ];
-
-export * from '@web/app/features/a/city/shared/dropdown-page-city/dropdown-page-city.component';

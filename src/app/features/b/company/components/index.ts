@@ -3,5 +3,3 @@ import { FormCompanyComponent } from '@web/app/features/b/company/components/for
 export const components: any[] = [
   FormCompanyComponent
 ];
-
-export * from '@web/app/features/b/company/components/form-company/form-company.component';

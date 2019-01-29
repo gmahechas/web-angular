@@ -3,5 +3,3 @@ import { DropdownPagePersonComponent } from '@web/app/features/c/person/shared/d
 export const shared: any[] = [
   DropdownPagePersonComponent
 ];
-
-export * from '@web/app/features/c/person/shared/dropdown-page-person/dropdown-page-person.component';

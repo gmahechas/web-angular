@@ -3,5 +3,3 @@ import { DropdownPageEstateComponent } from '@web/app/features/a/estate/shared/d
 export const shared: any[] = [
   DropdownPageEstateComponent
 ];
-
-export * from '@web/app/features/a/estate/shared/dropdown-page-estate/dropdown-page-estate.component';

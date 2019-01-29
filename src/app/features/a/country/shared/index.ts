@@ -3,5 +3,3 @@ import { DropdownPageCountryComponent } from '@web/app/features/a/country/shared
 export const shared: any[] = [
   DropdownPageCountryComponent
 ];
-
-export * from '@web/app/features/a/country/shared/dropdown-page-country/dropdown-page-country.component';

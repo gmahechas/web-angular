@@ -5,6 +5,3 @@ export const components: any[] = [
     SearchFormUserComponent,
     FormUserComponent
 ];
-
-export * from '@web/app/features/c/user/components/search-form-user/search-form-user.component';
-export * from '@web/app/features/c/user/components/form-user/form-user.component';

@@ -3,5 +3,3 @@ import { DropdownPageScheduleComponent } from '@web/app/features/f/schedule/shar
 export const shared: any[] = [
   DropdownPageScheduleComponent
 ];
-
-export * from '@web/app/features/f/schedule/shared/dropdown-page-schedule/dropdown-page-schedule.component';

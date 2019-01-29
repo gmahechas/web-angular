@@ -5,6 +5,3 @@ export const components: any[] = [
     SearchFormWorkflowComponent,
     FormWorkflowComponent
 ];
-
-export * from '@web/app/features/e/workflow/components/search-form-workflow/search-form-workflow.component';
-export * from '@web/app/features/e/workflow/components/form-workflow/form-workflow.component';
