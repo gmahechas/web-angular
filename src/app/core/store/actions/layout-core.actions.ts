@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import { Confirm } from '@web/app/core/models/confirm.model';
+
 export enum LayoutActionTypes {
   SetDefaultLang = '[Layout] Set Default Lang',
   ChangeLang = '[Layout] Get Menu',
@@ -16,7 +18,8 @@ export enum LayoutActionTypes {
   AddSelectedMenu = '[Layout] Add Selected Menu',
   ChangeSelectedMenu = '[Layout] Change Selected Menu',
   RemoveSelectedMenu = '[Layout] Remove Selected Menu',
-  ShowMessages = '[Layout] Show Messages'
+  ShowMessages = '[Layout] Show Messages',
+  ConfirmDialog = '[Layout] Confirm Dialog'
 }
 
 export class SetDefaultLang implements Action {
@@ -91,6 +94,11 @@ export class ShowMessages implements Action {
   constructor(public payload: { messages: any[] }) { }
 }
 
+export class ConfirmDialog implements Action {
+  readonly type = LayoutActionTypes.ConfirmDialog;
+  constructor(public payload: { confirm: Confirm }) { }
+}
+
 export type LayoutActions =
   | SetDefaultLang
   | ChangeLang
@@ -107,4 +115,5 @@ export type LayoutActions =
   | AddSelectedMenu
   | ChangeSelectedMenu
   | RemoveSelectedMenu
-  | ShowMessages;
+  | ShowMessages
+  | ConfirmDialog;

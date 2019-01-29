@@ -8,6 +8,9 @@ import * as fromCoreActions from '@web/app/core/store/actions';
 import { LocalStorageService } from '@web/app/core/services/local-storage.service';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationService } from 'primeng/api';
+
+import { Confirm } from '@web/app/core/models/confirm.model';
 
 import { defer, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -66,6 +69,34 @@ export class LayoutCoreEffects {
   );
 
   @Effect({ dispatch: false })
+  confirm$ = this.actions$.pipe(
+    ofType(fromCoreActions.LayoutActionTypes.ConfirmDialog),
+    map((action: fromCoreActions.ConfirmDialog) => action.payload.confirm),
+    tap((confirm: Confirm) => {
+      this.confirmationService.confirm({
+        accept: () => {
+          if (confirm.acceptType) {
+            this.store.dispatch({ type: confirm.acceptType, payload: confirm.acceptPayload });
+          }
+        },
+        reject: () => {
+          if (confirm.rejectType) {
+            this.store.dispatch({ type: confirm.rejectType, payload: confirm.rejectPayload });
+          }
+        },
+        message: confirm.message,
+        key: confirm.key,
+        icon: confirm.icon,
+        header: confirm.header,
+        acceptLabel: confirm.acceptLabel,
+        rejectLabel: confirm.rejectLabel,
+        acceptVisible: confirm.acceptVisible,
+        rejectVisible: confirm.rejectVisible
+      });
+    })
+  );
+
+  @Effect({ dispatch: false })
   init$ = defer(() => {
     return of([
       this.localStorageService.getLang(),
@@ -89,6 +120,7 @@ export class LayoutCoreEffects {
     private localStorageService: LocalStorageService,
     private store: Store<fromCoreReducers.State>,
     private messageService: MessageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private confirmationService: ConfirmationService
   ) { }
 }
