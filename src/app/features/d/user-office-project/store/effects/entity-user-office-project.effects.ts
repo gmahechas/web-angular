@@ -71,7 +71,7 @@ export class EntityUserOfficeProjectEffects {
       switchMap((searchUserOfficeProject: fromModels.SearchUserOfficeProject) => {
         if (
           searchUserOfficeProject.user_office_project.user_office_project_id === '' &&
-          searchUserOfficeProject.user_office_project.user_office_project_status === '' &&
+          searchUserOfficeProject.user_office_project.user_office_project_status === null &&
           searchUserOfficeProject.user_office === '' &&
           searchUserOfficeProject.project === ''
         ) {
@@ -86,9 +86,7 @@ export class EntityUserOfficeProjectEffects {
         return this.userOfficeProjectService.load({ ...searchUserOfficeProject, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromUserOfficeProjectActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromUserOfficeProjectActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((errors) => of(new fromUserOfficeProjectActions.LoadFailEntity({ error: errors })))
         );
 
       })

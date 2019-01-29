@@ -27,6 +27,18 @@ export class EntityUserOfficeEffects {
   );
 
   @Effect()
+  storeEntity$ = this.actions$.pipe(
+    ofType<fromUserOfficeActions.StoreEntity>(fromUserOfficeActions.EntityActionTypes.StoreEntity),
+    map(action => action.payload.entity),
+    switchMap((userOffice: fromModels.UserOffice) => {
+      return this.userOfficeService.store(userOffice).pipe(
+        map(({ data }) => new fromUserOfficeActions.StoreSuccessEntity({ entity: data })),
+        catchError((errors) => of(new fromUserOfficeActions.StoreFailEntity({ error: errors })))
+      );
+    })
+  );
+
+  @Effect()
   updateEntity$ = this.actions$.pipe(
     ofType<fromUserOfficeActions.UpdateEntity>(fromUserOfficeActions.EntityActionTypes.UpdateEntity),
     map(action => action.payload.entity),

@@ -9,6 +9,7 @@ import { UserOfficeProjectRoutingModule } from '@web/app/features/d/user-office-
 
 import * as fromContainers from '@web/app/features/d/user-office-project/containers';
 import * as fromComponents from '@web/app/features/d/user-office-project/components';
+import * as fromShared from '@web/app/features/d/user-office-project/shared';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import * as fromComponents from '@web/app/features/d/user-office-project/compone
   ],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    ...fromShared.shared
   ]
 })
 export class UserOfficeProjectModule { }

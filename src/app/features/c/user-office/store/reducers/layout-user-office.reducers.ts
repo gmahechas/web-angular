@@ -14,7 +14,7 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
     case EntityActionTypes.LoadFailEntity:
-    // case EntityActionTypes.StoreFailEntity:
+    case EntityActionTypes.StoreFailEntity:
     case EntityActionTypes.UpdateFailEntity:
     case EntityActionTypes.DestroyFailEntity: {
       return {
@@ -25,7 +25,8 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.LoadEntity:
-    // case EntityActionTypes.StoreEntity:
+    case EntityActionTypes.PaginateEntity:
+    case EntityActionTypes.StoreEntity:
     case EntityActionTypes.UpdateEntity:
     case EntityActionTypes.DestroyEntity: {
       return {
@@ -35,7 +36,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.LoadSuccessEntity:
-    // case EntityActionTypes.StoreSuccessEntity:
+    case EntityActionTypes.StoreSuccessEntity:
     case EntityActionTypes.UpdateSuccessEntity:
     case EntityActionTypes.DestroySuccessEntity: {
       return {

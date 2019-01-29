@@ -121,7 +121,8 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
     case LayoutActionTypes.SetUserOffice:
       return {
         ...state,
-        userOffice: action.payload.userOffice
+        userOffice: action.payload.userOffice,
+        userOfficeProject: null
       };
 
     case LayoutActionTypes.SetUserOfficeProject:

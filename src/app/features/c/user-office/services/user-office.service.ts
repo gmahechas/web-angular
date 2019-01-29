@@ -11,6 +11,7 @@ export class UserOfficeService {
 
   constructor(
     private userOfficePagination: fromGraphql.UserOfficePaginationGQL,
+    private userOfficeGQL: fromGraphql.UserOfficeStoreGQL,
     private userOfficeUpdate: fromGraphql.UserOfficeUpdateGQL,
     private userOfficeDestroy: fromGraphql.UserOfficeDestroyGQL
   ) { }
@@ -23,6 +24,10 @@ export class UserOfficeService {
       limit: searchUserOffice.limit,
       page: searchUserOffice.page
     }).valueChanges;
+  }
+
+  store(userOffice: fromModels.UserOffice) {
+    return this.userOfficeGQL.mutate(userOffice);
   }
 
   update(userOffice: fromModels.UserOffice) {

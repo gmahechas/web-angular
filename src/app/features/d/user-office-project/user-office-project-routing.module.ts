@@ -5,6 +5,9 @@ import * as fromContainers from '@web/app/features/d/user-office-project/contain
 
 const routes: Routes = [
   {
+    path: 'select-project', component: fromContainers.SelectProjectPageUserOfficeProjectComponent
+  },
+  {
     path: 'user/:user_id/:user_office_id', component: fromContainers.IndexPageUserOfficeProjectComponent
   },
   {

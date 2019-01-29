@@ -4,7 +4,7 @@ import { Project } from '@web/app/features/d/project/models/project.model';
 export interface SearchUserOfficeProject {
   user_office_project?: {
     user_office_project_id?: string;
-    user_office_project_status?: string;
+    user_office_project_status?: boolean | null;
   };
   user_office?: UserOffice | null;
   project?: Project | null;

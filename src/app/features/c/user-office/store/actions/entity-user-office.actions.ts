@@ -6,12 +6,16 @@ export enum EntityActionTypes {
   LoadEntity = '[User Office] Load Entity ',
   LoadSuccessEntity = '[User Office] Load Success Entity',
   LoadFailEntity = '[User Office] Load Fail Entity',
+  StoreEntity = '[User Office] Store Entity',
+  StoreSuccessEntity = '[User Office] Store Success Entity',
+  StoreFailEntity = '[User Office] Store Fail Entity',
   UpdateEntity = '[User Office] Update Entity',
   UpdateSuccessEntity = '[User Office] Update Success Entity',
   UpdateFailEntity = '[User Office] Update Fail Entity',
   DestroyEntity = '[User Office] Destroy Entity',
   DestroySuccessEntity = '[User Office] Destroy Success Entity',
   DestroyFailEntity = '[User Office] Destroy Fail Entity',
+  PaginateEntity = '[User Office] Paginate Entity',
   LoadEntityShared = '[User Office] Load Entity Shared',
   ResetSearch = '[User Office] Reset Search'
 }
@@ -28,6 +32,21 @@ export class LoadSuccessEntity implements Action {
 
 export class LoadFailEntity implements Action {
   readonly type = EntityActionTypes.LoadFailEntity;
+  constructor(public payload: { error: any }) { }
+}
+
+export class StoreEntity implements Action {
+  readonly type = EntityActionTypes.StoreEntity;
+  constructor(public payload: { entity: fromModels.UserOffice }) { }
+}
+
+export class StoreSuccessEntity implements Action {
+  readonly type = EntityActionTypes.StoreSuccessEntity;
+  constructor(public payload: { entity: fromModels.StoreUserOffice }) { }
+}
+
+export class StoreFailEntity implements Action {
+  readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
 }
 
@@ -61,6 +80,11 @@ export class DestroyFailEntity implements Action {
   constructor(public payload: { error: any }) { }
 }
 
+export class PaginateEntity implements Action {
+  readonly type = EntityActionTypes.PaginateEntity;
+  constructor(public payload: { page: number }) { }
+}
+
 export class LoadEntityShared implements Action {
   readonly type = EntityActionTypes.LoadEntityShared;
   constructor(public payload: { search: fromModels.SearchUserOffice }) { }
@@ -74,10 +98,15 @@ export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
   | LoadFailEntity
+  | StoreEntity
+  | StoreSuccessEntity
+  | StoreFailEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity
   | DestroyEntity
   | DestroySuccessEntity
   | DestroyFailEntity
+  | PaginateEntity
+  | LoadEntityShared
   | ResetSearch;

@@ -1,4 +1,4 @@
-<app-form-select-user-office *ngIf="(user$ | async)" [user]="user$ | async" (selectedUserOffice)="selectUserOffice($event)">
+<app-form-select-user-office *ngIf="(user$ | async) as user" [user]="user" (selectedUserOffice)="selectUserOffice($event)">
   <div class="form-title">
     <app-translate-shared [strings]="['change.verb', 'office.singular']"></app-translate-shared>
   </div>

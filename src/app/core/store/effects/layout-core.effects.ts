@@ -41,6 +41,7 @@ export class LayoutCoreEffects {
     map((action: fromCoreActions.SetUserOffice) => action.payload.userOffice),
     tap((userOffice) => {
       this.localStorageService.setUserOffice(userOffice);
+      this.localStorageService.setUserOfficeProject(null);
       this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
     })
   );
@@ -51,6 +52,7 @@ export class LayoutCoreEffects {
     map((action: fromCoreActions.SetUserOfficeProject) => action.payload.userOfficeProject),
     tap((userOfficeProject) => {
       this.localStorageService.setUserOfficeProject(userOfficeProject);
+      this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
     })
   );
 

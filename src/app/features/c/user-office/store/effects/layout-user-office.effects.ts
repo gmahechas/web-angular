@@ -15,9 +15,11 @@ export class LayoutUserOfficeEffects {
   entity$ = this.actions$.pipe(
     ofType(
       fromUserOfficeActions.EntityActionTypes.LoadEntity,
-      // fromUserOfficeActions.EntityActionTypes.StoreEntity,
+      fromUserOfficeActions.EntityActionTypes.StoreEntity,
       fromUserOfficeActions.EntityActionTypes.UpdateEntity,
-      fromUserOfficeActions.EntityActionTypes.DestroyEntity
+      fromUserOfficeActions.EntityActionTypes.DestroyEntity,
+      fromUserOfficeActions.EntityActionTypes.PaginateEntity,
+      fromUserOfficeActions.EntityActionTypes.LoadEntityShared
     ),
     tap(() => {
       this.store.dispatch(new fromCore.ShowSpinner);
@@ -37,7 +39,7 @@ export class LayoutUserOfficeEffects {
   @Effect({ dispatch: false })
   success$ = this.actions$.pipe(
     ofType(
-      // fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
+      fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
       fromUserOfficeActions.EntityActionTypes.UpdateSuccessEntity,
       fromUserOfficeActions.EntityActionTypes.DestroySuccessEntity
     ),
@@ -55,7 +57,7 @@ export class LayoutUserOfficeEffects {
   fail$ = this.actions$.pipe(
     ofType(
       fromUserOfficeActions.EntityActionTypes.LoadFailEntity,
-      // fromUserOfficeActions.EntityActionTypes.StoreFailEntity,
+      fromUserOfficeActions.EntityActionTypes.StoreFailEntity,
       fromUserOfficeActions.EntityActionTypes.UpdateFailEntity,
       fromUserOfficeActions.EntityActionTypes.DestroyFailEntity
     ),

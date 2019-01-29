@@ -30,16 +30,18 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new fromUserOffice.LoadEntityShared({
-      search: {
-        user_office: {
-          user_office_id: '',
-          user_office_status: (this.userOffice.user_office_status) ? this.userOffice.user_office_status : null
-        },
-        user: (this.userOffice.user) ? this.userOffice.user : null,
-        office: (this.userOffice.office) ? this.userOffice.office : null
-      }
-    }));
+    setTimeout(() => {
+      this.store.dispatch(new fromUserOffice.LoadEntityShared({
+        search: {
+          user_office: {
+            user_office_id: '',
+            user_office_status: (this.userOffice.user_office_status) ? this.userOffice.user_office_status : null
+          },
+          user: (this.userOffice.user) ? this.userOffice.user : null,
+          office: (this.userOffice.office) ? this.userOffice.office : null
+        }
+      }));
+    });
   }
 
   keyUp(event) {

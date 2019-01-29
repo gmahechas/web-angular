@@ -92,6 +92,11 @@ export const routes: Routes = [
     loadChildren: '@web/app/features/d/project/project.module#ProjectModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
+  {
+    path: 'user-office-project',
+    loadChildren: '@web/app/features/d/user-office-project/user-office-project.module#UserOfficeProjectModule',
+    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+  },
   /* E */
   {
     path: 'workflow',
