@@ -79,7 +79,7 @@ export class LayoutDepartmentEffects {
       fromDepartmentActions.EntityActionTypes.StoreSuccessEntity,
       fromDepartmentActions.EntityActionTypes.UpdateSuccessEntity,
       fromDepartmentActions.EntityActionTypes.DestroySuccessEntity,
-      fromDepartmentActions.EntityActionTypes.ResetSearch
+      fromDepartmentActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['department'] }));

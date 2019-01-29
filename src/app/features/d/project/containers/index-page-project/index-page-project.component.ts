@@ -96,7 +96,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromProject.ResetSearch());
+    this.store.dispatch(new fromProject.Reset());
   }
 
   ngOnDestroy() {

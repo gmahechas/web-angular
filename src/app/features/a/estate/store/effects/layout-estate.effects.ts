@@ -79,7 +79,7 @@ export class LayoutEstateEffects {
       fromEstateActions.EntityActionTypes.StoreSuccessEntity,
       fromEstateActions.EntityActionTypes.UpdateSuccessEntity,
       fromEstateActions.EntityActionTypes.DestroySuccessEntity,
-      fromEstateActions.EntityActionTypes.ResetSearch
+      fromEstateActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['estate'] }));

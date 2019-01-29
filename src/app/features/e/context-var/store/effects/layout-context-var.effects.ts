@@ -79,7 +79,7 @@ export class LayoutContextVarEffects {
       fromContextVarActions.EntityActionTypes.StoreSuccessEntity,
       fromContextVarActions.EntityActionTypes.UpdateSuccessEntity,
       fromContextVarActions.EntityActionTypes.DestroySuccessEntity,
-      fromContextVarActions.EntityActionTypes.ResetSearch
+      fromContextVarActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['context_var'] }));

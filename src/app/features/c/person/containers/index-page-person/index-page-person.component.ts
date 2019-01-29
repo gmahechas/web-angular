@@ -102,7 +102,7 @@ export class IndexPagePersonComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromPerson.ResetSearch());
+    this.store.dispatch(new fromPerson.Reset());
   }
 
   ngOnDestroy() {

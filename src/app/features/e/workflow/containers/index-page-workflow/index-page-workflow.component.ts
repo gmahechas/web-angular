@@ -93,7 +93,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromWorkflow.ResetSearch());
+    this.store.dispatch(new fromWorkflow.Reset());
   }
 
   ngOnDestroy() {

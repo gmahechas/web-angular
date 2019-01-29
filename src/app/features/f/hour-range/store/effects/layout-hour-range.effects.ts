@@ -79,7 +79,7 @@ export class LayoutHourRangeEffects {
       fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
       fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
       fromHourRangeActions.EntityActionTypes.DestroySuccessEntity,
-      fromHourRangeActions.EntityActionTypes.ResetSearch
+      fromHourRangeActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['hour_range'] }));

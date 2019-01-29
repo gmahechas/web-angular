@@ -38,6 +38,6 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromProfileMenu.ResetSearch());
+    this.store.dispatch(new fromProfileMenu.Reset());
   }
 }

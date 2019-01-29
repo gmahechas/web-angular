@@ -35,7 +35,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return initialState;
     }
 
-    case EntityActionTypes.ResetSearch: {
+    case EntityActionTypes.Reset: {
       return initialState;
     }
 

@@ -66,6 +66,6 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromUserOffice.ResetSearch());
+    this.store.dispatch(new fromUserOffice.Reset());
   }
 }

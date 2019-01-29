@@ -79,7 +79,7 @@ export class LayoutOfficeEffects {
       fromOfficeActions.EntityActionTypes.StoreSuccessEntity,
       fromOfficeActions.EntityActionTypes.UpdateSuccessEntity,
       fromOfficeActions.EntityActionTypes.DestroySuccessEntity,
-      fromOfficeActions.EntityActionTypes.ResetSearch
+      fromOfficeActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));

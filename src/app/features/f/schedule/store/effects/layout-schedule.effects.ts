@@ -79,7 +79,7 @@ export class LayoutScheduleEffects {
       fromScheduleActions.EntityActionTypes.StoreSuccessEntity,
       fromScheduleActions.EntityActionTypes.UpdateSuccessEntity,
       fromScheduleActions.EntityActionTypes.DestroySuccessEntity,
-      fromScheduleActions.EntityActionTypes.ResetSearch
+      fromScheduleActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['schedule'] }));

@@ -79,7 +79,7 @@ export class LayoutMacroprojectEffects {
       fromMacroprojectActions.EntityActionTypes.StoreSuccessEntity,
       fromMacroprojectActions.EntityActionTypes.UpdateSuccessEntity,
       fromMacroprojectActions.EntityActionTypes.DestroySuccessEntity,
-      fromMacroprojectActions.EntityActionTypes.ResetSearch
+      fromMacroprojectActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));

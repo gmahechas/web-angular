@@ -112,7 +112,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromTypePersonIdentification.ResetSearch());
+    this.store.dispatch(new fromTypePersonIdentification.Reset());
   }
 
   ngOnDestroy() {

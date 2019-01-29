@@ -79,7 +79,7 @@ export class LayoutUserEffects {
       fromUserActions.EntityActionTypes.StoreSuccessEntity,
       fromUserActions.EntityActionTypes.UpdateSuccessEntity,
       fromUserActions.EntityActionTypes.DestroySuccessEntity,
-      fromUserActions.EntityActionTypes.ResetSearch
+      fromUserActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['user'] }));

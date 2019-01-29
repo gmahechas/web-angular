@@ -115,7 +115,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromUser.ResetSearch());
+    this.store.dispatch(new fromUser.Reset());
   }
 
   ngOnDestroy() {

@@ -6,7 +6,7 @@ export enum EntityActionTypes {
   LoadSuccessEntity = '[Day] Load Success Entity',
   LoadFailEntity = '[Day] Load Fail Entity',
   LoadEntityShared = '[Day] Load Entity Shared',
-  ResetSearch = '[Day] Reset Search'
+  Reset = '[Day] Reset Search'
 }
 
 export class LoadSuccessEntity implements Action {
@@ -24,12 +24,12 @@ export class LoadEntityShared implements Action {
   constructor(public payload: { search: fromModels.SearchDay }) { }
 }
 
-export class ResetSearch implements Action {
-  readonly type = EntityActionTypes.ResetSearch;
+export class Reset implements Action {
+  readonly type = EntityActionTypes.Reset;
 }
 
 export type EntityActions =
   | LoadSuccessEntity
   | LoadFailEntity
   | LoadEntityShared
-  | ResetSearch;
+  | Reset;

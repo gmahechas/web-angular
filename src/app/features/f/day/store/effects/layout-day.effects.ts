@@ -50,7 +50,7 @@ export class LayoutDayEffects {
   @Effect({ dispatch: false })
   successRedirect$ = this.actions$.pipe(
     ofType(
-      fromDayActions.EntityActionTypes.ResetSearch
+      fromDayActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['day'] }));

@@ -92,7 +92,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromSchedule.ResetSearch());
+    this.store.dispatch(new fromSchedule.Reset());
   }
 
   ngOnDestroy() {

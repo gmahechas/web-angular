@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Workflow] Destroy Fail Entity',
   PaginateEntity = '[Workflow] Paginate Entity',
   LoadEntityShared = '[Workflow] Load Entity Shared',
-  ResetSearch = '[Workflow] Reset Search',
+  Reset = '[Workflow] Reset Search',
   SetSelected = '[Workflow] Set Selected'
 }
 
@@ -91,8 +91,8 @@ export class LoadEntityShared implements Action {
   constructor(public payload: { search: fromModels.SearchWorkflow }) { }
 }
 
-export class ResetSearch implements Action {
-  readonly type = EntityActionTypes.ResetSearch;
+export class Reset implements Action {
+  readonly type = EntityActionTypes.Reset;
 }
 
 export class SetSelected implements Action {
@@ -115,5 +115,5 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | ResetSearch
+  | Reset
   | SetSelected;

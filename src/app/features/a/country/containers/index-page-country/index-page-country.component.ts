@@ -93,7 +93,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromCountry.ResetSearch());
+    this.store.dispatch(new fromCountry.Reset());
   }
 
   ngOnDestroy() {

@@ -79,7 +79,7 @@ export class LayoutCountryEffects {
       fromCountryActions.EntityActionTypes.StoreSuccessEntity,
       fromCountryActions.EntityActionTypes.UpdateSuccessEntity,
       fromCountryActions.EntityActionTypes.DestroySuccessEntity,
-      fromCountryActions.EntityActionTypes.ResetSearch
+      fromCountryActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['country'] }));

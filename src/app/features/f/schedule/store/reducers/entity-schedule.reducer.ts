@@ -41,7 +41,7 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.removeOne(action.payload.entity.destroySchedule.schedule_id, state);
     }
 
-    case EntityActionTypes.ResetSearch: {
+    case EntityActionTypes.Reset: {
       return adapter.removeAll(state);
     }
 

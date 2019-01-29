@@ -79,7 +79,7 @@ export class LayoutProjectEffects {
       fromProjectActions.EntityActionTypes.StoreSuccessEntity,
       fromProjectActions.EntityActionTypes.UpdateSuccessEntity,
       fromProjectActions.EntityActionTypes.DestroySuccessEntity,
-      fromProjectActions.EntityActionTypes.ResetSearch
+      fromProjectActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));

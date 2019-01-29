@@ -79,7 +79,7 @@ export class LayoutProfileEffects {
       fromProfileActions.EntityActionTypes.StoreSuccessEntity,
       fromProfileActions.EntityActionTypes.UpdateSuccessEntity,
       fromProfileActions.EntityActionTypes.DestroySuccessEntity,
-      fromProfileActions.EntityActionTypes.ResetSearch
+      fromProfileActions.EntityActionTypes.Reset
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['profile'] }));

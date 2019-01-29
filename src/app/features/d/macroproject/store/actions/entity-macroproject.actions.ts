@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[Macroproject] Destroy Fail Entity',
   PaginateEntity = '[Macroproject] Paginate Entity',
   LoadEntityShared = '[Macroproject] Load Entity Shared',
-  ResetSearch = '[Macroproject] Reset Search',
+  Reset = '[Macroproject] Reset Search',
   SetSelected = '[Macroproject] Set Selected'
 }
 
@@ -91,8 +91,8 @@ export class LoadEntityShared implements Action {
   constructor(public payload: { search: fromModels.SearchMacroproject }) { }
 }
 
-export class ResetSearch implements Action {
-  readonly type = EntityActionTypes.ResetSearch;
+export class Reset implements Action {
+  readonly type = EntityActionTypes.Reset;
 }
 
 export class SetSelected implements Action {
@@ -115,5 +115,5 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | ResetSearch
+  | Reset
   | SetSelected;

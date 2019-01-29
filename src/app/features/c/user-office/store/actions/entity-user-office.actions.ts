@@ -17,7 +17,7 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[User Office] Destroy Fail Entity',
   PaginateEntity = '[User Office] Paginate Entity',
   LoadEntityShared = '[User Office] Load Entity Shared',
-  ResetSearch = '[User Office] Reset Search'
+  Reset = '[User Office] Reset Search'
 }
 
 export class LoadEntity implements Action {
@@ -90,8 +90,8 @@ export class LoadEntityShared implements Action {
   constructor(public payload: { search: fromModels.SearchUserOffice }) { }
 }
 
-export class ResetSearch implements Action {
-  readonly type = EntityActionTypes.ResetSearch;
+export class Reset implements Action {
+  readonly type = EntityActionTypes.Reset;
 }
 
 export type EntityActions =
@@ -109,4 +109,4 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | ResetSearch;
+  | Reset;
