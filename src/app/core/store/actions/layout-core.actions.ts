@@ -3,23 +3,23 @@ import { Action } from '@ngrx/store';
 import { Confirm } from '@web/app/core/models/confirm.model';
 
 export enum LayoutActionTypes {
-  SetDefaultLang = '[Layout] Set Default Lang',
-  ChangeLang = '[Layout] Get Menu',
-  OpenSidebar = '[Layout] Open Sidebar',
-  CloseSidebar = '[Layout] Close Sidebar',
-  BlockedDocument = '[Layout] Blocked Document',
-  UnblockedDocument = '[Layout] Unblocked Document',
-  ShowSpinner = '[Layout] Open Spinner',
-  CloseSpinner = '[Layout] Close Spinner',
-  ShowProgressBar = '[Layout] Open Progress Bar',
-  CloseProgressBar = '[Layout] Close Progress Bar',
-  SetUserOffice = '[Layout] Set User Office',
-  SetUserOfficeProject = '[Layout] Set User Office Project',
-  AddSelectedMenu = '[Layout] Add Selected Menu',
-  ChangeSelectedMenu = '[Layout] Change Selected Menu',
-  RemoveSelectedMenu = '[Layout] Remove Selected Menu',
-  ShowMessages = '[Layout] Show Messages',
-  ConfirmDialog = '[Layout] Confirm Dialog'
+  SetDefaultLang = '[Layout Core] Set Default Lang',
+  ChangeLang = '[Layout Core] Get Menu',
+  OpenSidebar = '[Layout Core] Open Sidebar',
+  CloseSidebar = '[Layout Core] Close Sidebar',
+  BlockedDocument = '[Layout Core] Blocked Document',
+  UnblockedDocument = '[Layout Core] Unblocked Document',
+  ShowSpinner = '[Layout Core] Open Spinner',
+  CloseSpinner = '[Layout Core] Close Spinner',
+  ShowProgressBar = '[Layout Core] Open Progress Bar',
+  CloseProgressBar = '[Layout Core] Close Progress Bar',
+  SetUserOffice = '[Layout Core] Set User Office',
+  SetUserOfficeProject = '[Layout Core] Set User Office Project',
+  AddSelectedMenu = '[Layout Core] Add Selected Menu',
+  ChangeSelectedMenu = '[Layout Core] Change Selected Menu',
+  RemoveSelectedMenu = '[Layout Core] Remove Selected Menu',
+  ShowMessages = '[Layout Core] Show Messages',
+  ConfirmDialog = '[Layout Core] Confirm Dialog'
 }
 
 export class SetDefaultLang implements Action {
