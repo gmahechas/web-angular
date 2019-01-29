@@ -54,7 +54,15 @@ export class IndexPageCoreComponent implements OnInit {
   }
 
   handleLogout(event) {
-    this.store.dispatch(new fromAuth.LogoutAuth());
+    this.store.dispatch(new fromCore.ConfirmDialog({
+      confirm: {
+        acceptType: fromAuth.AuthActionTypes.LogoutAuth,
+        acceptLabel: 'salir',
+        rejectLabel: 'cancelar',
+        header: 'salir',
+        message: 'realmente desea salir del sistema'
+      }
+    }));
   }
 
   gotoSelectOffice(event) {
