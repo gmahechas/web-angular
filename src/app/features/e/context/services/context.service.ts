@@ -10,11 +10,11 @@ import * as fromModels from '@web/app/features/e/context/models';
 export class ContextService {
 
   constructor(
-    private contextPagination: fromGraphql.ContextPaginationGQL
+    private contextPaginationGQL: fromGraphql.ContextPaginationGQL
   ) { }
 
   load(searchContext: fromModels.SearchContext) {
-    return this.contextPagination.watch({
+    return this.contextPaginationGQL.watch({
       ...searchContext.context,
       limit: searchContext.limit,
       page: searchContext.page

@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/f/schedule/models';
 export class ScheduleService {
 
   constructor(
-    private schedulePagination: fromGraphql.SchedulePaginationGQL,
+    private schedulePaginationGQL: fromGraphql.SchedulePaginationGQL,
     private scheduleStoreGQL: fromGraphql.ScheduleStoreGQL,
     private scheduleUpdateGQL: fromGraphql.ScheduleUpdateGQL,
     private scheduleDestroyGQL: fromGraphql.ScheduleDestroyGQL
   ) { }
 
   load(searchSchedule: fromModels.SearchSchedule) {
-    return this.schedulePagination.watch({
+    return this.schedulePaginationGQL.watch({
       ...searchSchedule.schedule,
       limit: searchSchedule.limit,
       page: searchSchedule.page
@@ -37,7 +37,7 @@ export class ScheduleService {
   }
 
   pagination(searchSchedule: fromModels.SearchSchedule) {
-    return this.schedulePagination.fetch({
+    return this.schedulePaginationGQL.fetch({
       schedule_id: searchSchedule.schedule.schedule_id,
       schedule_name: searchSchedule.schedule.schedule_name,
       limit: searchSchedule.limit,

@@ -13,14 +13,14 @@ export class CountryService {
   queryRef: QueryRef<fromModels.PaginationCountry>;
 
   constructor(
-    private countryPagination: fromGraphql.CountryPaginationGQL,
+    private countryPaginationGQL: fromGraphql.CountryPaginationGQL,
     private countryStoreGQL: fromGraphql.CountryStoreGQL,
     private countryUpdateGQL: fromGraphql.CountryUpdateGQL,
     private countryDestroyGQL: fromGraphql.CountryDestroyGQL
   ) { }
 
   load(searchCountry: fromModels.SearchCountry) {
-    this.queryRef = this.countryPagination.watch({
+    this.queryRef = this.countryPaginationGQL.watch({
       ...searchCountry.country,
       limit: searchCountry.limit,
       page: searchCountry.page
@@ -44,7 +44,7 @@ export class CountryService {
   pagination(searchCountry: fromModels.SearchCountry) {
 
     return this.queryRef.fetchMore({
-      query: this.countryPagination.document,
+      query: this.countryPaginationGQL.document,
       variables: {
         country_id: searchCountry.country.country_id,
         country_name: searchCountry.country.country_name,

@@ -13,14 +13,14 @@ export class UserService {
   queryRef: QueryRef<fromModels.PaginationUser>;
 
   constructor(
-    private userPagination: fromGraphql.UserPaginationGQL,
+    private userPaginationGQL: fromGraphql.UserPaginationGQL,
     private userStoreGQL: fromGraphql.UserStoreGQL,
     private userUpdateGQL: fromGraphql.UserUpdateGQL,
     private userDestroyGQL: fromGraphql.UserDestroyGQL
   ) { }
 
   load(searchUser: fromModels.SearchUser) {
-    this.queryRef = this.userPagination.watch({
+    this.queryRef = this.userPaginationGQL.watch({
       ...searchUser.user,
       person_id: (searchUser.person) ? searchUser.person.person_id : null,
       profile_id: (searchUser.profile) ? searchUser.profile.profile_id : null,
@@ -45,7 +45,7 @@ export class UserService {
 
   pagination(searchUser: fromModels.SearchUser) {
     return this.queryRef.fetchMore({
-      query: this.userPagination,
+      query: this.userPaginationGQL,
       variables: {
         user_id: searchUser.user.user_id,
         username: searchUser.user.username,

@@ -10,11 +10,11 @@ import * as fromModels from '@web/app/features/e/context-var/models';
 export class ContextVarService {
 
   constructor(
-    private contextVarPagination: fromGraphql.ContextVarPaginationGQL
+    private contextVarPaginationGQL: fromGraphql.ContextVarPaginationGQL
   ) { }
 
   load(searchContextVar: fromModels.SearchContextVar) {
-    return this.contextVarPagination.watch({
+    return this.contextVarPaginationGQL.watch({
       ...searchContextVar.context_var,
       context_id: (searchContextVar.context) ? searchContextVar.context.context_id : null,
       limit: searchContextVar.limit,

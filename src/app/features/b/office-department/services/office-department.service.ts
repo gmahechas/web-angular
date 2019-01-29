@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/b/office-department/models';
 export class OfficeDepartmentService {
 
   constructor(
-    private officeDepartmentPagination: fromGraphql.OfficeDepartmentPaginationGQL,
+    private officeDepartmentPaginationGQL: fromGraphql.OfficeDepartmentPaginationGQL,
     private officeDepartmentStoreGQL: fromGraphql.OfficeDepartmentStoreGQL,
     private officeDepartmentUpdateGQL: fromGraphql.OfficeDepartmentUpdateGQL,
     private officeDepartmentDestroyGQL: fromGraphql.OfficeDepartmentDestroyGQL
   ) { }
 
   load(searchOfficeDepartment: fromModels.SearchOfficeDepartment) {
-    return this.officeDepartmentPagination.watch({
+    return this.officeDepartmentPaginationGQL.watch({
       ...searchOfficeDepartment.office_department,
       office_id: (searchOfficeDepartment.office) ? searchOfficeDepartment.office.office_id : null,
       department_id: (searchOfficeDepartment.department) ? searchOfficeDepartment.department.department_id : null,

@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/c/user-office/models';
 export class UserOfficeService {
 
   constructor(
-    private userOfficePagination: fromGraphql.UserOfficePaginationGQL,
+    private userOfficePaginationGQL: fromGraphql.UserOfficePaginationGQL,
     private userOfficeGQL: fromGraphql.UserOfficeStoreGQL,
     private userOfficeUpdate: fromGraphql.UserOfficeUpdateGQL,
     private userOfficeDestroy: fromGraphql.UserOfficeDestroyGQL
   ) { }
 
   load(searchUserOffice: fromModels.SearchUserOffice) {
-    return this.userOfficePagination.watch({
+    return this.userOfficePaginationGQL.watch({
       ...searchUserOffice.user_office,
       user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
       office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,

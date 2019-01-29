@@ -10,11 +10,11 @@ import * as fromModels from '@web/app/features/f/day/models';
 export class DayService {
 
   constructor(
-    private dayPagination: fromGraphql.DayPaginationGQL
+    private dayPaginationGQL: fromGraphql.DayPaginationGQL
   ) { }
 
   load(searchDay: fromModels.SearchDay) {
-    return this.dayPagination.watch({
+    return this.dayPaginationGQL.watch({
       ...searchDay.day,
       limit: searchDay.limit,
       page: searchDay.page

@@ -13,14 +13,14 @@ export class MacroprojectService {
   queryRef: QueryRef<fromModels.PaginationMacroproject>;
 
   constructor(
-    private macroprojectPagination: fromGraphql.MacroprojectPaginationGQL,
+    private macroprojectPaginationGQL: fromGraphql.MacroprojectPaginationGQL,
     private macroprojectStoreGQL: fromGraphql.MacroprojectStoreGQL,
     private macroprojectUpdateGQL: fromGraphql.MacroprojectUpdateGQL,
     private macroprojectDestroyGQL: fromGraphql.MacroprojectDestroyGQL
   ) { }
 
   load(searchMacroproject: fromModels.SearchMacroproject) {
-    return this.macroprojectPagination.watch({
+    return this.macroprojectPaginationGQL.watch({
       ...searchMacroproject.macroproject,
       city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id : null,
       office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id : null,
@@ -43,7 +43,7 @@ export class MacroprojectService {
 
   pagination(searchMacroproject: fromModels.SearchMacroproject) {
     return this.queryRef.fetchMore({
-      query: this.macroprojectPagination.document,
+      query: this.macroprojectPaginationGQL.document,
       variables: {
         macroproject_id: searchMacroproject.macroproject.macroproject_id,
         macroproject_name: searchMacroproject.macroproject.macroproject_name,

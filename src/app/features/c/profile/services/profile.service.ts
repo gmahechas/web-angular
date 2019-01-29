@@ -13,14 +13,14 @@ export class ProfileService {
   queryRef: QueryRef<fromModels.PaginationProfile>;
 
   constructor(
-    private profilePagination: fromGraphql.ProfilePaginationGQL,
+    private profilePaginationGQL: fromGraphql.ProfilePaginationGQL,
     private profileStoreGQL: fromGraphql.ProfileStoreGQL,
     private profileUpdateGQL: fromGraphql.ProfileUpdateGQL,
     private profileDestroyGQL: fromGraphql.ProfileDestroyGQL
   ) { }
 
   load(searchProfile: fromModels.SearchProfile) {
-    this.queryRef = this.profilePagination.watch({
+    this.queryRef = this.profilePaginationGQL.watch({
       ...searchProfile.profile,
       limit: searchProfile.limit,
       page: searchProfile.page
@@ -44,7 +44,7 @@ export class ProfileService {
   pagination(searchProfile: fromModels.SearchProfile) {
 
     return this.queryRef.fetchMore({
-      query: this.profilePagination.document,
+      query: this.profilePaginationGQL.document,
       variables: {
         profile_id: searchProfile.profile.profile_id,
         profile_name: searchProfile.profile.profile_name,

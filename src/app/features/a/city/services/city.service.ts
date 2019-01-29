@@ -13,14 +13,14 @@ export class CityService {
   queryRef: QueryRef<fromModels.PaginationCity>;
 
   constructor(
-    private cityPagination: fromGraphql.CityPaginationGQL,
+    private cityPaginationGQL: fromGraphql.CityPaginationGQL,
     private cityStoreGQL: fromGraphql.CityStoreGQL,
     private cityUpdateGQL: fromGraphql.CityUpdateGQL,
     private cityDestroyGQL: fromGraphql.CityDestroyGQL
   ) { }
 
   load(searchCity: fromModels.SearchCity) {
-    this.queryRef = this.cityPagination.watch({
+    this.queryRef = this.cityPaginationGQL.watch({
       ...searchCity.city,
       estate_id: (searchCity.estate) ? searchCity.estate.estate_id : null,
       limit: searchCity.limit,
@@ -45,7 +45,7 @@ export class CityService {
   pagination(searchCity: fromModels.SearchCity) {
 
     return this.queryRef.fetchMore({
-      query: this.cityPagination.document,
+      query: this.cityPaginationGQL.document,
       variables: {
         city_id: searchCity.city.city_id,
         city_name: searchCity.city.city_name,

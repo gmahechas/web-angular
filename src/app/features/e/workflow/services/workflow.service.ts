@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/e/workflow/models';
 export class WorkflowService {
 
   constructor(
-    private workflowPagination: fromGraphql.WorkflowPaginationGQL,
+    private workflowPaginationGQL: fromGraphql.WorkflowPaginationGQL,
     private workflowStoreGQL: fromGraphql.WorkflowStoreGQL,
     private workflowUpdateGQL: fromGraphql.WorkflowUpdateGQL,
     private workflowDestroyGQL: fromGraphql.WorkflowDestroyGQL
   ) { }
 
   load(searchWorkflow: fromModels.SearchWorkflow) {
-    return this.workflowPagination.watch({
+    return this.workflowPaginationGQL.watch({
       ...searchWorkflow.workflow,
       limit: searchWorkflow.limit,
       page: searchWorkflow.page
@@ -37,7 +37,7 @@ export class WorkflowService {
   }
 
   pagination(searchWorkflow: fromModels.SearchWorkflow) {
-    return this.workflowPagination.fetch({
+    return this.workflowPaginationGQL.fetch({
       workflow_id: searchWorkflow.workflow.workflow_id,
       workflow_name: searchWorkflow.workflow.workflow_name,
       limit: searchWorkflow.limit,

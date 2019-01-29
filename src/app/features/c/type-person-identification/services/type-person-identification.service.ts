@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/c/type-person-identification/mode
 export class TypePersonIdentificationService {
 
   constructor(
-    private typePersonIdentificationPagination: fromGraphql.TypePersonIdentificationPaginationGQL,
+    private typePersonIdentificationPaginationGQL: fromGraphql.TypePersonIdentificationPaginationGQL,
     private typePersonIdentificationStoreGQL: fromGraphql.TypePersonIdentificationStoreGQL,
     private typePersonIdentificationUpdateGQL: fromGraphql.TypePersonIdentificationUpdateGQL,
     private typePersonIdentificationDestroyGQL: fromGraphql.TypePersonIdentificationDestroyGQL
   ) { }
 
   load(searchTypePersonIdentification: fromModels.SearchTypePersonIdentification) {
-    return this.typePersonIdentificationPagination.watch({
+    return this.typePersonIdentificationPaginationGQL.watch({
       ...searchTypePersonIdentification.type_person_identification,
       limit: searchTypePersonIdentification.limit,
       page: searchTypePersonIdentification.page
@@ -37,7 +37,7 @@ export class TypePersonIdentificationService {
   }
 
   pagination(searchTypePersonIdentification: fromModels.SearchTypePersonIdentification) {
-    return this.typePersonIdentificationPagination.fetch({
+    return this.typePersonIdentificationPaginationGQL.fetch({
       type_person_identification_id: searchTypePersonIdentification.type_person_identification.type_person_identification_id,
       type_person_identification_description:
         searchTypePersonIdentification.type_person_identification.type_person_identification_description,

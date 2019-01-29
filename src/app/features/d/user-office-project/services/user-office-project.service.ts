@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/d/user-office-project/models';
 export class UserOfficeProjectService {
 
   constructor(
-    private userOfficeProjectPagination: fromGraphql.UserOfficeProjectPaginationGQL,
+    private userOfficeProjectPaginationGQL: fromGraphql.UserOfficeProjectPaginationGQL,
     private userOfficeProjectStoreGQL: fromGraphql.UserOfficeProjectStoreGQL,
     private userOfficeProjectUpdateGQL: fromGraphql.UserOfficeProjectUpdateGQL,
     private userOfficeProjectDestroyGQL: fromGraphql.UserOfficeProjectDestroyGQL
   ) { }
 
   load(searchUserOfficeProject: fromModels.SearchUserOfficeProject) {
-    return this.userOfficeProjectPagination.watch({
+    return this.userOfficeProjectPaginationGQL.watch({
       ...searchUserOfficeProject.user_office_project,
       user_office_id: (searchUserOfficeProject.user_office) ? searchUserOfficeProject.user_office.user_office_id : null,
       project_id: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,

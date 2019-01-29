@@ -13,14 +13,14 @@ export class EstateService {
   queryRef: QueryRef<fromModels.PaginationEstate>;
 
   constructor(
-    private estatePagination: fromGraphql.EstatePaginationGQL,
+    private estatePaginationGQL: fromGraphql.EstatePaginationGQL,
     private estateStoreGQL: fromGraphql.EstateStoreGQL,
     private estateUpdateGQL: fromGraphql.EstateUpdateGQL,
     private estateDestroyGQL: fromGraphql.EstateDestroyGQL
   ) { }
 
   load(searchEstate: fromModels.SearchEstate) {
-    this.queryRef = this.estatePagination.watch({
+    this.queryRef = this.estatePaginationGQL.watch({
       ...searchEstate.estate,
       country_id: (searchEstate.country) ? searchEstate.country.country_id : null,
       limit: searchEstate.limit,
@@ -45,7 +45,7 @@ export class EstateService {
   pagination(searchEstate: fromModels.SearchEstate) {
 
     return this.queryRef.fetchMore({
-      query: this.estatePagination.document,
+      query: this.estatePaginationGQL.document,
       variables: {
         estate_id: searchEstate.estate.estate_id,
         estate_name: searchEstate.estate.estate_name,

@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/b/department/models';
 export class DepartmentService {
 
   constructor(
-    private departmentPagination: fromGraphql.DepartmentPaginationGQL,
+    private departmentPaginationGQL: fromGraphql.DepartmentPaginationGQL,
     private departmentStoreGQL: fromGraphql.DepartmentStoreGQL,
     private departmentUpdateGQL: fromGraphql.DepartmentUpdateGQL,
     private departmentDestroyGQL: fromGraphql.DepartmentDestroyGQL
   ) { }
 
   load(searchDepartment: fromModels.SearchDepartment) {
-    return this.departmentPagination.watch({
+    return this.departmentPaginationGQL.watch({
       ...searchDepartment.department,
       limit: searchDepartment.limit,
       page: searchDepartment.page
@@ -37,7 +37,7 @@ export class DepartmentService {
   }
 
   pagination(searchDepartment: fromModels.SearchDepartment) {
-    return this.departmentPagination.fetch({
+    return this.departmentPaginationGQL.fetch({
       department_id: searchDepartment.department.department_id,
       limit: searchDepartment.limit,
       page: searchDepartment.page

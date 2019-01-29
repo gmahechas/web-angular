@@ -13,14 +13,14 @@ export class ProjectService {
   queryRef: QueryRef<fromModels.PaginationProject>;
 
   constructor(
-    private projectPagination: fromGraphql.ProjectPaginationGQL,
+    private projectPaginationGQL: fromGraphql.ProjectPaginationGQL,
     private projectStoreGQL: fromGraphql.ProjectStoreGQL,
     private projectUpdateGQL: fromGraphql.ProjectUpdateGQL,
     private projectDestroyGQL: fromGraphql.ProjectDestroyGQL
   ) { }
 
   load(searchProject: fromModels.SearchProject) {
-    return this.projectPagination.watch({
+    return this.projectPaginationGQL.watch({
       ...searchProject.project,
       macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
       limit: searchProject.limit,
@@ -42,7 +42,7 @@ export class ProjectService {
 
   pagination(searchProject: fromModels.SearchProject) {
     return this.queryRef.fetchMore({
-      query: this.projectPagination.document,
+      query: this.projectPaginationGQL.document,
       variables: {
         project_id: searchProject.project.project_id,
         project_name: searchProject.project.project_name,

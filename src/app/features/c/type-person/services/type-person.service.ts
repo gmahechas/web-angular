@@ -10,14 +10,14 @@ import * as fromModels from '@web/app/features/c/type-person/models';
 export class TypePersonService {
 
   constructor(
-    private typePersonPagination: fromGraphql.TypePersonPaginationGQL,
+    private typePersonPaginationGQL: fromGraphql.TypePersonPaginationGQL,
     private typePersonStoreGQL: fromGraphql.TypePersonStoreGQL,
     private typePersonUpdateGQL: fromGraphql.TypePersonUpdateGQL,
     private typePersonDestroyGQL: fromGraphql.TypePersonDestroyGQL
   ) { }
 
   load(searchTypePerson: fromModels.SearchTypePerson) {
-    return this.typePersonPagination.watch({
+    return this.typePersonPaginationGQL.watch({
       ...searchTypePerson.type_person,
       limit: searchTypePerson.limit,
       page: searchTypePerson.page
@@ -37,7 +37,7 @@ export class TypePersonService {
   }
 
   pagination(searchTypePerson: fromModels.SearchTypePerson) {
-    return this.typePersonPagination.fetch({
+    return this.typePersonPaginationGQL.fetch({
       type_person_id: searchTypePerson.type_person.type_person_id,
       type_person_description: searchTypePerson.type_person.type_person_description,
       limit: searchTypePerson.limit,

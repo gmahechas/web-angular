@@ -13,14 +13,14 @@ export class PersonService {
   queryRef: QueryRef<fromModels.PaginationPerson>;
 
   constructor(
-    private personPagination: fromGraphql.PersonPaginationGQL,
+    private personPaginationGQL: fromGraphql.PersonPaginationGQL,
     private personStoreGQL: fromGraphql.PersonStoreGQL,
     private personUpdateGQL: fromGraphql.PersonUpdateGQL,
     private personDestroyGQL: fromGraphql.PersonDestroyGQL
   ) { }
 
   load(searchPerson: fromModels.SearchPerson) {
-    this.queryRef = this.personPagination.watch({
+    this.queryRef = this.personPaginationGQL.watch({
       ...searchPerson.person,
       limit: searchPerson.limit,
       page: searchPerson.page
@@ -43,7 +43,7 @@ export class PersonService {
 
   pagination(searchPerson: fromModels.SearchPerson) {
     return this.queryRef.fetchMore({
-      query: this.personPagination.document,
+      query: this.personPaginationGQL.document,
       variables: {
         person_id: searchPerson.person.person_id,
         person_identification: searchPerson.person.person_identification,
