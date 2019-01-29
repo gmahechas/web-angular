@@ -31,7 +31,7 @@ export class EntityTypePersonIdentificationEffects {
       currentPage = (currentPage) ? currentPage : searchTypePersonIdentification.page;
       return this.typePersonIdentificationService.load({ ...searchTypePersonIdentification, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromTypePersonIdentificationActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromTypePersonIdentificationActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonIdentificationActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -43,7 +43,7 @@ export class EntityTypePersonIdentificationEffects {
     switchMap((typePersonIdentification: fromModels.TypePersonIdentification) => {
       return this.typePersonIdentificationService.store(typePersonIdentification).pipe(
         map(({ data }) => new fromTypePersonIdentificationActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromTypePersonIdentificationActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonIdentificationActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -55,7 +55,7 @@ export class EntityTypePersonIdentificationEffects {
     switchMap((typePersonIdentification: fromModels.TypePersonIdentification) => {
       return this.typePersonIdentificationService.update(typePersonIdentification).pipe(
         map(({ data }) => new fromTypePersonIdentificationActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromTypePersonIdentificationActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonIdentificationActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -67,7 +67,7 @@ export class EntityTypePersonIdentificationEffects {
     switchMap((typePersonIdentification: fromModels.TypePersonIdentification) => {
       return this.typePersonIdentificationService.destroy(typePersonIdentification).pipe(
         map(({ data }) => new fromTypePersonIdentificationActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromTypePersonIdentificationActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonIdentificationActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -85,7 +85,7 @@ export class EntityTypePersonIdentificationEffects {
         ...searchTypePersonIdentification, limit: perPage, page: currentPage
       })).pipe(
         map(({ data }) => new fromTypePersonIdentificationActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromTypePersonIdentificationActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonIdentificationActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -112,9 +112,7 @@ export class EntityTypePersonIdentificationEffects {
         return this.typePersonIdentificationService.load({ ...searchTypePersonIdentification, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromTypePersonIdentificationActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromTypePersonIdentificationActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromTypePersonIdentificationActions.LoadFailEntity({ error })))
         );
 
       })

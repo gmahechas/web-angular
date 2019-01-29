@@ -29,7 +29,7 @@ export class EntityHourRangeEffects {
       currentPage = (currentPage) ? currentPage : searchHourRange.page;
       return this.hourRangeService.load({ ...searchHourRange, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromHourRangeActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -41,7 +41,7 @@ export class EntityHourRangeEffects {
     switchMap((hourRange: fromModels.HourRange) => {
       return this.hourRangeService.store(hourRange).pipe(
         map(({ data }) => new fromHourRangeActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromHourRangeActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromHourRangeActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -53,7 +53,7 @@ export class EntityHourRangeEffects {
     switchMap((hourRange: fromModels.HourRange) => {
       return this.hourRangeService.update(hourRange).pipe(
         map(({ data }) => new fromHourRangeActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromHourRangeActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromHourRangeActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -65,7 +65,7 @@ export class EntityHourRangeEffects {
     switchMap((hourRange: fromModels.HourRange) => {
       return this.hourRangeService.destroy(hourRange).pipe(
         map(({ data }) => new fromHourRangeActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromHourRangeActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromHourRangeActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -81,7 +81,7 @@ export class EntityHourRangeEffects {
     switchMap(([currentPage, perPage, searchHourRange]: [number, number, fromModels.SearchHourRange]) => {
       return from(this.hourRangeService.pagination({ ...searchHourRange, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromHourRangeActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -108,9 +108,7 @@ export class EntityHourRangeEffects {
         return this.hourRangeService.load({ ...searchHourRange, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromHourRangeActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
         );
 
       })

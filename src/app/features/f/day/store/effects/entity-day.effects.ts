@@ -38,9 +38,7 @@ export class EntityDayEffects {
         return this.dayService.load({ ...searchDay, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromDayActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromDayActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromDayActions.LoadFailEntity({ error })))
         );
 
       })

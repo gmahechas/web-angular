@@ -29,7 +29,7 @@ export class EntityTypePersonEffects {
       currentPage = (currentPage) ? currentPage : searchTypePerson.page;
       return this.typePersonService.load({ ...searchTypePerson, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromTypePersonActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromTypePersonActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -41,7 +41,7 @@ export class EntityTypePersonEffects {
     switchMap((typePerson: fromModels.TypePerson) => {
       return this.typePersonService.store(typePerson).pipe(
         map(({ data }) => new fromTypePersonActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromTypePersonActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -53,7 +53,7 @@ export class EntityTypePersonEffects {
     switchMap((typePerson: fromModels.TypePerson) => {
       return this.typePersonService.update(typePerson).pipe(
         map(({ data }) => new fromTypePersonActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromTypePersonActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -65,7 +65,7 @@ export class EntityTypePersonEffects {
     switchMap((typePerson: fromModels.TypePerson) => {
       return this.typePersonService.destroy(typePerson).pipe(
         map(({ data }) => new fromTypePersonActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromTypePersonActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -81,7 +81,7 @@ export class EntityTypePersonEffects {
     switchMap(([currentPage, perPage, searchTypePerson]: [number, number, fromModels.SearchTypePerson]) => {
       return from(this.typePersonService.pagination({ ...searchTypePerson, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromTypePersonActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromTypePersonActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromTypePersonActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -96,7 +96,7 @@ export class EntityTypePersonEffects {
         if (
           searchTypePerson.type_person.type_person_id === '' &&
           searchTypePerson.type_person.type_person_description === ''
-          ) {
+        ) {
           return EMPTY;
         }
 
@@ -108,9 +108,7 @@ export class EntityTypePersonEffects {
         return this.typePersonService.load({ ...searchTypePerson, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromTypePersonActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromTypePersonActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromTypePersonActions.LoadFailEntity({ error })))
         );
 
       })

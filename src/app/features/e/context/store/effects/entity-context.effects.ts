@@ -29,7 +29,7 @@ export class EntityContextEffects {
       currentPage = (currentPage) ? currentPage : searchContext.page;
       return this.contextService.load({ ...searchContext, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromContextActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromContextActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromContextActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -56,9 +56,7 @@ export class EntityContextEffects {
         return this.contextService.load({ ...searchContext, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromContextActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromContextActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromContextActions.LoadFailEntity({ error })))
         );
 
       })

@@ -33,7 +33,7 @@ export class EntityUserOfficeEffects {
     switchMap((userOffice: fromModels.UserOffice) => {
       return this.userOfficeService.store(userOffice).pipe(
         map(({ data }) => new fromUserOfficeActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromUserOfficeActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromUserOfficeActions.StoreFailEntity({ error })))
       );
     })
   );

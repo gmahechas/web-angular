@@ -29,7 +29,7 @@ export class EntityDepartmentEffects {
       currentPage = (currentPage) ? currentPage : searchDepartment.page;
       return this.departmentService.load({ ...searchDepartment, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromDepartmentActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromDepartmentActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromDepartmentActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -41,7 +41,7 @@ export class EntityDepartmentEffects {
     switchMap((department: fromModels.Department) => {
       return this.departmentService.store(department).pipe(
         map(({ data }) => new fromDepartmentActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromDepartmentActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromDepartmentActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -53,7 +53,7 @@ export class EntityDepartmentEffects {
     switchMap((department: fromModels.Department) => {
       return this.departmentService.update(department).pipe(
         map(({ data }) => new fromDepartmentActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromDepartmentActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromDepartmentActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -65,7 +65,7 @@ export class EntityDepartmentEffects {
     switchMap((department: fromModels.Department) => {
       return this.departmentService.destroy(department).pipe(
         map(({ data }) => new fromDepartmentActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromDepartmentActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromDepartmentActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -81,7 +81,7 @@ export class EntityDepartmentEffects {
     switchMap(([currentPage, perPage, searchDepartment]: [number, number, fromModels.SearchDepartment]) => {
       return from(this.departmentService.pagination({ ...searchDepartment, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromDepartmentActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromDepartmentActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromDepartmentActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -96,7 +96,7 @@ export class EntityDepartmentEffects {
         if (
           searchDepartment.department.department_id === '' &&
           searchDepartment.department.department_name === ''
-          ) {
+        ) {
           return EMPTY;
         }
 
@@ -108,9 +108,7 @@ export class EntityDepartmentEffects {
         return this.departmentService.load({ ...searchDepartment, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromDepartmentActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromDepartmentActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromDepartmentActions.LoadFailEntity({ error })))
         );
 
       })

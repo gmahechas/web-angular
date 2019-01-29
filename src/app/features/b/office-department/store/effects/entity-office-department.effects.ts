@@ -21,7 +21,7 @@ export class EntityOfficeDepartmentEffects {
     switchMap((search: fromModels.SearchOfficeDepartment) => {
       return this.officeDepartmentService.load(search).pipe(
         map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -33,7 +33,7 @@ export class EntityOfficeDepartmentEffects {
     switchMap((officeDepartment: fromModels.OfficeDepartment) => {
       return this.officeDepartmentService.store(officeDepartment).pipe(
         map(({ data }) => new fromOfficeDepartmentActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromOfficeDepartmentActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromOfficeDepartmentActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -45,7 +45,7 @@ export class EntityOfficeDepartmentEffects {
     switchMap((officeDepartment: fromModels.OfficeDepartment) => {
       return this.officeDepartmentService.update(officeDepartment).pipe(
         map(({ data }) => new fromOfficeDepartmentActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromOfficeDepartmentActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromOfficeDepartmentActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -57,7 +57,7 @@ export class EntityOfficeDepartmentEffects {
     switchMap((officeDepartment: fromModels.OfficeDepartment) => {
       return this.officeDepartmentService.destroy(officeDepartment).pipe(
         map(({ data }) => new fromOfficeDepartmentActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromOfficeDepartmentActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromOfficeDepartmentActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -86,9 +86,7 @@ export class EntityOfficeDepartmentEffects {
         return this.officeDepartmentService.load({ ...searchOfficeDepartment, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromOfficeDepartmentActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
         );
 
       })

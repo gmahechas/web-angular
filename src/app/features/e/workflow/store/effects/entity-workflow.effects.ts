@@ -29,7 +29,7 @@ export class EntityWorkflowEffects {
       currentPage = (currentPage) ? currentPage : searchWorkflow.page;
       return this.workflowService.load({ ...searchWorkflow, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromWorkflowActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromWorkflowActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromWorkflowActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -41,7 +41,7 @@ export class EntityWorkflowEffects {
     switchMap((workflow: fromModels.Workflow) => {
       return this.workflowService.store(workflow).pipe(
         map(({ data }) => new fromWorkflowActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromWorkflowActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromWorkflowActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -53,7 +53,7 @@ export class EntityWorkflowEffects {
     switchMap((workflow: fromModels.Workflow) => {
       return this.workflowService.update(workflow).pipe(
         map(({ data }) => new fromWorkflowActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromWorkflowActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromWorkflowActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -65,7 +65,7 @@ export class EntityWorkflowEffects {
     switchMap((workflow: fromModels.Workflow) => {
       return this.workflowService.destroy(workflow).pipe(
         map(({ data }) => new fromWorkflowActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromWorkflowActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromWorkflowActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -81,7 +81,7 @@ export class EntityWorkflowEffects {
     switchMap(([currentPage, perPage, searchWorkflow]: [number, number, fromModels.SearchWorkflow]) => {
       return from(this.workflowService.pagination({ ...searchWorkflow, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromWorkflowActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromWorkflowActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromWorkflowActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -96,7 +96,7 @@ export class EntityWorkflowEffects {
         if (
           searchWorkflow.workflow.workflow_id === '' &&
           searchWorkflow.workflow.workflow_name === ''
-          ) {
+        ) {
           return EMPTY;
         }
 
@@ -108,9 +108,7 @@ export class EntityWorkflowEffects {
         return this.workflowService.load({ ...searchWorkflow, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromWorkflowActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromWorkflowActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromWorkflowActions.LoadFailEntity({ error })))
         );
 
       })

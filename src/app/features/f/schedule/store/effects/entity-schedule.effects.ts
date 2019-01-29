@@ -29,7 +29,7 @@ export class EntityScheduleEffects {
       currentPage = (currentPage) ? currentPage : searchSchedule.page;
       return this.scheduleService.load({ ...searchSchedule, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromScheduleActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -41,7 +41,7 @@ export class EntityScheduleEffects {
     switchMap((schedule: fromModels.Schedule) => {
       return this.scheduleService.store(schedule).pipe(
         map(({ data }) => new fromScheduleActions.StoreSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromScheduleActions.StoreFailEntity({ error: errors })))
+        catchError((error) => of(new fromScheduleActions.StoreFailEntity({ error })))
       );
     })
   );
@@ -53,7 +53,7 @@ export class EntityScheduleEffects {
     switchMap((schedule: fromModels.Schedule) => {
       return this.scheduleService.update(schedule).pipe(
         map(({ data }) => new fromScheduleActions.UpdateSuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromScheduleActions.UpdateFailEntity({ error: errors })))
+        catchError((error) => of(new fromScheduleActions.UpdateFailEntity({ error })))
       );
     })
   );
@@ -65,7 +65,7 @@ export class EntityScheduleEffects {
     switchMap((schedule: fromModels.Schedule) => {
       return this.scheduleService.destroy(schedule).pipe(
         map(({ data }) => new fromScheduleActions.DestroySuccessEntity({ entity: data })),
-        catchError((errors) => of(new fromScheduleActions.DestroyFailEntity({ error: errors })))
+        catchError((error) => of(new fromScheduleActions.DestroyFailEntity({ error })))
       );
     })
   );
@@ -81,7 +81,7 @@ export class EntityScheduleEffects {
     switchMap(([currentPage, perPage, searchSchedule]: [number, number, fromModels.SearchSchedule]) => {
       return from(this.scheduleService.pagination({ ...searchSchedule, limit: perPage, page: currentPage })).pipe(
         map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
-        catchError((errors) => of(new fromScheduleActions.LoadFailEntity({ error: errors })))
+        catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
       );
     })
   );
@@ -108,9 +108,7 @@ export class EntityScheduleEffects {
         return this.scheduleService.load({ ...searchSchedule, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
           map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
-          catchError((errors) => {
-            return of(new fromScheduleActions.LoadFailEntity({ error: errors }));
-          })
+          catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
         );
 
       })
