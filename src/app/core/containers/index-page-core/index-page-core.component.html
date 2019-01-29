@@ -3,7 +3,7 @@
     <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
       (navigate)="handleNavigateFromSide($event)"></app-menu-core>
   </app-sidebar-shared>
-  <app-header-core [company]="company$ | async" [office]="userOffice$ | async" [project]="userOfficeProject$ | async"
+  <app-header-core [company]="company$ | async" [userOffice]="userOffice$ | async" [userOfficeProject]="userOfficeProject$ | async"
     [user]="user" (clickOpen)="opencloseSidebar($event)" (clickSelectOffice)="gotoSelectOffice($event)"
     (clickSelectProject)="gotoSelectProject($event)" (clickLogout)="handleLogout($event)"></app-header-core>
   <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus" [active]="selectedMenus.selected"

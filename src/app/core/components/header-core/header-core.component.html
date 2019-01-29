@@ -5,10 +5,16 @@
   <div class="ui-g-10">
     {{ company.company_name | transformTextShared:false:false:true }} <span style="font-weight: 400; margin: 0 10px 0 10px;">&#124;</span>
     <span (click)="selectOffice()">
-      {{ (office) ? (office.office.office_name | transformTextShared:false:false:true) : 'Seleccionar Oficina' }} <span style="font-weight: 400; margin: 0 10px 0 10px;">&#124;</span>
+      {{
+      (userOffice) ? (userOffice.office.office_name | transformTextShared:false:false:true) : 'Seleccionar Oficina'
+      }}
+      <span style="font-weight: 400; margin: 0 10px 0 10px;">&#124;</span>
     </span>
     <span (click)="selectProject()">
-      {{ (project) ? (project.project.project_name | transformTextShared:false:false:true) : 'Seleccionar Proyecto' }}
+      {{
+      (userOfficeProject) ? (userOfficeProject.project.project_name | transformTextShared:false:false:true) :
+      'Seleccionar Proyecto'
+      }}
     </span>
   </div>
   <div class="ui-g-1">
