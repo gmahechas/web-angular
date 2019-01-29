@@ -9,7 +9,6 @@ export enum EntityActionTypes {
   StoreEntity = '[Schedule] Store Entity',
   StoreSuccessEntity = '[Schedule] Store Success Entity',
   StoreFailEntity = '[Schedule] Store Fail Entity',
-  SelectEntity = '[Schedule] Select Entity',
   UpdateEntity = '[Schedule] Update Entity',
   UpdateSuccessEntity = '[Schedule] Update Success Entity',
   UpdateFailEntity = '[Schedule] Update Fail Entity',
@@ -50,11 +49,6 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
-}
-
-export class SelectEntity implements Action {
-  readonly type = EntityActionTypes.SelectEntity;
-  constructor(public payload: { entity: fromModels.Schedule }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -113,7 +107,6 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
-  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity

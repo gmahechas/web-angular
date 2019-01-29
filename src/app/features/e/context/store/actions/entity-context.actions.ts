@@ -9,7 +9,6 @@ export enum EntityActionTypes {
   StoreEntity = '[Context] Store Entity',
   StoreSuccessEntity = '[Context] Store Success Entity',
   StoreFailEntity = '[Context] Store Fail Entity',
-  SelectEntity = '[Context] Select Entity',
   UpdateEntity = '[Context] Update Entity',
   UpdateSuccessEntity = '[Context] Update Success Entity',
   UpdateFailEntity = '[Context] Update Fail Entity',
@@ -50,11 +49,6 @@ export class StoreSuccessEntity implements Action {
 export class StoreFailEntity implements Action {
   readonly type = EntityActionTypes.StoreFailEntity;
   constructor(public payload: { error: any }) { }
-}
-
-export class SelectEntity implements Action {
-  readonly type = EntityActionTypes.SelectEntity;
-  constructor(public payload: { entity: fromModels.Context }) { }
 }
 
 export class UpdateEntity implements Action {
@@ -113,7 +107,6 @@ export type EntityActions =
   | StoreEntity
   | StoreSuccessEntity
   | StoreFailEntity
-  | SelectEntity
   | UpdateEntity
   | UpdateSuccessEntity
   | UpdateFailEntity
