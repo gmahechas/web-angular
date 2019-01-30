@@ -11,7 +11,7 @@ export class UserOfficeService {
 
   constructor(
     private userOfficePaginationGQL: fromGraphql.UserOfficePaginationGQL,
-    private userOfficeGQL: fromGraphql.UserOfficeStoreGQL,
+    private userOfficeStoreGQL: fromGraphql.UserOfficeStoreGQL,
     private userOfficeUpdate: fromGraphql.UserOfficeUpdateGQL,
     private userOfficeDestroy: fromGraphql.UserOfficeDestroyGQL
   ) { }
@@ -27,7 +27,7 @@ export class UserOfficeService {
   }
 
   store(userOffice: fromModels.UserOffice) {
-    return this.userOfficeGQL.mutate(userOffice);
+    return this.userOfficeStoreGQL.mutate(userOffice);
   }
 
   update(userOffice: fromModels.UserOffice) {
@@ -38,4 +38,14 @@ export class UserOfficeService {
     return this.userOfficeDestroy.mutate(userOffice);
   }
 
+  pagination(searchUserOffice: fromModels.SearchUserOffice) {
+    return this.userOfficePaginationGQL.fetch({
+      user_office_id: searchUserOffice.user_office.user_office_id,
+      user_office_status: searchUserOffice.user_office.user_office_status,
+      user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
+      office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,
+      limit: searchUserOffice.limit,
+      page: searchUserOffice.page
+    });
+  }
 }

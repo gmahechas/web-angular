@@ -17,7 +17,8 @@ export enum EntityActionTypes {
   DestroyFailEntity = '[User Office] Destroy Fail Entity',
   PaginateEntity = '[User Office] Paginate Entity',
   LoadEntityShared = '[User Office] Load Entity Shared',
-  Reset = '[User Office] Reset'
+  Reset = '[User Office] Reset',
+  SetSelected = '[User Office] Set Selected'
 }
 
 export class LoadEntity implements Action {
@@ -94,6 +95,11 @@ export class Reset implements Action {
   readonly type = EntityActionTypes.Reset;
 }
 
+export class SetSelected implements Action {
+  readonly type = EntityActionTypes.SetSelected;
+  constructor(public payload: { selected: fromModels.SelectedUserOffice }) { }
+}
+
 export type EntityActions =
   | LoadEntity
   | LoadSuccessEntity
@@ -109,4 +115,5 @@ export type EntityActions =
   | DestroyFailEntity
   | PaginateEntity
   | LoadEntityShared
-  | Reset;
+  | Reset
+  | SetSelected;

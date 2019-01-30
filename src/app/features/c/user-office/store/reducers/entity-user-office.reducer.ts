@@ -2,9 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 import { EntityActionTypes, EntityActions } from '@web/app/features/c/user-office/store/actions/entity-user-office.actions';
 
-export interface State extends EntityState<UserOffice> {
-
-}
+export interface State extends EntityState<UserOffice> { }
 
 export const adapter: EntityAdapter<UserOffice> = createEntityAdapter<UserOffice>({
   selectId: (entity: UserOffice) => entity.user_office_id,

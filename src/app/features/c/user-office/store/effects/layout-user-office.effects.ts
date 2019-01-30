@@ -71,6 +71,21 @@ export class LayoutUserOfficeEffects {
     })
   );
 
+/*   // Redirects
+  @Effect({ dispatch: false })
+  successRedirect$ = this.actions$.pipe(
+    ofType(
+      fromUserOfficeActions.EntityActionTypes.LoadEntity,
+      fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
+      fromUserOfficeActions.EntityActionTypes.UpdateSuccessEntity,
+      fromUserOfficeActions.EntityActionTypes.DestroySuccessEntity,
+      fromUserOfficeActions.EntityActionTypes.Reset
+    ),
+    tap(() => {
+      this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
+    })
+  ); */
+
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>

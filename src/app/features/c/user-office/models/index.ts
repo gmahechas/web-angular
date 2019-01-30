@@ -4,3 +4,4 @@ export * from '@web/app/features/c/user-office/models/pagination-user-office.mod
 export * from '@web/app/features/c/user-office/models/store-user-office.model';
 export * from '@web/app/features/c/user-office/models/update-user-office.model';
 export * from '@web/app/features/c/user-office/models/destroy-user-office.model';
+export * from '@web/app/features/c/user-office/models/selected-user-office.model';
