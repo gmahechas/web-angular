@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/c/user-office/graphql';
 
 import * as fromModels from '@web/app/features/c/user-office/models';
@@ -9,6 +10,8 @@ import * as fromModels from '@web/app/features/c/user-office/models';
 })
 export class UserOfficeService {
 
+  queryRef: QueryRef<fromModels.PaginationUserOffice>;
+
   constructor(
     private userOfficePaginationGQL: fromGraphql.UserOfficePaginationGQL,
     private userOfficeStoreGQL: fromGraphql.UserOfficeStoreGQL,
@@ -17,13 +20,15 @@ export class UserOfficeService {
   ) { }
 
   load(searchUserOffice: fromModels.SearchUserOffice) {
-    return this.userOfficePaginationGQL.watch({
+    this.queryRef = this.userOfficePaginationGQL.watch({
       ...searchUserOffice.user_office,
       user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
       office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,
       limit: searchUserOffice.limit,
       page: searchUserOffice.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(userOffice: fromModels.UserOffice) {
@@ -39,13 +44,21 @@ export class UserOfficeService {
   }
 
   pagination(searchUserOffice: fromModels.SearchUserOffice) {
-    return this.userOfficePaginationGQL.fetch({
-      user_office_id: searchUserOffice.user_office.user_office_id,
-      user_office_status: searchUserOffice.user_office.user_office_status,
-      user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
-      office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,
-      limit: searchUserOffice.limit,
-      page: searchUserOffice.page
+
+    return this.queryRef.fetchMore({
+      query: this.userOfficePaginationGQL.document,
+      variables: {
+        user_office_id: searchUserOffice.user_office.user_office_id,
+        user_office_status: searchUserOffice.user_office.user_office_status,
+        user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
+        office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,
+        limit: searchUserOffice.limit,
+        page: searchUserOffice.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 }

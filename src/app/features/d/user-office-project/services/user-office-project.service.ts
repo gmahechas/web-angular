@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/d/user-office-project/graphql';
 
 import * as fromModels from '@web/app/features/d/user-office-project/models';
@@ -9,6 +10,8 @@ import * as fromModels from '@web/app/features/d/user-office-project/models';
 })
 export class UserOfficeProjectService {
 
+  queryRef: QueryRef<fromModels.PaginationUserOfficeProject>;
+
   constructor(
     private userOfficeProjectPaginationGQL: fromGraphql.UserOfficeProjectPaginationGQL,
     private userOfficeProjectStoreGQL: fromGraphql.UserOfficeProjectStoreGQL,
@@ -17,13 +20,15 @@ export class UserOfficeProjectService {
   ) { }
 
   load(searchUserOfficeProject: fromModels.SearchUserOfficeProject) {
-    return this.userOfficeProjectPaginationGQL.watch({
+    this.queryRef = this.userOfficeProjectPaginationGQL.watch({
       ...searchUserOfficeProject.user_office_project,
       user_office_id: (searchUserOfficeProject.user_office) ? searchUserOfficeProject.user_office.user_office_id : null,
       project_id: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,
       limit: searchUserOfficeProject.limit,
       page: searchUserOfficeProject.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(userOfficeProject: fromModels.UserOfficeProject) {
@@ -39,13 +44,21 @@ export class UserOfficeProjectService {
   }
 
   pagination(searchUserOfficeProject: fromModels.SearchUserOfficeProject) {
-    return this.userOfficeProjectPaginationGQL.fetch({
-      user_office_project_id: searchUserOfficeProject.user_office_project.user_office_project_id,
-      user_office_project_status: searchUserOfficeProject.user_office_project.user_office_project_status,
-      user_office_id: (searchUserOfficeProject.user_office) ? searchUserOfficeProject.user_office.user_office_id : null,
-      project_id: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,
-      limit: searchUserOfficeProject.limit,
-      page: searchUserOfficeProject.page
+
+    return this.queryRef.fetchMore({
+      query: this.userOfficeProjectPaginationGQL.document,
+      variables: {
+        user_office_project_id: searchUserOfficeProject.user_office_project.user_office_project_id,
+        user_office_project_status: searchUserOfficeProject.user_office_project.user_office_project_status,
+        user_office_id: (searchUserOfficeProject.user_office) ? searchUserOfficeProject.user_office.user_office_id : null,
+        project_id: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,
+        limit: searchUserOfficeProject.limit,
+        page: searchUserOfficeProject.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

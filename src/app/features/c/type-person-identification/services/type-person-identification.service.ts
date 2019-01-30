@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/c/type-person-identification/graphql';
 
 import * as fromModels from '@web/app/features/c/type-person-identification/models';
@@ -9,6 +10,8 @@ import * as fromModels from '@web/app/features/c/type-person-identification/mode
 })
 export class TypePersonIdentificationService {
 
+  queryRef: QueryRef<fromModels.PaginationTypePersonIdentification>;
+
   constructor(
     private typePersonIdentificationPaginationGQL: fromGraphql.TypePersonIdentificationPaginationGQL,
     private typePersonIdentificationStoreGQL: fromGraphql.TypePersonIdentificationStoreGQL,
@@ -17,11 +20,13 @@ export class TypePersonIdentificationService {
   ) { }
 
   load(searchTypePersonIdentification: fromModels.SearchTypePersonIdentification) {
-    return this.typePersonIdentificationPaginationGQL.watch({
+    this.queryRef = this.typePersonIdentificationPaginationGQL.watch({
       ...searchTypePersonIdentification.type_person_identification,
       limit: searchTypePersonIdentification.limit,
       page: searchTypePersonIdentification.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(typePersonIdentification: fromModels.TypePersonIdentification) {
@@ -37,12 +42,20 @@ export class TypePersonIdentificationService {
   }
 
   pagination(searchTypePersonIdentification: fromModels.SearchTypePersonIdentification) {
-    return this.typePersonIdentificationPaginationGQL.fetch({
-      type_person_identification_id: searchTypePersonIdentification.type_person_identification.type_person_identification_id,
-      type_person_identification_description:
-        searchTypePersonIdentification.type_person_identification.type_person_identification_description,
-      limit: searchTypePersonIdentification.limit,
-      page: searchTypePersonIdentification.page
+
+    return this.queryRef.fetchMore({
+      query: this.typePersonIdentificationPaginationGQL.document,
+      variables: {
+        type_person_identification_id: searchTypePersonIdentification.type_person_identification.type_person_identification_id,
+        type_person_identification_description:
+          searchTypePersonIdentification.type_person_identification.type_person_identification_description,
+        limit: searchTypePersonIdentification.limit,
+        page: searchTypePersonIdentification.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

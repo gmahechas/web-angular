@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/f/schedule/graphql';
 
 import * as fromModels from '@web/app/features/f/schedule/models';
@@ -9,6 +10,8 @@ import * as fromModels from '@web/app/features/f/schedule/models';
 })
 export class ScheduleService {
 
+  queryRef: QueryRef<fromModels.PaginationSchedule>;
+
   constructor(
     private schedulePaginationGQL: fromGraphql.SchedulePaginationGQL,
     private scheduleStoreGQL: fromGraphql.ScheduleStoreGQL,
@@ -17,11 +20,13 @@ export class ScheduleService {
   ) { }
 
   load(searchSchedule: fromModels.SearchSchedule) {
-    return this.schedulePaginationGQL.watch({
+    this.queryRef = this.schedulePaginationGQL.watch({
       ...searchSchedule.schedule,
       limit: searchSchedule.limit,
       page: searchSchedule.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(schedule: fromModels.Schedule) {
@@ -37,11 +42,19 @@ export class ScheduleService {
   }
 
   pagination(searchSchedule: fromModels.SearchSchedule) {
-    return this.schedulePaginationGQL.fetch({
-      schedule_id: searchSchedule.schedule.schedule_id,
-      schedule_name: searchSchedule.schedule.schedule_name,
-      limit: searchSchedule.limit,
-      page: searchSchedule.page
+
+    return this.queryRef.fetchMore({
+      query: this.schedulePaginationGQL.document,
+      variables: {
+        schedule_id: searchSchedule.schedule.schedule_id,
+        schedule_name: searchSchedule.schedule.schedule_name,
+        limit: searchSchedule.limit,
+        page: searchSchedule.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

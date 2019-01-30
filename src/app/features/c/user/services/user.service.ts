@@ -44,6 +44,7 @@ export class UserService {
   }
 
   pagination(searchUser: fromModels.SearchUser) {
+
     return this.queryRef.fetchMore({
       query: this.userPaginationGQL,
       variables: {

@@ -20,13 +20,15 @@ export class MacroprojectService {
   ) { }
 
   load(searchMacroproject: fromModels.SearchMacroproject) {
-    return this.macroprojectPaginationGQL.watch({
+    this.queryRef =  this.macroprojectPaginationGQL.watch({
       ...searchMacroproject.macroproject,
       city_id: (searchMacroproject.city) ? searchMacroproject.city.city_id : null,
       office_id: (searchMacroproject.office) ? searchMacroproject.office.office_id : null,
       limit: searchMacroproject.limit,
       page: searchMacroproject.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(macroproject: fromModels.Macroproject) {

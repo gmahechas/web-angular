@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/c/type-person/graphql';
 
 import * as fromModels from '@web/app/features/c/type-person/models';
@@ -9,6 +10,8 @@ import * as fromModels from '@web/app/features/c/type-person/models';
 })
 export class TypePersonService {
 
+  queryRef: QueryRef<fromModels.PaginationTypePerson>;
+
   constructor(
     private typePersonPaginationGQL: fromGraphql.TypePersonPaginationGQL,
     private typePersonStoreGQL: fromGraphql.TypePersonStoreGQL,
@@ -17,11 +20,13 @@ export class TypePersonService {
   ) { }
 
   load(searchTypePerson: fromModels.SearchTypePerson) {
-    return this.typePersonPaginationGQL.watch({
+    this.queryRef = this.typePersonPaginationGQL.watch({
       ...searchTypePerson.type_person,
       limit: searchTypePerson.limit,
       page: searchTypePerson.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(typePerson: fromModels.TypePerson) {
@@ -37,11 +42,19 @@ export class TypePersonService {
   }
 
   pagination(searchTypePerson: fromModels.SearchTypePerson) {
-    return this.typePersonPaginationGQL.fetch({
-      type_person_id: searchTypePerson.type_person.type_person_id,
-      type_person_description: searchTypePerson.type_person.type_person_description,
-      limit: searchTypePerson.limit,
-      page: searchTypePerson.page
+
+    return this.queryRef.fetchMore({
+      query: this.typePersonPaginationGQL.document,
+      variables: {
+        type_person_id: searchTypePerson.type_person.type_person_id,
+        type_person_description: searchTypePerson.type_person.type_person_description,
+        limit: searchTypePerson.limit,
+        page: searchTypePerson.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 

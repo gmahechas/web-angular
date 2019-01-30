@@ -20,12 +20,14 @@ export class ProjectService {
   ) { }
 
   load(searchProject: fromModels.SearchProject) {
-    return this.projectPaginationGQL.watch({
+    this.queryRef = this.projectPaginationGQL.watch({
       ...searchProject.project,
       macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
       limit: searchProject.limit,
       page: searchProject.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(project: fromModels.Project) {

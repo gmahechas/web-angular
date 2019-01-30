@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/f/day/graphql';
 
 import * as fromModels from '@web/app/features/f/day/models';
@@ -9,16 +10,20 @@ import * as fromModels from '@web/app/features/f/day/models';
 })
 export class DayService {
 
+  queryRef: QueryRef<fromModels.PaginationDay>;
+
   constructor(
     private dayPaginationGQL: fromGraphql.DayPaginationGQL
   ) { }
 
   load(searchDay: fromModels.SearchDay) {
-    return this.dayPaginationGQL.watch({
+    this.queryRef = this.dayPaginationGQL.watch({
       ...searchDay.day,
       limit: searchDay.limit,
       page: searchDay.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
 }

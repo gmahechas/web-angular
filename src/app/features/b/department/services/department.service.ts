@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { QueryRef } from 'apollo-angular';
 import * as fromGraphql from '@web/app/features/b/department/graphql';
 
 import * as fromModels from '@web/app/features/b/department/models';
@@ -9,6 +10,8 @@ import * as fromModels from '@web/app/features/b/department/models';
 })
 export class DepartmentService {
 
+  queryRef: QueryRef<fromModels.PaginationDepartment>;
+
   constructor(
     private departmentPaginationGQL: fromGraphql.DepartmentPaginationGQL,
     private departmentStoreGQL: fromGraphql.DepartmentStoreGQL,
@@ -17,11 +20,13 @@ export class DepartmentService {
   ) { }
 
   load(searchDepartment: fromModels.SearchDepartment) {
-    return this.departmentPaginationGQL.watch({
+    this.queryRef = this.departmentPaginationGQL.watch({
       ...searchDepartment.department,
       limit: searchDepartment.limit,
       page: searchDepartment.page
-    }).valueChanges;
+    });
+
+    return this.queryRef.valueChanges;
   }
 
   store(department: fromModels.Department) {
@@ -37,10 +42,18 @@ export class DepartmentService {
   }
 
   pagination(searchDepartment: fromModels.SearchDepartment) {
-    return this.departmentPaginationGQL.fetch({
-      department_id: searchDepartment.department.department_id,
-      limit: searchDepartment.limit,
-      page: searchDepartment.page
+
+    return this.queryRef.fetchMore({
+      query: this.departmentPaginationGQL.document,
+      variables: {
+        department_id: searchDepartment.department.department_id,
+        limit: searchDepartment.limit,
+        page: searchDepartment.page
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) { return prev; }
+        return fetchMoreResult;
+      }
     });
   }
 
