@@ -80,6 +80,7 @@ export class EntityMacroprojectEffects {
     ),
     switchMap(([currentPage, perPage, searchMacroproject]: [number, number, fromModels.SearchMacroproject]) => {
       return from(this.macroprojectService.pagination({ ...searchMacroproject, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromMacroprojectActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromMacroprojectActions.LoadFailEntity({ error })))
       );

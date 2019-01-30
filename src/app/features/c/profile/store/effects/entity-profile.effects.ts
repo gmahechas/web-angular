@@ -80,6 +80,7 @@ export class EntityProfileEffects {
     ),
     switchMap(([currentPage, perPage, searchProfile]: [number, number, fromModels.SearchProfile]) => {
       return from(this.profileService.pagination({ ...searchProfile, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromProfileActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromProfileActions.LoadFailEntity({ error })))
       );

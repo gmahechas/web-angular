@@ -74,6 +74,7 @@ export class EntityUserOfficeProjectEffects {
     ),
     switchMap(([currentPage, perPage, searchUserOfficeProject]: [number, number, fromModels.SearchUserOfficeProject]) => {
       return from(this.userOfficeProjectService.pagination({ ...searchUserOfficeProject, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromUserOfficeProjectActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromUserOfficeProjectActions.LoadFailEntity({ error })))
       );

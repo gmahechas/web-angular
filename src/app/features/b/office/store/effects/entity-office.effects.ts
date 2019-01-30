@@ -80,6 +80,7 @@ export class EntityOfficeEffects {
     ),
     switchMap(([currentPage, perPage, searchOffice]: [number, number, fromModels.SearchOffice]) => {
       return from(this.officeService.pagination({ ...searchOffice, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromOfficeActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromOfficeActions.LoadFailEntity({ error })))
       );

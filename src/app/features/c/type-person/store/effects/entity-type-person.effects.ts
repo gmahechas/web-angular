@@ -80,6 +80,7 @@ export class EntityTypePersonEffects {
     ),
     switchMap(([currentPage, perPage, searchTypePerson]: [number, number, fromModels.SearchTypePerson]) => {
       return from(this.typePersonService.pagination({ ...searchTypePerson, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromTypePersonActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromTypePersonActions.LoadFailEntity({ error })))
       );

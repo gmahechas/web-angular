@@ -80,6 +80,7 @@ export class EntityProjectEffects {
     ),
     switchMap(([currentPage, perPage, searchProject]: [number, number, fromModels.SearchProject]) => {
       return from(this.projectService.pagination({ ...searchProject, limit: perPage, page: currentPage })).pipe(
+        skip(1),
         map(({ data }) => new fromProjectActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromProjectActions.LoadFailEntity({ error })))
       );
