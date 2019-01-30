@@ -35,6 +35,59 @@ export class EntityContextEffects {
   );
 
   @Effect()
+  storeEntity$ = this.actions$.pipe(
+    ofType<fromContextActions.StoreEntity>(fromContextActions.EntityActionTypes.StoreEntity),
+    map(action => action.payload.entity),
+    switchMap((context: fromModels.Context) => {
+      return this.contextService.store(context).pipe(
+        map(({ data }) => new fromContextActions.StoreSuccessEntity({ entity: data })),
+        catchError((error) => of(new fromContextActions.StoreFailEntity({ error })))
+      );
+    })
+  );
+
+  @Effect()
+  updateEntity$ = this.actions$.pipe(
+    ofType<fromContextActions.UpdateEntity>(fromContextActions.EntityActionTypes.UpdateEntity),
+    map(action => action.payload.entity),
+    switchMap((context: fromModels.Context) => {
+      return this.contextService.update(context).pipe(
+        map(({ data }) => new fromContextActions.UpdateSuccessEntity({ entity: data })),
+        catchError((error) => of(new fromContextActions.UpdateFailEntity({ error })))
+      );
+    })
+  );
+
+  @Effect()
+  destroyEntity$ = this.actions$.pipe(
+    ofType<fromContextActions.DestroyEntity>(fromContextActions.EntityActionTypes.DestroyEntity),
+    map(action => action.payload.entity),
+    switchMap((context: fromModels.Context) => {
+      return this.contextService.destroy(context).pipe(
+        map(({ data }) => new fromContextActions.DestroySuccessEntity({ entity: data })),
+        catchError((error) => of(new fromContextActions.DestroyFailEntity({ error })))
+      );
+    })
+  );
+
+  @Effect()
+  paginateEntity$ = this.actions$.pipe(
+    ofType<fromContextActions.PaginateEntity>(fromContextActions.EntityActionTypes.PaginateEntity),
+    map(action => action.payload.page),
+    withLatestFrom(
+      this.store.pipe(select(fromContextSelectors.getPerPage)),
+      this.store.pipe(select(fromContextSelectors.getQuery))
+    ),
+    switchMap(([currentPage, perPage, searchContext]: [number, number, fromModels.SearchContext]) => {
+      return from(this.contextService.pagination({ ...searchContext, limit: perPage, page: currentPage })).pipe(
+        skip(1),
+        map(({ data }) => new fromContextActions.LoadSuccessEntity({ entities: data })),
+        catchError((error) => of(new fromContextActions.LoadFailEntity({ error })))
+      );
+    })
+  );
+
+  @Effect()
   loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
       ofType<fromContextActions.LoadEntityShared>(fromContextActions.EntityActionTypes.LoadEntityShared),

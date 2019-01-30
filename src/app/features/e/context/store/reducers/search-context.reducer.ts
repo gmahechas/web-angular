@@ -12,7 +12,8 @@ export const initialState: State = {
     context: {
       context_id: '',
       context_description: ''
-    }
+    },
+    menu: null
   }
 };
 
@@ -26,7 +27,8 @@ export function reducer(state = initialState, action: EntityActions): State {
         ...state,
         loaded: false,
         query: {
-          context: action.payload.search.context
+          context: action.payload.search.context,
+          menu: action.payload.search.menu
         }
       };
     }
