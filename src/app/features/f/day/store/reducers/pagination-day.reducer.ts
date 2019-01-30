@@ -20,6 +20,10 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
+    case EntityActionTypes.LoadEntity: {
+      return initialState;
+    }
+
     case EntityActionTypes.LoadSuccessEntity: {
       return {
         ...state,
@@ -32,6 +36,10 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.LoadFailEntity: {
+      return initialState;
+    }
+
+    case EntityActionTypes.StoreSuccessEntity: {
       return initialState;
     }
 

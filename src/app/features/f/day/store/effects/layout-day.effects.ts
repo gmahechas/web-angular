@@ -14,6 +14,11 @@ export class LayoutDayEffects {
   @Effect({ dispatch: false })
   entity$ = this.actions$.pipe(
     ofType(
+      fromDayActions.EntityActionTypes.LoadEntity,
+      fromDayActions.EntityActionTypes.StoreEntity,
+      fromDayActions.EntityActionTypes.UpdateEntity,
+      fromDayActions.EntityActionTypes.DestroyEntity,
+      fromDayActions.EntityActionTypes.PaginateEntity,
       fromDayActions.EntityActionTypes.LoadEntityShared
     ),
     tap(() => {
@@ -32,9 +37,29 @@ export class LayoutDayEffects {
   );
 
   @Effect({ dispatch: false })
+  success$ = this.actions$.pipe(
+    ofType(
+      fromDayActions.EntityActionTypes.StoreSuccessEntity,
+      fromDayActions.EntityActionTypes.UpdateSuccessEntity,
+      fromDayActions.EntityActionTypes.DestroySuccessEntity
+    ),
+    tap(() => {
+      this.store.dispatch(new fromCore.CloseSpinner);
+      this.store.dispatch(new fromCore.ShowMessages({
+        messages: [
+          { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
+        ]
+      }));
+    })
+  );
+
+  @Effect({ dispatch: false })
   fail$ = this.actions$.pipe(
     ofType(
-      fromDayActions.EntityActionTypes.LoadFailEntity
+      fromDayActions.EntityActionTypes.LoadFailEntity,
+      fromDayActions.EntityActionTypes.StoreFailEntity,
+      fromDayActions.EntityActionTypes.UpdateFailEntity,
+      fromDayActions.EntityActionTypes.DestroyFailEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.CloseSpinner);
@@ -50,6 +75,10 @@ export class LayoutDayEffects {
   @Effect({ dispatch: false })
   successRedirect$ = this.actions$.pipe(
     ofType(
+      fromDayActions.EntityActionTypes.LoadEntity,
+      fromDayActions.EntityActionTypes.StoreSuccessEntity,
+      fromDayActions.EntityActionTypes.UpdateSuccessEntity,
+      fromDayActions.EntityActionTypes.DestroySuccessEntity,
       fromDayActions.EntityActionTypes.Reset
     ),
     tap(() => {
@@ -60,5 +89,5 @@ export class LayoutDayEffects {
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) { }
+  ) {}
 }

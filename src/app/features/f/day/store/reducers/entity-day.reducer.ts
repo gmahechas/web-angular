@@ -23,6 +23,24 @@ export function reducer(state = initialState, action: EntityActions): State {
       return adapter.removeAll(state);
     }
 
+    case EntityActionTypes.StoreSuccessEntity: {
+      const newState = adapter.removeAll(state);
+      return adapter.addOne(action.payload.entity.storeDay, newState);
+    }
+
+    case EntityActionTypes.UpdateSuccessEntity: {
+      return adapter.updateOne({
+        id: action.payload.entity.updateDay.day_id,
+        changes: action.payload.entity.updateDay
+      },
+        state
+      );
+    }
+
+    case EntityActionTypes.DestroySuccessEntity: {
+      return adapter.removeOne(action.payload.entity.destroyDay.day_id, state);
+    }
+
     case EntityActionTypes.Reset: {
       return adapter.removeAll(state);
     }

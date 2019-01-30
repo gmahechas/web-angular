@@ -1,13 +1,14 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/f/day/store/actions/entity-day.actions';
+import { SelectedDay, initialStateSelectedDay } from '@web/app/features/f/day/models/selected-day.model';
 
 export interface State {
-  selected: any;
+  selected: SelectedDay;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
-  selected: null,
+  selected: initialStateSelectedDay,
   error: '',
   pending: false
 };
@@ -16,18 +17,43 @@ export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
 
-    case EntityActionTypes.LoadFailEntity: {
+    case EntityActionTypes.SetSelected: {
       return {
         ...state,
+        selected: action.payload.selected
+      };
+    }
+
+    case EntityActionTypes.LoadFailEntity:
+    case EntityActionTypes.StoreFailEntity:
+    case EntityActionTypes.UpdateFailEntity:
+    case EntityActionTypes.DestroyFailEntity: {
+      return {
+        ...state,
+        selected: initialStateSelectedDay,
         error: action.payload.error,
         pending: true
       };
     }
 
-
-    case EntityActionTypes.LoadSuccessEntity: {
+    case EntityActionTypes.LoadEntity:
+    case EntityActionTypes.PaginateEntity:
+    case EntityActionTypes.StoreEntity:
+    case EntityActionTypes.UpdateEntity:
+    case EntityActionTypes.DestroyEntity: {
       return {
         ...state,
+        pending: true
+      };
+    }
+
+    case EntityActionTypes.LoadSuccessEntity:
+    case EntityActionTypes.StoreSuccessEntity:
+    case EntityActionTypes.UpdateSuccessEntity:
+    case EntityActionTypes.DestroySuccessEntity: {
+      return {
+        ...state,
+        selected: initialStateSelectedDay,
         pending: false
       };
     }

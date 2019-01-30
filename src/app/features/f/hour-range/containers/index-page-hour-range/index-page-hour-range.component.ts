@@ -62,7 +62,6 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
     this.store.dispatch(new fromHourRange.LoadEntity({
       search: {
         hour_range: hourRangeSearch.hour_range,
-        // TODO:
         limit: 20,
         page: 1
       }

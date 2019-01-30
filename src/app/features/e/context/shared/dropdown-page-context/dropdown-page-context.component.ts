@@ -35,7 +35,8 @@ export class DropdownPageContextComponent implements OnInit {
         context: {
           context_id: '',
           context_description: event
-        }
+        },
+        menu: null
       }
     }));
   }
