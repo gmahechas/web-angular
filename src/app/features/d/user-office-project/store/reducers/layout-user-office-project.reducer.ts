@@ -1,11 +1,17 @@
 import { EntityActionTypes, EntityActions } from '@web/app/features/d/user-office-project/store/actions/entity-user-office-project.actions';
+import {
+  SelectedUserOfficeProject,
+  initialStateSelectedUserOfficeProject
+} from '@web/app/features/d/user-office-project/models/selected-user-office-project.model';
 
 export interface State {
+  selected: SelectedUserOfficeProject;
   error: string;
   pending: boolean;
 }
 
 export const initialState: State = {
+  selected: initialStateSelectedUserOfficeProject,
   error: '',
   pending: false
 };
@@ -13,12 +19,21 @@ export const initialState: State = {
 export function reducer(state = initialState, action: EntityActions): State {
 
   switch (action.type) {
+
+    case EntityActionTypes.SetSelected: {
+      return {
+        ...state,
+        selected: action.payload.selected
+      };
+    }
+
     case EntityActionTypes.LoadFailEntity:
     case EntityActionTypes.StoreFailEntity:
     case EntityActionTypes.UpdateFailEntity:
     case EntityActionTypes.DestroyFailEntity: {
       return {
         ...state,
+        selected: initialStateSelectedUserOfficeProject,
         error: action.payload.error,
         pending: true
       };
@@ -41,6 +56,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.DestroySuccessEntity: {
       return {
         ...state,
+        selected: initialStateSelectedUserOfficeProject,
         pending: false
       };
     }
@@ -55,5 +71,6 @@ export function reducer(state = initialState, action: EntityActions): State {
 
 }
 
+export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.pending;

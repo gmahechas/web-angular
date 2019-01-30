@@ -71,8 +71,23 @@ export class LayoutUserOfficeProjectEffects {
     })
   );
 
+/*   // Redirects
+  @Effect({ dispatch: false })
+  successRedirect$ = this.actions$.pipe(
+    ofType(
+      fromUserOfficeProjectActions.EntityActionTypes.LoadEntity,
+      fromUserOfficeProjectActions.EntityActionTypes.StoreSuccessEntity,
+      fromUserOfficeProjectActions.EntityActionTypes.UpdateSuccessEntity,
+      fromUserOfficeProjectActions.EntityActionTypes.DestroySuccessEntity,
+      fromUserOfficeProjectActions.EntityActionTypes.Reset
+    ),
+    tap(() => {
+      this.store.dispatch(new fromCore.Go({ path: ['user_office_project'] }));
+    })
+  ); */
+
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

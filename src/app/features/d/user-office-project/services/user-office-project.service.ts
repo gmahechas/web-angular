@@ -38,4 +38,15 @@ export class UserOfficeProjectService {
     return this.userOfficeProjectDestroyGQL.mutate(userOfficeProject);
   }
 
+  pagination(searchUserOfficeProject: fromModels.SearchUserOfficeProject) {
+    return this.userOfficeProjectPaginationGQL.fetch({
+      user_office_project_id: searchUserOfficeProject.user_office_project.user_office_project_id,
+      user_office_project_status: searchUserOfficeProject.user_office_project.user_office_project_status,
+      user_office_id: (searchUserOfficeProject.user_office) ? searchUserOfficeProject.user_office.user_office_id : null,
+      project_id: (searchUserOfficeProject.project) ? searchUserOfficeProject.project.project_id : null,
+      limit: searchUserOfficeProject.limit,
+      page: searchUserOfficeProject.page
+    });
+  }
+
 }

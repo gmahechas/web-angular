@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Action } from '@ngrx/store';
+import { Store, select, Action } from '@ngrx/store';
+import * as fromUserOfficeProjectReducers from '@web/app/features/d/user-office-project/store/reducers';
+import * as fromUserOfficeProjectSelectors from '@web/app/features/d/user-office-project/store/selectors';
 import * as fromUserOfficeProjectActions from '@web/app/features/d/user-office-project/store/actions';
 
 import * as fromModels from '@web/app/features/d/user-office-project/models';
@@ -9,7 +11,7 @@ import * as fromModels from '@web/app/features/d/user-office-project/models';
 import { UserOfficeProjectService } from '@web/app/features/d/user-office-project/services/user-office-project.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
-import { map, switchMap, catchError, debounceTime, skip, takeUntil } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class EntityUserOfficeProjectEffects {
@@ -63,6 +65,22 @@ export class EntityUserOfficeProjectEffects {
   );
 
   @Effect()
+  paginateEntity$ = this.actions$.pipe(
+    ofType<fromUserOfficeProjectActions.PaginateEntity>(fromUserOfficeProjectActions.EntityActionTypes.PaginateEntity),
+    map(action => action.payload.page),
+    withLatestFrom(
+      this.store.pipe(select(fromUserOfficeProjectSelectors.getPerPage)),
+      this.store.pipe(select(fromUserOfficeProjectSelectors.getQuery))
+    ),
+    switchMap(([currentPage, perPage, searchUserOfficeProject]: [number, number, fromModels.SearchUserOfficeProject]) => {
+      return from(this.userOfficeProjectService.pagination({ ...searchUserOfficeProject, limit: perPage, page: currentPage })).pipe(
+        map(({ data }) => new fromUserOfficeProjectActions.LoadSuccessEntity({ entities: data })),
+        catchError((error) => of(new fromUserOfficeProjectActions.LoadFailEntity({ error })))
+      );
+    })
+  );
+
+  @Effect()
   loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
       ofType<fromUserOfficeProjectActions.LoadEntityShared>(fromUserOfficeProjectActions.EntityActionTypes.LoadEntityShared),
@@ -94,6 +112,7 @@ export class EntityUserOfficeProjectEffects {
 
   constructor(
     private actions$: Actions,
-    private userOfficeProjectService: UserOfficeProjectService
+    private userOfficeProjectService: UserOfficeProjectService,
+    private store: Store<fromUserOfficeProjectReducers.State>
   ) { }
 }
