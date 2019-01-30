@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { Action } from '@ngrx/store';
+import { Store, select, Action } from '@ngrx/store';
+import * as fromOfficeDepartmentReducers from '@web/app/features/b/office-department/store/reducers';
+import * as fromOfficeDepartmentSelectors from '@web/app/features/b/office-department/store/selectors';
 import * as fromOfficeDepartmentActions from '@web/app/features/b/office-department/store/actions';
 
 import * as fromModels from '@web/app/features/b/office-department/models';
@@ -9,7 +11,7 @@ import * as fromModels from '@web/app/features/b/office-department/models';
 import { OfficeDepartmentService } from '@web/app/features/b/office-department/services/office-department.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
-import { map, switchMap, catchError, debounceTime, skip, takeUntil } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class EntityOfficeDepartmentEffects {
@@ -63,6 +65,23 @@ export class EntityOfficeDepartmentEffects {
   );
 
   @Effect()
+  paginateEntity$ = this.actions$.pipe(
+    ofType<fromOfficeDepartmentActions.PaginateEntity>(fromOfficeDepartmentActions.EntityActionTypes.PaginateEntity),
+    map(action => action.payload.page),
+    withLatestFrom(
+      this.store.pipe(select(fromOfficeDepartmentSelectors.getPerPage)),
+      this.store.pipe(select(fromOfficeDepartmentSelectors.getQuery))
+    ),
+    switchMap(([currentPage, perPage, searchOfficeDepartment]: [number, number, fromModels.SearchOfficeDepartment]) => {
+      return from(this.officeDepartmentService.pagination({ ...searchOfficeDepartment, limit: perPage, page: currentPage })).pipe(
+        skip(1),
+        map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
+        catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
+      );
+    })
+  );
+
+  @Effect()
   loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
       ofType<fromOfficeDepartmentActions.LoadEntityShared>(fromOfficeDepartmentActions.EntityActionTypes.LoadEntityShared),
@@ -88,12 +107,12 @@ export class EntityOfficeDepartmentEffects {
           map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
           catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
         );
-
       })
     )
 
   constructor(
     private actions$: Actions,
-    private officeDepartmentService: OfficeDepartmentService
+    private officeDepartmentService: OfficeDepartmentService,
+    private store: Store<fromOfficeDepartmentReducers.State>
   ) { }
 }

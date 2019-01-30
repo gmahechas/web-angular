@@ -38,4 +38,15 @@ export class OfficeDepartmentService {
     return this.officeDepartmentDestroyGQL.mutate(officeDepartment);
   }
 
+  pagination(searchOfficeDepartment: fromModels.SearchOfficeDepartment) {
+    return this.officeDepartmentPaginationGQL.fetch({
+      office_department_id: searchOfficeDepartment.office_department.office_department_id,
+      office_department_status: searchOfficeDepartment.office_department.office_department_status,
+      office_id: (searchOfficeDepartment.office) ? searchOfficeDepartment.office.office_id : null,
+      department_id: (searchOfficeDepartment) ? searchOfficeDepartment.department.department_id : null,
+      limit: searchOfficeDepartment.limit,
+      page: searchOfficeDepartment.page
+    });
+  }
+
 }
