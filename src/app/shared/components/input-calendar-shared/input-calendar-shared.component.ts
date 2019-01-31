@@ -9,17 +9,20 @@ import { FormGroup } from '@angular/forms';
 })
 export class InputCalendarSharedComponent implements OnInit {
 
-  es: any;
+  locale: any;
   @Input() group: FormGroup;
   @Input() groupName: string;
   @Input() controlName: string;
   @Input() dataType: string;
   @Input() dateFormat: string;
+  @Input() timeOnly: boolean;
+  @Input() showSeconds: boolean;
+  @Input() hourFormat = '24';
 
   constructor() { }
 
   ngOnInit() {
-    this.es = {
+    this.locale = {
       firstDayOfWeek: 1,
       dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
       dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
@@ -31,8 +34,7 @@ export class InputCalendarSharedComponent implements OnInit {
       ],
       monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
       today: 'Hoy',
-      clear: 'Borrar',
-      dateFormat: 'yy-mm-dd'
+      clear: 'Borrar'
     };
   }
 

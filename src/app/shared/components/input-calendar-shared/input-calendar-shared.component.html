@@ -1,5 +1,6 @@
 <div [formGroup]="group">
   <div [formGroupName]="groupName">
-    <p-calendar [formControlName]="controlName" [locale]="es" [dateFormat]="dateFormat" [dataType]="dataType" [readonlyInput]="true"></p-calendar>
+    <p-calendar [formControlName]="controlName" [locale]="locale" [dataType]="dataType" [dateFormat]="dateFormat"
+      [readonlyInput]="true" [timeOnly]="timeOnly" [showSeconds]="showSeconds" [hourFormat]="hourFormat"></p-calendar>
   </div>
 </div>

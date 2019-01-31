@@ -24,10 +24,10 @@ export class FormHourRangeComponent implements OnChanges, OnInit {
 
   hourRangeForm = this.formBuilder.group({
     hour_range: this.formBuilder.group({
-      hour_range_name: this.formBuilder.control(''),
-      hour_range_description: this.formBuilder.control(''),
-      hour_range_start: this.formBuilder.control(''),
-      hour_range_end: this.formBuilder.control('')
+      hour_range_name: this.formBuilder.control('', [Validators.required]),
+      hour_range_description: this.formBuilder.control('', [Validators.required]),
+      hour_range_start: this.formBuilder.control('', [Validators.required]),
+      hour_range_end: this.formBuilder.control('', [Validators.required])
     })
   });
 

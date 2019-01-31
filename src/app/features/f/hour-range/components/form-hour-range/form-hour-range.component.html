@@ -35,7 +35,8 @@
             <app-translate-shared [strings]="['hour_range.model.hour_range_start']"></app-translate-shared>
           </div>
           <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_start'"></app-input-text-shared>
+            <app-input-calendar-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_start'"
+              [dataType]="'string'" [timeOnly]="true" [showSeconds]="true"></app-input-calendar-shared>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_start')"></app-validation-errors-shared>
@@ -47,7 +48,8 @@
             <app-translate-shared [strings]="['hour_range.model.hour_range_end']"></app-translate-shared>
           </div>
           <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_end'"></app-input-text-shared>
+            <app-input-calendar-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_end'"
+              [dataType]="'string'" [timeOnly]="true" [showSeconds]="true"></app-input-calendar-shared>
           </div>
           <div class="ui-grid-col-4">
             <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_end')"></app-validation-errors-shared>
@@ -65,3 +67,5 @@
     </form>
   </div>
 </app-panel-shared>
+
+{{ hourRangeForm.value | json }}
