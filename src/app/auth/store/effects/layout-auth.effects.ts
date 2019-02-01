@@ -17,7 +17,7 @@ export class LayoutAuthEffects {
       fromAuthActions.AuthActionTypes.CheckAuth
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner);
+      this.store.dispatch(new fromCore.ShowSpinner());
     })
   );
 
@@ -28,7 +28,7 @@ export class LayoutAuthEffects {
       fromAuthActions.AuthActionTypes.CheckAuthSuccess
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.CloseSpinner);
+      this.store.dispatch(new fromCore.CloseSpinner());
     })
   );
 
@@ -39,7 +39,7 @@ export class LayoutAuthEffects {
       fromAuthActions.AuthActionTypes.CheckAuthFailure
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.CloseSpinner);
+      this.store.dispatch(new fromCore.CloseSpinner());
     })
   );
 

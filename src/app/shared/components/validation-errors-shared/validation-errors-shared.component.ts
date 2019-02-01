@@ -25,10 +25,10 @@ export class ValidationErrorsSharedComponent implements OnInit {
       texts.push('nouns.field.singular', 'adjectives.required.singular');
     }
     if (this.control.hasError('minlength')) {
-      texts.push('adjectives.minimum.singular', String(this.control.errors['minlength'].requiredLength), 'nouns.letter.singular');
+      texts.push('adjectives.minimum.singular', String(this.control.errors.minlength.requiredLength), 'nouns.letter.singular');
     }
     if (this.control.hasError('maxlength')) {
-      texts.push('adjectives.maximum.singular', String(this.control.errors['maxlength'].requiredLength), 'nouns.letter.singular');
+      texts.push('adjectives.maximum.singular', String(this.control.errors.maxlength.requiredLength), 'nouns.letter.singular');
     }
     if (this.control.hasError('invalidIdentification')) {
       texts.push('person.model.person_identification', 'adjectives.invalid.singular');

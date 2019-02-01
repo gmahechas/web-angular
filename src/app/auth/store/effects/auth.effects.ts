@@ -133,7 +133,7 @@ export class AuthEffects {
   }).pipe(
     tap((token: fromModels.Token) => {
       if (token) {
-        this.store.dispatch(new fromAuthActions.CheckAuth);
+        this.store.dispatch(new fromAuthActions.CheckAuth());
       }
     })
   );

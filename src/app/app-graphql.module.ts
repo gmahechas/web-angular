@@ -9,7 +9,7 @@ import { environment } from '@web/environments/environment';
 export function createApollo(httpLink: HttpLink) {
   const link = httpLink.create({ uri: environment.api.concat(environment.graphql) });
   return {
-    link: link,
+    link,
     cache: new InMemoryCache({
       addTypename: false
     }),
