@@ -22,16 +22,16 @@ export class ValidationErrorsSharedComponent implements OnInit {
   get showText() {
     const texts: string[] = [];
     if (this.control.hasError('required')) {
-      texts.push('field.verb', 'required.verb');
+      texts.push('nouns.field.singular', 'adjectives.required.singular');
     }
     if (this.control.hasError('minlength')) {
-      texts.push('minimum.verb', String(this.control.errors['minlength'].requiredLength), 'letter.verb');
+      texts.push('adjectives.minimum.singular', String(this.control.errors['minlength'].requiredLength), 'nouns.letter.singular');
     }
     if (this.control.hasError('maxlength')) {
-      texts.push('maximum.verb', String(this.control.errors['maxlength'].requiredLength), 'letter.verb');
+      texts.push('adjectives.maximum.singular', String(this.control.errors['maxlength'].requiredLength), 'nouns.letter.singular');
     }
     if (this.control.hasError('invalidIdentification')) {
-      texts.push('person.model.person_identification', 'invalid.verb');
+      texts.push('person.model.person_identification', 'adjectives.invalid.singular');
     }
     return texts;
   }

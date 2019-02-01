@@ -30,7 +30,7 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.AuthFailure: {
       return {
         ...state,
-        error: 'error.verb',
+        error: 'nouns.error.singular',
         pending: false
       };
     }
@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.CheckAuthFailure: {
       return {
         ...state,
-        error: 'error.verb',
+        error: 'nouns.error.singular',
         pending: false
       };
     }

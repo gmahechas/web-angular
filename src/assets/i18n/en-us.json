@@ -1,72 +1,69 @@
 {
-  "search": {
-    "verb": "search",
-    "present_participle": "searching",
-    "present": {
-      "first": "search",
-      "second": "search",
-      "third": "searches"
+  "verbs": {
+    "search": {
+      "verb": "search"
     },
-    "past": {
-      "first": "searched",
-      "second": "searched",
-      "third": "searched"
+    "save": {
+      "verb": "save"
     },
-    "future": {
-      "first": "will search",
-      "second": "will search",
-      "third": "will search"
+    "create": {
+      "verb": "create"
+    },
+    "update": {
+      "verb": "update"
+    },
+    "edit": {
+      "verb": "edit"
+    },
+    "delete": {
+      "verb": "delete"
+    },
+    "cancel": {
+      "verb": "cancel"
+    },
+    "clean": {
+      "verb": "clean"
+    },
+    "change": {
+      "verb": "change"
+    },
+    "select": {
+      "verb": "select"
     }
   },
-  "save": {
-    "verb": "save"
+  "nouns": {
+    "field": {
+      "singular": "field",
+      "plural": "fields"
+    },
+    "letter": {
+      "singular": "letter",
+      "plural": "letters"
+    },
+    "error": {
+      "singular": "error",
+      "plural": "errors"
+    }
   },
-  "create": {
-    "verb": "create"
+  "adjectives": {
+    "minimum": {
+      "singular": "minimum",
+      "plural": "minima"
+    },
+    "maximum": {
+      "singular": "maximum",
+      "plural": "maximum"
+    },
+    "required": {
+      "singular": "required",
+      "plural": "obligatory"
+    },
+    "invalid": {
+      "singular": "invalid",
+      "plural": "invalids"
+    }
   },
-  "update": {
-    "verb": "update"
-  },
-  "edit": {
-    "verb": "edit"
-  },
-  "delete": {
-    "verb": "delete"
-  },
-  "cancel": {
-    "verb": "cancel"
-  },
-  "clean": {
-    "verb": "clean"
-  },
-  "change": {
-    "verb": "change"
-  },
-  "select": {
-    "verb": "select"
-  },
-  "field": {
-    "verb": "field"
-  },
-  "letter": {
-    "verb": "letter"
-  },
-  "minimum": {
-    "verb": "minimum"
-  },
-  "maximum": {
-    "verb": "maximum"
-  },
-  "required": {
-    "verb": "required"
-  },
-  "invalid": {
-    "verb": "invalid"
-  },
-  "error": {
-    "verb": "error"
-  },
-  "auth":  {
+  "auth": {
     "singIn": "sing in",
     "singOut": "sing out",
     "forgotPassword": "forgot your password"

@@ -1,70 +1,67 @@
 {
-  "search": {
-    "verb": "buscar",
-    "present_participle": "buscando",
-    "present": {
-      "first": "busco",
-      "second": "buscas",
-      "third": "busca"
+  "verbs": {
+    "search": {
+      "verb": "buscar"
     },
-    "past": {
-      "first": "busco",
-      "second": "buscas",
-      "third": "busca"
+    "save": {
+      "verb": "guardar"
     },
-    "future": {
-      "first": "buscare",
-      "second": "buscaras",
-      "third": "buscara"
+    "create": {
+      "verb": "crear"
+    },
+    "update": {
+      "verb": "actualizar"
+    },
+    "edit": {
+      "verb": "editar"
+    },
+    "delete": {
+      "verb": "borrar"
+    },
+    "cancel": {
+      "verb": "cancelar"
+    },
+    "clean": {
+      "verb": "limpiar"
+    },
+    "change": {
+      "verb": "cambiar"
+    },
+    "select": {
+      "verb": "seleccionar"
     }
   },
-  "save": {
-    "verb": "guardar"
+  "nouns": {
+    "field": {
+      "singular": "campo",
+      "plural": "campos"
+    },
+    "letter": {
+      "singular": "letra",
+      "plural": "letra"
+    },
+    "error": {
+      "singular": "error",
+      "plural": "errores"
+    }
   },
-  "create": {
-    "verb": "crear"
-  },
-  "update": {
-    "verb": "actualizar"
-  },
-  "edit": {
-    "verb": "editar"
-  },
-  "delete": {
-    "verb": "borrar"
-  },
-  "cancel": {
-    "verb": "cancelar"
-  },
-  "clean": {
-    "verb": "limpiar"
-  },
-  "change": {
-    "verb": "cambiar"
-  },
-  "select": {
-    "verb": "seleccionar"
-  },
-  "field": {
-    "verb": "campo"
-  },
-  "letter": {
-    "verb": "letra"
-  },
-  "minimum": {
-    "verb": "minimo"
-  },
-  "maximum": {
-    "verb": "maximo"
-  },
-  "required": {
-    "verb": "obligatorio"
-  },
-  "invalid": {
-    "verb": "invalido"
-  },
-  "error": {
-    "verb": "error"
+  "adjectives": {
+    "minimum": {
+      "singular": "minimo",
+      "plural": "minimos"
+    },
+    "maximum": {
+      "singular": "maximo",
+      "plural": "maximos"
+    },
+    "required": {
+      "singular": "obligatorio",
+      "plural": "obligatorios"
+    },
+    "invalid": {
+      "singular": "invalido",
+      "plural": "invalidos"
+    }
   },
   "auth": {
     "singIn": "iniciar sesion",

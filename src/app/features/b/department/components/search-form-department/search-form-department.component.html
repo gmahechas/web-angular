@@ -1,6 +1,6 @@
 <app-panel-shared>
   <div class="panel-header">
-    <app-translate-shared [strings]="['search.verb', 'department.plural']"></app-translate-shared>
+    <app-translate-shared [strings]="['verbs.search.verb', 'department.plural']"></app-translate-shared>
   </div>
   <div class="panel-content">
     <form [formGroup]="searchFormDepartment" (ngSubmit)="onSubmit()">
@@ -30,10 +30,10 @@
           </div>
 
           <div class="ui-grid-col-7">
-            <app-button-shared [type]="'submit'" [label]="['search.verb']" [disabled]="searchFormDepartment.invalid"
+            <app-button-shared [type]="'submit'" [label]="['verbs.search.verb']" [disabled]="searchFormDepartment.invalid"
               [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="['create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="['clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
+            <app-button-shared [type]="'button'" [label]="['verbs.create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
+            <app-button-shared [type]="'button'" [label]="['verbs.clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
           </div>
         </div>
       </div>

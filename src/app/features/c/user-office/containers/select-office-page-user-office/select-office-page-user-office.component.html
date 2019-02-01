@@ -1,5 +1,5 @@
 <app-form-select-user-office *ngIf="(user$ | async) as user" [user]="user" (selectedUserOffice)="selectUserOffice($event)">
   <div class="form-title">
-    <app-translate-shared [strings]="['change.verb', 'office.singular']"></app-translate-shared>
+    <app-translate-shared [strings]="['verbs.change.verb', 'office.singular']"></app-translate-shared>
   </div>
 </app-form-select-user-office>

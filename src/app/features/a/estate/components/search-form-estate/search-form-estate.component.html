@@ -1,6 +1,6 @@
 <app-panel-shared>
   <div class="panel-header">
-    <app-translate-shared [strings]="['search.verb', 'estate.plural']"></app-translate-shared>
+    <app-translate-shared [strings]="['verbs.search.verb', 'estate.plural']"></app-translate-shared>
   </div>
   <div class="panel-content">
     <form [formGroup]="searchFormEstate" (ngSubmit)="onSubmit()">
@@ -48,10 +48,10 @@
             </div>
           </div>
           <div class="ui-grid-col-7">
-            <app-button-shared [type]="'submit'" [label]="['search.verb']" [disabled]="searchFormEstate.invalid"
+            <app-button-shared [type]="'submit'" [label]="['verbs.search.verb']" [disabled]="searchFormEstate.invalid"
               [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="['create.verb']" [class]="'ui-button-secondary'" (click)="onCreate()"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="['clean.verb']" [class]="'ui-button-secondary'" (click)="onReset()"></app-button-shared>
+            <app-button-shared [type]="'button'" [label]="['verbs.create.verb']" [class]="'ui-button-secondary'" (click)="onCreate()"></app-button-shared>
+            <app-button-shared [type]="'button'" [label]="['verbs.clean.verb']" [class]="'ui-button-secondary'" (click)="onReset()"></app-button-shared>
           </div>
         </div>
       </div>

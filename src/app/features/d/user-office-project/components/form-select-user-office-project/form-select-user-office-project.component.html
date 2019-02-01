@@ -14,7 +14,7 @@
               [options]="['project.project_name']" [optionLabel]="'project.project_name'" [userOfficeProject]="userOfficeProject"></app-dropdown-page-user-office-project>
           </div>
           <div class="ui-grid-col-2">
-            <app-button-shared [type]="'submit'" [label]="['select.verb']" [class]="'ui-button-secondary'" [disabled]="userOfficeProjectForm.invalid"></app-button-shared>
+            <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'" [disabled]="userOfficeProjectForm.invalid"></app-button-shared>
           </div>
           <div class="ui-grid-col-2">
             <app-validation-errors-shared [control]="userOfficeProjectForm.get('userOfficeProject')"></app-validation-errors-shared>

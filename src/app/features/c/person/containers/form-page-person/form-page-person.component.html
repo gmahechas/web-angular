@@ -1,15 +1,15 @@
 <app-form-person *ngIf="!(person$ | async) as person" [pending]="pending$ | async" (submitted)="onStore($event)">
   <div class="form-title">
-    <app-translate-shared [strings]="['create.verb', 'person.singular']"></app-translate-shared>
+    <app-translate-shared [strings]="['verbs.create.verb', 'person.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-person>
 
 <app-form-person *ngIf="(person$ | async) as person" [pending]="pending$ | async" (submitted)="onUpdate($event)"
   [person]="person">
   <div class="form-title">
-    <app-translate-shared [strings]="['edit.verb', 'person.singular']"></app-translate-shared>
+    <app-translate-shared [strings]="['verbs.edit.verb', 'person.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(person)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(person)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
 </app-form-person>

@@ -14,7 +14,7 @@
               [optionLabel]="'office.office_name'" [userOffice]="userOffice"></app-dropdown-page-user-office>
           </div>
           <div class="ui-grid-col-2">
-            <app-button-shared [type]="'submit'" [label]="['select.verb']" [class]="'ui-button-secondary'" [disabled]="userOfficeForm.invalid"></app-button-shared>
+            <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'" [disabled]="userOfficeForm.invalid"></app-button-shared>
           </div>
           <div class="ui-grid-col-2">
             <app-validation-errors-shared [control]="userOfficeForm.get('userOffice')"></app-validation-errors-shared>
