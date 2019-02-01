@@ -17,16 +17,16 @@ export class UserExistGuard implements CanActivate {
     private store: Store<fromUser.State>
   ) { }
 
-  hasInStore(user_id: string): Observable<boolean> {
+  hasInStore(userId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromUser.getEntities),
-      map(entities => !!entities[user_id]),
+      map(entities => !!entities[userId]),
       take(1)
     );
   }
 
-  hasEntity(user_id: string): Observable<boolean> {
-    return this.hasInStore(user_id).pipe(
+  hasEntity(userId: string): Observable<boolean> {
+    return this.hasInStore(userId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class UserExistGuard implements CanActivate {
     );
   }
 
-  checkStore(user_id: string): Observable<boolean> {
+  checkStore(userId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromUser.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class UserExistGuard implements CanActivate {
           this.store.dispatch(new fromUser.LoadEntity({
             search: {
               user: {
-                user_id: user_id,
+                user_id: userId,
                 username: ''
               },
               person: null,

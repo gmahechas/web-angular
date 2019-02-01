@@ -17,16 +17,16 @@ export class ProfileExistGuard implements CanActivate {
     private store: Store<fromProfile.State>
   ) { }
 
-  hasInStore(profile_id: string): Observable<boolean> {
+  hasInStore(profileId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromProfile.getEntities),
-      map(entities => !!entities[profile_id]),
+      map(entities => !!entities[profileId]),
       take(1)
     );
   }
 
-  hasEntity(profile_id: string): Observable<boolean> {
-    return this.hasInStore(profile_id).pipe(
+  hasEntity(profileId: string): Observable<boolean> {
+    return this.hasInStore(profileId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class ProfileExistGuard implements CanActivate {
     );
   }
 
-  checkStore(profile_id: string): Observable<boolean> {
+  checkStore(profileId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromProfile.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class ProfileExistGuard implements CanActivate {
           this.store.dispatch(new fromProfile.LoadEntity({
             search: {
               profile: {
-                profile_id: profile_id,
+                profile_id: profileId,
                 profile_name: ''
               }
             }

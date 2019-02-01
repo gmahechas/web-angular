@@ -20,7 +20,7 @@ export class BarMenuCoreComponent implements OnInit {
   }
 
   handleNavigate(option: ParentChild) {
-    this.navigate.emit({ bar: this.bar, option: option });
+    this.navigate.emit({ bar: this.bar, option });
   }
 
 }

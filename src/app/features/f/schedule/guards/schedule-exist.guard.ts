@@ -17,16 +17,16 @@ export class ScheduleExistGuard implements CanActivate {
     private store: Store<fromSchedule.State>
   ) { }
 
-  hasInStore(schedule_id: string): Observable<boolean> {
+  hasInStore(scheduleId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromSchedule.getEntities),
-      map(entities => !!entities[schedule_id]),
+      map(entities => !!entities[scheduleId]),
       take(1)
     );
   }
 
-  hasEntity(schedule_id: string): Observable<boolean> {
-    return this.hasInStore(schedule_id).pipe(
+  hasEntity(scheduleId: string): Observable<boolean> {
+    return this.hasInStore(scheduleId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class ScheduleExistGuard implements CanActivate {
     );
   }
 
-  checkStore(schedule_id: string): Observable<boolean> {
+  checkStore(scheduleId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromSchedule.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class ScheduleExistGuard implements CanActivate {
           this.store.dispatch(new fromSchedule.LoadEntity({
             search: {
               schedule: {
-                schedule_id: schedule_id,
+                schedule_id: scheduleId,
                 schedule_name: ''
               }
             }

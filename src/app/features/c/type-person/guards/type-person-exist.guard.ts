@@ -17,16 +17,16 @@ export class TypePersonExistGuard implements CanActivate {
     private store: Store<fromTypePerson.State>
   ) { }
 
-  hasInStore(type_person_id: string): Observable<boolean> {
+  hasInStore(typePersonId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromTypePerson.getEntities),
-      map(entities => !!entities[type_person_id]),
+      map(entities => !!entities[typePersonId]),
       take(1)
     );
   }
 
-  hasEntity(type_person_id: string): Observable<boolean> {
-    return this.hasInStore(type_person_id).pipe(
+  hasEntity(typePersonId: string): Observable<boolean> {
+    return this.hasInStore(typePersonId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class TypePersonExistGuard implements CanActivate {
     );
   }
 
-  checkStore(type_person_id: string): Observable<boolean> {
+  checkStore(typePersonId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromTypePerson.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class TypePersonExistGuard implements CanActivate {
           this.store.dispatch(new fromTypePerson.LoadEntity({
             search: {
               type_person: {
-                type_person_id: type_person_id,
+                type_person_id: typePersonId,
                 type_person_description: ''
               }
             }

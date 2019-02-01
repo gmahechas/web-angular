@@ -17,16 +17,16 @@ export class MacroprojectExistGuard implements CanActivate {
     private store: Store<fromMacroproject.State>
   ) { }
 
-  hasInStore(macroproject_id: string): Observable<boolean> {
+  hasInStore(macroprojectId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromMacroproject.getEntities),
-      map(entities => !!entities[macroproject_id]),
+      map(entities => !!entities[macroprojectId]),
       take(1)
     );
   }
 
-  hasEntity(macroproject_id: string): Observable<boolean> {
-    return this.hasInStore(macroproject_id).pipe(
+  hasEntity(macroprojectId: string): Observable<boolean> {
+    return this.hasInStore(macroprojectId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class MacroprojectExistGuard implements CanActivate {
     );
   }
 
-  checkStore(macroproject_id: string): Observable<boolean> {
+  checkStore(macroprojectId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromMacroproject.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class MacroprojectExistGuard implements CanActivate {
           this.store.dispatch(new fromMacroproject.LoadEntity({
             search: {
               macroproject: {
-                macroproject_id: macroproject_id,
+                macroproject_id: macroprojectId,
                 macroproject_name: '',
               },
               city: null,

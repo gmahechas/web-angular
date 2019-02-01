@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
       const token: Token = this.localStorageService.getToken();
       const request = req.clone({
         setHeaders: {
-          'Authorization': (token) ? token.token_type.concat(' ', token.access_token) : ''
+          Authorization: (token) ? token.token_type.concat(' ', token.access_token) : ''
         }
       });
       return next.handle(request);

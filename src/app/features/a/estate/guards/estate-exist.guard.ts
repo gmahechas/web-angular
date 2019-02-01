@@ -17,16 +17,16 @@ export class EstateExistGuard implements CanActivate {
     private store: Store<fromEstate.State>
   ) { }
 
-  hasInStore(estate_id: string): Observable<boolean> {
+  hasInStore(estateId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromEstate.getEntities),
-      map(entities => !!entities[estate_id]),
+      map(entities => !!entities[estateId]),
       take(1)
     );
   }
 
-  hasEntity(estate_id: string): Observable<boolean> {
-    return this.hasInStore(estate_id).pipe(
+  hasEntity(estateId: string): Observable<boolean> {
+    return this.hasInStore(estateId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class EstateExistGuard implements CanActivate {
     );
   }
 
-  checkStore(estate_id: string): Observable<boolean> {
+  checkStore(estateId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromEstate.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class EstateExistGuard implements CanActivate {
           this.store.dispatch(new fromEstate.LoadEntity({
             search: {
               estate: {
-                estate_id: estate_id,
+                estate_id: estateId,
                 estate_name: '',
                 estate_code: ''
               },

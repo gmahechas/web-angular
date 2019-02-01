@@ -17,16 +17,16 @@ export class HourRangeExistGuard implements CanActivate {
     private store: Store<fromHourRange.State>
   ) { }
 
-  hasInStore(hour_range_id: string): Observable<boolean> {
+  hasInStore(hourRangeId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromHourRange.getEntities),
-      map(entities => !!entities[hour_range_id]),
+      map(entities => !!entities[hourRangeId]),
       take(1)
     );
   }
 
-  hasEntity(hour_range_id: string): Observable<boolean> {
-    return this.hasInStore(hour_range_id).pipe(
+  hasEntity(hourRangeId: string): Observable<boolean> {
+    return this.hasInStore(hourRangeId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class HourRangeExistGuard implements CanActivate {
     );
   }
 
-  checkStore(hour_range_id: string): Observable<boolean> {
+  checkStore(hourRangeId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromHourRange.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class HourRangeExistGuard implements CanActivate {
           this.store.dispatch(new fromHourRange.LoadEntity({
             search: {
               hour_range: {
-                hour_range_id: hour_range_id,
+                hour_range_id: hourRangeId,
                 hour_range_name: ''
               }
             }

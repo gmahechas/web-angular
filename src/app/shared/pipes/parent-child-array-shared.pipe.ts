@@ -7,7 +7,7 @@ import { get } from 'lodash';
 })
 export class ParentChildArraySharedPipe implements PipeTransform {
 
-  transform(objects: any, id: any, parent_id: any, label?: any): any {
+  transform(objects: any, id: any, parentId: any, label?: any): any {
 
     const newObjects: any[] = [];
 
@@ -19,14 +19,14 @@ export class ParentChildArraySharedPipe implements PipeTransform {
       });
     });
 
-    return this.nested(newObjects, id, parent_id);
+    return this.nested(newObjects, id, parentId);
   }
 
-  nested(objects, id: any, parent_id: any, parentId = null) {
+  nested(objects, id: any, oldParentId: any, parentId = null) {
     const out = [];
     objects.forEach(element => {
-      if (get(element.data, parent_id, parent_id) === parentId) {
-        const children = this.nested(objects, id, parent_id, get(element.data, id, id));
+      if (get(element.data, oldParentId, oldParentId) === parentId) {
+        const children = this.nested(objects, id, oldParentId, get(element.data, id, id));
         if (children.length) {
           children.forEach(child => {
             element.children.push(child);

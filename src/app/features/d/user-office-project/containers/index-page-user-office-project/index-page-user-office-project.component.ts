@@ -32,12 +32,12 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
       switch (key) {
         case 'user_id':
         case 'office_id': {
-          const user_office_id = paramsMap.get(paramsMap.keys[1]);
+          const userOfficeId = paramsMap.get(paramsMap.keys[1]);
           setTimeout(() => {
             this.store.dispatch(new fromUserOfficeProject.LoadEntity({
               search: {
                 user_office: {
-                  user_office_id: +user_office_id
+                  user_office_id: +userOfficeId
                 }
               }
             }));
@@ -45,13 +45,13 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
           break;
         }
         case 'project_id': {
-          const project_id = paramsMap.get(key);
+          const projectId = paramsMap.get(key);
 
           setTimeout(() => {
             this.store.dispatch(new fromUserOfficeProject.LoadEntity({
               search: {
                 project: {
-                  project_id: +project_id
+                  project_id: +projectId
                 }
               }
             }));
@@ -73,6 +73,6 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.suscription.unsubscribe();
-    this.store.dispatch(new fromUserOfficeProject.Reset);
+    this.store.dispatch(new fromUserOfficeProject.Reset());
   }
 }

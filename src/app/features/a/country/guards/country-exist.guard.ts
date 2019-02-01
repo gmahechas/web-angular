@@ -17,16 +17,16 @@ export class CountryExistGuard implements CanActivate {
     private store: Store<fromCountry.State>
   ) { }
 
-  hasInStore(country_id: string): Observable<boolean> {
+  hasInStore(countryId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromCountry.getEntities),
-      map(entities => !!entities[country_id]),
+      map(entities => !!entities[countryId]),
       take(1)
     );
   }
 
-  hasEntity(country_id: string): Observable<boolean> {
-    return this.hasInStore(country_id).pipe(
+  hasEntity(countryId: string): Observable<boolean> {
+    return this.hasInStore(countryId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class CountryExistGuard implements CanActivate {
     );
   }
 
-  checkStore(country_id: string): Observable<boolean> {
+  checkStore(countryId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromCountry.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class CountryExistGuard implements CanActivate {
           this.store.dispatch(new fromCountry.LoadEntity({
             search: {
               country: {
-                country_id: country_id,
+                country_id: countryId,
                 country_name: '',
                 country_code: ''
               }

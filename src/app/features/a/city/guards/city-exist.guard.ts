@@ -17,16 +17,16 @@ export class CityExistGuard implements CanActivate {
     private store: Store<fromCity.State>
   ) { }
 
-  hasInStore(city_id: string): Observable<boolean> {
+  hasInStore(cityId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromCity.getEntities),
-      map(entities => !!entities[city_id]),
+      map(entities => !!entities[cityId]),
       take(1)
     );
   }
 
-  hasEntity(city_id: string): Observable<boolean> {
-    return this.hasInStore(city_id).pipe(
+  hasEntity(cityId: string): Observable<boolean> {
+    return this.hasInStore(cityId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class CityExistGuard implements CanActivate {
     );
   }
 
-  checkStore(city_id: string): Observable<boolean> {
+  checkStore(cityId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromCity.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class CityExistGuard implements CanActivate {
           this.store.dispatch(new fromCity.LoadEntity({
             search: {
               city: {
-                city_id: city_id,
+                city_id: cityId,
                 city_name: '',
                 city_code: ''
               },

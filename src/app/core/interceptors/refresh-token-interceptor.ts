@@ -33,11 +33,11 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
         ) {
           const token: Token = this.localStorageService.getToken();
           return this.authService.refreshToken(token).pipe(
-            mergeMap((_token: Token) => {
-              this.localStorageService.setToken(_token);
+            mergeMap((newToken: Token) => {
+              this.localStorageService.setToken(newToken);
               const request = req.clone({
                 setHeaders: {
-                  'Authorization': (_token) ? _token.token_type.concat(' ', _token.access_token) : ''
+                  Authorization: (newToken) ? newToken.token_type.concat(' ', newToken.access_token) : ''
                 }
               });
               return next.handle(request);

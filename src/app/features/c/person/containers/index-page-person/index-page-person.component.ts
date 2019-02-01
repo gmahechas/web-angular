@@ -45,7 +45,7 @@ export class IndexPagePersonComponent implements OnInit, OnDestroy {
             'person_first_surname',
             'person_second_surname',
             'person_legal_name'
-          ], header: ['person.model.person_name'], style: { 'width': '70%' }
+          ], header: ['person.model.person_name'], style: { width: '70%' }
         },
 
       ],

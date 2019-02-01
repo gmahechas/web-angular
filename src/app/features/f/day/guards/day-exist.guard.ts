@@ -17,16 +17,16 @@ export class DayExistGuard implements CanActivate {
     private store: Store<fromDay.State>
   ) { }
 
-  hasInStore(day_id: string): Observable<boolean> {
+  hasInStore(dayId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromDay.getEntities),
-      map(entities => !!entities[day_id]),
+      map(entities => !!entities[dayId]),
       take(1)
     );
   }
 
-  hasEntity(day_id: string): Observable<boolean> {
-    return this.hasInStore(day_id).pipe(
+  hasEntity(dayId: string): Observable<boolean> {
+    return this.hasInStore(dayId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class DayExistGuard implements CanActivate {
     );
   }
 
-  checkStore(day_id: string): Observable<boolean> {
+  checkStore(dayId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromDay.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class DayExistGuard implements CanActivate {
           this.store.dispatch(new fromDay.LoadEntity({
             search: {
               day: {
-                day_id: day_id,
+                day_id: dayId,
                 // TODO
               },
               // TODO

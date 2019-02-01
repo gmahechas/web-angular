@@ -17,16 +17,16 @@ export class ProjectExistGuard implements CanActivate {
     private store: Store<fromProject.State>
   ) { }
 
-  hasInStore(project_id: string): Observable<boolean> {
+  hasInStore(projectId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromProject.getEntities),
-      map(entities => !!entities[project_id]),
+      map(entities => !!entities[projectId]),
       take(1)
     );
   }
 
-  hasEntity(project_id: string): Observable<boolean> {
-    return this.hasInStore(project_id).pipe(
+  hasEntity(projectId: string): Observable<boolean> {
+    return this.hasInStore(projectId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class ProjectExistGuard implements CanActivate {
     );
   }
 
-  checkStore(project_id: string): Observable<boolean> {
+  checkStore(projectId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromProject.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class ProjectExistGuard implements CanActivate {
           this.store.dispatch(new fromProject.LoadEntity({
             search: {
               project: {
-                project_id: project_id,
+                project_id: projectId,
                 project_name: ''
               },
               macroproject: null

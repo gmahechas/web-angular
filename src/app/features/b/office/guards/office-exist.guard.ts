@@ -17,16 +17,16 @@ export class OfficeExistGuard implements CanActivate {
     private store: Store<fromOffice.State>
   ) { }
 
-  hasInStore(office_id: string): Observable<boolean> {
+  hasInStore(officeId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromOffice.getEntities),
-      map(entities => !!entities[office_id]),
+      map(entities => !!entities[officeId]),
       take(1)
     );
   }
 
-  hasEntity(office_id: string): Observable<boolean> {
-    return this.hasInStore(office_id).pipe(
+  hasEntity(officeId: string): Observable<boolean> {
+    return this.hasInStore(officeId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class OfficeExistGuard implements CanActivate {
     );
   }
 
-  checkStore(office_id: string): Observable<boolean> {
+  checkStore(officeId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromOffice.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class OfficeExistGuard implements CanActivate {
           this.store.dispatch(new fromOffice.LoadEntity({
             search: {
               office: {
-                office_id: office_id,
+                office_id: officeId,
                 office_name: '',
               },
               city: null

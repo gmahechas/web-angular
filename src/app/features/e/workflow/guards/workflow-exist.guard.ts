@@ -17,16 +17,16 @@ export class WorkflowExistGuard implements CanActivate {
     private store: Store<fromWorkflow.State>
   ) { }
 
-  hasInStore(workflow_id: string): Observable<boolean> {
+  hasInStore(workflowId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromWorkflow.getEntities),
-      map(entities => !!entities[workflow_id]),
+      map(entities => !!entities[workflowId]),
       take(1)
     );
   }
 
-  hasEntity(workflow_id: string): Observable<boolean> {
-    return this.hasInStore(workflow_id).pipe(
+  hasEntity(workflowId: string): Observable<boolean> {
+    return this.hasInStore(workflowId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class WorkflowExistGuard implements CanActivate {
     );
   }
 
-  checkStore(workflow_id: string): Observable<boolean> {
+  checkStore(workflowId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromWorkflow.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class WorkflowExistGuard implements CanActivate {
           this.store.dispatch(new fromWorkflow.LoadEntity({
             search: {
               workflow: {
-                workflow_id: workflow_id,
+                workflow_id: workflowId,
                 workflow_name: ''
               }
             }

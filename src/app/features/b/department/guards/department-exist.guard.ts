@@ -17,16 +17,16 @@ export class DepartmentExistGuard implements CanActivate {
     private store: Store<fromDepartment.State>
   ) { }
 
-  hasInStore(department_id: string): Observable<boolean> {
+  hasInStore(departmentId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromDepartment.getEntities),
-      map(entities => !!entities[department_id]),
+      map(entities => !!entities[departmentId]),
       take(1)
     );
   }
 
-  hasEntity(department_id: string): Observable<boolean> {
-    return this.hasInStore(department_id).pipe(
+  hasEntity(departmentId: string): Observable<boolean> {
+    return this.hasInStore(departmentId).pipe(
       switchMap(inStore => {
         if (inStore) {
           return of(inStore);
@@ -39,7 +39,7 @@ export class DepartmentExistGuard implements CanActivate {
     );
   }
 
-  checkStore(department_id: string): Observable<boolean> {
+  checkStore(departmentId: string): Observable<boolean> {
     return this.store.pipe(
       select(fromDepartment.getLoaded),
       tap(loaded => {
@@ -47,7 +47,7 @@ export class DepartmentExistGuard implements CanActivate {
           this.store.dispatch(new fromDepartment.LoadEntity({
             search: {
               department: {
-                department_id: department_id,
+                department_id: departmentId,
                 department_name: ''
               }
             }

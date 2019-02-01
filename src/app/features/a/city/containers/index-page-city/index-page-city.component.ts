@@ -40,7 +40,7 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
         { fields: ['city_name'], header: ['city.model.city_name'], style: { width: '30%' } },
         { fields: ['city_code'], header: ['city.model.city_code'], style: { width: '10%' } },
         { fields: ['estate.estate_name'], header: ['estate.singular'], style: { width: '30%' } },
-        { fields: ['estate.country.country_name'], header: ['country.singular'], style: { 'width': '25%' } }
+        { fields: ['estate.country.country_name'], header: ['country.singular'], style: { width: '25%' } }
       ],
       selectionMode: 'single'
     };
