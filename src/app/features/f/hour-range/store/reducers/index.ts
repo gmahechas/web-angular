@@ -13,15 +13,15 @@ export interface HourRangeState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  hour_range: HourRangeState;
+}
+
 export const reducers: ActionReducerMap<HourRangeState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  hour_range: HourRangeState;
-}
 
 export const getHourRangeState = createFeatureSelector<State, HourRangeState>('hour_range');

@@ -13,15 +13,15 @@ export interface ContextState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  context: ContextState;
+}
+
 export const reducers: ActionReducerMap<ContextState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  context: ContextState;
-}
 
 export const getContextState = createFeatureSelector<State, ContextState>('context');

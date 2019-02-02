@@ -13,15 +13,15 @@ export interface MacroprojectState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  macroproject: MacroprojectState;
+}
+
 export const reducers: ActionReducerMap<MacroprojectState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  macroproject: MacroprojectState;
-}
 
 export const getMacroprojectState = createFeatureSelector<State, MacroprojectState>('macroproject');

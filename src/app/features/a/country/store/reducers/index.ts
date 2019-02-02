@@ -13,15 +13,15 @@ export interface CountryState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  country: CountryState;
+}
+
 export const reducers: ActionReducerMap<CountryState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  country: CountryState;
-}
 
 export const getCountryState = createFeatureSelector<State, CountryState>('country');

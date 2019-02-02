@@ -13,15 +13,15 @@ export interface DayState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  day: DayState;
+}
+
 export const reducers: ActionReducerMap<DayState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  day: DayState;
-}
 
 export const getDayState = createFeatureSelector<State, DayState>('day');

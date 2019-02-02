@@ -13,15 +13,15 @@ export interface WorkflowState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  workflow: WorkflowState;
+}
+
 export const reducers: ActionReducerMap<WorkflowState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  workflow: WorkflowState;
-}
 
 export const getWorkflowState = createFeatureSelector<State, WorkflowState>('workflow');

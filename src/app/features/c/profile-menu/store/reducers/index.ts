@@ -9,13 +9,13 @@ export interface ProfileMenuState {
   search: fromSearch.State;
 }
 
+export interface State extends fromCore.State {
+  profile_menu: ProfileMenuState;
+}
+
 export const reducers: ActionReducerMap<ProfileMenuState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer
 };
-
-export interface State extends fromCore.State {
-  profile_menu: ProfileMenuState;
-}
 
 export const getProfileMenuState = createFeatureSelector<State, ProfileMenuState>('profile_menu');

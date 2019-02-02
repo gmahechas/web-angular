@@ -14,15 +14,15 @@ export interface TypePersonIdentificationState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  type_person_identification: TypePersonIdentificationState;
+}
+
 export const reducers: ActionReducerMap<TypePersonIdentificationState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  type_person_identification: TypePersonIdentificationState;
-}
 
 export const getTypePersonIdentificationState = createFeatureSelector<State, TypePersonIdentificationState>('type_person_identification');

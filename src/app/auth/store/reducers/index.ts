@@ -9,13 +9,13 @@ export interface AuthState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  auth: AuthState;
+}
+
 export const reducers: ActionReducerMap<AuthState> = {
   status: fromAuth.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  auth: AuthState;
-}
 
 export const getAuthState = createFeatureSelector<State, AuthState>('auth');

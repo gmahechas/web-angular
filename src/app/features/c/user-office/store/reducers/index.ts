@@ -13,15 +13,15 @@ export interface UserOfficeState {
   layout: fromLayout.State;
 }
 
+export interface State extends fromCore.State {
+  user_office: UserOfficeState;
+}
+
 export const reducers: ActionReducerMap<UserOfficeState> = {
   entity: fromEntity.reducer,
   search: fromSearch.reducer,
   pagination: fromPagination.reducer,
   layout: fromLayout.reducer
 };
-
-export interface State extends fromCore.State {
-  user_office: UserOfficeState;
-}
 
 export const getUserOfficeState = createFeatureSelector<State, UserOfficeState>('user_office');
