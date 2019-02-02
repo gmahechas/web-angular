@@ -24,7 +24,7 @@ export const getRouterState = createFeatureSelector<State, fromRouter.RouterRedu
 export const getLayoutState = createFeatureSelector<State, fromLayout.State>('layout');
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
-  return function (state: State, action: any): State {
+  return (state: State, action: any): any => {
     const result = reducer(state, action);
     console.groupCollapsed(action.type);
     console.log('prev state', state);
@@ -37,7 +37,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 }
 
 export function clearState(reducer: ActionReducer<State>): ActionReducer<State> {
-  return function (state: State, action: any): State {
+  return (state: State, action: any): any => {
     if (action.type === AuthActionTypes.LogoutAuthSuccess) {
       console.log('Reset state here');
     }
