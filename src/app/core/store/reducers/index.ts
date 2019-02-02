@@ -39,9 +39,9 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export function clearState(reducer: ActionReducer<State>): ActionReducer<State> {
   return (state: State, action: any): any => {
     if (action.type === AuthActionTypes.LogoutAuthSuccess) {
-      console.log('Reset state here');
+      state = undefined;
     }
     return reducer(state, action);
   };
 }
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ /* clearState, */ storeFreeze] : [];
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ clearState, storeFreeze] : [];

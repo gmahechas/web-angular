@@ -3,6 +3,7 @@ import { createSelector } from '@ngrx/store';
 import * as fromFeature from '@web/app/features/a/country/store/reducers';
 import * as fromEntity from '@web/app/features/a/country/store/reducers/entity-country.reducer';
 import * as fromCore from '@web/app/core/store';
+import { of } from 'rxjs';
 
 export const getEntityState = createSelector(
   fromFeature.getCountryState,
@@ -20,6 +21,6 @@ export const getSelectedByRouter = createSelector(
   getEntities,
   fromCore.getRouterState,
   (entities, router) => {
-    return router.state && entities[router.state.params.country_id];
+    return (router) ? router.state && entities[router.state.params.country_id] : null;
   }
 );

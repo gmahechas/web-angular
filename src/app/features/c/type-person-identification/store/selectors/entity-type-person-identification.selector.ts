@@ -20,6 +20,6 @@ export const getSelectedByRouter = createSelector(
   getEntities,
   fromCore.getRouterState,
   (entities, router) => {
-    return router.state && entities[router.state.params.type_person_identification_id];
+    return (router) ? router.state && entities[router.state.params.type_person_identification_id] : null;
   }
 );
