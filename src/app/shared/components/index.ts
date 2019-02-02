@@ -16,6 +16,7 @@ import { TranslateSharedComponent } from '@web/app/shared/components/translate-s
 import { SplitButtonSharedComponent } from '@web/app/shared/components/split-button-shared/split-button-shared.component';
 import { ListboxSharedComponent } from '@web/app/shared/components/listbox-shared/listbox-shared.component';
 import { TabMenuSharedComponent } from '@web/app/shared/components/tab-menu-shared/tab-menu-shared.component';
+import { IconPrimeSharedComponent } from '@web/app/shared/components/icon-prime-shared/icon-prime-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -35,5 +36,6 @@ export const components: any[] = [
   TranslateSharedComponent,
   SplitButtonSharedComponent,
   ListboxSharedComponent,
-  TabMenuSharedComponent
+  TabMenuSharedComponent,
+  IconPrimeSharedComponent
 ];
