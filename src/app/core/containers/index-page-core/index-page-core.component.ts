@@ -17,7 +17,7 @@ export class IndexPageCoreComponent implements OnInit {
   company$ = this.store.pipe(select(fromCore.getCompany));
   userOffice$ = this.store.pipe(select(fromCore.getUserOffice));
   userOfficeProject$ = this.store.pipe(select(fromCore.getUserOfficeProject));
-  showSidebar = this.store.pipe(select(fromCore.getShowSidebar));
+  showSidebar$ = this.store.pipe(select(fromCore.getShowSidebar));
   blockedDocument$ = this.store.pipe(select(fromCore.getBlockedDocument));
   showSpinner$ = this.store.pipe(select(fromCore.getShowSpinner));
   progressBar$ = this.store.pipe(select(fromCore.getProgressBar));

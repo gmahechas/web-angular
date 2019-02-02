@@ -1,3 +1,7 @@
+<app-sidebar-shared [showSidebar]="sideBar" [position]="'left'" [style]="{'width':'100%'}" (hide)="closeSidebar($event)">
+  <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
+    (navigate)="nav($event)"></app-menu-core>
+</app-sidebar-shared>
 <div class="ui-g">
   <div class="ui-g-1">
     <button pButton (click)="handlerClick(true)" class="ui-button-secondary" icon="pi pi-bars"></button>
@@ -21,3 +25,6 @@
     <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
   </div>
 </div>
+
+<app-tab-menu-shared *ngIf="selectedMenus" [items]="selectedMenus.profileMenus" [active]="selectedMenus.selected"
+  (navigate)="nav($event)" (close)="removeMenuTab($event)"></app-tab-menu-shared>

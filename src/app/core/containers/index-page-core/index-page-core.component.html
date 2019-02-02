@@ -1,18 +1,17 @@
-<div *ngIf="(user$ | async) as user">
-  <app-sidebar-shared [showSidebar]="showSidebar | async" [position]="'left'" [style]="{'width':'100%'}" (hide)="opencloseSidebar($event)">
-    <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
-      (navigate)="handleNavigateFromSide($event)"></app-menu-core>
-  </app-sidebar-shared>
-  <app-header-core [company]="company$ | async" [userOffice]="userOffice$ | async" [userOfficeProject]="userOfficeProject$ | async"
-    [user]="user" (clickOpen)="opencloseSidebar($event)" (clickSelectOffice)="gotoSelectOffice($event)"
-    (clickSelectProject)="gotoSelectProject($event)" (clickLogout)="handleLogout($event)"></app-header-core>
-  <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus" [active]="selectedMenus.selected"
-    (navigate)="handleNavigateFromTab($event)" (close)="removeMenuFromTab($event)"></app-tab-menu-shared>
+<div class="layout-wrapper">
+  <div class="layout-header" *ngIf="(user$ | async) as user">
+    <app-header-core [company]="company$ | async" [userOffice]="userOffice$ | async" [userOfficeProject]="userOfficeProject$ | async"
+      [user]="user" [sideBar]="showSidebar$ | async" [selectedMenus]="selectedMenus$ | async" (clickOpen)="opencloseSidebar($event)"
+      (clickSelectOffice)="gotoSelectOffice($event)" (clickSelectProject)="gotoSelectProject($event)" (clickLogout)="handleLogout($event)"
+      (handleHide)="opencloseSidebar($event)" (handleNavigate)="handleNavigateFromSide($event)" (removeTabMenu)=removeMenuFromTab($event)></app-header-core>
+  </div>
+  <div class="layout-content">
+    <app-message-core></app-message-core>
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<app-message-core></app-message-core>
-<app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>
-<router-outlet></router-outlet>
 <!-- Misc -->
+<app-progress-bar-core [progressBar]="progressBar$ | async"></app-progress-bar-core>
 <app-block-core [blockedDocument]="blockedDocument$ | async"></app-block-core>
 <app-spinner-core [showSpinner]="showSpinner$ | async"></app-spinner-core>
 <app-toast-core></app-toast-core>
