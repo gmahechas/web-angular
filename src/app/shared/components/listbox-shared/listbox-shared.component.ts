@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'app-listbox-shared',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './listbox-shared.component.html',
   styles: []
 })
