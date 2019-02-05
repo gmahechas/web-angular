@@ -22,12 +22,12 @@ export class HeaderCoreComponent implements OnInit {
   @Input() sideBar: boolean;
   @Input() selectedMenus: SelectedMenus;
   @Output() clickOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() handleHide: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickSelectOffice: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickSelectProject: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() clickLogout: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() handleHide: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() handleNavigate: EventEmitter<ProfileMenu> = new EventEmitter<ProfileMenu>();
   @Output() removeTabMenu: EventEmitter<number> = new EventEmitter<number>();
+  @Output() clickLogout: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -36,6 +36,9 @@ export class HeaderCoreComponent implements OnInit {
 
   handlerClick(event) {
     this.clickOpen.emit(event);
+  }
+  closeSidebar(event) {
+    this.handleHide.emit(event);
   }
 
   selectOffice() {
@@ -46,19 +49,15 @@ export class HeaderCoreComponent implements OnInit {
     this.clickSelectProject.emit(true);
   }
 
-  logout() {
-    this.clickLogout.emit(true);
-  }
-
-  closeSidebar(event) {
-    this.handleHide.emit(event);
-  }
-
   nav(profileMenu: ProfileMenu) {
     this.handleNavigate.emit(profileMenu);
   }
 
   removeMenuTab(index: number) {
     this.removeTabMenu.emit(index);
+  }
+
+  logout() {
+    this.clickLogout.emit(true);
   }
 }
