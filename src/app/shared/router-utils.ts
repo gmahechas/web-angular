@@ -1,10 +1,18 @@
+import { RouterStateSnapshot, Params, Route, PreloadingStrategy } from '@angular/router';
 import { RouterStateSerializer } from '@ngrx/router-store';
-import { RouterStateSnapshot, Params } from '@angular/router';
+
+import { Observable, of } from 'rxjs';
 
 export interface RouterStateUrl {
   url: string;
   params: Params;
   queryParams: Params;
+}
+
+export class CustomPreload implements PreloadingStrategy {
+  preload(route: Route, fn: () => Observable<any>): Observable<any> {
+    return route.data && route.data.preload ? fn() : of(null);
+  }
 }
 
 export class CustomRouterStateSerializer implements RouterStateSerializer<RouterStateUrl> {

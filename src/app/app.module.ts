@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects, metaReducers } from '@web/app/core/store';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-import { CustomRouterStateSerializer } from '@web/app/shared/router-utils';
+import { CustomPreload, CustomRouterStateSerializer } from '@web/app/shared/router-utils';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppLangModule } from '@web/app/app-lang.module';
@@ -46,6 +46,7 @@ import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core
     CoreModule.forRoot()
   ],
   providers: [
+    CustomPreload,
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     httpInterceptorProviders
   ],
