@@ -5,6 +5,7 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
 import { User } from '@web/app/features/c/user/models';
 import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
+import { SelectedMenus } from '@web/app/core/models/selected-menus.model';
 
 @Component({
   selector: 'app-header-core',
@@ -19,10 +20,7 @@ export class HeaderCoreComponent implements OnInit {
   @Input() userOfficeProject: UserOfficeProject;
   @Input() user: any;
   @Input() sideBar: boolean;
-  @Input() selectedMenus: {
-    selected: ProfileMenu,
-    profileMenus: ProfileMenu[],
-  };
+  @Input() selectedMenus: SelectedMenus;
   @Output() clickOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickSelectOffice: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clickSelectProject: EventEmitter<boolean> = new EventEmitter<boolean>();

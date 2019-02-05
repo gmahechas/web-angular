@@ -4,7 +4,7 @@ import { AuthActionTypes, AuthActions } from '@web/app/auth/store/actions/auth.a
 import { Company } from '@web/app/features/b/company/models/company.model';
 import { UserOffice } from '@web/app/features/c/user-office/models';
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
-import { ProfileMenu } from '@web/app/features/c/profile-menu/models/profile-menu.model';
+import { SelectedMenus } from '@web/app/core/models/selected-menus.model';
 
 export interface State {
   lang: string;
@@ -15,10 +15,7 @@ export interface State {
   company: Company | null;
   userOffice: UserOffice | null;
   userOfficeProject: UserOfficeProject | null;
-  selectedMenus: {
-    selected: ProfileMenu | null,
-    profileMenus: ProfileMenu[];
-  };
+  selectedMenus: SelectedMenus;
 }
 
 export const initialState: State = {
