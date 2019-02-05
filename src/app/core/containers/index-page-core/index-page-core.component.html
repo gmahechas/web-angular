@@ -1,9 +1,6 @@
 <div class="layout-wrapper">
-  <div class="layout-header" *ngIf="(user$ | async) as user">
-    <app-header-core [company]="company$ | async" [userOffice]="userOffice$ | async" [userOfficeProject]="userOfficeProject$ | async"
-      [user]="user" [sideBar]="showSidebar$ | async" [selectedMenus]="selectedMenus$ | async" (clickOpen)="opencloseSidebar($event)"
-      (clickSelectOffice)="gotoSelectOffice($event)" (clickSelectProject)="gotoSelectProject($event)" (clickLogout)="handleLogout($event)"
-      (handleHide)="opencloseSidebar($event)" (handleNavigate)="handleNavigateFromSide($event)" (removeTabMenu)=removeMenuFromTab($event)></app-header-core>
+  <div class="layout-header">
+    <app-header-core></app-header-core>
   </div>
   <div class="layout-content">
     <app-message-core></app-message-core>

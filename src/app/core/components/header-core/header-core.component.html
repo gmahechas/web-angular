@@ -1,42 +1,43 @@
-<app-sidebar-shared [showSidebar]="sideBar" [position]="'left'" [style]="{'width':'100%'}" (hide)="closeSidebar($event)">
-  <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
-    (navigate)="nav($event)"></app-menu-core>
-</app-sidebar-shared>
+<div *ngIf="(user$ | async) as user">
 
-<div class="layout-topbar">
-  <div class="layout-topbar-logo">
-    <app-image-shared></app-image-shared>
+  <app-sidebar-shared [showSidebar]="showSidebar$ | async" [style]="{'width':'100%'}" [modal]="false" (hide)="opencloseSidebar($event)">
+    <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
+      (navigate)="handleNavigateFromSide($event)">
+    </app-menu-core>
+  </app-sidebar-shared>
+
+  <div class="layout-topbar">
+    <div class="layout-topbar-logo">
+      <app-image-shared></app-image-shared>
+    </div>
+    <div class="layout-topbar-menu" (click)="opencloseSidebar(true)">
+      <app-icon-prime-shared [class]="'pi pi-bars'"></app-icon-prime-shared>
+    </div>
+    <div class="layout-topbar-info">
+      <div *ngIf="(company$ | async) as company">
+        {{ company.company_name | transformTextShared:false:false:true }}
+      </div>
+      <div *ngIf="(userOffice$ | async) as userOffice" (click)="gotoSelectOffice()">
+        {{
+        (userOffice) ? (userOffice.office.office_name | transformTextShared:false:false:true) : 'Seleccionar
+        Oficina'
+        }}
+      </div>
+      <div *ngIf="(userOfficeProject$ | async) as userOfficeProject" (click)="gotoSelectProject()">
+        {{
+        (userOfficeProject) ? (userOfficeProject.project.project_name | transformTextShared:false:false:true) :
+        'Seleccionar Proyecto'
+        }}
+      </div>
+    </div>
+    <div class="layout-topbar-icons">
+      <app-icon-prime-shared [class]="'pi pi-calendar'"></app-icon-prime-shared>
+      <app-icon-prime-shared [class]="'pi pi-bell'"></app-icon-prime-shared>
+      <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
+    </div>
   </div>
-  <div class="layout-topbar-menu" (click)="handlerClick(true)">
-    <app-icon-prime-shared [class]="'pi pi-bars'"></app-icon-prime-shared>
-  </div>
-  <div class="layout-topbar-info">
-    <ul>
-      <li><span>{{ company.company_name | transformTextShared:false:false:true }}</span></li>
-      <li>
-        <span (click)="selectOffice()">
-          {{
-          (userOffice) ? (userOffice.office.office_name | transformTextShared:false:false:true) : 'Seleccionar Oficina'
-          }}
-        </span>
-      </li>
-      <li>
-        <span (click)="selectProject()">
-          {{
-          (userOfficeProject) ? (userOfficeProject.project.project_name | transformTextShared:false:false:true) :
-          'Seleccionar Proyecto'
-          }}
-        </span>
-      </li>
-    </ul>
-  </div>
-  <div class="layout-topbar-icons">
-    <app-icon-prime-shared [class]="'pi pi-calendar'"></app-icon-prime-shared>
-    <app-icon-prime-shared [class]="'pi pi-bell'"></app-icon-prime-shared>
-    <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
+  <div class="layout-tabmenu">
+    <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus"
+      [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (close)="removeMenuTab($event)"></app-tab-menu-shared>
   </div>
 </div>
-
-
-<app-tab-menu-shared *ngIf="selectedMenus" [items]="selectedMenus.profileMenus" [active]="selectedMenus.selected"
-  (navigate)="nav($event)" (close)="removeMenuTab($event)"></app-tab-menu-shared>

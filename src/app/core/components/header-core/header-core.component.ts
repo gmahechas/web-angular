@@ -1,63 +1,72 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Company } from '@web/app/features/b/company/models/company.model';
-import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
-import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
-import { User } from '@web/app/features/c/user/models';
+import { Store, select } from '@ngrx/store';
+import * as fromCore from '@web/app/core/store';
+import * as fromAuth from '@web/app/auth/store';
+
 import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
-import { SelectedMenus } from '@web/app/core/models/selected-menus.model';
 
 @Component({
   selector: 'app-header-core',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header-core.component.html',
   styles: []
 })
 export class HeaderCoreComponent implements OnInit {
 
-  @Input() company: Company;
-  @Input() userOffice: UserOffice;
-  @Input() userOfficeProject: UserOfficeProject;
-  @Input() user: any;
-  @Input() sideBar: boolean;
-  @Input() selectedMenus: SelectedMenus;
-  @Output() clickOpen: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() handleHide: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() clickSelectOffice: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() clickSelectProject: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() handleNavigate: EventEmitter<ProfileMenu> = new EventEmitter<ProfileMenu>();
-  @Output() removeTabMenu: EventEmitter<number> = new EventEmitter<number>();
-  @Output() clickLogout: EventEmitter<boolean> = new EventEmitter<boolean>();
+  showSidebar$ = this.store.pipe(select(fromCore.getShowSidebar));
+  user$ = this.store.pipe(select(fromAuth.getUser));
+  company$ = this.store.pipe(select(fromCore.getCompany));
+  userOffice$ = this.store.pipe(select(fromCore.getUserOffice));
+  userOfficeProject$ = this.store.pipe(select(fromCore.getUserOfficeProject));
+  selectedMenus$ = this.store.pipe(select(fromCore.getSelectedMenus));
 
-  constructor() { }
+  constructor(
+    private store: Store<fromCore.State>
+  ) { }
 
   ngOnInit() {
   }
 
-  handlerClick(event) {
-    this.clickOpen.emit(event);
-  }
-  closeSidebar(event) {
-    this.handleHide.emit(event);
-  }
-
-  selectOffice() {
-    this.clickSelectOffice.emit(true);
+  opencloseSidebar(event: boolean) {
+    if (event) {
+      this.store.dispatch(new fromCore.OpenSidebar());
+    } else if (!event) {
+      this.store.dispatch(new fromCore.CloseSidebar());
+    }
   }
 
-  selectProject() {
-    this.clickSelectProject.emit(true);
+  gotoSelectOffice() {
+    this.store.dispatch(new fromCore.Go({ path: ['user-office', 'select-office'] }));
   }
 
-  nav(profileMenu: ProfileMenu) {
-    this.handleNavigate.emit(profileMenu);
+  gotoSelectProject() {
+    this.store.dispatch(new fromCore.Go({ path: ['user-office-project', 'select-project'] }));
+  }
+
+  handleNavigateFromSide(profileMenu: ProfileMenu) {
+    this.store.dispatch(new fromCore.AddSelectedMenu({ profile_menu: profileMenu }));
+    this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
+    this.store.dispatch(new fromCore.CloseSidebar());
+  }
+
+  handleNavigateFromTab(profileMenu: ProfileMenu) {
+    this.store.dispatch(new fromCore.ChangeSelectedMenu({ profile_menu: profileMenu }));
+    this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
   }
 
   removeMenuTab(index: number) {
-    this.removeTabMenu.emit(index);
+    this.store.dispatch(new fromCore.RemoveSelectedMenu({ index }));
   }
 
   logout() {
-    this.clickLogout.emit(true);
+    this.store.dispatch(new fromCore.ConfirmDialog({
+      confirm: {
+        acceptType: fromAuth.AuthActionTypes.LogoutAuth,
+        acceptLabel: 'salir',
+        rejectLabel: 'cancelar',
+        header: 'salir',
+        message: 'realmente desea salir del sistema'
+      }
+    }));
   }
 }
