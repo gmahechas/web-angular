@@ -1,4 +1,4 @@
-<div class="ui-g-12" *ngIf="(data$ | async) as data">
+<div *ngIf="(data$ | async) as data">
   <app-edit-form-user-office *ngFor="let userOffice of data" [userOffice]="userOffice" (edit)="onEdit($event)" (delete)="onDelete($event)"
     (gotoUserOfficeProject)="onUserOfficeProject($event)"></app-edit-form-user-office>
   <app-create-form-user-office></app-create-form-user-office>

@@ -1,16 +1,16 @@
-<div class="ui-g">
-  <div class="ui-g-12">
+<div class="p-grid p-nogutter">
+  <div class="p-col">
     <app-search-form-estate [query]="query$ | async" (search)="onLoad($event)" (create)="onCreate()" (resetSearch)="onResetSearch()"></app-search-form-estate>
   </div>
 </div>
-<div class="ui-g">
-  <div class="ui-g-5">
+<div class="p-grid p-nogutter">
+  <div class="p-col">
     <app-table-shared [data]="data$ | async" [totalRecords]="total$ | async" [rows]="perPage$ | async" [first]="from$ | async"
       [to]="to$ | async" [selectRows]="selectedEntity" [configTable]="configTable" (rowSelect)="onEdit($event)"
       (rowUnselect)="onCancel()" (pageChange)="onPaginate($event)">
     </app-table-shared>
   </div>
-  <div class="ui-g-4">
+  <div class="p-col">
     <router-outlet></router-outlet>
   </div>
 </div>
