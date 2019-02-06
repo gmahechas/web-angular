@@ -1,2 +1,2 @@
-<app-bar-menu-core class="ui-g-2 ui-g-nopad" *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options"
+<app-bar-menu-core *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options"
   (navigate)="onNavigate($event)"></app-bar-menu-core>
