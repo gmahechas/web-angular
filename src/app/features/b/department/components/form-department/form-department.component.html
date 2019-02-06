@@ -4,36 +4,35 @@
   </div>
   <div class="panel-content">
     <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
-      <div class="ui-grid">
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['department.model.department_name']"></app-translate-shared>
-          </div>
-          <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="departmentForm" [groupName]="'department'" [controlName]="'department_name'"></app-input-text-shared>
-          </div>
-          <div class="ui-grid-col-4">
-            <app-validation-errors-shared [control]="departmentForm.get('department.department_name')"></app-validation-errors-shared>
-          </div>
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <app-translate-shared [strings]="['department.model.department_name']"></app-translate-shared>
         </div>
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['department.model.department_description']"></app-translate-shared>
-          </div>
-          <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="departmentForm" [groupName]="'department'" [controlName]="'department_description'"></app-input-text-shared>
-          </div>
-          <div class="ui-grid-col-4">
-              <app-validation-errors-shared [control]="departmentForm.get('department.department_description')"></app-validation-errors-shared>
-          </div>
+        <div class="p-col">
+          <app-input-text-shared [group]="departmentForm" [groupName]="'department'" [controlName]="'department_name'"></app-input-text-shared>
+        </div>
+        <div class="p-col">
+          <app-validation-errors-shared [control]="departmentForm.get('department.department_name')"></app-validation-errors-shared>
         </div>
       </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-10 ui-g-offset-2">
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <app-translate-shared [strings]="['department.model.department_description']"></app-translate-shared>
+        </div>
+        <div class="p-col">
+          <app-input-text-shared [group]="departmentForm" [groupName]="'department'" [controlName]="'department_description'"></app-input-text-shared>
+        </div>
+        <div class="p-col">
+          <app-validation-errors-shared [control]="departmentForm.get('department.department_description')"></app-validation-errors-shared>
+        </div>
+      </div>
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
           <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="departmentForm.invalid"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>
+
     </form>
   </div>
 </app-panel-shared>

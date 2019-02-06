@@ -4,38 +4,32 @@
   </div>
   <div class="panel-content">
     <form [formGroup]="typePersonIdentificationForm" (ngSubmit)="onSubmit()">
-      <div class="ui-grid">
-
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['type_person_identification.model.type_person_identification_code']"></app-translate-shared>
-          </div>
-          <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="typePersonIdentificationForm" [groupName]="'type_person_identification'"
-              [controlName]="'type_person_identification_code'"></app-input-text-shared>
-          </div>
-          <div class="ui-grid-col-4">
-            <app-validation-errors-shared [control]="typePersonIdentificationForm.get('type_person_identification.type_person_identification_code')"></app-validation-errors-shared>
-          </div>
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <app-translate-shared [strings]="['type_person_identification.model.type_person_identification_code']"></app-translate-shared>
         </div>
-
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['type_person_identification.model.type_person_identification_description']"></app-translate-shared>
-          </div>
-          <div class="ui-grid-col-6">
-            <app-input-text-shared [group]="typePersonIdentificationForm" [groupName]="'type_person_identification'"
-              [controlName]="'type_person_identification_description'"></app-input-text-shared>
-          </div>
-          <div class="ui-grid-col-4">
-            <app-validation-errors-shared [control]="typePersonIdentificationForm.get('type_person_identification.type_person_identification_description')"></app-validation-errors-shared>
-          </div>
+        <div class="p-col">
+          <app-input-text-shared [group]="typePersonIdentificationForm" [groupName]="'type_person_identification'"
+            [controlName]="'type_person_identification_code'"></app-input-text-shared>
         </div>
-
+        <div class="p-col">
+          <app-validation-errors-shared [control]="typePersonIdentificationForm.get('type_person_identification.type_person_identification_code')"></app-validation-errors-shared>
+        </div>
       </div>
-
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-10 ui-g-offset-2">
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <app-translate-shared [strings]="['type_person_identification.model.type_person_identification_description']"></app-translate-shared>
+        </div>
+        <div class="p-col">
+          <app-input-text-shared [group]="typePersonIdentificationForm" [groupName]="'type_person_identification'"
+            [controlName]="'type_person_identification_description'"></app-input-text-shared>
+        </div>
+        <div class="p-col">
+          <app-validation-errors-shared [control]="typePersonIdentificationForm.get('type_person_identification.type_person_identification_description')"></app-validation-errors-shared>
+        </div>
+      </div>
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
           <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="typePersonIdentificationForm.invalid"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>

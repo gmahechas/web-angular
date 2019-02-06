@@ -4,56 +4,54 @@
   </div>
   <div class="panel-content">
     <form [formGroup]="searchFormMacroproject" (ngSubmit)="onSubmit()">
-      <div class="ui-grid">
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-1">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <app-translate-shared [strings]="['macroproject.model.macroproject_id']"></app-translate-shared>
-              </div>
-              <div class="ui-grid-col-9">
-                <app-input-text-shared [group]="searchFormMacroproject" [groupName]="'macroproject'" [controlName]="'macroproject_id'"></app-input-text-shared>
-              </div>
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <div class="p-grid p-nogutter">
+            <div class="p-col">
+              <app-translate-shared [strings]="['macroproject.model.macroproject_id']"></app-translate-shared>
+            </div>
+            <div class="p-col">
+              <app-input-text-shared [group]="searchFormMacroproject" [groupName]="'macroproject'" [controlName]="'macroproject_id'"></app-input-text-shared>
             </div>
           </div>
-          <div class="ui-grid-col-1">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <app-translate-shared [strings]="['macroproject.model.macroproject_name']"></app-translate-shared>
-              </div>
-              <div class="ui-grid-col-9">
-                <app-input-text-shared [group]="searchFormMacroproject" [groupName]="'macroproject'" [controlName]="'macroproject_name'"></app-input-text-shared>
-              </div>
+        </div>
+        <div class="p-col">
+          <div class="p-grid p-nogutter">
+            <div class="p-col">
+              <app-translate-shared [strings]="['macroproject.model.macroproject_name']"></app-translate-shared>
+            </div>
+            <div class="p-col">
+              <app-input-text-shared [group]="searchFormMacroproject" [groupName]="'macroproject'" [controlName]="'macroproject_name'"></app-input-text-shared>
             </div>
           </div>
-          <div class="ui-grid-col-2">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <app-translate-shared [strings]="['city.singular']"></app-translate-shared>
-              </div>
-              <div class="ui-grid-col-9">
-                <app-dropdown-page-city [group]="searchFormMacroproject" [controlName]="'city'" [options]="['city_name']"
-                  [optionLabel]="'city_name'"></app-dropdown-page-city>
-              </div>
+        </div>
+        <div class="p-col">
+          <div class="p-grid p-nogutter">
+            <div class="p-col">
+              <app-translate-shared [strings]="['city.singular']"></app-translate-shared>
+            </div>
+            <div class="p-col">
+              <app-dropdown-page-city [group]="searchFormMacroproject" [controlName]="'city'" [options]="['city_name']"
+                [optionLabel]="'city_name'"></app-dropdown-page-city>
             </div>
           </div>
-          <div class="ui-grid-col-2">
-            <div class="ui-grid-row">
-              <div class="ui-grid-col-3">
-                <app-translate-shared [strings]="['office.singular']"></app-translate-shared>
-              </div>
-              <div class="ui-grid-col-9">
-                <app-dropdown-page-office [group]="searchFormMacroproject" [controlName]="'office'" [options]="['office_name']"
-                  [optionLabel]="'office_name'"></app-dropdown-page-office>
-              </div>
+        </div>
+        <div class="p-col">
+          <div class="p-grid p-nogutter">
+            <div class="p-col">
+              <app-translate-shared [strings]="['office.singular']"></app-translate-shared>
+            </div>
+            <div class="p-col">
+              <app-dropdown-page-office [group]="searchFormMacroproject" [controlName]="'office'" [options]="['office_name']"
+                [optionLabel]="'office_name'"></app-dropdown-page-office>
             </div>
           </div>
-          <div class="ui-grid-col-7">
-            <app-button-shared [type]="'submit'" [label]="['verbs.search.verb']" [disabled]="searchFormMacroproject.invalid"
-              [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="['verbs.create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
-            <app-button-shared [type]="'button'" [label]="['verbs.clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
-          </div>
+        </div>
+        <div class="p-col">
+          <app-button-shared [type]="'submit'" [label]="['verbs.search.verb']" [disabled]="searchFormMacroproject.invalid"
+            [class]="'ui-button-secondary'"></app-button-shared>
+          <app-button-shared [type]="'button'" [label]="['verbs.create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
+          <app-button-shared [type]="'button'" [label]="['verbs.clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
         </div>
       </div>
     </form>

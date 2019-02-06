@@ -4,21 +4,20 @@
   </div>
   <div class="panel-content">
     <form [formGroup]="userOfficeForm" (ngSubmit)="onSubmit()">
-      <div class="ui-grid">
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-2">
-            <app-translate-shared [strings]="['office.singular']"></app-translate-shared>
-          </div>
-          <div class="ui-grid-col-6">
-            <app-dropdown-page-user-office [group]="userOfficeForm" [controlName]="'userOffice'" [options]="['office.office_name']"
-              [optionLabel]="'office.office_name'" [userOffice]="userOffice"></app-dropdown-page-user-office>
-          </div>
-          <div class="ui-grid-col-2">
-            <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'" [disabled]="userOfficeForm.invalid"></app-button-shared>
-          </div>
-          <div class="ui-grid-col-2">
-            <app-validation-errors-shared [control]="userOfficeForm.get('userOffice')"></app-validation-errors-shared>
-          </div>
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <app-translate-shared [strings]="['office.singular']"></app-translate-shared>
+        </div>
+        <div class="p-col">
+          <app-dropdown-page-user-office [group]="userOfficeForm" [controlName]="'userOffice'" [options]="['office.office_name']"
+            [optionLabel]="'office.office_name'" [userOffice]="userOffice"></app-dropdown-page-user-office>
+        </div>
+        <div class="p-col">
+          <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'"
+            [disabled]="userOfficeForm.invalid"></app-button-shared>
+        </div>
+        <div class="p-col">
+          <app-validation-errors-shared [control]="userOfficeForm.get('userOffice')"></app-validation-errors-shared>
         </div>
       </div>
     </form>
