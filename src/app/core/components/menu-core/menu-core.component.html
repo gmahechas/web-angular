@@ -1,2 +1,5 @@
-<app-bar-menu-core *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options"
-  (navigate)="onNavigate($event)"></app-bar-menu-core>
+<div class="p-grid p-nogutter">
+  <app-bar-menu-core class="p-col-2" *ngFor="let bar of bars" [bar]="bar.bar" [options]="bar.options"
+    (navigate)="onNavigate($event)">
+  </app-bar-menu-core>
+</div>
