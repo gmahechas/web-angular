@@ -12,9 +12,9 @@ import { SearchDay } from '@web/app/features/f/day/models/search-day.model';
 export class SearchFormDayComponent implements OnChanges, OnInit {
 
   @Input() query: SearchDay;
-  @Output() search: EventEmitter<SearchDay> = new EventEmitter<SearchDay>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchDay>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormDay = this.formBuilder.group({
     day: this.formBuilder.group({

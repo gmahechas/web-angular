@@ -11,7 +11,7 @@ export class ListboxSharedComponent implements OnInit {
   @Input() optionLabel: string;
   @Input() titleCaseLabel: string;
   @Input() upperCaseLabel: string;
-  @Output() handleClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() handleClick = new EventEmitter<any>();
 
   constructor() { }
 

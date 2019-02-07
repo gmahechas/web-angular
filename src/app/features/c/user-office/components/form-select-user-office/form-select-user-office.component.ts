@@ -12,7 +12,7 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 export class FormSelectUserOfficeComponent implements OnInit {
 
   @Input() user: User;
-  @Output() selectedUserOffice: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
+  @Output() selectedUserOffice = new EventEmitter<UserOffice>();
   userOffice: UserOffice;
 
   userOfficeForm = this.formBuilder.group({

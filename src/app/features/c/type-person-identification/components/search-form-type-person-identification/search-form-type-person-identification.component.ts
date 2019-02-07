@@ -14,9 +14,9 @@ import {
 export class SearchFormTypePersonIdentificationComponent implements OnChanges, OnInit {
 
   @Input() query: SearchTypePersonIdentification;
-  @Output() search: EventEmitter<SearchTypePersonIdentification> = new EventEmitter<SearchTypePersonIdentification>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchTypePersonIdentification>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormTypePersonIdentification = this.formBuilder.group({
     type_person_identification: this.formBuilder.group({

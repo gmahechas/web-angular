@@ -11,9 +11,9 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 export class EditFormUserOfficeComponent implements OnInit {
 
   @Input() userOffice: UserOffice;
-  @Output() edit: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
-  @Output() delete: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
-  @Output() gotoUserOfficeProject: EventEmitter<UserOffice> = new EventEmitter<UserOffice>();
+  @Output() edit = new EventEmitter<UserOffice>();
+  @Output() delete = new EventEmitter<UserOffice>();
+  @Output() gotoUserOfficeProject = new EventEmitter<UserOffice>();
 
   constructor() { }
 

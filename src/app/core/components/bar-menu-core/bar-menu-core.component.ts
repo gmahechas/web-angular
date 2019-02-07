@@ -12,7 +12,7 @@ export class BarMenuCoreComponent implements OnInit {
 
   @Input() bar: number;
   @Input() options: ParentChild[];
-  @Output() navigate: EventEmitter<{ bar: number, option: ParentChild }> = new EventEmitter<{ bar: number, option: ParentChild }>();
+  @Output() navigate = new EventEmitter<{ bar: number, option: ParentChild }>();
 
   constructor() { }
 

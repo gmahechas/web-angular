@@ -12,9 +12,9 @@ import { SearchDepartment } from '@web/app/features/b/department/models/search-d
 export class SearchFormDepartmentComponent implements OnChanges, OnInit {
 
   @Input() query: SearchDepartment;
-  @Output() search: EventEmitter<SearchDepartment> = new EventEmitter<SearchDepartment>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchDepartment>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormDepartment = this.formBuilder.group({
     department: this.formBuilder.group({

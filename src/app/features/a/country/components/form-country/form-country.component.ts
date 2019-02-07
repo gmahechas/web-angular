@@ -20,7 +20,7 @@ export class FormCountryComponent implements OnChanges, OnInit {
     }
   }
   @Input() country: Country;
-  @Output() submitted: EventEmitter<Country> = new EventEmitter<Country>();
+  @Output() submitted = new EventEmitter<Country>();
 
   countryForm = this.formBuilder.group({
     country: this.formBuilder.group({

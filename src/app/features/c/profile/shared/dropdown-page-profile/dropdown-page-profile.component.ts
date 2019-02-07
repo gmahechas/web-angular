@@ -19,7 +19,7 @@ export class DropdownPageProfileComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Input() showClear: boolean;
-  @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromProfile.getAllEntities));
   entityId = 'profile_id';
 

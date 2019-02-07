@@ -20,7 +20,7 @@ export class FormScheduleComponent implements OnChanges, OnInit {
     }
   }
   @Input() schedule: Schedule;
-  @Output() submitted: EventEmitter<Schedule> = new EventEmitter<Schedule>();
+  @Output() submitted = new EventEmitter<Schedule>();
 
   scheduleForm = this.formBuilder.group({
     schedule: this.formBuilder.group({

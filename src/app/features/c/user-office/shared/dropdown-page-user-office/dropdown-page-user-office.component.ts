@@ -21,7 +21,7 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Input() userOffice: UserOffice;
-  @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));
   entityId = 'user_office_id';
 

@@ -20,7 +20,7 @@ export class FormMacroprojectComponent implements OnChanges, OnInit {
     }
   }
   @Input() macroproject: Macroproject;
-  @Output() submitted: EventEmitter<Macroproject> = new EventEmitter<Macroproject>();
+  @Output() submitted = new EventEmitter<Macroproject>();
 
   macroprojectForm = this.formBuilder.group({
     macroproject: this.formBuilder.group({

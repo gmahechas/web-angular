@@ -10,8 +10,8 @@ export class TreeSharedComponent implements OnInit {
 
   @Input() value: any;
   @Input() selectionMode: string;
-  @Output() select: EventEmitter<any> = new EventEmitter<any>();
-  @Output() unSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() select = new EventEmitter<any>();
+  @Output() unSelect = new EventEmitter<any>();
 
   constructor() { }
 

@@ -20,7 +20,7 @@ export class FormTypePersonComponent implements OnChanges, OnInit {
     }
   }
   @Input() typePerson: TypePerson;
-  @Output() submitted: EventEmitter<TypePerson> = new EventEmitter<TypePerson>();
+  @Output() submitted = new EventEmitter<TypePerson>();
 
   typePersonForm = this.formBuilder.group({
     type_person: this.formBuilder.group({

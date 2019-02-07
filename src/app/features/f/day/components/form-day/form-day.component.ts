@@ -20,7 +20,7 @@ export class FormDayComponent implements OnChanges, OnInit {
     }
   }
   @Input() day: Day;
-  @Output() submitted: EventEmitter<Day> = new EventEmitter<Day>();
+  @Output() submitted = new EventEmitter<Day>();
 
   dayForm = this.formBuilder.group({
     day: this.formBuilder.group({

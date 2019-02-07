@@ -12,9 +12,9 @@ import { SearchWorkflow } from '@web/app/features/e/workflow/models/search-workf
 export class SearchFormWorkflowComponent implements OnChanges, OnInit {
 
   @Input() query: SearchWorkflow;
-  @Output() search: EventEmitter<SearchWorkflow> = new EventEmitter<SearchWorkflow>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchWorkflow>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormWorkflow = this.formBuilder.group({
     workflow: this.formBuilder.group({

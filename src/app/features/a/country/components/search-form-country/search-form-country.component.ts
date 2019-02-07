@@ -12,9 +12,9 @@ import { SearchCountry } from '@web/app/features/a/country/models/search-country
 export class SearchFormCountryComponent implements OnChanges, OnInit {
 
   @Input() query: SearchCountry;
-  @Output() search: EventEmitter<SearchCountry> = new EventEmitter<SearchCountry>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchCountry>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormCountry = this.formBuilder.group({
     country: this.formBuilder.group({

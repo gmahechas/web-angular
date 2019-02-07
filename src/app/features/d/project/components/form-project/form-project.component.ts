@@ -20,7 +20,7 @@ export class FormProjectComponent implements OnChanges, OnInit {
     }
   }
   @Input() project: Project;
-  @Output() submitted: EventEmitter<Project> = new EventEmitter<Project>();
+  @Output() submitted = new EventEmitter<Project>();
 
   projectForm = this.formBuilder.group({
     project: this.formBuilder.group({

@@ -22,7 +22,7 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() filterPlaceholder: string;
   @Input() showClear: boolean;
   @Input() country: Country;
-  @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromEstate.getAllEntities));
   entityId = 'estate_id';
 

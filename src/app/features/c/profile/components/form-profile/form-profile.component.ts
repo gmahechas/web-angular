@@ -20,7 +20,7 @@ export class FormProfileComponent implements OnChanges, OnInit {
     }
   }
   @Input() profile: Profile;
-  @Output() submitted: EventEmitter<Profile> = new EventEmitter<Profile>();
+  @Output() submitted = new EventEmitter<Profile>();
 
   profileForm = this.formBuilder.group({
     profile: this.formBuilder.group({

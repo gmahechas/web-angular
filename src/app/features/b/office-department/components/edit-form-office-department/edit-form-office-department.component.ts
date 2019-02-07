@@ -11,8 +11,8 @@ import { OfficeDepartment } from '@web/app/features/b/office-department/models/o
 export class EditFormOfficeDepartmentComponent implements OnInit {
 
   @Input() officeDepartment: OfficeDepartment;
-  @Output() edit: EventEmitter<OfficeDepartment> = new EventEmitter<OfficeDepartment>();
-  @Output() delete: EventEmitter<OfficeDepartment> = new EventEmitter<OfficeDepartment>();
+  @Output() edit = new EventEmitter<OfficeDepartment>();
+  @Output() delete = new EventEmitter<OfficeDepartment>();
 
   constructor() { }
 

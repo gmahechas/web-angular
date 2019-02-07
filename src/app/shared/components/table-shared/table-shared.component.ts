@@ -20,9 +20,9 @@ export class TableSharedComponent implements OnInit {
     }
   }
   @Input() configTable: any;
-  @Output() rowSelect: EventEmitter<any> = new EventEmitter<any>();
-  @Output() rowUnselect: EventEmitter<any> = new EventEmitter<any>();
-  @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() rowSelect = new EventEmitter<any>();
+  @Output() rowUnselect = new EventEmitter<any>();
+  @Output() pageChange = new EventEmitter<any>();
 
   constructor() { }
 

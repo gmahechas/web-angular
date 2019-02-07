@@ -12,9 +12,9 @@ import { SearchMacroproject } from '@web/app/features/d/macroproject/models/sear
 export class SearchFormMacroprojectComponent implements OnChanges, OnInit {
 
   @Input() query: SearchMacroproject;
-  @Output() search: EventEmitter<SearchMacroproject> = new EventEmitter<SearchMacroproject>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchMacroproject>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormMacroproject = this.formBuilder.group({
     macroproject: this.formBuilder.group({

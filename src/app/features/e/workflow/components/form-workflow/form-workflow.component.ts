@@ -20,7 +20,7 @@ export class FormWorkflowComponent implements OnChanges, OnInit {
     }
   }
   @Input() workflow: Workflow;
-  @Output() submitted: EventEmitter<Workflow> = new EventEmitter<Workflow>();
+  @Output() submitted = new EventEmitter<Workflow>();
 
   workflowForm = this.formBuilder.group({
     workflow: this.formBuilder.group({

@@ -13,7 +13,7 @@ export class MenuCoreComponent implements OnInit {
 
   bars: { bar: number, options: ParentChild[] }[] = [];
   @Input() options: ParentChild[];
-  @Output() navigate: EventEmitter<ProfileMenu> = new EventEmitter<ProfileMenu>();
+  @Output() navigate = new EventEmitter<ProfileMenu>();
 
   constructor() { }
 

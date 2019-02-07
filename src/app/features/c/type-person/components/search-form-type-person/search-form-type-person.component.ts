@@ -12,9 +12,9 @@ import { SearchTypePerson } from '@web/app/features/c/type-person/models/search-
 export class SearchFormTypePersonComponent implements OnChanges, OnInit {
 
   @Input() query: SearchTypePerson;
-  @Output() search: EventEmitter<SearchTypePerson> = new EventEmitter<SearchTypePerson>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchTypePerson>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormTypePerson = this.formBuilder.group({
     type_person: this.formBuilder.group({

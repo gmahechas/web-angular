@@ -20,7 +20,7 @@ export class FormUserComponent implements OnChanges, OnInit {
     }
   }
   @Input() user: User;
-  @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
+  @Output() submitted = new EventEmitter<User>();
 
   userForm = this.formBuilder.group({
     user: this.formBuilder.group({

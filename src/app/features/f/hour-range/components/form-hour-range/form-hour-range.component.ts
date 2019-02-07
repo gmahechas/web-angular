@@ -20,7 +20,7 @@ export class FormHourRangeComponent implements OnChanges, OnInit {
     }
   }
   @Input() hourRange: HourRange;
-  @Output() submitted: EventEmitter<HourRange> = new EventEmitter<HourRange>();
+  @Output() submitted = new EventEmitter<HourRange>();
 
   hourRangeForm = this.formBuilder.group({
     hour_range: this.formBuilder.group({

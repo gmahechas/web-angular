@@ -21,7 +21,7 @@ export class FormPersonComponent implements OnChanges, OnInit {
     }
   }
   @Input() person: Person;
-  @Output() submitted: EventEmitter<Person> = new EventEmitter<Person>();
+  @Output() submitted = new EventEmitter<Person>();
 
   personForm = this.formBuilder.group({
     person: this.formBuilder.group({

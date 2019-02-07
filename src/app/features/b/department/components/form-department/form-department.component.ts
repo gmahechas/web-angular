@@ -20,7 +20,7 @@ export class FormDepartmentComponent implements OnChanges, OnInit {
     }
   }
   @Input() department: Department;
-  @Output() submitted: EventEmitter<Department> = new EventEmitter<Department>();
+  @Output() submitted = new EventEmitter<Department>();
 
   departmentForm = this.formBuilder.group({
     department: this.formBuilder.group({

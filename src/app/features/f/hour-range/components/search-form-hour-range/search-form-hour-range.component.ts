@@ -12,9 +12,9 @@ import { SearchHourRange } from '@web/app/features/f/hour-range/models/search-ho
 export class SearchFormHourRangeComponent implements OnChanges, OnInit {
 
   @Input() query: SearchHourRange;
-  @Output() search: EventEmitter<SearchHourRange> = new EventEmitter<SearchHourRange>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchHourRange>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormHourRange = this.formBuilder.group({
     hour_range: this.formBuilder.group({

@@ -12,9 +12,9 @@ import { SearchProfile } from '@web/app/features/c/profile/models/search-profile
 export class SearchFormProfileComponent implements OnChanges, OnInit {
 
   @Input() query: SearchProfile;
-  @Output() search: EventEmitter<SearchProfile> = new EventEmitter<SearchProfile>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchProfile>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormProfile = this.formBuilder.group({
     profile: this.formBuilder.group({

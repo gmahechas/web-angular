@@ -20,7 +20,7 @@ export class FormCityComponent implements OnChanges, OnInit {
     }
   }
   @Input() city: City;
-  @Output() submitted: EventEmitter<City> = new EventEmitter<City>();
+  @Output() submitted = new EventEmitter<City>();
 
   cityForm = this.formBuilder.group({
     city: this.formBuilder.group({

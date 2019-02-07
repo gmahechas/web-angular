@@ -9,8 +9,8 @@ export class TabMenuSharedComponent implements OnInit {
 
   @Input() active: any;
   @Input() items: any;
-  @Output() navigate: EventEmitter<any> = new EventEmitter<any>();
-  @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() navigate = new EventEmitter<any>();
+  @Output() close = new EventEmitter<any>();
 
   constructor() { }
 

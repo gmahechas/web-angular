@@ -12,9 +12,9 @@ import { SearchOffice } from '@web/app/features/b/office/models/search-office.mo
 export class SearchFormOfficeComponent implements OnChanges, OnInit {
 
   @Input() query: SearchOffice;
-  @Output() search: EventEmitter<SearchOffice> = new EventEmitter<SearchOffice>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchOffice>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormOffice = this.formBuilder.group({
     office: this.formBuilder.group({

@@ -12,9 +12,9 @@ import { SearchSchedule } from '@web/app/features/f/schedule/models/search-sched
 export class SearchFormScheduleComponent implements OnChanges, OnInit {
 
   @Input() query: SearchSchedule;
-  @Output() search: EventEmitter<SearchSchedule> = new EventEmitter<SearchSchedule>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchSchedule>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormSchedule = this.formBuilder.group({
     schedule: this.formBuilder.group({

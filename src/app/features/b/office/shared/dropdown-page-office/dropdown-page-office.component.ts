@@ -19,7 +19,7 @@ export class DropdownPageOfficeComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Input() showClear: boolean;
-  @Output() changeDropdown: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromOffice.getAllEntities));
   entityId = 'office_id';
 

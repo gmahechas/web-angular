@@ -20,7 +20,7 @@ export class FormOfficeComponent implements OnChanges, OnInit {
     }
   }
   @Input() office: Office;
-  @Output() submitted: EventEmitter<Office> = new EventEmitter<Office>();
+  @Output() submitted = new EventEmitter<Office>();
 
   officeForm = this.formBuilder.group({
     office: this.formBuilder.group({

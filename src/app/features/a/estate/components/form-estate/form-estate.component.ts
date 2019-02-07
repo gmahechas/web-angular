@@ -20,7 +20,7 @@ export class FormEstateComponent implements OnChanges, OnInit {
     }
   }
   @Input() estate: Estate;
-  @Output() submitted: EventEmitter<Estate> = new EventEmitter<Estate>();
+  @Output() submitted = new EventEmitter<Estate>();
 
   estateForm = this.formBuilder.group({
     estate: this.formBuilder.group({

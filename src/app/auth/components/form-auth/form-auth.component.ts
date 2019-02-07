@@ -20,7 +20,7 @@ export class FormAuthComponent implements OnInit {
     }
   }
   @Input() error: string | null;
-  @Output() submitted: EventEmitter<Auth> = new EventEmitter<Auth>();
+  @Output() submitted = new EventEmitter<Auth>();
 
   authForm = this.formBuilder.group({
     auth: this.formBuilder.group({

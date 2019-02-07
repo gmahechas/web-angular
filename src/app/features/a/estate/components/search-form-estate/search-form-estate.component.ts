@@ -12,9 +12,9 @@ import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.mo
 export class SearchFormEstateComponent implements OnChanges, OnInit {
 
   @Input() query: SearchEstate;
-  @Output() search: EventEmitter<SearchEstate> = new EventEmitter<SearchEstate>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchEstate>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormEstate = this.formBuilder.group({
     estate: this.formBuilder.group({

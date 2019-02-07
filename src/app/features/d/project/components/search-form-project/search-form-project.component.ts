@@ -12,9 +12,9 @@ import { SearchProject } from '@web/app/features/d/project/models/search-project
 export class SearchFormProjectComponent implements OnChanges, OnInit {
 
   @Input() query: SearchProject;
-  @Output() search: EventEmitter<SearchProject> = new EventEmitter<SearchProject>();
-  @Output() create: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() resetSearch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() search = new EventEmitter<SearchProject>();
+  @Output() create = new EventEmitter<boolean>();
+  @Output() resetSearch = new EventEmitter<boolean>();
 
   searchFormProject = this.formBuilder.group({
     project: this.formBuilder.group({

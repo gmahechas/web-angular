@@ -14,7 +14,7 @@ export class CheckboxSharedComponent implements OnInit {
   @Input() checked: boolean;
   @Input() binary: boolean;
   @Input() label: string;
-  @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() change = new EventEmitter<boolean>();
 
   constructor() { }
 

@@ -13,7 +13,7 @@ import { UserOfficeProject } from '@web/app/features/d/user-office-project/model
 export class FormSelectUserOfficeProjectComponent implements OnInit {
 
   @Input() userOffice: UserOffice;
-  @Output() selectedUserOfficeProject: EventEmitter<UserOfficeProject> = new EventEmitter<UserOfficeProject>();
+  @Output() selectedUserOfficeProject = new EventEmitter<UserOfficeProject>();
   userOfficeProject: UserOfficeProject;
 
   userOfficeProjectForm = this.formBuilder.group({
