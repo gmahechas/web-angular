@@ -74,7 +74,6 @@ export class EntityOfficeDepartmentEffects {
     ),
     switchMap(([currentPage, perPage, searchOfficeDepartment]: [number, number, fromModels.SearchOfficeDepartment]) => {
       return from(this.officeDepartmentService.pagination({ ...searchOfficeDepartment, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
       );

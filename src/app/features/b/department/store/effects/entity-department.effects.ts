@@ -80,7 +80,6 @@ export class EntityDepartmentEffects {
     ),
     switchMap(([currentPage, perPage, searchDepartment]: [number, number, fromModels.SearchDepartment]) => {
       return from(this.departmentService.pagination({ ...searchDepartment, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromDepartmentActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromDepartmentActions.LoadFailEntity({ error })))
       );

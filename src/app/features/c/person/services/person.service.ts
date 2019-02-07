@@ -53,7 +53,7 @@ export class PersonService {
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) { return prev; }
-        return fetchMoreResult;
+        return Object.assign({}, prev, [prev, fetchMoreResult]);
       }
     });
   }

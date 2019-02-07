@@ -80,7 +80,6 @@ export class EntityUserEffects {
     ),
     switchMap(([currentPage, perPage, searchUser]: [number, number, fromModels.SearchUser]) => {
       return from(this.userService.pagination({ ...searchUser, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromUserActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromUserActions.LoadFailEntity({ error })))
       );

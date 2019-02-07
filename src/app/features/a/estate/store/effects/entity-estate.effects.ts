@@ -80,7 +80,6 @@ export class EntityEstateEffects {
     ),
     switchMap(([currentPage, perPage, searchEstate]: [number, number, fromModels.SearchEstate]) => {
       return from(this.estateService.pagination({ ...searchEstate, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
       );

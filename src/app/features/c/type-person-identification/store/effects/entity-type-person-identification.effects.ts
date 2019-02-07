@@ -84,7 +84,6 @@ export class EntityTypePersonIdentificationEffects {
       return from(this.typePersonIdentificationService.pagination({
         ...searchTypePersonIdentification, limit: perPage, page: currentPage
       })).pipe(
-        skip(1),
         map(({ data }) => new fromTypePersonIdentificationActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromTypePersonIdentificationActions.LoadFailEntity({ error })))
       );

@@ -80,7 +80,6 @@ export class EntityWorkflowEffects {
     ),
     switchMap(([currentPage, perPage, searchWorkflow]: [number, number, fromModels.SearchWorkflow]) => {
       return from(this.workflowService.pagination({ ...searchWorkflow, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromWorkflowActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromWorkflowActions.LoadFailEntity({ error })))
       );

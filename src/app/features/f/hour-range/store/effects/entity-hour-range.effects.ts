@@ -80,7 +80,6 @@ export class EntityHourRangeEffects {
     ),
     switchMap(([currentPage, perPage, searchHourRange]: [number, number, fromModels.SearchHourRange]) => {
       return from(this.hourRangeService.pagination({ ...searchHourRange, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
       );

@@ -80,7 +80,6 @@ export class EntityScheduleEffects {
     ),
     switchMap(([currentPage, perPage, searchSchedule]: [number, number, fromModels.SearchSchedule]) => {
       return from(this.scheduleService.pagination({ ...searchSchedule, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
       );

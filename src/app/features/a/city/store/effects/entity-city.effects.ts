@@ -80,7 +80,6 @@ export class EntityCityEffects {
     ),
     switchMap(([currentPage, perPage, searchCity]: [number, number, fromModels.SearchCity]) => {
       return from(this.cityService.pagination({ ...searchCity, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromCityActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromCityActions.LoadFailEntity({ error })))
       );

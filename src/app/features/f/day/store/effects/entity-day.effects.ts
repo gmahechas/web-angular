@@ -80,7 +80,6 @@ export class EntityDayEffects {
     ),
     switchMap(([currentPage, perPage, searchDay]: [number, number, fromModels.SearchDay]) => {
       return from(this.dayService.pagination({ ...searchDay, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromDayActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromDayActions.LoadFailEntity({ error })))
       );

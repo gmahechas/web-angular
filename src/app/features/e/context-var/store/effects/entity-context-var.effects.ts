@@ -80,7 +80,6 @@ export class EntityContextVarEffects {
     ),
     switchMap(([currentPage, perPage, searchContextVar]: [number, number, fromModels.SearchContextVar]) => {
       return from(this.contextVarService.pagination({ ...searchContextVar, limit: perPage, page: currentPage })).pipe(
-        skip(1),
         map(({ data }) => new fromContextVarActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromContextVarActions.LoadFailEntity({ error })))
       );
