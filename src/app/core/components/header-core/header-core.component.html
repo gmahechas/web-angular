@@ -1,6 +1,7 @@
 <div *ngIf="(user$ | async) as user">
 
-  <app-sidebar-shared [showSidebar]="showSidebar$ | async" [style]="{'width':'100%'}" [modal]="false" (hide)="opencloseSidebar($event)">
+  <app-sidebar-shared [showSidebar]="showSidebar$ | async" [style]="{'width':'100%'}" [modal]="false"
+    (hide)="opencloseSidebar($event)">
     <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
       (navigate)="handleNavigateFromSide($event)">
     </app-menu-core>
@@ -17,16 +18,16 @@
       <div *ngIf="(company$ | async) as company">
         {{ company.company_name | transformTextShared:false:false:true }}
       </div>
-      <div *ngIf="(userOffice$ | async) as userOffice" (click)="gotoSelectOffice()">
+      <div (click)="gotoSelectOffice()">
         {{
-        (userOffice) ? (userOffice.office.office_name | transformTextShared:false:false:true) : 'Seleccionar
-        Oficina'
+          (userOffice$ | async) ?
+            ((userOffice$ | async).office.office_name | transformTextShared:false:false:true) :'Seleccionar Oficina'
         }}
       </div>
-      <div *ngIf="(userOfficeProject$ | async) as userOfficeProject" (click)="gotoSelectProject()">
+      <div (click)="gotoSelectProject()">
         {{
-        (userOfficeProject) ? (userOfficeProject.project.project_name | transformTextShared:false:false:true) :
-        'Seleccionar Proyecto'
+          (userOfficeProject$ | async) ?
+            ((userOfficeProject$ | async).project.project_name | transformTextShared:false:false:true) : 'Seleccionar Proyecto'
         }}
       </div>
     </div>
@@ -38,6 +39,7 @@
   </div>
   <div class="layout-tabmenu">
     <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus"
-      [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (close)="removeMenuTab($event)"></app-tab-menu-shared>
+      [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (close)="removeMenuTab($event)">
+    </app-tab-menu-shared>
   </div>
 </div>
