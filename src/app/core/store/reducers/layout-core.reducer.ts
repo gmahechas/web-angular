@@ -43,16 +43,10 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
         lang: action.payload.lang
       };
 
-    case LayoutActionTypes.OpenSidebar:
+    case LayoutActionTypes.OpenCloseSidebar:
       return {
         ...state,
-        showSidebar: true
-      };
-
-    case LayoutActionTypes.CloseSidebar:
-      return {
-        ...state,
-        showSidebar: false
+        showSidebar: action.payload.showSidebar
       };
 
     case LayoutActionTypes.BlockedDocument:

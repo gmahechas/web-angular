@@ -37,6 +37,7 @@
       <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
     </div>
   </div>
+  
   <div class="layout-tabmenu">
     <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus"
       [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (close)="removeMenuTab($event)">

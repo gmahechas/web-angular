@@ -5,8 +5,7 @@ import { Confirm } from '@web/app/core/models/confirm.model';
 export enum LayoutActionTypes {
   SetDefaultLang = '[Layout Core] Set Default Lang',
   ChangeLang = '[Layout Core] Get Menu',
-  OpenSidebar = '[Layout Core] Open Sidebar',
-  CloseSidebar = '[Layout Core] Close Sidebar',
+  OpenCloseSidebar = '[Layout Core] Open Close Sidebar',
   BlockedDocument = '[Layout Core] Blocked Document',
   UnblockedDocument = '[Layout Core] Unblocked Document',
   ShowSpinner = '[Layout Core] Open Spinner',
@@ -32,12 +31,9 @@ export class ChangeLang implements Action {
   constructor(public payload: { lang: string }) { }
 }
 
-export class OpenSidebar implements Action {
-  readonly type = LayoutActionTypes.OpenSidebar;
-}
-
-export class CloseSidebar implements Action {
-  readonly type = LayoutActionTypes.CloseSidebar;
+export class OpenCloseSidebar implements Action {
+  readonly type = LayoutActionTypes.OpenCloseSidebar;
+  constructor(public payload: { showSidebar: boolean }) { }
 }
 
 export class BlockedDocument implements Action {
@@ -102,8 +98,7 @@ export class ConfirmDialog implements Action {
 export type LayoutActions =
   | SetDefaultLang
   | ChangeLang
-  | OpenSidebar
-  | CloseSidebar
+  | OpenCloseSidebar
   | BlockedDocument
   | UnblockedDocument
   | ShowSpinner

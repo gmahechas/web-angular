@@ -28,11 +28,7 @@ export class HeaderCoreComponent implements OnInit {
   }
 
   opencloseSidebar(event: boolean) {
-    if (event) {
-      this.store.dispatch(new fromCore.OpenSidebar());
-    } else if (!event) {
-      this.store.dispatch(new fromCore.CloseSidebar());
-    }
+    this.store.dispatch(new fromCore.OpenCloseSidebar({ showSidebar: event }));
   }
 
   gotoSelectOffice() {
@@ -46,7 +42,7 @@ export class HeaderCoreComponent implements OnInit {
   handleNavigateFromSide(profileMenu: ProfileMenu) {
     this.store.dispatch(new fromCore.AddSelectedMenu({ profile_menu: profileMenu }));
     this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
-    this.store.dispatch(new fromCore.CloseSidebar());
+    this.store.dispatch(new fromCore.OpenCloseSidebar({ showSidebar: false }));
   }
 
   handleNavigateFromTab(profileMenu: ProfileMenu) {
