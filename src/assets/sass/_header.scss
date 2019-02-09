@@ -1,12 +1,18 @@
-.layout-topbar {
-  height: 60px;
-  width: 100%;
-  box-sizing: border-box;
-  div {
-    display: inline-block;
+.layout-header {
+  
+  &-topbar {
+    height: 60px;
+    width: 100%;
+    box-sizing: border-box;
+    div {
+      display: inline-block;
+    }
+  }
+
+  &-tabmenu {
+    height: 35px;
   }
 }
 
-.layout-tabmenu {
-  height: 35px;
-}
+
+

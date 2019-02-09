@@ -7,14 +7,14 @@
     </app-menu-core>
   </app-sidebar-shared>
 
-  <div class="layout-topbar">
-    <div class="layout-topbar-logo">
+  <div class="layout-header-topbar">
+    <div class="layout-header-topbar-logo">
       <app-image-shared></app-image-shared>
     </div>
-    <div class="layout-topbar-menu" (click)="opencloseSidebar(true)">
+    <div class="layout-header-topbar-menu" (click)="opencloseSidebar(true)">
       <app-icon-prime-shared [class]="'pi pi-bars'"></app-icon-prime-shared>
     </div>
-    <div class="layout-topbar-info">
+    <div class="layout-header-topbar-info">
       <div *ngIf="(company$ | async) as company">
         {{ company.company_name | transformTextShared:false:false:true }}
       </div>
@@ -31,14 +31,14 @@
         }}
       </div>
     </div>
-    <div class="layout-topbar-icons">
+    <div class="layout-header-topbar-icons">
       <app-icon-prime-shared [class]="'pi pi-calendar'"></app-icon-prime-shared>
       <app-icon-prime-shared [class]="'pi pi-bell'"></app-icon-prime-shared>
       <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
     </div>
   </div>
-  
-  <div class="layout-tabmenu">
+
+  <div class="layout-header-tabmenu">
     <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus"
       [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (close)="removeMenuTab($event)">
     </app-tab-menu-shared>
