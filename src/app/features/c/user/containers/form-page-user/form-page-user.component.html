@@ -2,16 +2,21 @@
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.create.verb', 'user.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
 </app-form-user>
 
-<app-form-user *ngIf="(user$ | async) as user" [pending]="pending$ | async" (submitted)="onUpdate($event)" [user]="user">
+<app-form-user *ngIf="(user$ | async) as user" [pending]="pending$ | async" (submitted)="onUpdate($event)"
+  [user]="user">
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.edit.verb', 'user.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(user)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['office.plural']" [class]="'ui-button-secondary'" (click)="onUserOffice(user)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'"
+    (click)="onDestroy(user)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['office.plural']" [class]="'ui-button-secondary'"
+    (click)="onUserOffice(user)"></app-button-shared>
 </app-form-user>
 
 <router-outlet name="router-outlet-user-office"></router-outlet>

@@ -12,7 +12,7 @@ import gql from 'graphql-tag';
 export class UserOfficeUpdateGQL extends Mutation<UpdateUserOffice> {
 
   document: DocumentNode = gql`
-    mutation updateUserOffice($user_office_id: ID!, $user_office_status: Boolean) {
+    mutation updateUserOffice($user_office_id: ID!, $user_office_status: Boolean!) {
       updateUserOffice(user_office_id: $user_office_id, user_office_status: $user_office_status) {
         user_office_id
         user_office_status

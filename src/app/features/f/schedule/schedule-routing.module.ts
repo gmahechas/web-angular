@@ -9,7 +9,15 @@ export const routes: Routes = [
     path: '', component: fromContainers.IndexPageScheduleComponent,
     children: [
       { path: 'create', component: fromContainers.FormPageScheduleComponent },
-      { path: ':schedule_id', component: fromContainers.FormPageScheduleComponent, canActivate: [ScheduleExistGuard] }
+      {
+        path: ':schedule_id', component: fromContainers.FormPageScheduleComponent, canActivate: [ScheduleExistGuard], children: [
+          {
+            path: 'schedule-day',
+            loadChildren: '@web/app/features/f/schedule-day/schedule-day.module#ScheduleDayModule',
+            outlet: 'router-outlet-schedule-day'
+          }
+        ]
+      }
     ]
   }
 ];

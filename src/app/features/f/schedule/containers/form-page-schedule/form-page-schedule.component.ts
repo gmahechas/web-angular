@@ -42,4 +42,14 @@ export class FormPageScheduleComponent implements OnInit {
   onDestroy(schedule: Schedule) {
     this.store.dispatch(new fromSchedule.DestroyEntity({ entity: schedule }));
   }
+
+  onScheduleDay(schedule: Schedule) {
+    this.store.dispatch(new fromCore.Go({
+      path: [
+        'schedule',
+        schedule.schedule_id,
+        { outlets: { 'router-outlet-schedule-day': ['schedule-day', 'schedule', schedule.schedule_id] } }
+      ]
+    }));
+  }
 }

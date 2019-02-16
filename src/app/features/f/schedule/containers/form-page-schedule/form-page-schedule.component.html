@@ -1,15 +1,22 @@
 <app-form-schedule *ngIf="!(schedule$ | async) as schedule" [pending]="pending$ | async" (submitted)="onStore($event)">
-    <div class="form-title">
-      <app-translate-shared [strings]="['verbs.create.verb', 'schedule.singular']"></app-translate-shared>
-    </div>
-    <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  </app-form-schedule>
+  <div class="form-title">
+    <app-translate-shared [strings]="['verbs.create.verb', 'schedule.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+</app-form-schedule>
 
-  <app-form-schedule *ngIf="(schedule$ | async) as schedule" [pending]="pending$ | async" (submitted)="onUpdate($event)" [schedule]="schedule">
-    <div class="form-title">
-      <app-translate-shared [strings]="['verbs.edit.verb', 'schedule.singular']"></app-translate-shared>
-    </div>
-    <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(schedule)"></app-button-shared>
-    <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  </app-form-schedule>
+<app-form-schedule *ngIf="(schedule$ | async) as schedule" [pending]="pending$ | async" (submitted)="onUpdate($event)"
+  [schedule]="schedule">
+  <div class="form-title">
+    <app-translate-shared [strings]="['verbs.edit.verb', 'schedule.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'"
+    (click)="onDestroy(schedule)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['office.plural']" [class]="'ui-button-secondary'"
+    (click)="onScheduleDay(schedule)"></app-button-shared>
+</app-form-schedule>
 
+<router-outlet name="router-outlet-schedule-day"></router-outlet>
