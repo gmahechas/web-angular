@@ -1,7 +1,12 @@
 <div *ngIf="data.length > 0">
-  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
-  <p-table [value]="data" [columns]="configTable.cols" [selectionMode]="configTable.selectionMode" [(selection)]="selectedRows"
-    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [dataKey]="configTable.dataKey">
+  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
+    (onPageChange)="onPageChange($event)"></p-paginator>
+  <p-table [value]="data" [columns]="configTable.cols" [selectionMode]="configTable.selectionMode"
+    [(selection)]="selectedRows" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+    [dataKey]="configTable.dataKey">
+    <ng-template *ngIf="caption" pTemplate="caption">
+      <ng-content select="div.caption"></ng-content>
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [ngStyle]="col.style">
@@ -18,6 +23,13 @@
         </td>
       </tr>
     </ng-template>
+    <ng-template *ngIf="footer" pTemplate="footer">
+      <ng-content select="div.footer"></ng-content>
+    </ng-template>
+    <ng-template *ngIf="summary" pTemplate="summary">
+      <ng-content select="div.summary"></ng-content>
+    </ng-template>
   </p-table>
-  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
+  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
+    (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
