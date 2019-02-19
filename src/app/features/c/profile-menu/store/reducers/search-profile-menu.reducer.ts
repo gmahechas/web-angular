@@ -11,14 +11,10 @@ export const initialState: State = {
   query: {
     profile_menu: {
       profile_menu_id: '',
-      profile_menu_status: ''
+      profile_menu_status: null
     },
-    profile: {
-      profile_id: ''
-    },
-    menu: {
-      menu_id: ''
-    }
+    profile: null,
+    menu: null
   }
 };
 
