@@ -12,6 +12,7 @@
         <th *ngFor="let col of columns" [ngStyle]="col.style">
           <app-translate-shared [strings]="col.header"></app-translate-shared>
         </th>
+        <th *ngFor="let col of configTable.colSelection" [ngStyle]="col.style">&nbsp;</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -20,6 +21,10 @@
           <span *ngFor="let field of col.fields">
             {{ rowData | fetchStringInArrayShared:field }}
           </span>
+        </td>
+        <td *ngFor="let col of configTable.colSelection; let index = index;">
+          <app-icon-prime-shared [class]="col.class" (click)="onColumnSelection(index, rowData)">
+          </app-icon-prime-shared>
         </td>
       </tr>
     </ng-template>

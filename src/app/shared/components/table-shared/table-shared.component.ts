@@ -28,6 +28,7 @@ export class TableSharedComponent implements OnInit {
   @Output() rowSelect = new EventEmitter<any>();
   @Output() rowUnselect = new EventEmitter<any>();
   @Output() pageChange = new EventEmitter<any>();
+  @Output() columnSelected = new EventEmitter<any>();
 
   constructor() { }
 
@@ -43,5 +44,9 @@ export class TableSharedComponent implements OnInit {
 
   onPageChange(event) {
     this.pageChange.emit(event);
+  }
+
+  onColumnSelection(index, event) {
+    this.columnSelected.emit({ index, event });
   }
 }
