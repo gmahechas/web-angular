@@ -1,5 +1,5 @@
 <div *ngIf="data.length > 0">
-  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
+  <p-paginator *ngIf="topPaginator && totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
     (onPageChange)="onPageChange($event)"></p-paginator>
   <p-table [value]="data" [columns]="configTable.cols" [selectionMode]="configTable.selectionMode"
     [(selection)]="selectedRows" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
@@ -30,6 +30,6 @@
       <ng-content select="div.summary"></ng-content>
     </ng-template>
   </p-table>
-  <p-paginator *ngIf="totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
-    (onPageChange)="onPageChange($event)"></p-paginator>
+  <p-paginator *ngIf="footerPaginator && totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows"
+    [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
 </div>

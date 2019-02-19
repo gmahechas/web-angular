@@ -20,6 +20,8 @@ export class TableSharedComponent implements OnInit {
     }
   }
   @Input() configTable: any;
+  @Input() topPaginator = false;
+  @Input() footerPaginator = false;
   @Input() caption = false;
   @Input() footer = false;
   @Input() summary = false;
