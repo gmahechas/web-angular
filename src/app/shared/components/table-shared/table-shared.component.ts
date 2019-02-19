@@ -46,7 +46,7 @@ export class TableSharedComponent implements OnInit {
     this.pageChange.emit(event);
   }
 
-  onColumnSelection(index, event) {
-    this.columnSelected.emit({ index, event });
+  onColumnSelection(column, event) {
+    this.columnSelected.emit({ column, event });
   }
 }

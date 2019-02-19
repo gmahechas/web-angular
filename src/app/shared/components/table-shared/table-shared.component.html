@@ -12,7 +12,9 @@
         <th *ngFor="let col of columns" [ngStyle]="col.style">
           <app-translate-shared [strings]="col.header"></app-translate-shared>
         </th>
-        <th *ngFor="let col of configTable.colSelection" [ngStyle]="col.style">&nbsp;</th>
+        <th *ngFor="let col of configTable.colSelection" [ngStyle]="col.style">
+          <app-translate-shared [strings]="col.header"></app-translate-shared>
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -23,8 +25,17 @@
           </span>
         </td>
         <td *ngFor="let col of configTable.colSelection; let index = index;">
-          <app-icon-prime-shared [class]="col.class" (click)="onColumnSelection(index, rowData)">
-          </app-icon-prime-shared>
+          <div [ngSwitch]="col.type">
+            <div *ngSwitchCase="'icon'">
+              <app-icon-prime-shared [class]="col.class" (click)="onColumnSelection(index, rowData)">
+              </app-icon-prime-shared>
+            </div>
+            <div *ngSwitchCase="'checkbox'">
+              <app-checkbox-shared [checked]="rowData | fetchStringInArrayShared:col.field" [binary]="true"
+                (change)="onColumnSelection(index, rowData)">
+              </app-checkbox-shared>
+            </div>
+          </div>
         </td>
       </tr>
     </ng-template>
