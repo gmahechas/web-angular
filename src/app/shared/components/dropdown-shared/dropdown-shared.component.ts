@@ -19,8 +19,8 @@ export class DropdownSharedComponent implements OnInit {
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() keyUpTimes = 3;
   @Input() showClear: boolean;
-  @Input() isConditional: boolean;
   @Output() keyUp = new EventEmitter<string>();
   @Output() handleChange = new EventEmitter<any>();
 
@@ -32,8 +32,8 @@ export class DropdownSharedComponent implements OnInit {
   onKeyUp(event) {
     const key = event.key;
     const value = event.target.value;
-
-    if (value.length >= 3) {
+    console.log(this.data);
+    if (value.length >= this.keyUpTimes) {
       if (key === this.keyboardKey) {
         this.keyUp.emit(value);
       } else if (this.keyboardKey === 'Any') {
