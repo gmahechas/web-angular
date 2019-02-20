@@ -18,6 +18,7 @@ import { ListboxSharedComponent } from '@web/app/shared/components/listbox-share
 import { TabMenuSharedComponent } from '@web/app/shared/components/tab-menu-shared/tab-menu-shared.component';
 import { IconPrimeSharedComponent } from '@web/app/shared/components/icon-prime-shared/icon-prime-shared.component';
 import { ImageSharedComponent } from '@web/app/shared/components/image-shared/image-shared.component';
+import { DialogSharedComponent } from '@web/app/shared/components/dialog-shared/dialog-shared.component';
 
 export const components: any[] = [
   DropdownSharedComponent,
@@ -39,5 +40,6 @@ export const components: any[] = [
   ListboxSharedComponent,
   TabMenuSharedComponent,
   IconPrimeSharedComponent,
-  ImageSharedComponent
+  ImageSharedComponent,
+  DialogSharedComponent
 ];

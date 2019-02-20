@@ -21,6 +21,7 @@ import { TreeModule } from 'primeng/tree';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ListboxModule } from 'primeng/listbox';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { DialogModule } from 'primeng/dialog';
 
 export const prime: any[] = [
   SidebarModule,
@@ -45,5 +46,6 @@ export const prime: any[] = [
   TreeModule,
   SplitButtonModule,
   ListboxModule,
-  TabMenuModule
+  TabMenuModule,
+  DialogModule
 ];
