@@ -25,8 +25,8 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
     this.configTable = {
       dataKey: 'user_office_id',
       cols: [
-        { fields: ['office.office_name'], header: ['office.model.office_name'], style: { width: '40%' } },
-        { fields: ['user.username'], header: ['user.model.username'], style: { width: '40%' } },
+        { fields: ['office.office_name'], header: ['office.model.office_name'], style: { width: '35%' } },
+        { fields: ['user.username'], header: ['user.model.username'], style: { width: '35%' } },
       ],
       colSelection: [
         {
@@ -34,6 +34,12 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
           field: 'user_office_status',
           header: [],
           style: { width: '10%' }
+        },
+        {
+          type: 'button',
+          header: [],
+          label: ['project.plural'],
+          style: { width: '20%' }
         }
       ]
     };
@@ -52,17 +58,23 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   }
 
-  onEdit({ column, event }) {
+  handleColumnSelected({ column, event }) {
     switch (column) {
       case 0:
-        this.store.dispatch(new fromUserOffice.UpdateEntity({
-          entity: {
-            ...event,
-            user_office_status: !event.user_office_status
-          }
-        }));
+        this.onEdit({
+          ...event,
+          user_office_status: !event.user_office_status
+        });
         break;
+      case 1:
+        this.onUserOfficeProject(event);
+        break;
+
     }
+  }
+
+  onEdit(userOffice: UserOffice) {
+    this.store.dispatch(new fromUserOffice.UpdateEntity({ entity: userOffice }));
   }
 
   onDelete(userOffice: UserOffice) {

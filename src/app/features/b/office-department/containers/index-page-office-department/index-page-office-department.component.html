@@ -1,3 +1,3 @@
-<app-table-shared [data]="data$ | async" [configTable]="configTable" (columnSelected)="onEdit($event)">
+<app-table-shared [data]="data$ | async" [configTable]="configTable" (columnSelected)="handleColumnSelected($event)">
 </app-table-shared>
 <app-form-office-department></app-form-office-department>

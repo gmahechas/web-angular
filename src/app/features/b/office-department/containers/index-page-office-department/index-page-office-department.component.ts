@@ -49,17 +49,19 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  onEdit({ column, event }) {
+  handleColumnSelected({ column, event }) {
     switch (column) {
       case 0:
-        this.store.dispatch(new fromOfficeDepartment.UpdateEntity({
-          entity: {
-            ...event,
-            office_department_status: !event.office_department_status
-          }
-        }));
+        this.onEdit({
+          ...event,
+          office_department_status: !event.office_department_status
+        });
         break;
     }
+  }
+
+  onEdit(officeDepartment: OfficeDepartment) {
+    this.store.dispatch(new fromOfficeDepartment.UpdateEntity({ entity: officeDepartment }));
   }
 
   ngOnDestroy() {
