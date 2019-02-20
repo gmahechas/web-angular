@@ -16,11 +16,28 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromUserOffice.getAllEntities));
+  configTable: any;
 
   constructor(
     private store: Store<fromUserOffice.State>,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.configTable = {
+      dataKey: 'user_office_id',
+      cols: [
+        { fields: ['office.office_name'], header: ['office.model.office_name'], style: { width: '40%' } },
+        { fields: ['user.username'], header: ['user.model.username'], style: { width: '40%' } },
+      ],
+      colSelection: [
+        {
+          type: 'checkbox',
+          field: 'user_office_status',
+          header: [],
+          style: { width: '10%' }
+        }
+      ]
+    };
+  }
 
   ngOnInit() {
 
@@ -35,8 +52,17 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   }
 
-  onEdit(userOffice: UserOffice) {
-    this.store.dispatch(new fromUserOffice.UpdateEntity({ entity: userOffice }));
+  onEdit({ column, event }) {
+    switch (column) {
+      case 0:
+        this.store.dispatch(new fromUserOffice.UpdateEntity({
+          entity: {
+            ...event,
+            user_office_status: !event.user_office_status
+          }
+        }));
+        break;
+    }
   }
 
   onDelete(userOffice: UserOffice) {

@@ -1,5 +1,0 @@
-<div>{{ userOffice.office.office_name }}</div>
-<div>{{ userOffice.user.username }}</div>
-<app-button-shared [type]="'button'" [label]="['project.plural']" [class]="'ui-button-secondary'" (click)="onUserOfficeProject(userOffice)"></app-button-shared>
-<app-checkbox-shared [checked]="userOffice.user_office_status" [binary]="true" (change)="handleChange($event)"></app-checkbox-shared>
-<app-checkbox-shared (click)="handleDelete()"></app-checkbox-shared>
