@@ -20,6 +20,7 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   @Input() optionLabel: string;
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
+  @Input() showClear: boolean;
   @Input() userOffice: UserOffice;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));

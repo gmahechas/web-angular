@@ -18,6 +18,7 @@ export class DropdownPageTypePersonComponent implements OnInit {
   @Input() optionLabel: string;
   @Input() placeholder: string;
   @Input() filterPlaceholder: string;
+  @Input() showClear: boolean;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromStore.getAllEntities));
   entityId = 'type_person_id';
