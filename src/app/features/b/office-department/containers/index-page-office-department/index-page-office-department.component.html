@@ -1,3 +1,6 @@
-<app-table-shared [data]="data$ | async" [configTable]="configTable" (columnSelected)="handleColumnSelected($event)">
+<app-table-shared [data]="data$ | async" [configTable]="configTable" [summary]="true"
+  (columnSelected)="handleColumnSelected($event)">
+  <div class="summary">
+    <app-form-office-department (submitted)="onStore($event)"></app-form-office-department>
+  </div>
 </app-table-shared>
-<app-form-office-department></app-form-office-department>

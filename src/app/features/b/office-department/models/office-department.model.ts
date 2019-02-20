@@ -7,7 +7,7 @@ export interface OfficeDepartment {
   office_id?: number;
   office?: Office;
   department_id?: number;
-  department: Department;
+  department?: Department;
   office_department_created_at?: string;
   office_department_updated_at?: string;
   office_department_deleted_at?: string;

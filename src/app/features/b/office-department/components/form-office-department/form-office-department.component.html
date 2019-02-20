@@ -1,3 +1,16 @@
-<p>
-  form-office-department works!
-</p>
+<form [formGroup]="officeDepartmentForm" (ngSubmit)="onSubmit()">
+  <div class="p-grid p-nogutter">
+    <div class="p-col">
+      <app-dropdown-page-office [group]="officeDepartmentForm" [controlName]="'office'" [options]="['office_name']"
+        [optionLabel]="'office_name'"></app-dropdown-page-office>
+    </div>
+    <div class="p-col">
+      <app-dropdown-page-department [group]="officeDepartmentForm" [controlName]="'department'"
+        [options]="['department_name']" [optionLabel]="'department_name'"></app-dropdown-page-department>
+    </div>
+    <div class="p-col">
+      <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+        [disabled]="officeDepartmentForm.invalid"></app-button-shared>
+    </div>
+  </div>
+</form>

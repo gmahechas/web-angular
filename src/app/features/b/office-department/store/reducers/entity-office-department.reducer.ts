@@ -24,8 +24,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
-      const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeOfficeDepartment, newState);
+      return adapter.addOne(action.payload.entity.storeOfficeDepartment, state);
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {

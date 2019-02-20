@@ -6,10 +6,13 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@web/app/shared/shared.module';
 import { OfficeDepartmentRoutingModule } from '@web/app/features/b/office-department/office-department-routing.module';
+import { OfficeModule } from '@web/app/features/b/office/office.module';
+import { DepartmentModule } from '@web/app/features/b/department/department.module';
 
 import * as fromContainers from '@web/app/features/b/office-department/containers';
 import * as fromComponents from '@web/app/features/b/office-department/components';
 import * as fromShared from '@web/app/features/b/office-department/shared';
+
 
 @NgModule({
   imports: [
@@ -17,6 +20,8 @@ import * as fromShared from '@web/app/features/b/office-department/shared';
     OfficeDepartmentRoutingModule,
     StoreModule.forFeature('office_department', reducers),
     EffectsModule.forFeature(effects),
+    OfficeModule,
+    DepartmentModule
   ],
   declarations: [
     ...fromContainers.containers,

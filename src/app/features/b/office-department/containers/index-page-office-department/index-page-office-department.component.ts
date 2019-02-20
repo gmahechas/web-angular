@@ -49,6 +49,10 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  onStore(officeDepartment: OfficeDepartment) {
+    this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
+  }
+
   handleColumnSelected({ column, event }) {
     switch (column) {
       case 0:
