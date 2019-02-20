@@ -14,11 +14,27 @@ import { ScheduleDay } from '@web/app/features/f/schedule-day/models/schedule-da
 export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromScheduleDay.getAllEntities));
+  configTable: any;
 
   constructor(
     private store: Store<fromScheduleDay.State>,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.configTable = {
+      dataKey: 'schedule_day_id',
+      cols: [
+        { fields: ['day.day_name'], header: ['day.model.day_name'], style: { width: '90%' } },
+      ],
+      colSelection: [
+        {
+          type: 'checkbox',
+          field: 'schedule_day_status',
+          header: [],
+          style: { width: '10%' }
+        }
+      ]
+    };
+  }
 
   ngOnInit() {
     const key = this.route.snapshot.paramMap.keys[0];
@@ -29,6 +45,17 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
         search: { [key.split('_')[0]]: { [key]: val } }
       }));
     });
+  }
+
+  handleColumnSelected({ column, event }) {
+    switch (column) {
+      case 0:
+        this.onEdit({
+          ...event,
+          schedule_day_status: !event.schedule_day_status
+        });
+        break;
+    }
   }
 
   onEdit(scheduleDay: ScheduleDay) {
