@@ -17,11 +17,28 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromUserOfficeProject.getAllEntities));
   suscription: Subscription;
+  configTable: any;
 
   constructor(
     private store: Store<fromUserOfficeProject.State>,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.configTable = {
+      dataKey: 'user_office_project_id',
+      cols: [
+        { fields: ['project.project_name'], header: ['project.singular'], style: { width: '45%' } },
+        { fields: ['user_office.user.username'], header: ['user.model.username'], style: { width: '45%' } },
+      ],
+      colSelection: [
+        {
+          type: 'checkbox',
+          field: 'user_office_project_status',
+          header: [],
+          style: { width: '10%' }
+        },
+      ]
+    };
+  }
 
   ngOnInit() {
 
@@ -61,6 +78,17 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
       }
 
     });
+  }
+
+  handleColumnSelected({ column, event }) {
+    switch (column) {
+      case 0:
+        this.onEdit({
+          ...event,
+          user_office_project_status: !event.user_office_project_status
+        });
+        break;
+    }
   }
 
   onEdit(userOfficeProject: UserOfficeProject) {

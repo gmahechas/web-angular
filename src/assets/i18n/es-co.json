@@ -198,7 +198,7 @@
     "plural": "proyectos",
     "model": {
       "project_id": "id",
-      "project_name": "project",
+      "project_name": "proyecto",
       "project_address": "direccion",
       "project_phone": "telefono"
     }

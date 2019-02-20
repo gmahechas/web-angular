@@ -1,5 +1,3 @@
-<div *ngIf="(data$ | async) as data">
-  <app-edit-form-user-office-project *ngFor="let userOfficeProject of data" [userOfficeProject]="userOfficeProject"
-    (edit)="onEdit($event)" (delete)="onDelete($event)"></app-edit-form-user-office-project>
-  <app-create-form-user-office-project></app-create-form-user-office-project>
-</div>
+<app-table-shared [data]="data$ | async" [configTable]="configTable" (columnSelected)="handleColumnSelected($event)">
+</app-table-shared>
+<app-form-user-office-project></app-form-user-office-project>
