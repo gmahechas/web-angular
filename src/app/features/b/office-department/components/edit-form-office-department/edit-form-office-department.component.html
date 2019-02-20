@@ -1,8 +1,0 @@
-<div>{{ officeDepartment.office.office_name }}</div>
-<div>{{ officeDepartment.department.department_name }}</div>
-<div>
-  <app-checkbox-shared [checked]="officeDepartment.office_department_status" [binary]="true" (change)="handleChange($event)"></app-checkbox-shared>
-</div>
-<div>
-  <app-checkbox-shared (click)="handleDelete()"></app-checkbox-shared>
-</div>

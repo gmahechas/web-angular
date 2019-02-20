@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-create-form-office-department',
+  selector: 'app-form-office-department',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './create-form-office-department.component.html',
+  templateUrl: './form-office-department.component.html',
   styles: []
 })
-export class CreateFormOfficeDepartmentComponent implements OnInit {
+export class FormOfficeDepartmentComponent implements OnInit {
 
   constructor() { }
 

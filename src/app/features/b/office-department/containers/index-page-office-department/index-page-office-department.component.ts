@@ -15,11 +15,28 @@ import { OfficeDepartment } from '@web/app/features/b/office-department/models/o
 export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
+  configTable: any;
 
   constructor(
     private store: Store<fromOfficeDepartment.State>,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.configTable = {
+      dataKey: 'office_department_id',
+      cols: [
+        { fields: ['office.office_name'], header: ['office.model.office_name'], style: { width: '40%' } },
+        { fields: ['department.department_name'], header: ['department.model.department_name'], style: { width: '40%' } },
+      ],
+      colSelection: [
+        {
+          type: 'checkbox',
+          field: 'office_department_status',
+          header: [],
+          style: { width: '10%' }
+        }
+      ]
+    };
+  }
 
   ngOnInit() {
     const key = this.route.snapshot.paramMap.keys[0];
@@ -32,12 +49,17 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
     });
   }
 
-  onEdit(officeDepartment: OfficeDepartment) {
-    this.store.dispatch(new fromOfficeDepartment.UpdateEntity({ entity: officeDepartment }));
-  }
-
-  onDelete(officeDepartment: OfficeDepartment) {
-    this.store.dispatch(new fromOfficeDepartment.DestroyEntity({ entity: officeDepartment }));
+  onEdit({ column, event }) {
+    switch (column) {
+      case 0:
+        this.store.dispatch(new fromOfficeDepartment.UpdateEntity({
+          entity: {
+            ...event,
+            office_department_status: !event.office_department_status
+          }
+        }));
+        break;
+    }
   }
 
   ngOnDestroy() {
