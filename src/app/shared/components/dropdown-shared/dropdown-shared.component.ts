@@ -21,6 +21,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() showClear: boolean;
+  @Input() dropdownIcon: string;
   @Output() keyUp = new EventEmitter<string>();
   @Output() handleChange = new EventEmitter<any>();
 
