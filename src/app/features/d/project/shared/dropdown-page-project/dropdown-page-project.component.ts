@@ -25,8 +25,8 @@ export class DropdownPageProjectComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
-  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() isConditional = false;
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() searchProject: SearchProject;
   @Output() changeDropdown = new EventEmitter<any>();

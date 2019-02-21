@@ -25,8 +25,8 @@ export class DropdownPageOfficeDepartmentComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
-  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() isConditional = false;
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() searchOfficeDepartment: SearchOfficeDepartment;
   @Output() changeDropdown = new EventEmitter<any>();

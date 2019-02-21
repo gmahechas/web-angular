@@ -25,8 +25,8 @@ export class DropdownPageDepartmentComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
-  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() isConditional = false;
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() searchDepartment: SearchDepartment;
   @Output() changeDropdown = new EventEmitter<any>();
