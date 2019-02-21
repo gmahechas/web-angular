@@ -2,7 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/c/type-person-identification/store';
+import * as fromTypePersonIdentification from '@web/app/features/c/type-person-identification/store';
+
+import {
+  SearchTypePersonIdentification
+} from '@web/app/features/c/type-person-identification/models/search-type-person-identification.model';
 
 @Component({
   selector: 'app-dropdown-page-type-person-identification',
@@ -25,19 +29,20 @@ export class DropdownPageTypePersonIdentificationComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchTypePersonIdentification: SearchTypePersonIdentification;
   @Output() changeDropdown = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromTypePersonIdentification.getAllEntities));
   entityId = 'type_person_identification_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromTypePersonIdentification.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromTypePersonIdentification.LoadEntityShared({
       search: {
         type_person_identification: {
           type_person_identification_id: '',

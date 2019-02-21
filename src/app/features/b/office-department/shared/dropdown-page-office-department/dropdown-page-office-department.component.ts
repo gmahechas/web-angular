@@ -2,7 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/b/office-department/store';
+import * as fromOfficeDepartment from '@web/app/features/b/office-department/store';
+
+import { SearchOfficeDepartment } from '@web/app/features/b/office-department/models/search-office-department.model';
 
 @Component({
   selector: 'app-dropdown-page-office-department',
@@ -25,19 +27,20 @@ export class DropdownPageOfficeDepartmentComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchOfficeDepartment: SearchOfficeDepartment;
   @Output() changeDropdown = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
   entityId = 'office_department_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromOfficeDepartment.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromOfficeDepartment.LoadEntityShared({
       search: {
         office_department: {
           office_department_id: '',

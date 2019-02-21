@@ -2,7 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/f/hour-range/store';
+import * as fromHourRange from '@web/app/features/f/hour-range/store';
+
+import { SearchHourRange } from '@web/app/features/f/hour-range/models/search-hour-range.model';
 
 @Component({
   selector: 'app-dropdown-page-hour-range',
@@ -25,19 +27,20 @@ export class DropdownPageHourRangeComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchHourRange: SearchHourRange;
   @Output() changeDropdown = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromHourRange.getAllEntities));
   entityId = 'hour_range_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromHourRange.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromHourRange.LoadEntityShared({
       search: {
         hour_range: {
           hour_range_id: '',

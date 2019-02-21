@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromCity from '@web/app/features/a/city/store';
 
+import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
+
 @Component({
   selector: 'app-dropdown-page-city',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchCity: SearchCity;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromCity.getAllEntities));
   entityId = 'city_id';

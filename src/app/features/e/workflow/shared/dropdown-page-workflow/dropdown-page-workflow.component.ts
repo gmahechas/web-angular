@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromWorkflow from '@web/app/features/e/workflow/store';
 
+import { SearchWorkflow } from '@web/app/features/e/workflow/models/search-workflow.model';
+
 @Component({
   selector: 'app-dropdown-page-workflow',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageWorkflowComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchWorkflow: SearchWorkflow;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromWorkflow.getAllEntities));
   entityId = 'workflow_id';

@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromOffice from '@web/app/features/b/office/store';
 
+import { SearchOffice } from '@web/app/features/b/office/models/search-office.model';
+
 @Component({
   selector: 'app-dropdown-page-office',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageOfficeComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchOffice: SearchOffice;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromOffice.getAllEntities));
   entityId = 'office_id';

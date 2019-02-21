@@ -2,7 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/e/context-var/store';
+import * as fromContextVar from '@web/app/features/e/context-var/store';
+
+import { SearchContextVar } from '@web/app/features/e/context-var/models/search-context-var.model';
 
 @Component({
   selector: 'app-dropdown-page-context-var',
@@ -25,19 +27,20 @@ export class DropdownPageContextVarComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchContextVar: SearchContextVar;
   @Output() changeDropdown = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromContextVar.getAllEntities));
   entityId = 'context_var_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromContextVar.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromContextVar.LoadEntityShared({
       search: {
         context_var: {
           context_var_id: '',

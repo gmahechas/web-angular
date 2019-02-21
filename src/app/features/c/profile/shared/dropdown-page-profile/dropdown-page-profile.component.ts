@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '@web/app/features/c/profile/store';
 
+import { SearchProfile } from '@web/app/features/c/profile/models/search-profile.model';
+
 @Component({
   selector: 'app-dropdown-page-profile',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageProfileComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchProfile: SearchProfile;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromProfile.getAllEntities));
   entityId = 'profile_id';

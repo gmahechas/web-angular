@@ -2,7 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/f/schedule/store';
+import * as fromSchedule from '@web/app/features/f/schedule/store';
+
+import { SearchSchedule } from '@web/app/features/f/schedule/models/search-schedule.model';
 
 @Component({
   selector: 'app-dropdown-page-schedule',
@@ -25,19 +27,20 @@ export class DropdownPageScheduleComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchSchedule: SearchSchedule;
   @Output() changeDropdown = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromSchedule.getAllEntities));
   entityId = 'schedule_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromSchedule.State>
   ) { }
 
   ngOnInit() {
   }
 
   keyUp(event) {
-    this.store.dispatch(new fromStore.LoadEntityShared({
+    this.store.dispatch(new fromSchedule.LoadEntityShared({
       search: {
         schedule: {
           schedule_id: '',

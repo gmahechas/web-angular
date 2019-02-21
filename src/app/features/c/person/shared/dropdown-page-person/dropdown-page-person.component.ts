@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromPerson from '@web/app/features/c/person/store';
 
+import { SearchPerson } from '@web/app/features/c/person/models/search-person.model';
+
 @Component({
   selector: 'app-dropdown-page-person',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPagePersonComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Enter';
   @Input() keyUpTimes = 3;
+  @Input() searchPerson: SearchPerson;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromPerson.getAllEntities));
   entityId = 'person_id';

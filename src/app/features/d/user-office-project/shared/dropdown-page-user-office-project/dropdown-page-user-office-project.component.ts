@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
-import * as fromStore from '@web/app/features/d/user-office-project/store';
+import * as fromUserOffice from '@web/app/features/d/user-office-project/store';
 
 import { SearchUserOfficeProject } from '@web/app/features/d/user-office-project/models/search-user-office-project.model';
 
@@ -29,16 +29,16 @@ export class DropdownPageUserOfficeProjectComponent implements OnInit {
   @Input() keyUpTimes = 3;
   @Input() searchUserOfficeProject: SearchUserOfficeProject;
   @Output() changeDropdown = new EventEmitter<any>();
-  entities$ = this.store.pipe(select(fromStore.getAllEntities));
+  entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));
   entityId = 'user_office_project_id';
 
   constructor(
-    private store: Store<fromStore.State>
+    private store: Store<fromUserOffice.State>
   ) { }
 
   ngOnInit() {
     setTimeout(() => {
-      this.store.dispatch(new fromStore.LoadEntityShared({
+      this.store.dispatch(new fromUserOffice.LoadEntityShared({
         search: {
           user_office_project: {
             user_office_project_id: '',

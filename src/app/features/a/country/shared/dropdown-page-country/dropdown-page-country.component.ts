@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromCountry from '@web/app/features/a/country/store';
 
+import { SearchCountry } from '@web/app/features/a/country/models/search-country.model';
+
 @Component({
   selector: 'app-dropdown-page-country',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageCountryComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchCountry: SearchCountry;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromCountry.getAllEntities));
   entityId = 'country_id';

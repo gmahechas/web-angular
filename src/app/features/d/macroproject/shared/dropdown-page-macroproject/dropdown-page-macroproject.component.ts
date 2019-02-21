@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromMacroproject from '@web/app/features/d/macroproject/store';
 
+import { SearchMacroproject } from '@web/app/features/d/macroproject/models/search-macroproject.model';
+
 @Component({
   selector: 'app-dropdown-page-macroproject',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageMacroprojectComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchMacroproject: SearchMacroproject;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromMacroproject.getAllEntities));
   entityId = 'macroproject_id';

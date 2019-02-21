@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromProject from '@web/app/features/d/project/store';
 
+import { SearchProject } from '@web/app/features/d/project/models/search-project.model';
+
 @Component({
   selector: 'app-dropdown-page-project',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class DropdownPageProjectComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() searchProject: SearchProject;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromProject.getAllEntities));
   entityId = 'project_id';
