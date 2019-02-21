@@ -13,10 +13,11 @@ import * as fromStore from '@web/app/features/f/schedule-day/store';
 export class DropdownPageScheduleDayComponent implements OnInit {
 
   @Input() group: FormGroup;
+  @Input() groupName: string;
   @Input() controlName: string;
   @Input() options: string[];
   @Input() optionLabel: string;
-  @Input() filter: boolean;
+  @Input() filter = true;
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() showClear: boolean;

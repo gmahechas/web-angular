@@ -1,4 +1,6 @@
-<app-dropdown-shared [group]="group" [controlName]="controlName" [entityId]="entityId" [data]="entities$ | async"
-  [options]="options" [optionLabel]="optionLabel" [placeholder]="placeholder" [filterPlaceholder]="filterPlaceholder"
-  [showClear]="showClear" [dropdownIcon]="dropdownIcon" [emptyFilterMessage]="emptyFilterMessage"
-  (keyUp)="keyUp($event)" (handleChange)="handleChange($event)"></app-dropdown-shared>
+<app-dropdown-shared [group]="group" [groupName]="groupName" [controlName]="controlName" [entityId]="entityId"
+  [data]="entities$ | async" [options]="options" [optionLabel]="optionLabel" [filter]="filter"
+  [placeholder]="placeholder" [filterPlaceholder]="filterPlaceholder" [showClear]="showClear"
+  [dropdownIcon]="dropdownIcon" [emptyFilterMessage]="emptyFilterMessage" (keyUp)="keyUp($event)"
+  (handleChange)="handleChange($event)">
+</app-dropdown-shared>

@@ -16,7 +16,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() data: any[];
   @Input() options: string[];
   @Input() optionLabel: string;
-  @Input() filter = true;
+  @Input() filter: boolean;
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() placeholder: string[];

@@ -13,10 +13,11 @@ import * as fromMacroproject from '@web/app/features/d/macroproject/store';
 export class DropdownPageMacroprojectComponent implements OnInit {
 
   @Input() group: FormGroup;
+  @Input() groupName: string;
   @Input() controlName: string;
   @Input() options: string[];
   @Input() optionLabel: string;
-  @Input() filter: boolean;
+  @Input() filter = true;
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() showClear: boolean;
