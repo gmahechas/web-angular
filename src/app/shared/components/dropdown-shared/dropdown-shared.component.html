@@ -8,7 +8,7 @@
         [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
         [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
         [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''" [autoDisplayFirst]="false"
-        [style]="{'width':'100%'}" (keyup)="onKeyUp($event)" (onChange)="onChange($event)">
+        [resetFilterOnHide]="true" [style]="{'width':'100%'}" (keyup)="onKeyUp($event)" (onChange)="onChange($event)">
         <ng-template let-selectedItem pTemplate="selectedItem">
           <span *ngFor="let option of options">
             {{ selectedItem.value | fetchStringInArrayShared:option }}
@@ -31,7 +31,7 @@
       [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
       [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
       [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''" [autoDisplayFirst]="false"
-      [style]="{'width':'100%'}" (keyup)="onKeyUp($event)" (onChange)="onChange($event)">
+      [resetFilterOnHide]="true" [style]="{'width':'100%'}" (keyup)="onKeyUp($event)" (onChange)="onChange($event)">
       <ng-template let-selectedItem pTemplate="selectedItem">
         <span *ngFor="let option of options">
           {{ selectedItem.value | fetchStringInArrayShared:option }}
