@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromUserOffice from '@web/app/features/c/user-office/store';
 
-import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
+import { SearchUserOffice } from '@web/app/features/c/user-office/models/search-user-office.model';
 
 @Component({
   selector: 'app-dropdown-page-user-office',
@@ -27,7 +27,7 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
-  @Input() userOffice: UserOffice;
+  @Input() searchUserOffice: SearchUserOffice;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));
   entityId = 'user_office_id';
@@ -42,10 +42,12 @@ export class DropdownPageUserOfficeComponent implements OnInit {
         search: {
           user_office: {
             user_office_id: '',
-            user_office_status: (this.userOffice.user_office_status) ? this.userOffice.user_office_status : null
+            user_office_status:
+              (this.searchUserOffice.user_office.user_office_status) ?
+                this.searchUserOffice.user_office.user_office_status : null
           },
-          user: (this.userOffice.user) ? this.userOffice.user : null,
-          office: (this.userOffice.office) ? this.userOffice.office : null
+          user: (this.searchUserOffice.user) ? this.searchUserOffice.user : null,
+          office: (this.searchUserOffice.office) ? this.searchUserOffice.office : null
         }
       }));
     });

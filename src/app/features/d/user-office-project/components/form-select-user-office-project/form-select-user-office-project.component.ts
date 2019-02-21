@@ -1,9 +1,9 @@
-
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
+import { SearchUserOfficeProject } from '@web/app/features/d/user-office-project/models/search-user-office-project.model';
 
 @Component({
   selector: 'app-form-select-user-office-project',
@@ -14,7 +14,7 @@ export class FormSelectUserOfficeProjectComponent implements OnInit {
 
   @Input() userOffice: UserOffice;
   @Output() selectedUserOfficeProject = new EventEmitter<UserOfficeProject>();
-  userOfficeProject: UserOfficeProject;
+  searchUserOfficeProject: SearchUserOfficeProject;
 
   userOfficeProjectForm = this.formBuilder.group({
     userOfficeProject: this.formBuilder.control('', [Validators.required])
@@ -25,8 +25,10 @@ export class FormSelectUserOfficeProjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userOfficeProject = {
-      user_office_project_status: true,
+    this.searchUserOfficeProject = {
+      user_office_project: {
+        user_office_project_status: true
+      },
       user_office: this.userOffice
     };
   }

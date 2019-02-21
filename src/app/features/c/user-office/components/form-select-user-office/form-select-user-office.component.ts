@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '@web/app/features/c/user/models/user.model';
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
+import { SearchUserOffice } from '@web/app/features/c/user-office/models/search-user-office.model';
 
 @Component({
   selector: 'app-form-select-user-office',
@@ -13,7 +14,7 @@ export class FormSelectUserOfficeComponent implements OnInit {
 
   @Input() user: User;
   @Output() selectedUserOffice = new EventEmitter<UserOffice>();
-  userOffice: UserOffice;
+  searchUserOffice: SearchUserOffice;
 
   userOfficeForm = this.formBuilder.group({
     userOffice: this.formBuilder.control('', [Validators.required])
@@ -24,8 +25,10 @@ export class FormSelectUserOfficeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userOffice = {
-      user_office_status: true,
+    this.searchUserOffice = {
+      user_office: {
+        user_office_status: true
+      },
       user: this.user
     };
   }

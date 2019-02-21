@@ -10,14 +10,16 @@
         </div>
         <div class="p-col">
           <app-dropdown-page-user-office-project [group]="userOfficeProjectForm" [controlName]="'userOfficeProject'"
-            [options]="['project.project_name']" [optionLabel]="'project.project_name'" [userOfficeProject]="userOfficeProject"></app-dropdown-page-user-office-project>
+            [options]="['project.project_name']" [optionLabel]="'project.project_name'"
+            [searchUserOfficeProject]="searchUserOfficeProject"></app-dropdown-page-user-office-project>
         </div>
         <div class="p-col">
           <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'"
             [disabled]="userOfficeProjectForm.invalid"></app-button-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="userOfficeProjectForm.get('userOfficeProject')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="userOfficeProjectForm.get('userOfficeProject')">
+          </app-validation-errors-shared>
         </div>
       </div>
     </form>

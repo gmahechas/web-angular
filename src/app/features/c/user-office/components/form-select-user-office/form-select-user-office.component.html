@@ -9,8 +9,9 @@
           <app-translate-shared [strings]="['office.singular']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-dropdown-page-user-office [group]="userOfficeForm" [controlName]="'userOffice'" [options]="['office.office_name']"
-            [optionLabel]="'office.office_name'" [userOffice]="userOffice"></app-dropdown-page-user-office>
+          <app-dropdown-page-user-office [group]="userOfficeForm" [controlName]="'userOffice'"
+            [options]="['office.office_name']" [optionLabel]="'office.office_name'"
+            [searchUserOffice]="searchUserOffice"></app-dropdown-page-user-office>
         </div>
         <div class="p-col">
           <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'"
