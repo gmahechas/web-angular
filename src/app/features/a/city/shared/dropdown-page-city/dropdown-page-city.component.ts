@@ -39,17 +39,21 @@ export class DropdownPageCityComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchCity: SearchCity) {
     this.store.dispatch(new fromCity.LoadEntityShared({
-      search: {
-        city: {
-          city_id: '',
-          city_name: event,
-          city_code: ''
-        },
-        estate: null
-      }
+      search: searchCity
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      city: {
+        city_id: '',
+        city_name: event,
+        city_code: ''
+      },
+      estate: null
+    });
   }
 
   handleChange(event) {

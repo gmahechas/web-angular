@@ -39,15 +39,19 @@ export class DropdownPageScheduleComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchSchedule: SearchSchedule) {
     this.store.dispatch(new fromSchedule.LoadEntityShared({
-      search: {
-        schedule: {
-          schedule_id: '',
-          schedule_name: event
-        }
-      }
+      search: searchSchedule
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      schedule: {
+        schedule_id: '',
+        schedule_name: event
+      }
+    });
   }
 
   handleChange(event) {

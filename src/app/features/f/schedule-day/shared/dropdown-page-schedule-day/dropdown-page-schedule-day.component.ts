@@ -39,17 +39,21 @@ export class DropdownPageScheduleDayComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchScheduleDay: SearchScheduleDay) {
     this.store.dispatch(new fromScheduleDay.LoadEntityShared({
-      search: {
-        schedule_day: {
-          schedule_day_id: '',
-          schedule_day_status: null
-        },
-        schedule: null,
-        day: null
-      }
+      search: searchScheduleDay
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      schedule_day: {
+        schedule_day_id: '',
+        schedule_day_status: null
+      },
+      schedule: null,
+      day: null
+    });
   }
 
   handleChange(event) {

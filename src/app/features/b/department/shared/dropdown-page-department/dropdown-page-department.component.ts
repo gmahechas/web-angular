@@ -39,15 +39,19 @@ export class DropdownPageDepartmentComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchDepartment: SearchDepartment) {
     this.store.dispatch(new fromDepartment.LoadEntityShared({
-      search: {
-        department: {
-          department_id: '',
-          department_name: event
-        }
-      }
+      search: searchDepartment
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      department: {
+        department_id: '',
+        department_name: event
+      }
+    });
   }
 
   handleChange(event) {

@@ -39,16 +39,22 @@ export class DropdownPageOfficeComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchOffice: SearchOffice) {
     this.store.dispatch(new fromOffice.LoadEntityShared({
-      search: {
+      search: searchOffice
+    }));
+  }
+
+  keyUp(event) {
+    this.onLoad(
+      {
         office: {
           office_id: '',
           office_name: event
         },
         city: null
       }
-    }));
+    );
   }
 
   handleChange(event) {

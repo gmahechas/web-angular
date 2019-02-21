@@ -39,15 +39,19 @@ export class DropdownPageWorkflowComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchWorkflow: SearchWorkflow) {
     this.store.dispatch(new fromWorkflow.LoadEntityShared({
-      search: {
-        workflow: {
-          workflow_id: '',
-          workflow_name: event
-        }
-      }
+      search: searchWorkflow
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      workflow: {
+        workflow_id: '',
+        workflow_name: event
+      }
+    });
   }
 
   handleChange(event) {

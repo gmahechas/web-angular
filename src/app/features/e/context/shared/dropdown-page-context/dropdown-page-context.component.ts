@@ -39,16 +39,20 @@ export class DropdownPageContextComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchContext: SearchContext) {
     this.store.dispatch(new fromContext.LoadEntityShared({
-      search: {
-        context: {
-          context_id: '',
-          context_description: event
-        },
-        menu: null
-      }
+      search: searchContext
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      context: {
+        context_id: '',
+        context_description: event
+      },
+      menu: null
+    });
   }
 
   handleChange(event) {

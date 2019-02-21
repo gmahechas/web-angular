@@ -39,17 +39,21 @@ export class DropdownPageUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchUser: SearchUser) {
     this.store.dispatch(new fromUser.LoadEntityShared({
-      search: {
-        user: {
-          user_id: '',
-          username: event
-        },
-        person: null,
-        profile: null
-      }
+      search: searchUser
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      user: {
+        user_id: '',
+        username: event
+      },
+      person: null,
+      profile: null
+    });
   }
 
   handleChange(event) {

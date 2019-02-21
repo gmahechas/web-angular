@@ -38,19 +38,23 @@ export class DropdownPageUserOfficeComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.store.dispatch(new fromUserOffice.LoadEntityShared({
-        search: {
-          user_office: {
-            user_office_id: '',
-            user_office_status:
-              (this.searchUserOffice.user_office.user_office_status) ?
-                this.searchUserOffice.user_office.user_office_status : null
-          },
-          user: (this.searchUserOffice.user) ? this.searchUserOffice.user : null,
-          office: (this.searchUserOffice.office) ? this.searchUserOffice.office : null
-        }
-      }));
+      this.onLoad({
+        user_office: {
+          user_office_id: '',
+          user_office_status:
+            (this.searchUserOffice.user_office.user_office_status) ?
+              this.searchUserOffice.user_office.user_office_status : null
+        },
+        user: (this.searchUserOffice.user) ? this.searchUserOffice.user : null,
+        office: (this.searchUserOffice.office) ? this.searchUserOffice.office : null
+      });
     });
+  }
+
+  onLoad(searchUserOffice: SearchUserOffice) {
+    this.store.dispatch(new fromUserOffice.LoadEntityShared({
+      search: searchUserOffice
+    }));
   }
 
   keyUp(event) {

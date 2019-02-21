@@ -39,15 +39,19 @@ export class DropdownPageProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchProfile: SearchProfile) {
     this.store.dispatch(new fromProfile.LoadEntityShared({
-      search: {
-        profile: {
-          profile_id: '',
-          profile_name: event
-        }
-      }
+      search: searchProfile
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      profile: {
+        profile_id: '',
+        profile_name: event
+      }
+    });
   }
 
   handleChange(event) {

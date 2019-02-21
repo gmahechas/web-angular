@@ -39,17 +39,21 @@ export class DropdownPageMacroprojectComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchMacroproject: SearchMacroproject) {
     this.store.dispatch(new fromMacroproject.LoadEntityShared({
-      search: {
-        macroproject: {
-          macroproject_id: '',
-          macroproject_name: event,
-        },
-        city: null,
-        office: null
-      }
+      search: searchMacroproject
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      macroproject: {
+        macroproject_id: '',
+        macroproject_name: event,
+      },
+      city: null,
+      office: null
+    });
   }
 
   handleChange(event) {

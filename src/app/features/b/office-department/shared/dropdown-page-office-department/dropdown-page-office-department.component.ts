@@ -39,17 +39,21 @@ export class DropdownPageOfficeDepartmentComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchOfficeDepartment: SearchOfficeDepartment) {
     this.store.dispatch(new fromOfficeDepartment.LoadEntityShared({
-      search: {
-        office_department: {
-          office_department_id: '',
-          office_department_status: null
-        },
-        office: null,
-        department: null
-      }
+      search: searchOfficeDepartment
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      office_department: {
+        office_department_id: '',
+        office_department_status: null
+      },
+      office: null,
+      department: null
+    });
   }
 
   handleChange(event) {

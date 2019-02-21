@@ -39,16 +39,20 @@ export class DropdownPageCountryComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchCountry: SearchCountry) {
     this.store.dispatch(new fromCountry.LoadEntityShared({
-      search: {
-        country: {
-          country_id: '',
-          country_name: event,
-          country_code: ''
-        }
-      }
+      search: searchCountry
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      country: {
+        country_id: '',
+        country_name: event,
+        country_code: ''
+      }
+    });
   }
 
   handleChange(event) {

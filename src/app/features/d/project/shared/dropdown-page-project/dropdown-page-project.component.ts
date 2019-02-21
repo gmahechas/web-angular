@@ -39,16 +39,20 @@ export class DropdownPageProjectComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchProject: SearchProject) {
     this.store.dispatch(new fromProject.LoadEntityShared({
-      search: {
-        project: {
-          project_id: '',
-          project_name: event
-        },
-        macroproject: null
-      }
+      search: searchProject
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      project: {
+        project_id: '',
+        project_name: event
+      },
+      macroproject: null
+    });
   }
 
   handleChange(event) {

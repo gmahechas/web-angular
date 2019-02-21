@@ -39,18 +39,22 @@ export class DropdownPageContextVarComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchContextVar: SearchContextVar) {
     this.store.dispatch(new fromContextVar.LoadEntityShared({
-      search: {
-        context_var: {
-          context_var_id: '',
-          context_var_code: '',
-          context_var_type: '',
-          context_var_description: event
-        },
-        context: null
-      }
+      search: searchContextVar
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      context_var: {
+        context_var_id: '',
+        context_var_code: '',
+        context_var_type: '',
+        context_var_description: event
+      },
+      context: null
+    });
   }
 
   handleChange(event) {

@@ -39,17 +39,21 @@ export class DropdownPageEstateComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchEstate: SearchEstate) {
     this.store.dispatch(new fromEstate.LoadEntityShared({
-      search: {
-        estate: {
-          estate_id: '',
-          estate_name: event,
-          estate_code: ''
-        },
-        country: (this.searchEstate.country) ? this.searchEstate.country : null
-      }
+      search: searchEstate
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      estate: {
+        estate_id: '',
+        estate_name: event,
+        estate_code: ''
+      },
+      country: (this.searchEstate.country) ? this.searchEstate.country : null
+    });
   }
 
   handleChange(event) {

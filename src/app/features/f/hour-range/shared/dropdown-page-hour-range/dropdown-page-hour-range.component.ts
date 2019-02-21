@@ -39,15 +39,19 @@ export class DropdownPageHourRangeComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchHourRange: SearchHourRange) {
     this.store.dispatch(new fromHourRange.LoadEntityShared({
-      search: {
-        hour_range: {
-          hour_range_id: '',
-          hour_range_name: event
-        }
-      }
+      search: searchHourRange
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      hour_range: {
+        hour_range_id: '',
+        hour_range_name: event
+      }
+    });
   }
 
   handleChange(event) {

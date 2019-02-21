@@ -41,15 +41,19 @@ export class DropdownPageTypePersonIdentificationComponent implements OnInit {
   ngOnInit() {
   }
 
-  keyUp(event) {
+  onLoad(searchTypePersonIdentification: SearchTypePersonIdentification) {
     this.store.dispatch(new fromTypePersonIdentification.LoadEntityShared({
-      search: {
-        type_person_identification: {
-          type_person_identification_id: '',
-          type_person_identification_description: event
-        }
-      }
+      search: searchTypePersonIdentification
     }));
+  }
+
+  keyUp(event) {
+    this.onLoad({
+      type_person_identification: {
+        type_person_identification_id: '',
+        type_person_identification_description: event
+      }
+    });
   }
 
   handleChange(event) {
