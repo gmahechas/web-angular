@@ -3,13 +3,12 @@
 <ng-template #withGroupName>
   <div [formGroup]="group">
     <div [formGroupName]="groupName">
-      <p-dropdown [formControlName]="controlName" [options]="setOptions()" [optionLabel]="optionLabel"
-        [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''" [filter]="filter"
-        [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''"
-        [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''" [style]="{'width':'100%'}"
-        [showClear]="(showClear) ? true : false" [autoDisplayFirst]="false"
-        [dropdownIcon]="(dropdownIcon) ? dropdownIcon : 'pi pi-chevron-down'" (keyup)="onKeyUp($event)"
-        (onChange)="onChange($event)">
+      <p-dropdown [formControlName]="controlName" [options]="setOptions()" [optionLabel]="optionLabel" [filter]="filter"
+        [showClear]="(showClear) ? true : false" [dropdownIcon]="(dropdownIcon) ? dropdownIcon : 'pi pi-chevron-down'"
+        [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
+        [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
+        [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''" [autoDisplayFirst]="false"
+        [style]="{'width':'100%'}" (keyup)="onKeyUp($event)" (onChange)="onChange($event)">
         <ng-template let-selectedItem pTemplate="selectedItem">
           <span *ngFor="let option of options">
             {{ selectedItem.value | fetchStringInArrayShared:option }}
@@ -27,13 +26,12 @@
 
 <ng-template #withoutGroupName>
   <div [formGroup]="group">
-    <p-dropdown [formControlName]="controlName" [options]="setOptions()" [optionLabel]="optionLabel"
-      [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''" filter="true"
-      [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''"
-      [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''" [style]="{'width':'100%'}"
-      [showClear]="(showClear) ? true : false" [autoDisplayFirst]="false"
-      [dropdownIcon]="(dropdownIcon) ? dropdownIcon : 'pi pi-chevron-down'" (keyup)="onKeyUp($event)"
-      (onChange)="onChange($event)">
+    <p-dropdown [formControlName]="controlName" [options]="setOptions()" [optionLabel]="optionLabel" [filter]="filter"
+      [showClear]="(showClear) ? true : false" [dropdownIcon]="(dropdownIcon) ? dropdownIcon : 'pi pi-chevron-down'"
+      [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
+      [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''"
+      [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''" [autoDisplayFirst]="false"
+      [style]="{'width':'100%'}" (keyup)="onKeyUp($event)" (onChange)="onChange($event)">
       <ng-template let-selectedItem pTemplate="selectedItem">
         <span *ngFor="let option of options">
           {{ selectedItem.value | fetchStringInArrayShared:option }}

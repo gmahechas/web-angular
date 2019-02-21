@@ -17,13 +17,13 @@ export class DropdownSharedComponent implements OnInit {
   @Input() options: string[];
   @Input() optionLabel: string;
   @Input() filter = true;
-  @Input() placeholder: string[];
-  @Input() filterPlaceholder: string[];
-  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
-  @Input() keyUpTimes = 3;
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
+  @Input() placeholder: string[];
+  @Input() filterPlaceholder: string[];
   @Input() emptyFilterMessage: string[];
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() keyUpTimes = 3;
   @Output() keyUp = new EventEmitter<string>();
   @Output() handleChange = new EventEmitter<any>();
 
