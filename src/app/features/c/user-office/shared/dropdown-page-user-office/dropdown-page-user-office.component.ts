@@ -25,6 +25,8 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() keyUpTimes = 3;
   @Input() userOffice: UserOffice;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));

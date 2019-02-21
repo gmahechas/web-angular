@@ -23,6 +23,8 @@ export class DropdownPageOfficeDepartmentComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() keyUpTimes = 3;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromStore.getAllEntities));
   entityId = 'office_department_id';

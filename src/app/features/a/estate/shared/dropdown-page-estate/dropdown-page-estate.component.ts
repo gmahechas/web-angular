@@ -25,6 +25,8 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() keyUpTimes = 3;
   @Input() country: Country;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromEstate.getAllEntities));
