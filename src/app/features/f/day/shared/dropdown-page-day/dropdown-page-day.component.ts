@@ -26,6 +26,7 @@ export class DropdownPageDayComponent implements OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchDay: SearchDay;
   @Output() changeDropdown = new EventEmitter<any>();

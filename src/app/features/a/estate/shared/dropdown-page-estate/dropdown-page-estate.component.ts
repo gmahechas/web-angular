@@ -26,6 +26,7 @@ export class DropdownPageEstateComponent implements OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchEstate: SearchEstate;
   @Output() changeDropdown = new EventEmitter<any>();

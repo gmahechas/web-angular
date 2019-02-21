@@ -26,6 +26,7 @@ export class DropdownPageCountryComponent implements OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchCountry: SearchCountry;
   @Output() changeDropdown = new EventEmitter<any>();

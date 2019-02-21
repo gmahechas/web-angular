@@ -26,6 +26,7 @@ export class DropdownPageHourRangeComponent implements OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchHourRange: SearchHourRange;
   @Output() changeDropdown = new EventEmitter<any>();

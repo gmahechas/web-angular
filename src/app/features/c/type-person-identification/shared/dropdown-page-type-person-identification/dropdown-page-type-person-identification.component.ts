@@ -28,6 +28,7 @@ export class DropdownPageTypePersonIdentificationComponent implements OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchTypePersonIdentification: SearchTypePersonIdentification;
   @Output() changeDropdown = new EventEmitter<any>();

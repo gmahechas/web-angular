@@ -26,6 +26,7 @@ export class DropdownPageContextVarComponent implements OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchContextVar: SearchContextVar;
   @Output() changeDropdown = new EventEmitter<any>();

@@ -25,7 +25,8 @@ export class DropdownPagePersonComponent implements OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
-  @Input() keyboardKey: 'Enter' | 'Any' = 'Enter';
+  @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
+  @Input() isConditional = false;
   @Input() keyUpTimes = 3;
   @Input() searchPerson: SearchPerson;
   @Output() changeDropdown = new EventEmitter<any>();
