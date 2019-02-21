@@ -44,7 +44,7 @@
         </div>
         <div class="p-col">
           <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']"
-            [optionLabel]="'estate_name'" [searchEstate]="cityForm.get('country').value"></app-dropdown-page-estate>
+            [optionLabel]="'estate_name'" [searchEstate]="{ country: cityForm.get('country').value }"></app-dropdown-page-estate>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="cityForm.get('estate')"></app-validation-errors-shared>
