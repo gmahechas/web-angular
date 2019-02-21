@@ -16,6 +16,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() data: any[];
   @Input() options: string[];
   @Input() optionLabel: string;
+  @Input() filter = true;
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';

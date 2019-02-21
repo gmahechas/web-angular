@@ -16,6 +16,7 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() controlName: string;
   @Input() options: string[];
   @Input() optionLabel: string;
+  @Input() filter: boolean;
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() showClear: boolean;

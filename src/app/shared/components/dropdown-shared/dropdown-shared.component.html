@@ -3,11 +3,11 @@
 <ng-template #withGroupName>
   <div [formGroup]="group">
     <div [formGroupName]="groupName">
-      <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
-        [optionLabel]="optionLabel" filter="true"
+      <p-dropdown [formControlName]="controlName" [options]="setOptions()" [optionLabel]="optionLabel"
+        [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''" [filter]="filter"
         [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''"
-        [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''" [options]="setOptions()"
-        [style]="{'width':'100%'}" [showClear]="(showClear) ? true : false" [autoDisplayFirst]="false"
+        [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''" [style]="{'width':'100%'}"
+        [showClear]="(showClear) ? true : false" [autoDisplayFirst]="false"
         [dropdownIcon]="(dropdownIcon) ? dropdownIcon : 'pi pi-chevron-down'" (keyup)="onKeyUp($event)"
         (onChange)="onChange($event)">
         <ng-template let-selectedItem pTemplate="selectedItem">
@@ -27,11 +27,11 @@
 
 <ng-template #withoutGroupName>
   <div [formGroup]="group">
-    <p-dropdown [formControlName]="controlName" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''"
-      [optionLabel]="optionLabel" filter="true"
+    <p-dropdown [formControlName]="controlName" [options]="setOptions()" [optionLabel]="optionLabel"
+      [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''" filter="true"
       [emptyFilterMessage]="(emptyFilterMessage) ? (emptyFilterMessage | myTranslate) : ''"
-      [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''" [options]="setOptions()"
-      [style]="{'width':'100%'}" [showClear]="(showClear) ? true : false" [autoDisplayFirst]="false"
+      [filterPlaceholder]="(filterPlaceholder) ? (filterPlaceholder | myTranslate) : ''" [style]="{'width':'100%'}"
+      [showClear]="(showClear) ? true : false" [autoDisplayFirst]="false"
       [dropdownIcon]="(dropdownIcon) ? dropdownIcon : 'pi pi-chevron-down'" (keyup)="onKeyUp($event)"
       (onChange)="onChange($event)">
       <ng-template let-selectedItem pTemplate="selectedItem">
