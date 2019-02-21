@@ -32,7 +32,7 @@
         </div>
         <div class="p-col">
           <app-dropdown-page-country [group]="cityForm" [controlName]="'country'" [options]="['country_name']"
-            [optionLabel]="'country_name'" (changeDropdown)="changeCountry($event)" [showClear]="true"></app-dropdown-page-country>
+            [optionLabel]="'country_name'" (changeDropdown)="changeCountry($event)"></app-dropdown-page-country>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="cityForm.get('country')"></app-validation-errors-shared>

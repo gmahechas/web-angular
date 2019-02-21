@@ -16,12 +16,13 @@ export class DropdownSharedComponent implements OnInit {
   @Input() data: any[];
   @Input() options: string[];
   @Input() optionLabel: string;
-  @Input() placeholder: string;
-  @Input() filterPlaceholder: string;
+  @Input() placeholder: string[];
+  @Input() filterPlaceholder: string[];
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
+  @Input() emptyFilterMessage: string[];
   @Output() keyUp = new EventEmitter<string>();
   @Output() handleChange = new EventEmitter<any>();
 

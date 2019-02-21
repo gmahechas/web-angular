@@ -16,9 +16,11 @@ export class DropdownPageCityComponent implements OnInit {
   @Input() controlName: string;
   @Input() options: string[];
   @Input() optionLabel: string;
-  @Input() placeholder: string;
-  @Input() filterPlaceholder: string;
+  @Input() placeholder: string[];
+  @Input() filterPlaceholder: string[];
   @Input() showClear: boolean;
+  @Input() dropdownIcon: string;
+  @Input() emptyFilterMessage: string[];
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromCity.getAllEntities));
   entityId = 'city_id';
