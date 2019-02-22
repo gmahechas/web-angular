@@ -1,1 +1,6 @@
-<p-tree [value]="value" [selectionMode]="selectionMode" (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)"></p-tree>
+<p-tree [value]="value" [selectionMode]="selectionMode" [(selection)]="selectedNodes"
+  (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
+  <ng-template let-node pTemplate="default">
+    <app-translate-shared [strings]="[node.label]"></app-translate-shared>
+  </ng-template>
+</p-tree>
