@@ -33,6 +33,8 @@ document: DocumentNode = gql`
       menu {
         menu_id
         menu_name
+        menu_title_case
+        menu_upper_case
         menu_uri
         menu_parent_id
       }
