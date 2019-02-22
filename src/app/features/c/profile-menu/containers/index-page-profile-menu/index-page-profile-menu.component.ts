@@ -20,13 +20,16 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new fromProfileMenu.LoadEntity({
-      search: {
-        profile: {
-          profile_id: this.route.snapshot.params.profile_id
+    setTimeout(() => {
+      this.store.dispatch(new fromProfileMenu.LoadEntity({
+        search: {
+          profile: {
+            profile_id: this.route.snapshot.params.profile_id
+          }
         }
-      }
-    }));
+      }));
+    });
+
   }
 
   onSelect(event) {
