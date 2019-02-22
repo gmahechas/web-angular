@@ -12,7 +12,7 @@ import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.mo
   templateUrl: './dropdown-page-estate.component.html',
   styles: []
 })
-export class DropdownPageEstateComponent implements OnInit, OnChanges {
+export class DropdownPageEstateComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
