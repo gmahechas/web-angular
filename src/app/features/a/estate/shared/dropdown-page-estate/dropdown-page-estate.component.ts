@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.mo
   templateUrl: './dropdown-page-estate.component.html',
   styles: []
 })
-export class DropdownPageEstateComponent implements OnInit {
+export class DropdownPageEstateComponent implements OnInit, OnChanges {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,15 @@ export class DropdownPageEstateComponent implements OnInit {
     private store: Store<fromEstate.State>
   ) { }
 
+  ngOnChanges() {
+    if (
+      this.isConditional &&
+      this.searchEstate.country
+    ) {
+      this.store.dispatch(new fromEstate.Reset({ redirect: false }));
+    }
+  }
+
   ngOnInit() {
   }
 
@@ -53,7 +62,7 @@ export class DropdownPageEstateComponent implements OnInit {
         estate_name: event,
         estate_code: ''
       },
-      country: (this.searchEstate.country) ? this.searchEstate.country : null
+      country: (this.searchEstate) ? (this.searchEstate.country) ? this.searchEstate.country : null : null
     });
   }
 

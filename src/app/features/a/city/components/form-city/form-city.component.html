@@ -32,7 +32,7 @@
         </div>
         <div class="p-col">
           <app-dropdown-page-country [group]="cityForm" [controlName]="'country'" [options]="['country_name']"
-            [optionLabel]="'country_name'" (changeDropdown)="changeCountry($event)"></app-dropdown-page-country>
+            [optionLabel]="'country_name'" (changeDropdown)="changeEstate($event)"></app-dropdown-page-country>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="cityForm.get('country')"></app-validation-errors-shared>
@@ -44,7 +44,7 @@
         </div>
         <div class="p-col">
           <app-dropdown-page-estate [group]="cityForm" [controlName]="'estate'" [options]="['estate_name']"
-            [optionLabel]="'estate_name'" [searchEstate]="{ country: cityForm.get('country').value }"></app-dropdown-page-estate>
+            [optionLabel]="'estate_name'" [isConditional]="true" [searchEstate]="{ country: cityForm.get('country').value }"></app-dropdown-page-estate>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="cityForm.get('estate')"></app-validation-errors-shared>

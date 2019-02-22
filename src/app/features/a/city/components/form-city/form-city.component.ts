@@ -72,9 +72,9 @@ export class FormCityComponent implements OnChanges, OnInit {
 
   }
 
-  changeCountry(event) {
+  changeEstate(event) {
     this.cityForm.controls.estate.reset();
-    if (event === null) {
+    if (this.cityForm.controls.country.value === null) {
       this.cityForm.controls.estate.disable({ onlySelf: true });
     } else {
       this.cityForm.controls.estate.enable();
