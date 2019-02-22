@@ -60,7 +60,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   onLoad(countrySearch: SearchCountry) {
     this.store.dispatch(new fromCountry.LoadEntity({
       search: {
-        country: countrySearch.country,
+        ...countrySearch,
         limit: 20,
         page: 1
       }

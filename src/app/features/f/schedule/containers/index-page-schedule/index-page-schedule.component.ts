@@ -59,7 +59,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
   onLoad(scheduleSearch: SearchSchedule) {
     this.store.dispatch(new fromSchedule.LoadEntity({
       search: {
-        schedule: scheduleSearch.schedule,
+        ...scheduleSearch,
         limit: 20,
         page: 1
       }

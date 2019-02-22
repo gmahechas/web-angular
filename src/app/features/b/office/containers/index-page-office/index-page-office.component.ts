@@ -71,8 +71,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   onLoad(officeSearch: SearchOffice) {
     this.store.dispatch(new fromOffice.LoadEntity({
       search: {
-        office: officeSearch.office,
-        city: officeSearch.city,
+        ...officeSearch,
         limit: 20,
         page: 1
       }

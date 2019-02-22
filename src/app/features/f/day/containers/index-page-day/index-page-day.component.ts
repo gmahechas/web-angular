@@ -57,8 +57,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
   onLoad(daySearch: SearchDay) {
     this.store.dispatch(new fromDay.LoadEntity({
       search: {
-        day: daySearch.day,
-        // TODO
+        ...daySearch,
         limit: 20,
         page: 1
       }

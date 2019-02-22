@@ -61,8 +61,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   onLoad(estateSearch: SearchEstate) {
     this.store.dispatch(new fromEstate.LoadEntity({
       search: {
-        estate: estateSearch.estate,
-        country: estateSearch.country,
+        ...estateSearch,
         limit: 20,
         page: 1
       }

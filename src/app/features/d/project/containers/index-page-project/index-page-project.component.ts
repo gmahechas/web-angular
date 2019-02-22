@@ -62,8 +62,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   onLoad(projectSearch: SearchProject) {
     this.store.dispatch(new fromProject.LoadEntity({
       search: {
-        project: projectSearch.project,
-        macroproject: projectSearch.macroproject,
+        ...projectSearch,
         limit: 20,
         page: 1
       }

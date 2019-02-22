@@ -60,7 +60,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   onLoad(workflowSearch: SearchWorkflow) {
     this.store.dispatch(new fromWorkflow.LoadEntity({
       search: {
-        workflow: workflowSearch.workflow,
+        ...workflowSearch,
         limit: 20,
         page: 1
       }

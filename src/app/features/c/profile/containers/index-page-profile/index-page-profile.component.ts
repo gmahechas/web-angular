@@ -69,7 +69,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   onLoad(profileSearch: SearchProfile) {
     this.store.dispatch(new fromProfile.LoadEntity({
       search: {
-        profile: profileSearch.profile,
+        ...profileSearch,
         limit: 20,
         page: 1
       }

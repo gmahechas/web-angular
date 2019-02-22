@@ -69,7 +69,7 @@ export class IndexPagePersonComponent implements OnInit, OnDestroy {
   onLoad(personSearch: SearchPerson) {
     this.store.dispatch(new fromPerson.LoadEntity({
       search: {
-        person: personSearch.person,
+        ...personSearch,
         limit: 20,
         page: 1
       }

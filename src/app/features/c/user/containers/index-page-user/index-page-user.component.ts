@@ -80,9 +80,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
   onLoad(userSearch: SearchUser) {
     this.store.dispatch(new fromUser.LoadEntity({
       search: {
-        user: userSearch.user,
-        person: userSearch.person,
-        profile: userSearch.profile,
+        ...userSearch,
         limit: 20,
         page: 1
       }

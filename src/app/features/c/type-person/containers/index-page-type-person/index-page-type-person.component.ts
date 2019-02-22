@@ -60,7 +60,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
   onLoad(typePersonSearch: SearchTypePerson) {
     this.store.dispatch(new fromTypePerson.LoadEntity({
       search: {
-        type_person: typePersonSearch.type_person,
+        ...typePersonSearch,
         limit: 20,
         page: 1
       }

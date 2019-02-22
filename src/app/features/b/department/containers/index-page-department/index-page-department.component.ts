@@ -60,7 +60,7 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
   onLoad(departmentSearch: SearchDepartment) {
     this.store.dispatch(new fromDepartment.LoadEntity({
       search: {
-        department: departmentSearch.department,
+        ...departmentSearch,
         limit: 20,
         page: 1
       }

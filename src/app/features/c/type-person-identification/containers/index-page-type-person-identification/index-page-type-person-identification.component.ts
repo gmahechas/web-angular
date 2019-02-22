@@ -77,7 +77,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   onLoad(typePersonIdentificationSearch: SearchTypePersonIdentification) {
     this.store.dispatch(new fromTypePersonIdentification.LoadEntity({
       search: {
-        type_person_identification: typePersonIdentificationSearch.type_person_identification,
+        ...typePersonIdentificationSearch,
         limit: 20,
         page: 1
       }
