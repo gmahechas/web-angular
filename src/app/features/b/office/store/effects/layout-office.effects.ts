@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromOfficeActions from '@web/app/features/b/office/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutOfficeEffects {
@@ -78,11 +78,21 @@ export class LayoutOfficeEffects {
       fromOfficeActions.EntityActionTypes.LoadEntity,
       fromOfficeActions.EntityActionTypes.StoreSuccessEntity,
       fromOfficeActions.EntityActionTypes.UpdateSuccessEntity,
-      fromOfficeActions.EntityActionTypes.DestroySuccessEntity,
-      fromOfficeActions.EntityActionTypes.Reset
+      fromOfficeActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['office'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromOfficeActions.EntityActionTypes.Reset),
+    map((action: fromOfficeActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['office'] }));
+      }
     })
   );
 

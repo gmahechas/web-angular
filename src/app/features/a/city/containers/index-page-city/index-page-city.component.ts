@@ -96,7 +96,7 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromCity.Reset());
+    this.store.dispatch(new fromCity.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

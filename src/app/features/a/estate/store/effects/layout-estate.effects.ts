@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromEstateActions from '@web/app/features/a/estate/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutEstateEffects {
@@ -78,11 +78,21 @@ export class LayoutEstateEffects {
       fromEstateActions.EntityActionTypes.LoadEntity,
       fromEstateActions.EntityActionTypes.StoreSuccessEntity,
       fromEstateActions.EntityActionTypes.UpdateSuccessEntity,
-      fromEstateActions.EntityActionTypes.DestroySuccessEntity,
-      fromEstateActions.EntityActionTypes.Reset
+      fromEstateActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromEstateActions.EntityActionTypes.Reset),
+    map((action: fromEstateActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
+      }
     })
   );
 

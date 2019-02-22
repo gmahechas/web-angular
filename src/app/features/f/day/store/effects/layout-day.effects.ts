@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromDayActions from '@web/app/features/f/day/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutDayEffects {
@@ -78,16 +78,26 @@ export class LayoutDayEffects {
       fromDayActions.EntityActionTypes.LoadEntity,
       fromDayActions.EntityActionTypes.StoreSuccessEntity,
       fromDayActions.EntityActionTypes.UpdateSuccessEntity,
-      fromDayActions.EntityActionTypes.DestroySuccessEntity,
-      fromDayActions.EntityActionTypes.Reset
+      fromDayActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['day'] }));
     })
   );
 
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromDayActions.EntityActionTypes.Reset),
+    map((action: fromDayActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['day'] }));
+      }
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

@@ -94,7 +94,7 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromHourRange.Reset());
+    this.store.dispatch(new fromHourRange.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

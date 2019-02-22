@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromCountryActions from '@web/app/features/a/country/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutCountryEffects {
@@ -78,11 +78,21 @@ export class LayoutCountryEffects {
       fromCountryActions.EntityActionTypes.LoadEntity,
       fromCountryActions.EntityActionTypes.StoreSuccessEntity,
       fromCountryActions.EntityActionTypes.UpdateSuccessEntity,
-      fromCountryActions.EntityActionTypes.DestroySuccessEntity,
-      fromCountryActions.EntityActionTypes.Reset
+      fromCountryActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromCountryActions.EntityActionTypes.Reset),
+    map((action: fromCountryActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['country'] }));
+      }
     })
   );
 

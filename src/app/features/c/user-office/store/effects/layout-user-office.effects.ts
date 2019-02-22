@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromUserOfficeActions from '@web/app/features/c/user-office/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutUserOfficeEffects {
@@ -71,18 +71,28 @@ export class LayoutUserOfficeEffects {
     })
   );
 
-/*   // Redirects
+  /*   // Redirects
+    @Effect({ dispatch: false })
+    successRedirect$ = this.actions$.pipe(
+      ofType(
+        fromUserOfficeActions.EntityActionTypes.LoadEntity,
+        fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
+        fromUserOfficeActions.EntityActionTypes.UpdateSuccessEntity,
+        fromUserOfficeActions.EntityActionTypes.DestroySuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
+      })
+    );
+
   @Effect({ dispatch: false })
-  successRedirect$ = this.actions$.pipe(
-    ofType(
-      fromUserOfficeActions.EntityActionTypes.LoadEntity,
-      fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
-      fromUserOfficeActions.EntityActionTypes.UpdateSuccessEntity,
-      fromUserOfficeActions.EntityActionTypes.DestroySuccessEntity,
-      fromUserOfficeActions.EntityActionTypes.Reset
-    ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
+  reset$ = this.actions$.pipe(
+    ofType(fromUserOfficeActions.EntityActionTypes.Reset),
+    map((action: fromUserOfficeActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
+      }
     })
   ); */
 

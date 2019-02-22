@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromScheduleDayActions from '@web/app/features/f/schedule-day/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutScheduleDayEffects {
@@ -71,23 +71,33 @@ export class LayoutScheduleDayEffects {
     })
   );
 
-/*   // Redirects
+  /*   // Redirects
+    @Effect({ dispatch: false })
+    successRedirect$ = this.actions$.pipe(
+      ofType(
+        fromScheduleDayActions.EntityActionTypes.LoadEntity,
+        fromScheduleDayActions.EntityActionTypes.StoreSuccessEntity,
+        fromScheduleDayActions.EntityActionTypes.UpdateSuccessEntity,
+        fromScheduleDayActions.EntityActionTypes.DestroySuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.Go({ path: ['schedule_day'] }));
+      })
+    );
+
   @Effect({ dispatch: false })
-  successRedirect$ = this.actions$.pipe(
-    ofType(
-      fromScheduleDayActions.EntityActionTypes.LoadEntity,
-      fromScheduleDayActions.EntityActionTypes.StoreSuccessEntity,
-      fromScheduleDayActions.EntityActionTypes.UpdateSuccessEntity,
-      fromScheduleDayActions.EntityActionTypes.DestroySuccessEntity,
-      fromScheduleDayActions.EntityActionTypes.Reset
-    ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['schedule_day'] }));
+  reset$ = this.actions$.pipe(
+    ofType(fromScheduleDayActions.EntityActionTypes.Reset),
+    map((action: fromScheduleDayActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['schedule_day'] }));
+      }
     })
   ); */
 
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

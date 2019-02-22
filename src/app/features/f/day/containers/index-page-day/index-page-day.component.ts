@@ -91,7 +91,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromDay.Reset());
+    this.store.dispatch(new fromDay.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

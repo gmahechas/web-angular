@@ -103,7 +103,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromMacroproject.Reset());
+    this.store.dispatch(new fromMacroproject.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

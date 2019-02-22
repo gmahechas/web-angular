@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromWorkflowActions from '@web/app/features/e/workflow/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutWorkflowEffects {
@@ -78,11 +78,21 @@ export class LayoutWorkflowEffects {
       fromWorkflowActions.EntityActionTypes.LoadEntity,
       fromWorkflowActions.EntityActionTypes.StoreSuccessEntity,
       fromWorkflowActions.EntityActionTypes.UpdateSuccessEntity,
-      fromWorkflowActions.EntityActionTypes.DestroySuccessEntity,
-      fromWorkflowActions.EntityActionTypes.Reset
+      fromWorkflowActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['workflow'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromWorkflowActions.EntityActionTypes.Reset),
+    map((action: fromWorkflowActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['workflow'] }));
+      }
     })
   );
 

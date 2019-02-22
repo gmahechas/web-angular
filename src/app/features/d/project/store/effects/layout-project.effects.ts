@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromProjectActions from '@web/app/features/d/project/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProjectEffects {
@@ -78,11 +78,21 @@ export class LayoutProjectEffects {
       fromProjectActions.EntityActionTypes.LoadEntity,
       fromProjectActions.EntityActionTypes.StoreSuccessEntity,
       fromProjectActions.EntityActionTypes.UpdateSuccessEntity,
-      fromProjectActions.EntityActionTypes.DestroySuccessEntity,
-      fromProjectActions.EntityActionTypes.Reset
+      fromProjectActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['project'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromProjectActions.EntityActionTypes.Reset),
+    map((action: fromProjectActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['project'] }));
+      }
     })
   );
 

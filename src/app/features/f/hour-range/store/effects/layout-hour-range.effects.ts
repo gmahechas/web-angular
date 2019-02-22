@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromHourRangeActions from '@web/app/features/f/hour-range/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutHourRangeEffects {
@@ -78,11 +78,21 @@ export class LayoutHourRangeEffects {
       fromHourRangeActions.EntityActionTypes.LoadEntity,
       fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
       fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-      fromHourRangeActions.EntityActionTypes.DestroySuccessEntity,
-      fromHourRangeActions.EntityActionTypes.Reset
+      fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['hour_range'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromHourRangeActions.EntityActionTypes.Reset),
+    map((action: fromHourRangeActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['hour_range'] }));
+      }
     })
   );
 

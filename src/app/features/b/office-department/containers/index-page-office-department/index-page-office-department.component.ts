@@ -69,7 +69,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromOfficeDepartment.Reset());
+    this.store.dispatch(new fromOfficeDepartment.Reset({ redirect: true }));
   }
 
 }

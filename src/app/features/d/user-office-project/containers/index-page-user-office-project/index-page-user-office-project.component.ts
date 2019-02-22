@@ -101,6 +101,6 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.suscription.unsubscribe();
-    this.store.dispatch(new fromUserOfficeProject.Reset());
+    this.store.dispatch(new fromUserOfficeProject.Reset({ redirect: true }));
   }
 }

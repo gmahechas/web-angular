@@ -95,7 +95,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromEstate.Reset());
+    this.store.dispatch(new fromEstate.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromContextVarActions from '@web/app/features/e/context-var/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutContextVarEffects {
@@ -78,16 +78,26 @@ export class LayoutContextVarEffects {
       fromContextVarActions.EntityActionTypes.LoadEntity,
       fromContextVarActions.EntityActionTypes.StoreSuccessEntity,
       fromContextVarActions.EntityActionTypes.UpdateSuccessEntity,
-      fromContextVarActions.EntityActionTypes.DestroySuccessEntity,
-      fromContextVarActions.EntityActionTypes.Reset
+      fromContextVarActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['context_var'] }));
     })
   );
 
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromContextVarActions.EntityActionTypes.Reset),
+    map((action: fromContextVarActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['context_var'] }));
+      }
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromProfileActions from '@web/app/features/c/profile/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProfileEffects {
@@ -78,11 +78,21 @@ export class LayoutProfileEffects {
       fromProfileActions.EntityActionTypes.LoadEntity,
       fromProfileActions.EntityActionTypes.StoreSuccessEntity,
       fromProfileActions.EntityActionTypes.UpdateSuccessEntity,
-      fromProfileActions.EntityActionTypes.DestroySuccessEntity,
-      fromProfileActions.EntityActionTypes.Reset
+      fromProfileActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromProfileActions.EntityActionTypes.Reset),
+    map((action: fromProfileActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
+      }
     })
   );
 

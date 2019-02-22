@@ -93,7 +93,7 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromDepartment.Reset());
+    this.store.dispatch(new fromDepartment.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

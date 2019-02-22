@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromCityActions from '@web/app/features/a/city/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutCityEffects {
@@ -78,11 +78,21 @@ export class LayoutCityEffects {
       fromCityActions.EntityActionTypes.LoadEntity,
       fromCityActions.EntityActionTypes.StoreSuccessEntity,
       fromCityActions.EntityActionTypes.UpdateSuccessEntity,
-      fromCityActions.EntityActionTypes.DestroySuccessEntity,
-      fromCityActions.EntityActionTypes.Reset
+      fromCityActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['city'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromCityActions.EntityActionTypes.Reset),
+    map((action: fromCityActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['city'] }));
+      }
     })
   );
 

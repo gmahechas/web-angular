@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromScheduleActions from '@web/app/features/f/schedule/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutScheduleEffects {
@@ -78,16 +78,26 @@ export class LayoutScheduleEffects {
       fromScheduleActions.EntityActionTypes.LoadEntity,
       fromScheduleActions.EntityActionTypes.StoreSuccessEntity,
       fromScheduleActions.EntityActionTypes.UpdateSuccessEntity,
-      fromScheduleActions.EntityActionTypes.DestroySuccessEntity,
-      fromScheduleActions.EntityActionTypes.Reset
+      fromScheduleActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['schedule'] }));
     })
   );
 
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromScheduleActions.EntityActionTypes.Reset),
+    map((action: fromScheduleActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['schedule'] }));
+      }
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

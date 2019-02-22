@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromTypePersonActions from '@web/app/features/c/type-person/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutTypePersonEffects {
@@ -78,16 +78,26 @@ export class LayoutTypePersonEffects {
       fromTypePersonActions.EntityActionTypes.LoadEntity,
       fromTypePersonActions.EntityActionTypes.StoreSuccessEntity,
       fromTypePersonActions.EntityActionTypes.UpdateSuccessEntity,
-      fromTypePersonActions.EntityActionTypes.DestroySuccessEntity,
-      fromTypePersonActions.EntityActionTypes.Reset
+      fromTypePersonActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['type_person'] }));
     })
   );
 
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromTypePersonActions.EntityActionTypes.Reset),
+    map((action: fromTypePersonActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['type_person'] }));
+      }
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

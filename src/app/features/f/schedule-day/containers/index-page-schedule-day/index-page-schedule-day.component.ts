@@ -67,6 +67,6 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromScheduleDay.Reset());
+    this.store.dispatch(new fromScheduleDay.Reset({ redirect: true }));
   }
 }

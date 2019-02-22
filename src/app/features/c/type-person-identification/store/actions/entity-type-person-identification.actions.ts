@@ -93,6 +93,7 @@ export class LoadEntityShared implements Action {
 
 export class Reset implements Action {
   readonly type = EntityActionTypes.Reset;
+  constructor(public payload: { redirect: boolean }) { }
 }
 
 export class SetSelect implements Action {

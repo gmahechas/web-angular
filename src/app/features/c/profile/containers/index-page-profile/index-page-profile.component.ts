@@ -102,7 +102,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromProfile.Reset());
+    this.store.dispatch(new fromProfile.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

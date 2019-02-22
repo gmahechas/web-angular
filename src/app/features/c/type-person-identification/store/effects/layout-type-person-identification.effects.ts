@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromTypePersonIdentificationActions from '@web/app/features/c/type-person-identification/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutTypePersonIdentificationEffects {
@@ -78,11 +78,21 @@ export class LayoutTypePersonIdentificationEffects {
       fromTypePersonIdentificationActions.EntityActionTypes.LoadEntity,
       fromTypePersonIdentificationActions.EntityActionTypes.StoreSuccessEntity,
       fromTypePersonIdentificationActions.EntityActionTypes.UpdateSuccessEntity,
-      fromTypePersonIdentificationActions.EntityActionTypes.DestroySuccessEntity,
-      fromTypePersonIdentificationActions.EntityActionTypes.Reset
+      fromTypePersonIdentificationActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['type_person_identification'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromTypePersonIdentificationActions.EntityActionTypes.Reset),
+    map((action: fromTypePersonIdentificationActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['type_person_identification'] }));
+      }
     })
   );
 

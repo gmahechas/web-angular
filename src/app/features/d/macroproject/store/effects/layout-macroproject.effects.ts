@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromMacroprojectActions from '@web/app/features/d/macroproject/store/actions';
 
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutMacroprojectEffects {
@@ -78,11 +78,21 @@ export class LayoutMacroprojectEffects {
       fromMacroprojectActions.EntityActionTypes.LoadEntity,
       fromMacroprojectActions.EntityActionTypes.StoreSuccessEntity,
       fromMacroprojectActions.EntityActionTypes.UpdateSuccessEntity,
-      fromMacroprojectActions.EntityActionTypes.DestroySuccessEntity,
-      fromMacroprojectActions.EntityActionTypes.Reset
+      fromMacroprojectActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
       this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
+    })
+  );
+
+  @Effect({ dispatch: false })
+  reset$ = this.actions$.pipe(
+    ofType(fromMacroprojectActions.EntityActionTypes.Reset),
+    map((action: fromMacroprojectActions.Reset) => action.payload),
+    tap(({ redirect }) => {
+      if (redirect) {
+        this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
+      }
     })
   );
 
