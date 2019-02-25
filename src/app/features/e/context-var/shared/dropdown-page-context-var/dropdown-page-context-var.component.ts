@@ -54,7 +54,7 @@ export class DropdownPageContextVarComponent implements OnInit {
         context_var_type: '',
         context_var_description: event
       },
-      context: null
+      context: (this.searchContextVar) ? (this.searchContextVar.context) ? this.searchContextVar.context : null : null
     });
   }
 

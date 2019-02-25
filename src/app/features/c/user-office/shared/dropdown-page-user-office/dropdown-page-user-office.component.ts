@@ -46,8 +46,8 @@ export class DropdownPageUserOfficeComponent implements OnInit {
             (this.searchUserOffice.user_office.user_office_status) ?
               this.searchUserOffice.user_office.user_office_status : null
         },
-        user: (this.searchUserOffice.user) ? this.searchUserOffice.user : null,
-        office: (this.searchUserOffice.office) ? this.searchUserOffice.office : null
+        user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
+        office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null
       });
     });
   }

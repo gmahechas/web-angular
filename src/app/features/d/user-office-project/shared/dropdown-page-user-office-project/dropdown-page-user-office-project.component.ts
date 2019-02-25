@@ -46,8 +46,12 @@ export class DropdownPageUserOfficeProjectComponent implements OnInit {
             (this.searchUserOfficeProject.user_office_project.user_office_project_status) ?
               this.searchUserOfficeProject.user_office_project.user_office_project_status : null
         },
-        user_office: (this.searchUserOfficeProject.user_office) ? this.searchUserOfficeProject.user_office : null,
-        project: (this.searchUserOfficeProject.project) ? this.searchUserOfficeProject.project : null
+        user_office:
+          (this.searchUserOfficeProject) ?
+            (this.searchUserOfficeProject.user_office) ? this.searchUserOfficeProject.user_office : null : null,
+        project:
+          (this.searchUserOfficeProject) ?
+            (this.searchUserOfficeProject.project) ? this.searchUserOfficeProject.project : null : null
       });
     });
   }

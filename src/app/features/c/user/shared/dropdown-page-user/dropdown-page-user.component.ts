@@ -52,8 +52,8 @@ export class DropdownPageUserComponent implements OnInit {
         user_id: '',
         username: event
       },
-      person: null,
-      profile: null
+      person: (this.searchUser) ? (this.searchUser.person) ? this.searchUser.person : null : null,
+      profile: (this.searchUser) ? (this.searchUser.profile) ? this.searchUser.profile : null : null
     });
   }
 

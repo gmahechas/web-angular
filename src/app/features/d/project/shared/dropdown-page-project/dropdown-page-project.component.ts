@@ -52,7 +52,7 @@ export class DropdownPageProjectComponent implements OnInit {
         project_id: '',
         project_name: event
       },
-      macroproject: null
+      macroproject: (this.searchProject) ? (this.searchProject.macroproject) ? this.searchProject.macroproject : null : null,
     });
   }
 

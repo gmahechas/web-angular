@@ -52,8 +52,10 @@ export class DropdownPageOfficeDepartmentComponent implements OnInit {
         office_department_id: '',
         office_department_status: null
       },
-      office: null,
-      department: null
+      office:
+        (this.searchOfficeDepartment) ? (this.searchOfficeDepartment.office) ? this.searchOfficeDepartment.office : null : null,
+      department:
+        (this.searchOfficeDepartment) ? (this.searchOfficeDepartment.department) ? this.searchOfficeDepartment.department : null : null
     });
   }
 

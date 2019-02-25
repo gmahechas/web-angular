@@ -52,8 +52,8 @@ export class DropdownPageMacroprojectComponent implements OnInit {
         macroproject_id: '',
         macroproject_name: event,
       },
-      city: null,
-      office: null
+      city: (this.searchMacroproject) ? (this.searchMacroproject.city) ? this.searchMacroproject.city : null : null,
+      office: (this.searchMacroproject) ? (this.searchMacroproject.office) ? this.searchMacroproject.office : null : null
     });
   }
 

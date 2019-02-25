@@ -53,7 +53,7 @@ export class DropdownPageCityComponent implements OnInit {
         city_name: event,
         city_code: ''
       },
-      estate: null
+      estate: (this.searchCity) ? (this.searchCity.estate) ? this.searchCity.estate : null : null
     });
   }
 

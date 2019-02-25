@@ -53,7 +53,7 @@ export class DropdownPageOfficeComponent implements OnInit {
           office_id: '',
           office_name: event
         },
-        city: null
+        city: (this.searchOffice) ? (this.searchOffice.city) ? this.searchOffice.city : null : null
       }
     );
   }

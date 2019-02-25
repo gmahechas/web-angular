@@ -52,7 +52,7 @@ export class DropdownPageContextComponent implements OnInit {
         context_id: '',
         context_description: event
       },
-      menu: null
+      menu: (this.searchContext) ? (this.searchContext.menu) ? this.searchContext.menu : null : null
     });
   }
 

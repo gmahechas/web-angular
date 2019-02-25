@@ -52,8 +52,8 @@ export class DropdownPageScheduleDayComponent implements OnInit {
         schedule_day_id: '',
         schedule_day_status: null
       },
-      schedule: null,
-      day: null
+      schedule: (this.searchScheduleDay) ? (this.searchScheduleDay.schedule) ? this.searchScheduleDay.schedule : null : null,
+      day: (this.searchScheduleDay) ? (this.searchScheduleDay.day) ? this.searchScheduleDay.day : null : null,
     });
   }
 
