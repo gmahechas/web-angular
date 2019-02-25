@@ -2,7 +2,8 @@
 
   <app-sidebar-shared [showSidebar]="showSidebar$ | async" [style]="{'width':'100%'}" [modal]="false"
     (hide)="opencloseSidebar($event)">
-    <app-menu-core [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id'"
+    <app-menu-core
+      [options]="user.profile.profile_menus | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id':'menu.menu_name'"
       (navigate)="handleNavigateFromSide($event)">
     </app-menu-core>
   </app-sidebar-shared>

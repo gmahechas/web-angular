@@ -11,14 +11,14 @@ export class ListboxSharedComponent implements OnInit {
   @Input() optionLabel: string;
   @Input() titleCaseLabel: string;
   @Input() upperCaseLabel: string;
-  @Output() handleClick = new EventEmitter<any>();
+  @Output() handleChange = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onClick(event) {
-    this.handleClick.emit(event.value);
+  onChange(event) {
+    this.handleChange.emit(event.value);
   }
 }

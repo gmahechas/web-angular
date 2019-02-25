@@ -1,3 +1,4 @@
-<div *ngIf="(data$ | async | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id':'menu.menu_name') as data">
-  <app-tree-shared [value]="data" [selectionMode]="'checkbox'" (select)="onSelect($event)" (unSelect)="onUnSelect($event)"></app-tree-shared>
+<div *ngIf="(data$ | async) as data">
+  <app-tree-shared [value]="data | parentChildArrayShared:'menu.menu_id':'menu.menu_parent_id':'menu.menu_name'"
+    [selectionMode]="'checkbox'" (select)="onSelect($event)" (unSelect)="onUnSelect($event)"></app-tree-shared>
 </div>

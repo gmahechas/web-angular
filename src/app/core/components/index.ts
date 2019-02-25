@@ -7,7 +7,6 @@ import { ProgressBarCoreComponent } from '@web/app/core/components/progress-bar-
 import { ToastCoreComponent } from '@web/app/core/components/toast-core/toast-core.component';
 import { ConfirmCoreComponent } from '@web/app/core/components/confirm-core/confirm-core.component';
 import { MessageCoreComponent } from '@web/app/core/components/message-core/message-core.component';
-import { BarMenuCoreComponent } from '@web/app/core/components/bar-menu-core/bar-menu-core.component';
 
 export const components: any[] = [
   HeaderCoreComponent,
@@ -18,8 +17,7 @@ export const components: any[] = [
   ProgressBarCoreComponent,
   ToastCoreComponent,
   ConfirmCoreComponent,
-  MessageCoreComponent,
-  BarMenuCoreComponent
+  MessageCoreComponent
 ];
 
 export * from '@web/app/core/components/not-found-core/not-found-core.component';

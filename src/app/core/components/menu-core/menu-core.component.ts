@@ -11,9 +11,9 @@ import { ParentChild } from '@web/app/core/models/parent-child.model';
 })
 export class MenuCoreComponent implements OnInit {
 
-  bars: { bar: number, options: ParentChild[] }[] = [];
   @Input() options: ParentChild[];
   @Output() navigate = new EventEmitter<ProfileMenu>();
+  bars: { bar: number, options: ParentChild[] }[] = [];
 
   constructor() { }
 
@@ -21,13 +21,13 @@ export class MenuCoreComponent implements OnInit {
     this.bars.push({ bar: 0, options: this.options });
   }
 
-  onNavigate(option: { bar: number, option: ParentChild }) {
-    if (option.option.data.menu.menu_uri) {
-      this.bars.splice((option.bar + 1), this.bars.length);
-      this.navigate.emit(option.option.data);
+  onNavigate(bar: number, option: ParentChild) {
+    if (option.data.menu.menu_uri) {
+      this.bars.splice((bar + 1), this.bars.length);
+      this.navigate.emit(option.data);
     } else {
-      this.bars.splice((option.bar + 1), this.bars.length);
-      this.bars.push({ bar: this.bars.length, options: option.option.children });
+      this.bars.splice((bar + 1), this.bars.length);
+      this.bars.push({ bar: this.bars.length, options: option.children });
     }
   }
 }
