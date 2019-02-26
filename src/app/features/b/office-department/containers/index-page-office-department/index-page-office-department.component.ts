@@ -16,6 +16,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
   configTable: any;
+  entityLabel: string;
 
   constructor(
     private store: Store<fromOfficeDepartment.State>,
@@ -39,18 +40,22 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     const key = this.route.snapshot.paramMap.keys[0];
     const val = this.route.snapshot.params[key];
 
+    this.entityLabel = key.split('_')[0];
+
     setTimeout(() => {
       this.store.dispatch(new fromOfficeDepartment.LoadEntity({
-        search: { [key.split('_')[0]]: { [key]: val } }
+        search: { [this.entityLabel]: { [key]: val } }
       }));
     });
   }
 
   onStore(officeDepartment: OfficeDepartment) {
-    this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
+    console.log(officeDepartment);
+    // this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
   }
 
   handleColumnSelected({ column, event }) {
