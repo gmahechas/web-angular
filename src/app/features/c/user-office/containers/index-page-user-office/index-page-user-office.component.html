@@ -1,4 +1,5 @@
-<app-table-shared [data]="data$ | async" [configTable]="configTable" (columnSelected)="handleColumnSelected($event)">
+<app-table-shared *ngIf="(data$ | async)?.length > 0 && (data$ | async); let data" [data]="data"
+  [configTable]="configTable" (columnSelected)="handleColumnSelected($event)">
 </app-table-shared>
 <app-form-user-office></app-form-user-office>
 

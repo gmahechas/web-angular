@@ -1,56 +1,54 @@
-<div *ngIf="data.length > 0">
-  <p-paginator *ngIf="topPaginator && totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
-    (onPageChange)="onPageChange($event)"></p-paginator>
-  <p-table [value]="data" [columns]="configTable.cols" [selectionMode]="configTable.selectionMode"
-    [(selection)]="selectedRows" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-    [dataKey]="configTable.dataKey">
-    <ng-template *ngIf="caption" pTemplate="caption">
-      <ng-content select="div.caption"></ng-content>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [ngStyle]="col.style">
-          <app-translate-shared [strings]="col.header"></app-translate-shared>
-        </th>
-        <th *ngFor="let col of configTable.colSelection" [ngStyle]="col.style">
-          <app-translate-shared [strings]="col.header"></app-translate-shared>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr [pSelectableRow]="rowData">
-        <td *ngFor="let col of columns">
-          <span *ngFor="let field of col.fields">
-            {{ rowData | fetchStringInArrayShared:field }}
-          </span>
-        </td>
-        <td *ngFor="let col of configTable.colSelection; let index = index;">
-          <div [ngSwitch]="col.type">
-            <div *ngSwitchCase="'icon'">
-              <app-icon-prime-shared [class]="col.class" (click)="onColumnSelection(index, rowData)">
-              </app-icon-prime-shared>
-            </div>
-            <div *ngSwitchCase="'checkbox'">
-              <app-checkbox-shared [checked]="rowData | fetchStringInArrayShared:col.field" [binary]="true"
-                (change)="onColumnSelection(index, rowData)">
-              </app-checkbox-shared>
-            </div>
-            <div *ngSwitchCase="'button'">
-              <app-button-shared [type]="'button'" [label]="col.label" (click)="onColumnSelection(index, rowData)"
-                [class]="'ui-button-secondary'">
-              </app-button-shared>
-            </div>
+<p-paginator *ngIf="topPaginator && totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
+  (onPageChange)="onPageChange($event)"></p-paginator>
+<p-table [value]="data" [columns]="configTable.cols" [selectionMode]="configTable.selectionMode"
+  [(selection)]="selectedRows" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+  [dataKey]="configTable.dataKey">
+  <ng-template *ngIf="caption" pTemplate="caption">
+    <ng-content select="div.caption"></ng-content>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [ngStyle]="col.style">
+        <app-translate-shared [strings]="col.header"></app-translate-shared>
+      </th>
+      <th *ngFor="let col of configTable.colSelection" [ngStyle]="col.style">
+        <app-translate-shared [strings]="col.header"></app-translate-shared>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        <span *ngFor="let field of col.fields">
+          {{ rowData | fetchStringInArrayShared:field }}
+        </span>
+      </td>
+      <td *ngFor="let col of configTable.colSelection; let index = index;">
+        <div [ngSwitch]="col.type">
+          <div *ngSwitchCase="'icon'">
+            <app-icon-prime-shared [class]="col.class" (click)="onColumnSelection(index, rowData)">
+            </app-icon-prime-shared>
           </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template *ngIf="footer" pTemplate="footer">
-      <ng-content select="div.footer"></ng-content>
-    </ng-template>
-    <ng-template *ngIf="summary" pTemplate="summary">
-      <ng-content select="div.summary"></ng-content>
-    </ng-template>
-  </p-table>
-  <p-paginator *ngIf="footerPaginator && totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows"
-    [first]="first" (onPageChange)="onPageChange($event)"></p-paginator>
-</div>
+          <div *ngSwitchCase="'checkbox'">
+            <app-checkbox-shared [checked]="rowData | fetchStringInArrayShared:col.field" [binary]="true"
+              (change)="onColumnSelection(index, rowData)">
+            </app-checkbox-shared>
+          </div>
+          <div *ngSwitchCase="'button'">
+            <app-button-shared [type]="'button'" [label]="col.label" (click)="onColumnSelection(index, rowData)"
+              [class]="'ui-button-secondary'">
+            </app-button-shared>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template *ngIf="footer" pTemplate="footer">
+    <ng-content select="div.footer"></ng-content>
+  </ng-template>
+  <ng-template *ngIf="summary" pTemplate="summary">
+    <ng-content select="div.summary"></ng-content>
+  </ng-template>
+</p-table>
+<p-paginator *ngIf="footerPaginator && totalRecords > rows" [totalRecords]="totalRecords" [rows]="rows" [first]="first"
+  (onPageChange)="onPageChange($event)"></p-paginator>

@@ -6,10 +6,10 @@
 </div>
 <div class="p-grid p-nogutter">
   <div class="p-col">
-    <app-table-shared [data]="data$ | async" [totalRecords]="total$ | async" [rows]="perPage$ | async"
-      [first]="from$ | async" [to]="to$ | async" [selectRows]="selectedEntity" [configTable]="configTable"
-      [footerPaginator]="true" (rowSelect)="onEdit($event)" (rowUnselect)="onCancel()"
-      (pageChange)="onPaginate($event)">
+    <app-table-shared *ngIf="(data$ | async)?.length > 0 && (data$ | async); let data" [data]="data"
+      [totalRecords]="total$ | async" [rows]="perPage$ | async" [first]="from$ | async" [to]="to$ | async"
+      [selectRows]="selectedEntity" [configTable]="configTable" [footerPaginator]="true" (rowSelect)="onEdit($event)"
+      (rowUnselect)="onCancel()" (pageChange)="onPaginate($event)">
     </app-table-shared>
   </div>
   <div class="p-col">
