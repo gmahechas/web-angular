@@ -28,7 +28,6 @@ export class FormOfficeDepartmentComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnChanges() {
-    this.officeDepartmentForm.reset();
     switch (this.entityLabel) {
       case 'office':
         this.officeDepartmentForm.setValue({
@@ -54,6 +53,13 @@ export class FormOfficeDepartmentComponent implements OnChanges, OnInit {
       office_id: this.officeDepartmentForm.value.office.office_id,
       department_id: this.officeDepartmentForm.value.department.department_id
     });
-    this.officeDepartmentForm.reset();
+    switch (this.entityLabel) {
+      case 'office':
+        this.officeDepartmentForm.controls.department.reset();
+        break;
+      case 'department':
+        this.officeDepartmentForm.controls.office.reset();
+        break;
+    }
   }
 }
