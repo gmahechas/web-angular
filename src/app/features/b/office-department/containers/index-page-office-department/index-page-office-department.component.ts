@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromOfficeDepartment from '@web/app/features/b/office-department/store';
+import * as fromOffice from '@web/app/features/b/office/store';
+import * as fromDepartment from '@web/app/features/b/department/store';
 import * as fromCore from '@web/app/core/store';
 
 import { OfficeDepartment } from '@web/app/features/b/office-department/models/office-department.model';
@@ -15,11 +17,13 @@ import { OfficeDepartment } from '@web/app/features/b/office-department/models/o
 export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
+  office$ = this.store.pipe(select(fromOffice.getSelected));
+  department$ = this.store.pipe(select(fromDepartment.getSelected));
   configTable: any;
   entityLabel: string;
 
   constructor(
-    private store: Store<fromOfficeDepartment.State>,
+    private store: Store<fromCore.State>,
     private route: ActivatedRoute
   ) {
     this.configTable = {
@@ -54,8 +58,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onStore(officeDepartment: OfficeDepartment) {
-    console.log(officeDepartment);
-    // this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
+    this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
   }
 
   handleColumnSelected({ column, event }) {
@@ -74,7 +77,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromOfficeDepartment.Reset({ redirect: true }));
+    this.store.dispatch(new fromOfficeDepartment.Reset({ redirect: false }));
   }
 
 }

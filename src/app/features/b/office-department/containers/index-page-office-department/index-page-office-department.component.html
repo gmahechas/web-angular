@@ -1,7 +1,8 @@
 <app-table-shared *ngIf="(data$ | async) as data" [data]="data" [configTable]="configTable" [summary]="true"
   (columnSelected)="handleColumnSelected($event)">
   <div class="summary">
-    <app-form-office-department [entityLabel]="entityLabel" [entities]="data$ | async" (submitted)="onStore($event)">
+    <app-form-office-department [entityLabel]="entityLabel" [office]="(office$ | async).selectedEntity"
+      [department]="(department$ | async).selectedEntity" (submitted)="onStore($event)">
     </app-form-office-department>
   </div>
 </app-table-shared>

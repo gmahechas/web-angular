@@ -46,13 +46,18 @@ export class DropdownSharedComponent implements OnInit {
   }
 
   setOptions() {
-    if (this.group.get(this.controlName).value) {
-      return [this.group.get(this.controlName).value].concat(this.data.filter(
-        entity => entity[this.entityId] !== this.group.get(this.controlName).value[this.entityId]
-      ));
+    if (this.filter) {
+      if (this.group.get(this.controlName).value) {
+        return [this.group.get(this.controlName).value].concat(this.data.filter(
+          entity => entity[this.entityId] !== this.group.get(this.controlName).value[this.entityId]
+        ));
+      } else {
+        return this.data;
+      }
     } else {
-      return this.data;
+      return [this.group.get(this.controlName).value];
     }
+
   }
 
   onChange(event) {

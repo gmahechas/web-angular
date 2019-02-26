@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { OfficeDepartment } from '@web/app/features/b/office-department/models/office-department.model';
+import { Office } from '@web/app/features/b/office/models/office.model';
+import { Department } from '@web/app/features/b/department/models/department.model';
 
 @Component({
   selector: 'app-form-office-department',
@@ -12,7 +14,8 @@ import { OfficeDepartment } from '@web/app/features/b/office-department/models/o
 export class FormOfficeDepartmentComponent implements OnChanges, OnInit {
 
   @Input() entityLabel: string;
-  @Input() entities: OfficeDepartment[];
+  @Input() office: Office;
+  @Input() department: Department;
   @Output() submitted = new EventEmitter<OfficeDepartment>();
 
   officeDepartmentForm = this.formBuilder.group({
@@ -25,23 +28,20 @@ export class FormOfficeDepartmentComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnChanges() {
-    if (this.entities.length > 0) {
-      this.officeDepartmentForm.reset();
-      switch (this.entityLabel) {
-        case 'office':
-          this.officeDepartmentForm.setValue({
-            office: this.entities[0].office,
-            department: ''
-          });
-          break;
-
-        case 'department':
-          this.officeDepartmentForm.setValue({
-            office: '',
-            department: this.entities[0].department
-          });
-          break;
-      }
+    this.officeDepartmentForm.reset();
+    switch (this.entityLabel) {
+      case 'office':
+        this.officeDepartmentForm.setValue({
+          office: this.office,
+          department: null
+        });
+        break;
+      case 'department':
+        this.officeDepartmentForm.setValue({
+          office: null,
+          department: this.department
+        });
+        break;
     }
   }
 
