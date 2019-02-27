@@ -100,6 +100,10 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   onUserOfficeProject(userOffice: UserOffice) {
 
+    this.store.dispatch(new fromUserOffice.SetSelected({
+      selected: { selectedEntity: userOffice }
+    }));
+
     const key = this.route.snapshot.paramMap.keys[0];
 
     this.store.dispatch(new fromCore.Go({
