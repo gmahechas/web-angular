@@ -26,8 +26,9 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
     this.configTable = {
       dataKey: 'user_office_project_id',
       cols: [
-        { fields: ['project.project_name'], header: ['project.singular'], style: { width: '45%' } },
-        { fields: ['user_office.user.username'], header: ['user.model.username'], style: { width: '45%' } },
+        { fields: ['user_office.office.office_name'], header: ['office.model.office_name'], style: { width: '30%' } },
+        { fields: ['user_office.user.username'], header: ['user.model.username'], style: { width: '30%' } },
+        { fields: ['project.project_name'], header: ['project.singular'], style: { width: '30%' } },
       ],
       colSelection: [
         {
