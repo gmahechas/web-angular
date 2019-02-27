@@ -28,6 +28,7 @@ export class DropdownPageContextComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchContext: SearchContext;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromContext.getAllEntities));

@@ -28,6 +28,7 @@ export class DropdownPageHourRangeComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchHourRange: SearchHourRange;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromHourRange.getAllEntities));

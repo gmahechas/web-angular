@@ -28,6 +28,7 @@ export class DropdownPageWorkflowComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchWorkflow: SearchWorkflow;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromWorkflow.getAllEntities));

@@ -28,6 +28,7 @@ export class DropdownPageOfficeComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchOffice: SearchOffice;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromOffice.getAllEntities));

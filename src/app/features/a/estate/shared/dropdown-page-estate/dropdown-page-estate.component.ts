@@ -28,6 +28,7 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchEstate: SearchEstate;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromEstate.getAllEntities));

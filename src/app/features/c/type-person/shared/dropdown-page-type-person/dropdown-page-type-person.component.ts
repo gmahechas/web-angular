@@ -28,6 +28,7 @@ export class DropdownPageTypePersonComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchTypePerson: SearchTypePerson;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromTypePerson.getAllEntities));

@@ -28,6 +28,7 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchUserOffice: SearchUserOffice;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromUserOffice.getAllEntities));
@@ -38,18 +39,21 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.onLoad({
-        user_office: {
-          user_office_id: '',
-          user_office_status:
-            (this.searchUserOffice) ? (this.searchUserOffice.user_office.user_office_status) ?
-              this.searchUserOffice.user_office.user_office_status : null : null
-        },
-        user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
-        office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null
+    if (this.loadOnInit) {
+      setTimeout(() => {
+        this.onLoad({
+          user_office: {
+            user_office_id: '',
+            user_office_status:
+              (this.searchUserOffice) ? (this.searchUserOffice.user_office.user_office_status) ?
+                this.searchUserOffice.user_office.user_office_status : null : null
+          },
+          user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
+          office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null
+        });
       });
-    });
+    }
+
   }
 
   onLoad(searchUserOffice: SearchUserOffice) {

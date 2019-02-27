@@ -28,6 +28,7 @@ export class DropdownPageScheduleComponent implements OnInit {
   @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
+  @Input() loadOnInit = false;
   @Input() searchSchedule: SearchSchedule;
   @Output() changeDropdown = new EventEmitter<any>();
   entities$ = this.store.pipe(select(fromSchedule.getAllEntities));
