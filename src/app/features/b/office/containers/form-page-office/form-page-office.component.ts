@@ -44,13 +44,18 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onUserOffice(office: Office) {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: { selectedEntity: office, gotoUserOffice: true } }));
+    this.store.dispatch(new fromOffice.SetSelected({
+      selected: { selectedEntity: office, gotoUserOffice: true, gotoOfficeDeparment: false }
+    }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', office.office_id, { outlets: { 'router-outlet-user-office': ['user-office', 'office', office.office_id] } }]
     }));
   }
 
   onOfficeDepartment(office: Office) {
+    this.store.dispatch(new fromOffice.SetSelected({
+      selected: { selectedEntity: office, gotoUserOffice: false, gotoOfficeDeparment: true }
+    }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', office.office_id, {
         outlets: { 'router-outlet-user-department': ['office-department', 'office', office.office_id] }

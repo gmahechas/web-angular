@@ -57,6 +57,14 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
               { outlets: { 'router-outlet-user-office': ['user-office', 'office', selected.selectedEntity.office_id] } }
             ]
           }));
+        } else if (selected.gotoOfficeDeparment && selected.selectedEntity) {
+          this.store.dispatch(new fromCore.Go({
+            path: [
+              'office',
+              selected.selectedEntity.office_id,
+              { outlets: { 'router-outlet-user-department': ['office-department', 'office', selected.selectedEntity.office_id] } }
+            ]
+          }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
