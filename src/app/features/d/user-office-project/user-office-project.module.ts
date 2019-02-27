@@ -6,6 +6,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@web/app/shared/shared.module';
 import { UserOfficeProjectRoutingModule } from '@web/app/features/d/user-office-project/user-office-project-routing.module';
+import { UserOfficeModule } from '@web/app/features/c/user-office/user-office.module';
+import { ProjectModule } from '@web/app/features/d/project/project.module';
 
 import * as fromContainers from '@web/app/features/d/user-office-project/containers';
 import * as fromComponents from '@web/app/features/d/user-office-project/components';
@@ -16,7 +18,9 @@ import * as fromShared from '@web/app/features/d/user-office-project/shared';
     SharedModule,
     UserOfficeProjectRoutingModule,
     StoreModule.forFeature('user_office_project', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    UserOfficeModule,
+    ProjectModule
   ],
   declarations: [
     ...fromContainers.containers,

@@ -3,6 +3,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUserOfficeProject from '@web/app/features/d/user-office-project/store';
+import * as fromUserOffice from '@web/app/features/c/user-office/store';
+import * as fromProject from '@web/app/features/d/project/store';
+import * as fromCore from '@web/app/core/store';
 
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
 
@@ -16,11 +19,14 @@ import { Subscription } from 'rxjs';
 export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromUserOfficeProject.getAllEntities));
-  suscription: Subscription;
+  userOffice$ = this.store.pipe(select(fromUserOffice.getSelected));
+  project$ = this.store.pipe(select(fromProject.getSelected));
   configTable: any;
+  entityLabel: string;
+  suscription: Subscription;
 
   constructor(
-    private store: Store<fromUserOfficeProject.State>,
+    private store: Store<fromCore.State>,
     private route: ActivatedRoute
   ) {
     this.configTable = {
@@ -47,9 +53,11 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
 
       const key = paramsMap.keys[0];
 
+      this.entityLabel = key.split('_')[0];
+
       switch (key) {
         case 'user_id':
-        case 'office_id': {
+        case 'office_id':
           const userOfficeId = paramsMap.get(paramsMap.keys[1]);
           setTimeout(() => {
             this.store.dispatch(new fromUserOfficeProject.LoadEntity({
@@ -61,10 +69,8 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
             }));
           });
           break;
-        }
-        case 'project_id': {
+        case 'project_id':
           const projectId = paramsMap.get(key);
-
           setTimeout(() => {
             this.store.dispatch(new fromUserOfficeProject.LoadEntity({
               search: {
@@ -75,9 +81,7 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
             }));
           });
           break;
-        }
       }
-
     });
   }
 
@@ -88,6 +92,19 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
           ...event,
           user_office_project_status: !event.user_office_project_status
         });
+        break;
+    }
+  }
+
+  onStore(userOfficeProject: UserOfficeProject) {
+    this.store.dispatch(new fromUserOfficeProject.StoreEntity({ entity: userOfficeProject }));
+    switch (this.entityLabel) {
+      case 'user':
+      case 'office':
+        this.store.dispatch(new fromProject.Reset({ redirect: false }));
+        break;
+      case 'project':
+        this.store.dispatch(new fromUserOffice.Reset({ redirect: false }));
         break;
     }
   }

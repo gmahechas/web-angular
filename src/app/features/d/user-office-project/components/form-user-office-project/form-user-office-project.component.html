@@ -1,3 +1,19 @@
-<p>
-  form-user-office-project works!
-</p>
+<form [formGroup]="userOfficeProjectForm" (ngSubmit)="onSubmit()">
+  <div class="p-grid p-nogutter">
+    <div class="p-col">
+      <app-dropdown-page-user-office [group]="userOfficeProjectForm" [controlName]="'user_office'"
+        [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'"
+        [filter]="(entityLabel === 'user' || entityLabel === 'office') ? false : true">
+      </app-dropdown-page-user-office>
+    </div>
+    <div class="p-col">
+      <app-dropdown-page-project [group]="userOfficeProjectForm" [controlName]="'project'" [options]="['project_name']"
+        [optionLabel]="'project_name'" [filter]="(entityLabel === 'project') ? false : true">
+      </app-dropdown-page-project>
+    </div>
+    <div class="p-col">
+      <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+        [disabled]="userOfficeProjectForm.invalid"></app-button-shared>
+    </div>
+  </div>
+</form>

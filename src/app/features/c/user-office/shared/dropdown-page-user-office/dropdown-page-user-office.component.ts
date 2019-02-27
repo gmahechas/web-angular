@@ -43,8 +43,8 @@ export class DropdownPageUserOfficeComponent implements OnInit {
         user_office: {
           user_office_id: '',
           user_office_status:
-            (this.searchUserOffice.user_office.user_office_status) ?
-              this.searchUserOffice.user_office.user_office_status : null
+            (this.searchUserOffice) ? (this.searchUserOffice.user_office.user_office_status) ?
+              this.searchUserOffice.user_office.user_office_status : null : null
         },
         user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
         office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null
@@ -59,6 +59,7 @@ export class DropdownPageUserOfficeComponent implements OnInit {
   }
 
   keyUp(event) {
+    console.log(event);
   }
 
   handleChange(event) {

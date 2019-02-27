@@ -26,6 +26,9 @@ import * as fromShared from '@web/app/features/c/user-office/shared';
     ...fromContainers.containers,
     ...fromComponents.components,
     ...fromShared.shared
+  ],
+  exports: [
+    ...fromShared.shared
   ]
 })
 export class UserOfficeModule { }
