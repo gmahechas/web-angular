@@ -1,4 +1,6 @@
-<app-table-shared *ngIf="(data$ | async) as data" [data]="data" [configTable]="configTable"
+<app-table-shared *ngIf="(data$ | async) as data" [data]="data" [configTable]="configTable" [summary]="true"
   (columnSelected)="handleColumnSelected($event)">
+  <div class="summary">
+    <app-form-schedule-day></app-form-schedule-day>
+  </div>
 </app-table-shared>
-<app-form-schedule-day></app-form-schedule-day>

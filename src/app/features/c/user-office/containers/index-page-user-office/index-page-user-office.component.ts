@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUserOffice from '@web/app/features/c/user-office/store';
+import * as fromOffice from '@web/app/features/b/office/store';
+import * as fromUser from '@web/app/features/c/user/store';
 import * as fromCore from '@web/app/core/store';
 
 import { UserOffice } from '@web/app/features/c/user-office/models/user-office.model';
@@ -16,10 +18,13 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
   data$ = this.store.pipe(select(fromUserOffice.getAllEntities));
+  user$ = this.store.pipe(select(fromUser.getSelected));
+  office$ = this.store.pipe(select(fromOffice.getSelected));
   configTable: any;
+  entityLabel: string;
 
   constructor(
-    private store: Store<fromUserOffice.State>,
+    private store: Store<fromCore.State>,
     private route: ActivatedRoute
   ) {
     this.configTable = {
@@ -46,16 +51,16 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     const key = this.route.snapshot.paramMap.keys[0];
     const val = this.route.snapshot.params[key];
 
+    this.entityLabel = key.split('_')[0];
+
     setTimeout(() => {
       this.store.dispatch(new fromUserOffice.LoadEntity({
-        search: { [key.split('_')[0]]: { [key]: val } }
+        search: { [this.entityLabel]: { [key]: val } }
       }));
     });
-
   }
 
   handleColumnSelected({ column, event }) {
@@ -70,6 +75,18 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
         this.onUserOfficeProject(event);
         break;
 
+    }
+  }
+
+  onStore(userOffice: UserOffice) {
+    this.store.dispatch(new fromUserOffice.StoreEntity({ entity: userOffice }));
+    switch (this.entityLabel) {
+      case 'user':
+        this.store.dispatch(new fromOffice.Reset({ redirect: false }));
+        break;
+      case 'office':
+        this.store.dispatch(new fromUser.Reset({ redirect: false }));
+        break;
     }
   }
 

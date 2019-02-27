@@ -44,7 +44,6 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     const key = this.route.snapshot.paramMap.keys[0];
     const val = this.route.snapshot.params[key];
 
@@ -57,6 +56,17 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
     });
   }
 
+  handleColumnSelected({ column, event }) {
+    switch (column) {
+      case 0:
+        this.onEdit({
+          ...event,
+          office_department_status: !event.office_department_status
+        });
+        break;
+    }
+  }
+
   onStore(officeDepartment: OfficeDepartment) {
     this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
     switch (this.entityLabel) {
@@ -65,17 +75,6 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
         break;
       case 'department':
         this.store.dispatch(new fromOffice.Reset({ redirect: false }));
-        break;
-    }
-  }
-
-  handleColumnSelected({ column, event }) {
-    switch (column) {
-      case 0:
-        this.onEdit({
-          ...event,
-          office_department_status: !event.office_department_status
-        });
         break;
     }
   }
