@@ -41,7 +41,7 @@ export class FormProjectComponent implements OnChanges, OnInit {
       this.projectForm.setValue({
         project: {
           project_name: this.project.project_name,
-          project_address: this.project.project_phone,
+          project_address: this.project.project_address,
           project_phone: this.project.project_phone
         },
         macroproject: this.project.macroproject
