@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchProject } from '@web/app/features/d/project/models/search-project
   templateUrl: './dropdown-page-project.component.html',
   styles: []
 })
-export class DropdownPageProjectComponent implements OnInit {
+export class DropdownPageProjectComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageProjectComponent implements OnInit {
   constructor(
     private store: Store<fromProject.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromProject.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
   }

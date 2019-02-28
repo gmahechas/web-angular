@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchUserOfficeProject } from '@web/app/features/d/user-office-project
   templateUrl: './dropdown-page-user-office-project.component.html',
   styles: []
 })
-export class DropdownPageUserOfficeProjectComponent implements OnInit {
+export class DropdownPageUserOfficeProjectComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageUserOfficeProjectComponent implements OnInit {
   constructor(
     private store: Store<fromUserOffice.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromUserOffice.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
     if (this.loadOnInit) {

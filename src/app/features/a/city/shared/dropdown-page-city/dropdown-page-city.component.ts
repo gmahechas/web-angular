@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
   templateUrl: './dropdown-page-city.component.html',
   styles: []
 })
-export class DropdownPageCityComponent implements OnInit {
+export class DropdownPageCityComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageCityComponent implements OnInit {
   constructor(
     private store: Store<fromCity.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromCity.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
   }

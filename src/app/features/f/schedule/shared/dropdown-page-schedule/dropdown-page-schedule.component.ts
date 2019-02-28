@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchSchedule } from '@web/app/features/f/schedule/models/search-sched
   templateUrl: './dropdown-page-schedule.component.html',
   styles: []
 })
-export class DropdownPageScheduleComponent implements OnInit {
+export class DropdownPageScheduleComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageScheduleComponent implements OnInit {
   constructor(
     private store: Store<fromSchedule.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromSchedule.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
   }

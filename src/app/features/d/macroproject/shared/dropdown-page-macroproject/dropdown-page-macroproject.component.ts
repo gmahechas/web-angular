@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchMacroproject } from '@web/app/features/d/macroproject/models/sear
   templateUrl: './dropdown-page-macroproject.component.html',
   styles: []
 })
-export class DropdownPageMacroprojectComponent implements OnInit {
+export class DropdownPageMacroprojectComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageMacroprojectComponent implements OnInit {
   constructor(
     private store: Store<fromMacroproject.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromMacroproject.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
   }

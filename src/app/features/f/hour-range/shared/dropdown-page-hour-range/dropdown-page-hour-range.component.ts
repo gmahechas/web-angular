@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchHourRange } from '@web/app/features/f/hour-range/models/search-ho
   templateUrl: './dropdown-page-hour-range.component.html',
   styles: []
 })
-export class DropdownPageHourRangeComponent implements OnInit {
+export class DropdownPageHourRangeComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageHourRangeComponent implements OnInit {
   constructor(
     private store: Store<fromHourRange.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromHourRange.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
   }

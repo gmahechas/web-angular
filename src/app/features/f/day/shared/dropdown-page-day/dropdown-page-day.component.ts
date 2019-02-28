@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { SearchDay } from '@web/app/features/f/day/models/search-day.model';
   templateUrl: './dropdown-page-day.component.html',
   styles: []
 })
-export class DropdownPageDayComponent implements OnInit {
+export class DropdownPageDayComponent implements OnChanges, OnInit {
 
   @Input() group: FormGroup;
   @Input() groupName: string;
@@ -37,6 +37,12 @@ export class DropdownPageDayComponent implements OnInit {
   constructor(
     private store: Store<fromDay.State>
   ) { }
+
+  ngOnChanges() {
+    if (this.isConditional) {
+      this.store.dispatch(new fromDay.Reset({ redirect: false }));
+    }
+  }
 
   ngOnInit() {
   }

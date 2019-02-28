@@ -39,10 +39,7 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnChanges() {
-    if (
-      this.isConditional &&
-      this.searchEstate.country
-    ) {
+    if (this.isConditional) {
       this.store.dispatch(new fromEstate.Reset({ redirect: false }));
     }
   }
