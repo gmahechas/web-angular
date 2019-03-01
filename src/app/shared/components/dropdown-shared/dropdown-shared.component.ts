@@ -51,7 +51,7 @@ export class DropdownSharedComponent implements OnInit {
     switch (this.onlyShow) {
       case 'store':
         return this.data;
-      case 'data_form':
+      case 'store_form':
         if (this.group.get(this.controlName).value) {
           return [this.group.get(this.controlName).value].concat(this.data.filter(
             entity => entity[this.entityId] !== this.group.get(this.controlName).value[this.entityId]
