@@ -20,6 +20,7 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
   @Input() options: string[];
   @Input() optionLabel: string;
   @Input() filter = true;
+  @Input() onlyShow: 'store' | 'store_form' | 'form';
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() showClear: boolean;
