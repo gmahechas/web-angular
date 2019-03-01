@@ -3,12 +3,16 @@
     <div class="p-col">
       <app-dropdown-page-user-office [group]="userOfficeProjectForm" [controlName]="'user_office'"
         [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'"
-        [filter]="(entityLabel === 'user' || entityLabel === 'office') ? false : true">
+        [filter]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
+        [isConditional]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
+        [searchUserOffice]="(entityLabel === 'user' || entityLabel === 'office') ? null : { office : project.macroproject.office }">
       </app-dropdown-page-user-office>
     </div>
     <div class="p-col">
       <app-dropdown-page-project [group]="userOfficeProjectForm" [controlName]="'project'" [options]="['project_name']"
-        [optionLabel]="'project_name'" [filter]="(entityLabel === 'project') ? false : true">
+        [optionLabel]="'project_name'" [filter]="(entityLabel === 'project') ? false : true"
+        [isConditional]="(entityLabel === 'project') ? false : true"
+        [searchProject]="(entityLabel === 'project') ? null : { office: userOffice.office}">
       </app-dropdown-page-project>
     </div>
     <div class="p-col">

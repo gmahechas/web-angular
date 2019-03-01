@@ -69,7 +69,14 @@ export class DropdownPageUserOfficeComponent implements OnChanges, OnInit {
   }
 
   keyUp(event) {
-    console.log(event);
+    this.onLoad({
+      user_office: {
+        user_office_id: '',
+        user_office_status: true
+      },
+      user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
+      office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null
+    });
   }
 
   handleChange(event) {

@@ -16,6 +16,7 @@ document: DocumentNode = gql`
     $user_office_id: ID,
     $user_office_status: Boolean,
     $user_id: ID,
+    $username: String,
     $office_id: ID,
     $limit: Int,
     $page: Int
@@ -24,6 +25,7 @@ document: DocumentNode = gql`
       user_office_id: $user_office_id,
       user_office_status: $user_office_status,
       user_id: $user_id,
+      username: $username,
       office_id: $office_id,
       limit: $limit,
       page: $page

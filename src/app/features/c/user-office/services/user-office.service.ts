@@ -23,6 +23,7 @@ export class UserOfficeService {
     this.queryRef = this.userOfficePaginationGQL.watch({
       ...searchUserOffice.user_office,
       user_id: (searchUserOffice.user) ? searchUserOffice.user.user_id : null,
+      username: (searchUserOffice.user) ? searchUserOffice.user.username : null,
       office_id: (searchUserOffice.office) ? searchUserOffice.office.office_id : null,
       limit: searchUserOffice.limit,
       page: searchUserOffice.page

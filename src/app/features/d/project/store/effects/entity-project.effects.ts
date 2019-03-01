@@ -96,7 +96,8 @@ export class EntityProjectEffects {
         if (
           searchProject.project.project_id === '' &&
           searchProject.project.project_name === '' &&
-          searchProject.macroproject === null
+          searchProject.macroproject === null &&
+          searchProject.office === null
         ) {
           return EMPTY;
         }

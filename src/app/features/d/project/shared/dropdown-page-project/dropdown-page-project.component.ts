@@ -60,6 +60,7 @@ export class DropdownPageProjectComponent implements OnChanges, OnInit {
         project_name: event
       },
       macroproject: (this.searchProject) ? (this.searchProject.macroproject) ? this.searchProject.macroproject : null : null,
+      office: (this.searchProject) ? (this.searchProject.office) ? this.searchProject.office : null : null
     });
   }
 

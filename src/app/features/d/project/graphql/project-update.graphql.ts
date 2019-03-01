@@ -25,21 +25,27 @@ document: DocumentNode = gql`
         project_address: $project_address,
         project_phone: $project_phone,
         macroproject_id: $macroproject_id
-      ) {
-        project_id
-        project_name
-        project_address
-        project_phone
+    ) {
+      project_id
+      project_name
+      project_address
+      project_phone
+      macroproject_id
+      macroproject {
         macroproject_id
-        macroproject {
-          macroproject_id
-          macroproject_name
-          macroproject_address
-          macroproject_phone
-          city_id
+        macroproject_name
+        macroproject_address
+        macroproject_phone
+        city_id
+        office_id
+        office {
           office_id
+          office_name
+          company_id
+          city_id
         }
       }
+    }
   }
 `;
 

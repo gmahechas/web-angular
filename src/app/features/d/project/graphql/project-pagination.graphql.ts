@@ -16,6 +16,7 @@ document: DocumentNode = gql`
     $project_id: ID,
     $project_name: String,
     $macroproject_id: ID,
+    $office_id: ID,
     $limit: Int,
     $page: Int
   ) {
@@ -23,6 +24,7 @@ document: DocumentNode = gql`
       project_id: $project_id,
       project_name: $project_name,
       macroproject_id: $macroproject_id,
+      office_id: $office_id,
       limit: $limit,
       page: $page
     ) {
@@ -44,6 +46,12 @@ document: DocumentNode = gql`
           macroproject_phone
           city_id
           office_id
+          office {
+            office_id
+            office_name
+            company_id
+            city_id
+          }
         }
       }
     }

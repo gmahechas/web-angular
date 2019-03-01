@@ -26,6 +26,12 @@ document: DocumentNode = gql`
         macroproject_phone
         city_id
         office_id
+        office {
+          office_id
+          office_name
+          company_id
+          city_id
+        }
       }
     }
   }

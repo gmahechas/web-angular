@@ -23,6 +23,7 @@ export class ProjectService {
     this.queryRef = this.projectPaginationGQL.watch({
       ...searchProject.project,
       macroproject_id: (searchProject.macroproject) ? searchProject.macroproject.macroproject_id : null,
+      office_id: (searchProject.office) ? searchProject.office.office_id : null,
       limit: searchProject.limit,
       page: searchProject.page
     });
