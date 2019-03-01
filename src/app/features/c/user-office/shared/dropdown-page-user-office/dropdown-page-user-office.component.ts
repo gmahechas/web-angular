@@ -45,12 +45,12 @@ export class DropdownPageUserOfficeComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    if (this.loadOnInit) {
+    if (this.loadOnInit && this.searchUserOffice) {
       setTimeout(() => {
         this.onLoad({
-          user_office: (this.searchUserOffice) ? (this.searchUserOffice.user_office) ? this.searchUserOffice.user_office : null : null,
-          user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
-          office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null
+          user_office: (this.searchUserOffice.user_office) ? this.searchUserOffice.user_office : null,
+          user: (this.searchUserOffice.user) ? this.searchUserOffice.user : null,
+          office: (this.searchUserOffice.office) ? this.searchUserOffice.office : null
         });
       });
     }
