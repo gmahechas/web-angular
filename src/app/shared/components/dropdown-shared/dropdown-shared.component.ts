@@ -17,6 +17,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() options: string[];
   @Input() optionLabel: string;
   @Input() filter: boolean;
+  @Input() onlyShow: string;
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() placeholder: string[];
@@ -46,18 +47,20 @@ export class DropdownSharedComponent implements OnInit {
   }
 
   setOptions() {
-    if (this.filter) {
-      if (this.group.get(this.controlName).value) {
-        return [this.group.get(this.controlName).value].concat(this.data.filter(
-          entity => entity[this.entityId] !== this.group.get(this.controlName).value[this.entityId]
-        ));
-      } else {
-        return this.data;
-      }
-    } else {
-      return [this.group.get(this.controlName).value];
-    }
 
+    switch (this.onlyShow) {
+      case 'store':
+        return this.data;
+      case 'data_form':
+        if (this.group.get(this.controlName).value) {
+          return [this.group.get(this.controlName).value].concat(this.data.filter(
+            entity => entity[this.entityId] !== this.group.get(this.controlName).value[this.entityId]
+          ));
+        } else {
+          return this.data;
+        }
+      case 'form': return [this.group.get(this.controlName).value];
+    }
   }
 
   onChange(event) {
