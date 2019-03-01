@@ -22,7 +22,7 @@ export class DropdownPageTypePersonIdentificationComponent implements OnChanges,
   @Input() options: string[];
   @Input() optionLabel: string;
   @Input() filter = true;
-  @Input() onlyShow: 'store' | 'store_form' | 'form';
+  @Input() onlyShow: 'store' | 'store_form' | 'form' = 'store_form';
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() showClear: boolean;

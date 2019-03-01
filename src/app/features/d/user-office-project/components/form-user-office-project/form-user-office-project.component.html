@@ -2,8 +2,8 @@
   <div class="p-grid p-nogutter">
     <div class="p-col">
       <app-dropdown-page-user-office [group]="userOfficeProjectForm" [controlName]="'user_office'"
-        [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'"
-        [filter]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
+        [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'" [filter]="false"
+        [onlyShow]="(entityLabel === 'user' || entityLabel === 'office') ? 'form' : 'store_form'"
         [isConditional]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
         [loadOnInit]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
         [searchUserOffice]="(entityLabel === 'user' || entityLabel === 'office') ? null : {  user_office: { user_office_status: true }, office : project.macroproject.office }">
@@ -12,6 +12,7 @@
     <div class="p-col">
       <app-dropdown-page-project [group]="userOfficeProjectForm" [controlName]="'project'" [options]="['project_name']"
         [optionLabel]="'project_name'" [filter]="(entityLabel === 'project') ? false : true"
+        [onlyShow]="(entityLabel === 'project') ? 'form' : 'store_form'"
         [isConditional]="(entityLabel === 'project') ? false : true"
         [searchProject]="(entityLabel === 'project') ? null : { office: userOffice.office}">
       </app-dropdown-page-project>

@@ -2,11 +2,13 @@
   <div class="p-grid p-nogutter">
     <div class="p-col">
       <app-dropdown-page-office [group]="userOfficeForm" [controlName]="'office'" [options]="['office_name']"
-        [optionLabel]="'office_name'" [filter]="(entityLabel === 'office') ? false : true"></app-dropdown-page-office>
+        [optionLabel]="'office_name'" [filter]="(entityLabel === 'office') ? false : true"
+        [onlyShow]="(entityLabel === 'office') ? 'form' : 'store_form'"></app-dropdown-page-office>
     </div>
     <div class="p-col">
       <app-dropdown-page-user [group]="userOfficeForm" [controlName]="'user'" [options]="['username']"
-        [optionLabel]="'username'" [filter]="(entityLabel === 'user') ? false : true"></app-dropdown-page-user>
+        [optionLabel]="'username'" [filter]="(entityLabel === 'user') ? false : true"
+        [onlyShow]="(entityLabel === 'user') ? 'form' : 'store_form'"></app-dropdown-page-user>
     </div>
     <div class="p-col">
       <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
