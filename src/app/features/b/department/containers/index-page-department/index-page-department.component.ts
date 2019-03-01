@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Department } from '@web/app/features/b/department/models/department.model';
 import { SearchDepartment } from '@web/app/features/b/department/models/search-department.model';
-import { initialStateSelectedDepartment } from '@web/app/features/b/department/models/selected-department.model';
+import { SelectedDepartment, initialStateSelectedDepartment } from '@web/app/features/b/department/models/selected-department.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -46,8 +46,16 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromDepartment.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Department | null }) => {
-        if (selected.selectedEntity) {
+      (selected: SelectedDepartment) => {
+
+        if (selected.gotoOfficeDepartment && selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
+          this.store.dispatch(new fromCore.Go({
+            path: ['department', selected.selectedEntity.department_id, {
+              outlets: { 'router-outlet-user-department': ['office-department', 'department', selected.selectedEntity.department_id] }
+            }]
+          }));
+        } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
             path: ['department', selected.selectedEntity.department_id]

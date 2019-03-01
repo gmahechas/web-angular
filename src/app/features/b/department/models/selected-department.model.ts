@@ -2,8 +2,10 @@ import { Department } from '@web/app/features/b/department/models/department.mod
 
 export interface SelectedDepartment {
   selectedEntity: Department | null;
+  gotoOfficeDepartment: boolean | null;
 }
 
 export const initialStateSelectedDepartment: SelectedDepartment = {
-  selectedEntity: null
+  selectedEntity: null,
+  gotoOfficeDepartment: false
 };
