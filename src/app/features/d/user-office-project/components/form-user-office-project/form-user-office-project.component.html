@@ -5,7 +5,8 @@
         [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'"
         [filter]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
         [isConditional]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
-        [searchUserOffice]="(entityLabel === 'user' || entityLabel === 'office') ? null : { office : project.macroproject.office }">
+        [loadOnInit]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
+        [searchUserOffice]="(entityLabel === 'user' || entityLabel === 'office') ? null : {  user_office: { user_office_status: true }, office : project.macroproject.office }">
       </app-dropdown-page-user-office>
     </div>
     <div class="p-col">

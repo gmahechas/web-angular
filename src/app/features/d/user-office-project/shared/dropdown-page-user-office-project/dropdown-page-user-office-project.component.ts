@@ -64,6 +64,20 @@ export class DropdownPageUserOfficeProjectComponent implements OnChanges, OnInit
   }
 
   keyUp(event) {
+    this.onLoad({
+      user_office_project:
+        (this.searchUserOfficeProject) ?
+          (this.searchUserOfficeProject.user_office_project) ?
+            this.searchUserOfficeProject.user_office_project : null : null,
+      user_office:
+        (this.searchUserOfficeProject) ?
+          (this.searchUserOfficeProject.user_office) ?
+            this.searchUserOfficeProject.user_office : null : null,
+      project:
+        (this.searchUserOfficeProject.project) ?
+          (this.searchUserOfficeProject.project) ?
+            this.searchUserOfficeProject.project : null : null
+    });
   }
 
   handleChange(event) {
