@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromDay from '@web/app/features/f/day/store';
+import { initialState } from '@web/app/features/f/day/store/reducers/search-day.reducer';
 
 import { SearchDay } from '@web/app/features/f/day/models/search-day.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageDayComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchDay) {
+      setTimeout(() => {
+        this.onLoad({
+          day: (this.searchDay.day) ? this.searchDay.day : null
+        });
+      });
+    }
   }
 
   onLoad(searchDay: SearchDay) {
@@ -57,8 +65,8 @@ export class DropdownPageDayComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       day: {
-        day_id: '',
-        day_name: event
+        ...initialState.query.day,
+        [this.optionLabel]: event
       }
     });
   }

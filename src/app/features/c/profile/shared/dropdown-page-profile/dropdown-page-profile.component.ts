@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromProfile from '@web/app/features/c/profile/store';
+import { initialState } from '@web/app/features/c/profile/store/reducers/search-profile.reducer';
 
 import { SearchProfile } from '@web/app/features/c/profile/models/search-profile.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageProfileComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchProfile) {
+      setTimeout(() => {
+        this.onLoad({
+          profile: (this.searchProfile.profile) ? this.searchProfile.profile : null
+        });
+      });
+    }
   }
 
   onLoad(searchProfile: SearchProfile) {
@@ -57,8 +65,8 @@ export class DropdownPageProfileComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       profile: {
-        profile_id: '',
-        profile_name: event
+        ...initialState.query.profile,
+        [this.optionLabel]: event
       }
     });
   }

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromTypePersonIdentification from '@web/app/features/c/type-person-identification/store';
+import { initialState } from '@web/app/features/c/type-person-identification/store/reducers/search-type-person-identification.reducer';
 
 import {
   SearchTypePersonIdentification
@@ -48,6 +49,15 @@ export class DropdownPageTypePersonIdentificationComponent implements OnChanges,
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchTypePersonIdentification) {
+      setTimeout(() => {
+        this.onLoad({
+          type_person_identification:
+            (this.searchTypePersonIdentification.type_person_identification) ?
+              this.searchTypePersonIdentification.type_person_identification : null
+        });
+      });
+    }
   }
 
   onLoad(searchTypePersonIdentification: SearchTypePersonIdentification) {
@@ -59,8 +69,8 @@ export class DropdownPageTypePersonIdentificationComponent implements OnChanges,
   keyUp(event) {
     this.onLoad({
       type_person_identification: {
-        type_person_identification_id: '',
-        type_person_identification_description: event
+        ...initialState.query.type_person_identification,
+        [this.optionLabel]: event
       }
     });
   }

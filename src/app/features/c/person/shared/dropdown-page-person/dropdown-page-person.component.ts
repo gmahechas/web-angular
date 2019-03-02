@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromPerson from '@web/app/features/c/person/store';
+import { initialState } from '@web/app/features/c/person/store/reducers/search-person.reducer';
 
 import { SearchPerson } from '@web/app/features/c/person/models/search-person.model';
 
@@ -46,6 +47,13 @@ export class DropdownPagePersonComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchPerson) {
+      setTimeout(() => {
+        this.onLoad({
+          person: (this.searchPerson.person) ? this.searchPerson.person : null
+        });
+      });
+    }
   }
 
   onLoad(searchPerson: SearchPerson) {
@@ -57,9 +65,8 @@ export class DropdownPagePersonComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       person: {
-        person_id: '',
-        person_identification: event,
-        person_names: ''
+        ...initialState.query.person,
+        [this.optionLabel]: event
       }
     });
   }

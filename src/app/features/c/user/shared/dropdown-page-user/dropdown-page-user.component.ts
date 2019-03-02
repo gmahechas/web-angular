@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUser from '@web/app/features/c/user/store';
+import { initialState } from '@web/app/features/c/user/store/reducers/search-user.reducer';
 
 import { SearchUser } from '@web/app/features/c/user/models/search-user.model';
 
@@ -46,6 +47,15 @@ export class DropdownPageUserComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchUser) {
+      setTimeout(() => {
+        this.onLoad({
+          user: (this.searchUser.user) ? this.searchUser.user : null,
+          person: (this.searchUser.person) ? this.searchUser.person : null,
+          profile: (this.searchUser.profile) ? this.searchUser.profile : null
+        });
+      });
+    }
   }
 
   onLoad(searchUser: SearchUser) {
@@ -57,8 +67,8 @@ export class DropdownPageUserComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       user: {
-        user_id: '',
-        username: event
+        ...initialState.query.user,
+        [this.optionLabel]: event
       },
       person: (this.searchUser) ? (this.searchUser.person) ? this.searchUser.person : null : null,
       profile: (this.searchUser) ? (this.searchUser.profile) ? this.searchUser.profile : null : null

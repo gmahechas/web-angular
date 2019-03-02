@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromOffice from '@web/app/features/b/office/store';
+import { initialState } from '@web/app/features/b/office/store/reducers/search-office.reducer';
 
 import { SearchOffice } from '@web/app/features/b/office/models/search-office.model';
 
@@ -46,6 +47,14 @@ export class DropdownPageOfficeComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchOffice) {
+      setTimeout(() => {
+        this.onLoad({
+          office: (this.searchOffice.office) ? this.searchOffice.office : null,
+          city: (this.searchOffice.city) ? this.searchOffice.city : null
+        });
+      });
+    }
   }
 
   onLoad(searchOffice: SearchOffice) {
@@ -55,15 +64,13 @@ export class DropdownPageOfficeComponent implements OnChanges, OnInit {
   }
 
   keyUp(event) {
-    this.onLoad(
-      {
-        office: {
-          office_id: '',
-          office_name: event
-        },
-        city: (this.searchOffice) ? (this.searchOffice.city) ? this.searchOffice.city : null : null
-      }
-    );
+    this.onLoad({
+      office: {
+        ...initialState.query.office,
+        [this.optionLabel]: event
+      },
+      city: (this.searchOffice) ? (this.searchOffice.city) ? this.searchOffice.city : null : null
+    });
   }
 
   handleChange(event) {

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromContext from '@web/app/features/e/context/store';
+import { initialState } from '@web/app/features/e/context/store/reducers/search-context.reducer';
 
 import { SearchContext } from '@web/app/features/e/context/models/search-context.model';
 
@@ -46,6 +47,14 @@ export class DropdownPageContextComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchContext) {
+      setTimeout(() => {
+        this.onLoad({
+          context: (this.searchContext.context) ? this.searchContext.context : null,
+          menu: (this.searchContext.menu) ? this.searchContext.menu : null
+        });
+      });
+    }
   }
 
   onLoad(searchContext: SearchContext) {
@@ -57,8 +66,8 @@ export class DropdownPageContextComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       context: {
-        context_id: '',
-        context_description: event
+        ...initialState.query.context,
+        [this.optionLabel]: event
       },
       menu: (this.searchContext) ? (this.searchContext.menu) ? this.searchContext.menu : null : null
     });

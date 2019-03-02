@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromSchedule from '@web/app/features/f/schedule/store';
+import { initialState } from '@web/app/features/f/schedule/store/reducers/search-schedule.reducer';
 
 import { SearchSchedule } from '@web/app/features/f/schedule/models/search-schedule.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageScheduleComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchSchedule) {
+      setTimeout(() => {
+        this.onLoad({
+          schedule: (this.searchSchedule.schedule) ? this.searchSchedule.schedule : null
+        });
+      });
+    }
   }
 
   onLoad(searchSchedule: SearchSchedule) {
@@ -57,8 +65,8 @@ export class DropdownPageScheduleComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       schedule: {
-        schedule_id: '',
-        schedule_name: event
+        ...initialState.query.schedule,
+        [this.optionLabel]: event
       }
     });
   }

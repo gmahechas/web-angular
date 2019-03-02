@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromCity from '@web/app/features/a/city/store';
+import { initialState } from '@web/app/features/a/city/store/reducers/search-city.reducer';
 
 import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
 
@@ -46,6 +47,14 @@ export class DropdownPageCityComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchCity) {
+      setTimeout(() => {
+        this.onLoad({
+          city: (this.searchCity.city) ? this.searchCity.city : null,
+          estate: (this.searchCity.estate) ? this.searchCity.estate : null
+        });
+      });
+    }
   }
 
   onLoad(searchCity: SearchCity) {
@@ -57,9 +66,8 @@ export class DropdownPageCityComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       city: {
-        city_id: '',
-        city_name: event,
-        city_code: ''
+        ...initialState.query.city,
+        [this.optionLabel]: event
       },
       estate: (this.searchCity) ? (this.searchCity.estate) ? this.searchCity.estate : null : null
     });

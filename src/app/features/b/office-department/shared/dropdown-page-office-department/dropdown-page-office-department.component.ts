@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromOfficeDepartment from '@web/app/features/b/office-department/store';
+import { initialState } from '@web/app/features/b/office-department/store/reducers/search-office-department.reducer';
 
 import { SearchOfficeDepartment } from '@web/app/features/b/office-department/models/search-office-department.model';
 
@@ -46,6 +47,21 @@ export class DropdownPageOfficeDepartmentComponent implements OnChanges, OnInit 
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchOfficeDepartment) {
+      setTimeout(() => {
+        this.onLoad({
+          office_department:
+            (this.searchOfficeDepartment.office_department) ?
+              this.searchOfficeDepartment.office_department : null,
+          office:
+            (this.searchOfficeDepartment.office) ?
+              this.searchOfficeDepartment.office : null,
+          department:
+            (this.searchOfficeDepartment.department) ?
+              this.searchOfficeDepartment.department : null
+        });
+      });
+    }
   }
 
   onLoad(searchOfficeDepartment: SearchOfficeDepartment) {
@@ -56,14 +72,18 @@ export class DropdownPageOfficeDepartmentComponent implements OnChanges, OnInit 
 
   keyUp(event) {
     this.onLoad({
-      office_department: {
-        office_department_id: '',
-        office_department_status: null
-      },
+      office_department:
+        (this.searchOfficeDepartment) ?
+          (this.searchOfficeDepartment.office_department) ?
+            this.searchOfficeDepartment.office_department : null : null,
       office:
-        (this.searchOfficeDepartment) ? (this.searchOfficeDepartment.office) ? this.searchOfficeDepartment.office : null : null,
+        (this.searchOfficeDepartment) ?
+          (this.searchOfficeDepartment.office) ?
+            this.searchOfficeDepartment.office : null : null,
       department:
-        (this.searchOfficeDepartment) ? (this.searchOfficeDepartment.department) ? this.searchOfficeDepartment.department : null : null
+        (this.searchOfficeDepartment) ?
+          (this.searchOfficeDepartment.department) ?
+            this.searchOfficeDepartment.department : null : null
     });
   }
 

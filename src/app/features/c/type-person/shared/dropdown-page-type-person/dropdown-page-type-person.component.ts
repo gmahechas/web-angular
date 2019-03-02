@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromTypePerson from '@web/app/features/c/type-person/store';
+import { initialState } from '@web/app/features/c/type-person/store/reducers/search-type-person.reducer';
 
 import { SearchTypePerson } from '@web/app/features/c/type-person/models/search-type-person.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageTypePersonComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchTypePerson) {
+      setTimeout(() => {
+        this.onLoad({
+          type_person: (this.searchTypePerson.type_person) ? this.searchTypePerson.type_person : null
+        });
+      });
+    }
   }
 
   onLoad(searchTypePerson: SearchTypePerson) {
@@ -57,8 +65,8 @@ export class DropdownPageTypePersonComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       type_person: {
-        type_person_id: '',
-        type_person_description: event
+        ...initialState.query.type_person,
+        [this.optionLabel]: event
       }
     });
   }

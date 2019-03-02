@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromMacroproject from '@web/app/features/d/macroproject/store';
+import { initialState } from '@web/app/features/d/macroproject/store/reducers/search-macroproject.reducer';
 
 import { SearchMacroproject } from '@web/app/features/d/macroproject/models/search-macroproject.model';
 
@@ -46,6 +47,15 @@ export class DropdownPageMacroprojectComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchMacroproject) {
+      setTimeout(() => {
+        this.onLoad({
+          macroproject: (this.searchMacroproject.macroproject) ? this.searchMacroproject.macroproject : null,
+          city: (this.searchMacroproject.city) ? this.searchMacroproject.city : null,
+          office: (this.searchMacroproject.office) ? this.searchMacroproject.office : null
+        });
+      });
+    }
   }
 
   onLoad(searchMacroproject: SearchMacroproject) {
@@ -57,8 +67,8 @@ export class DropdownPageMacroprojectComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       macroproject: {
-        macroproject_id: '',
-        macroproject_name: event,
+        ...initialState.query.macroproject,
+        [this.optionLabel]: event
       },
       city: (this.searchMacroproject) ? (this.searchMacroproject.city) ? this.searchMacroproject.city : null : null,
       office: (this.searchMacroproject) ? (this.searchMacroproject.office) ? this.searchMacroproject.office : null : null

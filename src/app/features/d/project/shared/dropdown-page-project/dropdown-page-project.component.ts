@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromProject from '@web/app/features/d/project/store';
+import { initialState } from '@web/app/features/d/project/store/reducers/search-project.reducer';
 
 import { SearchProject } from '@web/app/features/d/project/models/search-project.model';
 
@@ -46,6 +47,15 @@ export class DropdownPageProjectComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchProject) {
+      setTimeout(() => {
+        this.onLoad({
+          project: (this.searchProject.project) ? this.searchProject.project : null,
+          macroproject: (this.searchProject.macroproject) ? this.searchProject.macroproject : null,
+          office: (this.searchProject.office) ? this.searchProject.office : null
+        });
+      });
+    }
   }
 
   onLoad(searchProject: SearchProject) {
@@ -57,8 +67,8 @@ export class DropdownPageProjectComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       project: {
-        project_id: '',
-        project_name: event
+        ...initialState.query.project,
+        [this.optionLabel]: event
       },
       macroproject: (this.searchProject) ? (this.searchProject.macroproject) ? this.searchProject.macroproject : null : null,
       office: (this.searchProject) ? (this.searchProject.office) ? this.searchProject.office : null : null

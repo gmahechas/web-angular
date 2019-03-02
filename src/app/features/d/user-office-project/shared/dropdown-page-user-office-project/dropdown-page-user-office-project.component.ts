@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUserOffice from '@web/app/features/d/user-office-project/store';
+import { initialState } from '@web/app/features/d/user-office-project/store/reducers/search-user-office-project.reducer';
 
 import { SearchUserOfficeProject } from '@web/app/features/d/user-office-project/models/search-user-office-project.model';
 
@@ -49,9 +50,15 @@ export class DropdownPageUserOfficeProjectComponent implements OnChanges, OnInit
     if (this.loadOnInit && this.searchUserOfficeProject) {
       setTimeout(() => {
         this.onLoad({
-          user_office_project: (this.searchUserOfficeProject.user_office_project) ? this.searchUserOfficeProject.user_office_project : null,
-          user_office: (this.searchUserOfficeProject.user_office) ? this.searchUserOfficeProject.user_office : null,
-          project: (this.searchUserOfficeProject.project) ? this.searchUserOfficeProject.project : null
+          user_office_project:
+            (this.searchUserOfficeProject.user_office_project) ?
+              this.searchUserOfficeProject.user_office_project : null,
+          user_office:
+            (this.searchUserOfficeProject.user_office) ?
+              this.searchUserOfficeProject.user_office : null,
+          project:
+            (this.searchUserOfficeProject.project) ?
+              this.searchUserOfficeProject.project : null
         });
       });
     }

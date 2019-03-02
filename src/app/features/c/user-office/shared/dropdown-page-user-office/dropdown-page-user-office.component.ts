@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromUserOffice from '@web/app/features/c/user-office/store';
+import { initialState } from '@web/app/features/c/user-office/store/reducers/search-user-office.reducer';
 
 import { SearchUserOffice } from '@web/app/features/c/user-office/models/search-user-office.model';
 
@@ -49,9 +50,15 @@ export class DropdownPageUserOfficeComponent implements OnChanges, OnInit {
     if (this.loadOnInit && this.searchUserOffice) {
       setTimeout(() => {
         this.onLoad({
-          user_office: (this.searchUserOffice.user_office) ? this.searchUserOffice.user_office : null,
-          user: (this.searchUserOffice.user) ? this.searchUserOffice.user : null,
-          office: (this.searchUserOffice.office) ? this.searchUserOffice.office : null
+          user_office:
+            (this.searchUserOffice.user_office) ?
+              this.searchUserOffice.user_office : null,
+          user:
+            (this.searchUserOffice.user) ?
+              this.searchUserOffice.user : null,
+          office:
+            (this.searchUserOffice.office) ?
+              this.searchUserOffice.office : null
         });
       });
     }
@@ -66,9 +73,18 @@ export class DropdownPageUserOfficeComponent implements OnChanges, OnInit {
 
   keyUp(event) {
     this.onLoad({
-      user_office: (this.searchUserOffice) ? (this.searchUserOffice.user_office) ? this.searchUserOffice.user_office : null : null,
-      user: (this.searchUserOffice) ? (this.searchUserOffice.user) ? this.searchUserOffice.user : null : null,
-      office: (this.searchUserOffice) ? (this.searchUserOffice.office) ? this.searchUserOffice.office : null : null,
+      user_office:
+        (this.searchUserOffice) ?
+          (this.searchUserOffice.user_office) ?
+            this.searchUserOffice.user_office : null : null,
+      user:
+        (this.searchUserOffice) ?
+          (this.searchUserOffice.user) ?
+            this.searchUserOffice.user : null : null,
+      office:
+        (this.searchUserOffice) ?
+          (this.searchUserOffice.office) ?
+            this.searchUserOffice.office : null : null,
     });
   }
 

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromWorkflow from '@web/app/features/e/workflow/store';
+import { initialState } from '@web/app/features/e/workflow/store/reducers/search-workflow.reducer';
 
 import { SearchWorkflow } from '@web/app/features/e/workflow/models/search-workflow.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageWorkflowComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchWorkflow) {
+      setTimeout(() => {
+        this.onLoad({
+          workflow: (this.searchWorkflow.workflow) ? this.searchWorkflow.workflow : null
+        });
+      });
+    }
   }
 
   onLoad(searchWorkflow: SearchWorkflow) {
@@ -57,8 +65,8 @@ export class DropdownPageWorkflowComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       workflow: {
-        workflow_id: '',
-        workflow_name: event
+        ...initialState.query.workflow,
+        [this.optionLabel]: event
       }
     });
   }

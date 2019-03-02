@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromEstate from '@web/app/features/a/estate/store';
+import { initialState } from '@web/app/features/a/estate/store/reducers/search-estate.reducer';
 
 import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.model';
 
@@ -46,6 +47,14 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchEstate) {
+      setTimeout(() => {
+        this.onLoad({
+          estate: (this.searchEstate.estate) ? this.searchEstate.estate : null,
+          country: (this.searchEstate.country) ? this.searchEstate.country : null
+        });
+      });
+    }
   }
 
   onLoad(searchEstate: SearchEstate) {
@@ -57,9 +66,8 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       estate: {
-        estate_id: '',
-        estate_name: event,
-        estate_code: ''
+        ...initialState.query.estate,
+        [this.optionLabel]: event
       },
       country: (this.searchEstate) ? (this.searchEstate.country) ? this.searchEstate.country : null : null
     });

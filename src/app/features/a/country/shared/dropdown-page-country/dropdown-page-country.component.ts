@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromCountry from '@web/app/features/a/country/store';
+import { initialState } from '@web/app/features/a/country/store/reducers/search-country.reducer';
 
 import { SearchCountry } from '@web/app/features/a/country/models/search-country.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageCountryComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchCountry) {
+      setTimeout(() => {
+        this.onLoad({
+          country: (this.searchCountry.country) ? this.searchCountry.country : null
+        });
+      });
+    }
   }
 
   onLoad(searchCountry: SearchCountry) {
@@ -57,9 +65,8 @@ export class DropdownPageCountryComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       country: {
-        country_id: '',
-        country_name: event,
-        country_code: ''
+        ...initialState.query.country,
+        [this.optionLabel]: event
       }
     });
   }

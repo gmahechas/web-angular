@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromDepartment from '@web/app/features/b/department/store';
+import { initialState } from '@web/app/features/b/department/store/reducers/search-department.reducer';
 
 import { SearchDepartment } from '@web/app/features/b/department/models/search-department.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageDepartmentComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchDepartment) {
+      setTimeout(() => {
+        this.onLoad({
+          department: (this.searchDepartment.department) ? this.searchDepartment.department : null
+        });
+      });
+    }
   }
 
   onLoad(searchDepartment: SearchDepartment) {
@@ -57,8 +65,8 @@ export class DropdownPageDepartmentComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       department: {
-        department_id: '',
-        department_name: event
+        ...initialState.query.department,
+        [this.optionLabel]: event
       }
     });
   }

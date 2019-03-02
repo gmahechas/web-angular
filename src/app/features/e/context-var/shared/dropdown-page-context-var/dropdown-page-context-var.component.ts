@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromContextVar from '@web/app/features/e/context-var/store';
+import { initialState } from '@web/app/features/e/context-var/store/reducers/search-context-var.reducer';
 
 import { SearchContextVar } from '@web/app/features/e/context-var/models/search-context-var.model';
 
@@ -46,6 +47,14 @@ export class DropdownPageContextVarComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchContextVar) {
+      setTimeout(() => {
+        this.onLoad({
+          context_var: (this.searchContextVar.context_var) ? this.searchContextVar.context_var : null,
+          context: (this.searchContextVar.context) ? this.searchContextVar.context : null
+        });
+      });
+    }
   }
 
   onLoad(searchContextVar: SearchContextVar) {
@@ -57,10 +66,8 @@ export class DropdownPageContextVarComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       context_var: {
-        context_var_id: '',
-        context_var_code: '',
-        context_var_type: '',
-        context_var_description: event
+        ...initialState.query.context_var,
+        [this.optionLabel]: event
       },
       context: (this.searchContextVar) ? (this.searchContextVar.context) ? this.searchContextVar.context : null : null
     });

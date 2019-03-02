@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import * as fromHourRange from '@web/app/features/f/hour-range/store';
+import { initialState } from '@web/app/features/f/hour-range/store/reducers/search-hour-range.reducer';
 
 import { SearchHourRange } from '@web/app/features/f/hour-range/models/search-hour-range.model';
 
@@ -46,6 +47,13 @@ export class DropdownPageHourRangeComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    if (this.loadOnInit && this.searchHourRange) {
+      setTimeout(() => {
+        this.onLoad({
+          hour_range: (this.searchHourRange.hour_range) ? this.searchHourRange.hour_range : null
+        });
+      });
+    }
   }
 
   onLoad(searchHourRange: SearchHourRange) {
@@ -57,8 +65,8 @@ export class DropdownPageHourRangeComponent implements OnChanges, OnInit {
   keyUp(event) {
     this.onLoad({
       hour_range: {
-        hour_range_id: '',
-        hour_range_name: event
+        ...initialState.query.hour_range,
+        [this.optionLabel]: event
       }
     });
   }
