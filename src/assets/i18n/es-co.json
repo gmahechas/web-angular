@@ -218,7 +218,7 @@
     "model": {
       "day_id": "id",
       "day_code": "code",
-      "day_name": "day"
+      "day_name": "dia"
     }
   },
   "schedule": {
