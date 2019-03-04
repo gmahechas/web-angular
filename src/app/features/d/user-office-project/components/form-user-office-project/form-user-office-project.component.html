@@ -2,7 +2,8 @@
   <div class="p-grid p-nogutter">
     <div class="p-col">
       <app-dropdown-page-user-office [group]="userOfficeProjectForm" [controlName]="'user_office'"
-        [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'" [filter]="false"
+        [options]="['office.office_name', ' - ', 'user.username']" [optionLabel]="'user.username'"
+        [searchByKeyUp]="false"
         [onlyShow]="(entityLabel === 'user' || entityLabel === 'office') ? 'form' : 'store_form'"
         [isConditional]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
         [loadOnInit]="(entityLabel === 'user' || entityLabel === 'office') ? false : true"
