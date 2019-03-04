@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Schedule } from '@web/app/features/f/schedule/models/schedule.model';
 import { SearchSchedule } from '@web/app/features/f/schedule/models/search-schedule.model';
-import { initialStateSelectedSchedule } from '@web/app/features/f/schedule/models/selected-schedule.model';
+import { SelectedSchedule, initialStateSelectedSchedule } from '@web/app/features/f/schedule/models/selected-schedule.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -45,8 +45,17 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromSchedule.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Schedule | null }) => {
-        if (selected.selectedEntity) {
+      (selected: SelectedSchedule) => {
+        if (selected.gotoScheduleDay && selected.selectedEntity) {
+          this.selectedEntity = selected.selectedEntity;
+          this.store.dispatch(new fromCore.Go({
+            path: [
+              'schedule',
+              selected.selectedEntity.schedule_id,
+              { outlets: { 'router-outlet-schedule-day': ['schedule-day', 'schedule', selected.selectedEntity.schedule_id] } }
+            ]
+          }));
+        } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
             path: ['schedule', selected.selectedEntity.schedule_id]
