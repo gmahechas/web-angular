@@ -23,6 +23,7 @@ export class DropdownSharedComponent implements OnInit {
   @Input() placeholder: string[];
   @Input() filterPlaceholder: string[];
   @Input() emptyFilterMessage: string[];
+  @Input() searchByKeyUp: boolean;
   @Input() keyboardKey: string;
   @Input() keyUpTimes: number;
   @Output() keyUp = new EventEmitter<string>();
@@ -34,14 +35,16 @@ export class DropdownSharedComponent implements OnInit {
   }
 
   onKeyUp(event) {
-    const key = event.key;
-    const value = event.target.value;
+    if (this.searchByKeyUp) {
+      const key = event.key;
+      const value = event.target.value;
 
-    if (value.length >= this.keyUpTimes) {
-      if (key === this.keyboardKey) {
-        this.keyUp.emit(value);
-      } else if (this.keyboardKey === 'Any') {
-        this.keyUp.emit(value);
+      if (value.length >= this.keyUpTimes) {
+        if (key === this.keyboardKey) {
+          this.keyUp.emit(value);
+        } else if (this.keyboardKey === 'Any') {
+          this.keyUp.emit(value);
+        }
       }
     }
   }

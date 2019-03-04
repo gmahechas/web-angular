@@ -30,6 +30,7 @@ export class DropdownPageTypePersonIdentificationComponent implements OnChanges,
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() isConditional = false;
+  @Input() searchByKeyUp = true;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() loadOnInit = false;

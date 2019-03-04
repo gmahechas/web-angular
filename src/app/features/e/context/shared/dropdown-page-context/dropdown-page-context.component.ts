@@ -28,6 +28,7 @@ export class DropdownPageContextComponent implements OnChanges, OnInit {
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
   @Input() isConditional = false;
+  @Input() searchByKeyUp = true;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() loadOnInit = false;
