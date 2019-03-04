@@ -27,8 +27,8 @@ export class DropdownPageScheduleComponent implements OnChanges, OnInit {
   @Input() showClear: boolean;
   @Input() dropdownIcon: string;
   @Input() emptyFilterMessage: string[];
-  @Input() isConditional = false;
   @Input() searchByKeyUp = true;
+  @Input() isConditional = false;
   @Input() keyboardKey: 'Enter' | 'Any' = 'Any';
   @Input() keyUpTimes = 3;
   @Input() loadOnInit = false;

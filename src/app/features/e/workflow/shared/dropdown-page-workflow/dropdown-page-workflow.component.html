@@ -1,6 +1,6 @@
 <app-dropdown-shared [group]="group" [groupName]="groupName" [controlName]="controlName" [entityId]="entityId"
   [data]="entities$ | async" [options]="options" [optionLabel]="optionLabel" [filter]="filter" [onlyShow]="onlyShow"
   [placeholder]="placeholder" [filterPlaceholder]="filterPlaceholder" [showClear]="showClear"
-  [dropdownIcon]="dropdownIcon" [emptyFilterMessage]="emptyFilterMessage" [keyboardKey]="keyboardKey"
-  [keyUpTimes]="keyUpTimes" (keyUp)="keyUp($event)" (handleChange)="handleChange($event)">
+  [dropdownIcon]="dropdownIcon" [emptyFilterMessage]="emptyFilterMessage" [searchByKeyUp]="searchByKeyUp"
+  [keyboardKey]="keyboardKey" [keyUpTimes]="keyUpTimes" (keyUp)="keyUp($event)" (handleChange)="handleChange($event)">
 </app-dropdown-shared>
