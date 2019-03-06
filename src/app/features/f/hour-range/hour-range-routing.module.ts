@@ -9,7 +9,15 @@ export const routes: Routes = [
     path: '', component: fromContainers.IndexPageHourRangeComponent,
     children: [
       { path: 'create', component: fromContainers.FormPageHourRangeComponent },
-      { path: ':hour_range_id', component: fromContainers.FormPageHourRangeComponent, canActivate: [HourRangeExistGuard] }
+      {
+        path: ':hour_range_id', component: fromContainers.FormPageHourRangeComponent, canActivate: [HourRangeExistGuard], children: [
+          {
+            path: 'schedule-day-hour-range',
+            loadChildren: '@web/app/features/f/schedule-day-hour-range/schedule-day-hour-range.module#ScheduleDayHourRangeModule',
+            outlet: 'router-outlet-schedule-day-hour-range'
+          }
+        ]
+      }
     ]
   }
 ];

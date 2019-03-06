@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store, select } from '@ngrx/store';
 import * as fromScheduleDay from '@web/app/features/f/schedule-day/store';
+import * as fromCore from '@web/app/core/store';
 
 import { ScheduleDay } from '@web/app/features/f/schedule-day/models/schedule-day.model';
 
@@ -23,7 +24,7 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
     this.configTable = {
       dataKey: 'schedule_day_id',
       cols: [
-        { fields: ['day.day_name'], header: ['day.model.day_name'], style: { width: '90%' } },
+        { fields: ['day.day_name'], header: ['day.model.day_name'], style: { width: '70%' } },
       ],
       colSelection: [
         {
@@ -31,6 +32,12 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
           field: 'schedule_day_status',
           header: [],
           style: { width: '10%' }
+        },
+        {
+          type: 'button',
+          header: [],
+          label: ['hour_range.plural'],
+          style: { width: '20%' }
         }
       ]
     };
@@ -55,6 +62,9 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
           schedule_day_status: !event.schedule_day_status
         });
         break;
+      case 1:
+        this.onScheduleDayHourRange(event);
+        break;
     }
   }
 
@@ -64,6 +74,26 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
 
   onDelete(scheduleDay: ScheduleDay) {
     this.store.dispatch(new fromScheduleDay.DestroyEntity({ entity: scheduleDay }));
+  }
+
+  onScheduleDayHourRange(scheduleDay: ScheduleDay) {
+    this.store.dispatch(new fromScheduleDay.SetSelected({ selected: { selectedEntity: scheduleDay } }));
+    this.store.dispatch(new fromCore.Go({
+      path: [
+        'schedule',
+        scheduleDay.schedule_id,
+        {
+          outlets: {
+            'router-outlet-schedule-day': ['schedule-day', 'schedule', scheduleDay.schedule_id, {
+              outlets: {
+                'router-outlet-schedule-day-hour-range':
+                  ['schedule-day-hour-range', 'schedule_day', scheduleDay.schedule_id, scheduleDay.schedule_day_id]
+              }
+            }]
+          }
+        }
+      ]
+    }));
   }
 
   ngOnDestroy() {

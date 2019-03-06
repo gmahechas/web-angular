@@ -1,15 +1,23 @@
-<app-form-hour-range *ngIf="!(hourRange$ | async) as hourRange" [pending]="pending$ | async" (submitted)="onStore($event)">
-    <div class="form-title">
-      <app-translate-shared [strings]="['verbs.create.verb', 'hour_range.singular']"></app-translate-shared>
-    </div>
-    <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  </app-form-hour-range>
+<app-form-hour-range *ngIf="!(hourRange$ | async) as hourRange" [pending]="pending$ | async"
+  (submitted)="onStore($event)">
+  <div class="form-title">
+    <app-translate-shared [strings]="['verbs.create.verb', 'hour_range.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+</app-form-hour-range>
 
-  <app-form-hour-range *ngIf="(hourRange$ | async) as hourRange" [pending]="pending$ | async" (submitted)="onUpdate($event)" [hourRange]="hourRange">
-    <div class="form-title">
-      <app-translate-shared [strings]="['verbs.edit.verb', 'hour_range.singular']"></app-translate-shared>
-    </div>
-    <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(hourRange)"></app-button-shared>
-    <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  </app-form-hour-range>
+<app-form-hour-range *ngIf="(hourRange$ | async) as hourRange" [pending]="pending$ | async"
+  (submitted)="onUpdate($event)" [hourRange]="hourRange">
+  <div class="form-title">
+    <app-translate-shared [strings]="['verbs.edit.verb', 'hour_range.singular']"></app-translate-shared>
+  </div>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'"
+    (click)="onDestroy(hourRange)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['schedule.plural']" [class]="'ui-button-secondary'"
+    (click)="onScheduleDayHourRange(hourRange)"></app-button-shared>
+</app-form-hour-range>
 
+<router-outlet name="router-outlet-schedule-day-hour-range"></router-outlet>

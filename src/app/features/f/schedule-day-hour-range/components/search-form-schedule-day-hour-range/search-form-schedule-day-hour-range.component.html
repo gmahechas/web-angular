@@ -1,0 +1,27 @@
+<app-panel-shared>
+  <div class="panel-header">
+    <app-translate-shared [strings]="['search.verb', 'schedule_day_hour_range.plural']"></app-translate-shared>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="searchFormScheduleDayHourRange" (ngSubmit)="onSubmit()">
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <div class="p-grid p-nogutter">
+            <div class="p-col">
+              // TODO:
+            </div>
+            <div class="p-col">
+              // TODO:
+            </div>
+          </div>
+        </div>
+        <div class="p-col">
+          <app-button-shared [type]="'submit'" [label]="['search.verb']" [disabled]="searchFormScheduleDayHourRange.invalid"
+            [class]="'ui-button-secondary'"></app-button-shared>
+          <app-button-shared [type]="'button'" [label]="['create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
+          <app-button-shared [type]="'button'" [label]="['clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-panel-shared>

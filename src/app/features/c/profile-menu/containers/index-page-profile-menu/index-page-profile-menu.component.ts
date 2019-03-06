@@ -33,11 +33,9 @@ export class IndexPageProfileMenuComponent implements OnInit, OnDestroy {
   }
 
   onSelect(event) {
-    console.log(event);
   }
 
   onUnSelect(event) {
-    console.log(event);
   }
 
   ngOnDestroy() {

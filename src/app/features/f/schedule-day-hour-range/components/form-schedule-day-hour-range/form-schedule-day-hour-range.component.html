@@ -1,0 +1,28 @@
+<app-panel-shared>
+  <div class="panel-header">
+    <ng-content select=".form-title"></ng-content>
+  </div>
+  <div class="panel-content">
+    <form [formGroup]="scheduleDayHourRangeForm" (ngSubmit)="onSubmit()">
+      
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <!-- // TODO: -->
+        </div>
+        <div class="p-col">
+          <!-- // TODO: -->
+        </div>
+        <div class="p-col">
+          <!-- // TODO: -->
+        </div>
+      </div>
+
+      <div class="p-grid p-nogutter">
+        <div class="p-col">
+          <app-button-shared [type]="'submit'" [label]="['save.verb']" [class]="'ui-button-secondary'" [disabled]="scheduleDayHourRangeForm.invalid"></app-button-shared>
+          <ng-content select="app-button-shared"></ng-content>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-panel-shared>
