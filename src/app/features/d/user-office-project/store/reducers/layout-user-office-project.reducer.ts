@@ -23,7 +23,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.SetSelected: {
       return {
         ...state,
-        selected: action.payload.selected
+        selected: { ...state.selected, ...action.payload.selected}
       };
     }
 
