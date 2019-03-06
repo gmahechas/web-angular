@@ -39,17 +39,6 @@ export class FormPageHourRangeComponent implements OnInit {
     }));
   }
 
-  onScheduleDayHourRange(hourRange: HourRange) {
-    this.store.dispatch(new fromCore.Go({
-      path: [
-        'hour-range',
-        hourRange.hour_range_id,
-        { outlets: { 'router-outlet-schedule-day-hour-range': ['schedule-day-hour-range', 'hour-range', hourRange.hour_range_id] } }
-      ]
-    }));
-  }
-
-
   onDestroy(hourRange: HourRange) {
     this.store.dispatch(new fromHourRange.DestroyEntity({ entity: hourRange }));
   }

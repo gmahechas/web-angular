@@ -16,8 +16,6 @@
     (click)="onDestroy(hourRange)"></app-button-shared>
   <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
     (click)="onCancel()"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['schedule.plural']" [class]="'ui-button-secondary'"
-    (click)="onScheduleDayHourRange(hourRange)"></app-button-shared>
 </app-form-hour-range>
 
 <router-outlet name="router-outlet-schedule-day-hour-range"></router-outlet>
