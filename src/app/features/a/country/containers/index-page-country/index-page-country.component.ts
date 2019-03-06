@@ -75,7 +75,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onEdit(country: Country) {
-    this.store.dispatch(new fromCountry.SetSelected({ selected: { ...initialStateSelectedCountry, selectedEntity: country } }));
+    this.store.dispatch(new fromCountry.SetSelected({ selected: { selectedEntity: country } }));
     this.store.dispatch(new fromCore.Go({
       path: ['country', country.country_id]
     }));

@@ -72,7 +72,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
   }
 
   onEdit(day: Day) {
-    this.store.dispatch(new fromDay.SetSelected({ selected: { ...initialStateSelectedDay, selectedEntity: day } }));
+    this.store.dispatch(new fromDay.SetSelected({ selected: { selectedEntity: day } }));
     this.store.dispatch(new fromCore.Go({
       path: ['day', day.day_id]
     }));

@@ -94,7 +94,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   }
 
   onEdit(office: Office) {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: { ...initialStateSelectedOffice, selectedEntity: office } }));
+    this.store.dispatch(new fromOffice.SetSelected({ selected: { selectedEntity: office } }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', office.office_id]
     }));

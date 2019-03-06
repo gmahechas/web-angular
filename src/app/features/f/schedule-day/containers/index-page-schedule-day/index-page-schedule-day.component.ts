@@ -87,7 +87,7 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
             'router-outlet-schedule-day': ['schedule-day', 'schedule', scheduleDay.schedule_id, {
               outlets: {
                 'router-outlet-schedule-day-hour-range':
-                  ['schedule-day-hour-range', 'schedule_day', scheduleDay.schedule_id, scheduleDay.schedule_day_id]
+                  ['schedule-day-hour-range', 'schedule-day', scheduleDay.schedule_id, scheduleDay.schedule_day_id]
               }
             }]
           }

@@ -44,7 +44,7 @@ export class FormPageDepartmentComponent implements OnInit {
   }
 
   onOfficeDepartment(department: Department) {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: { selectedEntity: department, gotoOfficeDepartment: true } }));
+    this.store.dispatch(new fromDepartment.SetSelected({ selected: { gotoOfficeDepartment: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['department', department.department_id, {
         outlets: { 'router-outlet-user-department': ['office-department', 'department', department.department_id] }

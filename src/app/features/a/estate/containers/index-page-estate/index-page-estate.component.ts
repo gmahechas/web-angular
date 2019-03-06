@@ -76,7 +76,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   }
 
   onEdit(estate: Estate) {
-    this.store.dispatch(new fromEstate.SetSelected({ selected: { ...initialStateSelectedEstate, selectedEntity: estate } }));
+    this.store.dispatch(new fromEstate.SetSelected({ selected: { selectedEntity: estate } }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', estate.estate_id]
     }));

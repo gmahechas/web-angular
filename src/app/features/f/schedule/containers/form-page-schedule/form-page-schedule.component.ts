@@ -44,7 +44,7 @@ export class FormPageScheduleComponent implements OnInit {
   }
 
   onScheduleDay(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: { selectedEntity: schedule, gotoScheduleDay: true } }));
+    this.store.dispatch(new fromSchedule.SetSelected({ selected: { gotoScheduleDay: true } }));
     this.store.dispatch(new fromCore.Go({
       path: [
         'schedule',

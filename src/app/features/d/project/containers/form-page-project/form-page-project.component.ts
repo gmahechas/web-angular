@@ -44,7 +44,7 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onUserOfficeProject(project: Project) {
-    this.store.dispatch(new fromProject.SetSelected({ selected: { selectedEntity: project, gotoUserOfficeProject: true } }));
+    this.store.dispatch(new fromProject.SetSelected({ selected: { gotoUserOfficeProject: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', project.project_id, {
         outlets: {

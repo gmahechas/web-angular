@@ -95,7 +95,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
   }
 
   onEdit(user: User) {
-    this.store.dispatch(new fromUser.SetSelected({ selected: { ...initialStateSelectedUser, selectedEntity: user } }));
+    this.store.dispatch(new fromUser.SetSelected({ selected: { selectedEntity: user } }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', user.user_id]
     }));

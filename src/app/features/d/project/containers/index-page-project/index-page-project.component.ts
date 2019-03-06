@@ -85,7 +85,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   onEdit(project: Project) {
-    this.store.dispatch(new fromProject.SetSelected({ selected: { ...initialStateSelectedProject, selectedEntity: project } }));
+    this.store.dispatch(new fromProject.SetSelected({ selected: { selectedEntity: project } }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', project.project_id]
     }));

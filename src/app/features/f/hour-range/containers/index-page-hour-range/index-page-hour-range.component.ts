@@ -76,7 +76,7 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
   }
 
   onEdit(hourRange: HourRange) {
-    this.store.dispatch(new fromHourRange.SetSelected({ selected: { ...initialStateSelectedHourRange, selectedEntity: hourRange } }));
+    this.store.dispatch(new fromHourRange.SetSelected({ selected: { selectedEntity: hourRange } }));
     this.store.dispatch(new fromCore.Go({
       path: ['hour-range', hourRange.hour_range_id]
     }));

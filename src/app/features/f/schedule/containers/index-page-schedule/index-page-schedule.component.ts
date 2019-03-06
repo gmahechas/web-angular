@@ -83,7 +83,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
   }
 
   onEdit(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: { ...initialStateSelectedSchedule, selectedEntity: schedule } }));
+    this.store.dispatch(new fromSchedule.SetSelected({ selected: { selectedEntity: schedule } }));
     this.store.dispatch(new fromCore.Go({
       path: ['schedule', schedule.schedule_id]
     }));

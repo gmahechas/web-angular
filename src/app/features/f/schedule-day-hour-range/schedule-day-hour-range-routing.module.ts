@@ -6,10 +6,10 @@ import { ScheduleDayHourRangeExistGuard } from '@web/app/features/f/schedule-day
 
 export const routes: Routes = [
   {
-    path: 'schedule_day/:schedule_id/:schedule_day_id', component: fromContainers.IndexPageScheduleDayHourRangeComponent
+    path: 'schedule-day/:schedule_id/:schedule_day_id', component: fromContainers.IndexPageScheduleDayHourRangeComponent
   },
   {
-    path: 'hour_range/:hour_range_id', component: fromContainers.IndexPageScheduleDayHourRangeComponent
+    path: 'hour-range/:hour_range_id', component: fromContainers.IndexPageScheduleDayHourRangeComponent
   }
 ];
 

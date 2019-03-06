@@ -75,7 +75,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
   }
 
   onEdit(typePerson: TypePerson) {
-    this.store.dispatch(new fromTypePerson.SetSelected({ selected: { ...initialStateSelectedTypePerson, selectedEntity: typePerson } }));
+    this.store.dispatch(new fromTypePerson.SetSelected({ selected: { selectedEntity: typePerson } }));
     this.store.dispatch(new fromCore.Go({
       path: ['type-person', typePerson.type_person_id]
     }));

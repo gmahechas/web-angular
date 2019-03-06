@@ -83,7 +83,7 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onEdit(department: Department) {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: { ...initialStateSelectedDepartment, selectedEntity: department } }));
+    this.store.dispatch(new fromDepartment.SetSelected({ selected: { selectedEntity: department } }));
     this.store.dispatch(new fromCore.Go({
       path: ['department', department.department_id]
     }));

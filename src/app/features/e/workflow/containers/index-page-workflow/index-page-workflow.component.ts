@@ -75,7 +75,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   onEdit(workflow: Workflow) {
-    this.store.dispatch(new fromWorkflow.SetSelected({ selected: { ...initialStateSelectedWorkflow, selectedEntity: workflow } }));
+    this.store.dispatch(new fromWorkflow.SetSelected({ selected: { selectedEntity: workflow } }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', workflow.workflow_id]
     }));

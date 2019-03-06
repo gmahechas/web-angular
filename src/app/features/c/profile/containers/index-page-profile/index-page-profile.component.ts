@@ -84,7 +84,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   }
 
   onEdit(profile: Profile) {
-    this.store.dispatch(new fromProfile.SetSelected({ selected: { ...initialStateSelectedProfile, selectedEntity: profile } }));
+    this.store.dispatch(new fromProfile.SetSelected({ selected: { selectedEntity: profile } }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', profile.profile_id]
     }));
