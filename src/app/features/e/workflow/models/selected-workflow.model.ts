@@ -1,7 +1,7 @@
 import { Workflow } from '@web/app/features/e/workflow/models/workflow.model';
 
 export interface SelectedWorkflow {
-  selectedEntity: Workflow | null;
+  selectedEntity?: Workflow | null;
 }
 
 export const initialStateSelectedWorkflow: SelectedWorkflow = {

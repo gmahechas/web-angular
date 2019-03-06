@@ -1,7 +1,7 @@
 import { Day } from '@web/app/features/f/day/models/day.model';
 
 export interface SelectedDay {
-  selectedEntity: Day | null;
+  selectedEntity?: Day | null;
 }
 
 export const initialStateSelectedDay: SelectedDay = {

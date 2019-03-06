@@ -1,8 +1,8 @@
 import { Project } from '@web/app/features/d/project/models/project.model';
 
 export interface SelectedProject {
-  selectedEntity: Project | null;
-  gotoUserOfficeProject: boolean;
+  selectedEntity?: Project | null;
+  gotoUserOfficeProject?: boolean;
 }
 
 export const initialStateSelectedProject: SelectedProject = {
