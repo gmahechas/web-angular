@@ -54,12 +54,12 @@ export const routes: Routes = [
   },
   /* C */
   {
-    path: 'type_person',
+    path: 'type-person',
     loadChildren: '@web/app/features/c/type-person/type-person.module#TypePersonModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
-    path: 'type_person_identification',
+    path: 'type-person-identification',
     loadChildren: '@web/app/features/c/type-person-identification/type-person-identification.module#TypePersonIdentificationModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
@@ -112,7 +112,7 @@ export const routes: Routes = [
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
-    path: 'hour_range',
+    path: 'hour-range',
     loadChildren: '@web/app/features/f/hour-range/hour-range.module#HourRangeModule',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },

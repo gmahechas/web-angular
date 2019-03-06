@@ -51,7 +51,7 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['hour_range', selected.selectedEntity.hour_range_id]
+            path: ['hour-range', selected.selectedEntity.hour_range_id]
           }));
         }
       }
@@ -71,14 +71,14 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
   onCreate() {
     this.store.dispatch(new fromHourRange.SetSelected({ selected: initialStateSelectedHourRange }));
     this.store.dispatch(new fromCore.Go({
-      path: ['hour_range', 'create']
+      path: ['hour-range', 'create']
     }));
   }
 
   onEdit(hourRange: HourRange) {
     this.store.dispatch(new fromHourRange.SetSelected({ selected: { ...initialStateSelectedHourRange, selectedEntity: hourRange } }));
     this.store.dispatch(new fromCore.Go({
-      path: ['hour_range', hourRange.hour_range_id]
+      path: ['hour-range', hourRange.hour_range_id]
     }));
   }
 
@@ -89,7 +89,7 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
   onCancel() {
     this.store.dispatch(new fromHourRange.SetSelected({ selected: initialStateSelectedHourRange }));
     this.store.dispatch(new fromCore.Go({
-      path: ['hour_range']
+      path: ['hour-range']
     }));
   }
 

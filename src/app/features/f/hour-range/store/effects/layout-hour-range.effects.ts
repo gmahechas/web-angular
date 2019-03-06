@@ -81,7 +81,7 @@ export class LayoutHourRangeEffects {
       fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['hour_range'] }));
+      this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
     })
   );
 
@@ -91,7 +91,7 @@ export class LayoutHourRangeEffects {
     map((action: fromHourRangeActions.Reset) => action.payload),
     tap(({ redirect }) => {
       if (redirect) {
-        this.store.dispatch(new fromCore.Go({ path: ['hour_range'] }));
+        this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
       }
     })
   );

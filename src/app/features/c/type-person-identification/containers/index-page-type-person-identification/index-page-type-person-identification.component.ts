@@ -67,7 +67,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['type_person_identification', selected.selectedEntity.type_person_identification_id]
+            path: ['type-person-identification', selected.selectedEntity.type_person_identification_id]
           }));
         }
       }
@@ -87,7 +87,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   onCreate() {
     this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
-      path: ['type_person_identification', 'create']
+      path: ['type-person-identification', 'create']
     }));
   }
 
@@ -96,7 +96,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
       selected: { ...initialStateSelectedTypePersonIdentification, selectedEntity: typePersonIdentification }
     }));
     this.store.dispatch(new fromCore.Go({
-      path: ['type_person_identification', typePersonIdentification.type_person_identification_id]
+      path: ['type-person-identification', typePersonIdentification.type_person_identification_id]
     }));
   }
 
@@ -107,7 +107,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   onCancel() {
     this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
-      path: ['type_person_identification']
+      path: ['type-person-identification']
     }));
   }
 

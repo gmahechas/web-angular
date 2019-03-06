@@ -81,7 +81,7 @@ export class LayoutTypePersonEffects {
       fromTypePersonActions.EntityActionTypes.DestroySuccessEntity
     ),
     tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['type_person'] }));
+      this.store.dispatch(new fromCore.Go({ path: ['type-person'] }));
     })
   );
 
@@ -91,7 +91,7 @@ export class LayoutTypePersonEffects {
     map((action: fromTypePersonActions.Reset) => action.payload),
     tap(({ redirect }) => {
       if (redirect) {
-        this.store.dispatch(new fromCore.Go({ path: ['type_person'] }));
+        this.store.dispatch(new fromCore.Go({ path: ['type-person'] }));
       }
     })
   );

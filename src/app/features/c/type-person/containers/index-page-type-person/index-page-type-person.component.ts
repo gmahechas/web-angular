@@ -50,7 +50,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({
-            path: ['type_person', selected.selectedEntity.type_person_id]
+            path: ['type-person', selected.selectedEntity.type_person_id]
           }));
         }
       }
@@ -70,14 +70,14 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
   onCreate() {
     this.store.dispatch(new fromTypePerson.SetSelected({ selected: initialStateSelectedTypePerson }));
     this.store.dispatch(new fromCore.Go({
-      path: ['type_person', 'create']
+      path: ['type-person', 'create']
     }));
   }
 
   onEdit(typePerson: TypePerson) {
     this.store.dispatch(new fromTypePerson.SetSelected({ selected: { ...initialStateSelectedTypePerson, selectedEntity: typePerson } }));
     this.store.dispatch(new fromCore.Go({
-      path: ['type_person', typePerson.type_person_id]
+      path: ['type-person', typePerson.type_person_id]
     }));
   }
 
@@ -88,7 +88,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
   onCancel() {
     this.store.dispatch(new fromTypePerson.SetSelected({ selected: initialStateSelectedTypePerson }));
     this.store.dispatch(new fromCore.Go({
-      path: ['type_person']
+      path: ['type-person']
     }));
   }
 
