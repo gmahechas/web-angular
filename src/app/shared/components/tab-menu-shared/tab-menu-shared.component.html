@@ -2,10 +2,9 @@
   <ng-template pTemplate="item" let-item let-index="index">
     <div style="position: relative; text-align: center;">
       <div class="ui-menuitem-text" (click)="onClick(item)">
-        <app-translate-shared [strings]="[item[itemLabel]]" [titleCase]="true"></app-translate-shared>
+        <app-translate-shared [strings]="[item.menu.menu_name]" [titleCase]="true"></app-translate-shared>
       </div>
-      <div *ngIf="active != item" class="ui-menuitem-icon" (click)="onClose($event, index)"
-        style="position: absolute; font-size: .8em; right: -1.2em; top: -.6em; padding: 0; margin: 0;">
+      <div *ngIf="active != item" class="ui-menuitem-icon" (click)="onClose($event, index)" style="position: absolute; font-size: .8em; right: -1.2em; top: -.6em; padding: 0; margin: 0;">
         <span class="pi pi-times"></span>
       </div>
     </div>
