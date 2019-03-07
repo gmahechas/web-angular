@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 })
 export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy {
 
+  pending$ = this.store.pipe(select(fromScheduleDayHourRange.getPending));
   data$ = this.store.pipe(select(fromScheduleDayHourRange.getAllEntities));
   scheduleDay$ = this.store.pipe(select(fromScheduleDay.getSelected));
   hourRange$ = this.store.pipe(select(fromHourRange.getSelected));

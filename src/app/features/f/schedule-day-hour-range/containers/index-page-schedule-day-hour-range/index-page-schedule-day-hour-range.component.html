@@ -1,8 +1,9 @@
 <app-table-shared *ngIf="(data$ | async) as data" [data]="data" [configTable]="configTable" [summary]="true"
   (columnSelected)="handleColumnSelected($event)">
   <div class="summary">
-    <app-form-schedule-day-hour-range [entityLabel]="entityLabel" [scheduleDay]="(scheduleDay$ | async).selectedEntity"
-      [hourRange]="(hourRange$ | async).selectedEntity" (submitted)="onStore($event)">
+    <app-form-schedule-day-hour-range [pending]="pending$ | async" [entityLabel]="entityLabel"
+      [scheduleDay]="(scheduleDay$ | async).selectedEntity" [hourRange]="(hourRange$ | async).selectedEntity"
+      (submitted)="onStore($event)">
     </app-form-schedule-day-hour-range>
   </div>
 </app-table-shared>

@@ -13,6 +13,14 @@ import { HourRange } from '@web/app/features/f/hour-range/models/hour-range.mode
 })
 export class FormScheduleDayHourRangeComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.scheduleDayHourRangeForm.disable();
+    } else {
+      this.scheduleDayHourRangeForm.enable();
+    }
+  }
   @Input() entityLabel: string;
   @Input() scheduleDay: ScheduleDay;
   @Input() hourRange: HourRange;
