@@ -16,6 +16,7 @@ import { OfficeDepartment } from '@web/app/features/b/office-department/models/o
 })
 export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
 
+  pending$ = this.store.pipe(select(fromOfficeDepartment.getPending));
   data$ = this.store.pipe(select(fromOfficeDepartment.getAllEntities));
   office$ = this.store.pipe(select(fromOffice.getSelected));
   department$ = this.store.pipe(select(fromDepartment.getSelected));

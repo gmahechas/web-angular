@@ -13,6 +13,14 @@ import { Department } from '@web/app/features/b/department/models/department.mod
 })
 export class FormOfficeDepartmentComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.officeDepartmentForm.disable();
+    } else {
+      this.officeDepartmentForm.enable();
+    }
+  }
   @Input() entityLabel: string;
   @Input() office: Office;
   @Input() department: Department;
