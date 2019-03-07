@@ -24,7 +24,7 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
     this.configTable = {
       dataKey: 'schedule_day_id',
       cols: [
-        { fields: ['day.day_name'], header: ['day.model.day_name'], style: { width: '70%' } },
+        { fields: ['day.day_name'], header: ['day.model.day_name'], style: { width: '60%' } },
       ],
       colSelection: [
         {
@@ -37,7 +37,7 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
           type: 'button',
           header: [],
           label: ['hour_range.plural'],
-          style: { width: '20%' }
+          style: { width: '30%' }
         }
       ]
     };

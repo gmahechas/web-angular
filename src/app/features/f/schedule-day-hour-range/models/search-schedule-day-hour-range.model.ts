@@ -6,8 +6,8 @@ export interface SearchScheduleDayHourRange {
     schedule_day_hour_range_id?: string;
     schedule_day_hour_range_status?: boolean | null;
   };
-  schedule_day?: ScheduleDay;
-  hour_range?: HourRange;
+  schedule_day?: ScheduleDay | null;
+  hour_range?: HourRange | null;
   limit?: number;
   page?: number;
 }

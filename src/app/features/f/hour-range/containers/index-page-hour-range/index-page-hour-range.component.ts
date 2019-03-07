@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { HourRange } from '@web/app/features/f/hour-range/models/hour-range.model';
 import { SearchHourRange } from '@web/app/features/f/hour-range/models/search-hour-range.model';
-import { initialStateSelectedHourRange } from '@web/app/features/f/hour-range/models/selected-hour-range.model';
+import { SelectedHourRange, initialStateSelectedHourRange } from '@web/app/features/f/hour-range/models/selected-hour-range.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -47,7 +47,7 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromHourRange.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: HourRange | null }) => {
+      (selected: SelectedHourRange) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

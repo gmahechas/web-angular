@@ -1,7 +1,4 @@
-<app-table-shared *ngIf="(data$ | async) as data" [data]="data" [configTable]="configTable" [summary]="true"
+<app-table-shared *ngIf="(data$ | async) as data" [data]="data" [configTable]="configTable"
   (columnSelected)="handleColumnSelected($event)">
-  <div class="summary">
-    <app-form-schedule-day></app-form-schedule-day>
-  </div>
 </app-table-shared>
 <router-outlet name="router-outlet-schedule-day-hour-range"></router-outlet>

@@ -6,7 +6,7 @@ import * as fromCore from '@web/app/core/store';
 
 import { Day } from '@web/app/features/f/day/models/day.model';
 import { SearchDay } from '@web/app/features/f/day/models/search-day.model';
-import { initialStateSelectedDay } from '@web/app/features/f/day/models/selected-day.model';
+import { SelectedDay, initialStateSelectedDay } from '@web/app/features/f/day/models/selected-day.model';
 
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -43,7 +43,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.store.pipe(select(fromDay.getSelected), take(1)).subscribe(
-      (selected: { selectedEntity: Day | null }) => {
+      (selected: SelectedDay) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
           this.store.dispatch(new fromCore.Go({

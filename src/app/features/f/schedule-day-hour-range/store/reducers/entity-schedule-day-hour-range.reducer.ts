@@ -1,6 +1,9 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { ScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-range/models/schedule-day-hour-range.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/schedule-day-hour-range/store/actions/entity-schedule-day-hour-range.actions';
+import {
+  EntityActionTypes,
+  EntityActions
+} from '@web/app/features/f/schedule-day-hour-range/store/actions/entity-schedule-day-hour-range.actions';
 
 export interface State extends EntityState<ScheduleDayHourRange> { }
 
@@ -24,8 +27,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     }
 
     case EntityActionTypes.StoreSuccessEntity: {
-      const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeScheduleDayHourRange, newState);
+      return adapter.addOne(action.payload.entity.storeScheduleDayHourRange, state);
     }
 
     case EntityActionTypes.UpdateSuccessEntity: {

@@ -2,6 +2,8 @@ import { Component, OnChanges, OnInit, Input, Output, EventEmitter, ChangeDetect
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { ScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-range/models/schedule-day-hour-range.model';
+import { ScheduleDay } from '@web/app/features/f/schedule-day/models/schedule-day.model';
+import { HourRange } from '@web/app/features/f/hour-range/models/hour-range.model';
 
 @Component({
   selector: 'app-form-schedule-day-hour-range',
@@ -11,22 +13,14 @@ import { ScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-rang
 })
 export class FormScheduleDayHourRangeComponent implements OnChanges, OnInit {
 
-  @Input()
-  set pending(isPending: boolean) {
-    if (isPending) {
-      this.scheduleDayHourRangeForm.disable();
-    } else {
-      this.scheduleDayHourRangeForm.enable();
-    }
-  }
-  @Input() scheduleDayHourRange: ScheduleDayHourRange;
+  @Input() entityLabel: string;
+  @Input() scheduleDay: ScheduleDay;
+  @Input() hourRange: HourRange;
   @Output() submitted = new EventEmitter<ScheduleDayHourRange>();
 
   scheduleDayHourRangeForm = this.formBuilder.group({
-    schedule_day_hour_range: this.formBuilder.group({
-      // TODO:
-    }),
-    // TODO:
+    schedule_day: this.formBuilder.control('', [Validators.required]),
+    hour_range: this.formBuilder.control('', [Validators.required])
   });
 
   constructor(
@@ -34,14 +28,13 @@ export class FormScheduleDayHourRangeComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnChanges() {
-    if (this.scheduleDayHourRange) {
-      this.scheduleDayHourRangeForm.reset();
-      this.scheduleDayHourRangeForm.setValue({
-        schedule_day_hour_range: {
-          // TODO:
-        },
-        // TODO:
-      });
+    switch (this.entityLabel) {
+      case 'schedule':
+        this.scheduleDayHourRangeForm.setValue({
+          schedule_day: this.scheduleDay,
+          hour_range: null
+        });
+        break;
     }
   }
 
@@ -49,20 +42,16 @@ export class FormScheduleDayHourRangeComponent implements OnChanges, OnInit {
   }
 
   onSubmit() {
-
-    if (this.scheduleDayHourRange) {
-      if (this.scheduleDayHourRangeForm.dirty) {
-        const updated = {
-            schedule_day_hour_range_id: this.scheduleDayHourRange.schedule_day_hour_range_id,
-            ...this.scheduleDayHourRangeForm.value.schedule_day_hour_range,
-            // TODO:
-        };
-        this.submitted.emit(updated);
-      }
-    } else {
-      this.submitted.emit({...this.scheduleDayHourRangeForm.value.schedule_day_hour_range}); // TODO:
+    this.submitted.emit({
+      schedule_day_hour_range_status: true,
+      schedule_day_id: this.scheduleDayHourRangeForm.value.schedule_day.schedule_day_id,
+      hour_range_id: this.scheduleDayHourRangeForm.value.hour_range.hour_range_id
+    });
+    switch (this.entityLabel) {
+      case 'schedule':
+        this.scheduleDayHourRangeForm.controls.hour_range.reset();
+        break;
     }
-
   }
 
 }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import * as fromContainers from '@web/app/features/f/schedule-day-hour-range/containers';
-import { ScheduleDayHourRangeExistGuard } from '@web/app/features/f/schedule-day-hour-range/guards/schedule-day-hour-range-exist.guard';
 
 export const routes: Routes = [
   {

@@ -8,6 +8,7 @@ import * as fromHourRange from '@web/app/features/f/hour-range/store';
 import * as fromCore from '@web/app/core/store';
 
 import { ScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-range/models/schedule-day-hour-range.model';
+import { SearchScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-range/models/search-schedule-day-hour-range.model';
 
 import { Subscription } from 'rxjs';
 
@@ -32,7 +33,17 @@ export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy
     this.configTable = {
       dataKey: 'schedule_day_hour_range_id',
       cols: [
-
+        { fields: ['hour_range.hour_range_name'], header: ['hour_range.model.hour_range_name'], style: { width: '40%' } },
+        { fields: ['hour_range.hour_range_start'], header: ['hour_range.model.hour_range_start'], style: { width: '25%' } },
+        { fields: ['hour_range.hour_range_end'], header: ['hour_range.model.hour_range_end'], style: { width: '25%' } },
+      ],
+      colSelection: [
+        {
+          type: 'checkbox',
+          field: 'schedule_day_hour_range_status',
+          header: [],
+          style: { width: '10%' }
+        }
       ]
     };
   }
@@ -41,10 +52,27 @@ export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy
     this.suscription = this.route.paramMap.subscribe((paramsMap: ParamMap) => {
 
       const key = paramsMap.keys[0];
-
       this.entityLabel = key.split('_')[0];
 
+      switch (key) {
+        case 'schedule_id':
+          const scheduleDayId = paramsMap.get(paramsMap.keys[1]);
+          setTimeout(() => {
+            this.onLoad({
+              schedule_day: {
+                schedule_day_id: +scheduleDayId
+              }
+            });
+          });
+          break;
+      }
     });
+  }
+
+  onLoad(searchScheduleDayHourRange: SearchScheduleDayHourRange) {
+    this.store.dispatch(new fromScheduleDayHourRange.LoadEntity({
+      search: searchScheduleDayHourRange
+    }));
   }
 
   handleColumnSelected({ column, event }) {
@@ -52,7 +80,7 @@ export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy
       case 0:
         this.onEdit({
           ...event,
-          user_office_project_status: !event.user_office_project_status
+          schedule_day_hour_range_status: !event.schedule_day_hour_range_status
         });
         break;
     }
@@ -60,15 +88,6 @@ export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy
 
   onStore(scheduleDayHourRange: ScheduleDayHourRange) {
     this.store.dispatch(new fromScheduleDayHourRange.StoreEntity({ entity: scheduleDayHourRange }));
-    /*     switch (this.entityLabel) {
-          case 'user':
-          case 'office':
-            this.store.dispatch(new fromProject.Reset({ redirect: false }));
-            break;
-          case 'project':
-            this.store.dispatch(new fromUserOffice.Reset({ redirect: false }));
-            break;
-        } */
   }
 
   onEdit(scheduleDayHourRange: ScheduleDayHourRange) {

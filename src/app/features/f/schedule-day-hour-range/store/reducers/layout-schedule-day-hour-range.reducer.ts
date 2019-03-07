@@ -1,5 +1,9 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/schedule-day-hour-range/store/actions/entity-schedule-day-hour-range.actions';
-import { SelectedScheduleDayHourRange, initialStateSelectedScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-range/models/selected-schedule-day-hour-range.model';
+import {
+  EntityActionTypes, EntityActions
+} from '@web/app/features/f/schedule-day-hour-range/store/actions/entity-schedule-day-hour-range.actions';
+import {
+  SelectedScheduleDayHourRange, initialStateSelectedScheduleDayHourRange
+} from '@web/app/features/f/schedule-day-hour-range/models/selected-schedule-day-hour-range.model';
 
 export interface State {
   selected: SelectedScheduleDayHourRange;
@@ -20,7 +24,7 @@ export function reducer(state = initialState, action: EntityActions): State {
     case EntityActionTypes.SetSelected: {
       return {
         ...state,
-        selected: { ...state.selected, ...action.payload.selected}
+        selected: { ...state.selected, ...action.payload.selected }
       };
     }
 

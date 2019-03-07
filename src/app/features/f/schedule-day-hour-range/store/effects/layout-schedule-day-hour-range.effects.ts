@@ -71,7 +71,7 @@ export class LayoutScheduleDayHourRangeEffects {
     })
   );
 
-  // Redirects
+/*   // Redirects
   @Effect({ dispatch: false })
   successRedirect$ = this.actions$.pipe(
     ofType(
@@ -94,7 +94,7 @@ export class LayoutScheduleDayHourRangeEffects {
         this.store.dispatch(new fromCore.Go({ path: ['schedule_day_hour_range'] }));
       }
     })
-  );
+  ); */
 
   constructor(
     private actions$: Actions,
