@@ -4,3 +4,8 @@ export interface SelectedMenus {
   selected?: ProfileMenu | null;
   profileMenus?: ProfileMenu[];
 }
+
+export const initialStateSelectedMenus: SelectedMenus = {
+  selected: null,
+  profileMenus: []
+};
