@@ -5,7 +5,6 @@ import * as fromCore from '@web/app/core/store';
 import * as fromAuth from '@web/app/auth/store';
 
 import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
-import { Menu } from '@web/app/features/c/menu/models/menu.model';
 
 @Component({
   selector: 'app-header-core',
@@ -41,14 +40,14 @@ export class HeaderCoreComponent implements OnInit {
   }
 
   handleNavigateFromSide(profileMenu: ProfileMenu) {
-    this.store.dispatch(new fromCore.AddSelectedMenu({ menu: profileMenu.menu }));
+    this.store.dispatch(new fromCore.AddSelectedMenu({ profile_menu: profileMenu }));
     this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
     this.store.dispatch(new fromCore.OpenCloseSidebar({ showSidebar: false }));
   }
 
-  handleNavigateFromTab(menu: Menu) {
-    this.store.dispatch(new fromCore.ChangeSelectedMenu({ menu }));
-    this.store.dispatch(new fromCore.Go({ path: [menu.menu_uri] }));
+  handleNavigateFromTab(profileMenu: ProfileMenu) {
+    this.store.dispatch(new fromCore.ChangeSelectedMenu({ profile_menu: profileMenu }));
+    this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
   }
 
   removeMenuTab(index: number) {
