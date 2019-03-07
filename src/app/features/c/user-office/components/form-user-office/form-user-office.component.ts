@@ -13,6 +13,14 @@ import { Office } from '@web/app/features/b/office/models/office.model';
 })
 export class FormUserOfficeComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.userOfficeForm.disable();
+    } else {
+      this.userOfficeForm.enable();
+    }
+  }
   @Input() entityLabel: string;
   @Input() user: User;
   @Input() office: Office;

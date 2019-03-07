@@ -17,6 +17,7 @@ import { UserOffice } from '@web/app/features/c/user-office/models/user-office.m
 })
 export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
+  pending$ = this.store.pipe(select(fromUserOffice.getPending));
   data$ = this.store.pipe(select(fromUserOffice.getAllEntities));
   user$ = this.store.pipe(select(fromUser.getSelected));
   office$ = this.store.pipe(select(fromOffice.getSelected));

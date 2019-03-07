@@ -12,7 +12,7 @@
     </div>
     <div class="p-col">
       <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
-        [disabled]="userOfficeForm.invalid"></app-button-shared>
+        [disabled]="userOfficeForm.invalid || userOfficeForm.disabled"></app-button-shared>
     </div>
   </div>
 </form>
