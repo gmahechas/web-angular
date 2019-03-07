@@ -7,8 +7,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TabMenuSharedComponent implements OnInit {
 
-  @Input() active: any;
   @Input() items: any;
+  @Input() active: any;
+  @Input() itemLabel: string;
   @Output() navigate = new EventEmitter<any>();
   @Output() close = new EventEmitter<any>();
 

@@ -1,11 +1,11 @@
-import { ProfileMenu } from '@web/app/features/c/profile-menu/models';
+import { Menu } from '@web/app/features/c/menu/models/menu.model';
 
 export interface SelectedMenus {
-  selected?: ProfileMenu | null;
-  profileMenus?: ProfileMenu[];
+  selected?: Menu | null;
+  menus?: Menu[];
 }
 
 export const initialStateSelectedMenus: SelectedMenus = {
   selected: null,
-  profileMenus: []
+  menus: []
 };

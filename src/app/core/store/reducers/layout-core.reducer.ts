@@ -123,10 +123,10 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       return {
         ...state,
         selectedMenus: {
-          selected: action.payload.profile_menu,
-          profileMenus: (state.selectedMenus.profileMenus.includes(action.payload.profile_menu)) ?
-            [...state.selectedMenus.profileMenus] :
-            [...state.selectedMenus.profileMenus, action.payload.profile_menu]
+          selected: action.payload.menu,
+          menus: (state.selectedMenus.menus.includes(action.payload.menu)) ?
+            [...state.selectedMenus.menus] :
+            [...state.selectedMenus.menus, action.payload.menu]
         }
       };
 
@@ -134,20 +134,20 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       return {
         ...state,
         selectedMenus: {
-          selected: action.payload.profile_menu,
-          profileMenus: state.selectedMenus.profileMenus
+          selected: action.payload.menu,
+          menus: state.selectedMenus.menus
         }
       };
     }
 
     case LayoutActionTypes.RemoveSelectedMenu: {
-      const oldRecipes = [...state.selectedMenus.profileMenus];
+      const oldRecipes = [...state.selectedMenus.menus];
       oldRecipes.splice(action.payload.index, 1);
       return {
         ...state,
         selectedMenus: {
           selected: state.selectedMenus.selected,
-          profileMenus: oldRecipes
+          menus: oldRecipes
         }
       };
     }

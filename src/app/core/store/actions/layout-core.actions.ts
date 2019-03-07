@@ -72,12 +72,12 @@ export class SetUserOfficeProject implements Action {
 
 export class AddSelectedMenu implements Action {
   readonly type = LayoutActionTypes.AddSelectedMenu;
-  constructor(public payload: { profile_menu: any }) { }
+  constructor(public payload: { menu: any }) { }
 }
 
 export class ChangeSelectedMenu implements Action {
   readonly type = LayoutActionTypes.ChangeSelectedMenu;
-  constructor(public payload: { profile_menu: any }) { }
+  constructor(public payload: { menu: any }) { }
 }
 
 export class RemoveSelectedMenu implements Action {
