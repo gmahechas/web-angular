@@ -9,15 +9,18 @@
           <app-translate-shared [strings]="['profile.model.profile_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="profileForm" [groupName]="'profile'" [controlName]="'profile_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="profileForm" [groupName]="'profile'" [controlName]="'profile_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="profileForm.get('profile.profile_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="profileForm.get('profile.profile_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="profileForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="profileForm.invalid || profileForm.disabled"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

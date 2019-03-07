@@ -15,7 +15,7 @@
         </div>
         <div class="p-col">
           <app-button-shared [type]="'submit'" [label]="['verbs.select.verb']" [class]="'ui-button-secondary'"
-            [disabled]="userOfficeForm.invalid"></app-button-shared>
+            [disabled]="userOfficeForm.invalid || userOfficeForm.disabled"></app-button-shared>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="userOfficeForm.get('userOffice')"></app-validation-errors-shared>

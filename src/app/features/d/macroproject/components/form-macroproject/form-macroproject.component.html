@@ -9,10 +9,12 @@
           <app-translate-shared [strings]="['macroproject.model.macroproject_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'" [controlName]="'macroproject_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'"
+            [controlName]="'macroproject_name'"></app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -20,10 +22,12 @@
           <app-translate-shared [strings]="['macroproject.model.macroproject_address']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'" [controlName]="'macroproject_address'"></app-input-text-shared>
+          <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'"
+            [controlName]="'macroproject_address'"></app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_address')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_address')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -31,10 +35,12 @@
           <app-translate-shared [strings]="['macroproject.model.macroproject_phone']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'" [controlName]="'macroproject_phone'"></app-input-text-shared>
+          <app-input-text-shared [group]="macroprojectForm" [groupName]="'macroproject'"
+            [controlName]="'macroproject_phone'"></app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_phone')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="macroprojectForm.get('macroproject.macroproject_phone')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -63,7 +69,8 @@
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="macroprojectForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="macroprojectForm.invalid || macroprojectForm.disabled"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

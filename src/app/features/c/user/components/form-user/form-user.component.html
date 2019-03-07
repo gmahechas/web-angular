@@ -9,7 +9,8 @@
           <app-translate-shared [strings]="['user.model.username']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="userForm" [groupName]="'user'" [controlName]="'username'"></app-input-text-shared>
+          <app-input-text-shared [group]="userForm" [groupName]="'user'" [controlName]="'username'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="userForm.get('user.username')"></app-validation-errors-shared>
@@ -20,7 +21,8 @@
           <app-translate-shared [strings]="['person.singular']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-dropdown-page-person [group]="userForm" [controlName]="'person'" [options]="['person_first_name', 'person_second_name', 'person_legal_name']"
+          <app-dropdown-page-person [group]="userForm" [controlName]="'person'"
+            [options]="['person_first_name', 'person_second_name', 'person_legal_name']"
             [optionLabel]="'person_identification'"></app-dropdown-page-person>
         </div>
         <div class="p-col">
@@ -41,7 +43,8 @@
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="userForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="userForm.invalid || userForm.disabled"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

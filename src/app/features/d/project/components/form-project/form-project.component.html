@@ -9,10 +9,12 @@
           <app-translate-shared [strings]="['project.model.project_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="projectForm.get('project.project_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="projectForm.get('project.project_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -20,10 +22,12 @@
           <app-translate-shared [strings]="['project.model.project_address']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_address'"></app-input-text-shared>
+          <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_address'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="projectForm.get('project.project_address')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="projectForm.get('project.project_address')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -31,10 +35,12 @@
           <app-translate-shared [strings]="['project.model.project_phone']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_phone'"></app-input-text-shared>
+          <app-input-text-shared [group]="projectForm" [groupName]="'project'" [controlName]="'project_phone'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="projectForm.get('project.project_phone')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="projectForm.get('project.project_phone')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -42,8 +48,8 @@
           <app-translate-shared [strings]="['macroproject.singular']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-dropdown-page-macroproject [group]="projectForm" [controlName]="'macroproject'" [options]="['macroproject_name']"
-            [optionLabel]="'macroproject_name'"></app-dropdown-page-macroproject>
+          <app-dropdown-page-macroproject [group]="projectForm" [controlName]="'macroproject'"
+            [options]="['macroproject_name']" [optionLabel]="'macroproject_name'"></app-dropdown-page-macroproject>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="projectForm.get('macroproject')"></app-validation-errors-shared>
@@ -51,7 +57,8 @@
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="projectForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="projectForm.invalid || projectForm.disabled"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

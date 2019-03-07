@@ -9,8 +9,9 @@
           <app-translate-shared [strings]="['type_person.singular']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-dropdown-page-type-person [group]="personForm" [controlName]="'type_person'" [options]="['type_person_description']"
-            [optionLabel]="'type_person_description'"></app-dropdown-page-type-person>
+          <app-dropdown-page-type-person [group]="personForm" [controlName]="'type_person'"
+            [options]="['type_person_description']" [optionLabel]="'type_person_description'">
+          </app-dropdown-page-type-person>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="personForm.get('type_person')"></app-validation-errors-shared>
@@ -21,11 +22,13 @@
           <app-translate-shared [strings]="['type_person_identification.singular']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-dropdown-page-type-person-identification [group]="personForm" [controlName]="'type_person_identification'"
-            [options]="['type_person_identification_description']" [optionLabel]="'type_person_identification_description'"></app-dropdown-page-type-person-identification>
+          <app-dropdown-page-type-person-identification [group]="personForm"
+            [controlName]="'type_person_identification'" [options]="['type_person_identification_description']"
+            [optionLabel]="'type_person_identification_description'"></app-dropdown-page-type-person-identification>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('type_person_identification')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('type_person_identification')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -33,11 +36,13 @@
           <app-translate-shared [strings]="['person.model.person_identification_date_issue']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-calendar-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification_date_issue'"
-            [dataType]="'string'" [dateFormat]="'yy-mm-dd'"></app-input-calendar-shared>
+          <app-input-calendar-shared [group]="personForm" [groupName]="'person'"
+            [controlName]="'person_identification_date_issue'" [dataType]="'string'" [dateFormat]="'yy-mm-dd'">
+          </app-input-calendar-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_identification_date_issue')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_identification_date_issue')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -45,10 +50,12 @@
           <app-translate-shared [strings]="['person.model.person_identification']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_identification'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_identification')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_identification')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -56,10 +63,12 @@
           <app-translate-shared [strings]="['person.model.person_first_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_first_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_first_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_first_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_first_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -67,10 +76,12 @@
           <app-translate-shared [strings]="['person.model.person_second_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_second_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_second_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_second_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_second_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -78,10 +89,12 @@
           <app-translate-shared [strings]="['person.model.person_first_surname']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_first_surname'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_first_surname'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_first_surname')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_first_surname')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -89,10 +102,12 @@
           <app-translate-shared [strings]="['person.model.person_second_surname']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_second_surname'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_second_surname'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_second_surname')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_second_surname')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -100,10 +115,12 @@
           <app-translate-shared [strings]="['person.model.person_legal_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_legal_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_legal_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_legal_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_legal_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -111,10 +128,12 @@
           <app-translate-shared [strings]="['person.model.person_address']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_address'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_address'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_address')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_address')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -122,10 +141,12 @@
           <app-translate-shared [strings]="['person.model.person_email']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_email'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_email'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_email')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_email')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -133,10 +154,12 @@
           <app-translate-shared [strings]="['person.model.person_phone']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_phone'"></app-input-text-shared>
+          <app-input-text-shared [group]="personForm" [groupName]="'person'" [controlName]="'person_phone'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="personForm.get('person.person_phone')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="personForm.get('person.person_phone')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -165,7 +188,8 @@
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="personForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="personForm.invalid || personForm.disabled"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>

@@ -9,10 +9,12 @@
           <app-translate-shared [strings]="['hour_range.model.hour_range_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_name'"></app-input-text-shared>
+          <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_name')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -20,10 +22,12 @@
           <app-translate-shared [strings]="['hour_range.model.hour_range_description']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_description'"></app-input-text-shared>
+          <app-input-text-shared [group]="hourRangeForm" [groupName]="'hour_range'"
+            [controlName]="'hour_range_description'"></app-input-text-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_description')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_description')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -31,11 +35,13 @@
           <app-translate-shared [strings]="['hour_range.model.hour_range_start']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-calendar-shared [group]="hourRangeForm" [groupName]="'hour_range'" [controlName]="'hour_range_start'"
-            [dataType]="'string'" [timeOnly]="true" [showSeconds]="true"></app-input-calendar-shared>
+          <app-input-calendar-shared [group]="hourRangeForm" [groupName]="'hour_range'"
+            [controlName]="'hour_range_start'" [dataType]="'string'" [timeOnly]="true" [showSeconds]="true">
+          </app-input-calendar-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_start')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_start')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
@@ -47,12 +53,14 @@
             [dataType]="'string'" [timeOnly]="true" [showSeconds]="true"></app-input-calendar-shared>
         </div>
         <div class="p-col">
-          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_end')"></app-validation-errors-shared>
+          <app-validation-errors-shared [control]="hourRangeForm.get('hour_range.hour_range_end')">
+          </app-validation-errors-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'" [disabled]="hourRangeForm.invalid"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="hourRangeForm.invalid || hourRangeForm.disabled"></app-button-shared>
           <ng-content select="app-button-shared"></ng-content>
         </div>
       </div>
