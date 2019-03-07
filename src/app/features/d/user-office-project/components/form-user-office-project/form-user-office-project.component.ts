@@ -13,6 +13,14 @@ import { Project } from '@web/app/features/d/project/models/project.model';
 })
 export class FormUserOfficeProjectComponent implements OnChanges, OnInit {
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.userOfficeProjectForm.disable();
+    } else {
+      this.userOfficeProjectForm.enable();
+    }
+  }
   @Input() entityLabel: string;
   @Input() userOffice: UserOffice;
   @Input() project: Project;

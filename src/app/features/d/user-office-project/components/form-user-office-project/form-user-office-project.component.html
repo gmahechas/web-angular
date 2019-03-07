@@ -20,7 +20,7 @@
     </div>
     <div class="p-col">
       <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
-        [disabled]="userOfficeProjectForm.invalid"></app-button-shared>
+        [disabled]="userOfficeProjectForm.invalid || userOfficeProjectForm.disabled"></app-button-shared>
     </div>
   </div>
 </form>

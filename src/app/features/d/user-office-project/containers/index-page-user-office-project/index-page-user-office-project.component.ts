@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 })
 export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
 
+  pending$ = this.store.pipe(select(fromUserOfficeProject.getPending));
   data$ = this.store.pipe(select(fromUserOfficeProject.getAllEntities));
   userOffice$ = this.store.pipe(select(fromUserOffice.getSelected));
   project$ = this.store.pipe(select(fromProject.getSelected));
