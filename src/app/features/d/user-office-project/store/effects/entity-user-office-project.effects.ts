@@ -20,8 +20,14 @@ export class EntityUserOfficeProjectEffects {
   loadEntity$ = this.actions$.pipe(
     ofType<fromUserOfficeProjectActions.LoadEntity>(fromUserOfficeProjectActions.EntityActionTypes.LoadEntity),
     map(action => action.payload.search),
-    switchMap((search: fromModels.SearchUserOfficeProject) => {
-      return this.userOfficeProjectService.load(search).pipe(
+    withLatestFrom(
+      this.store.pipe(select(fromUserOfficeProjectSelectors.getPerPage)),
+      this.store.pipe(select(fromUserOfficeProjectSelectors.getCurrentPage))
+    ),
+    switchMap(([searchUserOfficeProject, perPage, currentPage]: [fromModels.SearchUserOfficeProject, number, number]) => {
+      perPage = (perPage) ? perPage : searchUserOfficeProject.limit;
+      currentPage = (currentPage) ? currentPage : searchUserOfficeProject.page;
+      return this.userOfficeProjectService.load({ ...searchUserOfficeProject, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromUserOfficeProjectActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromUserOfficeProjectActions.LoadFailEntity({ error })))
       );

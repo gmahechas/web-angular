@@ -20,8 +20,14 @@ export class EntityOfficeDepartmentEffects {
   loadEntity$ = this.actions$.pipe(
     ofType<fromOfficeDepartmentActions.LoadEntity>(fromOfficeDepartmentActions.EntityActionTypes.LoadEntity),
     map(action => action.payload.search),
-    switchMap((search: fromModels.SearchOfficeDepartment) => {
-      return this.officeDepartmentService.load(search).pipe(
+    withLatestFrom(
+      this.store.pipe(select(fromOfficeDepartmentSelectors.getPerPage)),
+      this.store.pipe(select(fromOfficeDepartmentSelectors.getCurrentPage))
+    ),
+    switchMap(([searchOfficeDepartment, perPage, currentPage]: [fromModels.SearchOfficeDepartment, number, number]) => {
+      perPage = (perPage) ? perPage : searchOfficeDepartment.limit;
+      currentPage = (currentPage) ? currentPage : searchOfficeDepartment.page;
+      return this.officeDepartmentService.load({ ...searchOfficeDepartment, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
       );

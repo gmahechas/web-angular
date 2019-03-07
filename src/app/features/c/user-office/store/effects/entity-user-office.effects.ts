@@ -20,8 +20,14 @@ export class EntityUserOfficeEffects {
   loadEntity$ = this.actions$.pipe(
     ofType<fromUserOfficeActions.LoadEntity>(fromUserOfficeActions.EntityActionTypes.LoadEntity),
     map(action => action.payload.search),
-    switchMap((search: fromModels.SearchUserOffice) => {
-      return this.userOfficeService.load(search).pipe(
+    withLatestFrom(
+      this.store.pipe(select(fromUserOfficeSelectors.getPerPage)),
+      this.store.pipe(select(fromUserOfficeSelectors.getCurrentPage))
+    ),
+    switchMap(([searchUserOffice, perPage, currentPage]: [fromModels.SearchUserOffice, number, number]) => {
+      perPage = (perPage) ? perPage : searchUserOffice.limit;
+      currentPage = (currentPage) ? currentPage : searchUserOffice.page;
+      return this.userOfficeService.load({ ...searchUserOffice, limit: perPage, page: currentPage }).pipe(
         map(({ data }) => new fromUserOfficeActions.LoadSuccessEntity({ entities: data })),
         catchError((error) => of(new fromUserOfficeActions.LoadFailEntity({ error })))
       );
