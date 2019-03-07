@@ -96,8 +96,8 @@ export class EntityUserOfficeProjectEffects {
         if (
           searchUserOfficeProject.user_office_project.user_office_project_id === '' &&
           searchUserOfficeProject.user_office_project.user_office_project_status === null &&
-          searchUserOfficeProject.user_office === '' &&
-          searchUserOfficeProject.project === ''
+          searchUserOfficeProject.user_office === null &&
+          searchUserOfficeProject.project === null
         ) {
           return EMPTY;
         }

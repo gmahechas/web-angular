@@ -6,8 +6,8 @@ export interface SearchScheduleDay {
     schedule_day_id?: string;
     schedule_day_status?: boolean | null;
   };
-  schedule?: Schedule;
-  day?: Day;
+  schedule?: Schedule | null;
+  day?: Day | null;
   limit?: number;
   page?: number;
 }

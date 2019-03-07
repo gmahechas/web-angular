@@ -6,8 +6,8 @@ export interface SearchOfficeDepartment {
     office_department_id?: string;
     office_department_status?: boolean | null;
   };
-  office?: Office;
-  department?: Department;
+  office?: Office | null;
+  department?: Department | null;
   limit?: number;
   page?: number;
 }
