@@ -4,7 +4,7 @@ import { AuthActionTypes, AuthActions } from '@web/app/auth/store/actions/auth.a
 import { Company } from '@web/app/features/b/company/models/company.model';
 import { UserOffice } from '@web/app/features/c/user-office/models';
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
-import { initialStateSelectedMenus, SelectedMenus } from '@web/app/core/models/selected-menus.model';
+import { initialStateSelectedMenus, SelectedMenus, initialProfileMenu } from '@web/app/core/models/selected-menus.model';
 
 export interface State {
   lang: string;
@@ -120,11 +120,17 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       };
 
     case LayoutActionTypes.AddSelectedMenu:
+
+      const found = state.selectedMenus.profileMenus.filter(profileMenu => {
+        return String(profileMenu.menu_id) === action.payload.profile_menu.menu_id;
+      });
+
       return {
         ...state,
         selectedMenus: {
-          selected: action.payload.profile_menu,
-          profileMenus: (state.selectedMenus.profileMenus.includes(action.payload.profile_menu)) ?
+          selected: (found.length > 0) ?
+            (found[0].menu_id === 1) ? initialProfileMenu : action.payload.profile_menu : action.payload.profile_menu,
+          profileMenus: (found.length > 0) ?
             [...state.selectedMenus.profileMenus] :
             [...state.selectedMenus.profileMenus, action.payload.profile_menu]
         }
