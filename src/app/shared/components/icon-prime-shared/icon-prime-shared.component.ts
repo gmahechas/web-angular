@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-icon-prime-shared',
@@ -6,11 +7,21 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
   templateUrl: './icon-prime-shared.component.html',
   styles: []
 })
-export class IconPrimeSharedComponent implements OnInit {
+export class IconPrimeSharedComponent implements OnChanges, OnInit {
 
   @Input() class: string;
+  @Input() style: string;
+  newStyle: any;
 
-  constructor() { }
+  constructor(
+    private sanitizer: DomSanitizer
+  ) { }
+
+  ngOnChanges() {
+    if (this.style) {
+      this.newStyle = this.sanitizer.bypassSecurityTrustStyle(this.style);
+    }
+  }
 
   ngOnInit() {
   }

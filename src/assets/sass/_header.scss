@@ -1,13 +1,37 @@
 .layout-header {
 
   &-topbar {
-    height: 60px;
+    background-color: #007AD8;
+    color: #ffffff;
+    height: 40px;
     width: 100%;
     box-sizing: border-box;
     div {
       display: inline-block;
     }
+    &-logo {
+      vertical-align: top;
+      height: 40px;
+    }
+    &-menu {
+      padding-top: 5px;
+      height: 40px;
+    }
+    &-info {
+      vertical-align: top;
+      height: 40px;
+    }
+    &-icons {
+      padding-top: 5px;
+      height: 40px;
+    }
   }
+
+  &-tabmenu {
+    margin-top: 2px;
+    margin-bottom: 1px;
+  }
+
 }
 
 

@@ -4,8 +4,10 @@
       <div class="ui-menuitem-text" (click)="onClick(item)">
         <app-translate-shared [strings]="[item.menu.menu_name]" [titleCase]="true"></app-translate-shared>
       </div>
-      <div *ngIf="active != item" class="ui-menuitem-icon" (click)="onClose($event, index)" style="position: absolute; font-size: .8em; right: -1.2em; top: -.6em; padding: 0; margin: 0;">
-        <span class="pi pi-times"></span>
+      <div *ngIf="active != item" class="ui-menuitem-icon" (click)="onClose($event, index)">
+        <app-icon-prime-shared [class]="'pi pi-times'"
+          [style]="'position: absolute; font-size: 1.1em !important; right: -1em; top: -.6em; padding: 0; margin: 0;'">
+        </app-icon-prime-shared>
       </div>
     </div>
   </ng-template>

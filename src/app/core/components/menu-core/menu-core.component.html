@@ -1,5 +1,5 @@
-<div class="p-grid p-nogutter">
+<div class="p-grid p-nogutter" style="height: 100%">
   <app-listbox-shared class="p-col-2" *ngFor="let bar of bars" [options]="bar.options" [optionLabel]="'label'"
     [titleCaseLabel]="'data.menu.menu_title_case'" [upperCaseLabel]="'data.menu.menu_upper_case'"
-    (handleChange)="onNavigate(bar.bar, $event)"></app-listbox-shared>
+    [style]="{'width':'100%', 'height': '100%'}" (handleChange)="onNavigate(bar.bar, $event)"></app-listbox-shared>
 </div>

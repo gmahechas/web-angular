@@ -13,7 +13,7 @@
       <app-image-shared></app-image-shared>
     </div>
     <div class="layout-header-topbar-menu" (click)="opencloseSidebar(true)">
-      <app-icon-prime-shared [class]="'pi pi-bars'"></app-icon-prime-shared>
+      <app-icon-prime-shared [class]="'pi pi-bars'" [style]="'font-size: 30px !important'"></app-icon-prime-shared>
     </div>
     <div class="layout-header-topbar-info">
       <div *ngIf="(company$ | async) as company">
@@ -33,8 +33,8 @@
       </div>
     </div>
     <div class="layout-header-topbar-icons">
-      <app-icon-prime-shared [class]="'pi pi-calendar'"></app-icon-prime-shared>
-      <app-icon-prime-shared [class]="'pi pi-bell'"></app-icon-prime-shared>
+      <app-icon-prime-shared [class]="'pi pi-calendar'" [style]="'font-size: 30px !important'"></app-icon-prime-shared>
+      <app-icon-prime-shared [class]="'pi pi-bell'" [style]="'font-size: 30px !important'"></app-icon-prime-shared>
       <app-translate-shared [strings]="['auth.singOut']" [titleCase]="true" (click)="logout()"></app-translate-shared>
     </div>
   </div>
