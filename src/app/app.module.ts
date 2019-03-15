@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from '@web/app/app-routing.module';
 import { AppLangModule } from '@web/app/app-lang.module';
 import { AppGraphqlModule } from '@web/app/app-graphql.module';
 import { SharedModule } from '@web/app/shared/shared.module';
 import { AuthModule } from '@web/app/auth/auth.module';
-import { AppRoutingModule } from '@web/app/app-routing.module';
 import { CoreModule } from '@web/app/core/core.module';
 
 import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core/index-page-core.component';
@@ -17,11 +17,11 @@ import { IndexPageCoreComponent } from '@web/app/core/containers/index-page-core
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
     AppLangModule,
     AppGraphqlModule,
     SharedModule,
     AuthModule,
-    AppRoutingModule,
     CoreModule.forRoot()
   ],
   bootstrap: [IndexPageCoreComponent]
