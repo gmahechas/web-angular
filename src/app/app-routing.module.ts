@@ -11,7 +11,7 @@ import { CustomPreload } from '@web/app/shared/router-utils';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
