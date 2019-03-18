@@ -1,7 +1,8 @@
 <div [formGroup]="group">
   <div [formGroupName]="groupName">
-    <input pInputText type="text" [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''" [formControlName]="controlName"
-      [pKeyFilter]="(keyFilter) ? keyFilter : noFilter" [tooltipDisabled]="(toolTip) ? false : true" [pTooltip]="toolTip"
+    <input pInputText type="text" [formControlName]="controlName"
+      [placeholder]="(placeholder) ? (placeholder | myTranslate) : ''" [pKeyFilter]="(keyFilter) ? keyFilter : noFilter"
+      [tooltipDisabled]="(toolTip) ? false : true" [pTooltip]="toolTip"
       [tooltipPosition]="(tooltipPosition) ? tooltipPosition : 'right'" [ngStyle]="{width : '100%'}" />
   </div>
 </div>

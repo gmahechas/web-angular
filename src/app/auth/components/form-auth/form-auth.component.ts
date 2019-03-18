@@ -36,7 +36,7 @@ export class FormAuthComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  onSubmit() {
     this.submitted.emit(this.authForm.value.auth);
   }
 }

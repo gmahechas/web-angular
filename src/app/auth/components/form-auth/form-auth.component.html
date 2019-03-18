@@ -3,7 +3,7 @@
     <app-translate-shared [strings]="['auth.singIn']"></app-translate-shared>
   </div>
   <div class="panel-content">
-    <form [formGroup]="authForm" (ngSubmit)="login()">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
       <div class="p-grid p-nogutter">
         <div class="p-col">
           <app-translate-shared [strings]="['user.model.username']"></app-translate-shared>
