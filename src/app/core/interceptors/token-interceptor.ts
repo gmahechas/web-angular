@@ -6,7 +6,7 @@ import { Token } from '@web/app/auth/models/token.model';
 import { Observable } from 'rxjs';
 
 import { environment } from '@web/environments/environment';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from '@web/app/core/services/local-storage.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
