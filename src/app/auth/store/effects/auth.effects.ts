@@ -34,7 +34,7 @@ export class AuthEffects {
     tap(({ token, user, company }) => {
       this.localStorageService.setToken(token);
       this.store.dispatch(new fromCore.Go({
-        path: ['user-office', 'select-office']
+        path: ['dashboard']
       }));
     })
   );
