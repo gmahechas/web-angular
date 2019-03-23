@@ -61,13 +61,7 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
     case LayoutActionTypes.ShowProgressBar:
       return {
         ...state,
-        progressBar: true,
-      };
-
-    case LayoutActionTypes.CloseProgressBar:
-      return {
-        ...state,
-        progressBar: false,
+        progressBar: action.payload.toggle,
       };
 
     case AuthActionTypes.AuthSuccess: {
