@@ -55,13 +55,7 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
     case LayoutActionTypes.ShowSpinner:
       return {
         ...state,
-        showSpinner: true,
-      };
-
-    case LayoutActionTypes.CloseSpinner:
-      return {
-        ...state,
-        showSpinner: false,
+        showSpinner: action.payload.toggle,
       };
 
     case LayoutActionTypes.ShowProgressBar:

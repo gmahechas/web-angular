@@ -8,7 +8,6 @@ export enum LayoutActionTypes {
   OpenCloseSidebar = '[Layout Core] Open Close Sidebar',
   BlockedDocument = '[Layout Core] Blocked Document',
   ShowSpinner = '[Layout Core] Open Spinner',
-  CloseSpinner = '[Layout Core] Close Spinner',
   ShowProgressBar = '[Layout Core] Open Progress Bar',
   CloseProgressBar = '[Layout Core] Close Progress Bar',
   SetUserOffice = '[Layout Core] Set User Office',
@@ -42,10 +41,7 @@ export class BlockedDocument implements Action {
 
 export class ShowSpinner implements Action {
   readonly type = LayoutActionTypes.ShowSpinner;
-}
-
-export class CloseSpinner implements Action {
-  readonly type = LayoutActionTypes.CloseSpinner;
+  constructor(public payload: { toggle: boolean }) { }
 }
 
 export class ShowProgressBar implements Action {
@@ -97,7 +93,6 @@ export type LayoutActions =
   | OpenCloseSidebar
   | BlockedDocument
   | ShowSpinner
-  | CloseSpinner
   | ShowProgressBar
   | CloseProgressBar
   | SetUserOffice
