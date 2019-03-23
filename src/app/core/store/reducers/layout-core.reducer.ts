@@ -49,13 +49,7 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
     case LayoutActionTypes.BlockedDocument:
       return {
         ...state,
-        blockedDocument: true
-      };
-
-    case LayoutActionTypes.UnblockedDocument:
-      return {
-        ...state,
-        blockedDocument: false
+        blockedDocument: action.payload.toggle
       };
 
     case LayoutActionTypes.ShowSpinner:

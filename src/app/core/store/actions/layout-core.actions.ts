@@ -7,7 +7,6 @@ export enum LayoutActionTypes {
   ChangeLang = '[Layout Core] Get Menu',
   OpenCloseSidebar = '[Layout Core] Open Close Sidebar',
   BlockedDocument = '[Layout Core] Blocked Document',
-  UnblockedDocument = '[Layout Core] Unblocked Document',
   ShowSpinner = '[Layout Core] Open Spinner',
   CloseSpinner = '[Layout Core] Close Spinner',
   ShowProgressBar = '[Layout Core] Open Progress Bar',
@@ -38,10 +37,7 @@ export class OpenCloseSidebar implements Action {
 
 export class BlockedDocument implements Action {
   readonly type = LayoutActionTypes.BlockedDocument;
-}
-
-export class UnblockedDocument implements Action {
-  readonly type = LayoutActionTypes.UnblockedDocument;
+  constructor(public payload: { toggle: boolean }) { }
 }
 
 export class ShowSpinner implements Action {
@@ -100,7 +96,6 @@ export type LayoutActions =
   | ChangeLang
   | OpenCloseSidebar
   | BlockedDocument
-  | UnblockedDocument
   | ShowSpinner
   | CloseSpinner
   | ShowProgressBar
