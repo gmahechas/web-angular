@@ -30,7 +30,7 @@ export function reducer(state = initialState, action: AuthActions): State {
     case AuthActionTypes.AuthFailure: {
       return {
         ...state,
-        error: 'nouns.error.singular',
+        error: action.payload.error.error.error,
         pending: false
       };
     }

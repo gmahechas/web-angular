@@ -10,7 +10,7 @@ import * as fromAuth from '@web/app/auth/store';
 import { Token } from '@web/app/auth/models/token.model';
 
 import { Observable, throwError } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 
 import { environment } from '@web/environments/environment';
 
@@ -26,31 +26,32 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((errors: HttpErrorResponse) => {
-        if (
-          req.url !== environment.api.concat(environment.api) &&
-          req.body.operationName !== null &&
-          errors.error.error !== 'invalid_request'
-        ) {
-          const token: Token = this.localStorageService.getToken();
-          return this.authService.refreshToken(token).pipe(
-            mergeMap((newToken: Token) => {
-              this.localStorageService.setToken(newToken);
-              const request = req.clone({
-                setHeaders: {
-                  Authorization: (newToken) ? newToken.token_type.concat(' ', newToken.access_token) : ''
-                }
-              });
-              return next.handle(request);
-            }),
-            catchError((error) => {
-              this.store.dispatch(new fromAuth.ExpiredAuth());
-              this.localStorageService.setUserOffice(null);
-              this.localStorageService.setUserOfficeProject(null);
-              return throwError('Error');
-            })
-          );
+        if (errors.status !== 0) {
+          if (errors.error.error === 'no_authenticated') {
+            const token: Token = this.localStorageService.getToken();
+
+            return this.authService.refreshToken(token).pipe(
+              switchMap((newToken: Token) => {
+                this.localStorageService.setToken(newToken);
+                const request = req.clone({
+                  setHeaders: {
+                    Authorization: (newToken) ? newToken.token_type.concat(' ', newToken.access_token) : ''
+                  }
+                });
+                return next.handle(request);
+              }),
+              catchError((newErrors) => {
+                this.store.dispatch(new fromAuth.ExpiredAuth());
+                this.localStorageService.setUserOffice(null);
+                this.localStorageService.setUserOfficeProject(null);
+                return throwError(newErrors.error);
+              })
+            );
+          } else {
+            return throwError(errors.error);
+          }
         } else {
-          return throwError('Error');
+          return throwError(errors.error);
         }
       })
     );
