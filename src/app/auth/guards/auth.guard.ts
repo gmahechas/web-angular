@@ -1,4 +1,3 @@
-import { User } from '@web/app/features/c/user/models';
 import { Injectable } from '@angular/core';
 import { CanLoad, CanActivate } from '@angular/router';
 
