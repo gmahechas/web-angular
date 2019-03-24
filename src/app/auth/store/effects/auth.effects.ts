@@ -51,16 +51,6 @@ export class AuthEffects {
   );
 
   @Effect({ dispatch: false })
-  checkAuthSuccess$ = this.actions$.pipe(
-    ofType(fromAuthActions.AuthActionTypes.CheckAuthSuccess),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({
-        path: ['dashboard']
-      }));
-    })
-  );
-
-  @Effect({ dispatch: false })
   checkAuthFailure$ = this.actions$.pipe(
     ofType(fromAuthActions.AuthActionTypes.CheckAuthFailure),
     tap(() => {

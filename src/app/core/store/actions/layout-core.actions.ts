@@ -50,12 +50,12 @@ export class ShowProgressBar implements Action {
 
 export class SetUserOffice implements Action {
   readonly type = LayoutActionTypes.SetUserOffice;
-  constructor(public payload: { userOffice: any }) { }
+  constructor(public payload: { userOffice: any, redirect: boolean }) { }
 }
 
 export class SetUserOfficeProject implements Action {
   readonly type = LayoutActionTypes.SetUserOfficeProject;
-  constructor(public payload: { userOfficeProject: any }) { }
+  constructor(public payload: { userOfficeProject: any, redirect: boolean }) { }
 }
 
 export class AddSelectedMenu implements Action {

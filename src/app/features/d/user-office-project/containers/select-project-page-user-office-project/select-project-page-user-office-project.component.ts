@@ -20,6 +20,6 @@ export class SelectProjectPageUserOfficeProjectComponent implements OnInit {
   }
 
   selectUserOfficeProject(userOfficeProject) {
-    this.store.dispatch(new fromCore.SetUserOfficeProject({ userOfficeProject }));
+    this.store.dispatch(new fromCore.SetUserOfficeProject({ userOfficeProject, redirect: true }));
   }
 }

@@ -21,7 +21,7 @@ export class SelectOfficePageUserOfficeComponent implements OnInit {
   }
 
   selectUserOffice(userOffice) {
-    this.store.dispatch(new fromCore.SetUserOffice({ userOffice }));
+    this.store.dispatch(new fromCore.SetUserOffice({ userOffice, redirect: true }));
   }
 
 }

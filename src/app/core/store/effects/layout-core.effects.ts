@@ -41,21 +41,25 @@ export class LayoutCoreEffects {
   @Effect({ dispatch: false })
   setUserOffice$ = this.actions$.pipe(
     ofType(fromCoreActions.LayoutActionTypes.SetUserOffice),
-    map((action: fromCoreActions.SetUserOffice) => action.payload.userOffice),
-    tap((userOffice) => {
+    map((action: fromCoreActions.SetUserOffice) => action.payload),
+    tap(({ userOffice, redirect }) => {
       this.localStorageService.setUserOffice(userOffice);
       this.localStorageService.setUserOfficeProject(null);
-      this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+      if (redirect) {
+        this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+      }
     })
   );
 
   @Effect({ dispatch: false })
   setUserOfficeProject$ = this.actions$.pipe(
     ofType(fromCoreActions.LayoutActionTypes.SetUserOfficeProject),
-    map((action: fromCoreActions.SetUserOfficeProject) => action.payload.userOfficeProject),
-    tap((userOfficeProject) => {
+    map((action: fromCoreActions.SetUserOfficeProject) => action.payload),
+    tap(({ userOfficeProject, redirect }) => {
       this.localStorageService.setUserOfficeProject(userOfficeProject);
-      this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+      if (redirect) {
+        this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+      }
     })
   );
 
@@ -110,8 +114,8 @@ export class LayoutCoreEffects {
       } else {
         this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang: 'es-co' }));
       }
-      this.store.dispatch(new fromCoreActions.SetUserOffice({ userOffice }));
-      this.store.dispatch(new fromCoreActions.SetUserOfficeProject({ userOfficeProject }));
+      this.store.dispatch(new fromCoreActions.SetUserOffice({ userOffice, redirect: false }));
+      this.store.dispatch(new fromCoreActions.SetUserOfficeProject({ userOfficeProject, redirect: false }));
     })
   );
 
