@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/d/macroproject/store/reducers/entity-macroproject.reducer';
 import * as fromSearch from '@web/app/features/d/macroproject/store/reducers/search-macroproject.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   macroproject: MacroprojectState;
 }
 
-export const reducers: ActionReducerMap<MacroprojectState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: MacroprojectState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getMacroprojectState = createFeatureSelector<State, MacroprojectState>('macroproject');

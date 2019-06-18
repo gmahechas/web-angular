@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
 import * as fromEstateReducers from '@web/app/features/a/estate/store/reducers';
@@ -11,83 +11,87 @@ import * as fromModels from '@web/app/features/a/estate/models';
 import { EstateService } from '@web/app/features/a/estate/services/estate.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
-import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class EntityEstateEffects {
 
-  @Effect()
-  loadEntity$ = this.actions$.pipe(
-    ofType<fromEstateActions.LoadEntity>(fromEstateActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload.search),
-    withLatestFrom(
-      this.store.pipe(select(fromEstateSelectors.getPerPage)),
-      this.store.pipe(select(fromEstateSelectors.getCurrentPage))
-    ),
-    switchMap(([searchEstate, perPage, currentPage]: [fromModels.SearchEstate, number, number]) => {
-      perPage = (perPage) ? perPage : searchEstate.limit;
-      currentPage = (currentPage) ? currentPage : searchEstate.page;
-      return this.estateService.load({ ...searchEstate, limit: perPage, page: currentPage }).pipe(
-        map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
-      );
-    })
+  loadEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromEstateActions.LoadEntity>(fromEstateActions.EntityActionTypes.LoadEntity),
+      map(action => action.payload.search),
+      withLatestFrom(
+        this.store.pipe(select(fromEstateSelectors.getPerPage)),
+        this.store.pipe(select(fromEstateSelectors.getCurrentPage))
+      ),
+      mergeMap(([searchEstate, perPage, currentPage]: [fromModels.SearchEstate, number, number]) => {
+        perPage = (perPage) ? perPage : searchEstate.limit;
+        currentPage = (currentPage) ? currentPage : searchEstate.page;
+        return this.estateService.load({ ...searchEstate, limit: perPage, page: currentPage }).pipe(
+          map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  storeEntity$ = this.actions$.pipe(
-    ofType<fromEstateActions.StoreEntity>(fromEstateActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload.entity),
-    switchMap((estate: fromModels.Estate) => {
-      return this.estateService.store(estate).pipe(
-        map(({ data }) => new fromEstateActions.StoreSuccessEntity({ entity: data })),
-        catchError((error) => of(new fromEstateActions.StoreFailEntity({ error })))
-      );
-    })
+  storeEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromEstateActions.StoreEntity>(fromEstateActions.EntityActionTypes.StoreEntity),
+      map(action => action.payload.entity),
+      mergeMap((estate: fromModels.Estate) => {
+        return this.estateService.store(estate).pipe(
+          map(({ data }) => new fromEstateActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(new fromEstateActions.StoreFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  updateEntity$ = this.actions$.pipe(
-    ofType<fromEstateActions.UpdateEntity>(fromEstateActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload.entity),
-    switchMap((estate: fromModels.Estate) => {
-      return this.estateService.update(estate).pipe(
-        map(({ data }) => new fromEstateActions.UpdateSuccessEntity({ entity: data })),
-        catchError((error) => of(new fromEstateActions.UpdateFailEntity({ error })))
-      );
-    })
+  updateEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromEstateActions.UpdateEntity>(fromEstateActions.EntityActionTypes.UpdateEntity),
+      map(action => action.payload.entity),
+      mergeMap((estate: fromModels.Estate) => {
+        return this.estateService.update(estate).pipe(
+          map(({ data }) => new fromEstateActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(new fromEstateActions.UpdateFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  destroyEntity$ = this.actions$.pipe(
-    ofType<fromEstateActions.DestroyEntity>(fromEstateActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload.entity),
-    switchMap((estate: fromModels.Estate) => {
-      return this.estateService.destroy(estate).pipe(
-        map(({ data }) => new fromEstateActions.DestroySuccessEntity({ entity: data })),
-        catchError((error) => of(new fromEstateActions.DestroyFailEntity({ error })))
-      );
-    })
+  destroyEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromEstateActions.DestroyEntity>(fromEstateActions.EntityActionTypes.DestroyEntity),
+      map(action => action.payload.entity),
+      mergeMap((estate: fromModels.Estate) => {
+        return this.estateService.destroy(estate).pipe(
+          map(({ data }) => new fromEstateActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(new fromEstateActions.DestroyFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  paginateEntity$ = this.actions$.pipe(
-    ofType<fromEstateActions.PaginateEntity>(fromEstateActions.EntityActionTypes.PaginateEntity),
-    map(action => action.payload.page),
-    withLatestFrom(
-      this.store.pipe(select(fromEstateSelectors.getPerPage)),
-      this.store.pipe(select(fromEstateSelectors.getQuery))
-    ),
-    switchMap(([currentPage, perPage, searchEstate]: [number, number, fromModels.SearchEstate]) => {
-      return from(this.estateService.pagination({ ...searchEstate, limit: perPage, page: currentPage })).pipe(
-        map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
-      );
-    })
+  paginateEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromEstateActions.PaginateEntity>(fromEstateActions.EntityActionTypes.PaginateEntity),
+      map(action => action.payload.page),
+      withLatestFrom(
+        this.store.pipe(select(fromEstateSelectors.getPerPage)),
+        this.store.pipe(select(fromEstateSelectors.getQuery))
+      ),
+      mergeMap(([currentPage, perPage, searchEstate]: [number, number, fromModels.SearchEstate]) => {
+        return from(this.estateService.pagination({ ...searchEstate, limit: perPage, page: currentPage })).pipe(
+          map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
+  loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
       ofType<fromEstateActions.LoadEntityShared>(fromEstateActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
@@ -114,6 +118,7 @@ export class EntityEstateEffects {
         );
       })
     )
+  );
 
   constructor(
     private actions$: Actions,

@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/f/schedule/store/reducers/entity-schedule.reducer';
 import * as fromSearch from '@web/app/features/f/schedule/store/reducers/search-schedule.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   schedule: ScheduleState;
 }
 
-export const reducers: ActionReducerMap<ScheduleState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: ScheduleState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getScheduleState = createFeatureSelector<State, ScheduleState>('schedule');

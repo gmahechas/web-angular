@@ -1,6 +1,6 @@
-import { ActionReducerMap, createFeatureSelector, ActionReducer, MetaReducer } from '@ngrx/store';
+import { createFeatureSelector, ActionReducer, MetaReducer, Action, ActionReducerMap } from '@ngrx/store';
 
-import { storeFreeze } from 'ngrx-store-freeze';
+import { InjectionToken } from '@angular/core';
 
 import * as fromLayout from '@web/app/core/store/reducers/layout-core.reducer';
 import * as fromRouter from '@ngrx/router-store';
@@ -15,13 +15,12 @@ export interface State {
   router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
-export const reducers: ActionReducerMap<State> = {
-  layout: fromLayout.reducer,
-  router: fromRouter.routerReducer
-};
-
-export const getRouterState = createFeatureSelector<State, fromRouter.RouterReducerState<RouterStateUrl>>('router');
-export const getLayoutState = createFeatureSelector<State, fromLayout.State>('layout');
+export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>('Root reducers token', {
+  factory: () => ({
+    layout: fromLayout.reducer,
+    router: fromRouter.routerReducer,
+  }),
+});
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   return (state: State, action: any): any => {
@@ -48,4 +47,8 @@ export function clearState(reducer: ActionReducer<State>): ActionReducer<State> 
     return reducer(state, action);
   };
 }
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ clearState, storeFreeze] : [];
+
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [/* logger ,*/ clearState] : [];
+
+export const getRouterState = createFeatureSelector<State, fromRouter.RouterReducerState<RouterStateUrl>>('router');
+export const getLayoutState = createFeatureSelector<State, fromLayout.State>('layout');

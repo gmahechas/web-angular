@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action} from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/a/city/store/reducers/entity-city.reducer';
 import * as fromSearch from '@web/app/features/a/city/store/reducers/search-city.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   city: CityState;
 }
 
-export const reducers: ActionReducerMap<CityState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: CityState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer,
+  })(state, action);
+}
 
 export const getCityState = createFeatureSelector<State, CityState>('city');

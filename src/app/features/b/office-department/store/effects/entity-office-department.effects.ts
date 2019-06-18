@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store, select, Action } from '@ngrx/store';
 import * as fromOfficeDepartmentReducers from '@web/app/features/b/office-department/store/reducers';
@@ -11,83 +11,87 @@ import * as fromModels from '@web/app/features/b/office-department/models';
 import { OfficeDepartmentService } from '@web/app/features/b/office-department/services/office-department.service';
 
 import { of, from, asyncScheduler, EMPTY, Observable } from 'rxjs';
-import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil } from 'rxjs/operators';
+import { map, switchMap, catchError, withLatestFrom, debounceTime, skip, takeUntil, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class EntityOfficeDepartmentEffects {
 
-  @Effect()
-  loadEntity$ = this.actions$.pipe(
-    ofType<fromOfficeDepartmentActions.LoadEntity>(fromOfficeDepartmentActions.EntityActionTypes.LoadEntity),
-    map(action => action.payload.search),
-    withLatestFrom(
-      this.store.pipe(select(fromOfficeDepartmentSelectors.getPerPage)),
-      this.store.pipe(select(fromOfficeDepartmentSelectors.getCurrentPage))
-    ),
-    switchMap(([searchOfficeDepartment, perPage, currentPage]: [fromModels.SearchOfficeDepartment, number, number]) => {
-      perPage = (perPage) ? perPage : searchOfficeDepartment.limit;
-      currentPage = (currentPage) ? currentPage : searchOfficeDepartment.page;
-      return this.officeDepartmentService.load({ ...searchOfficeDepartment, limit: perPage, page: currentPage }).pipe(
-        map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
-      );
-    })
+  loadEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromOfficeDepartmentActions.LoadEntity>(fromOfficeDepartmentActions.EntityActionTypes.LoadEntity),
+      map(action => action.payload.search),
+      withLatestFrom(
+        this.store.pipe(select(fromOfficeDepartmentSelectors.getPerPage)),
+        this.store.pipe(select(fromOfficeDepartmentSelectors.getCurrentPage))
+      ),
+      mergeMap(([searchOfficeDepartment, perPage, currentPage]: [fromModels.SearchOfficeDepartment, number, number]) => {
+        perPage = (perPage) ? perPage : searchOfficeDepartment.limit;
+        currentPage = (currentPage) ? currentPage : searchOfficeDepartment.page;
+        return this.officeDepartmentService.load({ ...searchOfficeDepartment, limit: perPage, page: currentPage }).pipe(
+          map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  storeEntity$ = this.actions$.pipe(
-    ofType<fromOfficeDepartmentActions.StoreEntity>(fromOfficeDepartmentActions.EntityActionTypes.StoreEntity),
-    map(action => action.payload.entity),
-    switchMap((officeDepartment: fromModels.OfficeDepartment) => {
-      return this.officeDepartmentService.store(officeDepartment).pipe(
-        map(({ data }) => new fromOfficeDepartmentActions.StoreSuccessEntity({ entity: data })),
-        catchError((error) => of(new fromOfficeDepartmentActions.StoreFailEntity({ error })))
-      );
-    })
+  storeEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromOfficeDepartmentActions.StoreEntity>(fromOfficeDepartmentActions.EntityActionTypes.StoreEntity),
+      map(action => action.payload.entity),
+      mergeMap((officeDepartment: fromModels.OfficeDepartment) => {
+        return this.officeDepartmentService.store(officeDepartment).pipe(
+          map(({ data }) => new fromOfficeDepartmentActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(new fromOfficeDepartmentActions.StoreFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  updateEntity$ = this.actions$.pipe(
-    ofType<fromOfficeDepartmentActions.UpdateEntity>(fromOfficeDepartmentActions.EntityActionTypes.UpdateEntity),
-    map(action => action.payload.entity),
-    switchMap((officeDepartment: fromModels.OfficeDepartment) => {
-      return this.officeDepartmentService.update(officeDepartment).pipe(
-        map(({ data }) => new fromOfficeDepartmentActions.UpdateSuccessEntity({ entity: data })),
-        catchError((error) => of(new fromOfficeDepartmentActions.UpdateFailEntity({ error })))
-      );
-    })
+  updateEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromOfficeDepartmentActions.UpdateEntity>(fromOfficeDepartmentActions.EntityActionTypes.UpdateEntity),
+      map(action => action.payload.entity),
+      mergeMap((officeDepartment: fromModels.OfficeDepartment) => {
+        return this.officeDepartmentService.update(officeDepartment).pipe(
+          map(({ data }) => new fromOfficeDepartmentActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(new fromOfficeDepartmentActions.UpdateFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  destroyEntity$ = this.actions$.pipe(
-    ofType<fromOfficeDepartmentActions.DestroyEntity>(fromOfficeDepartmentActions.EntityActionTypes.DestroyEntity),
-    map(action => action.payload.entity),
-    switchMap((officeDepartment: fromModels.OfficeDepartment) => {
-      return this.officeDepartmentService.destroy(officeDepartment).pipe(
-        map(({ data }) => new fromOfficeDepartmentActions.DestroySuccessEntity({ entity: data })),
-        catchError((error) => of(new fromOfficeDepartmentActions.DestroyFailEntity({ error })))
-      );
-    })
+  destroyEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromOfficeDepartmentActions.DestroyEntity>(fromOfficeDepartmentActions.EntityActionTypes.DestroyEntity),
+      map(action => action.payload.entity),
+      mergeMap((officeDepartment: fromModels.OfficeDepartment) => {
+        return this.officeDepartmentService.destroy(officeDepartment).pipe(
+          map(({ data }) => new fromOfficeDepartmentActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(new fromOfficeDepartmentActions.DestroyFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  paginateEntity$ = this.actions$.pipe(
-    ofType<fromOfficeDepartmentActions.PaginateEntity>(fromOfficeDepartmentActions.EntityActionTypes.PaginateEntity),
-    map(action => action.payload.page),
-    withLatestFrom(
-      this.store.pipe(select(fromOfficeDepartmentSelectors.getPerPage)),
-      this.store.pipe(select(fromOfficeDepartmentSelectors.getQuery))
-    ),
-    switchMap(([currentPage, perPage, searchOfficeDepartment]: [number, number, fromModels.SearchOfficeDepartment]) => {
-      return from(this.officeDepartmentService.pagination({ ...searchOfficeDepartment, limit: perPage, page: currentPage })).pipe(
-        map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
-        catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
-      );
-    })
+  paginateEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<fromOfficeDepartmentActions.PaginateEntity>(fromOfficeDepartmentActions.EntityActionTypes.PaginateEntity),
+      map(action => action.payload.page),
+      withLatestFrom(
+        this.store.pipe(select(fromOfficeDepartmentSelectors.getPerPage)),
+        this.store.pipe(select(fromOfficeDepartmentSelectors.getQuery))
+      ),
+      mergeMap(([currentPage, perPage, searchOfficeDepartment]: [number, number, fromModels.SearchOfficeDepartment]) => {
+        return from(this.officeDepartmentService.pagination({ ...searchOfficeDepartment, limit: perPage, page: currentPage })).pipe(
+          map(({ data }) => new fromOfficeDepartmentActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(new fromOfficeDepartmentActions.LoadFailEntity({ error })))
+        );
+      })
+    )
   );
 
-  @Effect()
-  loadEntityShared$ = ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
+  loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
       ofType<fromOfficeDepartmentActions.LoadEntityShared>(fromOfficeDepartmentActions.EntityActionTypes.LoadEntityShared),
       debounceTime(debounce, scheduler),
@@ -114,6 +118,7 @@ export class EntityOfficeDepartmentEffects {
         );
       })
     )
+  );
 
   constructor(
     private actions$: Actions,

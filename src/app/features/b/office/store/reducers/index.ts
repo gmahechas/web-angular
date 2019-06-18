@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/b/office/store/reducers/entity-office.reducer';
 import * as fromSearch from '@web/app/features/b/office/store/reducers/search-office.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   office: OfficeState;
 }
 
-export const reducers: ActionReducerMap<OfficeState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: OfficeState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer,
+  })(state, action);
+}
 
 export const getOfficeState = createFeatureSelector<State, OfficeState>('office');

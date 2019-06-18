@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
 import * as fromCoreReducers from '@web/app/core/store/reducers';
@@ -18,105 +18,119 @@ import { map, tap } from 'rxjs/operators';
 @Injectable()
 export class LayoutCoreEffects {
 
-  @Effect({ dispatch: false })
-  setDefaultLang$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetDefaultLang),
-    map((action: fromCoreActions.SetDefaultLang) => action.payload.lang),
-    tap((lang: string) => {
-      this.localStorageService.setLang(lang);
-      this.translate.setDefaultLang(lang);
-    })
+  setDefaultLang$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCoreActions.LayoutActionTypes.SetDefaultLang),
+      map((action: fromCoreActions.SetDefaultLang) => action.payload.lang),
+      tap((lang: string) => {
+        this.localStorageService.setLang(lang);
+        this.translate.setDefaultLang(lang);
+      })
+    ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  changeLang$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.ChangeLang),
-    map((action: fromCoreActions.ChangeLang) => action.payload.lang),
-    tap((lang: string) => {
-      this.localStorageService.setLang(lang);
-      this.translate.use(lang);
-    })
+  changeLang$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCoreActions.LayoutActionTypes.ChangeLang),
+      map((action: fromCoreActions.ChangeLang) => action.payload.lang),
+      tap((lang: string) => {
+        this.localStorageService.setLang(lang);
+        this.translate.use(lang);
+      })
+    ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  setUserOffice$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetUserOffice),
-    map((action: fromCoreActions.SetUserOffice) => action.payload),
-    tap(({ userOffice, redirect }) => {
-      this.localStorageService.setUserOffice(userOffice);
-      this.localStorageService.setUserOfficeProject(null);
-      if (redirect) {
-        this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
-      }
-    })
+  setUserOffice$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCoreActions.LayoutActionTypes.SetUserOffice),
+      map((action: fromCoreActions.SetUserOffice) => action.payload),
+      tap(({ userOffice, redirect }) => {
+        this.localStorageService.setUserOffice(userOffice);
+        this.localStorageService.setUserOfficeProject(null);
+        if (redirect) {
+          this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+        }
+      })
+    ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  setUserOfficeProject$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.SetUserOfficeProject),
-    map((action: fromCoreActions.SetUserOfficeProject) => action.payload),
-    tap(({ userOfficeProject, redirect }) => {
-      this.localStorageService.setUserOfficeProject(userOfficeProject);
-      if (redirect) {
-        this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
-      }
-    })
+  setUserOfficeProject$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCoreActions.LayoutActionTypes.SetUserOfficeProject),
+      map((action: fromCoreActions.SetUserOfficeProject) => action.payload),
+      tap(({ userOfficeProject, redirect }) => {
+        this.localStorageService.setUserOfficeProject(userOfficeProject);
+        if (redirect) {
+          this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+        }
+      })
+    ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  showMessages$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.ShowMessages),
-    map((action: fromCoreActions.ShowMessages) => action.payload.messages),
-    tap((message: any[]) => {
-      this.messageService.addAll(message);
-    })
+  showMessages$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCoreActions.LayoutActionTypes.ShowMessages),
+      map((action: fromCoreActions.ShowMessages) => action.payload.messages),
+      tap((message: any[]) => {
+        this.messageService.addAll(message);
+      })
+    ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  confirm$ = this.actions$.pipe(
-    ofType(fromCoreActions.LayoutActionTypes.ConfirmDialog),
-    map((action: fromCoreActions.ConfirmDialog) => action.payload.confirm),
-    tap((confirm: Confirm) => {
-      this.confirmationService.confirm({
-        accept: () => {
-          if (confirm.acceptType) {
-            this.store.dispatch({ type: confirm.acceptType, payload: confirm.acceptPayload });
-          }
-        },
-        reject: () => {
-          if (confirm.rejectType) {
-            this.store.dispatch({ type: confirm.rejectType, payload: confirm.rejectPayload });
-          }
-        },
-        message: confirm.message,
-        key: confirm.key,
-        icon: confirm.icon,
-        header: confirm.header,
-        acceptLabel: confirm.acceptLabel,
-        rejectLabel: confirm.rejectLabel,
-        acceptVisible: confirm.acceptVisible,
-        rejectVisible: confirm.rejectVisible
-      });
-    })
+  confirm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCoreActions.LayoutActionTypes.ConfirmDialog),
+      map((action: fromCoreActions.ConfirmDialog) => action.payload.confirm),
+      tap((confirm: Confirm) => {
+        this.confirmationService.confirm({
+          accept: () => {
+            if (confirm.acceptType) {
+              this.store.dispatch({ type: confirm.acceptType, payload: confirm.acceptPayload });
+            }
+          },
+          reject: () => {
+            if (confirm.rejectType) {
+              this.store.dispatch({ type: confirm.rejectType, payload: confirm.rejectPayload });
+            }
+          },
+          message: confirm.message,
+          key: confirm.key,
+          icon: confirm.icon,
+          header: confirm.header,
+          acceptLabel: confirm.acceptLabel,
+          rejectLabel: confirm.rejectLabel,
+          acceptVisible: confirm.acceptVisible,
+          rejectVisible: confirm.rejectVisible
+        });
+      })
+    ),
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  init$ = defer(() => {
-    return of([
-      this.localStorageService.getLang(),
-      this.localStorageService.getUserOffice(),
-      this.localStorageService.getUserOfficeProject()
-    ]);
-  }).pipe(
-    tap(([lang, userOffice, userOfficeProject]) => {
-      if (lang) {
-        this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang }));
-      } else {
-        this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang: 'es-co' }));
-      }
-      this.store.dispatch(new fromCoreActions.SetUserOffice({ userOffice, redirect: false }));
-      this.store.dispatch(new fromCoreActions.SetUserOfficeProject({ userOfficeProject, redirect: false }));
-    })
+  init$ = createEffect(
+    () => defer(() => {
+      return of([
+        this.localStorageService.getLang(),
+        this.localStorageService.getUserOffice(),
+        this.localStorageService.getUserOfficeProject()
+      ]);
+    }).pipe(
+      tap(([lang, userOffice, userOfficeProject]) => {
+        if (lang) {
+          this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang }));
+        } else {
+          this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang: 'es-co' }));
+        }
+        this.store.dispatch(new fromCoreActions.SetUserOffice({ userOffice, redirect: false }));
+        this.store.dispatch(new fromCoreActions.SetUserOfficeProject({ userOfficeProject, redirect: false }));
+      })
+    ),
+    { dispatch: false }
   );
 
   constructor(

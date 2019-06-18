@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
@@ -10,37 +10,43 @@ import { map, tap } from 'rxjs/operators';
 @Injectable()
 export class LayoutAuthEffects {
 
-  @Effect({ dispatch: false })
-  auth$ = this.actions$.pipe(
-    ofType(
-      fromAuthActions.AuthActionTypes.Auth,
-      fromAuthActions.AuthActionTypes.CheckAuth
+  auth$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromAuthActions.AuthActionTypes.Auth,
+        fromAuthActions.AuthActionTypes.CheckAuth
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  authSuccess$ = this.actions$.pipe(
-    ofType(
-      fromAuthActions.AuthActionTypes.AuthSuccess,
-      fromAuthActions.AuthActionTypes.CheckAuthSuccess
+  authSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromAuthActions.AuthActionTypes.AuthSuccess,
+        fromAuthActions.AuthActionTypes.CheckAuthSuccess
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  authFailure$ = this.actions$.pipe(
-    ofType(
-      fromAuthActions.AuthActionTypes.AuthFailure,
-      fromAuthActions.AuthActionTypes.CheckAuthFailure
+  authFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromAuthActions.AuthActionTypes.AuthFailure,
+        fromAuthActions.AuthActionTypes.CheckAuthFailure
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-    })
+    { dispatch: false }
   );
 
   constructor(

@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/a/estate/store/reducers/entity-estate.reducer';
 import * as fromSearch from '@web/app/features/a/estate/store/reducers/search-estate.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   estate: EstateState;
 }
 
-export const reducers: ActionReducerMap<EstateState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: EstateState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer,
+  })(state, action);
+}
 
 export const getEstateState = createFeatureSelector<State, EstateState>('estate');

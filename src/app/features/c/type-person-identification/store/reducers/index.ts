@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/c/type-person-identification/store/reducers/entity-type-person-identification.reducer';
 import * as fromSearch from '@web/app/features/c/type-person-identification/store/reducers/search-type-person-identification.reducer';
@@ -18,11 +18,13 @@ export interface State extends fromCore.State {
   type_person_identification: TypePersonIdentificationState;
 }
 
-export const reducers: ActionReducerMap<TypePersonIdentificationState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: TypePersonIdentificationState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getTypePersonIdentificationState = createFeatureSelector<State, TypePersonIdentificationState>('type_person_identification');

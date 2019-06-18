@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
@@ -11,93 +11,105 @@ import { map, tap } from 'rxjs/operators';
 export class LayoutHourRangeEffects {
 
   // Notifications / Spinner
-  @Effect({ dispatch: false })
-  entity$ = this.actions$.pipe(
-    ofType(
-      fromHourRangeActions.EntityActionTypes.LoadEntity,
-      fromHourRangeActions.EntityActionTypes.StoreEntity,
-      fromHourRangeActions.EntityActionTypes.UpdateEntity,
-      fromHourRangeActions.EntityActionTypes.DestroyEntity,
-      fromHourRangeActions.EntityActionTypes.PaginateEntity,
-      fromHourRangeActions.EntityActionTypes.LoadEntityShared
+  entity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromHourRangeActions.EntityActionTypes.LoadEntity,
+        fromHourRangeActions.EntityActionTypes.StoreEntity,
+        fromHourRangeActions.EntityActionTypes.UpdateEntity,
+        fromHourRangeActions.EntityActionTypes.DestroyEntity,
+        fromHourRangeActions.EntityActionTypes.PaginateEntity,
+        fromHourRangeActions.EntityActionTypes.LoadEntityShared
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  loadSuccessEntity$ = this.actions$.pipe(
-    ofType(
-      fromHourRangeActions.EntityActionTypes.LoadSuccessEntity
+  loadSuccessEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromHourRangeActions.EntityActionTypes.LoadSuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  success$ = this.actions$.pipe(
-    ofType(
-      fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
-      fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-      fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
+  success$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
+        fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
+        fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(new fromCore.ShowMessages({
+          messages: [
+            { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
+          ]
+        }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-      this.store.dispatch(new fromCore.ShowMessages({
-        messages: [
-          { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
-        ]
-      }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  fail$ = this.actions$.pipe(
-    ofType(
-      fromHourRangeActions.EntityActionTypes.LoadFailEntity,
-      fromHourRangeActions.EntityActionTypes.StoreFailEntity,
-      fromHourRangeActions.EntityActionTypes.UpdateFailEntity,
-      fromHourRangeActions.EntityActionTypes.DestroyFailEntity
+  fail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromHourRangeActions.EntityActionTypes.LoadFailEntity,
+        fromHourRangeActions.EntityActionTypes.StoreFailEntity,
+        fromHourRangeActions.EntityActionTypes.UpdateFailEntity,
+        fromHourRangeActions.EntityActionTypes.DestroyFailEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(new fromCore.ShowMessages({
+          messages: [
+            { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
+          ]
+        }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-      this.store.dispatch(new fromCore.ShowMessages({
-        messages: [
-          { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
-        ]
-      }));
-    })
+    { dispatch: false }
   );
 
   // Redirects
-  @Effect({ dispatch: false })
-  successRedirect$ = this.actions$.pipe(
-    ofType(
-      fromHourRangeActions.EntityActionTypes.LoadEntity,
-      fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
-      fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-      fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
+  successRedirect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromHourRangeActions.EntityActionTypes.LoadEntity,
+        fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
+        fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
+        fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  reset$ = this.actions$.pipe(
-    ofType(fromHourRangeActions.EntityActionTypes.Reset),
-    map((action: fromHourRangeActions.Reset) => action.payload),
-    tap(({ redirect }) => {
-      if (redirect) {
-        this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
-      }
-    })
+  reset$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromHourRangeActions.EntityActionTypes.Reset),
+      map((action: fromHourRangeActions.Reset) => action.payload),
+      tap(({ redirect }) => {
+        if (redirect) {
+          this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
+        }
+      })
+    ),
+    { dispatch: false }
   );
 
   constructor(
     private actions$: Actions,
     private store: Store<fromCore.State>
-  ) {}
+  ) { }
 }

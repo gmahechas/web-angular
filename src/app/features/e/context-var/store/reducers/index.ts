@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/e/context-var/store/reducers/entity-context-var.reducer';
 import * as fromSearch from '@web/app/features/e/context-var/store/reducers/search-context-var.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   context_var: ContextVarState;
 }
 
-export const reducers: ActionReducerMap<ContextVarState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: ContextVarState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getContextVarState = createFeatureSelector<State, ContextVarState>('context_var');

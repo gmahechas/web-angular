@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/c/person/store/reducers/entity-person.reducer';
 import * as fromSearch from '@web/app/features/c/person/store/reducers/search-person.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   person: PersonState;
 }
 
-export const reducers: ActionReducerMap<PersonState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: PersonState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getPersonState = createFeatureSelector<State, PersonState>('person');

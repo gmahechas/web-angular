@@ -2,8 +2,8 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects, metaReducers } from '@web/app/core/store';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { ROOT_REDUCERS, metaReducers, effects } from '@web/app/core/store';
+import { StoreRouterConnectingModule, RouterStateSerializer, RouterState } from '@ngrx/router-store';
 import { CustomPreload, CustomRouterStateSerializer } from '@web/app/shared/router-utils';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -20,9 +20,18 @@ import { environment } from '@web/environments/environment';
 @NgModule({
   imports: [
     SharedModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(ROOT_REDUCERS, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+      },
+    }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
+      routerState: RouterState.Minimal
     }),
     StoreDevtoolsModule.instrument({
       name: 'NgRx Web Store DevTools',

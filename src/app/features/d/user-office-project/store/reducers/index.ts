@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/d/user-office-project/store/reducers/entity-user-office-project.reducer';
 import * as fromSearch from '@web/app/features/d/user-office-project/store/reducers/search-user-office-project.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   user_office_project: UserOfficeProjectState;
 }
 
-export const reducers: ActionReducerMap<UserOfficeProjectState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: UserOfficeProjectState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getUserOfficeProjectState = createFeatureSelector<State, UserOfficeProjectState>('user_office_project');

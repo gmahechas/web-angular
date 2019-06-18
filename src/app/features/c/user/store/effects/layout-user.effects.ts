@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
@@ -11,89 +11,101 @@ import { map, tap } from 'rxjs/operators';
 export class LayoutUserEffects {
 
   // Notifications / Spinner
-  @Effect({ dispatch: false })
-  entity$ = this.actions$.pipe(
-    ofType(
-      fromUserActions.EntityActionTypes.LoadEntity,
-      fromUserActions.EntityActionTypes.StoreEntity,
-      fromUserActions.EntityActionTypes.UpdateEntity,
-      fromUserActions.EntityActionTypes.DestroyEntity,
-      fromUserActions.EntityActionTypes.PaginateEntity,
-      fromUserActions.EntityActionTypes.LoadEntityShared
+  entity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromUserActions.EntityActionTypes.LoadEntity,
+        fromUserActions.EntityActionTypes.StoreEntity,
+        fromUserActions.EntityActionTypes.UpdateEntity,
+        fromUserActions.EntityActionTypes.DestroyEntity,
+        fromUserActions.EntityActionTypes.PaginateEntity,
+        fromUserActions.EntityActionTypes.LoadEntityShared
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  loadSuccessEntity$ = this.actions$.pipe(
-    ofType(
-      fromUserActions.EntityActionTypes.LoadSuccessEntity
+  loadSuccessEntity$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromUserActions.EntityActionTypes.LoadSuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  success$ = this.actions$.pipe(
-    ofType(
-      fromUserActions.EntityActionTypes.StoreSuccessEntity,
-      fromUserActions.EntityActionTypes.UpdateSuccessEntity,
-      fromUserActions.EntityActionTypes.DestroySuccessEntity
+  success$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromUserActions.EntityActionTypes.StoreSuccessEntity,
+        fromUserActions.EntityActionTypes.UpdateSuccessEntity,
+        fromUserActions.EntityActionTypes.DestroySuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(new fromCore.ShowMessages({
+          messages: [
+            { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
+          ]
+        }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-      this.store.dispatch(new fromCore.ShowMessages({
-        messages: [
-          { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
-        ]
-      }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  fail$ = this.actions$.pipe(
-    ofType(
-      fromUserActions.EntityActionTypes.LoadFailEntity,
-      fromUserActions.EntityActionTypes.StoreFailEntity,
-      fromUserActions.EntityActionTypes.UpdateFailEntity,
-      fromUserActions.EntityActionTypes.DestroyFailEntity
+  fail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromUserActions.EntityActionTypes.LoadFailEntity,
+        fromUserActions.EntityActionTypes.StoreFailEntity,
+        fromUserActions.EntityActionTypes.UpdateFailEntity,
+        fromUserActions.EntityActionTypes.DestroyFailEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(new fromCore.ShowMessages({
+          messages: [
+            { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
+          ]
+        }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-      this.store.dispatch(new fromCore.ShowMessages({
-        messages: [
-          { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
-        ]
-      }));
-    })
+    { dispatch: false }
   );
 
   // Redirects
-  @Effect({ dispatch: false })
-  successRedirect$ = this.actions$.pipe(
-    ofType(
-      fromUserActions.EntityActionTypes.LoadEntity,
-      fromUserActions.EntityActionTypes.StoreSuccessEntity,
-      fromUserActions.EntityActionTypes.UpdateSuccessEntity,
-      fromUserActions.EntityActionTypes.DestroySuccessEntity
+  successRedirect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromUserActions.EntityActionTypes.LoadEntity,
+        fromUserActions.EntityActionTypes.StoreSuccessEntity,
+        fromUserActions.EntityActionTypes.UpdateSuccessEntity,
+        fromUserActions.EntityActionTypes.DestroySuccessEntity
+      ),
+      tap(() => {
+        this.store.dispatch(new fromCore.Go({ path: ['user'] }));
+      })
     ),
-    tap(() => {
-      this.store.dispatch(new fromCore.Go({ path: ['user'] }));
-    })
+    { dispatch: false }
   );
 
-  @Effect({ dispatch: false })
-  reset$ = this.actions$.pipe(
-    ofType(fromUserActions.EntityActionTypes.Reset),
-    map((action: fromUserActions.Reset) => action.payload),
-    tap(({ redirect }) => {
-      if (redirect) {
-        this.store.dispatch(new fromCore.Go({ path: ['user'] }));
-      }
-    })
+  reset$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromUserActions.EntityActionTypes.Reset),
+      map((action: fromUserActions.Reset) => action.payload),
+      tap(({ redirect }) => {
+        if (redirect) {
+          this.store.dispatch(new fromCore.Go({ path: ['user'] }));
+        }
+      })
+    ),
+    { dispatch: false }
   );
 
   constructor(

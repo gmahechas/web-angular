@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/f/hour-range/store/reducers/entity-hour-range.reducer';
 import * as fromSearch from '@web/app/features/f/hour-range/store/reducers/search-hour-range.reducer';
@@ -17,11 +17,13 @@ export interface State extends fromCore.State {
   hour_range: HourRangeState;
 }
 
-export const reducers: ActionReducerMap<HourRangeState> = {
-  entity: fromEntity.reducer,
-  search: fromSearch.reducer,
-  pagination: fromPagination.reducer,
-  layout: fromLayout.reducer
-};
+export function reducers(state: HourRangeState | undefined, action: Action) {
+  return combineReducers({
+    entity: fromEntity.reducer,
+    search: fromSearch.reducer,
+    pagination: fromPagination.reducer,
+    layout: fromLayout.reducer
+  })(state, action);
+}
 
 export const getHourRangeState = createFeatureSelector<State, HourRangeState>('hour_range');

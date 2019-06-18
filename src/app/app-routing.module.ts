@@ -6,12 +6,10 @@ import { HaveUserOfficeCoreGuard } from '@web/app/core/guards/have-user-office-c
 
 import { NotFoundCoreComponent } from '@web/app/core/components/not-found-core/not-found-core.component';
 
-import { CustomPreload } from '@web/app/shared/router-utils';
-
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '/dashboard',
     pathMatch: 'full',
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
@@ -129,7 +127,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, preloadingStrategy: CustomPreload })],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 
