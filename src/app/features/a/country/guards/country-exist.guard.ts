@@ -44,7 +44,7 @@ export class CountryExistGuard implements CanActivate {
       select(fromCountry.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromCountry.LoadEntity({
+          this.store.dispatch(fromCountry.EntityActions.LoadEntity({
             search: {
               country: {
                 country_id: countryId,

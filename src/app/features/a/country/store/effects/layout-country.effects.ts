@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromCountryActions from '@web/app/features/a/country/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutCountryEffects {
@@ -14,12 +14,12 @@ export class LayoutCountryEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCountryActions.EntityActionTypes.LoadEntity,
-        fromCountryActions.EntityActionTypes.StoreEntity,
-        fromCountryActions.EntityActionTypes.UpdateEntity,
-        fromCountryActions.EntityActionTypes.DestroyEntity,
-        fromCountryActions.EntityActionTypes.PaginateEntity,
-        fromCountryActions.EntityActionTypes.LoadEntityShared
+        fromCountryActions.EntityActions.LoadEntity,
+        fromCountryActions.EntityActions.StoreEntity,
+        fromCountryActions.EntityActions.UpdateEntity,
+        fromCountryActions.EntityActions.DestroyEntity,
+        fromCountryActions.EntityActions.PaginateEntity,
+        fromCountryActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutCountryEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCountryActions.EntityActionTypes.LoadSuccessEntity
+        fromCountryActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutCountryEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCountryActions.EntityActionTypes.StoreSuccessEntity,
-        fromCountryActions.EntityActionTypes.UpdateSuccessEntity,
-        fromCountryActions.EntityActionTypes.DestroySuccessEntity
+        fromCountryActions.EntityActions.StoreSuccessEntity,
+        fromCountryActions.EntityActions.UpdateSuccessEntity,
+        fromCountryActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutCountryEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCountryActions.EntityActionTypes.LoadFailEntity,
-        fromCountryActions.EntityActionTypes.StoreFailEntity,
-        fromCountryActions.EntityActionTypes.UpdateFailEntity,
-        fromCountryActions.EntityActionTypes.DestroyFailEntity
+        fromCountryActions.EntityActions.LoadFailEntity,
+        fromCountryActions.EntityActions.StoreFailEntity,
+        fromCountryActions.EntityActions.UpdateFailEntity,
+        fromCountryActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutCountryEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCountryActions.EntityActionTypes.LoadEntity,
-        fromCountryActions.EntityActionTypes.StoreSuccessEntity,
-        fromCountryActions.EntityActionTypes.UpdateSuccessEntity,
-        fromCountryActions.EntityActionTypes.DestroySuccessEntity
+        fromCountryActions.EntityActions.LoadEntity,
+        fromCountryActions.EntityActions.StoreSuccessEntity,
+        fromCountryActions.EntityActions.UpdateSuccessEntity,
+        fromCountryActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['country'] }));
@@ -97,8 +97,7 @@ export class LayoutCountryEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCountryActions.EntityActionTypes.Reset),
-      map((action: fromCountryActions.Reset) => action.payload),
+      ofType(fromCountryActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['country'] }));

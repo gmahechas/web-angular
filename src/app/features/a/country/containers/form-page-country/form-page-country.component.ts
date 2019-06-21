@@ -25,21 +25,21 @@ export class FormPageCountryComponent implements OnInit {
   }
 
   onStore(country: Country) {
-    this.store.dispatch(new fromCountry.StoreEntity({ entity: country }));
+    this.store.dispatch(fromCountry.EntityActions.StoreEntity({ entity: country }));
   }
 
   onUpdate(country: Country) {
-    this.store.dispatch(new fromCountry.UpdateEntity({ entity: country }));
+    this.store.dispatch(fromCountry.EntityActions.UpdateEntity({ entity: country }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromCountry.SetSelected({ selected: initialStateSelectedCountry }));
+    this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: initialStateSelectedCountry }));
     this.store.dispatch(new fromCore.Go({
       path: ['country']
     }));
   }
 
   onDestroy(country: Country) {
-    this.store.dispatch(new fromCountry.DestroyEntity({ entity: country }));
+    this.store.dispatch(fromCountry.EntityActions.DestroyEntity({ entity: country }));
   }
 }

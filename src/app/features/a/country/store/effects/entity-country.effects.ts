@@ -18,8 +18,8 @@ export class EntityCountryEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCountryActions.LoadEntity>(fromCountryActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromCountryActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromCountrySelectors.getPerPage)),
         this.store.pipe(select(fromCountrySelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityCountryEffects {
         perPage = (perPage) ? perPage : searchCountry.limit;
         currentPage = (currentPage) ? currentPage : searchCountry.page;
         return this.countryService.load({ ...searchCountry, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromCountryActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromCountryActions.LoadFailEntity({ error })))
+          map(({ data }) => fromCountryActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromCountryActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,24 +37,24 @@ export class EntityCountryEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCountryActions.StoreEntity>(fromCountryActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromCountryActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((country: fromModels.Country) => {
         return this.countryService.store(country).pipe(
-          map(({ data }) => new fromCountryActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromCountryActions.StoreFailEntity({ error })))
+          map(({ data }) => fromCountryActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromCountryActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     ));
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCountryActions.UpdateEntity>(fromCountryActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromCountryActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((country: fromModels.Country) => {
         return this.countryService.update(country).pipe(
-          map(({ data }) => new fromCountryActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromCountryActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromCountryActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromCountryActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -62,12 +62,12 @@ export class EntityCountryEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCountryActions.DestroyEntity>(fromCountryActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromCountryActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((country: fromModels.Country) => {
         return this.countryService.destroy(country).pipe(
-          map(({ data }) => new fromCountryActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromCountryActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromCountryActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromCountryActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -75,16 +75,16 @@ export class EntityCountryEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCountryActions.PaginateEntity>(fromCountryActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromCountryActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromCountrySelectors.getPerPage)),
         this.store.pipe(select(fromCountrySelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchCountry]: [number, number, fromModels.SearchCountry]) => {
         return from(this.countryService.pagination({ ...searchCountry, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromCountryActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromCountryActions.LoadFailEntity({ error })))
+          map(({ data }) => fromCountryActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromCountryActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -92,9 +92,9 @@ export class EntityCountryEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromCountryActions.LoadEntityShared>(fromCountryActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromCountryActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchCountry: fromModels.SearchCountry) => {
         if (
           searchCountry.country.country_id === '' &&
@@ -105,14 +105,14 @@ export class EntityCountryEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromCountryActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromCountryActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.countryService.load({ ...searchCountry, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromCountryActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromCountryActions.LoadFailEntity({ error })))
+          map(({ data }) => fromCountryActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromCountryActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )

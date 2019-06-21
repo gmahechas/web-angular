@@ -58,7 +58,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onLoad(countrySearch: SearchCountry) {
-    this.store.dispatch(new fromCountry.LoadEntity({
+    this.store.dispatch(fromCountry.EntityActions.LoadEntity({
       search: {
         ...countrySearch,
         limit: 20,
@@ -68,32 +68,32 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromCountry.SetSelected({ selected: initialStateSelectedCountry }));
+    this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: initialStateSelectedCountry }));
     this.store.dispatch(new fromCore.Go({
       path: ['country', 'create']
     }));
   }
 
   onEdit(country: Country) {
-    this.store.dispatch(new fromCountry.SetSelected({ selected: { selectedEntity: country } }));
+    this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: { selectedEntity: country } }));
     this.store.dispatch(new fromCore.Go({
       path: ['country', country.country_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromCountry.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromCountry.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromCountry.SetSelected({ selected: initialStateSelectedCountry }));
+    this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: initialStateSelectedCountry }));
     this.store.dispatch(new fromCore.Go({
       path: ['country']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromCountry.Reset({ redirect: true }));
+    this.store.dispatch(fromCountry.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

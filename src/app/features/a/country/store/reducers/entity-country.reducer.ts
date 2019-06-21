@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { EntityActions } from '@web/app/features/a/country/store/actions';
 import { Country } from '@web/app/features/a/country/models/country.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/a/country/store/actions/entity-country.actions';
 
 export interface State extends EntityState<Country> { }
 
@@ -11,42 +12,34 @@ export const adapter: EntityAdapter<Country> = createEntityAdapter<Country>({
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationCountry.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationCountry.data, state)
+  ),
+  on(
+    EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeCountry, newState);
+      return adapter.addOne(entity.storeCountry, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateCountry.country_id,
-        changes: action.payload.entity.updateCountry
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyCountry.country_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateCountry.country_id, changes: entity.updateCountry }, state)
+  ),
+  on(
+    EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyCountry.country_id, state)
+  ),
+  on(
+    EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);
