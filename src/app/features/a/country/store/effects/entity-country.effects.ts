@@ -45,7 +45,8 @@ export class EntityCountryEffects {
           catchError((error) => of(fromCountryActions.EntityActions.StoreFailEntity({ error })))
         );
       })
-    ));
+    )
+  );
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
