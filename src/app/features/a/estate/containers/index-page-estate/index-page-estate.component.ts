@@ -59,7 +59,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   }
 
   onLoad(estateSearch: SearchEstate) {
-    this.store.dispatch(new fromEstate.LoadEntity({
+    this.store.dispatch(fromEstate.EntityActions.LoadEntity({
       search: {
         ...estateSearch,
         limit: 20,
@@ -69,32 +69,32 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromEstate.SetSelected({ selected: initialStateSelectedEstate }));
+    this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: initialStateSelectedEstate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', 'create']
     }));
   }
 
   onEdit(estate: Estate) {
-    this.store.dispatch(new fromEstate.SetSelected({ selected: { selectedEntity: estate } }));
+    this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: { selectedEntity: estate } }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate', estate.estate_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromEstate.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromEstate.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromEstate.SetSelected({ selected: initialStateSelectedEstate }));
+    this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: initialStateSelectedEstate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromEstate.Reset({ redirect: true }));
+    this.store.dispatch(fromEstate.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

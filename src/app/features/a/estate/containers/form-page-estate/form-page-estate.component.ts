@@ -25,21 +25,21 @@ export class FormPageEstateComponent implements OnInit {
   }
 
   onStore(estate: Estate) {
-    this.store.dispatch(new fromEstate.StoreEntity({ entity: estate }));
+    this.store.dispatch(fromEstate.EntityActions.StoreEntity({ entity: estate }));
   }
 
   onUpdate(estate: Estate) {
-    this.store.dispatch(new fromEstate.UpdateEntity({ entity: estate }));
+    this.store.dispatch(fromEstate.EntityActions.UpdateEntity({ entity: estate }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromEstate.SetSelected({ selected: initialStateSelectedEstate }));
+    this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: initialStateSelectedEstate }));
     this.store.dispatch(new fromCore.Go({
       path: ['estate']
     }));
   }
 
   onDestroy(estate: Estate) {
-    this.store.dispatch(new fromEstate.DestroyEntity({ entity: estate }));
+    this.store.dispatch(fromEstate.EntityActions.DestroyEntity({ entity: estate }));
   }
 }

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromEstateActions from '@web/app/features/a/estate/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutEstateEffects {
@@ -14,12 +14,12 @@ export class LayoutEstateEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromEstateActions.EntityActionTypes.LoadEntity,
-        fromEstateActions.EntityActionTypes.StoreEntity,
-        fromEstateActions.EntityActionTypes.UpdateEntity,
-        fromEstateActions.EntityActionTypes.DestroyEntity,
-        fromEstateActions.EntityActionTypes.PaginateEntity,
-        fromEstateActions.EntityActionTypes.LoadEntityShared
+        fromEstateActions.EntityActions.LoadEntity,
+        fromEstateActions.EntityActions.StoreEntity,
+        fromEstateActions.EntityActions.UpdateEntity,
+        fromEstateActions.EntityActions.DestroyEntity,
+        fromEstateActions.EntityActions.PaginateEntity,
+        fromEstateActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutEstateEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromEstateActions.EntityActionTypes.LoadSuccessEntity,
+        fromEstateActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutEstateEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromEstateActions.EntityActionTypes.StoreSuccessEntity,
-        fromEstateActions.EntityActionTypes.UpdateSuccessEntity,
-        fromEstateActions.EntityActionTypes.DestroySuccessEntity
+        fromEstateActions.EntityActions.StoreSuccessEntity,
+        fromEstateActions.EntityActions.UpdateSuccessEntity,
+        fromEstateActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutEstateEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromEstateActions.EntityActionTypes.LoadFailEntity,
-        fromEstateActions.EntityActionTypes.StoreFailEntity,
-        fromEstateActions.EntityActionTypes.UpdateFailEntity,
-        fromEstateActions.EntityActionTypes.DestroyFailEntity
+        fromEstateActions.EntityActions.LoadFailEntity,
+        fromEstateActions.EntityActions.StoreFailEntity,
+        fromEstateActions.EntityActions.UpdateFailEntity,
+        fromEstateActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutEstateEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromEstateActions.EntityActionTypes.LoadEntity,
-        fromEstateActions.EntityActionTypes.StoreSuccessEntity,
-        fromEstateActions.EntityActionTypes.UpdateSuccessEntity,
-        fromEstateActions.EntityActionTypes.DestroySuccessEntity
+        fromEstateActions.EntityActions.LoadEntity,
+        fromEstateActions.EntityActions.StoreSuccessEntity,
+        fromEstateActions.EntityActions.UpdateSuccessEntity,
+        fromEstateActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['estate'] }));
@@ -97,8 +97,7 @@ export class LayoutEstateEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromEstateActions.EntityActionTypes.Reset),
-      map((action: fromEstateActions.Reset) => action.payload),
+      ofType(fromEstateActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['estate'] }));

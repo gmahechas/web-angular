@@ -43,7 +43,7 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromEstate.Reset({ redirect: false }));
+      this.store.dispatch(fromEstate.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -59,7 +59,7 @@ export class DropdownPageEstateComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchEstate: SearchEstate) {
-    this.store.dispatch(new fromEstate.LoadEntityShared({
+    this.store.dispatch(fromEstate.EntityActions.LoadEntityShared({
       search: searchEstate
     }));
   }

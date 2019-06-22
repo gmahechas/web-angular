@@ -18,8 +18,8 @@ export class EntityEstateEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromEstateActions.LoadEntity>(fromEstateActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromEstateActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromEstateSelectors.getPerPage)),
         this.store.pipe(select(fromEstateSelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityEstateEffects {
         perPage = (perPage) ? perPage : searchEstate.limit;
         currentPage = (currentPage) ? currentPage : searchEstate.page;
         return this.estateService.load({ ...searchEstate, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
+          map(({ data }) => fromEstateActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromEstateActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityEstateEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromEstateActions.StoreEntity>(fromEstateActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromEstateActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((estate: fromModels.Estate) => {
         return this.estateService.store(estate).pipe(
-          map(({ data }) => new fromEstateActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromEstateActions.StoreFailEntity({ error })))
+          map(({ data }) => fromEstateActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromEstateActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityEstateEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromEstateActions.UpdateEntity>(fromEstateActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromEstateActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((estate: fromModels.Estate) => {
         return this.estateService.update(estate).pipe(
-          map(({ data }) => new fromEstateActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromEstateActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromEstateActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromEstateActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityEstateEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromEstateActions.DestroyEntity>(fromEstateActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromEstateActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((estate: fromModels.Estate) => {
         return this.estateService.destroy(estate).pipe(
-          map(({ data }) => new fromEstateActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromEstateActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromEstateActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromEstateActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityEstateEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromEstateActions.PaginateEntity>(fromEstateActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromEstateActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromEstateSelectors.getPerPage)),
         this.store.pipe(select(fromEstateSelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchEstate]: [number, number, fromModels.SearchEstate]) => {
         return from(this.estateService.pagination({ ...searchEstate, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
+          map(({ data }) => fromEstateActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromEstateActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityEstateEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromEstateActions.LoadEntityShared>(fromEstateActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromEstateActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchEstate: fromModels.SearchEstate) => {
         if (
           searchEstate.estate.estate_id === '' &&
@@ -107,14 +107,14 @@ export class EntityEstateEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromEstateActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromEstateActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.estateService.load({ ...searchEstate, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromEstateActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromEstateActions.LoadFailEntity({ error })))
+          map(({ data }) => fromEstateActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromEstateActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
