@@ -43,7 +43,7 @@ export class DropdownPageUserOfficeProjectComponent implements OnChanges, OnInit
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromUserOffice.Reset({ redirect: false }));
+      this.store.dispatch(fromUserOffice.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -67,7 +67,7 @@ export class DropdownPageUserOfficeProjectComponent implements OnChanges, OnInit
   }
 
   onLoad(searchUserOfficeProject: SearchUserOfficeProject) {
-    this.store.dispatch(new fromUserOffice.LoadEntityShared({
+    this.store.dispatch(fromUserOffice.EntityActions.LoadEntityShared({
       search: searchUserOfficeProject
     }));
   }

@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromUserOfficeProjectActions from '@web/app/features/d/user-office-project/store/actions';
 import { UserOfficeProject } from '@web/app/features/d/user-office-project/models/user-office-project.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/d/user-office-project/store/actions/entity-user-office-project.actions';
 
 export interface State extends EntityState<UserOfficeProject> { }
 
@@ -11,41 +12,34 @@ export const adapter: EntityAdapter<UserOfficeProject> = createEntityAdapter<Use
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationUserOfficeProject.data, state);
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromUserOfficeProjectActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationUserOfficeProject.data, state)
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
+      const newState = adapter.removeAll(state);
+      return adapter.addOne(entity.storeUserOfficeProject, newState);
     }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return adapter.addOne(action.payload.entity.storeUserOfficeProject, state);
-    }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateUserOfficeProject.user_office_project_id,
-        changes: action.payload.entity.updateUserOfficeProject
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyUserOfficeProject.user_office_project_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateUserOfficeProject.user_office_project_id, changes: entity.updateUserOfficeProject }, state)
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyUserOfficeProject.user_office_project_id, state)
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);

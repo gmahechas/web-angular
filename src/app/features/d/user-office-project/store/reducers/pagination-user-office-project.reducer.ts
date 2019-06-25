@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/d/user-office-project/store/actions/entity-user-office-project.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromUserOfficeProjectActions from '@web/app/features/d/user-office-project/store/actions';
 
 export interface State {
   total: number;
@@ -16,42 +17,34 @@ export const initialState: State = {
   to: null
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        total: action.payload.entities.paginationUserOfficeProject.total,
-        perPage: action.payload.entities.paginationUserOfficeProject.per_page,
-        currentPage: action.payload.entities.paginationUserOfficeProject.current_page,
-        from: action.payload.entities.paginationUserOfficeProject.from,
-        to: action.payload.entities.paginationUserOfficeProject.to
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromUserOfficeProjectActions.EntityActions.LoadEntity,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => ({
+      ...state,
+      total: entities.paginationUserOfficeProject.total,
+      perPage: entities.paginationUserOfficeProject.per_page,
+      currentPage: entities.paginationUserOfficeProject.current_page,
+      from: entities.paginationUserOfficeProject.from,
+      to: entities.paginationUserOfficeProject.to
+    })
+  ),
+  on(
+    fromUserOfficeProjectActions.EntityActions.LoadFailEntity,
+    fromUserOfficeProjectActions.EntityActions.StoreSuccessEntity,
+    fromUserOfficeProjectActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getTotal = (state: State) => state.total;
 export const getPerPage = (state: State) => state.perPage;

@@ -61,7 +61,7 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
         case 'office_id':
           const userOfficeId = paramsMap.get(paramsMap.keys[1]);
           setTimeout(() => {
-            this.store.dispatch(new fromUserOfficeProject.LoadEntity({
+            this.store.dispatch(fromUserOfficeProject.EntityActions.LoadEntity({
               search: {
                 user_office: {
                   user_office_id: +userOfficeId
@@ -73,7 +73,7 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
         case 'project_id':
           const projectId = paramsMap.get(key);
           setTimeout(() => {
-            this.store.dispatch(new fromUserOfficeProject.LoadEntity({
+            this.store.dispatch(fromUserOfficeProject.EntityActions.LoadEntity({
               search: {
                 project: {
                   project_id: +projectId
@@ -98,7 +98,7 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
   }
 
   onStore(userOfficeProject: UserOfficeProject) {
-    this.store.dispatch(new fromUserOfficeProject.StoreEntity({ entity: userOfficeProject }));
+    this.store.dispatch(fromUserOfficeProject.EntityActions.StoreEntity({ entity: userOfficeProject }));
     switch (this.entityLabel) {
       case 'user':
       case 'office':
@@ -111,15 +111,15 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
   }
 
   onEdit(userOfficeProject: UserOfficeProject) {
-    this.store.dispatch(new fromUserOfficeProject.UpdateEntity({ entity: userOfficeProject }));
+    this.store.dispatch(fromUserOfficeProject.EntityActions.UpdateEntity({ entity: userOfficeProject }));
   }
 
   onDelete(userOfficeProject: UserOfficeProject) {
-    this.store.dispatch(new fromUserOfficeProject.DestroyEntity({ entity: userOfficeProject }));
+    this.store.dispatch(fromUserOfficeProject.EntityActions.DestroyEntity({ entity: userOfficeProject }));
   }
 
   ngOnDestroy() {
     this.suscription.unsubscribe();
-    this.store.dispatch(new fromUserOfficeProject.Reset({ redirect: false }));
+    this.store.dispatch(fromUserOfficeProject.EntityActions.Reset({ redirect: false }));
   }
 }

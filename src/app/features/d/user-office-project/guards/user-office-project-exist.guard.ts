@@ -44,7 +44,7 @@ export class UserOfficeProjectExistGuard implements CanActivate {
       select(fromUserOfficeProject.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromUserOfficeProject.LoadEntity({
+          this.store.dispatch(fromUserOfficeProject.EntityActions.LoadEntity({
             search: {
               user_office_project: {
                 user_office_project_id: userOfficeProjectId,
