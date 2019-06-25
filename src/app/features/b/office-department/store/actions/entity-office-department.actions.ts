@@ -1,120 +1,83 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import * as fromModels from '@web/app/features/b/office-department/models';
 
-export enum EntityActionTypes {
-  LoadEntity = '[OfficeDepartment] Load Entity ',
-  LoadSuccessEntity = '[OfficeDepartment] Load Success Entity',
-  LoadFailEntity = '[OfficeDepartment] Load Fail Entity',
-  StoreEntity = '[OfficeDepartment] Store Entity',
-  StoreSuccessEntity = '[OfficeDepartment] Store Success Entity',
-  StoreFailEntity = '[OfficeDepartment] Store Fail Entity',
-  UpdateEntity = '[OfficeDepartment] Update Entity',
-  UpdateSuccessEntity = '[OfficeDepartment] Update Success Entity',
-  UpdateFailEntity = '[OfficeDepartment] Update Fail Entity',
-  DestroyEntity = '[OfficeDepartment] Destroy Entity',
-  DestroySuccessEntity = '[OfficeDepartment] Destroy Success Entity',
-  DestroyFailEntity = '[OfficeDepartment] Destroy Fail Entity',
-  PaginateEntity = '[OfficeDepartment] Paginate Entity',
-  LoadEntityShared = '[OfficeDepartment] Load Entity Shared',
-  Reset = '[OfficeDepartment] Reset',
-  SetSelected = '[OfficeDepartment] Set Selected'
-}
+export const LoadEntity = createAction(
+  '[OfficeDepartment] Load Entity',
+  props<{ search: fromModels.SearchOfficeDepartment }>()
+);
 
-export class LoadEntity implements Action {
-  readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: { search: fromModels.SearchOfficeDepartment }) { }
-}
+export const LoadSuccessEntity = createAction(
+  '[OfficeDepartment] Load Success Entity',
+  props<{ entities: fromModels.PaginationOfficeDepartment }>()
+);
 
-export class LoadSuccessEntity implements Action {
-  readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: { entities: fromModels.PaginationOfficeDepartment }) { }
-}
+export const LoadFailEntity = createAction(
+  '[OfficeDepartment] Load Fail Entity',
+  props<{ error: any }>()
+);
 
-export class LoadFailEntity implements Action {
-  readonly type = EntityActionTypes.LoadFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const StoreEntity = createAction(
+  '[OfficeDepartment] Store Entity',
+  props<{ entity: fromModels.OfficeDepartment }>()
+);
 
-export class StoreEntity implements Action {
-  readonly type = EntityActionTypes.StoreEntity;
-  constructor(public payload: { entity: fromModels.OfficeDepartment }) { }
-}
+export const StoreSuccessEntity = createAction(
+  '[OfficeDepartment] Store Success Entity',
+  props<{ entity: fromModels.StoreOfficeDepartment }>()
+);
 
-export class StoreSuccessEntity implements Action {
-  readonly type = EntityActionTypes.StoreSuccessEntity;
-  constructor(public payload: { entity: fromModels.StoreOfficeDepartment }) { }
-}
+export const StoreFailEntity = createAction(
+  '[OfficeDepartment] Store Fail Entity',
+  props<{ error: any }>()
+);
 
-export class StoreFailEntity implements Action {
-  readonly type = EntityActionTypes.StoreFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const UpdateEntity = createAction(
+  '[OfficeDepartment] Update Entity',
+  props<{ entity: fromModels.OfficeDepartment }>()
+);
 
-export class UpdateEntity implements Action {
-  readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: { entity: fromModels.OfficeDepartment }) { }
-}
+export const UpdateSuccessEntity = createAction(
+  '[OfficeDepartment] Update Success Entity',
+  props<{ entity: fromModels.UpdateOfficeDepartment }>()
+);
 
-export class UpdateSuccessEntity implements Action {
-  readonly type = EntityActionTypes.UpdateSuccessEntity;
-  constructor(public payload: { entity: fromModels.UpdateOfficeDepartment }) { }
-}
+export const UpdateFailEntity = createAction(
+  '[OfficeDepartment] Update Fail Entity',
+  props<{ error: any }>()
+);
 
-export class UpdateFailEntity implements Action {
-  readonly type = EntityActionTypes.UpdateFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const DestroyEntity = createAction(
+  '[OfficeDepartment] Destroy Entity',
+  props<{ entity: fromModels.OfficeDepartment }>()
+);
 
-export class DestroyEntity implements Action {
-  readonly type = EntityActionTypes.DestroyEntity;
-  constructor(public payload: { entity: fromModels.OfficeDepartment }) { }
-}
+export const DestroySuccessEntity = createAction(
+  '[OfficeDepartment] Destroy Success Entity',
+  props<{ entity: fromModels.DestroyOfficeDepartment }>()
+);
 
-export class DestroySuccessEntity implements Action {
-  readonly type = EntityActionTypes.DestroySuccessEntity;
-  constructor(public payload: { entity: fromModels.DestroyOfficeDepartment }) { }
-}
+export const DestroyFailEntity = createAction(
+  '[OfficeDepartment] Destroy Fail Entity',
+  props<{ error: any }>()
+);
 
-export class DestroyFailEntity implements Action {
-  readonly type = EntityActionTypes.DestroyFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const PaginateEntity = createAction(
+  '[OfficeDepartment] Paginate Entity',
+  props<{ page: number }>()
+);
 
-export class PaginateEntity implements Action {
-  readonly type = EntityActionTypes.PaginateEntity;
-  constructor(public payload: { page: number }) { }
-}
+export const LoadEntityShared = createAction(
+  '[OfficeDepartment] Load Entity Shared',
+  props<{ search: fromModels.SearchOfficeDepartment}>()
+);
 
-export class LoadEntityShared implements Action {
-  readonly type = EntityActionTypes.LoadEntityShared;
-  constructor(public payload: { search: fromModels.SearchOfficeDepartment }) { }
-}
+export const Reset = createAction(
+  '[OfficeDepartment] Reset',
+  props<{ redirect: boolean }>()
+);
 
-export class Reset implements Action {
-  readonly type = EntityActionTypes.Reset;
-  constructor(public payload: { redirect: boolean }) { }
-}
-
-export class SetSelected implements Action {
-  readonly type = EntityActionTypes.SetSelected;
-  constructor(public payload: { selected: fromModels.SelectedOfficeDepartment }) { }
-}
-
-export type EntityActions =
-  | LoadEntity
-  | LoadSuccessEntity
-  | LoadFailEntity
-  | StoreEntity
-  | StoreSuccessEntity
-  | StoreFailEntity
-  | UpdateEntity
-  | UpdateSuccessEntity
-  | UpdateFailEntity
-  | DestroyEntity
-  | DestroySuccessEntity
-  | DestroyFailEntity
-  | PaginateEntity
-  | LoadEntityShared
-  | Reset
-  | SetSelected;
+export const SetSelected = createAction(
+  '[OfficeDepartment] Set Selected',
+  props<{ selected: fromModels.SelectedOfficeDepartment }>()
+);

@@ -51,7 +51,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
     this.entityLabel = key.split('_')[0];
 
     setTimeout(() => {
-      this.store.dispatch(new fromOfficeDepartment.LoadEntity({
+      this.store.dispatch(fromOfficeDepartment.EntityActions.LoadEntity({
         search: { [this.entityLabel]: { [key]: val } }
       }));
     });
@@ -69,7 +69,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onStore(officeDepartment: OfficeDepartment) {
-    this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
+    this.store.dispatch(fromOfficeDepartment.EntityActions.StoreEntity({ entity: officeDepartment }));
     switch (this.entityLabel) {
       case 'office':
         this.store.dispatch(fromDepartment.EntityActions.Reset({ redirect: false }));
@@ -81,11 +81,11 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onEdit(officeDepartment: OfficeDepartment) {
-    this.store.dispatch(new fromOfficeDepartment.UpdateEntity({ entity: officeDepartment }));
+    this.store.dispatch(fromOfficeDepartment.EntityActions.UpdateEntity({ entity: officeDepartment }));
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromOfficeDepartment.Reset({ redirect: false }));
+    this.store.dispatch(fromOfficeDepartment.EntityActions.Reset({ redirect: false }));
   }
 
 }

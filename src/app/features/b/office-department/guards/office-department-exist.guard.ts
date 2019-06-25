@@ -44,7 +44,7 @@ export class OfficeDepartmentExistGuard implements CanActivate {
       select(fromOfficeDepartment.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromOfficeDepartment.LoadEntity({
+          this.store.dispatch(fromOfficeDepartment.EntityActions.LoadEntity({
             search: {
               office_department: {
                 office_department_id: officeDepartmentId,
