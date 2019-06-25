@@ -25,26 +25,26 @@ export class FormPageUserComponent implements OnInit {
   }
 
   onStore(user: User) {
-    this.store.dispatch(new fromUser.StoreEntity({ entity: user }));
+    this.store.dispatch(fromUser.EntityActions.StoreEntity({ entity: user }));
   }
 
   onUpdate(user: User) {
-    this.store.dispatch(new fromUser.UpdateEntity({ entity: user }));
+    this.store.dispatch(fromUser.EntityActions.UpdateEntity({ entity: user }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromUser.SetSelected({ selected: initialStateSelectedUser }));
+    this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: initialStateSelectedUser }));
     this.store.dispatch(new fromCore.Go({
       path: ['user']
     }));
   }
 
   onDestroy(user: User) {
-    this.store.dispatch(new fromUser.DestroyEntity({ entity: user }));
+    this.store.dispatch(fromUser.EntityActions.DestroyEntity({ entity: user }));
   }
 
   onUserOffice(user: User) {
-    this.store.dispatch(new fromUser.SetSelected({ selected: { gotoUserOffice: true } }));
+    this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: { gotoUserOffice: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['user', user.user_id, { outlets: { 'router-outlet-user-office': ['user-office', 'user', user.user_id] } }]
     }));

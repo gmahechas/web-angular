@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/c/user/store/actions/entity-user.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromUserActions from '@web/app/features/c/user/store/actions';
 
 export interface State {
   total: number;
@@ -16,42 +17,34 @@ export const initialState: State = {
   to: null
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        total: action.payload.entities.paginationUser.total,
-        perPage: action.payload.entities.paginationUser.per_page,
-        currentPage: action.payload.entities.paginationUser.current_page,
-        from: action.payload.entities.paginationUser.from,
-        to: action.payload.entities.paginationUser.to
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromUserActions.EntityActions.LoadEntity,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromUserActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => ({
+      ...state,
+      total: entities.paginationUser.total,
+      perPage: entities.paginationUser.per_page,
+      currentPage: entities.paginationUser.current_page,
+      from: entities.paginationUser.from,
+      to: entities.paginationUser.to
+    })
+  ),
+  on(
+    fromUserActions.EntityActions.LoadFailEntity,
+    fromUserActions.EntityActions.StoreSuccessEntity,
+    fromUserActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getTotal = (state: State) => state.total;
 export const getPerPage = (state: State) => state.perPage;
