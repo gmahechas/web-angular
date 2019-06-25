@@ -13,8 +13,7 @@ export class RouterCoreEffects {
 
   go$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.RouterActionTypes.Go),
-      map((action: fromCoreActions.Go) => action.payload),
+      ofType(fromCoreActions.RouterActions.Go),
       tap(({ path, query: queryParams, extras }) => {
         this.router.navigate(path, { queryParams, ...extras });
       })
@@ -24,7 +23,7 @@ export class RouterCoreEffects {
 
   back$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.RouterActionTypes.Back),
+      ofType(fromCoreActions.RouterActions.Back),
       tap(() => this.location.back())
     ),
     { dispatch: false }
@@ -32,7 +31,7 @@ export class RouterCoreEffects {
 
   forward$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.RouterActionTypes.Forward),
+      ofType(fromCoreActions.RouterActions.Forward),
       tap(() => this.location.forward())
     ),
     { dispatch: false }

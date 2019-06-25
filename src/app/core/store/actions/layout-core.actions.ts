@@ -1,99 +1,68 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Confirm } from '@web/app/core/models/confirm.model';
 
-export enum LayoutActionTypes {
-  SetDefaultLang = '[Layout Core] Set Default Lang',
-  ChangeLang = '[Layout Core] Get Menu',
-  ShowSidebar = '[Layout Core] Show Sidebar',
-  BlockedDocument = '[Layout Core] Blocked Document',
-  ShowSpinner = '[Layout Core] Open Spinner',
-  ShowProgressBar = '[Layout Core] Open Progress Bar',
-  SetUserOffice = '[Layout Core] Set User Office',
-  SetUserOfficeProject = '[Layout Core] Set User Office Project',
-  AddSelectedMenu = '[Layout Core] Add Selected Menu',
-  ChangeSelectedMenu = '[Layout Core] Change Selected Menu',
-  RemoveSelectedMenu = '[Layout Core] Remove Selected Menu',
-  ShowMessages = '[Layout Core] Show Messages',
-  ConfirmDialog = '[Layout Core] Confirm Dialog'
-}
+export const SetDefaultLang = createAction(
+  '[Layout Core] Set Default Lang',
+  props<{ lang: string }>()
+);
 
-export class SetDefaultLang implements Action {
-  readonly type = LayoutActionTypes.SetDefaultLang;
-  constructor(public payload: { lang: string }) { }
-}
+export const ChangeLang = createAction(
+  '[Layout Core] Change Lang',
+  props<{ lang: string }>()
+);
 
-export class ChangeLang implements Action {
-  readonly type = LayoutActionTypes.ChangeLang;
-  constructor(public payload: { lang: string }) { }
-}
+export const ShowSidebar = createAction(
+  '[Layout Core] Show Sidebar',
+  props<{ toggle: boolean }>()
+);
 
-export class ShowSidebar implements Action {
-  readonly type = LayoutActionTypes.ShowSidebar;
-  constructor(public payload: { toggle: boolean }) { }
-}
+export const BlockedDocument = createAction(
+  '[Layout Core] Blocked Document',
+  props<{ toggle: boolean }>()
+);
 
-export class BlockedDocument implements Action {
-  readonly type = LayoutActionTypes.BlockedDocument;
-  constructor(public payload: { toggle: boolean }) { }
-}
+export const ShowSpinner = createAction(
+  '[Layout Core] Show Spinner',
+  props<{ toggle: boolean }>()
+);
 
-export class ShowSpinner implements Action {
-  readonly type = LayoutActionTypes.ShowSpinner;
-  constructor(public payload: { toggle: boolean }) { }
-}
+export const ShowProgressBar = createAction(
+  '[Layout Core] Show Progress Bar',
+  props<{ toggle: boolean }>()
+);
 
-export class ShowProgressBar implements Action {
-  readonly type = LayoutActionTypes.ShowProgressBar;
-  constructor(public payload: { toggle: boolean }) { }
-}
+export const SetUserOffice = createAction(
+  '[Layout Core] Set User Office',
+  props<{ userOffice: any, redirect: boolean }>()
+);
 
-export class SetUserOffice implements Action {
-  readonly type = LayoutActionTypes.SetUserOffice;
-  constructor(public payload: { userOffice: any, redirect: boolean }) { }
-}
+export const SetUserOfficeProject = createAction(
+  '[Layout Core] Set User Office Project',
+  props<{ userOfficeProject: any, redirect: boolean }>()
+);
 
-export class SetUserOfficeProject implements Action {
-  readonly type = LayoutActionTypes.SetUserOfficeProject;
-  constructor(public payload: { userOfficeProject: any, redirect: boolean }) { }
-}
+export const AddSelectedMenu = createAction(
+  '[Layout Core] Add Selected Menu',
+  props<{ profile_menu: any }>()
+);
 
-export class AddSelectedMenu implements Action {
-  readonly type = LayoutActionTypes.AddSelectedMenu;
-  constructor(public payload: { profile_menu: any }) { }
-}
+export const ChangeSelectedMenu = createAction(
+  '[Layout Core] Change Selected Menu',
+  props<{ profile_menu: any }>()
+);
 
-export class ChangeSelectedMenu implements Action {
-  readonly type = LayoutActionTypes.ChangeSelectedMenu;
-  constructor(public payload: { profile_menu: any }) { }
-}
+export const RemoveSelectedMenu = createAction(
+  '[Layout Core] Remove Selected Menu',
+  props<{ index: number }>()
+);
 
-export class RemoveSelectedMenu implements Action {
-  readonly type = LayoutActionTypes.RemoveSelectedMenu;
-  constructor(public payload: { index: number }) { }
-}
+export const ShowMessages = createAction(
+  '[Layout Core] Show Messages',
+  props<{ messages: any[] }>()
+);
 
-export class ShowMessages implements Action {
-  readonly type = LayoutActionTypes.ShowMessages;
-  constructor(public payload: { messages: any[] }) { }
-}
-
-export class ConfirmDialog implements Action {
-  readonly type = LayoutActionTypes.ConfirmDialog;
-  constructor(public payload: { confirm: Confirm }) { }
-}
-
-export type LayoutActions =
-  | SetDefaultLang
-  | ChangeLang
-  | ShowSidebar
-  | BlockedDocument
-  | ShowSpinner
-  | ShowProgressBar
-  | SetUserOffice
-  | SetUserOfficeProject
-  | AddSelectedMenu
-  | ChangeSelectedMenu
-  | RemoveSelectedMenu
-  | ShowMessages
-  | ConfirmDialog;
+export const ConfirmDialog = createAction(
+  '[Layout Core] Confirm Dialog',
+  props<{ confirm: Confirm }>()
+);

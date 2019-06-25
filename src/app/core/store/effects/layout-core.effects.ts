@@ -20,8 +20,8 @@ export class LayoutCoreEffects {
 
   setDefaultLang$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.LayoutActionTypes.SetDefaultLang),
-      map((action: fromCoreActions.SetDefaultLang) => action.payload.lang),
+      ofType(fromCoreActions.LayoutActions.SetDefaultLang),
+      map(action => action.lang),
       tap((lang: string) => {
         this.localStorageService.setLang(lang);
         this.translate.setDefaultLang(lang);
@@ -32,8 +32,8 @@ export class LayoutCoreEffects {
 
   changeLang$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.LayoutActionTypes.ChangeLang),
-      map((action: fromCoreActions.ChangeLang) => action.payload.lang),
+      ofType(fromCoreActions.LayoutActions.ChangeLang),
+      map(action => action.lang),
       tap((lang: string) => {
         this.localStorageService.setLang(lang);
         this.translate.use(lang);
@@ -44,13 +44,12 @@ export class LayoutCoreEffects {
 
   setUserOffice$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.LayoutActionTypes.SetUserOffice),
-      map((action: fromCoreActions.SetUserOffice) => action.payload),
+      ofType(fromCoreActions.LayoutActions.SetUserOffice),
       tap(({ userOffice, redirect }) => {
         this.localStorageService.setUserOffice(userOffice);
         this.localStorageService.setUserOfficeProject(null);
         if (redirect) {
-          this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+          this.store.dispatch(fromCoreActions.RouterActions.Go({ path: ['dashboard'] }));
         }
       })
     ),
@@ -59,12 +58,11 @@ export class LayoutCoreEffects {
 
   setUserOfficeProject$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.LayoutActionTypes.SetUserOfficeProject),
-      map((action: fromCoreActions.SetUserOfficeProject) => action.payload),
+      ofType(fromCoreActions.LayoutActions.SetUserOfficeProject),
       tap(({ userOfficeProject, redirect }) => {
         this.localStorageService.setUserOfficeProject(userOfficeProject);
         if (redirect) {
-          this.store.dispatch(new fromCoreActions.Go({ path: ['dashboard'] }));
+          this.store.dispatch(fromCoreActions.RouterActions.Go({ path: ['dashboard'] }));
         }
       })
     ),
@@ -73,8 +71,8 @@ export class LayoutCoreEffects {
 
   showMessages$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.LayoutActionTypes.ShowMessages),
-      map((action: fromCoreActions.ShowMessages) => action.payload.messages),
+      ofType(fromCoreActions.LayoutActions.ShowMessages),
+      map(action => action.messages),
       tap((message: any[]) => {
         this.messageService.addAll(message);
       })
@@ -84,8 +82,8 @@ export class LayoutCoreEffects {
 
   confirm$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCoreActions.LayoutActionTypes.ConfirmDialog),
-      map((action: fromCoreActions.ConfirmDialog) => action.payload.confirm),
+      ofType(fromCoreActions.LayoutActions.ConfirmDialog),
+      map(action => action.confirm),
       tap((confirm: Confirm) => {
         this.confirmationService.confirm({
           accept: () => {
@@ -122,12 +120,12 @@ export class LayoutCoreEffects {
     }).pipe(
       tap(([lang, userOffice, userOfficeProject]) => {
         if (lang) {
-          this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang }));
+          this.store.dispatch(fromCoreActions.LayoutActions.SetDefaultLang({ lang }));
         } else {
-          this.store.dispatch(new fromCoreActions.SetDefaultLang({ lang: 'es-co' }));
+          this.store.dispatch(fromCoreActions.LayoutActions.SetDefaultLang({ lang: 'es-co' }));
         }
-        this.store.dispatch(new fromCoreActions.SetUserOffice({ userOffice, redirect: false }));
-        this.store.dispatch(new fromCoreActions.SetUserOfficeProject({ userOfficeProject, redirect: false }));
+        this.store.dispatch(fromCoreActions.LayoutActions.SetUserOffice({ userOffice, redirect: false }));
+        this.store.dispatch(fromCoreActions.LayoutActions.SetUserOfficeProject({ userOfficeProject, redirect: false }));
       })
     ),
     { dispatch: false }

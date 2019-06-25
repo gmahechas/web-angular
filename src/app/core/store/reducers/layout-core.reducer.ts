@@ -1,5 +1,5 @@
-import { LayoutActionTypes, LayoutActions } from '@web/app/core/store/actions/layout-core.actions';
-import { AuthActionTypes, AuthActions } from '@web/app/auth/store/actions/auth.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromCoreActions from '@web/app/core/store/actions';
 
 import { Company } from '@web/app/features/b/company/models/company.model';
 import { UserOffice } from '@web/app/features/c/user-office/models';
@@ -30,39 +30,105 @@ export const initialState: State = {
   selectedMenus: initialStateSelectedMenus
 };
 
-export function reducer(state: State = initialState, action: LayoutActions | AuthActions): State {
-  switch (action.type) {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromCoreActions.LayoutActions.SetDefaultLang,
+    fromCoreActions.LayoutActions.ChangeLang,
+    (state, { lang }) => ({
+      ...state,
+      lang
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.ShowSidebar,
+    (state, { toggle }) => ({
+      ...state,
+      showSidebar: toggle
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.BlockedDocument,
+    (state, { toggle }) => ({
+      ...state,
+      blockedDocument: toggle
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.ShowSpinner,
+    (state, { toggle }) => ({
+      ...state,
+      showSpinner: toggle
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.ShowProgressBar,
+    (state, { toggle }) => ({
+      ...state,
+      progressBar: toggle
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.SetUserOffice,
+    (state, { userOffice, redirect }) => ({
+      ...state,
+      userOffice,
+      userOfficeProject: null
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.SetUserOfficeProject,
+    (state, { userOfficeProject, redirect }) => ({
+      ...state,
+      userOfficeProject
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.AddSelectedMenu,
+    (state, { profile_menu }) => {
+      const found = state.selectedMenus.profileMenus.filter(profileMenu => {
+        return String(profileMenu.menu_id) === profile_menu.menu_id;
+      });
 
-    case LayoutActionTypes.SetDefaultLang:
-    case LayoutActionTypes.ChangeLang:
       return {
         ...state,
-        lang: action.payload.lang
+        selectedMenus: {
+          selected: (found.length > 0) ?
+            (found[0].menu_id === 1) ? initialProfileMenu : profile_menu : profile_menu,
+          profileMenus: (found.length > 0) ?
+            [...state.selectedMenus.profileMenus] :
+            [...state.selectedMenus.profileMenus, profile_menu]
+        }
       };
-
-    case LayoutActionTypes.ShowSidebar:
+    }
+  ),
+  on(
+    fromCoreActions.LayoutActions.ChangeSelectedMenu,
+    (state, { profile_menu }) => ({
+      ...state,
+      selectedMenus: {
+        selected: profile_menu,
+        profileMenus: state.selectedMenus.profileMenus
+      }
+    })
+  ),
+  on(
+    fromCoreActions.LayoutActions.RemoveSelectedMenu,
+    (state, { index }) => {
+      const oldRecipes = [...state.selectedMenus.profileMenus];
+      oldRecipes.splice(index, 1);
       return {
         ...state,
-        showSidebar: action.payload.toggle
+        selectedMenus: {
+          selected: state.selectedMenus.selected,
+          profileMenus: oldRecipes
+        }
       };
+    }
+  )
+);
 
-    case LayoutActionTypes.BlockedDocument:
-      return {
-        ...state,
-        blockedDocument: action.payload.toggle
-      };
-
-    case LayoutActionTypes.ShowSpinner:
-      return {
-        ...state,
-        showSpinner: action.payload.toggle,
-      };
-
-    case LayoutActionTypes.ShowProgressBar:
-      return {
-        ...state,
-        progressBar: action.payload.toggle,
-      };
+/*
 
     case AuthActionTypes.AuthSuccess: {
       return {
@@ -88,62 +154,7 @@ export function reducer(state: State = initialState, action: LayoutActions | Aut
       };
     }
 
-    case LayoutActionTypes.SetUserOffice:
-      return {
-        ...state,
-        userOffice: action.payload.userOffice,
-        userOfficeProject: null
-      };
-
-    case LayoutActionTypes.SetUserOfficeProject:
-      return {
-        ...state,
-        userOfficeProject: action.payload.userOfficeProject
-      };
-
-    case LayoutActionTypes.AddSelectedMenu:
-
-      const found = state.selectedMenus.profileMenus.filter(profileMenu => {
-        return String(profileMenu.menu_id) === action.payload.profile_menu.menu_id;
-      });
-
-      return {
-        ...state,
-        selectedMenus: {
-          selected: (found.length > 0) ?
-            (found[0].menu_id === 1) ? initialProfileMenu : action.payload.profile_menu : action.payload.profile_menu,
-          profileMenus: (found.length > 0) ?
-            [...state.selectedMenus.profileMenus] :
-            [...state.selectedMenus.profileMenus, action.payload.profile_menu]
-        }
-      };
-
-    case LayoutActionTypes.ChangeSelectedMenu: {
-      return {
-        ...state,
-        selectedMenus: {
-          selected: action.payload.profile_menu,
-          profileMenus: state.selectedMenus.profileMenus
-        }
-      };
-    }
-
-    case LayoutActionTypes.RemoveSelectedMenu: {
-      const oldRecipes = [...state.selectedMenus.profileMenus];
-      oldRecipes.splice(action.payload.index, 1);
-      return {
-        ...state,
-        selectedMenus: {
-          selected: state.selectedMenus.selected,
-          profileMenus: oldRecipes
-        }
-      };
-    }
-
-    default:
-      return state;
-  }
-}
+ */
 
 export const getLang = (state: State) => state.lang;
 export const getShowSidebar = (state: State) => state.showSidebar;
