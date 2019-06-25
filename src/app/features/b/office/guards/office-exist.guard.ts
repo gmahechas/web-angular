@@ -44,7 +44,7 @@ export class OfficeExistGuard implements CanActivate {
       select(fromOffice.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromOffice.LoadEntity({
+          this.store.dispatch(fromOffice.EntityActions.LoadEntity({
             search: {
               office: {
                 office_id: officeId,

@@ -75,7 +75,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
         this.store.dispatch(fromDepartment.EntityActions.Reset({ redirect: false }));
         break;
       case 'department':
-        this.store.dispatch(new fromOffice.Reset({ redirect: false }));
+        this.store.dispatch(fromOffice.EntityActions.Reset({ redirect: false }));
         break;
     }
   }

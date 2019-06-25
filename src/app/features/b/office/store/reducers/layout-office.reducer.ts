@@ -1,9 +1,10 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/b/office/store/actions/entity-office.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromOfficeActions from '@web/app/features/b/office/store/actions';
 import { SelectedOffice, initialStateSelectedOffice } from '@web/app/features/b/office/models/selected-office.model';
 
 export interface State {
   selected: SelectedOffice;
-  error: any;
+  error: string;
   pending: boolean;
 }
 
@@ -13,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedOffice,
-        error: action.payload.error,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedOffice,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromOfficeActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromOfficeActions.EntityActions.LoadFailEntity,
+    fromOfficeActions.EntityActions.StoreFailEntity,
+    fromOfficeActions.EntityActions.UpdateFailEntity,
+    fromOfficeActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedOffice,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromOfficeActions.EntityActions.LoadEntity,
+    fromOfficeActions.EntityActions.PaginateEntity,
+    fromOfficeActions.EntityActions.StoreEntity,
+    fromOfficeActions.EntityActions.UpdateEntity,
+    fromOfficeActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromOfficeActions.EntityActions.LoadSuccessEntity,
+    fromOfficeActions.EntityActions.StoreSuccessEntity,
+    fromOfficeActions.EntityActions.UpdateSuccessEntity,
+    fromOfficeActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedOffice,
+      pending: false
+    })
+  ),
+  on(
+    fromOfficeActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

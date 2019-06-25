@@ -25,26 +25,26 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onStore(office: Office) {
-    this.store.dispatch(new fromOffice.StoreEntity({ entity: office }));
+    this.store.dispatch(fromOffice.EntityActions.StoreEntity({ entity: office }));
   }
 
   onUpdate(office: Office) {
-    this.store.dispatch(new fromOffice.UpdateEntity({ entity: office }));
+    this.store.dispatch(fromOffice.EntityActions.UpdateEntity({ entity: office }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelectedOffice }));
+    this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: initialStateSelectedOffice }));
     this.store.dispatch(new fromCore.Go({
       path: ['office']
     }));
   }
 
   onDestroy(office: Office) {
-    this.store.dispatch(new fromOffice.DestroyEntity({ entity: office }));
+    this.store.dispatch(fromOffice.EntityActions.DestroyEntity({ entity: office }));
   }
 
   onUserOffice(office: Office) {
-    this.store.dispatch(new fromOffice.SetSelected({
+    this.store.dispatch(fromOffice.EntityActions.SetSelected({
       selected: { gotoUserOffice: true, gotoOfficeDeparment: false }
     }));
     this.store.dispatch(new fromCore.Go({
@@ -53,7 +53,7 @@ export class FormPageOfficeComponent implements OnInit {
   }
 
   onOfficeDepartment(office: Office) {
-    this.store.dispatch(new fromOffice.SetSelected({
+    this.store.dispatch(fromOffice.EntityActions.SetSelected({
       selected: { gotoUserOffice: false, gotoOfficeDeparment: true }
     }));
     this.store.dispatch(new fromCore.Go({

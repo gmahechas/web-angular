@@ -77,7 +77,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   }
 
   onLoad(officeSearch: SearchOffice) {
-    this.store.dispatch(new fromOffice.LoadEntity({
+    this.store.dispatch(fromOffice.EntityActions.LoadEntity({
       search: {
         ...officeSearch,
         limit: 20,
@@ -87,32 +87,32 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelectedOffice }));
+    this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: initialStateSelectedOffice }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', 'create']
     }));
   }
 
   onEdit(office: Office) {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: { selectedEntity: office } }));
+    this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: { selectedEntity: office } }));
     this.store.dispatch(new fromCore.Go({
       path: ['office', office.office_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromOffice.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromOffice.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromOffice.SetSelected({ selected: initialStateSelectedOffice }));
+    this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: initialStateSelectedOffice }));
     this.store.dispatch(new fromCore.Go({
       path: ['office']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromOffice.Reset({ redirect: true }));
+    this.store.dispatch(fromOffice.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {
