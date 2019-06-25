@@ -44,7 +44,7 @@ export class DayExistGuard implements CanActivate {
       select(fromDay.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromDay.LoadEntity({
+          this.store.dispatch(fromDay.EntityActions.LoadEntity({
             search: {
               day: {
                 day_id: dayId,

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromDayActions from '@web/app/features/f/day/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutDayEffects {
@@ -14,12 +14,12 @@ export class LayoutDayEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDayActions.EntityActionTypes.LoadEntity,
-        fromDayActions.EntityActionTypes.StoreEntity,
-        fromDayActions.EntityActionTypes.UpdateEntity,
-        fromDayActions.EntityActionTypes.DestroyEntity,
-        fromDayActions.EntityActionTypes.PaginateEntity,
-        fromDayActions.EntityActionTypes.LoadEntityShared
+        fromDayActions.EntityActions.LoadEntity,
+        fromDayActions.EntityActions.StoreEntity,
+        fromDayActions.EntityActions.UpdateEntity,
+        fromDayActions.EntityActions.DestroyEntity,
+        fromDayActions.EntityActions.PaginateEntity,
+        fromDayActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutDayEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDayActions.EntityActionTypes.LoadSuccessEntity
+        fromDayActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutDayEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDayActions.EntityActionTypes.StoreSuccessEntity,
-        fromDayActions.EntityActionTypes.UpdateSuccessEntity,
-        fromDayActions.EntityActionTypes.DestroySuccessEntity
+        fromDayActions.EntityActions.StoreSuccessEntity,
+        fromDayActions.EntityActions.UpdateSuccessEntity,
+        fromDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutDayEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDayActions.EntityActionTypes.LoadFailEntity,
-        fromDayActions.EntityActionTypes.StoreFailEntity,
-        fromDayActions.EntityActionTypes.UpdateFailEntity,
-        fromDayActions.EntityActionTypes.DestroyFailEntity
+        fromDayActions.EntityActions.LoadFailEntity,
+        fromDayActions.EntityActions.StoreFailEntity,
+        fromDayActions.EntityActions.UpdateFailEntity,
+        fromDayActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutDayEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDayActions.EntityActionTypes.LoadEntity,
-        fromDayActions.EntityActionTypes.StoreSuccessEntity,
-        fromDayActions.EntityActionTypes.UpdateSuccessEntity,
-        fromDayActions.EntityActionTypes.DestroySuccessEntity
+        fromDayActions.EntityActions.LoadEntity,
+        fromDayActions.EntityActions.StoreSuccessEntity,
+        fromDayActions.EntityActions.UpdateSuccessEntity,
+        fromDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['day'] }));
@@ -97,8 +97,7 @@ export class LayoutDayEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromDayActions.EntityActionTypes.Reset),
-      map((action: fromDayActions.Reset) => action.payload),
+      ofType(fromDayActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['day'] }));

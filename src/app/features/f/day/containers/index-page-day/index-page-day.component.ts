@@ -55,7 +55,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
   }
 
   onLoad(daySearch: SearchDay) {
-    this.store.dispatch(new fromDay.LoadEntity({
+    this.store.dispatch(fromDay.EntityActions.LoadEntity({
       search: {
         ...daySearch,
         limit: 20,
@@ -65,32 +65,32 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromDay.SetSelected({ selected: initialStateSelectedDay }));
+    this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: initialStateSelectedDay }));
     this.store.dispatch(new fromCore.Go({
       path: ['day', 'create']
     }));
   }
 
   onEdit(day: Day) {
-    this.store.dispatch(new fromDay.SetSelected({ selected: { selectedEntity: day } }));
+    this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: { selectedEntity: day } }));
     this.store.dispatch(new fromCore.Go({
       path: ['day', day.day_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromDay.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromDay.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromDay.SetSelected({ selected: initialStateSelectedDay }));
+    this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: initialStateSelectedDay }));
     this.store.dispatch(new fromCore.Go({
       path: ['day']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromDay.Reset({ redirect: true }));
+    this.store.dispatch(fromDay.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

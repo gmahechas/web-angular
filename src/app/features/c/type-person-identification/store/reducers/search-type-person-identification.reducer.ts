@@ -28,7 +28,7 @@ export const reducer = createReducer(
       ...state,
       loaded: false,
       query: {
-        type_person_identification: search.type_person_identification, // TODO:
+        type_person_identification: search.type_person_identification
       }
     })
   ),

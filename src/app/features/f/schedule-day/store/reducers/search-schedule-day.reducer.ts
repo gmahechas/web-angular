@@ -11,9 +11,11 @@ export const initialState: State = {
   loaded: false,
   query: {
     schedule_day: {
-      schedule_day_id: ''
-      // TODO:
-    }
+      schedule_day_id: '',
+      schedule_day_status: null
+    },
+    schedule: null,
+    day: null
   }
 };
 
@@ -25,9 +27,7 @@ export const reducer = createReducer(
     (state, { search }) => ({
       ...state,
       loaded: false,
-      query: {
-        schedule_day: search.schedule_day, // TODO:
-      }
+      query: { schedule_day: search.schedule_day }
     })
   ),
   on(

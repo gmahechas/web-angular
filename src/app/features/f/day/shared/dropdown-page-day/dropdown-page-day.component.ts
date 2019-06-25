@@ -43,7 +43,7 @@ export class DropdownPageDayComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromDay.Reset({ redirect: false }));
+      this.store.dispatch(fromDay.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPageDayComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchDay: SearchDay) {
-    this.store.dispatch(new fromDay.LoadEntityShared({
+    this.store.dispatch(fromDay.EntityActions.LoadEntityShared({
       search: searchDay
     }));
   }

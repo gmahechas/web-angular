@@ -25,21 +25,21 @@ export class FormPageDayComponent implements OnInit {
   }
 
   onStore(day: Day) {
-    this.store.dispatch(new fromDay.StoreEntity({ entity: day }));
+    this.store.dispatch(fromDay.EntityActions.StoreEntity({ entity: day }));
   }
 
   onUpdate(day: Day) {
-    this.store.dispatch(new fromDay.UpdateEntity({ entity: day }));
+    this.store.dispatch(fromDay.EntityActions.UpdateEntity({ entity: day }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromDay.SetSelected({ selected: initialStateSelectedDay }));
+    this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: initialStateSelectedDay }));
     this.store.dispatch(new fromCore.Go({
       path: ['day']
     }));
   }
 
   onDestroy(day: Day) {
-    this.store.dispatch(new fromDay.DestroyEntity({ entity: day }));
+    this.store.dispatch(fromDay.EntityActions.DestroyEntity({ entity: day }));
   }
 }
