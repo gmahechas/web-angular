@@ -25,21 +25,21 @@ export class FormPagePersonComponent implements OnInit {
   }
 
   onStore(person: Person) {
-    this.store.dispatch(new fromPerson.StoreEntity({ entity: person }));
+    this.store.dispatch(fromPerson.EntityActions.StoreEntity({ entity: person }));
   }
 
   onUpdate(person: Person) {
-    this.store.dispatch(new fromPerson.UpdateEntity({ entity: person }));
+    this.store.dispatch(fromPerson.EntityActions.UpdateEntity({ entity: person }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromPerson.SetSelected({ selected: initialStateSelectedPerson }));
+    this.store.dispatch(fromPerson.EntityActions.SetSelected({ selected: initialStateSelectedPerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['person']
     }));
   }
 
   onDestroy(person: Person) {
-    this.store.dispatch(new fromPerson.DestroyEntity({ entity: person }));
+    this.store.dispatch(fromPerson.EntityActions.DestroyEntity({ entity: person }));
   }
 }

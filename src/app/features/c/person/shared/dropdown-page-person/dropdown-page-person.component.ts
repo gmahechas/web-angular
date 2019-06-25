@@ -43,7 +43,7 @@ export class DropdownPagePersonComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromPerson.Reset({ redirect: false }));
+      this.store.dispatch(fromPerson.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPagePersonComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchPerson: SearchPerson) {
-    this.store.dispatch(new fromPerson.LoadEntityShared({
+    this.store.dispatch(fromPerson.EntityActions.LoadEntityShared({
       search: searchPerson
     }));
   }

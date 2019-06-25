@@ -67,7 +67,7 @@ export class IndexPagePersonComponent implements OnInit, OnDestroy {
   }
 
   onLoad(personSearch: SearchPerson) {
-    this.store.dispatch(new fromPerson.LoadEntity({
+    this.store.dispatch(fromPerson.EntityActions.LoadEntity({
       search: {
         ...personSearch,
         limit: 20,
@@ -77,32 +77,32 @@ export class IndexPagePersonComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromPerson.SetSelected({ selected: initialStateSelectedPerson }));
+    this.store.dispatch(fromPerson.EntityActions.SetSelected({ selected: initialStateSelectedPerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['person', 'create']
     }));
   }
 
   onEdit(person: Person) {
-    this.store.dispatch(new fromPerson.SetSelected({ selected: { selectedEntity: person } }));
+    this.store.dispatch(fromPerson.EntityActions.SetSelected({ selected: { selectedEntity: person } }));
     this.store.dispatch(new fromCore.Go({
       path: ['person', person.person_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromPerson.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromPerson.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromPerson.SetSelected({ selected: initialStateSelectedPerson }));
+    this.store.dispatch(fromPerson.EntityActions.SetSelected({ selected: initialStateSelectedPerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['person']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromPerson.Reset({ redirect: true }));
+    this.store.dispatch(fromPerson.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {
