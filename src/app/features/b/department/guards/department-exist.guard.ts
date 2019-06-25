@@ -44,7 +44,7 @@ export class DepartmentExistGuard implements CanActivate {
       select(fromDepartment.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromDepartment.LoadEntity({
+          this.store.dispatch(fromDepartment.EntityActions.LoadEntity({
             search: {
               department: {
                 department_id: departmentId,

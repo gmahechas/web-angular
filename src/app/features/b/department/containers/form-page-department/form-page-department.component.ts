@@ -25,26 +25,26 @@ export class FormPageDepartmentComponent implements OnInit {
   }
 
   onStore(department: Department) {
-    this.store.dispatch(new fromDepartment.StoreEntity({ entity: department }));
+    this.store.dispatch(fromDepartment.EntityActions.StoreEntity({ entity: department }));
   }
 
   onUpdate(department: Department) {
-    this.store.dispatch(new fromDepartment.UpdateEntity({ entity: department }));
+    this.store.dispatch(fromDepartment.EntityActions.UpdateEntity({ entity: department }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: initialStateSelectedDepartment }));
+    this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: initialStateSelectedDepartment }));
     this.store.dispatch(new fromCore.Go({
       path: ['department']
     }));
   }
 
   onDestroy(department: Department) {
-    this.store.dispatch(new fromDepartment.DestroyEntity({ entity: department }));
+    this.store.dispatch(fromDepartment.EntityActions.DestroyEntity({ entity: department }));
   }
 
   onOfficeDepartment(department: Department) {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: { gotoOfficeDepartment: true } }));
+    this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: { gotoOfficeDepartment: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['department', department.department_id, {
         outlets: { 'router-outlet-user-department': ['office-department', 'department', department.department_id] }

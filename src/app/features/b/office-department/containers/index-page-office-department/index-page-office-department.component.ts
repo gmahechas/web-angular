@@ -72,7 +72,7 @@ export class IndexPageOfficeDepartmentComponent implements OnInit, OnDestroy {
     this.store.dispatch(new fromOfficeDepartment.StoreEntity({ entity: officeDepartment }));
     switch (this.entityLabel) {
       case 'office':
-        this.store.dispatch(new fromDepartment.Reset({ redirect: false }));
+        this.store.dispatch(fromDepartment.EntityActions.Reset({ redirect: false }));
         break;
       case 'department':
         this.store.dispatch(new fromOffice.Reset({ redirect: false }));

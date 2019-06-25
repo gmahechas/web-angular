@@ -43,7 +43,7 @@ export class DropdownPageDepartmentComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromDepartment.Reset({ redirect: false }));
+      this.store.dispatch(fromDepartment.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPageDepartmentComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchDepartment: SearchDepartment) {
-    this.store.dispatch(new fromDepartment.LoadEntityShared({
+    this.store.dispatch(fromDepartment.EntityActions.LoadEntityShared({
       search: searchDepartment
     }));
   }

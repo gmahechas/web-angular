@@ -66,7 +66,7 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onLoad(departmentSearch: SearchDepartment) {
-    this.store.dispatch(new fromDepartment.LoadEntity({
+    this.store.dispatch(fromDepartment.EntityActions.LoadEntity({
       search: {
         ...departmentSearch,
         limit: 20,
@@ -76,32 +76,32 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: initialStateSelectedDepartment }));
+    this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: initialStateSelectedDepartment }));
     this.store.dispatch(new fromCore.Go({
       path: ['department', 'create']
     }));
   }
 
   onEdit(department: Department) {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: { selectedEntity: department } }));
+    this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: { selectedEntity: department } }));
     this.store.dispatch(new fromCore.Go({
       path: ['department', department.department_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromDepartment.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromDepartment.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromDepartment.SetSelected({ selected: initialStateSelectedDepartment }));
+    this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: initialStateSelectedDepartment }));
     this.store.dispatch(new fromCore.Go({
       path: ['department']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromDepartment.Reset({ redirect: true }));
+    this.store.dispatch(fromDepartment.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

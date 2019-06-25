@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromDepartmentActions from '@web/app/features/b/department/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutDepartmentEffects {
@@ -14,12 +14,12 @@ export class LayoutDepartmentEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDepartmentActions.EntityActionTypes.LoadEntity,
-        fromDepartmentActions.EntityActionTypes.StoreEntity,
-        fromDepartmentActions.EntityActionTypes.UpdateEntity,
-        fromDepartmentActions.EntityActionTypes.DestroyEntity,
-        fromDepartmentActions.EntityActionTypes.PaginateEntity,
-        fromDepartmentActions.EntityActionTypes.LoadEntityShared
+        fromDepartmentActions.EntityActions.LoadEntity,
+        fromDepartmentActions.EntityActions.StoreEntity,
+        fromDepartmentActions.EntityActions.UpdateEntity,
+        fromDepartmentActions.EntityActions.DestroyEntity,
+        fromDepartmentActions.EntityActions.PaginateEntity,
+        fromDepartmentActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutDepartmentEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDepartmentActions.EntityActionTypes.LoadSuccessEntity
+        fromDepartmentActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutDepartmentEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDepartmentActions.EntityActionTypes.StoreSuccessEntity,
-        fromDepartmentActions.EntityActionTypes.UpdateSuccessEntity,
-        fromDepartmentActions.EntityActionTypes.DestroySuccessEntity
+        fromDepartmentActions.EntityActions.StoreSuccessEntity,
+        fromDepartmentActions.EntityActions.UpdateSuccessEntity,
+        fromDepartmentActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutDepartmentEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDepartmentActions.EntityActionTypes.LoadFailEntity,
-        fromDepartmentActions.EntityActionTypes.StoreFailEntity,
-        fromDepartmentActions.EntityActionTypes.UpdateFailEntity,
-        fromDepartmentActions.EntityActionTypes.DestroyFailEntity
+        fromDepartmentActions.EntityActions.LoadFailEntity,
+        fromDepartmentActions.EntityActions.StoreFailEntity,
+        fromDepartmentActions.EntityActions.UpdateFailEntity,
+        fromDepartmentActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutDepartmentEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromDepartmentActions.EntityActionTypes.LoadEntity,
-        fromDepartmentActions.EntityActionTypes.StoreSuccessEntity,
-        fromDepartmentActions.EntityActionTypes.UpdateSuccessEntity,
-        fromDepartmentActions.EntityActionTypes.DestroySuccessEntity
+        fromDepartmentActions.EntityActions.LoadEntity,
+        fromDepartmentActions.EntityActions.StoreSuccessEntity,
+        fromDepartmentActions.EntityActions.UpdateSuccessEntity,
+        fromDepartmentActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['department'] }));
@@ -97,8 +97,7 @@ export class LayoutDepartmentEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromDepartmentActions.EntityActionTypes.Reset),
-      map((action: fromDepartmentActions.Reset) => action.payload),
+      ofType(fromDepartmentActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['department'] }));
