@@ -44,7 +44,7 @@ export class MacroprojectExistGuard implements CanActivate {
       select(fromMacroproject.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromMacroproject.LoadEntity({
+          this.store.dispatch(fromMacroproject.EntityActions.LoadEntity({
             search: {
               macroproject: {
                 macroproject_id: macroprojectId,

@@ -64,7 +64,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   onLoad(macroprojectSearch: SearchMacroproject) {
-    this.store.dispatch(new fromMacroproject.LoadEntity({
+    this.store.dispatch(fromMacroproject.EntityActions.LoadEntity({
       search: {
         ...macroprojectSearch,
         limit: 20,
@@ -74,14 +74,14 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromMacroproject.SetSelected({ selected: initialStateSelectedMacroproject }));
+    this.store.dispatch(fromMacroproject.EntityActions.SetSelected({ selected: initialStateSelectedMacroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject', 'create']
     }));
   }
 
   onEdit(macroproject: Macroproject) {
-    this.store.dispatch(new fromMacroproject.SetSelected({
+    this.store.dispatch(fromMacroproject.EntityActions.SetSelected({
       selected: { ...initialStateSelectedMacroproject, selectedEntity: macroproject }
     }));
     this.store.dispatch(new fromCore.Go({
@@ -90,18 +90,18 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromMacroproject.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromMacroproject.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromMacroproject.SetSelected({ selected: initialStateSelectedMacroproject }));
+    this.store.dispatch(fromMacroproject.EntityActions.SetSelected({ selected: initialStateSelectedMacroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromMacroproject.Reset({ redirect: true }));
+    this.store.dispatch(fromMacroproject.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

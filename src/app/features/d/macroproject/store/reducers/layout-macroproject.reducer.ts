@@ -1,7 +1,6 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/d/macroproject/store/actions/entity-macroproject.actions';
-import {
-  SelectedMacroproject, initialStateSelectedMacroproject
-} from '@web/app/features/d/macroproject/models/selected-macroproject.model';
+import { createReducer, on } from '@ngrx/store';
+import * as fromMacroprojectActions from '@web/app/features/d/macroproject/store/actions';
+import { SelectedMacroproject, initialStateSelectedMacroproject } from '@web/app/features/d/macroproject/models/selected-macroproject.model';
 
 export interface State {
   selected: SelectedMacroproject;
@@ -15,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedMacroproject,
-        error: action.payload.error,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedMacroproject,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromMacroprojectActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.LoadFailEntity,
+    fromMacroprojectActions.EntityActions.StoreFailEntity,
+    fromMacroprojectActions.EntityActions.UpdateFailEntity,
+    fromMacroprojectActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedMacroproject,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.LoadEntity,
+    fromMacroprojectActions.EntityActions.PaginateEntity,
+    fromMacroprojectActions.EntityActions.StoreEntity,
+    fromMacroprojectActions.EntityActions.UpdateEntity,
+    fromMacroprojectActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.LoadSuccessEntity,
+    fromMacroprojectActions.EntityActions.StoreSuccessEntity,
+    fromMacroprojectActions.EntityActions.UpdateSuccessEntity,
+    fromMacroprojectActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedMacroproject,
+      pending: false
+    })
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

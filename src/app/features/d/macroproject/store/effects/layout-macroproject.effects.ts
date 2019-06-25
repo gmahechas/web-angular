@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromMacroprojectActions from '@web/app/features/d/macroproject/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutMacroprojectEffects {
@@ -14,12 +14,12 @@ export class LayoutMacroprojectEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromMacroprojectActions.EntityActionTypes.LoadEntity,
-        fromMacroprojectActions.EntityActionTypes.StoreEntity,
-        fromMacroprojectActions.EntityActionTypes.UpdateEntity,
-        fromMacroprojectActions.EntityActionTypes.DestroyEntity,
-        fromMacroprojectActions.EntityActionTypes.PaginateEntity,
-        fromMacroprojectActions.EntityActionTypes.LoadEntityShared
+        fromMacroprojectActions.EntityActions.LoadEntity,
+        fromMacroprojectActions.EntityActions.StoreEntity,
+        fromMacroprojectActions.EntityActions.UpdateEntity,
+        fromMacroprojectActions.EntityActions.DestroyEntity,
+        fromMacroprojectActions.EntityActions.PaginateEntity,
+        fromMacroprojectActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutMacroprojectEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromMacroprojectActions.EntityActionTypes.LoadSuccessEntity
+        fromMacroprojectActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutMacroprojectEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromMacroprojectActions.EntityActionTypes.StoreSuccessEntity,
-        fromMacroprojectActions.EntityActionTypes.UpdateSuccessEntity,
-        fromMacroprojectActions.EntityActionTypes.DestroySuccessEntity
+        fromMacroprojectActions.EntityActions.StoreSuccessEntity,
+        fromMacroprojectActions.EntityActions.UpdateSuccessEntity,
+        fromMacroprojectActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutMacroprojectEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromMacroprojectActions.EntityActionTypes.LoadFailEntity,
-        fromMacroprojectActions.EntityActionTypes.StoreFailEntity,
-        fromMacroprojectActions.EntityActionTypes.UpdateFailEntity,
-        fromMacroprojectActions.EntityActionTypes.DestroyFailEntity
+        fromMacroprojectActions.EntityActions.LoadFailEntity,
+        fromMacroprojectActions.EntityActions.StoreFailEntity,
+        fromMacroprojectActions.EntityActions.UpdateFailEntity,
+        fromMacroprojectActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutMacroprojectEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromMacroprojectActions.EntityActionTypes.LoadEntity,
-        fromMacroprojectActions.EntityActionTypes.StoreSuccessEntity,
-        fromMacroprojectActions.EntityActionTypes.UpdateSuccessEntity,
-        fromMacroprojectActions.EntityActionTypes.DestroySuccessEntity
+        fromMacroprojectActions.EntityActions.LoadEntity,
+        fromMacroprojectActions.EntityActions.StoreSuccessEntity,
+        fromMacroprojectActions.EntityActions.UpdateSuccessEntity,
+        fromMacroprojectActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));
@@ -97,8 +97,7 @@ export class LayoutMacroprojectEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromMacroprojectActions.EntityActionTypes.Reset),
-      map((action: fromMacroprojectActions.Reset) => action.payload),
+      ofType(fromMacroprojectActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['macroproject'] }));

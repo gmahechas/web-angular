@@ -25,21 +25,21 @@ export class FormPageMacroprojectComponent implements OnInit {
   }
 
   onStore(macroproject: Macroproject) {
-    this.store.dispatch(new fromMacroproject.StoreEntity({ entity: macroproject }));
+    this.store.dispatch(fromMacroproject.EntityActions.StoreEntity({ entity: macroproject }));
   }
 
   onUpdate(macroproject: Macroproject) {
-    this.store.dispatch(new fromMacroproject.UpdateEntity({ entity: macroproject }));
+    this.store.dispatch(fromMacroproject.EntityActions.UpdateEntity({ entity: macroproject }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromMacroproject.SetSelected({ selected: initialStateSelectedMacroproject }));
+    this.store.dispatch(fromMacroproject.EntityActions.SetSelected({ selected: initialStateSelectedMacroproject }));
     this.store.dispatch(new fromCore.Go({
       path: ['macroproject']
     }));
   }
 
   onDestroy(macroproject: Macroproject) {
-    this.store.dispatch(new fromMacroproject.DestroyEntity({ entity: macroproject }));
+    this.store.dispatch(fromMacroproject.EntityActions.DestroyEntity({ entity: macroproject }));
   }
 }

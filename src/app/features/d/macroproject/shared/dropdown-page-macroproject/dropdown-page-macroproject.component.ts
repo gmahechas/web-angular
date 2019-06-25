@@ -43,7 +43,7 @@ export class DropdownPageMacroprojectComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromMacroproject.Reset({ redirect: false }));
+      this.store.dispatch(fromMacroproject.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -60,7 +60,7 @@ export class DropdownPageMacroprojectComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchMacroproject: SearchMacroproject) {
-    this.store.dispatch(new fromMacroproject.LoadEntityShared({
+    this.store.dispatch(fromMacroproject.EntityActions.LoadEntityShared({
       search: searchMacroproject
     }));
   }

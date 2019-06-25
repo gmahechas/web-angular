@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromMacroprojectActions from '@web/app/features/d/macroproject/store/actions';
 import { Macroproject } from '@web/app/features/d/macroproject/models/macroproject.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/d/macroproject/store/actions/entity-macroproject.actions';
 
 export interface State extends EntityState<Macroproject> { }
 
@@ -11,42 +12,34 @@ export const adapter: EntityAdapter<Macroproject> = createEntityAdapter<Macropro
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationMacroproject.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromMacroprojectActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationMacroproject.data, state)
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeMacroproject, newState);
+      return adapter.addOne(entity.storeMacroproject, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateMacroproject.macroproject_id,
-        changes: action.payload.entity.updateMacroproject
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyMacroproject.macroproject_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateMacroproject.macroproject_id, changes: entity.updateMacroproject }, state)
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyMacroproject.macroproject_id, state)
+  ),
+  on(
+    fromMacroprojectActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);
