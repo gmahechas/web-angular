@@ -25,26 +25,26 @@ export class FormPageProfileComponent implements OnInit {
   }
 
   onStore(profile: Profile) {
-    this.store.dispatch(new fromProfile.StoreEntity({ entity: profile }));
+    this.store.dispatch(fromProfile.EntityActions.StoreEntity({ entity: profile }));
   }
 
   onUpdate(profile: Profile) {
-    this.store.dispatch(new fromProfile.UpdateEntity({ entity: profile }));
+    this.store.dispatch(fromProfile.EntityActions.UpdateEntity({ entity: profile }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromProfile.SetSelected({ selected: initialStateSelectedProfile }));
+    this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: initialStateSelectedProfile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile']
     }));
   }
 
   onDestroy(profile: Profile) {
-    this.store.dispatch(new fromProfile.DestroyEntity({ entity: profile }));
+    this.store.dispatch(fromProfile.EntityActions.DestroyEntity({ entity: profile }));
   }
 
   onProfileMenu(profile: Profile) {
-    this.store.dispatch(new fromProfile.SetSelected({ selected: { gotoProfileMenu: true } }));
+    this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: { gotoProfileMenu: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', profile.profile_id, { outlets: { 'router-outlet-profile-menu': ['profile-menu', profile.profile_id] } }]
     }));

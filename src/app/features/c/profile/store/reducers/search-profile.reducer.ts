@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/c/profile/store/actions/entity-profile.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromProfileActions from '@web/app/features/c/profile/store/actions';
 import { SearchProfile } from '@web/app/features/c/profile/models/search-profile.model';
 
 export interface State {
@@ -16,44 +17,40 @@ export const initialState: State = {
   }
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.LoadEntityShared: {
-      return {
-        ...state,
-        loaded: false,
-        query: {
-          profile: action.payload.search.profile
-        }
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        loaded: true
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return {
-        ...state,
-        loaded: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromProfileActions.EntityActions.LoadEntity,
+    fromProfileActions.EntityActions.LoadEntityShared,
+    (state, { search }) => ({
+      ...state,
+      loaded: false,
+      query: {
+        profile: search.profile
+      }
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.LoadSuccessEntity,
+    (state) => ({
+      ...state,
+      loaded: true
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.LoadFailEntity,
+    (state) => ({
+      ...state,
+      loaded: false
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getLoaded = (state: State) => state.loaded;
 export const getQuery = (state: State) => state.query;

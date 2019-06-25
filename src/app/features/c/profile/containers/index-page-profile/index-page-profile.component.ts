@@ -67,7 +67,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   }
 
   onLoad(profileSearch: SearchProfile) {
-    this.store.dispatch(new fromProfile.LoadEntity({
+    this.store.dispatch(fromProfile.EntityActions.LoadEntity({
       search: {
         ...profileSearch,
         limit: 20,
@@ -77,32 +77,32 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromProfile.SetSelected({ selected: initialStateSelectedProfile }));
+    this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: initialStateSelectedProfile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', 'create']
     }));
   }
 
   onEdit(profile: Profile) {
-    this.store.dispatch(new fromProfile.SetSelected({ selected: { selectedEntity: profile } }));
+    this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: { selectedEntity: profile } }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile', profile.profile_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromProfile.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromProfile.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromProfile.SetSelected({ selected: initialStateSelectedProfile }));
+    this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: initialStateSelectedProfile }));
     this.store.dispatch(new fromCore.Go({
       path: ['profile']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromProfile.Reset({ redirect: true }));
+    this.store.dispatch(fromProfile.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

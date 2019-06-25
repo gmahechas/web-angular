@@ -43,7 +43,7 @@ export class DropdownPageProfileComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromProfile.Reset({ redirect: false }));
+      this.store.dispatch(fromProfile.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPageProfileComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchProfile: SearchProfile) {
-    this.store.dispatch(new fromProfile.LoadEntityShared({
+    this.store.dispatch(fromProfile.EntityActions.LoadEntityShared({
       search: searchProfile
     }));
   }

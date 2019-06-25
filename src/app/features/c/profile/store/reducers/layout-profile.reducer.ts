@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/c/profile/store/actions/entity-profile.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromProfileActions from '@web/app/features/c/profile/store/actions';
 import { SelectedProfile, initialStateSelectedProfile } from '@web/app/features/c/profile/models/selected-profile.model';
 
 export interface State {
@@ -13,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedProfile,
-        error: action.payload.error,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedProfile,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromProfileActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.LoadFailEntity,
+    fromProfileActions.EntityActions.StoreFailEntity,
+    fromProfileActions.EntityActions.UpdateFailEntity,
+    fromProfileActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedProfile,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.LoadEntity,
+    fromProfileActions.EntityActions.PaginateEntity,
+    fromProfileActions.EntityActions.StoreEntity,
+    fromProfileActions.EntityActions.UpdateEntity,
+    fromProfileActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.LoadSuccessEntity,
+    fromProfileActions.EntityActions.StoreSuccessEntity,
+    fromProfileActions.EntityActions.UpdateSuccessEntity,
+    fromProfileActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedProfile,
+      pending: false
+    })
+  ),
+  on(
+    fromProfileActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

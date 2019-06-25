@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromProfileActions from '@web/app/features/c/profile/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProfileEffects {
@@ -14,12 +14,12 @@ export class LayoutProfileEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileActions.EntityActionTypes.LoadEntity,
-        fromProfileActions.EntityActionTypes.StoreEntity,
-        fromProfileActions.EntityActionTypes.UpdateEntity,
-        fromProfileActions.EntityActionTypes.DestroyEntity,
-        fromProfileActions.EntityActionTypes.PaginateEntity,
-        fromProfileActions.EntityActionTypes.LoadEntityShared
+        fromProfileActions.EntityActions.LoadEntity,
+        fromProfileActions.EntityActions.StoreEntity,
+        fromProfileActions.EntityActions.UpdateEntity,
+        fromProfileActions.EntityActions.DestroyEntity,
+        fromProfileActions.EntityActions.PaginateEntity,
+        fromProfileActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutProfileEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileActions.EntityActionTypes.LoadSuccessEntity
+        fromProfileActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutProfileEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileActions.EntityActionTypes.StoreSuccessEntity,
-        fromProfileActions.EntityActionTypes.UpdateSuccessEntity,
-        fromProfileActions.EntityActionTypes.DestroySuccessEntity
+        fromProfileActions.EntityActions.StoreSuccessEntity,
+        fromProfileActions.EntityActions.UpdateSuccessEntity,
+        fromProfileActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutProfileEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileActions.EntityActionTypes.LoadFailEntity,
-        fromProfileActions.EntityActionTypes.StoreFailEntity,
-        fromProfileActions.EntityActionTypes.UpdateFailEntity,
-        fromProfileActions.EntityActionTypes.DestroyFailEntity
+        fromProfileActions.EntityActions.LoadFailEntity,
+        fromProfileActions.EntityActions.StoreFailEntity,
+        fromProfileActions.EntityActions.UpdateFailEntity,
+        fromProfileActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutProfileEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileActions.EntityActionTypes.LoadEntity,
-        fromProfileActions.EntityActionTypes.StoreSuccessEntity,
-        fromProfileActions.EntityActionTypes.UpdateSuccessEntity,
-        fromProfileActions.EntityActionTypes.DestroySuccessEntity
+        fromProfileActions.EntityActions.LoadEntity,
+        fromProfileActions.EntityActions.StoreSuccessEntity,
+        fromProfileActions.EntityActions.UpdateSuccessEntity,
+        fromProfileActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
@@ -97,8 +97,7 @@ export class LayoutProfileEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromProfileActions.EntityActionTypes.Reset),
-      map((action: fromProfileActions.Reset) => action.payload),
+      ofType(fromProfileActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['profile'] }));
