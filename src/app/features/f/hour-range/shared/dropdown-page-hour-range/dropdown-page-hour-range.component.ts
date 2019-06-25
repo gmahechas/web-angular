@@ -43,7 +43,7 @@ export class DropdownPageHourRangeComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromHourRange.Reset({ redirect: false }));
+      this.store.dispatch(fromHourRange.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPageHourRangeComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchHourRange: SearchHourRange) {
-    this.store.dispatch(new fromHourRange.LoadEntityShared({
+    this.store.dispatch(fromHourRange.EntityActions.LoadEntityShared({
       search: searchHourRange
     }));
   }

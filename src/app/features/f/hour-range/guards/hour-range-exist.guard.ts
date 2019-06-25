@@ -44,7 +44,7 @@ export class HourRangeExistGuard implements CanActivate {
       select(fromHourRange.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromHourRange.LoadEntity({
+          this.store.dispatch(fromHourRange.EntityActions.LoadEntity({
             search: {
               hour_range: {
                 hour_range_id: hourRangeId,

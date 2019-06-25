@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromHourRangeActions from '@web/app/features/f/hour-range/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutHourRangeEffects {
@@ -14,12 +14,12 @@ export class LayoutHourRangeEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromHourRangeActions.EntityActionTypes.LoadEntity,
-        fromHourRangeActions.EntityActionTypes.StoreEntity,
-        fromHourRangeActions.EntityActionTypes.UpdateEntity,
-        fromHourRangeActions.EntityActionTypes.DestroyEntity,
-        fromHourRangeActions.EntityActionTypes.PaginateEntity,
-        fromHourRangeActions.EntityActionTypes.LoadEntityShared
+        fromHourRangeActions.EntityActions.LoadEntity,
+        fromHourRangeActions.EntityActions.StoreEntity,
+        fromHourRangeActions.EntityActions.UpdateEntity,
+        fromHourRangeActions.EntityActions.DestroyEntity,
+        fromHourRangeActions.EntityActions.PaginateEntity,
+        fromHourRangeActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutHourRangeEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromHourRangeActions.EntityActionTypes.LoadSuccessEntity
+        fromHourRangeActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutHourRangeEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
-        fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-        fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
+        fromHourRangeActions.EntityActions.StoreSuccessEntity,
+        fromHourRangeActions.EntityActions.UpdateSuccessEntity,
+        fromHourRangeActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutHourRangeEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromHourRangeActions.EntityActionTypes.LoadFailEntity,
-        fromHourRangeActions.EntityActionTypes.StoreFailEntity,
-        fromHourRangeActions.EntityActionTypes.UpdateFailEntity,
-        fromHourRangeActions.EntityActionTypes.DestroyFailEntity
+        fromHourRangeActions.EntityActions.LoadFailEntity,
+        fromHourRangeActions.EntityActions.StoreFailEntity,
+        fromHourRangeActions.EntityActions.UpdateFailEntity,
+        fromHourRangeActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutHourRangeEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromHourRangeActions.EntityActionTypes.LoadEntity,
-        fromHourRangeActions.EntityActionTypes.StoreSuccessEntity,
-        fromHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-        fromHourRangeActions.EntityActionTypes.DestroySuccessEntity
+        fromHourRangeActions.EntityActions.LoadEntity,
+        fromHourRangeActions.EntityActions.StoreSuccessEntity,
+        fromHourRangeActions.EntityActions.UpdateSuccessEntity,
+        fromHourRangeActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));
@@ -97,8 +97,7 @@ export class LayoutHourRangeEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromHourRangeActions.EntityActionTypes.Reset),
-      map((action: fromHourRangeActions.Reset) => action.payload),
+      ofType(fromHourRangeActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['hour-range'] }));

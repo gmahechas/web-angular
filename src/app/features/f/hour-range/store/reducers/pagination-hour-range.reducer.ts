@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/hour-range/store/actions/entity-hour-range.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromHourRangeActions from '@web/app/features/f/hour-range/store/actions';
 
 export interface State {
   total: number;
@@ -16,42 +17,34 @@ export const initialState: State = {
   to: null
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        total: action.payload.entities.paginationHourRange.total,
-        perPage: action.payload.entities.paginationHourRange.per_page,
-        currentPage: action.payload.entities.paginationHourRange.current_page,
-        from: action.payload.entities.paginationHourRange.from,
-        to: action.payload.entities.paginationHourRange.to
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromHourRangeActions.EntityActions.LoadEntity,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => ({
+      ...state,
+      total: entities.paginationHourRange.total,
+      perPage: entities.paginationHourRange.per_page,
+      currentPage: entities.paginationHourRange.current_page,
+      from: entities.paginationHourRange.from,
+      to: entities.paginationHourRange.to
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadFailEntity,
+    fromHourRangeActions.EntityActions.StoreSuccessEntity,
+    fromHourRangeActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getTotal = (state: State) => state.total;
 export const getPerPage = (state: State) => state.perPage;

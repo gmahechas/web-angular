@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromHourRangeActions from '@web/app/features/f/hour-range/store/actions';
 import { HourRange } from '@web/app/features/f/hour-range/models/hour-range.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/hour-range/store/actions/entity-hour-range.actions';
 
 export interface State extends EntityState<HourRange> { }
 
@@ -11,42 +12,34 @@ export const adapter: EntityAdapter<HourRange> = createEntityAdapter<HourRange>(
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationHourRange.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromHourRangeActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationHourRange.data, state)
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromHourRangeActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeHourRange, newState);
+      return adapter.addOne(entity.storeHourRange, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateHourRange.hour_range_id,
-        changes: action.payload.entity.updateHourRange
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyHourRange.hour_range_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromHourRangeActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateHourRange.hour_range_id, changes: entity.updateHourRange }, state)
+  ),
+  on(
+    fromHourRangeActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyHourRange.hour_range_id, state)
+  ),
+  on(
+    fromHourRangeActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);

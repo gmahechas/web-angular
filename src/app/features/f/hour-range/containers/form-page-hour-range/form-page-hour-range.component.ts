@@ -25,21 +25,21 @@ export class FormPageHourRangeComponent implements OnInit {
   }
 
   onStore(hourRange: HourRange) {
-    this.store.dispatch(new fromHourRange.StoreEntity({ entity: hourRange }));
+    this.store.dispatch(fromHourRange.EntityActions.StoreEntity({ entity: hourRange }));
   }
 
   onUpdate(hourRange: HourRange) {
-    this.store.dispatch(new fromHourRange.UpdateEntity({ entity: hourRange }));
+    this.store.dispatch(fromHourRange.EntityActions.UpdateEntity({ entity: hourRange }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromHourRange.SetSelected({ selected: initialStateSelectedHourRange }));
+    this.store.dispatch(fromHourRange.EntityActions.SetSelected({ selected: initialStateSelectedHourRange }));
     this.store.dispatch(new fromCore.Go({
       path: ['hourRange']
     }));
   }
 
   onDestroy(hourRange: HourRange) {
-    this.store.dispatch(new fromHourRange.DestroyEntity({ entity: hourRange }));
+    this.store.dispatch(fromHourRange.EntityActions.DestroyEntity({ entity: hourRange }));
   }
 }

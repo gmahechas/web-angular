@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/hour-range/store/actions/entity-hour-range.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromHourRangeActions from '@web/app/features/f/hour-range/store/actions';
 import { SearchHourRange } from '@web/app/features/f/hour-range/models/search-hour-range.model';
 
 export interface State {
@@ -16,44 +17,40 @@ export const initialState: State = {
   }
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.LoadEntityShared: {
-      return {
-        ...state,
-        loaded: false,
-        query: {
-          hour_range: action.payload.search.hour_range
-        }
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        loaded: true
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return {
-        ...state,
-        loaded: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromHourRangeActions.EntityActions.LoadEntity,
+    fromHourRangeActions.EntityActions.LoadEntityShared,
+    (state, { search }) => ({
+      ...state,
+      loaded: false,
+      query: {
+        hour_range: search.hour_range
+      }
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadSuccessEntity,
+    (state) => ({
+      ...state,
+      loaded: true
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadFailEntity,
+    (state) => ({
+      ...state,
+      loaded: false
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getLoaded = (state: State) => state.loaded;
 export const getQuery = (state: State) => state.query;

@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/hour-range/store/actions/entity-hour-range.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromHourRangeActions from '@web/app/features/f/hour-range/store/actions';
 import { SelectedHourRange, initialStateSelectedHourRange } from '@web/app/features/f/hour-range/models/selected-hour-range.model';
 
 export interface State {
@@ -13,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedHourRange,
-        error: action.payload.error,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedHourRange,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromHourRangeActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadFailEntity,
+    fromHourRangeActions.EntityActions.StoreFailEntity,
+    fromHourRangeActions.EntityActions.UpdateFailEntity,
+    fromHourRangeActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedHourRange,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadEntity,
+    fromHourRangeActions.EntityActions.PaginateEntity,
+    fromHourRangeActions.EntityActions.StoreEntity,
+    fromHourRangeActions.EntityActions.UpdateEntity,
+    fromHourRangeActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.LoadSuccessEntity,
+    fromHourRangeActions.EntityActions.StoreSuccessEntity,
+    fromHourRangeActions.EntityActions.UpdateSuccessEntity,
+    fromHourRangeActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedHourRange,
+      pending: false
+    })
+  ),
+  on(
+    fromHourRangeActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

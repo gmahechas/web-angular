@@ -18,8 +18,8 @@ export class EntityHourRangeEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromHourRangeActions.LoadEntity>(fromHourRangeActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromHourRangeActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromHourRangeSelectors.getPerPage)),
         this.store.pipe(select(fromHourRangeSelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityHourRangeEffects {
         perPage = (perPage) ? perPage : searchHourRange.limit;
         currentPage = (currentPage) ? currentPage : searchHourRange.page;
         return this.hourRangeService.load({ ...searchHourRange, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromHourRangeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromHourRangeActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityHourRangeEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromHourRangeActions.StoreEntity>(fromHourRangeActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromHourRangeActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((hourRange: fromModels.HourRange) => {
         return this.hourRangeService.store(hourRange).pipe(
-          map(({ data }) => new fromHourRangeActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromHourRangeActions.StoreFailEntity({ error })))
+          map(({ data }) => fromHourRangeActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromHourRangeActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityHourRangeEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromHourRangeActions.UpdateEntity>(fromHourRangeActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromHourRangeActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((hourRange: fromModels.HourRange) => {
         return this.hourRangeService.update(hourRange).pipe(
-          map(({ data }) => new fromHourRangeActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromHourRangeActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromHourRangeActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromHourRangeActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityHourRangeEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromHourRangeActions.DestroyEntity>(fromHourRangeActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromHourRangeActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((hourRange: fromModels.HourRange) => {
         return this.hourRangeService.destroy(hourRange).pipe(
-          map(({ data }) => new fromHourRangeActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromHourRangeActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromHourRangeActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromHourRangeActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityHourRangeEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromHourRangeActions.PaginateEntity>(fromHourRangeActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromHourRangeActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromHourRangeSelectors.getPerPage)),
         this.store.pipe(select(fromHourRangeSelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchHourRange]: [number, number, fromModels.SearchHourRange]) => {
         return from(this.hourRangeService.pagination({ ...searchHourRange, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromHourRangeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromHourRangeActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityHourRangeEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromHourRangeActions.LoadEntityShared>(fromHourRangeActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromHourRangeActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchHourRange: fromModels.SearchHourRange) => {
         if (
           searchHourRange.hour_range.hour_range_id === '' &&
@@ -105,16 +105,15 @@ export class EntityHourRangeEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromHourRangeActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromHourRangeActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.hourRangeService.load({ ...searchHourRange, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromHourRangeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromHourRangeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromHourRangeActions.EntityActions.LoadFailEntity({ error })))
         );
-
       })
     )
   );

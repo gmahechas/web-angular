@@ -59,7 +59,7 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
   }
 
   onLoad(hourRangeSearch: SearchHourRange) {
-    this.store.dispatch(new fromHourRange.LoadEntity({
+    this.store.dispatch(fromHourRange.EntityActions.LoadEntity({
       search: {
         ...hourRangeSearch,
         limit: 20,
@@ -69,32 +69,32 @@ export class IndexPageHourRangeComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromHourRange.SetSelected({ selected: initialStateSelectedHourRange }));
+    this.store.dispatch(fromHourRange.EntityActions.SetSelected({ selected: initialStateSelectedHourRange }));
     this.store.dispatch(new fromCore.Go({
       path: ['hour-range', 'create']
     }));
   }
 
   onEdit(hourRange: HourRange) {
-    this.store.dispatch(new fromHourRange.SetSelected({ selected: { selectedEntity: hourRange } }));
+    this.store.dispatch(fromHourRange.EntityActions.SetSelected({ selected: { selectedEntity: hourRange } }));
     this.store.dispatch(new fromCore.Go({
       path: ['hour-range', hourRange.hour_range_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromHourRange.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromHourRange.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromHourRange.SetSelected({ selected: initialStateSelectedHourRange }));
+    this.store.dispatch(fromHourRange.EntityActions.SetSelected({ selected: initialStateSelectedHourRange }));
     this.store.dispatch(new fromCore.Go({
       path: ['hour-range']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromHourRange.Reset({ redirect: true }));
+    this.store.dispatch(fromHourRange.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {
