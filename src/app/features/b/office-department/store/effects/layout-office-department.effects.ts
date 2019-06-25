@@ -79,7 +79,7 @@ export class LayoutOfficeDepartmentEffects {
     { dispatch: false }
   );
 
-  // Redirects
+/*   // Redirects
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -105,7 +105,7 @@ export class LayoutOfficeDepartmentEffects {
       })
     ),
     { dispatch: false }
-  );
+  ); */
 
   constructor(
     private actions$: Actions,
