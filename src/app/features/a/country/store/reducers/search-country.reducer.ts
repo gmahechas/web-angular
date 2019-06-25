@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityActions } from '@web/app/features/a/country/store/actions';
+import * as fromCountryActions from '@web/app/features/a/country/store/actions';
 import { SearchCountry } from '@web/app/features/a/country/models/search-country.model';
 
 export interface State {
@@ -21,8 +21,8 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(
-    EntityActions.LoadEntity,
-    EntityActions.LoadEntityShared,
+    fromCountryActions.EntityActions.LoadEntity,
+    fromCountryActions.EntityActions.LoadEntityShared,
     (state, { search }) => ({
       ...state,
       loaded: false,
@@ -32,21 +32,21 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.LoadSuccessEntity,
+    fromCountryActions.EntityActions.LoadSuccessEntity,
     (state) => ({
       ...state,
       loaded: true
     })
   ),
   on(
-    EntityActions.LoadFailEntity,
+    fromCountryActions.EntityActions.LoadFailEntity,
     (state) => ({
       ...state,
       loaded: false
     })
   ),
   on(
-    EntityActions.Reset,
+    fromCountryActions.EntityActions.Reset,
     (state) => ({
       ...initialState
     })

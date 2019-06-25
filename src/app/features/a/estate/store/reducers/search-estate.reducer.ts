@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityActions } from '@web/app/features/a/estate/store/actions';
+import * as fromEstateActions from '@web/app/features/a/estate/store/actions';
 import { SearchEstate } from '@web/app/features/a/estate/models/search-estate.model';
 
 export interface State {
@@ -22,8 +22,8 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(
-    EntityActions.LoadEntity,
-    EntityActions.LoadEntityShared,
+    fromEstateActions.EntityActions.LoadEntity,
+    fromEstateActions.EntityActions.LoadEntityShared,
     (state, { search }) => ({
       ...state,
       loaded: false,
@@ -34,21 +34,21 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.LoadSuccessEntity,
+    fromEstateActions.EntityActions.LoadSuccessEntity,
     (state) => ({
       ...state,
       loaded: true
     })
   ),
   on(
-    EntityActions.LoadFailEntity,
+    fromEstateActions.EntityActions.LoadFailEntity,
     (state) => ({
       ...state,
       loaded: false
     })
   ),
   on(
-    EntityActions.Reset,
+    fromEstateActions.EntityActions.Reset,
     (state) => ({
       ...initialState
     })

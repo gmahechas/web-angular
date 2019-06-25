@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityActions } from '@web/app/features/a/estate/store/actions';
+import * as fromEstateActions from '@web/app/features/a/estate/store/actions';
 import { SelectedEstate, initialStateSelectedEstate } from '@web/app/features/a/estate/models/selected-estate.model';
 
 export interface State {
@@ -17,17 +17,17 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(
-    EntityActions.SetSelected,
+    fromEstateActions.EntityActions.SetSelected,
     (state, { selected }) => ({
       ...state,
       selected
     })
   ),
   on(
-    EntityActions.LoadFailEntity,
-    EntityActions.StoreFailEntity,
-    EntityActions.UpdateFailEntity,
-    EntityActions.DestroyFailEntity,
+    fromEstateActions.EntityActions.LoadFailEntity,
+    fromEstateActions.EntityActions.StoreFailEntity,
+    fromEstateActions.EntityActions.UpdateFailEntity,
+    fromEstateActions.EntityActions.DestroyFailEntity,
     (state, { error }) => ({
       ...state,
       selected: initialStateSelectedEstate,
@@ -36,21 +36,21 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.LoadEntity,
-    EntityActions.PaginateEntity,
-    EntityActions.StoreEntity,
-    EntityActions.UpdateEntity,
-    EntityActions.DestroyEntity,
+    fromEstateActions.EntityActions.LoadEntity,
+    fromEstateActions.EntityActions.PaginateEntity,
+    fromEstateActions.EntityActions.StoreEntity,
+    fromEstateActions.EntityActions.UpdateEntity,
+    fromEstateActions.EntityActions.DestroyEntity,
     (state) => ({
       ...state,
       pending: true
     })
   ),
   on(
-    EntityActions.LoadSuccessEntity,
-    EntityActions.StoreSuccessEntity,
-    EntityActions.UpdateSuccessEntity,
-    EntityActions.DestroySuccessEntity,
+    fromEstateActions.EntityActions.LoadSuccessEntity,
+    fromEstateActions.EntityActions.StoreSuccessEntity,
+    fromEstateActions.EntityActions.UpdateSuccessEntity,
+    fromEstateActions.EntityActions.DestroySuccessEntity,
     (state) => ({
       ...state,
       selected: initialStateSelectedEstate,
@@ -58,7 +58,7 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.Reset,
+    fromEstateActions.EntityActions.Reset,
     (state) => ({
       ...initialState
     })

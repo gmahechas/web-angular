@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityActions } from '@web/app/features/a/country/store/actions';
+import * as fromCountryActions from '@web/app/features/a/country/store/actions';
 import { SelectedCountry, initialStateSelectedCountry } from '@web/app/features/a/country/models/selected-country.model';
 
 export interface State {
@@ -17,17 +17,17 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(
-    EntityActions.SetSelected,
+    fromCountryActions.EntityActions.SetSelected,
     (state, { selected }) => ({
       ...state,
       selected
     })
   ),
   on(
-    EntityActions.LoadFailEntity,
-    EntityActions.StoreFailEntity,
-    EntityActions.UpdateFailEntity,
-    EntityActions.DestroyFailEntity,
+    fromCountryActions.EntityActions.LoadFailEntity,
+    fromCountryActions.EntityActions.StoreFailEntity,
+    fromCountryActions.EntityActions.UpdateFailEntity,
+    fromCountryActions.EntityActions.DestroyFailEntity,
     (state, { error }) => ({
       ...state,
       selected: initialStateSelectedCountry,
@@ -36,21 +36,21 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.LoadEntity,
-    EntityActions.PaginateEntity,
-    EntityActions.StoreEntity,
-    EntityActions.UpdateEntity,
-    EntityActions.DestroyEntity,
+    fromCountryActions.EntityActions.LoadEntity,
+    fromCountryActions.EntityActions.PaginateEntity,
+    fromCountryActions.EntityActions.StoreEntity,
+    fromCountryActions.EntityActions.UpdateEntity,
+    fromCountryActions.EntityActions.DestroyEntity,
     (state) => ({
       ...state,
       pending: true
     })
   ),
   on(
-    EntityActions.LoadSuccessEntity,
-    EntityActions.StoreSuccessEntity,
-    EntityActions.UpdateSuccessEntity,
-    EntityActions.DestroySuccessEntity,
+    fromCountryActions.EntityActions.LoadSuccessEntity,
+    fromCountryActions.EntityActions.StoreSuccessEntity,
+    fromCountryActions.EntityActions.UpdateSuccessEntity,
+    fromCountryActions.EntityActions.DestroySuccessEntity,
     (state) => ({
       ...state,
       selected: initialStateSelectedCountry,
@@ -58,7 +58,7 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.Reset,
+    fromCountryActions.EntityActions.Reset,
     (state) => ({
       ...initialState
     })

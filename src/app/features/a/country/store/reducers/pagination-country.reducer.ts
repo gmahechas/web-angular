@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityActions } from '@web/app/features/a/country/store/actions';
+import * as fromCountryActions from '@web/app/features/a/country/store/actions';
 
 export interface State {
   total: number;
@@ -20,13 +20,13 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(
-    EntityActions.LoadEntity,
+    fromCountryActions.EntityActions.LoadEntity,
     (state) => ({
       ...initialState
     })
   ),
   on(
-    EntityActions.LoadSuccessEntity,
+    fromCountryActions.EntityActions.LoadSuccessEntity,
     (state, { entities }) => ({
       ...state,
       total: entities.paginationCountry.total,
@@ -37,9 +37,9 @@ export const reducer = createReducer(
     })
   ),
   on(
-    EntityActions.LoadFailEntity,
-    EntityActions.StoreSuccessEntity,
-    EntityActions.Reset,
+    fromCountryActions.EntityActions.LoadFailEntity,
+    fromCountryActions.EntityActions.StoreSuccessEntity,
+    fromCountryActions.EntityActions.Reset,
     (state) => ({
       ...initialState
     })
