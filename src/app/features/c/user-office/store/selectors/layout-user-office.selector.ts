@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
 import * as fromFeature from '@web/app/features/c/user-office/store/reducers';
-import * as fromLayout from '@web/app/features/c/user-office/store/reducers/layout-user-office.reducers';
+import * as fromLayout from '@web/app/features/c/user-office/store/reducers/layout-user-office.reducer';
 
 export const getLayoutState = createSelector(
   fromFeature.getUserOfficeState,

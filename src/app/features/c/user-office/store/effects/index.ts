@@ -2,6 +2,6 @@ import { EntityUserOfficeEffects } from '@web/app/features/c/user-office/store/e
 import { LayoutUserOfficeEffects } from '@web/app/features/c/user-office/store/effects/layout-user-office.effects';
 
 export const effects: any[] = [
-  EntityUserOfficeEffects,
-  LayoutUserOfficeEffects
+    EntityUserOfficeEffects,
+    LayoutUserOfficeEffects
 ];

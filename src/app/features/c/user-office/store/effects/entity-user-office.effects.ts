@@ -18,8 +18,8 @@ export class EntityUserOfficeEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromUserOfficeActions.LoadEntity>(fromUserOfficeActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromUserOfficeActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromUserOfficeSelectors.getPerPage)),
         this.store.pipe(select(fromUserOfficeSelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityUserOfficeEffects {
         perPage = (perPage) ? perPage : searchUserOffice.limit;
         currentPage = (currentPage) ? currentPage : searchUserOffice.page;
         return this.userOfficeService.load({ ...searchUserOffice, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromUserOfficeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromUserOfficeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromUserOfficeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromUserOfficeActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityUserOfficeEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromUserOfficeActions.StoreEntity>(fromUserOfficeActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromUserOfficeActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((userOffice: fromModels.UserOffice) => {
         return this.userOfficeService.store(userOffice).pipe(
-          map(({ data }) => new fromUserOfficeActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromUserOfficeActions.StoreFailEntity({ error })))
+          map(({ data }) => fromUserOfficeActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromUserOfficeActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityUserOfficeEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromUserOfficeActions.UpdateEntity>(fromUserOfficeActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromUserOfficeActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((userOffice: fromModels.UserOffice) => {
         return this.userOfficeService.update(userOffice).pipe(
-          map(({ data }) => new fromUserOfficeActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromUserOfficeActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromUserOfficeActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromUserOfficeActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityUserOfficeEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromUserOfficeActions.DestroyEntity>(fromUserOfficeActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromUserOfficeActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((userOffice: fromModels.UserOffice) => {
         return this.userOfficeService.destroy(userOffice).pipe(
-          map(({ data }) => new fromUserOfficeActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromUserOfficeActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromUserOfficeActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromUserOfficeActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityUserOfficeEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromUserOfficeActions.PaginateEntity>(fromUserOfficeActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromUserOfficeActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromUserOfficeSelectors.getPerPage)),
         this.store.pipe(select(fromUserOfficeSelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchUserOffice]: [number, number, fromModels.SearchUserOffice]) => {
         return from(this.userOfficeService.pagination({ ...searchUserOffice, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromUserOfficeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromUserOfficeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromUserOfficeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromUserOfficeActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityUserOfficeEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromUserOfficeActions.LoadEntityShared>(fromUserOfficeActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromUserOfficeActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchUserOffice: fromModels.SearchUserOffice) => {
         if (
           searchUserOffice.user_office.user_office_id === '' &&
@@ -107,16 +107,15 @@ export class EntityUserOfficeEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromUserOfficeActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromUserOfficeActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.userOfficeService.load({ ...searchUserOffice, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromUserOfficeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromUserOfficeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromUserOfficeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromUserOfficeActions.EntityActions.LoadFailEntity({ error })))
         );
-
       })
     )
   );

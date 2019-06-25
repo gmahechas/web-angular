@@ -58,7 +58,7 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
     this.entityLabel = key.split('_')[0];
 
     setTimeout(() => {
-      this.store.dispatch(new fromUserOffice.LoadEntity({
+      this.store.dispatch(fromUserOffice.EntityActions.LoadEntity({
         search: { [this.entityLabel]: { [key]: val } }
       }));
     });
@@ -80,7 +80,7 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   }
 
   onStore(userOffice: UserOffice) {
-    this.store.dispatch(new fromUserOffice.StoreEntity({ entity: userOffice }));
+    this.store.dispatch(fromUserOffice.EntityActions.StoreEntity({ entity: userOffice }));
     switch (this.entityLabel) {
       case 'user':
         this.store.dispatch(fromOffice.EntityActions.Reset({ redirect: false }));
@@ -92,16 +92,16 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   }
 
   onEdit(userOffice: UserOffice) {
-    this.store.dispatch(new fromUserOffice.UpdateEntity({ entity: userOffice }));
+    this.store.dispatch(fromUserOffice.EntityActions.UpdateEntity({ entity: userOffice }));
   }
 
   onDelete(userOffice: UserOffice) {
-    this.store.dispatch(new fromUserOffice.DestroyEntity({ entity: userOffice }));
+    this.store.dispatch(fromUserOffice.EntityActions.DestroyEntity({ entity: userOffice }));
   }
 
   onUserOfficeProject(userOffice: UserOffice) {
 
-    this.store.dispatch(new fromUserOffice.SetSelected({
+    this.store.dispatch(fromUserOffice.EntityActions.SetSelected({
       selected: { selectedEntity: userOffice }
     }));
 
@@ -126,6 +126,6 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromUserOffice.Reset({ redirect: false }));
+    this.store.dispatch(fromUserOffice.EntityActions.Reset({ redirect: false }));
   }
 }

@@ -1,120 +1,83 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import * as fromModels from '@web/app/features/c/user-office/models';
 
-export enum EntityActionTypes {
-  LoadEntity = '[User Office] Load Entity ',
-  LoadSuccessEntity = '[User Office] Load Success Entity',
-  LoadFailEntity = '[User Office] Load Fail Entity',
-  StoreEntity = '[User Office] Store Entity',
-  StoreSuccessEntity = '[User Office] Store Success Entity',
-  StoreFailEntity = '[User Office] Store Fail Entity',
-  UpdateEntity = '[User Office] Update Entity',
-  UpdateSuccessEntity = '[User Office] Update Success Entity',
-  UpdateFailEntity = '[User Office] Update Fail Entity',
-  DestroyEntity = '[User Office] Destroy Entity',
-  DestroySuccessEntity = '[User Office] Destroy Success Entity',
-  DestroyFailEntity = '[User Office] Destroy Fail Entity',
-  PaginateEntity = '[User Office] Paginate Entity',
-  LoadEntityShared = '[User Office] Load Entity Shared',
-  Reset = '[User Office] Reset',
-  SetSelected = '[User Office] Set Selected'
-}
+export const LoadEntity = createAction(
+  '[UserOffice] Load Entity',
+  props<{ search: fromModels.SearchUserOffice }>()
+);
 
-export class LoadEntity implements Action {
-  readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: { search: fromModels.SearchUserOffice }) { }
-}
+export const LoadSuccessEntity = createAction(
+  '[UserOffice] Load Success Entity',
+  props<{ entities: fromModels.PaginationUserOffice }>()
+);
 
-export class LoadSuccessEntity implements Action {
-  readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: { entities: fromModels.PaginationUserOffice }) { }
-}
+export const LoadFailEntity = createAction(
+  '[UserOffice] Load Fail Entity',
+  props<{ error: any }>()
+);
 
-export class LoadFailEntity implements Action {
-  readonly type = EntityActionTypes.LoadFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const StoreEntity = createAction(
+  '[UserOffice] Store Entity',
+  props<{ entity: fromModels.UserOffice }>()
+);
 
-export class StoreEntity implements Action {
-  readonly type = EntityActionTypes.StoreEntity;
-  constructor(public payload: { entity: fromModels.UserOffice }) { }
-}
+export const StoreSuccessEntity = createAction(
+  '[UserOffice] Store Success Entity',
+  props<{ entity: fromModels.StoreUserOffice }>()
+);
 
-export class StoreSuccessEntity implements Action {
-  readonly type = EntityActionTypes.StoreSuccessEntity;
-  constructor(public payload: { entity: fromModels.StoreUserOffice }) { }
-}
+export const StoreFailEntity = createAction(
+  '[UserOffice] Store Fail Entity',
+  props<{ error: any }>()
+);
 
-export class StoreFailEntity implements Action {
-  readonly type = EntityActionTypes.StoreFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const UpdateEntity = createAction(
+  '[UserOffice] Update Entity',
+  props<{ entity: fromModels.UserOffice }>()
+);
 
-export class UpdateEntity implements Action {
-  readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: { entity: fromModels.UserOffice }) { }
-}
+export const UpdateSuccessEntity = createAction(
+  '[UserOffice] Update Success Entity',
+  props<{ entity: fromModels.UpdateUserOffice }>()
+);
 
-export class UpdateSuccessEntity implements Action {
-  readonly type = EntityActionTypes.UpdateSuccessEntity;
-  constructor(public payload: { entity: fromModels.UpdateUserOffice }) { }
-}
+export const UpdateFailEntity = createAction(
+  '[UserOffice] Update Fail Entity',
+  props<{ error: any }>()
+);
 
-export class UpdateFailEntity implements Action {
-  readonly type = EntityActionTypes.UpdateFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const DestroyEntity = createAction(
+  '[UserOffice] Destroy Entity',
+  props<{ entity: fromModels.UserOffice }>()
+);
 
-export class DestroyEntity implements Action {
-  readonly type = EntityActionTypes.DestroyEntity;
-  constructor(public payload: { entity: fromModels.UserOffice }) { }
-}
+export const DestroySuccessEntity = createAction(
+  '[UserOffice] Destroy Success Entity',
+  props<{ entity: fromModels.DestroyUserOffice }>()
+);
 
-export class DestroySuccessEntity implements Action {
-  readonly type = EntityActionTypes.DestroySuccessEntity;
-  constructor(public payload: { entity: fromModels.DestroyUserOffice }) { }
-}
+export const DestroyFailEntity = createAction(
+  '[UserOffice] Destroy Fail Entity',
+  props<{ error: any }>()
+);
 
-export class DestroyFailEntity implements Action {
-  readonly type = EntityActionTypes.DestroyFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const PaginateEntity = createAction(
+  '[UserOffice] Paginate Entity',
+  props<{ page: number }>()
+);
 
-export class PaginateEntity implements Action {
-  readonly type = EntityActionTypes.PaginateEntity;
-  constructor(public payload: { page: number }) { }
-}
+export const LoadEntityShared = createAction(
+  '[UserOffice] Load Entity Shared',
+  props<{ search: fromModels.SearchUserOffice}>()
+);
 
-export class LoadEntityShared implements Action {
-  readonly type = EntityActionTypes.LoadEntityShared;
-  constructor(public payload: { search: fromModels.SearchUserOffice }) { }
-}
+export const Reset = createAction(
+  '[UserOffice] Reset',
+  props<{ redirect: boolean }>()
+);
 
-export class Reset implements Action {
-  readonly type = EntityActionTypes.Reset;
-  constructor(public payload: { redirect: boolean }) { }
-}
-
-export class SetSelected implements Action {
-  readonly type = EntityActionTypes.SetSelected;
-  constructor(public payload: { selected: fromModels.SelectedUserOffice }) { }
-}
-
-export type EntityActions =
-  | LoadEntity
-  | LoadSuccessEntity
-  | LoadFailEntity
-  | StoreEntity
-  | StoreSuccessEntity
-  | StoreFailEntity
-  | UpdateEntity
-  | UpdateSuccessEntity
-  | UpdateFailEntity
-  | DestroyEntity
-  | DestroySuccessEntity
-  | DestroyFailEntity
-  | PaginateEntity
-  | LoadEntityShared
-  | Reset
-  | SetSelected;
+export const SetSelected = createAction(
+  '[UserOffice] Set Selected',
+  props<{ selected: fromModels.SelectedUserOffice }>()
+);

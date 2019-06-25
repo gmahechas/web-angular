@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromUserOfficeActions from '@web/app/features/c/user-office/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutUserOfficeEffects {
@@ -14,12 +14,12 @@ export class LayoutUserOfficeEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromUserOfficeActions.EntityActionTypes.LoadEntity,
-        fromUserOfficeActions.EntityActionTypes.StoreEntity,
-        fromUserOfficeActions.EntityActionTypes.UpdateEntity,
-        fromUserOfficeActions.EntityActionTypes.DestroyEntity,
-        fromUserOfficeActions.EntityActionTypes.PaginateEntity,
-        fromUserOfficeActions.EntityActionTypes.LoadEntityShared
+        fromUserOfficeActions.EntityActions.LoadEntity,
+        fromUserOfficeActions.EntityActions.StoreEntity,
+        fromUserOfficeActions.EntityActions.UpdateEntity,
+        fromUserOfficeActions.EntityActions.DestroyEntity,
+        fromUserOfficeActions.EntityActions.PaginateEntity,
+        fromUserOfficeActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutUserOfficeEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromUserOfficeActions.EntityActionTypes.LoadSuccessEntity
+        fromUserOfficeActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutUserOfficeEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
-        fromUserOfficeActions.EntityActionTypes.UpdateSuccessEntity,
-        fromUserOfficeActions.EntityActionTypes.DestroySuccessEntity
+        fromUserOfficeActions.EntityActions.StoreSuccessEntity,
+        fromUserOfficeActions.EntityActions.UpdateSuccessEntity,
+        fromUserOfficeActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutUserOfficeEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromUserOfficeActions.EntityActionTypes.LoadFailEntity,
-        fromUserOfficeActions.EntityActionTypes.StoreFailEntity,
-        fromUserOfficeActions.EntityActionTypes.UpdateFailEntity,
-        fromUserOfficeActions.EntityActionTypes.DestroyFailEntity
+        fromUserOfficeActions.EntityActions.LoadFailEntity,
+        fromUserOfficeActions.EntityActions.StoreFailEntity,
+        fromUserOfficeActions.EntityActions.UpdateFailEntity,
+        fromUserOfficeActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -79,34 +79,33 @@ export class LayoutUserOfficeEffects {
     { dispatch: false }
   );
 
-  /*   // Redirects
-    successRedirect$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(
-          fromUserOfficeActions.EntityActionTypes.LoadEntity,
-          fromUserOfficeActions.EntityActionTypes.StoreSuccessEntity,
-          fromUserOfficeActions.EntityActionTypes.UpdateSuccessEntity,
-          fromUserOfficeActions.EntityActionTypes.DestroySuccessEntity
-        ),
-        tap(() => {
-          this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
-        })
+  // Redirects
+  successRedirect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        fromUserOfficeActions.EntityActions.LoadEntity,
+        fromUserOfficeActions.EntityActions.StoreSuccessEntity,
+        fromUserOfficeActions.EntityActions.UpdateSuccessEntity,
+        fromUserOfficeActions.EntityActions.DestroySuccessEntity
       ),
-      { dispatch: false }
-    );
+      tap(() => {
+        this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
+      })
+    ),
+    { dispatch: false }
+  );
 
-    reset$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(fromUserOfficeActions.EntityActionTypes.Reset),
-        map((action: fromUserOfficeActions.Reset) => action.payload),
-        tap(({ redirect }) => {
-          if (redirect) {
-            this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
-          }
-        })
-      ),
-      { dispatch: false }
-    ); */
+  reset$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromUserOfficeActions.EntityActions.Reset),
+      tap(({ redirect }) => {
+        if (redirect) {
+          this.store.dispatch(new fromCore.Go({ path: ['user_office'] }));
+        }
+      })
+    ),
+    { dispatch: false }
+  );
 
   constructor(
     private actions$: Actions,
