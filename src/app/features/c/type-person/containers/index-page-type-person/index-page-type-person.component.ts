@@ -58,7 +58,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
   }
 
   onLoad(typePersonSearch: SearchTypePerson) {
-    this.store.dispatch(new fromTypePerson.LoadEntity({
+    this.store.dispatch(fromTypePerson.EntityActions.LoadEntity({
       search: {
         ...typePersonSearch,
         limit: 20,
@@ -68,32 +68,32 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromTypePerson.SetSelected({ selected: initialStateSelectedTypePerson }));
+    this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: initialStateSelectedTypePerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['type-person', 'create']
     }));
   }
 
   onEdit(typePerson: TypePerson) {
-    this.store.dispatch(new fromTypePerson.SetSelected({ selected: { selectedEntity: typePerson } }));
+    this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: { selectedEntity: typePerson } }));
     this.store.dispatch(new fromCore.Go({
       path: ['type-person', typePerson.type_person_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromTypePerson.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromTypePerson.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePerson.SetSelected({ selected: initialStateSelectedTypePerson }));
+    this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: initialStateSelectedTypePerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['type-person']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromTypePerson.Reset({ redirect: true }));
+    this.store.dispatch(fromTypePerson.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

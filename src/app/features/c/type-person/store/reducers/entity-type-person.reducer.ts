@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromTypePersonActions from '@web/app/features/c/type-person/store/actions';
 import { TypePerson } from '@web/app/features/c/type-person/models/type-person.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/c/type-person/store/actions/entity-type-person.actions';
 
 export interface State extends EntityState<TypePerson> { }
 
@@ -11,42 +12,34 @@ export const adapter: EntityAdapter<TypePerson> = createEntityAdapter<TypePerson
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationTypePerson.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromTypePersonActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationTypePerson.data, state)
+  ),
+  on(
+    fromTypePersonActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromTypePersonActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeTypePerson, newState);
+      return adapter.addOne(entity.storeTypePerson, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateTypePerson.type_person_id,
-        changes: action.payload.entity.updateTypePerson
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyTypePerson.type_person_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromTypePersonActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateTypePerson.type_person_id, changes: entity.updateTypePerson }, state)
+  ),
+  on(
+    fromTypePersonActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyTypePerson.type_person_id, state)
+  ),
+  on(
+    fromTypePersonActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);

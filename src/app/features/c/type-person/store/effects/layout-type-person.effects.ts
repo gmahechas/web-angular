@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromTypePersonActions from '@web/app/features/c/type-person/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutTypePersonEffects {
@@ -14,12 +14,12 @@ export class LayoutTypePersonEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonActions.EntityActionTypes.LoadEntity,
-        fromTypePersonActions.EntityActionTypes.StoreEntity,
-        fromTypePersonActions.EntityActionTypes.UpdateEntity,
-        fromTypePersonActions.EntityActionTypes.DestroyEntity,
-        fromTypePersonActions.EntityActionTypes.PaginateEntity,
-        fromTypePersonActions.EntityActionTypes.LoadEntityShared
+        fromTypePersonActions.EntityActions.LoadEntity,
+        fromTypePersonActions.EntityActions.StoreEntity,
+        fromTypePersonActions.EntityActions.UpdateEntity,
+        fromTypePersonActions.EntityActions.DestroyEntity,
+        fromTypePersonActions.EntityActions.PaginateEntity,
+        fromTypePersonActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutTypePersonEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonActions.EntityActionTypes.LoadSuccessEntity
+        fromTypePersonActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutTypePersonEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonActions.EntityActionTypes.StoreSuccessEntity,
-        fromTypePersonActions.EntityActionTypes.UpdateSuccessEntity,
-        fromTypePersonActions.EntityActionTypes.DestroySuccessEntity
+        fromTypePersonActions.EntityActions.StoreSuccessEntity,
+        fromTypePersonActions.EntityActions.UpdateSuccessEntity,
+        fromTypePersonActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutTypePersonEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonActions.EntityActionTypes.LoadFailEntity,
-        fromTypePersonActions.EntityActionTypes.StoreFailEntity,
-        fromTypePersonActions.EntityActionTypes.UpdateFailEntity,
-        fromTypePersonActions.EntityActionTypes.DestroyFailEntity
+        fromTypePersonActions.EntityActions.LoadFailEntity,
+        fromTypePersonActions.EntityActions.StoreFailEntity,
+        fromTypePersonActions.EntityActions.UpdateFailEntity,
+        fromTypePersonActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutTypePersonEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonActions.EntityActionTypes.LoadEntity,
-        fromTypePersonActions.EntityActionTypes.StoreSuccessEntity,
-        fromTypePersonActions.EntityActionTypes.UpdateSuccessEntity,
-        fromTypePersonActions.EntityActionTypes.DestroySuccessEntity
+        fromTypePersonActions.EntityActions.LoadEntity,
+        fromTypePersonActions.EntityActions.StoreSuccessEntity,
+        fromTypePersonActions.EntityActions.UpdateSuccessEntity,
+        fromTypePersonActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['type-person'] }));
@@ -97,8 +97,7 @@ export class LayoutTypePersonEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromTypePersonActions.EntityActionTypes.Reset),
-      map((action: fromTypePersonActions.Reset) => action.payload),
+      ofType(fromTypePersonActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['type-person'] }));

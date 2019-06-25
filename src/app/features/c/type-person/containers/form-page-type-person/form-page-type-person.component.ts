@@ -25,21 +25,21 @@ export class FormPageTypePersonComponent implements OnInit {
   }
 
   onStore(typePerson: TypePerson) {
-    this.store.dispatch(new fromTypePerson.StoreEntity({ entity: typePerson }));
+    this.store.dispatch(fromTypePerson.EntityActions.StoreEntity({ entity: typePerson }));
   }
 
   onUpdate(typePerson: TypePerson) {
-    this.store.dispatch(new fromTypePerson.UpdateEntity({ entity: typePerson }));
+    this.store.dispatch(fromTypePerson.EntityActions.UpdateEntity({ entity: typePerson }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePerson.SetSelected({ selected: initialStateSelectedTypePerson }));
+    this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: initialStateSelectedTypePerson }));
     this.store.dispatch(new fromCore.Go({
       path: ['typePerson']
     }));
   }
 
   onDestroy(typePerson: TypePerson) {
-    this.store.dispatch(new fromTypePerson.DestroyEntity({ entity: typePerson }));
+    this.store.dispatch(fromTypePerson.EntityActions.DestroyEntity({ entity: typePerson }));
   }
 }

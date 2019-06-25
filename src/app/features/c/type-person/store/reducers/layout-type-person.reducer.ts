@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/c/type-person/store/actions/entity-type-person.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromTypePersonActions from '@web/app/features/c/type-person/store/actions';
 import { SelectedTypePerson, initialStateSelectedTypePerson } from '@web/app/features/c/type-person/models/selected-type-person.model';
 
 export interface State {
@@ -13,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedTypePerson,
-        error: action.payload.error,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedTypePerson,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromTypePersonActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromTypePersonActions.EntityActions.LoadFailEntity,
+    fromTypePersonActions.EntityActions.StoreFailEntity,
+    fromTypePersonActions.EntityActions.UpdateFailEntity,
+    fromTypePersonActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedTypePerson,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromTypePersonActions.EntityActions.LoadEntity,
+    fromTypePersonActions.EntityActions.PaginateEntity,
+    fromTypePersonActions.EntityActions.StoreEntity,
+    fromTypePersonActions.EntityActions.UpdateEntity,
+    fromTypePersonActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromTypePersonActions.EntityActions.LoadSuccessEntity,
+    fromTypePersonActions.EntityActions.StoreSuccessEntity,
+    fromTypePersonActions.EntityActions.UpdateSuccessEntity,
+    fromTypePersonActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedTypePerson,
+      pending: false
+    })
+  ),
+  on(
+    fromTypePersonActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;
