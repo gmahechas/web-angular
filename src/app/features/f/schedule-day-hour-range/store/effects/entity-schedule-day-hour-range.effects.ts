@@ -18,8 +18,8 @@ export class EntityScheduleDayHourRangeEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayHourRangeActions.LoadEntity>(fromScheduleDayHourRangeActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromScheduleDayHourRangeSelectors.getPerPage)),
         this.store.pipe(select(fromScheduleDayHourRangeSelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityScheduleDayHourRangeEffects {
         perPage = (perPage) ? perPage : searchScheduleDayHourRange.limit;
         currentPage = (currentPage) ? currentPage : searchScheduleDayHourRange.page;
         return this.scheduleDayHourRangeService.load({ ...searchScheduleDayHourRange, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromScheduleDayHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleDayHourRangeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleDayHourRangeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleDayHourRangeActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityScheduleDayHourRangeEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayHourRangeActions.StoreEntity>(fromScheduleDayHourRangeActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((scheduleDayHourRange: fromModels.ScheduleDayHourRange) => {
         return this.scheduleDayHourRangeService.store(scheduleDayHourRange).pipe(
-          map(({ data }) => new fromScheduleDayHourRangeActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleDayHourRangeActions.StoreFailEntity({ error })))
+          map(({ data }) => fromScheduleDayHourRangeActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleDayHourRangeActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityScheduleDayHourRangeEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayHourRangeActions.UpdateEntity>(fromScheduleDayHourRangeActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((scheduleDayHourRange: fromModels.ScheduleDayHourRange) => {
         return this.scheduleDayHourRangeService.update(scheduleDayHourRange).pipe(
-          map(({ data }) => new fromScheduleDayHourRangeActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleDayHourRangeActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromScheduleDayHourRangeActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleDayHourRangeActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityScheduleDayHourRangeEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayHourRangeActions.DestroyEntity>(fromScheduleDayHourRangeActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((scheduleDayHourRange: fromModels.ScheduleDayHourRange) => {
         return this.scheduleDayHourRangeService.destroy(scheduleDayHourRange).pipe(
-          map(({ data }) => new fromScheduleDayHourRangeActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleDayHourRangeActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromScheduleDayHourRangeActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleDayHourRangeActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityScheduleDayHourRangeEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayHourRangeActions.PaginateEntity>(fromScheduleDayHourRangeActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromScheduleDayHourRangeSelectors.getPerPage)),
         this.store.pipe(select(fromScheduleDayHourRangeSelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchScheduleDayHourRange]: [number, number, fromModels.SearchScheduleDayHourRange]) => {
         return from(this.scheduleDayHourRangeService.pagination({ ...searchScheduleDayHourRange, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromScheduleDayHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleDayHourRangeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleDayHourRangeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleDayHourRangeActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityScheduleDayHourRangeEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromScheduleDayHourRangeActions.LoadEntityShared>(fromScheduleDayHourRangeActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchScheduleDayHourRange: fromModels.SearchScheduleDayHourRange) => {
         if (
           searchScheduleDayHourRange.schedule_day_hour_range.schedule_day_hour_range_id === '' &&
@@ -107,16 +107,15 @@ export class EntityScheduleDayHourRangeEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromScheduleDayHourRangeActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromScheduleDayHourRangeActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.scheduleDayHourRangeService.load({ ...searchScheduleDayHourRange, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromScheduleDayHourRangeActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleDayHourRangeActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleDayHourRangeActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleDayHourRangeActions.EntityActions.LoadFailEntity({ error })))
         );
-
       })
     )
   );

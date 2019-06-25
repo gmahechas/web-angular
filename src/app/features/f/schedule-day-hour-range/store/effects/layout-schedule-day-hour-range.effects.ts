@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromScheduleDayHourRangeActions from '@web/app/features/f/schedule-day-hour-range/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutScheduleDayHourRangeEffects {
@@ -14,12 +14,12 @@ export class LayoutScheduleDayHourRangeEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayHourRangeActions.EntityActionTypes.LoadEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.StoreEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.UpdateEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.DestroyEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.PaginateEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.LoadEntityShared
+        fromScheduleDayHourRangeActions.EntityActions.LoadEntity,
+        fromScheduleDayHourRangeActions.EntityActions.StoreEntity,
+        fromScheduleDayHourRangeActions.EntityActions.UpdateEntity,
+        fromScheduleDayHourRangeActions.EntityActions.DestroyEntity,
+        fromScheduleDayHourRangeActions.EntityActions.PaginateEntity,
+        fromScheduleDayHourRangeActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutScheduleDayHourRangeEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayHourRangeActions.EntityActionTypes.LoadSuccessEntity
+        fromScheduleDayHourRangeActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutScheduleDayHourRangeEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayHourRangeActions.EntityActionTypes.StoreSuccessEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.DestroySuccessEntity
+        fromScheduleDayHourRangeActions.EntityActions.StoreSuccessEntity,
+        fromScheduleDayHourRangeActions.EntityActions.UpdateSuccessEntity,
+        fromScheduleDayHourRangeActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutScheduleDayHourRangeEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayHourRangeActions.EntityActionTypes.LoadFailEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.StoreFailEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.UpdateFailEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.DestroyFailEntity
+        fromScheduleDayHourRangeActions.EntityActions.LoadFailEntity,
+        fromScheduleDayHourRangeActions.EntityActions.StoreFailEntity,
+        fromScheduleDayHourRangeActions.EntityActions.UpdateFailEntity,
+        fromScheduleDayHourRangeActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutScheduleDayHourRangeEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayHourRangeActions.EntityActionTypes.LoadEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.StoreSuccessEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.UpdateSuccessEntity,
-        fromScheduleDayHourRangeActions.EntityActionTypes.DestroySuccessEntity
+        fromScheduleDayHourRangeActions.EntityActions.LoadEntity,
+        fromScheduleDayHourRangeActions.EntityActions.StoreSuccessEntity,
+        fromScheduleDayHourRangeActions.EntityActions.UpdateSuccessEntity,
+        fromScheduleDayHourRangeActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['schedule_day_hour_range'] }));
@@ -97,8 +97,7 @@ export class LayoutScheduleDayHourRangeEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromScheduleDayHourRangeActions.EntityActionTypes.Reset),
-      map((action: fromScheduleDayHourRangeActions.Reset) => action.payload),
+      ofType(fromScheduleDayHourRangeActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['schedule_day_hour_range'] }));

@@ -42,7 +42,7 @@ export class DropdownPageScheduleDayHourRangeComponent implements OnChanges, OnI
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromScheduleDayHourRange.Reset({ redirect: false }));
+      this.store.dispatch(fromScheduleDayHourRange.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -65,7 +65,7 @@ export class DropdownPageScheduleDayHourRangeComponent implements OnChanges, OnI
   }
 
   onLoad(searchScheduleDayHourRange: SearchScheduleDayHourRange) {
-    this.store.dispatch(new fromScheduleDayHourRange.LoadEntityShared({
+    this.store.dispatch(fromScheduleDayHourRange.EntityActions.LoadEntityShared({
       search: searchScheduleDayHourRange
     }));
   }

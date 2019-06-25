@@ -71,7 +71,7 @@ export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy
   }
 
   onLoad(searchScheduleDayHourRange: SearchScheduleDayHourRange) {
-    this.store.dispatch(new fromScheduleDayHourRange.LoadEntity({
+    this.store.dispatch(fromScheduleDayHourRange.EntityActions.LoadEntity({
       search: searchScheduleDayHourRange
     }));
   }
@@ -88,14 +88,14 @@ export class IndexPageScheduleDayHourRangeComponent implements OnInit, OnDestroy
   }
 
   onStore(scheduleDayHourRange: ScheduleDayHourRange) {
-    this.store.dispatch(new fromScheduleDayHourRange.StoreEntity({ entity: scheduleDayHourRange }));
+    this.store.dispatch(fromScheduleDayHourRange.EntityActions.StoreEntity({ entity: scheduleDayHourRange }));
   }
 
   onEdit(scheduleDayHourRange: ScheduleDayHourRange) {
-    this.store.dispatch(new fromScheduleDayHourRange.UpdateEntity({ entity: scheduleDayHourRange }));
+    this.store.dispatch(fromScheduleDayHourRange.EntityActions.UpdateEntity({ entity: scheduleDayHourRange }));
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromScheduleDayHourRange.Reset({ redirect: false }));
+    this.store.dispatch(fromScheduleDayHourRange.EntityActions.Reset({ redirect: false }));
   }
 }

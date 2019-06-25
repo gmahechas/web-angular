@@ -22,7 +22,7 @@ export function reducers(state: ScheduleDayHourRangeState | undefined, action: A
     entity: fromEntity.reducer,
     search: fromSearch.reducer,
     pagination: fromPagination.reducer,
-    layout: fromLayout.reducer
+    layout: fromLayout.reducer,
   })(state, action);
 }
 

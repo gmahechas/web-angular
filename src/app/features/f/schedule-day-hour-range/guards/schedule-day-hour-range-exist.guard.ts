@@ -44,7 +44,7 @@ export class ScheduleDayHourRangeExistGuard implements CanActivate {
       select(fromScheduleDayHourRange.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromScheduleDayHourRange.LoadEntity({
+          this.store.dispatch(fromScheduleDayHourRange.EntityActions.LoadEntity({
             search: {
               schedule_day_hour_range: {
                 schedule_day_hour_range_id: scheduleDayHourRangeId,

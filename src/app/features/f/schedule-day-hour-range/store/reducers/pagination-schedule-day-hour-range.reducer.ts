@@ -1,6 +1,5 @@
-import {
-  EntityActionTypes, EntityActions
-} from '@web/app/features/f/schedule-day-hour-range/store/actions/entity-schedule-day-hour-range.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromScheduleDayHourRangeActions from '@web/app/features/f/schedule-day-hour-range/store/actions';
 
 export interface State {
   total: number;
@@ -18,42 +17,34 @@ export const initialState: State = {
   to: null
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        total: action.payload.entities.paginationScheduleDayHourRange.total,
-        perPage: action.payload.entities.paginationScheduleDayHourRange.per_page,
-        currentPage: action.payload.entities.paginationScheduleDayHourRange.current_page,
-        from: action.payload.entities.paginationScheduleDayHourRange.from,
-        to: action.payload.entities.paginationScheduleDayHourRange.to
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromScheduleDayHourRangeActions.EntityActions.LoadEntity,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromScheduleDayHourRangeActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => ({
+      ...state,
+      total: entities.paginationScheduleDayHourRange.total,
+      perPage: entities.paginationScheduleDayHourRange.per_page,
+      currentPage: entities.paginationScheduleDayHourRange.current_page,
+      from: entities.paginationScheduleDayHourRange.from,
+      to: entities.paginationScheduleDayHourRange.to
+    })
+  ),
+  on(
+    fromScheduleDayHourRangeActions.EntityActions.LoadFailEntity,
+    fromScheduleDayHourRangeActions.EntityActions.StoreSuccessEntity,
+    fromScheduleDayHourRangeActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getTotal = (state: State) => state.total;
 export const getPerPage = (state: State) => state.perPage;
