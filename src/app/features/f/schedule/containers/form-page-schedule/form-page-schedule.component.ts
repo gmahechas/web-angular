@@ -25,26 +25,26 @@ export class FormPageScheduleComponent implements OnInit {
   }
 
   onStore(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.StoreEntity({ entity: schedule }));
+    this.store.dispatch(fromSchedule.EntityActions.StoreEntity({ entity: schedule }));
   }
 
   onUpdate(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.UpdateEntity({ entity: schedule }));
+    this.store.dispatch(fromSchedule.EntityActions.UpdateEntity({ entity: schedule }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: initialStateSelectedSchedule }));
+    this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: initialStateSelectedSchedule }));
     this.store.dispatch(new fromCore.Go({
       path: ['schedule']
     }));
   }
 
   onDestroy(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.DestroyEntity({ entity: schedule }));
+    this.store.dispatch(fromSchedule.EntityActions.DestroyEntity({ entity: schedule }));
   }
 
   onScheduleDay(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: { gotoScheduleDay: true } }));
+    this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: { gotoScheduleDay: true } }));
     this.store.dispatch(new fromCore.Go({
       path: [
         'schedule',

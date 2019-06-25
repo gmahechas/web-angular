@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromScheduleActions from '@web/app/features/f/schedule/store/actions';
 import { Schedule } from '@web/app/features/f/schedule/models/schedule.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/schedule/store/actions/entity-schedule.actions';
 
 export interface State extends EntityState<Schedule> { }
 
@@ -11,42 +12,34 @@ export const adapter: EntityAdapter<Schedule> = createEntityAdapter<Schedule>({
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationSchedule.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromScheduleActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationSchedule.data, state)
+  ),
+  on(
+    fromScheduleActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromScheduleActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeSchedule, newState);
+      return adapter.addOne(entity.storeSchedule, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateSchedule.schedule_id,
-        changes: action.payload.entity.updateSchedule
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroySchedule.schedule_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromScheduleActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateSchedule.schedule_id, changes: entity.updateSchedule }, state)
+  ),
+  on(
+    fromScheduleActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroySchedule.schedule_id, state)
+  ),
+  on(
+    fromScheduleActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);

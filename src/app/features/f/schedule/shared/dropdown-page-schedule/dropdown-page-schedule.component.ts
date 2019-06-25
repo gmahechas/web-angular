@@ -43,7 +43,7 @@ export class DropdownPageScheduleComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromSchedule.Reset({ redirect: false }));
+      this.store.dispatch(fromSchedule.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPageScheduleComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchSchedule: SearchSchedule) {
-    this.store.dispatch(new fromSchedule.LoadEntityShared({
+    this.store.dispatch(fromSchedule.EntityActions.LoadEntityShared({
       search: searchSchedule
     }));
   }

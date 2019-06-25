@@ -66,7 +66,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
   }
 
   onLoad(scheduleSearch: SearchSchedule) {
-    this.store.dispatch(new fromSchedule.LoadEntity({
+    this.store.dispatch(fromSchedule.EntityActions.LoadEntity({
       search: {
         ...scheduleSearch,
         limit: 20,
@@ -76,32 +76,32 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: initialStateSelectedSchedule }));
+    this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: initialStateSelectedSchedule }));
     this.store.dispatch(new fromCore.Go({
       path: ['schedule', 'create']
     }));
   }
 
   onEdit(schedule: Schedule) {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: { selectedEntity: schedule } }));
+    this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: { selectedEntity: schedule } }));
     this.store.dispatch(new fromCore.Go({
       path: ['schedule', schedule.schedule_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromSchedule.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromSchedule.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromSchedule.SetSelected({ selected: initialStateSelectedSchedule }));
+    this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: initialStateSelectedSchedule }));
     this.store.dispatch(new fromCore.Go({
       path: ['schedule']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromSchedule.Reset({ redirect: true }));
+    this.store.dispatch(fromSchedule.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

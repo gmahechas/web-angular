@@ -18,8 +18,8 @@ export class EntityScheduleEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleActions.LoadEntity>(fromScheduleActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromScheduleActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromScheduleSelectors.getPerPage)),
         this.store.pipe(select(fromScheduleSelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityScheduleEffects {
         perPage = (perPage) ? perPage : searchSchedule.limit;
         currentPage = (currentPage) ? currentPage : searchSchedule.page;
         return this.scheduleService.load({ ...searchSchedule, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityScheduleEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleActions.StoreEntity>(fromScheduleActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((schedule: fromModels.Schedule) => {
         return this.scheduleService.store(schedule).pipe(
-          map(({ data }) => new fromScheduleActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleActions.StoreFailEntity({ error })))
+          map(({ data }) => fromScheduleActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityScheduleEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleActions.UpdateEntity>(fromScheduleActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((schedule: fromModels.Schedule) => {
         return this.scheduleService.update(schedule).pipe(
-          map(({ data }) => new fromScheduleActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromScheduleActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityScheduleEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleActions.DestroyEntity>(fromScheduleActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((schedule: fromModels.Schedule) => {
         return this.scheduleService.destroy(schedule).pipe(
-          map(({ data }) => new fromScheduleActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromScheduleActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityScheduleEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleActions.PaginateEntity>(fromScheduleActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromScheduleActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromScheduleSelectors.getPerPage)),
         this.store.pipe(select(fromScheduleSelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchSchedule]: [number, number, fromModels.SearchSchedule]) => {
         return from(this.scheduleService.pagination({ ...searchSchedule, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityScheduleEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromScheduleActions.LoadEntityShared>(fromScheduleActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromScheduleActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchSchedule: fromModels.SearchSchedule) => {
         if (
           searchSchedule.schedule.schedule_id === '' &&
@@ -105,16 +105,15 @@ export class EntityScheduleEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromScheduleActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromScheduleActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.scheduleService.load({ ...searchSchedule, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromScheduleActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleActions.EntityActions.LoadFailEntity({ error })))
         );
-
       })
     )
   );

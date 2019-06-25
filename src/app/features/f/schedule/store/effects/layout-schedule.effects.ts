@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromScheduleActions from '@web/app/features/f/schedule/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutScheduleEffects {
@@ -14,12 +14,12 @@ export class LayoutScheduleEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleActions.EntityActionTypes.LoadEntity,
-        fromScheduleActions.EntityActionTypes.StoreEntity,
-        fromScheduleActions.EntityActionTypes.UpdateEntity,
-        fromScheduleActions.EntityActionTypes.DestroyEntity,
-        fromScheduleActions.EntityActionTypes.PaginateEntity,
-        fromScheduleActions.EntityActionTypes.LoadEntityShared
+        fromScheduleActions.EntityActions.LoadEntity,
+        fromScheduleActions.EntityActions.StoreEntity,
+        fromScheduleActions.EntityActions.UpdateEntity,
+        fromScheduleActions.EntityActions.DestroyEntity,
+        fromScheduleActions.EntityActions.PaginateEntity,
+        fromScheduleActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutScheduleEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleActions.EntityActionTypes.LoadSuccessEntity
+        fromScheduleActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutScheduleEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleActions.EntityActionTypes.StoreSuccessEntity,
-        fromScheduleActions.EntityActionTypes.UpdateSuccessEntity,
-        fromScheduleActions.EntityActionTypes.DestroySuccessEntity
+        fromScheduleActions.EntityActions.StoreSuccessEntity,
+        fromScheduleActions.EntityActions.UpdateSuccessEntity,
+        fromScheduleActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutScheduleEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleActions.EntityActionTypes.LoadFailEntity,
-        fromScheduleActions.EntityActionTypes.StoreFailEntity,
-        fromScheduleActions.EntityActionTypes.UpdateFailEntity,
-        fromScheduleActions.EntityActionTypes.DestroyFailEntity
+        fromScheduleActions.EntityActions.LoadFailEntity,
+        fromScheduleActions.EntityActions.StoreFailEntity,
+        fromScheduleActions.EntityActions.UpdateFailEntity,
+        fromScheduleActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutScheduleEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleActions.EntityActionTypes.LoadEntity,
-        fromScheduleActions.EntityActionTypes.StoreSuccessEntity,
-        fromScheduleActions.EntityActionTypes.UpdateSuccessEntity,
-        fromScheduleActions.EntityActionTypes.DestroySuccessEntity
+        fromScheduleActions.EntityActions.LoadEntity,
+        fromScheduleActions.EntityActions.StoreSuccessEntity,
+        fromScheduleActions.EntityActions.UpdateSuccessEntity,
+        fromScheduleActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['schedule'] }));
@@ -97,8 +97,7 @@ export class LayoutScheduleEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromScheduleActions.EntityActionTypes.Reset),
-      map((action: fromScheduleActions.Reset) => action.payload),
+      ofType(fromScheduleActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['schedule'] }));

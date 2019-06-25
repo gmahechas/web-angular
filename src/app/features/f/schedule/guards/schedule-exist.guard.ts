@@ -44,7 +44,7 @@ export class ScheduleExistGuard implements CanActivate {
       select(fromSchedule.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromSchedule.LoadEntity({
+          this.store.dispatch(fromSchedule.EntityActions.LoadEntity({
             search: {
               schedule: {
                 schedule_id: scheduleId,
