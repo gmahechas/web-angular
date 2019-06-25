@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/schedule-day/store/actions/entity-schedule-day.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromScheduleDayActions from '@web/app/features/f/schedule-day/store/actions';
 
 export interface State {
   total: number;
@@ -16,42 +17,34 @@ export const initialState: State = {
   to: null
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        total: action.payload.entities.paginationScheduleDay.total,
-        perPage: action.payload.entities.paginationScheduleDay.per_page,
-        currentPage: action.payload.entities.paginationScheduleDay.current_page,
-        from: action.payload.entities.paginationScheduleDay.from,
-        to: action.payload.entities.paginationScheduleDay.to
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromScheduleDayActions.EntityActions.LoadEntity,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => ({
+      ...state,
+      total: entities.paginationScheduleDay.total,
+      perPage: entities.paginationScheduleDay.per_page,
+      currentPage: entities.paginationScheduleDay.current_page,
+      from: entities.paginationScheduleDay.from,
+      to: entities.paginationScheduleDay.to
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadFailEntity,
+    fromScheduleDayActions.EntityActions.StoreSuccessEntity,
+    fromScheduleDayActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getTotal = (state: State) => state.total;
 export const getPerPage = (state: State) => state.perPage;

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromScheduleDayActions from '@web/app/features/f/schedule-day/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutScheduleDayEffects {
@@ -14,12 +14,12 @@ export class LayoutScheduleDayEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayActions.EntityActionTypes.LoadEntity,
-        fromScheduleDayActions.EntityActionTypes.StoreEntity,
-        fromScheduleDayActions.EntityActionTypes.UpdateEntity,
-        fromScheduleDayActions.EntityActionTypes.DestroyEntity,
-        fromScheduleDayActions.EntityActionTypes.PaginateEntity,
-        fromScheduleDayActions.EntityActionTypes.LoadEntityShared
+        fromScheduleDayActions.EntityActions.LoadEntity,
+        fromScheduleDayActions.EntityActions.StoreEntity,
+        fromScheduleDayActions.EntityActions.UpdateEntity,
+        fromScheduleDayActions.EntityActions.DestroyEntity,
+        fromScheduleDayActions.EntityActions.PaginateEntity,
+        fromScheduleDayActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutScheduleDayEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayActions.EntityActionTypes.LoadSuccessEntity
+        fromScheduleDayActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutScheduleDayEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayActions.EntityActionTypes.StoreSuccessEntity,
-        fromScheduleDayActions.EntityActionTypes.UpdateSuccessEntity,
-        fromScheduleDayActions.EntityActionTypes.DestroySuccessEntity
+        fromScheduleDayActions.EntityActions.StoreSuccessEntity,
+        fromScheduleDayActions.EntityActions.UpdateSuccessEntity,
+        fromScheduleDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutScheduleDayEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayActions.EntityActionTypes.LoadFailEntity,
-        fromScheduleDayActions.EntityActionTypes.StoreFailEntity,
-        fromScheduleDayActions.EntityActionTypes.UpdateFailEntity,
-        fromScheduleDayActions.EntityActionTypes.DestroyFailEntity
+        fromScheduleDayActions.EntityActions.LoadFailEntity,
+        fromScheduleDayActions.EntityActions.StoreFailEntity,
+        fromScheduleDayActions.EntityActions.UpdateFailEntity,
+        fromScheduleDayActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutScheduleDayEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromScheduleDayActions.EntityActionTypes.LoadEntity,
-        fromScheduleDayActions.EntityActionTypes.StoreSuccessEntity,
-        fromScheduleDayActions.EntityActionTypes.UpdateSuccessEntity,
-        fromScheduleDayActions.EntityActionTypes.DestroySuccessEntity
+        fromScheduleDayActions.EntityActions.LoadEntity,
+        fromScheduleDayActions.EntityActions.StoreSuccessEntity,
+        fromScheduleDayActions.EntityActions.UpdateSuccessEntity,
+        fromScheduleDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['schedule_day'] }));
@@ -97,8 +97,7 @@ export class LayoutScheduleDayEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromScheduleDayActions.EntityActionTypes.Reset),
-      map((action: fromScheduleDayActions.Reset) => action.payload),
+      ofType(fromScheduleDayActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['schedule_day'] }));

@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/schedule-day/store/actions/entity-schedule-day.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromScheduleDayActions from '@web/app/features/f/schedule-day/store/actions';
 import { SearchScheduleDay } from '@web/app/features/f/schedule-day/models/search-schedule-day.model';
 
 export interface State {
@@ -10,50 +11,46 @@ export const initialState: State = {
   loaded: false,
   query: {
     schedule_day: {
-      schedule_day_id: '',
-      schedule_day_status: null
-    },
-    schedule: null,
-    day: null
+      schedule_day_id: ''
+      // TODO:
+    }
   }
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.LoadEntityShared: {
-      return {
-        ...state,
-        loaded: false,
-        query: { schedule_day: action.payload.search.schedule_day }
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        loaded: true
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return {
-        ...state,
-        loaded: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromScheduleDayActions.EntityActions.LoadEntity,
+    fromScheduleDayActions.EntityActions.LoadEntityShared,
+    (state, { search }) => ({
+      ...state,
+      loaded: false,
+      query: {
+        schedule_day: search.schedule_day, // TODO:
+      }
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadSuccessEntity,
+    (state) => ({
+      ...state,
+      loaded: true
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadFailEntity,
+    (state) => ({
+      ...state,
+      loaded: false
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getLoaded = (state: State) => state.loaded;
 export const getQuery = (state: State) => state.query;

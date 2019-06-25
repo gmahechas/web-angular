@@ -18,8 +18,8 @@ export class EntityScheduleDayEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayActions.LoadEntity>(fromScheduleDayActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromScheduleDayActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromScheduleDaySelectors.getPerPage)),
         this.store.pipe(select(fromScheduleDaySelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityScheduleDayEffects {
         perPage = (perPage) ? perPage : searchScheduleDay.limit;
         currentPage = (currentPage) ? currentPage : searchScheduleDay.page;
         return this.scheduleDayService.load({ ...searchScheduleDay, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromScheduleDayActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleDayActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleDayActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleDayActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityScheduleDayEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayActions.StoreEntity>(fromScheduleDayActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleDayActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((scheduleDay: fromModels.ScheduleDay) => {
         return this.scheduleDayService.store(scheduleDay).pipe(
-          map(({ data }) => new fromScheduleDayActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleDayActions.StoreFailEntity({ error })))
+          map(({ data }) => fromScheduleDayActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleDayActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityScheduleDayEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayActions.UpdateEntity>(fromScheduleDayActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleDayActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((scheduleDay: fromModels.ScheduleDay) => {
         return this.scheduleDayService.update(scheduleDay).pipe(
-          map(({ data }) => new fromScheduleDayActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleDayActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromScheduleDayActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleDayActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityScheduleDayEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayActions.DestroyEntity>(fromScheduleDayActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromScheduleDayActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((scheduleDay: fromModels.ScheduleDay) => {
         return this.scheduleDayService.destroy(scheduleDay).pipe(
-          map(({ data }) => new fromScheduleDayActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromScheduleDayActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromScheduleDayActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromScheduleDayActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityScheduleDayEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromScheduleDayActions.PaginateEntity>(fromScheduleDayActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromScheduleDayActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromScheduleDaySelectors.getPerPage)),
         this.store.pipe(select(fromScheduleDaySelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchScheduleDay]: [number, number, fromModels.SearchScheduleDay]) => {
         return from(this.scheduleDayService.pagination({ ...searchScheduleDay, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromScheduleDayActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleDayActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleDayActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleDayActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityScheduleDayEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromScheduleDayActions.LoadEntityShared>(fromScheduleDayActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromScheduleDayActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchScheduleDay: fromModels.SearchScheduleDay) => {
         if (
           searchScheduleDay.schedule_day.schedule_day_id === '' &&
@@ -107,16 +107,15 @@ export class EntityScheduleDayEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromScheduleDayActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromScheduleDayActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.scheduleDayService.load({ ...searchScheduleDay, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromScheduleDayActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromScheduleDayActions.LoadFailEntity({ error })))
+          map(({ data }) => fromScheduleDayActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromScheduleDayActions.EntityActions.LoadFailEntity({ error })))
         );
-
       })
     )
   );

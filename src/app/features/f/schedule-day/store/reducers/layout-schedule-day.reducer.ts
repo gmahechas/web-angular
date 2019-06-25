@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/f/schedule-day/store/actions/entity-schedule-day.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromScheduleDayActions from '@web/app/features/f/schedule-day/store/actions';
 import { SelectedScheduleDay, initialStateSelectedScheduleDay } from '@web/app/features/f/schedule-day/models/selected-schedule-day.model';
 
 export interface State {
@@ -13,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedScheduleDay,
-        error: action.payload.error,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedScheduleDay,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromScheduleDayActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadFailEntity,
+    fromScheduleDayActions.EntityActions.StoreFailEntity,
+    fromScheduleDayActions.EntityActions.UpdateFailEntity,
+    fromScheduleDayActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedScheduleDay,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadEntity,
+    fromScheduleDayActions.EntityActions.PaginateEntity,
+    fromScheduleDayActions.EntityActions.StoreEntity,
+    fromScheduleDayActions.EntityActions.UpdateEntity,
+    fromScheduleDayActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.LoadSuccessEntity,
+    fromScheduleDayActions.EntityActions.StoreSuccessEntity,
+    fromScheduleDayActions.EntityActions.UpdateSuccessEntity,
+    fromScheduleDayActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedScheduleDay,
+      pending: false
+    })
+  ),
+  on(
+    fromScheduleDayActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

@@ -48,7 +48,7 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
     const val = this.route.snapshot.params[key];
 
     setTimeout(() => {
-      this.store.dispatch(new fromScheduleDay.LoadEntity({
+      this.store.dispatch(fromScheduleDay.EntityActions.LoadEntity({
         search: { [key.split('_')[0]]: { [key]: val } }
       }));
     });
@@ -69,15 +69,15 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
   }
 
   onEdit(scheduleDay: ScheduleDay) {
-    this.store.dispatch(new fromScheduleDay.UpdateEntity({ entity: scheduleDay }));
+    this.store.dispatch(fromScheduleDay.EntityActions.UpdateEntity({ entity: scheduleDay }));
   }
 
   onDelete(scheduleDay: ScheduleDay) {
-    this.store.dispatch(new fromScheduleDay.DestroyEntity({ entity: scheduleDay }));
+    this.store.dispatch(fromScheduleDay.EntityActions.DestroyEntity({ entity: scheduleDay }));
   }
 
   onScheduleDayHourRange(scheduleDay: ScheduleDay) {
-    this.store.dispatch(new fromScheduleDay.SetSelected({ selected: { selectedEntity: scheduleDay } }));
+    this.store.dispatch(fromScheduleDay.EntityActions.SetSelected({ selected: { selectedEntity: scheduleDay } }));
     this.store.dispatch(new fromCore.Go({
       path: [
         'schedule',
@@ -97,6 +97,6 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new fromScheduleDay.Reset({ redirect: false }));
+    this.store.dispatch(fromScheduleDay.EntityActions.Reset({ redirect: false }));
   }
 }
