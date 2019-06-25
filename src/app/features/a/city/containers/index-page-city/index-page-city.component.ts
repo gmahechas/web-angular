@@ -60,7 +60,7 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
   }
 
   onLoad(citySearch: SearchCity) {
-    this.store.dispatch(new fromCity.LoadEntity({
+    this.store.dispatch(fromCity.EntityActions.LoadEntity({
       search: {
         ...citySearch,
         limit: 20,
@@ -70,32 +70,32 @@ export class IndexPageCityComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromCity.SetSelected({ selected: initialStateSelectedCity }));
+    this.store.dispatch(fromCity.EntityActions.SetSelected({ selected: initialStateSelectedCity }));
     this.store.dispatch(new fromCore.Go({
       path: ['city', 'create']
     }));
   }
 
   onEdit(city: City) {
-    this.store.dispatch(new fromCity.SetSelected({ selected: { selectedEntity: city } }));
+    this.store.dispatch(fromCity.EntityActions.SetSelected({ selected: { selectedEntity: city } }));
     this.store.dispatch(new fromCore.Go({
       path: ['city', city.city_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromCity.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromCity.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromCity.SetSelected({ selected: initialStateSelectedCity }));
+    this.store.dispatch(fromCity.EntityActions.SetSelected({ selected: initialStateSelectedCity }));
     this.store.dispatch(new fromCore.Go({
       path: ['city']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromCity.Reset({ redirect: true }));
+    this.store.dispatch(fromCity.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

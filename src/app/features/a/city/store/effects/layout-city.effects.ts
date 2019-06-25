@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromCityActions from '@web/app/features/a/city/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutCityEffects {
@@ -14,12 +14,12 @@ export class LayoutCityEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCityActions.EntityActionTypes.LoadEntity,
-        fromCityActions.EntityActionTypes.StoreEntity,
-        fromCityActions.EntityActionTypes.UpdateEntity,
-        fromCityActions.EntityActionTypes.DestroyEntity,
-        fromCityActions.EntityActionTypes.PaginateEntity,
-        fromCityActions.EntityActionTypes.LoadEntityShared
+        fromCityActions.EntityActions.LoadEntity,
+        fromCityActions.EntityActions.StoreEntity,
+        fromCityActions.EntityActions.UpdateEntity,
+        fromCityActions.EntityActions.DestroyEntity,
+        fromCityActions.EntityActions.PaginateEntity,
+        fromCityActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutCityEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCityActions.EntityActionTypes.LoadSuccessEntity
+        fromCityActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutCityEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCityActions.EntityActionTypes.StoreSuccessEntity,
-        fromCityActions.EntityActionTypes.UpdateSuccessEntity,
-        fromCityActions.EntityActionTypes.DestroySuccessEntity
+        fromCityActions.EntityActions.StoreSuccessEntity,
+        fromCityActions.EntityActions.UpdateSuccessEntity,
+        fromCityActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutCityEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCityActions.EntityActionTypes.LoadFailEntity,
-        fromCityActions.EntityActionTypes.StoreFailEntity,
-        fromCityActions.EntityActionTypes.UpdateFailEntity,
-        fromCityActions.EntityActionTypes.DestroyFailEntity
+        fromCityActions.EntityActions.LoadFailEntity,
+        fromCityActions.EntityActions.StoreFailEntity,
+        fromCityActions.EntityActions.UpdateFailEntity,
+        fromCityActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutCityEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromCityActions.EntityActionTypes.LoadEntity,
-        fromCityActions.EntityActionTypes.StoreSuccessEntity,
-        fromCityActions.EntityActionTypes.UpdateSuccessEntity,
-        fromCityActions.EntityActionTypes.DestroySuccessEntity
+        fromCityActions.EntityActions.LoadEntity,
+        fromCityActions.EntityActions.StoreSuccessEntity,
+        fromCityActions.EntityActions.UpdateSuccessEntity,
+        fromCityActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['city'] }));
@@ -97,8 +97,7 @@ export class LayoutCityEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromCityActions.EntityActionTypes.Reset),
-      map((action: fromCityActions.Reset) => action.payload),
+      ofType(fromCityActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['city'] }));

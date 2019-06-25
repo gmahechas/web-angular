@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/a/city/store/actions/entity-city.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromCityActions from '@web/app/features/a/city/store/actions';
 import { SearchCity } from '@web/app/features/a/city/models/search-city.model';
 
 export interface State {
@@ -18,45 +19,41 @@ export const initialState: State = {
   }
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.LoadEntityShared: {
-      return {
-        ...state,
-        loaded: false,
-        query: {
-          city: action.payload.search.city,
-          estate: action.payload.search.estate
-        }
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        loaded: true
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return {
-        ...state,
-        loaded: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromCityActions.EntityActions.LoadEntity,
+    fromCityActions.EntityActions.LoadEntityShared,
+    (state, { search }) => ({
+      ...state,
+      loaded: false,
+      query: {
+        city: search.city,
+        estate: search.estate
+      }
+    })
+  ),
+  on(
+    fromCityActions.EntityActions.LoadSuccessEntity,
+    (state) => ({
+      ...state,
+      loaded: true
+    })
+  ),
+  on(
+    fromCityActions.EntityActions.LoadFailEntity,
+    (state) => ({
+      ...state,
+      loaded: false
+    })
+  ),
+  on(
+    fromCityActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getLoaded = (state: State) => state.loaded;
 export const getQuery = (state: State) => state.query;

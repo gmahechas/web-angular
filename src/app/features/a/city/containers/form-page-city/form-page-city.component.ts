@@ -25,21 +25,21 @@ export class FormPageCityComponent implements OnInit {
   }
 
   onStore(city: City) {
-    this.store.dispatch(new fromCity.StoreEntity({ entity: city }));
+    this.store.dispatch(fromCity.EntityActions.StoreEntity({ entity: city }));
   }
 
   onUpdate(city: City) {
-    this.store.dispatch(new fromCity.UpdateEntity({ entity: city }));
+    this.store.dispatch(fromCity.EntityActions.UpdateEntity({ entity: city }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromCity.SetSelected({ selected: initialStateSelectedCity }));
+    this.store.dispatch(fromCity.EntityActions.SetSelected({ selected: initialStateSelectedCity }));
     this.store.dispatch(new fromCore.Go({
       path: ['city']
     }));
   }
 
   onDestroy(city: City) {
-    this.store.dispatch(new fromCity.DestroyEntity({ entity: city }));
+    this.store.dispatch(fromCity.EntityActions.DestroyEntity({ entity: city }));
   }
 }

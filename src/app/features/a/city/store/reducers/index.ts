@@ -1,4 +1,4 @@
-import { createFeatureSelector, combineReducers, Action} from '@ngrx/store';
+import { createFeatureSelector, combineReducers, Action } from '@ngrx/store';
 
 import * as fromEntity from '@web/app/features/a/city/store/reducers/entity-city.reducer';
 import * as fromSearch from '@web/app/features/a/city/store/reducers/search-city.reducer';

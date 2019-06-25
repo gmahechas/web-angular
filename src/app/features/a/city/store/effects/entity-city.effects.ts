@@ -18,8 +18,8 @@ export class EntityCityEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCityActions.LoadEntity>(fromCityActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromCityActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromCitySelectors.getPerPage)),
         this.store.pipe(select(fromCitySelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityCityEffects {
         perPage = (perPage) ? perPage : searchCity.limit;
         currentPage = (currentPage) ? currentPage : searchCity.page;
         return this.cityService.load({ ...searchCity, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromCityActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromCityActions.LoadFailEntity({ error })))
+          map(({ data }) => fromCityActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromCityActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityCityEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCityActions.StoreEntity>(fromCityActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromCityActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((city: fromModels.City) => {
         return this.cityService.store(city).pipe(
-          map(({ data }) => new fromCityActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromCityActions.StoreFailEntity({ error })))
+          map(({ data }) => fromCityActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromCityActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityCityEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCityActions.UpdateEntity>(fromCityActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromCityActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((city: fromModels.City) => {
         return this.cityService.update(city).pipe(
-          map(({ data }) => new fromCityActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromCityActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromCityActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromCityActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityCityEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCityActions.DestroyEntity>(fromCityActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromCityActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((city: fromModels.City) => {
         return this.cityService.destroy(city).pipe(
-          map(({ data }) => new fromCityActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromCityActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromCityActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromCityActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityCityEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromCityActions.PaginateEntity>(fromCityActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromCityActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromCitySelectors.getPerPage)),
         this.store.pipe(select(fromCitySelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchCity]: [number, number, fromModels.SearchCity]) => {
         return from(this.cityService.pagination({ ...searchCity, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromCityActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromCityActions.LoadFailEntity({ error })))
+          map(({ data }) => fromCityActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromCityActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityCityEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromCityActions.LoadEntityShared>(fromCityActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromCityActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchCity: fromModels.SearchCity) => {
         if (
           searchCity.city.city_id === '' &&
@@ -107,14 +107,14 @@ export class EntityCityEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromCityActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromCityActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.cityService.load({ ...searchCity, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromCityActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromCityActions.LoadFailEntity({ error })))
+          map(({ data }) => fromCityActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromCityActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
