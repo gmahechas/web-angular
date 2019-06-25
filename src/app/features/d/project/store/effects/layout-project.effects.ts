@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromProjectActions from '@web/app/features/d/project/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProjectEffects {
@@ -14,12 +14,12 @@ export class LayoutProjectEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProjectActions.EntityActionTypes.LoadEntity,
-        fromProjectActions.EntityActionTypes.StoreEntity,
-        fromProjectActions.EntityActionTypes.UpdateEntity,
-        fromProjectActions.EntityActionTypes.DestroyEntity,
-        fromProjectActions.EntityActionTypes.PaginateEntity,
-        fromProjectActions.EntityActionTypes.LoadEntityShared
+        fromProjectActions.EntityActions.LoadEntity,
+        fromProjectActions.EntityActions.StoreEntity,
+        fromProjectActions.EntityActions.UpdateEntity,
+        fromProjectActions.EntityActions.DestroyEntity,
+        fromProjectActions.EntityActions.PaginateEntity,
+        fromProjectActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutProjectEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProjectActions.EntityActionTypes.LoadSuccessEntity
+        fromProjectActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutProjectEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProjectActions.EntityActionTypes.StoreSuccessEntity,
-        fromProjectActions.EntityActionTypes.UpdateSuccessEntity,
-        fromProjectActions.EntityActionTypes.DestroySuccessEntity
+        fromProjectActions.EntityActions.StoreSuccessEntity,
+        fromProjectActions.EntityActions.UpdateSuccessEntity,
+        fromProjectActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutProjectEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProjectActions.EntityActionTypes.LoadFailEntity,
-        fromProjectActions.EntityActionTypes.StoreFailEntity,
-        fromProjectActions.EntityActionTypes.UpdateFailEntity,
-        fromProjectActions.EntityActionTypes.DestroyFailEntity
+        fromProjectActions.EntityActions.LoadFailEntity,
+        fromProjectActions.EntityActions.StoreFailEntity,
+        fromProjectActions.EntityActions.UpdateFailEntity,
+        fromProjectActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutProjectEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProjectActions.EntityActionTypes.LoadEntity,
-        fromProjectActions.EntityActionTypes.StoreSuccessEntity,
-        fromProjectActions.EntityActionTypes.UpdateSuccessEntity,
-        fromProjectActions.EntityActionTypes.DestroySuccessEntity
+        fromProjectActions.EntityActions.LoadEntity,
+        fromProjectActions.EntityActions.StoreSuccessEntity,
+        fromProjectActions.EntityActions.UpdateSuccessEntity,
+        fromProjectActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['project'] }));
@@ -97,8 +97,7 @@ export class LayoutProjectEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromProjectActions.EntityActionTypes.Reset),
-      map((action: fromProjectActions.Reset) => action.payload),
+      ofType(fromProjectActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['project'] }));

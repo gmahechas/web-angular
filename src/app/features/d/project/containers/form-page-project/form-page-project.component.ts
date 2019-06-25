@@ -25,26 +25,26 @@ export class FormPageProjectComponent implements OnInit {
   }
 
   onStore(project: Project) {
-    this.store.dispatch(new fromProject.StoreEntity({ entity: project }));
+    this.store.dispatch(fromProject.EntityActions.StoreEntity({ entity: project }));
   }
 
   onUpdate(project: Project) {
-    this.store.dispatch(new fromProject.UpdateEntity({ entity: project }));
+    this.store.dispatch(fromProject.EntityActions.UpdateEntity({ entity: project }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromProject.SetSelected({ selected: initialStateSelectedProject }));
+    this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: initialStateSelectedProject }));
     this.store.dispatch(new fromCore.Go({
       path: ['project']
     }));
   }
 
   onDestroy(project: Project) {
-    this.store.dispatch(new fromProject.DestroyEntity({ entity: project }));
+    this.store.dispatch(fromProject.EntityActions.DestroyEntity({ entity: project }));
   }
 
   onUserOfficeProject(project: Project) {
-    this.store.dispatch(new fromProject.SetSelected({ selected: { gotoUserOfficeProject: true } }));
+    this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: { gotoUserOfficeProject: true } }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', project.project_id, {
         outlets: {

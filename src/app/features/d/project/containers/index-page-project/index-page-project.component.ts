@@ -68,7 +68,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   onLoad(projectSearch: SearchProject) {
-    this.store.dispatch(new fromProject.LoadEntity({
+    this.store.dispatch(fromProject.EntityActions.LoadEntity({
       search: {
         ...projectSearch,
         limit: 20,
@@ -78,32 +78,32 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromProject.SetSelected({ selected: initialStateSelectedProject }));
+    this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: initialStateSelectedProject }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', 'create']
     }));
   }
 
   onEdit(project: Project) {
-    this.store.dispatch(new fromProject.SetSelected({ selected: { selectedEntity: project } }));
+    this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: { selectedEntity: project } }));
     this.store.dispatch(new fromCore.Go({
       path: ['project', project.project_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromProject.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromProject.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromProject.SetSelected({ selected: initialStateSelectedProject }));
+    this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: initialStateSelectedProject }));
     this.store.dispatch(new fromCore.Go({
       path: ['project']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromProject.Reset({ redirect: true }));
+    this.store.dispatch(fromProject.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

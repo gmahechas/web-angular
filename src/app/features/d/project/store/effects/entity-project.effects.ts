@@ -18,8 +18,8 @@ export class EntityProjectEffects {
 
   loadEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromProjectActions.LoadEntity>(fromProjectActions.EntityActionTypes.LoadEntity),
-      map(action => action.payload.search),
+      ofType(fromProjectActions.EntityActions.LoadEntity),
+      map(action => action.search),
       withLatestFrom(
         this.store.pipe(select(fromProjectSelectors.getPerPage)),
         this.store.pipe(select(fromProjectSelectors.getCurrentPage))
@@ -28,8 +28,8 @@ export class EntityProjectEffects {
         perPage = (perPage) ? perPage : searchProject.limit;
         currentPage = (currentPage) ? currentPage : searchProject.page;
         return this.projectService.load({ ...searchProject, limit: perPage, page: currentPage }).pipe(
-          map(({ data }) => new fromProjectActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromProjectActions.LoadFailEntity({ error })))
+          map(({ data }) => fromProjectActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromProjectActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -37,12 +37,12 @@ export class EntityProjectEffects {
 
   storeEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromProjectActions.StoreEntity>(fromProjectActions.EntityActionTypes.StoreEntity),
-      map(action => action.payload.entity),
+      ofType(fromProjectActions.EntityActions.StoreEntity),
+      map(action => action.entity),
       mergeMap((project: fromModels.Project) => {
         return this.projectService.store(project).pipe(
-          map(({ data }) => new fromProjectActions.StoreSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromProjectActions.StoreFailEntity({ error })))
+          map(({ data }) => fromProjectActions.EntityActions.StoreSuccessEntity({ entity: data })),
+          catchError((error) => of(fromProjectActions.EntityActions.StoreFailEntity({ error })))
         );
       })
     )
@@ -50,12 +50,12 @@ export class EntityProjectEffects {
 
   updateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromProjectActions.UpdateEntity>(fromProjectActions.EntityActionTypes.UpdateEntity),
-      map(action => action.payload.entity),
+      ofType(fromProjectActions.EntityActions.UpdateEntity),
+      map(action => action.entity),
       mergeMap((project: fromModels.Project) => {
         return this.projectService.update(project).pipe(
-          map(({ data }) => new fromProjectActions.UpdateSuccessEntity({ entity: data })),
-          catchError((error) => of(new fromProjectActions.UpdateFailEntity({ error })))
+          map(({ data }) => fromProjectActions.EntityActions.UpdateSuccessEntity({ entity: data })),
+          catchError((error) => of(fromProjectActions.EntityActions.UpdateFailEntity({ error })))
         );
       })
     )
@@ -63,12 +63,12 @@ export class EntityProjectEffects {
 
   destroyEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromProjectActions.DestroyEntity>(fromProjectActions.EntityActionTypes.DestroyEntity),
-      map(action => action.payload.entity),
+      ofType(fromProjectActions.EntityActions.DestroyEntity),
+      map(action => action.entity),
       mergeMap((project: fromModels.Project) => {
         return this.projectService.destroy(project).pipe(
-          map(({ data }) => new fromProjectActions.DestroySuccessEntity({ entity: data })),
-          catchError((error) => of(new fromProjectActions.DestroyFailEntity({ error })))
+          map(({ data }) => fromProjectActions.EntityActions.DestroySuccessEntity({ entity: data })),
+          catchError((error) => of(fromProjectActions.EntityActions.DestroyFailEntity({ error })))
         );
       })
     )
@@ -76,16 +76,16 @@ export class EntityProjectEffects {
 
   paginateEntity$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromProjectActions.PaginateEntity>(fromProjectActions.EntityActionTypes.PaginateEntity),
-      map(action => action.payload.page),
+      ofType(fromProjectActions.EntityActions.PaginateEntity),
+      map(action => action.page),
       withLatestFrom(
         this.store.pipe(select(fromProjectSelectors.getPerPage)),
         this.store.pipe(select(fromProjectSelectors.getQuery))
       ),
       mergeMap(([currentPage, perPage, searchProject]: [number, number, fromModels.SearchProject]) => {
         return from(this.projectService.pagination({ ...searchProject, limit: perPage, page: currentPage })).pipe(
-          map(({ data }) => new fromProjectActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromProjectActions.LoadFailEntity({ error })))
+          map(({ data }) => fromProjectActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromProjectActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )
@@ -93,9 +93,9 @@ export class EntityProjectEffects {
 
   loadEntityShared$ = createEffect(() => ({ debounce = 600, scheduler = asyncScheduler } = {}): Observable<Action> =>
     this.actions$.pipe(
-      ofType<fromProjectActions.LoadEntityShared>(fromProjectActions.EntityActionTypes.LoadEntityShared),
+      ofType(fromProjectActions.EntityActions.LoadEntityShared),
       debounceTime(debounce, scheduler),
-      map(action => action.payload.search),
+      map(action => action.search),
       switchMap((searchProject: fromModels.SearchProject) => {
         if (
           searchProject.project.project_id === '' &&
@@ -107,14 +107,14 @@ export class EntityProjectEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(fromProjectActions.EntityActionTypes.LoadEntityShared),
+          ofType(fromProjectActions.EntityActions.LoadEntityShared),
           skip(1)
         );
 
         return this.projectService.load({ ...searchProject, limit: 20, page: 1 }).pipe(
           takeUntil(nextSearch$),
-          map(({ data }) => new fromProjectActions.LoadSuccessEntity({ entities: data })),
-          catchError((error) => of(new fromProjectActions.LoadFailEntity({ error })))
+          map(({ data }) => fromProjectActions.EntityActions.LoadSuccessEntity({ entities: data })),
+          catchError((error) => of(fromProjectActions.EntityActions.LoadFailEntity({ error })))
         );
       })
     )

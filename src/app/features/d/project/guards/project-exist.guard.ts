@@ -44,7 +44,7 @@ export class ProjectExistGuard implements CanActivate {
       select(fromProject.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromProject.LoadEntity({
+          this.store.dispatch(fromProject.EntityActions.LoadEntity({
             search: {
               project: {
                 project_id: projectId,

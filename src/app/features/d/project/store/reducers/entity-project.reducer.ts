@@ -1,6 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromProjectActions from '@web/app/features/d/project/store/actions';
 import { Project } from '@web/app/features/d/project/models/project.model';
-import { EntityActionTypes, EntityActions } from '@web/app/features/d/project/store/actions/entity-project.actions';
 
 export interface State extends EntityState<Project> { }
 
@@ -11,42 +12,34 @@ export const adapter: EntityAdapter<Project> = createEntityAdapter<Project>({
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationProject.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromProjectActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationProject.data, state)
+  ),
+  on(
+    fromProjectActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromProjectActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeProject, newState);
+      return adapter.addOne(entity.storeProject, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateProject.project_id,
-        changes: action.payload.entity.updateProject
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyProject.project_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromProjectActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateProject.project_id, changes: entity.updateProject }, state)
+  ),
+  on(
+    fromProjectActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyProject.project_id, state)
+  ),
+  on(
+    fromProjectActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);

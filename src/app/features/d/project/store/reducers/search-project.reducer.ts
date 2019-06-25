@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/d/project/store/actions/entity-project.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromProjectActions from '@web/app/features/d/project/store/actions';
 import { SearchProject } from '@web/app/features/d/project/models/search-project.model';
 
 export interface State {
@@ -17,45 +18,41 @@ export const initialState: State = {
   }
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.LoadEntityShared: {
-      return {
-        ...state,
-        loaded: false,
-        query: {
-          project: action.payload.search.project,
-          macroproject: action.payload.search.macroproject
-        }
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        loaded: true
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return {
-        ...state,
-        loaded: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromProjectActions.EntityActions.LoadEntity,
+    fromProjectActions.EntityActions.LoadEntityShared,
+    (state, { search }) => ({
+      ...state,
+      loaded: false,
+      query: {
+        project: search.project,
+        macroproject: search.macroproject
+      }
+    })
+  ),
+  on(
+    fromProjectActions.EntityActions.LoadSuccessEntity,
+    (state) => ({
+      ...state,
+      loaded: true
+    })
+  ),
+  on(
+    fromProjectActions.EntityActions.LoadFailEntity,
+    (state) => ({
+      ...state,
+      loaded: false
+    })
+  ),
+  on(
+    fromProjectActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getLoaded = (state: State) => state.loaded;
 export const getQuery = (state: State) => state.query;

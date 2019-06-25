@@ -1,120 +1,83 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import * as fromModels from '@web/app/features/d/project/models';
 
-export enum EntityActionTypes {
-  LoadEntity = '[Project] Load Entity ',
-  LoadSuccessEntity = '[Project] Load Success Entity',
-  LoadFailEntity = '[Project] Load Fail Entity',
-  StoreEntity = '[Project] Store Entity',
-  StoreSuccessEntity = '[Project] Store Success Entity',
-  StoreFailEntity = '[Project] Store Fail Entity',
-  UpdateEntity = '[Project] Update Entity',
-  UpdateSuccessEntity = '[Project] Update Success Entity',
-  UpdateFailEntity = '[Project] Update Fail Entity',
-  DestroyEntity = '[Project] Destroy Entity',
-  DestroySuccessEntity = '[Project] Destroy Success Entity',
-  DestroyFailEntity = '[Project] Destroy Fail Entity',
-  PaginateEntity = '[Project] Paginate Entity',
-  LoadEntityShared = '[Project] Load Entity Shared',
-  Reset = '[Project] Reset',
-  SetSelected = '[Project] Set Selected'
-}
+export const LoadEntity = createAction(
+  '[Project] Load Entity',
+  props<{ search: fromModels.SearchProject }>()
+);
 
-export class LoadEntity implements Action {
-  readonly type = EntityActionTypes.LoadEntity;
-  constructor(public payload: { search: fromModels.SearchProject }) { }
-}
+export const LoadSuccessEntity = createAction(
+  '[Project] Load Success Entity',
+  props<{ entities: fromModels.PaginationProject }>()
+);
 
-export class LoadSuccessEntity implements Action {
-  readonly type = EntityActionTypes.LoadSuccessEntity;
-  constructor(public payload: { entities: fromModels.PaginationProject }) { }
-}
+export const LoadFailEntity = createAction(
+  '[Project] Load Fail Entity',
+  props<{ error: any }>()
+);
 
-export class LoadFailEntity implements Action {
-  readonly type = EntityActionTypes.LoadFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const StoreEntity = createAction(
+  '[Project] Store Entity',
+  props<{ entity: fromModels.Project }>()
+);
 
-export class StoreEntity implements Action {
-  readonly type = EntityActionTypes.StoreEntity;
-  constructor(public payload: { entity: fromModels.Project }) { }
-}
+export const StoreSuccessEntity = createAction(
+  '[Project] Store Success Entity',
+  props<{ entity: fromModels.StoreProject }>()
+);
 
-export class StoreSuccessEntity implements Action {
-  readonly type = EntityActionTypes.StoreSuccessEntity;
-  constructor(public payload: { entity: fromModels.StoreProject }) { }
-}
+export const StoreFailEntity = createAction(
+  '[Project] Store Fail Entity',
+  props<{ error: any }>()
+);
 
-export class StoreFailEntity implements Action {
-  readonly type = EntityActionTypes.StoreFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const UpdateEntity = createAction(
+  '[Project] Update Entity',
+  props<{ entity: fromModels.Project }>()
+);
 
-export class UpdateEntity implements Action {
-  readonly type = EntityActionTypes.UpdateEntity;
-  constructor(public payload: { entity: fromModels.Project }) { }
-}
+export const UpdateSuccessEntity = createAction(
+  '[Project] Update Success Entity',
+  props<{ entity: fromModels.UpdateProject }>()
+);
 
-export class UpdateSuccessEntity implements Action {
-  readonly type = EntityActionTypes.UpdateSuccessEntity;
-  constructor(public payload: { entity: fromModels.UpdateProject }) { }
-}
+export const UpdateFailEntity = createAction(
+  '[Project] Update Fail Entity',
+  props<{ error: any }>()
+);
 
-export class UpdateFailEntity implements Action {
-  readonly type = EntityActionTypes.UpdateFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const DestroyEntity = createAction(
+  '[Project] Destroy Entity',
+  props<{ entity: fromModels.Project }>()
+);
 
-export class DestroyEntity implements Action {
-  readonly type = EntityActionTypes.DestroyEntity;
-  constructor(public payload: { entity: fromModels.Project }) { }
-}
+export const DestroySuccessEntity = createAction(
+  '[Project] Destroy Success Entity',
+  props<{ entity: fromModels.DestroyProject }>()
+);
 
-export class DestroySuccessEntity implements Action {
-  readonly type = EntityActionTypes.DestroySuccessEntity;
-  constructor(public payload: { entity: fromModels.DestroyProject }) { }
-}
+export const DestroyFailEntity = createAction(
+  '[Project] Destroy Fail Entity',
+  props<{ error: any }>()
+);
 
-export class DestroyFailEntity implements Action {
-  readonly type = EntityActionTypes.DestroyFailEntity;
-  constructor(public payload: { error: any }) { }
-}
+export const PaginateEntity = createAction(
+  '[Project] Paginate Entity',
+  props<{ page: number }>()
+);
 
-export class PaginateEntity implements Action {
-  readonly type = EntityActionTypes.PaginateEntity;
-  constructor(public payload: { page: number }) { }
-}
+export const LoadEntityShared = createAction(
+  '[Project] Load Entity Shared',
+  props<{ search: fromModels.SearchProject}>()
+);
 
-export class LoadEntityShared implements Action {
-  readonly type = EntityActionTypes.LoadEntityShared;
-  constructor(public payload: { search: fromModels.SearchProject }) { }
-}
+export const Reset = createAction(
+  '[Project] Reset',
+  props<{ redirect: boolean }>()
+);
 
-export class Reset implements Action {
-  readonly type = EntityActionTypes.Reset;
-  constructor(public payload: { redirect: boolean }) { }
-}
-
-export class SetSelected implements Action {
-  readonly type = EntityActionTypes.SetSelected;
-  constructor(public payload: { selected: fromModels.SelectedProject }) { }
-}
-
-export type EntityActions =
-  | LoadEntity
-  | LoadSuccessEntity
-  | LoadFailEntity
-  | StoreEntity
-  | StoreSuccessEntity
-  | StoreFailEntity
-  | UpdateEntity
-  | UpdateSuccessEntity
-  | UpdateFailEntity
-  | DestroyEntity
-  | DestroySuccessEntity
-  | DestroyFailEntity
-  | PaginateEntity
-  | LoadEntityShared
-  | Reset
-  | SetSelected;
+export const SetSelected = createAction(
+  '[Project] Set Selected',
+  props<{ selected: fromModels.SelectedProject }>()
+);

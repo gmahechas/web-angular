@@ -102,7 +102,7 @@ export class IndexPageUserOfficeProjectComponent implements OnInit, OnDestroy {
     switch (this.entityLabel) {
       case 'user':
       case 'office':
-        this.store.dispatch(new fromProject.Reset({ redirect: false }));
+        this.store.dispatch(fromProject.EntityActions.Reset({ redirect: false }));
         break;
       case 'project':
         this.store.dispatch(fromUserOffice.EntityActions.Reset({ redirect: false }));
