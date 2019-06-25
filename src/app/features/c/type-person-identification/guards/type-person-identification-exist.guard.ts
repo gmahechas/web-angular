@@ -44,7 +44,7 @@ export class TypePersonIdentificationExistGuard implements CanActivate {
       select(fromTypePersonIdentification.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromTypePersonIdentification.LoadEntity({
+          this.store.dispatch(fromTypePersonIdentification.EntityActions.LoadEntity({
             search: {
               type_person_identification: {
                 type_person_identification_id: typePersonIdentificationId,

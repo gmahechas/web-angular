@@ -1,9 +1,7 @@
+import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import * as fromTypePersonIdentificationActions from '@web/app/features/c/type-person-identification/store/actions';
 import { TypePersonIdentification } from '@web/app/features/c/type-person-identification/models/type-person-identification.model';
-import {
-  EntityActionTypes,
-  EntityActions
-} from '@web/app/features/c/type-person-identification/store/actions/entity-type-person-identification.actions';
 
 export interface State extends EntityState<TypePersonIdentification> { }
 
@@ -14,42 +12,34 @@ export const adapter: EntityAdapter<TypePersonIdentification> = createEntityAdap
 
 export const initialState: State = adapter.getInitialState();
 
-export function reducer(state = initialState, action: EntityActions): State {
 
-  switch (action.type) {
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return adapter.addAll(action.payload.entities.paginationTypePersonIdentification.data, state);
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return adapter.removeAll(state);
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => adapter.addAll(entities.paginationTypePersonIdentification.data, state)
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadFailEntity,
+    (state, { error }) => adapter.removeAll(state)
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.StoreSuccessEntity,
+    (state, { entity }) => {
       const newState = adapter.removeAll(state);
-      return adapter.addOne(action.payload.entity.storeTypePersonIdentification, newState);
+      return adapter.addOne(entity.storeTypePersonIdentification, newState);
     }
-
-    case EntityActionTypes.UpdateSuccessEntity: {
-      return adapter.updateOne({
-        id: action.payload.entity.updateTypePersonIdentification.type_person_identification_id,
-        changes: action.payload.entity.updateTypePersonIdentification
-      },
-        state
-      );
-    }
-
-    case EntityActionTypes.DestroySuccessEntity: {
-      return adapter.removeOne(action.payload.entity.destroyTypePersonIdentification.type_person_identification_id, state);
-    }
-
-    case EntityActionTypes.Reset: {
-      return adapter.removeAll(state);
-    }
-
-    default:
-      return state;
-  }
-
-}
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.UpdateSuccessEntity,
+    (state, { entity }) => adapter.updateOne({ id: entity.updateTypePersonIdentification.type_person_identification_id, changes: entity.updateTypePersonIdentification }, state)
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.DestroySuccessEntity,
+    (state, { entity }) => adapter.removeOne(entity.destroyTypePersonIdentification.type_person_identification_id, state)
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.Reset,
+    (state, { redirect }) => adapter.removeAll(state)
+  ),
+);

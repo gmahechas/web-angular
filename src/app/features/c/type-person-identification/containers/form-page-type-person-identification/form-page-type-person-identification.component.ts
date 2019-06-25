@@ -27,21 +27,21 @@ export class FormPageTypePersonIdentificationComponent implements OnInit {
   }
 
   onStore(typePersonIdentification: TypePersonIdentification) {
-    this.store.dispatch(new fromTypePersonIdentification.StoreEntity({ entity: typePersonIdentification }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.StoreEntity({ entity: typePersonIdentification }));
   }
 
   onUpdate(typePersonIdentification: TypePersonIdentification) {
-    this.store.dispatch(new fromTypePersonIdentification.UpdateEntity({ entity: typePersonIdentification }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.UpdateEntity({ entity: typePersonIdentification }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['typePersonIdentification']
     }));
   }
 
   onDestroy(typePersonIdentification: TypePersonIdentification) {
-    this.store.dispatch(new fromTypePersonIdentification.DestroyEntity({ entity: typePersonIdentification }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.DestroyEntity({ entity: typePersonIdentification }));
   }
 }

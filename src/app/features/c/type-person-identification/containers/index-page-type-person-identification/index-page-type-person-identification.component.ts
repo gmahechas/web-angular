@@ -75,7 +75,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   onLoad(typePersonIdentificationSearch: SearchTypePersonIdentification) {
-    this.store.dispatch(new fromTypePersonIdentification.LoadEntity({
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.LoadEntity({
       search: {
         ...typePersonIdentificationSearch,
         limit: 20,
@@ -85,14 +85,14 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   onCreate() {
-    this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['type-person-identification', 'create']
     }));
   }
 
   onEdit(typePersonIdentification: TypePersonIdentification) {
-    this.store.dispatch(new fromTypePersonIdentification.SetSelect({
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({
       selected: { ...initialStateSelectedTypePersonIdentification, selectedEntity: typePersonIdentification }
     }));
     this.store.dispatch(new fromCore.Go({
@@ -101,18 +101,18 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromTypePersonIdentification.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromTypePersonIdentification.SetSelect({ selected: initialStateSelectedTypePersonIdentification }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({ selected: initialStateSelectedTypePersonIdentification }));
     this.store.dispatch(new fromCore.Go({
       path: ['type-person-identification']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromTypePersonIdentification.Reset({ redirect: true }));
+    this.store.dispatch(fromTypePersonIdentification.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

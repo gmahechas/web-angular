@@ -1,7 +1,5 @@
-import {
-  EntityActionTypes,
-  EntityActions
-} from '@web/app/features/c/type-person-identification/store/actions/entity-type-person-identification.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromTypePersonIdentificationActions from '@web/app/features/c/type-person-identification/store/actions';
 
 export interface State {
   total: number;
@@ -19,42 +17,34 @@ export const initialState: State = {
   to: null
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.LoadEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.LoadSuccessEntity: {
-      return {
-        ...state,
-        total: action.payload.entities.paginationTypePersonIdentification.total,
-        perPage: action.payload.entities.paginationTypePersonIdentification.per_page,
-        currentPage: action.payload.entities.paginationTypePersonIdentification.current_page,
-        from: action.payload.entities.paginationTypePersonIdentification.from,
-        to: action.payload.entities.paginationTypePersonIdentification.to
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.StoreSuccessEntity: {
-      return initialState;
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadEntity,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadSuccessEntity,
+    (state, { entities }) => ({
+      ...state,
+      total: entities.paginationTypePersonIdentification.total,
+      perPage: entities.paginationTypePersonIdentification.per_page,
+      currentPage: entities.paginationTypePersonIdentification.current_page,
+      from: entities.paginationTypePersonIdentification.from,
+      to: entities.paginationTypePersonIdentification.to
+    })
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadFailEntity,
+    fromTypePersonIdentificationActions.EntityActions.StoreSuccessEntity,
+    fromTypePersonIdentificationActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getTotal = (state: State) => state.total;
 export const getPerPage = (state: State) => state.perPage;

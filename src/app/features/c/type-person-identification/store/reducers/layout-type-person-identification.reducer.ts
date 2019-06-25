@@ -1,10 +1,6 @@
-import {
-  EntityActionTypes,
-  EntityActions
-} from '@web/app/features/c/type-person-identification/store/actions/entity-type-person-identification.actions';
-import {
-  SelectedTypePersonIdentification, initialStateSelectedTypePersonIdentification
-} from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
+import { createReducer, on } from '@ngrx/store';
+import * as fromTypePersonIdentificationActions from '@web/app/features/c/type-person-identification/store/actions';
+import { SelectedTypePersonIdentification, initialStateSelectedTypePersonIdentification } from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
 
 export interface State {
   selected: SelectedTypePersonIdentification;
@@ -18,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelect: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedTypePersonIdentification,
-        error: action.payload.error,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedTypePersonIdentification,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromTypePersonIdentificationActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadFailEntity,
+    fromTypePersonIdentificationActions.EntityActions.StoreFailEntity,
+    fromTypePersonIdentificationActions.EntityActions.UpdateFailEntity,
+    fromTypePersonIdentificationActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedTypePersonIdentification,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadEntity,
+    fromTypePersonIdentificationActions.EntityActions.PaginateEntity,
+    fromTypePersonIdentificationActions.EntityActions.StoreEntity,
+    fromTypePersonIdentificationActions.EntityActions.UpdateEntity,
+    fromTypePersonIdentificationActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.LoadSuccessEntity,
+    fromTypePersonIdentificationActions.EntityActions.StoreSuccessEntity,
+    fromTypePersonIdentificationActions.EntityActions.UpdateSuccessEntity,
+    fromTypePersonIdentificationActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedTypePersonIdentification,
+      pending: false
+    })
+  ),
+  on(
+    fromTypePersonIdentificationActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

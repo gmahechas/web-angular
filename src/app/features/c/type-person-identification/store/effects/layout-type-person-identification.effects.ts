@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromTypePersonIdentificationActions from '@web/app/features/c/type-person-identification/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutTypePersonIdentificationEffects {
@@ -14,12 +14,12 @@ export class LayoutTypePersonIdentificationEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonIdentificationActions.EntityActionTypes.LoadEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.StoreEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.UpdateEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.DestroyEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.PaginateEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.LoadEntityShared
+        fromTypePersonIdentificationActions.EntityActions.LoadEntity,
+        fromTypePersonIdentificationActions.EntityActions.StoreEntity,
+        fromTypePersonIdentificationActions.EntityActions.UpdateEntity,
+        fromTypePersonIdentificationActions.EntityActions.DestroyEntity,
+        fromTypePersonIdentificationActions.EntityActions.PaginateEntity,
+        fromTypePersonIdentificationActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutTypePersonIdentificationEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonIdentificationActions.EntityActionTypes.LoadSuccessEntity
+        fromTypePersonIdentificationActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutTypePersonIdentificationEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonIdentificationActions.EntityActionTypes.StoreSuccessEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.UpdateSuccessEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.DestroySuccessEntity
+        fromTypePersonIdentificationActions.EntityActions.StoreSuccessEntity,
+        fromTypePersonIdentificationActions.EntityActions.UpdateSuccessEntity,
+        fromTypePersonIdentificationActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutTypePersonIdentificationEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonIdentificationActions.EntityActionTypes.LoadFailEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.StoreFailEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.UpdateFailEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.DestroyFailEntity
+        fromTypePersonIdentificationActions.EntityActions.LoadFailEntity,
+        fromTypePersonIdentificationActions.EntityActions.StoreFailEntity,
+        fromTypePersonIdentificationActions.EntityActions.UpdateFailEntity,
+        fromTypePersonIdentificationActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutTypePersonIdentificationEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromTypePersonIdentificationActions.EntityActionTypes.LoadEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.StoreSuccessEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.UpdateSuccessEntity,
-        fromTypePersonIdentificationActions.EntityActionTypes.DestroySuccessEntity
+        fromTypePersonIdentificationActions.EntityActions.LoadEntity,
+        fromTypePersonIdentificationActions.EntityActions.StoreSuccessEntity,
+        fromTypePersonIdentificationActions.EntityActions.UpdateSuccessEntity,
+        fromTypePersonIdentificationActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['type-person-identification'] }));
@@ -97,8 +97,7 @@ export class LayoutTypePersonIdentificationEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromTypePersonIdentificationActions.EntityActionTypes.Reset),
-      map((action: fromTypePersonIdentificationActions.Reset) => action.payload),
+      ofType(fromTypePersonIdentificationActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['type-person-identification'] }));
