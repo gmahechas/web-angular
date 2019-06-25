@@ -44,7 +44,7 @@ export class WorkflowExistGuard implements CanActivate {
       select(fromWorkflow.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromWorkflow.LoadEntity({
+          this.store.dispatch(fromWorkflow.EntityActions.LoadEntity({
             search: {
               workflow: {
                 workflow_id: workflowId,

@@ -1,4 +1,5 @@
-import { EntityActionTypes, EntityActions } from '@web/app/features/e/workflow/store/actions/entity-workflow.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromWorkflowActions from '@web/app/features/e/workflow/store/actions';
 import { SelectedWorkflow, initialStateSelectedWorkflow } from '@web/app/features/e/workflow/models/selected-workflow.model';
 
 export interface State {
@@ -13,60 +14,56 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: EntityActions): State {
-
-  switch (action.type) {
-
-    case EntityActionTypes.SetSelected: {
-      return {
-        ...state,
-        selected: { ...state.selected, ...action.payload.selected}
-      };
-    }
-
-    case EntityActionTypes.LoadFailEntity:
-    case EntityActionTypes.StoreFailEntity:
-    case EntityActionTypes.UpdateFailEntity:
-    case EntityActionTypes.DestroyFailEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedWorkflow,
-        error: action.payload.error,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadEntity:
-    case EntityActionTypes.PaginateEntity:
-    case EntityActionTypes.StoreEntity:
-    case EntityActionTypes.UpdateEntity:
-    case EntityActionTypes.DestroyEntity: {
-      return {
-        ...state,
-        pending: true
-      };
-    }
-
-    case EntityActionTypes.LoadSuccessEntity:
-    case EntityActionTypes.StoreSuccessEntity:
-    case EntityActionTypes.UpdateSuccessEntity:
-    case EntityActionTypes.DestroySuccessEntity: {
-      return {
-        ...state,
-        selected: initialStateSelectedWorkflow,
-        pending: false
-      };
-    }
-
-    case EntityActionTypes.Reset: {
-      return initialState;
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromWorkflowActions.EntityActions.SetSelected,
+    (state, { selected }) => ({
+      ...state,
+      selected
+    })
+  ),
+  on(
+    fromWorkflowActions.EntityActions.LoadFailEntity,
+    fromWorkflowActions.EntityActions.StoreFailEntity,
+    fromWorkflowActions.EntityActions.UpdateFailEntity,
+    fromWorkflowActions.EntityActions.DestroyFailEntity,
+    (state, { error }) => ({
+      ...state,
+      selected: initialStateSelectedWorkflow,
+      error,
+      pending: false
+    })
+  ),
+  on(
+    fromWorkflowActions.EntityActions.LoadEntity,
+    fromWorkflowActions.EntityActions.PaginateEntity,
+    fromWorkflowActions.EntityActions.StoreEntity,
+    fromWorkflowActions.EntityActions.UpdateEntity,
+    fromWorkflowActions.EntityActions.DestroyEntity,
+    (state) => ({
+      ...state,
+      pending: true
+    })
+  ),
+  on(
+    fromWorkflowActions.EntityActions.LoadSuccessEntity,
+    fromWorkflowActions.EntityActions.StoreSuccessEntity,
+    fromWorkflowActions.EntityActions.UpdateSuccessEntity,
+    fromWorkflowActions.EntityActions.DestroySuccessEntity,
+    (state) => ({
+      ...state,
+      selected: initialStateSelectedWorkflow,
+      pending: false
+    })
+  ),
+  on(
+    fromWorkflowActions.EntityActions.Reset,
+    (state) => ({
+      ...initialState
+    })
+  )
+);
 
 export const getSelected = (state: State) => state.selected;
 export const getError = (state: State) => state.error;

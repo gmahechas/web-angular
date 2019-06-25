@@ -25,21 +25,21 @@ export class FormPageWorkflowComponent implements OnInit {
   }
 
   onStore(workflow: Workflow) {
-    this.store.dispatch(new fromWorkflow.StoreEntity({ entity: workflow }));
+    this.store.dispatch(fromWorkflow.EntityActions.StoreEntity({ entity: workflow }));
   }
 
   onUpdate(workflow: Workflow) {
-    this.store.dispatch(new fromWorkflow.UpdateEntity({ entity: workflow }));
+    this.store.dispatch(fromWorkflow.EntityActions.UpdateEntity({ entity: workflow }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromWorkflow.SetSelected({ selected: initialStateSelectedWorkflow }));
+    this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: initialStateSelectedWorkflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow']
     }));
   }
 
   onDestroy(workflow: Workflow) {
-    this.store.dispatch(new fromWorkflow.DestroyEntity({ entity: workflow }));
+    this.store.dispatch(fromWorkflow.EntityActions.DestroyEntity({ entity: workflow }));
   }
 }

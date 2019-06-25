@@ -58,7 +58,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   onLoad(workflowSearch: SearchWorkflow) {
-    this.store.dispatch(new fromWorkflow.LoadEntity({
+    this.store.dispatch(fromWorkflow.EntityActions.LoadEntity({
       search: {
         ...workflowSearch,
         limit: 20,
@@ -68,32 +68,32 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    this.store.dispatch(new fromWorkflow.SetSelected({ selected: initialStateSelectedWorkflow }));
+    this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: initialStateSelectedWorkflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', 'create']
     }));
   }
 
   onEdit(workflow: Workflow) {
-    this.store.dispatch(new fromWorkflow.SetSelected({ selected: { selectedEntity: workflow } }));
+    this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: { selectedEntity: workflow } }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow', workflow.workflow_id]
     }));
   }
 
   onPaginate(event) {
-    this.store.dispatch(new fromWorkflow.PaginateEntity({ page: event.page + 1 }));
+    this.store.dispatch(fromWorkflow.EntityActions.PaginateEntity({ page: event.page + 1 }));
   }
 
   onCancel() {
-    this.store.dispatch(new fromWorkflow.SetSelected({ selected: initialStateSelectedWorkflow }));
+    this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: initialStateSelectedWorkflow }));
     this.store.dispatch(new fromCore.Go({
       path: ['workflow']
     }));
   }
 
   onResetSearch() {
-    this.store.dispatch(new fromWorkflow.Reset({ redirect: true }));
+    this.store.dispatch(fromWorkflow.EntityActions.Reset({ redirect: true }));
   }
 
   ngOnDestroy() {

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromWorkflowActions from '@web/app/features/e/workflow/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutWorkflowEffects {
@@ -14,12 +14,12 @@ export class LayoutWorkflowEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromWorkflowActions.EntityActionTypes.LoadEntity,
-        fromWorkflowActions.EntityActionTypes.StoreEntity,
-        fromWorkflowActions.EntityActionTypes.UpdateEntity,
-        fromWorkflowActions.EntityActionTypes.DestroyEntity,
-        fromWorkflowActions.EntityActionTypes.PaginateEntity,
-        fromWorkflowActions.EntityActionTypes.LoadEntityShared
+        fromWorkflowActions.EntityActions.LoadEntity,
+        fromWorkflowActions.EntityActions.StoreEntity,
+        fromWorkflowActions.EntityActions.UpdateEntity,
+        fromWorkflowActions.EntityActions.DestroyEntity,
+        fromWorkflowActions.EntityActions.PaginateEntity,
+        fromWorkflowActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutWorkflowEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromWorkflowActions.EntityActionTypes.LoadSuccessEntity
+        fromWorkflowActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutWorkflowEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromWorkflowActions.EntityActionTypes.StoreSuccessEntity,
-        fromWorkflowActions.EntityActionTypes.UpdateSuccessEntity,
-        fromWorkflowActions.EntityActionTypes.DestroySuccessEntity
+        fromWorkflowActions.EntityActions.StoreSuccessEntity,
+        fromWorkflowActions.EntityActions.UpdateSuccessEntity,
+        fromWorkflowActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutWorkflowEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromWorkflowActions.EntityActionTypes.LoadFailEntity,
-        fromWorkflowActions.EntityActionTypes.StoreFailEntity,
-        fromWorkflowActions.EntityActionTypes.UpdateFailEntity,
-        fromWorkflowActions.EntityActionTypes.DestroyFailEntity
+        fromWorkflowActions.EntityActions.LoadFailEntity,
+        fromWorkflowActions.EntityActions.StoreFailEntity,
+        fromWorkflowActions.EntityActions.UpdateFailEntity,
+        fromWorkflowActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
@@ -83,10 +83,10 @@ export class LayoutWorkflowEffects {
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromWorkflowActions.EntityActionTypes.LoadEntity,
-        fromWorkflowActions.EntityActionTypes.StoreSuccessEntity,
-        fromWorkflowActions.EntityActionTypes.UpdateSuccessEntity,
-        fromWorkflowActions.EntityActionTypes.DestroySuccessEntity
+        fromWorkflowActions.EntityActions.LoadEntity,
+        fromWorkflowActions.EntityActions.StoreSuccessEntity,
+        fromWorkflowActions.EntityActions.UpdateSuccessEntity,
+        fromWorkflowActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(new fromCore.Go({ path: ['workflow'] }));
@@ -97,8 +97,7 @@ export class LayoutWorkflowEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromWorkflowActions.EntityActionTypes.Reset),
-      map((action: fromWorkflowActions.Reset) => action.payload),
+      ofType(fromWorkflowActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(new fromCore.Go({ path: ['workflow'] }));

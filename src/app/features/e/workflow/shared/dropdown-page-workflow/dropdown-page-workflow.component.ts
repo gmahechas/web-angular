@@ -43,7 +43,7 @@ export class DropdownPageWorkflowComponent implements OnChanges, OnInit {
 
   ngOnChanges() {
     if (this.isConditional) {
-      this.store.dispatch(new fromWorkflow.Reset({ redirect: false }));
+      this.store.dispatch(fromWorkflow.EntityActions.Reset({ redirect: false }));
     }
   }
 
@@ -58,7 +58,7 @@ export class DropdownPageWorkflowComponent implements OnChanges, OnInit {
   }
 
   onLoad(searchWorkflow: SearchWorkflow) {
-    this.store.dispatch(new fromWorkflow.LoadEntityShared({
+    this.store.dispatch(fromWorkflow.EntityActions.LoadEntityShared({
       search: searchWorkflow
     }));
   }
