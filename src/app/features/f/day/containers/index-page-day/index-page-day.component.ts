@@ -46,7 +46,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
       (selected: SelectedDay) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['day', selected.selectedEntity.day_id]
           }));
         }
@@ -66,14 +66,14 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: initialStateSelectedDay }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['day', 'create']
     }));
   }
 
   onEdit(day: Day) {
     this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: { selectedEntity: day } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['day', day.day_id]
     }));
   }
@@ -84,7 +84,7 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: initialStateSelectedDay }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['day']
     }));
   }

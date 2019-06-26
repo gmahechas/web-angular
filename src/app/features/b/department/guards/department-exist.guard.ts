@@ -31,7 +31,7 @@ export class DepartmentExistGuard implements CanActivate {
         if (inStore) {
           return of(inStore);
         }
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['not-found']
         }));
         return of(false);

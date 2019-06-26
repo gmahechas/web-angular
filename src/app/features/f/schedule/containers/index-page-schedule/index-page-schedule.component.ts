@@ -48,7 +48,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
       (selected: SelectedSchedule) => {
         if (selected.gotoScheduleDay && selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: [
               'schedule',
               selected.selectedEntity.schedule_id,
@@ -57,7 +57,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['schedule', selected.selectedEntity.schedule_id]
           }));
         }
@@ -77,14 +77,14 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: initialStateSelectedSchedule }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['schedule', 'create']
     }));
   }
 
   onEdit(schedule: Schedule) {
     this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: { selectedEntity: schedule } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['schedule', schedule.schedule_id]
     }));
   }
@@ -95,7 +95,7 @@ export class IndexPageScheduleComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: initialStateSelectedSchedule }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['schedule']
     }));
   }

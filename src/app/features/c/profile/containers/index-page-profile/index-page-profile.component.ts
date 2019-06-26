@@ -49,7 +49,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
 
         if (selected.gotoProfileMenu && selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: [
               'profile',
               selected.selectedEntity.profile_id,
@@ -58,7 +58,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['profile', selected.selectedEntity.profile_id]
           }));
         }
@@ -78,14 +78,14 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: initialStateSelectedProfile }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['profile', 'create']
     }));
   }
 
   onEdit(profile: Profile) {
     this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: { selectedEntity: profile } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['profile', profile.profile_id]
     }));
   }
@@ -96,7 +96,7 @@ export class IndexPageProfileComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: initialStateSelectedProfile }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['profile']
     }));
   }

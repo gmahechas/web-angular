@@ -34,7 +34,7 @@ export class FormPageCountryComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: initialStateSelectedCountry }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['country']
     }));
   }

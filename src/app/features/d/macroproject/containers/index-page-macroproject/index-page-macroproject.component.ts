@@ -55,7 +55,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
       (selected: SelectedMacroproject) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['macroproject', selected.selectedEntity.macroproject_id]
           }));
         }
@@ -75,7 +75,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromMacroproject.EntityActions.SetSelected({ selected: initialStateSelectedMacroproject }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['macroproject', 'create']
     }));
   }
@@ -84,7 +84,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
     this.store.dispatch(fromMacroproject.EntityActions.SetSelected({
       selected: { ...initialStateSelectedMacroproject, selectedEntity: macroproject }
     }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['macroproject', macroproject.macroproject_id]
     }));
   }
@@ -95,7 +95,7 @@ export class IndexPageMacroprojectComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromMacroproject.EntityActions.SetSelected({ selected: initialStateSelectedMacroproject }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['macroproject']
     }));
   }

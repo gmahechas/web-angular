@@ -50,7 +50,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
 
         if (selected.gotoUserOffice && selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: [
               'office',
               selected.selectedEntity.office_id,
@@ -58,7 +58,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
             ]
           }));
         } else if (selected.gotoOfficeDeparment && selected.selectedEntity) {
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: [
               'office',
               selected.selectedEntity.office_id,
@@ -67,7 +67,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['office', selected.selectedEntity.office_id]
           }));
         }
@@ -88,14 +88,14 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: initialStateSelectedOffice }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['office', 'create']
     }));
   }
 
   onEdit(office: Office) {
     this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: { selectedEntity: office } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['office', office.office_id]
     }));
   }
@@ -106,7 +106,7 @@ export class IndexPageOfficeComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: initialStateSelectedOffice }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['office']
     }));
   }

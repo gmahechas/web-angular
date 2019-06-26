@@ -49,7 +49,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
       (selected: SelectedTypePerson) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['type-person', selected.selectedEntity.type_person_id]
           }));
         }
@@ -69,14 +69,14 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: initialStateSelectedTypePerson }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['type-person', 'create']
     }));
   }
 
   onEdit(typePerson: TypePerson) {
     this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: { selectedEntity: typePerson } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['type-person', typePerson.type_person_id]
     }));
   }
@@ -87,7 +87,7 @@ export class IndexPageTypePersonComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromTypePerson.EntityActions.SetSelected({ selected: initialStateSelectedTypePerson }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['type-person']
     }));
   }

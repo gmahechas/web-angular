@@ -6,7 +6,7 @@ import * as fromLayout from '@web/app/core/store/reducers/layout-core.reducer';
 import * as fromRouter from '@ngrx/router-store';
 import { RouterStateUrl } from '@web/app/shared/router-utils';
 
-import { AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
+import * as fromAuthActions from '@web/app/auth/store/actions';
 
 import { environment } from '@web/environments/environment';
 
@@ -38,9 +38,9 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export function clearState(reducer: ActionReducer<State>): ActionReducer<State> {
   return (state: State, action: any): any => {
     if (
-      action.type === AuthActionTypes.LogoutAuthSuccess ||
-      action.type === AuthActionTypes.CheckAuthFailure ||
-      action.type === AuthActionTypes.ExpiredAuth
+      action.type === fromAuthActions.AuthActions.LogoutAuthSuccess ||
+      action.type === fromAuthActions.AuthActions.CheckAuthFailure ||
+      action.type === fromAuthActions.AuthActions.ExpiredAuth
     ) {
       state = undefined;
     }

@@ -34,7 +34,7 @@ export class FormPageEstateComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: initialStateSelectedEstate }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['estate']
     }));
   }

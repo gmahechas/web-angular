@@ -34,7 +34,7 @@ export class FormPageHourRangeComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromHourRange.EntityActions.SetSelected({ selected: initialStateSelectedHourRange }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['hourRange']
     }));
   }

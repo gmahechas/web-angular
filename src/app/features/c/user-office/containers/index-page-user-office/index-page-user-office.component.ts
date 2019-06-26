@@ -107,7 +107,7 @@ export class IndexPageUserOfficeComponent implements OnInit, OnDestroy {
 
     const key = this.route.snapshot.paramMap.keys[0];
 
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: [
         key.split('_')[0], userOffice[key],
         {

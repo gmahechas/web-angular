@@ -50,7 +50,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
     this.subscription = this.store.pipe(select(fromProject.getSelected), take(1)).subscribe(
       (selected: SelectedProject) => {
         if (selected.gotoUserOfficeProject && selected.selectedEntity) {
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['project', selected.selectedEntity.project_id, {
               outlets: {
                 'router-outlet-user-office-project': ['user-office-project', 'project', selected.selectedEntity.project_id]
@@ -59,7 +59,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['project', selected.selectedEntity.project_id]
           }));
         }
@@ -79,14 +79,14 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: initialStateSelectedProject }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['project', 'create']
     }));
   }
 
   onEdit(project: Project) {
     this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: { selectedEntity: project } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['project', project.project_id]
     }));
   }
@@ -97,7 +97,7 @@ export class IndexPageProjectComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: initialStateSelectedProject }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['project']
     }));
   }

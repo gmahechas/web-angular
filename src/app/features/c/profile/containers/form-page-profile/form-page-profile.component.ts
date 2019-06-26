@@ -34,7 +34,7 @@ export class FormPageProfileComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: initialStateSelectedProfile }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['profile']
     }));
   }
@@ -45,7 +45,7 @@ export class FormPageProfileComponent implements OnInit {
 
   onProfileMenu(profile: Profile) {
     this.store.dispatch(fromProfile.EntityActions.SetSelected({ selected: { gotoProfileMenu: true } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['profile', profile.profile_id, { outlets: { 'router-outlet-profile-menu': ['profile-menu', profile.profile_id] } }]
     }));
   }

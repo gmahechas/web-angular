@@ -34,7 +34,7 @@ export class FormPageDepartmentComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: initialStateSelectedDepartment }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['department']
     }));
   }
@@ -45,7 +45,7 @@ export class FormPageDepartmentComponent implements OnInit {
 
   onOfficeDepartment(department: Department) {
     this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: { gotoOfficeDepartment: true } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['department', department.department_id, {
         outlets: { 'router-outlet-user-department': ['office-department', 'department', department.department_id] }
       }]

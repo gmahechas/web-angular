@@ -34,7 +34,7 @@ export class FormPageScheduleComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: initialStateSelectedSchedule }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['schedule']
     }));
   }
@@ -45,7 +45,7 @@ export class FormPageScheduleComponent implements OnInit {
 
   onScheduleDay(schedule: Schedule) {
     this.store.dispatch(fromSchedule.EntityActions.SetSelected({ selected: { gotoScheduleDay: true } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: [
         'schedule',
         schedule.schedule_id,

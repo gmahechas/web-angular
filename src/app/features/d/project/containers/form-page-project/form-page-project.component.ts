@@ -34,7 +34,7 @@ export class FormPageProjectComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: initialStateSelectedProject }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['project']
     }));
   }
@@ -45,7 +45,7 @@ export class FormPageProjectComponent implements OnInit {
 
   onUserOfficeProject(project: Project) {
     this.store.dispatch(fromProject.EntityActions.SetSelected({ selected: { gotoUserOfficeProject: true } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['project', project.project_id, {
         outlets: {
           'router-outlet-user-office-project': ['user-office-project', 'project', project.project_id]

@@ -20,7 +20,7 @@ export class HaveUserOfficeCoreGuard implements CanLoad, CanActivate {
     return this.store.pipe(select(fromCore.getUserOffice),
       map(userOffice => {
         if (!userOffice) {
-          this.store.dispatch(new fromCore.Go({ path: ['user-office', 'select-office'] }));
+          this.store.dispatch(fromCore.RouterActions.Go({ path: ['user-office', 'select-office'] }));
           return false;
         }
         return true;
@@ -34,7 +34,7 @@ export class HaveUserOfficeCoreGuard implements CanLoad, CanActivate {
       map(userOffice => {
         if (!userOffice) {
 
-          this.store.dispatch(new fromCore.Go({ path: ['user-office', 'select-office'] }));
+          this.store.dispatch(fromCore.RouterActions.Go({ path: ['user-office', 'select-office'] }));
           return false;
         }
         return true;

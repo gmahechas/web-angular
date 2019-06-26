@@ -50,14 +50,14 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
 
         if (selected.gotoOfficeDepartment && selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['department', selected.selectedEntity.department_id, {
               outlets: { 'router-outlet-user-department': ['office-department', 'department', selected.selectedEntity.department_id] }
             }]
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['department', selected.selectedEntity.department_id]
           }));
         }
@@ -77,14 +77,14 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: initialStateSelectedDepartment }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['department', 'create']
     }));
   }
 
   onEdit(department: Department) {
     this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: { selectedEntity: department } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['department', department.department_id]
     }));
   }
@@ -95,7 +95,7 @@ export class IndexPageDepartmentComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromDepartment.EntityActions.SetSelected({ selected: initialStateSelectedDepartment }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['department']
     }));
   }

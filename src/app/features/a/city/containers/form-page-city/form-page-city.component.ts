@@ -34,7 +34,7 @@ export class FormPageCityComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromCity.EntityActions.SetSelected({ selected: initialStateSelectedCity }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['city']
     }));
   }

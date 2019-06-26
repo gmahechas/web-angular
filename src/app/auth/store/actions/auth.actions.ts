@@ -1,82 +1,55 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import * as fromModels from '@web/app/auth/models';
 import { User } from '@web/app/features/c/user/models/user.model';
 import { Company } from '@web/app/features/b/company/models/company.model';
 
-export enum AuthActionTypes {
-  Auth = '[Auth] Auth',
-  AuthSuccess = '[Auth] Auth Success',
-  AuthFailure = '[Auth] Auth Failure',
-  CheckAuth = '[Auth] Check Auth',
-  CheckAuthSuccess = '[Auth] Check Auth Success',
-  CheckAuthFailure = '[Auth] Check Auth Failure',
-  LogoutAuth = '[Auth] Logout Auth',
-  LogoutAuthSuccess = '[Auth] Logout Auth Success',
-  LogoutAuthFailure = '[Auth] Logout Auth Failure',
-  AuthRedirect = '[Auth] Auth Redirect',
-  ExpiredAuth = '[Auth] Expired Auth',
-}
+export const Auth = createAction(
+  '[Auth] Auth',
+  props<{ auth: fromModels.Auth }>()
+);
 
-export class Auth implements Action {
-  readonly type = AuthActionTypes.Auth;
-  constructor(public payload: { auth: fromModels.Auth }) { }
-}
+export const AuthSuccess = createAction(
+  '[Auth] Auth Success',
+  props<{ token: fromModels.Token, user: User, company: Company }>()
+);
 
-export class AuthSuccess implements Action {
-  readonly type = AuthActionTypes.AuthSuccess;
-  constructor(public payload: { token: fromModels.Token, user: User, company: Company }) { }
-}
+export const AuthFailure = createAction(
+  '[Auth] Auth Failure',
+  props<{ error: any }>()
+);
 
-export class AuthFailure implements Action {
-  readonly type = AuthActionTypes.AuthFailure;
-  constructor(public payload: { error: any }) { }
-}
+export const CheckAuth = createAction(
+  '[Auth] Check Auth'
+);
 
-export class CheckAuth implements Action {
-  readonly type = AuthActionTypes.CheckAuth;
-}
+export const CheckAuthSuccess = createAction(
+  '[Auth] Check Auth Success',
+  props<{ auth: fromModels.CheckAuth }>()
+);
 
-export class CheckAuthSuccess implements Action {
-  readonly type = AuthActionTypes.CheckAuthSuccess;
-  constructor(public payload: fromModels.CheckAuth) { }
-}
+export const CheckAuthFailure = createAction(
+  '[Auth] Check Auth Failure',
+  props<{ error: any }>()
+);
 
-export class CheckAuthFailure implements Action {
-  readonly type = AuthActionTypes.CheckAuthFailure;
-  constructor(public payload: { error: any }) { }
-}
+export const LogoutAuth = createAction(
+  '[Auth] Logout Auth'
+);
 
-export class LogoutAuth implements Action {
-  readonly type = AuthActionTypes.LogoutAuth;
-}
+export const LogoutAuthSuccess = createAction(
+  '[Auth] Logout Auth Success'
+);
 
-export class LogoutAuthSuccess implements Action {
-  readonly type = AuthActionTypes.LogoutAuthSuccess;
-}
+export const LogoutAuthFailure = createAction(
+  '[Auth] Logout Auth Failure',
+  props<{ error: any }>()
+);
 
-export class LogoutAuthFailure implements Action {
-  readonly type = AuthActionTypes.LogoutAuthFailure;
-  constructor(public payload: { error: any }) { }
-}
+export const AuthRedirect = createAction(
+  '[Auth] Auth Redirect'
+);
 
-export class AuthRedirect implements Action {
-  readonly type = AuthActionTypes.AuthRedirect;
-}
-
-export class ExpiredAuth implements Action {
-  readonly type = AuthActionTypes.ExpiredAuth;
-}
-
-export type AuthActions =
-  | Auth
-  | AuthSuccess
-  | AuthFailure
-  | CheckAuth
-  | CheckAuthSuccess
-  | CheckAuthFailure
-  | LogoutAuth
-  | LogoutAuthSuccess
-  | LogoutAuthFailure
-  | AuthRedirect
-  | ExpiredAuth;
+export const ExpiredAuth = createAction(
+  '[Auth] Expired Auth'
+);

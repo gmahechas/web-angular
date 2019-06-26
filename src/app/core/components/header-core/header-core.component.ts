@@ -28,36 +28,36 @@ export class HeaderCoreComponent implements OnInit {
   }
 
   opencloseSidebar(event: boolean) {
-    this.store.dispatch(new fromCore.ShowSidebar({ toggle: event }));
+    this.store.dispatch(fromCore.LayoutActions.ShowSidebar({ toggle: event }));
   }
 
   gotoSelectOffice() {
-    this.store.dispatch(new fromCore.Go({ path: ['user-office', 'select-office'] }));
+    this.store.dispatch(fromCore.RouterActions.Go({ path: ['user-office', 'select-office'] }));
   }
 
   gotoSelectProject() {
-    this.store.dispatch(new fromCore.Go({ path: ['user-office-project', 'select-project'] }));
+    this.store.dispatch(fromCore.RouterActions.Go({ path: ['user-office-project', 'select-project'] }));
   }
 
   handleNavigateFromSide(profileMenu: ProfileMenu) {
-    this.store.dispatch(new fromCore.AddSelectedMenu({ profile_menu: profileMenu }));
-    this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
-    this.store.dispatch(new fromCore.ShowSidebar({ toggle: false }));
+    this.store.dispatch(fromCore.LayoutActions.AddSelectedMenu({ profile_menu: profileMenu }));
+    this.store.dispatch(fromCore.RouterActions.Go({ path: [profileMenu.menu.menu_uri] }));
+    this.store.dispatch(fromCore.LayoutActions.ShowSidebar({ toggle: false }));
   }
 
   handleNavigateFromTab(profileMenu: ProfileMenu) {
-    this.store.dispatch(new fromCore.ChangeSelectedMenu({ profile_menu: profileMenu }));
-    this.store.dispatch(new fromCore.Go({ path: [profileMenu.menu.menu_uri] }));
+    this.store.dispatch(fromCore.LayoutActions.ChangeSelectedMenu({ profile_menu: profileMenu }));
+    this.store.dispatch(fromCore.RouterActions.Go({ path: [profileMenu.menu.menu_uri] }));
   }
 
   removeMenuTab(index: number) {
-    this.store.dispatch(new fromCore.RemoveSelectedMenu({ index }));
+    this.store.dispatch(fromCore.LayoutActions.RemoveSelectedMenu({ index }));
   }
 
   logout() {
-    this.store.dispatch(new fromCore.ConfirmDialog({
+    this.store.dispatch(fromCore.LayoutActions.ConfirmDialog({
       confirm: {
-        acceptType: fromAuth.AuthActionTypes.LogoutAuth,
+        acceptType: fromAuth.AuthActions.LogoutAuth,
         acceptLabel: 'salir',
         rejectLabel: 'cancelar',
         header: 'salir',

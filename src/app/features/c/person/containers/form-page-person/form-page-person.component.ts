@@ -34,7 +34,7 @@ export class FormPagePersonComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromPerson.EntityActions.SetSelected({ selected: initialStateSelectedPerson }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['person']
     }));
   }

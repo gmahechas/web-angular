@@ -25,7 +25,7 @@ export class AuthGuard implements CanLoad, CanActivate {
       ),
       map(([user, pending]) => {
         if (!user && !pending) {
-          this.store.dispatch(new fromAuth.AuthRedirect());
+          this.store.dispatch(fromAuth.AuthActions.AuthRedirect());
           return false;
         }
         return true;
@@ -43,7 +43,7 @@ export class AuthGuard implements CanLoad, CanActivate {
       ),
       map(([user, pending]) => {
         if (!user && !pending) {
-          this.store.dispatch(new fromAuth.AuthRedirect());
+          this.store.dispatch(fromAuth.AuthActions.AuthRedirect());
           return false;
         }
         return true;

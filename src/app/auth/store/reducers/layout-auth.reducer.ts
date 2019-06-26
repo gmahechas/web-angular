@@ -1,4 +1,5 @@
-import { AuthActions, AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromAuthActions from '@web/app/auth/store/actions';
 
 export interface State {
   error: string | null;
@@ -10,43 +11,34 @@ export const initialState: State = {
   pending: false
 };
 
-export function reducer(state = initialState, action: AuthActions): State {
-
-  switch (action.type) {
-    case AuthActionTypes.Auth:
-    case AuthActionTypes.CheckAuth: {
-      return {
-        ...state,
-        error: null,
-        pending: true
-      };
-    }
-
-    case AuthActionTypes.AuthSuccess:
-    case AuthActionTypes.CheckAuthSuccess: {
-      return initialState;
-    }
-
-    case AuthActionTypes.AuthFailure: {
-      return {
-        ...state,
-        error: action.payload.error.error.error,
-        pending: false
-      };
-    }
-
-    case AuthActionTypes.CheckAuthFailure: {
-      return {
-        ...state,
-        error: 'nouns.error.singular',
-        pending: false
-      };
-    }
-
-    default:
-      return state;
-  }
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromAuthActions.AuthActions.Auth,
+    fromAuthActions.AuthActions.CheckAuth,
+    (state) => ({
+      ...state,
+      error: null,
+      pending: true
+    })
+  ),
+  on(
+    fromAuthActions.AuthActions.AuthFailure,
+    (state, { error }) => ({
+      ...state,
+      error: error.error.error,
+      pending: false
+    })
+  ),
+  on(
+    fromAuthActions.AuthActions.CheckAuthFailure,
+    (state, { error }) => ({
+      ...state,
+      error: 'nouns.error.singular',
+      pending: false
+    })
+  )
+);
 
 export const getError = (state: State) => state.error;
 export const getPending = (state: State) => state.pending;

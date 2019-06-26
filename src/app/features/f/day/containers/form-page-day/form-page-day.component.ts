@@ -34,7 +34,7 @@ export class FormPageDayComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromDay.EntityActions.SetSelected({ selected: initialStateSelectedDay }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['day']
     }));
   }

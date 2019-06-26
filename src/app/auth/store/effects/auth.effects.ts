@@ -18,12 +18,12 @@ export class AuthEffects {
 
   auth$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromAuthActions.Auth>(fromAuthActions.AuthActionTypes.Auth),
-      map(action => action.payload.auth),
+      ofType(fromAuthActions.AuthActions.Auth),
+      map(action => action.auth),
       switchMap((auth: fromModels.Auth) =>
         this.authService.login(auth).pipe(
-          map(({ token, user, company }) => new fromAuthActions.AuthSuccess({ token, user, company })),
-          catchError(error => of(new fromAuthActions.AuthFailure({ error })))
+          map(({ token, user, company }) => fromAuthActions.AuthActions.AuthSuccess({ token, user, company })),
+          catchError(error => of(fromAuthActions.AuthActions.AuthFailure({ error })))
         )
       )
     )
@@ -31,11 +31,10 @@ export class AuthEffects {
 
   authSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromAuthActions.AuthSuccess>(fromAuthActions.AuthActionTypes.AuthSuccess),
-      map(action => action.payload),
+      ofType(fromAuthActions.AuthActions.AuthSuccess),
       tap(({ token, user, company }) => {
         this.localStorageService.setToken(token);
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['dashboard']
         }));
       })
@@ -45,11 +44,11 @@ export class AuthEffects {
 
   checkAuth$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromAuthActions.CheckAuth>(fromAuthActions.AuthActionTypes.CheckAuth),
+      ofType(fromAuthActions.AuthActions.CheckAuth),
       switchMap(() => {
         return this.authService.checkAuth().pipe(
-          map(({ data }) => new fromAuthActions.CheckAuthSuccess(data)),
-          catchError((error) => of(new fromAuthActions.CheckAuthFailure({ error })))
+          map(({ data }) => fromAuthActions.AuthActions.CheckAuthSuccess({ auth: data })),
+          catchError((error) => of(fromAuthActions.AuthActions.CheckAuthFailure({ error })))
         );
       })
     )
@@ -57,10 +56,10 @@ export class AuthEffects {
 
   checkAuthFailure$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromAuthActions.AuthActionTypes.CheckAuthFailure),
+      ofType(fromAuthActions.AuthActions.CheckAuthFailure),
       tap(() => {
         this.localStorageService.removeToken();
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['auth']
         }));
       })
@@ -70,11 +69,11 @@ export class AuthEffects {
 
   logoutAuth$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<fromAuthActions.LogoutAuth>(fromAuthActions.AuthActionTypes.LogoutAuth),
+      ofType(fromAuthActions.AuthActions.LogoutAuth),
       switchMap(() => {
         return this.authService.logout().pipe(
-          map(({ data }) => new fromAuthActions.LogoutAuthSuccess()),
-          catchError((error) => of(new fromAuthActions.LogoutAuthFailure({ error })))
+          map(({ data }) => fromAuthActions.AuthActions.LogoutAuthSuccess()),
+          catchError((error) => of(fromAuthActions.AuthActions.LogoutAuthFailure({ error })))
         );
       })
     )
@@ -82,12 +81,12 @@ export class AuthEffects {
 
   logoutAuthSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromAuthActions.AuthActionTypes.LogoutAuthSuccess),
+      ofType(fromAuthActions.AuthActions.LogoutAuthSuccess),
       tap(() => {
         this.localStorageService.removeToken();
         this.localStorageService.setUserOffice(null);
         this.localStorageService.setUserOfficeProject(null);
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['auth']
         }));
       })
@@ -97,12 +96,12 @@ export class AuthEffects {
 
   logoutAuthFailure$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromAuthActions.AuthActionTypes.LogoutAuthFailure),
+      ofType(fromAuthActions.AuthActions.LogoutAuthFailure),
       tap(() => {
         this.localStorageService.removeToken();
         this.localStorageService.setUserOffice(null);
         this.localStorageService.setUserOfficeProject(null);
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['auth']
         }));
       })
@@ -112,9 +111,9 @@ export class AuthEffects {
 
   authRedirect$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromAuthActions.AuthActionTypes.AuthRedirect),
+      ofType(fromAuthActions.AuthActions.AuthRedirect),
       tap(() => {
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['auth']
         }));
       })
@@ -124,10 +123,10 @@ export class AuthEffects {
 
   expiredAuth$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromAuthActions.AuthActionTypes.ExpiredAuth),
+      ofType(fromAuthActions.AuthActions.ExpiredAuth),
       tap(() => {
         this.localStorageService.removeToken();
-        this.store.dispatch(new fromCore.Go({
+        this.store.dispatch(fromCore.RouterActions.Go({
           path: ['auth']
         }));
       })
@@ -142,7 +141,7 @@ export class AuthEffects {
     }).pipe(
       tap((token: fromModels.Token) => {
         if (token) {
-          this.store.dispatch(new fromAuthActions.CheckAuth());
+          this.store.dispatch(fromAuthActions.AuthActions.CheckAuth());
         }
       })
     ),

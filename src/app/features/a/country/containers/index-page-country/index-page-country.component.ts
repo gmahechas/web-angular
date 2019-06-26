@@ -49,7 +49,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
       (selected: SelectedCountry) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['country', selected.selectedEntity.country_id]
           }));
         }
@@ -69,14 +69,14 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: initialStateSelectedCountry }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['country', 'create']
     }));
   }
 
   onEdit(country: Country) {
     this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: { selectedEntity: country } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['country', country.country_id]
     }));
   }
@@ -87,7 +87,7 @@ export class IndexPageCountryComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromCountry.EntityActions.SetSelected({ selected: initialStateSelectedCountry }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['country']
     }));
   }

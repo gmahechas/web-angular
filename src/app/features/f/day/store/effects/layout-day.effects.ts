@@ -22,7 +22,7 @@ export class LayoutDayEffects {
         fromDayActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: true }));
       })
     ),
     { dispatch: false }
@@ -34,7 +34,7 @@ export class LayoutDayEffects {
         fromDayActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
       })
     ),
     { dispatch: false }
@@ -48,8 +48,8 @@ export class LayoutDayEffects {
         fromDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-        this.store.dispatch(new fromCore.ShowMessages({
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
+        this.store.dispatch(fromCore.LayoutActions.ShowMessages({
           messages: [
             { severity: 'success', summary: 'Exito', detail: 'Se llevo a cabo', key: 'toast' }
           ]
@@ -68,8 +68,8 @@ export class LayoutDayEffects {
         fromDayActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
-        this.store.dispatch(new fromCore.ShowMessages({
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
+        this.store.dispatch(fromCore.LayoutActions.ShowMessages({
           messages: [
             { severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error.', key: 'toast' }
           ]
@@ -89,7 +89,7 @@ export class LayoutDayEffects {
         fromDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.Go({ path: ['day'] }));
+        this.store.dispatch(fromCore.RouterActions.Go({ path: ['day'] }));
       })
     ),
     { dispatch: false }
@@ -100,7 +100,7 @@ export class LayoutDayEffects {
       ofType(fromDayActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
-          this.store.dispatch(new fromCore.Go({ path: ['day'] }));
+          this.store.dispatch(fromCore.RouterActions.Go({ path: ['day'] }));
         }
       })
     ),

@@ -50,7 +50,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
       (selected: SelectedEstate) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['estate', selected.selectedEntity.estate_id]
           }));
         }
@@ -70,14 +70,14 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: initialStateSelectedEstate }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['estate', 'create']
     }));
   }
 
   onEdit(estate: Estate) {
     this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: { selectedEntity: estate } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['estate', estate.estate_id]
     }));
   }
@@ -88,7 +88,7 @@ export class IndexPageEstateComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromEstate.EntityActions.SetSelected({ selected: initialStateSelectedEstate }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['estate']
     }));
   }

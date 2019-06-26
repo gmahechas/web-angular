@@ -34,7 +34,7 @@ export class FormPageUserComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: initialStateSelectedUser }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['user']
     }));
   }
@@ -45,7 +45,7 @@ export class FormPageUserComponent implements OnInit {
 
   onUserOffice(user: User) {
     this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: { gotoUserOffice: true } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['user', user.user_id, { outlets: { 'router-outlet-user-office': ['user-office', 'user', user.user_id] } }]
     }));
   }

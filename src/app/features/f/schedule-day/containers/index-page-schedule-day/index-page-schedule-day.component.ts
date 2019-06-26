@@ -78,7 +78,7 @@ export class IndexPageScheduleDayComponent implements OnInit, OnDestroy {
 
   onScheduleDayHourRange(scheduleDay: ScheduleDay) {
     this.store.dispatch(fromScheduleDay.EntityActions.SetSelected({ selected: { selectedEntity: scheduleDay } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: [
         'schedule',
         scheduleDay.schedule_id,

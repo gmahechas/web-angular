@@ -34,7 +34,7 @@ export class FormPageMacroprojectComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromMacroproject.EntityActions.SetSelected({ selected: initialStateSelectedMacroproject }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['macroproject']
     }));
   }

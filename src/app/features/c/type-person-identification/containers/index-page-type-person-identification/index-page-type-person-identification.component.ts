@@ -66,7 +66,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
       (selected: SelectedTypePersonIdentification) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['type-person-identification', selected.selectedEntity.type_person_identification_id]
           }));
         }
@@ -86,7 +86,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
 
   onCreate() {
     this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({ selected: initialStateSelectedTypePersonIdentification }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['type-person-identification', 'create']
     }));
   }
@@ -95,7 +95,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
     this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({
       selected: { ...initialStateSelectedTypePersonIdentification, selectedEntity: typePersonIdentification }
     }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['type-person-identification', typePersonIdentification.type_person_identification_id]
     }));
   }
@@ -106,7 +106,7 @@ export class IndexPageTypePersonIdentificationComponent implements OnInit, OnDes
 
   onCancel() {
     this.store.dispatch(fromTypePersonIdentification.EntityActions.SetSelected({ selected: initialStateSelectedTypePersonIdentification }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['type-person-identification']
     }));
   }

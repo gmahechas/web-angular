@@ -1,4 +1,5 @@
-import { AuthActions, AuthActionTypes } from '@web/app/auth/store/actions/auth.actions';
+import { createReducer, on } from '@ngrx/store';
+import * as fromAuthActions from '@web/app/auth/store/actions';
 
 import { User } from '@web/app/features/c/user/models/user.model';
 
@@ -10,39 +11,35 @@ export const initialState: State = {
   user: null
 };
 
-export function reducer(state = initialState, action: AuthActions): State {
-
-  switch (action.type) {
-
-    case AuthActionTypes.Auth:
-    case AuthActionTypes.AuthFailure:
-    case AuthActionTypes.CheckAuth:
-    case AuthActionTypes.CheckAuthFailure:
-    case AuthActionTypes.LogoutAuthSuccess:
-    case AuthActionTypes.LogoutAuthFailure:
-    case AuthActionTypes.AuthRedirect:
-    case AuthActionTypes.ExpiredAuth: {
-      return initialState;
-    }
-
-    case AuthActionTypes.AuthSuccess: {
-      return {
-        ...state,
-        user: action.payload.user
-      };
-    }
-
-    case AuthActionTypes.CheckAuthSuccess: {
-      return {
-        ...state,
-        user: action.payload.checkAuth.user
-      };
-    }
-
-    default:
-      return state;
-  }
-
-}
+export const reducer = createReducer(
+  initialState,
+  on(
+    fromAuthActions.AuthActions.Auth,
+    fromAuthActions.AuthActions.AuthFailure,
+    fromAuthActions.AuthActions.CheckAuth,
+    fromAuthActions.AuthActions.CheckAuthFailure,
+    fromAuthActions.AuthActions.LogoutAuthSuccess,
+    fromAuthActions.AuthActions.LogoutAuthFailure,
+    fromAuthActions.AuthActions.AuthRedirect,
+    fromAuthActions.AuthActions.ExpiredAuth,
+    (state) => ({
+      ...initialState
+    })
+  ),
+  on(
+    fromAuthActions.AuthActions.AuthSuccess,
+    (state, { token, user, company }) => ({
+      ...state,
+      user
+    })
+  ),
+  on(
+    fromAuthActions.AuthActions.CheckAuthSuccess,
+    (state, { auth }) => ({
+      ...state,
+      user: auth.checkAuth.user
+    })
+  )
+);
 
 export const getUser = (state: State) => state.user;

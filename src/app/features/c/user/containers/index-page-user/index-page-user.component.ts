@@ -60,7 +60,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
 
         if (selected.gotoUserOffice && selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: [
               'user',
               selected.selectedEntity.user_id,
@@ -69,7 +69,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
           }));
         } else if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['user', selected.selectedEntity.user_id]
           }));
         }
@@ -89,14 +89,14 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: initialStateSelectedUser }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['user', 'create']
     }));
   }
 
   onEdit(user: User) {
     this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: { selectedEntity: user } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['user', user.user_id]
     }));
   }
@@ -107,7 +107,7 @@ export class IndexPageUserComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromUser.EntityActions.SetSelected({ selected: initialStateSelectedUser }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['user']
     }));
   }

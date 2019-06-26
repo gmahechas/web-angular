@@ -49,7 +49,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
       (selected: SelectedWorkflow) => {
         if (selected.selectedEntity) {
           this.selectedEntity = selected.selectedEntity;
-          this.store.dispatch(new fromCore.Go({
+          this.store.dispatch(fromCore.RouterActions.Go({
             path: ['workflow', selected.selectedEntity.workflow_id]
           }));
         }
@@ -69,14 +69,14 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
 
   onCreate() {
     this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: initialStateSelectedWorkflow }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['workflow', 'create']
     }));
   }
 
   onEdit(workflow: Workflow) {
     this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: { selectedEntity: workflow } }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['workflow', workflow.workflow_id]
     }));
   }
@@ -87,7 +87,7 @@ export class IndexPageWorkflowComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: initialStateSelectedWorkflow }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['workflow']
     }));
   }

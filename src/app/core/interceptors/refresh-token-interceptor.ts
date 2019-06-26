@@ -41,7 +41,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                 return next.handle(request);
               }),
               catchError((newErrors) => {
-                this.store.dispatch(new fromAuth.ExpiredAuth());
+                this.store.dispatch(fromAuth.AuthActions.ExpiredAuth());
                 this.localStorageService.setUserOffice(null);
                 this.localStorageService.setUserOfficeProject(null);
                 return throwError(newErrors.error);

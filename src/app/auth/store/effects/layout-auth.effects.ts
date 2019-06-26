@@ -13,11 +13,11 @@ export class LayoutAuthEffects {
   auth$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromAuthActions.AuthActionTypes.Auth,
-        fromAuthActions.AuthActionTypes.CheckAuth
+        fromAuthActions.AuthActions.Auth,
+        fromAuthActions.AuthActions.CheckAuth
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: true }));
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: true }));
       })
     ),
     { dispatch: false }
@@ -26,11 +26,11 @@ export class LayoutAuthEffects {
   authSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromAuthActions.AuthActionTypes.AuthSuccess,
-        fromAuthActions.AuthActionTypes.CheckAuthSuccess
+        fromAuthActions.AuthActions.AuthSuccess,
+        fromAuthActions.AuthActions.CheckAuthSuccess
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
       })
     ),
     { dispatch: false }
@@ -39,11 +39,11 @@ export class LayoutAuthEffects {
   authFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromAuthActions.AuthActionTypes.AuthFailure,
-        fromAuthActions.AuthActionTypes.CheckAuthFailure
+        fromAuthActions.AuthActions.AuthFailure,
+        fromAuthActions.AuthActions.CheckAuthFailure
       ),
       tap(() => {
-        this.store.dispatch(new fromCore.ShowSpinner({ toggle: false }));
+        this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
       })
     ),
     { dispatch: false }

@@ -34,7 +34,7 @@ export class FormPageOfficeComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromOffice.EntityActions.SetSelected({ selected: initialStateSelectedOffice }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['office']
     }));
   }
@@ -47,7 +47,7 @@ export class FormPageOfficeComponent implements OnInit {
     this.store.dispatch(fromOffice.EntityActions.SetSelected({
       selected: { gotoUserOffice: true, gotoOfficeDeparment: false }
     }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['office', office.office_id, { outlets: { 'router-outlet-user-office': ['user-office', 'office', office.office_id] } }]
     }));
   }
@@ -56,7 +56,7 @@ export class FormPageOfficeComponent implements OnInit {
     this.store.dispatch(fromOffice.EntityActions.SetSelected({
       selected: { gotoUserOffice: false, gotoOfficeDeparment: true }
     }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['office', office.office_id, {
         outlets: { 'router-outlet-user-department': ['office-department', 'office', office.office_id] }
       }]

@@ -23,6 +23,6 @@ export class IndexPageAuthComponent implements OnInit {
   }
 
   login(auth: Auth) {
-    this.store.dispatch(new fromAuth.Auth({ auth }));
+    this.store.dispatch(fromAuth.AuthActions.Auth({ auth }));
   }
 }

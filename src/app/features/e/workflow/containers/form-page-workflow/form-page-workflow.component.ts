@@ -34,7 +34,7 @@ export class FormPageWorkflowComponent implements OnInit {
 
   onCancel() {
     this.store.dispatch(fromWorkflow.EntityActions.SetSelected({ selected: initialStateSelectedWorkflow }));
-    this.store.dispatch(new fromCore.Go({
+    this.store.dispatch(fromCore.RouterActions.Go({
       path: ['workflow']
     }));
   }
