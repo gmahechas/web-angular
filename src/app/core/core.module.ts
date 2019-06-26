@@ -3,7 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ROOT_REDUCERS, metaReducers, effects } from '@web/app/core/store';
-import { StoreRouterConnectingModule, RouterStateSerializer, RouterState } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, RouterState, NavigationActionTiming } from '@ngrx/router-store';
 import { CustomPreload, CustomRouterStateSerializer } from '@web/app/shared/router-utils';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -31,7 +31,9 @@ import { environment } from '@web/environments/environment';
     }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
-      routerState: RouterState.Minimal
+      routerState: RouterState.Minimal,
+      serializer: CustomRouterStateSerializer,
+      navigationActionTiming: NavigationActionTiming.PostActivation
     }),
     StoreDevtoolsModule.instrument({
       name: 'NgRx Web Store DevTools',
@@ -55,7 +57,6 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         CustomPreload,
-        { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
         httpInterceptorProviders,
         ...fromServices.services,
       ],
