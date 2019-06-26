@@ -88,12 +88,12 @@ export class LayoutCoreEffects {
         this.confirmationService.confirm({
           accept: () => {
             if (confirm.acceptType) {
-              this.store.dispatch({ type: confirm.acceptType, payload: confirm.acceptPayload });
+              this.store.dispatch(confirm.acceptType(confirm.acceptPayload));
             }
           },
           reject: () => {
             if (confirm.rejectType) {
-              this.store.dispatch({ type: confirm.rejectType, payload: confirm.rejectPayload });
+              this.store.dispatch(confirm.rejectType(confirm.rejectPayload));
             }
           },
           message: confirm.message,
