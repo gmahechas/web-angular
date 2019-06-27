@@ -13,12 +13,16 @@ export const routes: Routes = [
         path: ':office_id', component: fromContainers.FormPageOfficeComponent, canActivate: [OfficeExistGuard], children: [
           {
             path: 'user-office',
-            loadChildren: '@web/app/features/c/user-office/user-office.module#UserOfficeModule',
+            loadChildren: () => {
+              return import('@web/app/features/c/user-office/user-office.module').then(m => m.UserOfficeModule);
+            },
             outlet: 'router-outlet-user-office'
           },
           {
             path: 'office-department',
-            loadChildren: '@web/app/features/b/office-department/office-department.module#OfficeDepartmentModule',
+            loadChildren: () => {
+              return import('@web/app/features/b/office-department/office-department.module').then(m => m.OfficeDepartmentModule);
+            },
             outlet: 'router-outlet-user-department'
           }
         ]

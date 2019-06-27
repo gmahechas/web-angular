@@ -13,7 +13,9 @@ export const routes: Routes = [
         path: ':profile_id', component: fromContainers.FormPageProfileComponent, canActivate: [ProfileExistGuard], children: [
           {
             path: 'profile-menu',
-            loadChildren: '@web/app/features/c/profile-menu/profile-menu.module#ProfileMenuModule',
+            loadChildren: () => {
+              return import('@web/app/features/c/profile-menu/profile-menu.module').then(m => m.ProfileMenuModule);
+            },
             outlet: 'router-outlet-profile-menu'
           }
         ]

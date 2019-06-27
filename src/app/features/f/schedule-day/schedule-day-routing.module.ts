@@ -8,7 +8,10 @@ export const routes: Routes = [
     path: 'schedule/:schedule_id', component: fromContainers.IndexPageScheduleDayComponent, children: [
       {
         path: 'schedule-day-hour-range',
-        loadChildren: '@web/app/features/f/schedule-day-hour-range/schedule-day-hour-range.module#ScheduleDayHourRangeModule',
+        loadChildren: () => {
+          // tslint:disable-next-line:max-line-length
+          return import('@web/app/features/f/schedule-day-hour-range/schedule-day-hour-range.module').then(m => m.ScheduleDayHourRangeModule);
+        },
         outlet: 'router-outlet-schedule-day-hour-range'
       }
     ]

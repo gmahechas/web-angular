@@ -13,7 +13,9 @@ export const routes: Routes = [
         path: ':schedule_id', component: fromContainers.FormPageScheduleComponent, canActivate: [ScheduleExistGuard], children: [
           {
             path: 'schedule-day',
-            loadChildren: '@web/app/features/f/schedule-day/schedule-day.module#ScheduleDayModule',
+            loadChildren: () => {
+              return import('@web/app/features/f/schedule-day/schedule-day.module').then(m => m.ScheduleDayModule);
+            },
             outlet: 'router-outlet-schedule-day'
           }
         ]

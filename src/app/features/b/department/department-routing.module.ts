@@ -13,7 +13,9 @@ export const routes: Routes = [
         path: ':department_id', component: fromContainers.FormPageDepartmentComponent, canActivate: [DepartmentExistGuard], children: [
           {
             path: 'office-department',
-            loadChildren: '@web/app/features/b/office-department/office-department.module#OfficeDepartmentModule',
+            loadChildren: () => {
+              return import('@web/app/features/b/office-department/office-department.module').then(m => m.OfficeDepartmentModule);
+            },
             outlet: 'router-outlet-user-department'
           }
         ]

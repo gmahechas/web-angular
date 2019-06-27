@@ -13,7 +13,9 @@ export const routes: Routes = [
         path: ':user_id', component: fromContainers.FormPageUserComponent, canActivate: [UserExistGuard], children: [
           {
             path: 'user-office',
-            loadChildren: '@web/app/features/c/user-office/user-office.module#UserOfficeModule',
+            loadChildren: () => {
+              return import('@web/app/features/c/user-office/user-office.module').then(m => m.UserOfficeModule);
+            },
             outlet: 'router-outlet-user-office'
           }
         ]

@@ -13,7 +13,9 @@ export const routes: Routes = [
         path: ':project_id', component: fromContainers.FormPageProjectComponent, canActivate: [ProjectExistGuard], children: [
           {
             path: 'user-office-project',
-            loadChildren: '@web/app/features/d/user-office-project/user-office-project.module#UserOfficeProjectModule',
+            loadChildren: () => {
+              return import('@web/app/features/d/user-office-project/user-office-project.module').then(m => m.UserOfficeProjectModule);
+            },
             outlet: 'router-outlet-user-office-project'
           }
         ]

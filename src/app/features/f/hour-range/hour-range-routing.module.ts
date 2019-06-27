@@ -13,7 +13,10 @@ export const routes: Routes = [
         path: ':hour_range_id', component: fromContainers.FormPageHourRangeComponent, canActivate: [HourRangeExistGuard], children: [
           {
             path: 'schedule-day-hour-range',
-            loadChildren: '@web/app/features/f/schedule-day-hour-range/schedule-day-hour-range.module#ScheduleDayHourRangeModule',
+            loadChildren: () => {
+              // tslint:disable-next-line:max-line-length
+              return import('@web/app/features/f/schedule-day-hour-range/schedule-day-hour-range.module').then(m => m.ScheduleDayHourRangeModule);
+            },
             outlet: 'router-outlet-schedule-day-hour-range'
           }
         ]

@@ -15,103 +15,142 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: '@web/app/dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => {
+      return import('@web/app/dashboard/dashboard.module').then(m => m.DashboardModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   /* A */
   {
     path: 'country',
-    loadChildren: '@web/app/features/a/country/country.module#CountryModule',
+    loadChildren: () => {
+      return import('@web/app/features/a/country/country.module').then(m => m.CountryModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'estate',
-    loadChildren: '@web/app/features/a/estate/estate.module#EstateModule',
+    loadChildren: () => {
+      return import('@web/app/features/a/estate/estate.module').then(m => m.EstateModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'city',
-    loadChildren: '@web/app/features/a/city/city.module#CityModule',
+    loadChildren: () => {
+      return import('@web/app/features/a/city/city.module').then(m => m.CityModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   /* B */
   {
     path: 'company',
-    loadChildren: '@web/app/features/b/company/company.module#CompanyModule',
+    loadChildren: () => {
+      return import('@web/app/features/b/company/company.module').then(m => m.CompanyModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'office',
-    loadChildren: '@web/app/features/b/office/office.module#OfficeModule',
+    loadChildren: () => {
+      return import('@web/app/features/b/office/office.module').then(m => m.OfficeModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'department',
-    loadChildren: '@web/app/features/b/department/department.module#DepartmentModule',
+    loadChildren: () => {
+      return import('@web/app/features/b/department/department.module').then(m => m.DepartmentModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   /* C */
   {
     path: 'type-person',
-    loadChildren: '@web/app/features/c/type-person/type-person.module#TypePersonModule',
+    loadChildren: () => {
+      return import('@web/app/features/c/type-person/type-person.module').then(m => m.TypePersonModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'type-person-identification',
-    loadChildren: '@web/app/features/c/type-person-identification/type-person-identification.module#TypePersonIdentificationModule',
+    loadChildren: () => {
+      // tslint:disable-next-line:max-line-length
+      return import('@web/app/features/c/type-person-identification/type-person-identification.module').then(m => m.TypePersonIdentificationModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'person',
-    loadChildren: '@web/app/features/c/person/person.module#PersonModule',
+    loadChildren: () => {
+      return import('@web/app/features/c/person/person.module').then(m => m.PersonModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'profile',
-    loadChildren: '@web/app/features/c/profile/profile.module#ProfileModule',
+    loadChildren: () => {
+      return import('@web/app/features/c/profile/profile.module').then(m => m.ProfileModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'user',
-    loadChildren: '@web/app/features/c/user/user.module#UserModule',
+    loadChildren: () => {
+      return import('@web/app/features/c/user/user.module').then(m => m.UserModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'user-office',
-    loadChildren: '@web/app/features/c/user-office/user-office.module#UserOfficeModule',
+    loadChildren: () => {
+      return import('@web/app/features/c/user-office/user-office.module').then(m => m.UserOfficeModule);
+    },
     canLoad: [AuthGuard]
   },
   /* D */
   {
     path: 'macroproject',
-    loadChildren: '@web/app/features/d/macroproject/macroproject.module#MacroprojectModule',
+    loadChildren: () => {
+      return import('@web/app/features/d/macroproject/macroproject.module').then(m => m.MacroprojectModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'project',
-    loadChildren: '@web/app/features/d/project/project.module#ProjectModule',
+    loadChildren: () => {
+      return import('@web/app/features/d/project/project.module').then(m => m.ProjectModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'user-office-project',
-    loadChildren: '@web/app/features/d/user-office-project/user-office-project.module#UserOfficeProjectModule',
+    loadChildren: () => {
+      return import('@web/app/features/d/user-office-project/user-office-project.module').then(m => m.UserOfficeProjectModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   /* E */
   {
     path: 'workflow',
-    loadChildren: '@web/app/features/e/workflow/workflow.module#WorkflowModule',
+    loadChildren: () => {
+      return import('@web/app/features/e/workflow/workflow.module').then(m => m.WorkflowModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   /* F */
   {
     path: 'schedule',
-    loadChildren: '@web/app/features/f/schedule/schedule.module#ScheduleModule',
+    loadChildren: () => {
+      return import('@web/app/features/f/schedule/schedule.module').then(m => m.ScheduleModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
     path: 'hour-range',
-    loadChildren: '@web/app/features/f/hour-range/hour-range.module#HourRangeModule',
+    loadChildren: () => {
+      return import('@web/app/features/f/hour-range/hour-range.module').then(m => m.HourRangeModule);
+    },
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
