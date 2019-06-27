@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import * as fromMacroprojectActions from '@web/app/features/d/macroproject/store/actions';
-import { SelectedMacroproject, initialStateSelectedMacroproject } from '@web/app/features/d/macroproject/models/selected-macroproject.model';
+import {
+  SelectedMacroproject, initialStateSelectedMacroproject
+} from '@web/app/features/d/macroproject/models/selected-macroproject.model';
 
 export interface State {
   selected: SelectedMacroproject;

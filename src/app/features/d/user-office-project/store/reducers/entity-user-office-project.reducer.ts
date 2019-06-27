@@ -32,7 +32,9 @@ export const reducer = createReducer(
   ),
   on(
     fromUserOfficeProjectActions.EntityActions.UpdateSuccessEntity,
-    (state, { entity }) => adapter.updateOne({ id: entity.updateUserOfficeProject.user_office_project_id, changes: entity.updateUserOfficeProject }, state)
+    (state, { entity }) => adapter.updateOne({
+      id: entity.updateUserOfficeProject.user_office_project_id, changes: entity.updateUserOfficeProject
+    }, state)
   ),
   on(
     fromUserOfficeProjectActions.EntityActions.DestroySuccessEntity,

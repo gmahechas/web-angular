@@ -32,7 +32,9 @@ export const reducer = createReducer(
   ),
   on(
     fromTypePersonIdentificationActions.EntityActions.UpdateSuccessEntity,
-    (state, { entity }) => adapter.updateOne({ id: entity.updateTypePersonIdentification.type_person_identification_id, changes: entity.updateTypePersonIdentification }, state)
+    (state, { entity }) => adapter.updateOne({
+      id: entity.updateTypePersonIdentification.type_person_identification_id, changes: entity.updateTypePersonIdentification
+    }, state)
   ),
   on(
     fromTypePersonIdentificationActions.EntityActions.DestroySuccessEntity,

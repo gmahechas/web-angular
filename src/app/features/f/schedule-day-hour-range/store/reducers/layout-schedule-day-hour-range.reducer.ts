@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import * as fromScheduleDayHourRangeActions from '@web/app/features/f/schedule-day-hour-range/store/actions';
-import { SelectedScheduleDayHourRange, initialStateSelectedScheduleDayHourRange } from '@web/app/features/f/schedule-day-hour-range/models/selected-schedule-day-hour-range.model';
+import {
+  SelectedScheduleDayHourRange, initialStateSelectedScheduleDayHourRange
+} from '@web/app/features/f/schedule-day-hour-range/models/selected-schedule-day-hour-range.model';
 
 export interface State {
   selected: SelectedScheduleDayHourRange;

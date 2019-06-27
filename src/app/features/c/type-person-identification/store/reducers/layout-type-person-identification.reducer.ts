@@ -1,6 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import * as fromTypePersonIdentificationActions from '@web/app/features/c/type-person-identification/store/actions';
-import { SelectedTypePersonIdentification, initialStateSelectedTypePersonIdentification } from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
+import {
+  SelectedTypePersonIdentification,
+  initialStateSelectedTypePersonIdentification
+} from '@web/app/features/c/type-person-identification/models/selected-type-person-identification.model';
 
 export interface State {
   selected: SelectedTypePersonIdentification;

@@ -32,7 +32,9 @@ export const reducer = createReducer(
   ),
   on(
     fromOfficeDepartmentActions.EntityActions.UpdateSuccessEntity,
-    (state, { entity }) => adapter.updateOne({ id: entity.updateOfficeDepartment.office_department_id, changes: entity.updateOfficeDepartment }, state)
+    (state, { entity }) => adapter.updateOne({
+      id: entity.updateOfficeDepartment.office_department_id, changes: entity.updateOfficeDepartment
+    }, state)
   ),
   on(
     fromOfficeDepartmentActions.EntityActions.DestroySuccessEntity,

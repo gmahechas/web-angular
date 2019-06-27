@@ -31,7 +31,7 @@
           </div>
           <div *ngSwitchCase="'checkbox'">
             <app-checkbox-shared [checked]="rowData | fetchStringInArrayShared:col.field" [binary]="true"
-              (change)="onColumnSelection(index, rowData)">
+              (handleChange)="onColumnSelection(index, rowData)">
             </app-checkbox-shared>
           </div>
           <div *ngSwitchCase="'button'">

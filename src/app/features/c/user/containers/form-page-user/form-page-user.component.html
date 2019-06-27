@@ -1,4 +1,5 @@
-<app-form-user *ngIf="!(user$ | async) as user" [pending]="pending$ | async" (submitted)="onStore($event)">
+<app-form-user *ngIf="((user$ | async) === undefined) as user" [pending]="pending$ | async"
+  (submitted)="onStore($event)">
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.create.verb', 'user.singular']"></app-translate-shared>
   </div>

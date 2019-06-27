@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import * as fromOfficeDepartmentActions from '@web/app/features/b/office-department/store/actions';
-import { SelectedOfficeDepartment, initialStateSelectedOfficeDepartment } from '@web/app/features/b/office-department/models/selected-office-department.model';
+import {
+  SelectedOfficeDepartment, initialStateSelectedOfficeDepartment
+} from '@web/app/features/b/office-department/models/selected-office-department.model';
 
 export interface State {
   selected: SelectedOfficeDepartment;

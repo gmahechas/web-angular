@@ -1,8 +1,10 @@
-<app-form-office *ngIf="!(office$ | async) as office" [pending]="pending$ | async" (submitted)="onStore($event)">
+<app-form-office *ngIf="((office$ | async) === undefined) as office" [pending]="pending$ | async"
+  (submitted)="onStore($event)">
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.create.verb', 'office.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
 </app-form-office>
 
 <app-form-office *ngIf="(office$ | async) as office" [pending]="pending$ | async" (submitted)="onUpdate($event)"
@@ -10,10 +12,14 @@
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.edit.verb', 'office.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(office)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['user.plural']" [class]="'ui-button-secondary'" (click)="onUserOffice(office)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['department.plural']" [class]="'ui-button-secondary'" (click)="onOfficeDepartment(office)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'"
+    (click)="onDestroy(office)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['user.plural']" [class]="'ui-button-secondary'"
+    (click)="onUserOffice(office)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['department.plural']" [class]="'ui-button-secondary'"
+    (click)="onOfficeDepartment(office)"></app-button-shared>
 </app-form-office>
 
 <router-outlet name="router-outlet-user-office"></router-outlet>

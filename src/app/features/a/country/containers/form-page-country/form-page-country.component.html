@@ -1,4 +1,5 @@
-<app-form-country *ngIf="!(country$ | async) as country" [pending]="pending$ | async" (submitted)="onStore($event)">
+<app-form-country *ngIf="((country$ | async) === undefined) as country" [pending]="pending$ | async"
+  (submitted)="onStore($event)">
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.create.verb', 'country.singular']"></app-translate-shared>
   </div>

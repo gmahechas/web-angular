@@ -1,4 +1,4 @@
-<app-form-hour-range *ngIf="!(hourRange$ | async) as hourRange" [pending]="pending$ | async"
+<app-form-hour-range *ngIf="((hourRange$ | async) === undefined) as hourRange" [pending]="pending$ | async"
   (submitted)="onStore($event)">
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.create.verb', 'hour_range.singular']"></app-translate-shared>

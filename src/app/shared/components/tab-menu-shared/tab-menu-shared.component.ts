@@ -10,7 +10,7 @@ export class TabMenuSharedComponent implements OnInit {
   @Input() active: any;
   @Input() items: any;
   @Output() navigate = new EventEmitter<any>();
-  @Output() close = new EventEmitter<any>();
+  @Output() handleClose = new EventEmitter<any>();
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class TabMenuSharedComponent implements OnInit {
   }
 
   onClose(event, index) {
-    this.close.emit(index);
+    this.handleClose.emit(index);
     event.preventDefault();
   }
 }

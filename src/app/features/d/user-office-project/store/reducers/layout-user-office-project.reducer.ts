@@ -1,6 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import * as fromUserOfficeProjectActions from '@web/app/features/d/user-office-project/store/actions';
-import { SelectedUserOfficeProject, initialStateSelectedUserOfficeProject } from '@web/app/features/d/user-office-project/models/selected-user-office-project.model';
+import {
+  SelectedUserOfficeProject,
+  initialStateSelectedUserOfficeProject
+} from '@web/app/features/d/user-office-project/models/selected-user-office-project.model';
 
 export interface State {
   selected: SelectedUserOfficeProject;

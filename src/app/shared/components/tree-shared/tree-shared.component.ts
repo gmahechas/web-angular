@@ -10,7 +10,7 @@ export class TreeSharedComponent implements OnChanges, OnInit {
 
   @Input() value: any;
   @Input() selectionMode: string;
-  @Output() select = new EventEmitter<any>();
+  @Output() handleSelect = new EventEmitter<any>();
   @Output() unSelect = new EventEmitter<any>();
   selectedNodes: any[] = [];
 
@@ -28,7 +28,7 @@ export class TreeSharedComponent implements OnChanges, OnInit {
   }
 
   nodeSelect(event) {
-    this.select.emit(event.node);
+    this.handleSelect.emit(event.node);
   }
 
   nodeUnselect(event) {

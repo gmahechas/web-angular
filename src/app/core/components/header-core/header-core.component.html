@@ -41,7 +41,7 @@
 
   <div class="layout-header-tabmenu">
     <app-tab-menu-shared *ngIf="(selectedMenus$ | async) as selectedMenus" [items]="selectedMenus.profileMenus"
-      [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (close)="removeMenuTab($event)">
+      [active]="selectedMenus.selected" (navigate)="handleNavigateFromTab($event)" (handleClose)="removeMenuTab($event)">
     </app-tab-menu-shared>
   </div>
 </div>

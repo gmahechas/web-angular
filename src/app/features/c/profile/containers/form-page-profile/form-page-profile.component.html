@@ -1,8 +1,10 @@
-<app-form-profile *ngIf="!(profile$ | async) as profile" [pending]="pending$ | async" (submitted)="onStore($event)">
+<app-form-profile *ngIf="((profile$ | async) === undefined) as profile" [pending]="pending$ | async"
+  (submitted)="onStore($event)">
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.create.verb', 'profile.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
 </app-form-profile>
 
 <app-form-profile *ngIf="(profile$ | async) as profile" [pending]="pending$ | async" (submitted)="onUpdate($event)"
@@ -10,9 +12,12 @@
   <div class="form-title">
     <app-translate-shared [strings]="['verbs.edit.verb', 'profile.singular']"></app-translate-shared>
   </div>
-  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'" (click)="onDestroy(profile)"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'" (click)="onCancel()"></app-button-shared>
-  <app-button-shared [type]="'button'" [label]="['profile_menu.plural']" [class]="'ui-button-secondary'" (click)="onProfileMenu(profile)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.delete.verb']" [class]="'ui-button-secondary'"
+    (click)="onDestroy(profile)"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['verbs.cancel.verb']" [class]="'ui-button-secondary'"
+    (click)="onCancel()"></app-button-shared>
+  <app-button-shared [type]="'button'" [label]="['profile_menu.plural']" [class]="'ui-button-secondary'"
+    (click)="onProfileMenu(profile)"></app-button-shared>
 </app-form-profile>
 
 <router-outlet name="router-outlet-profile-menu"></router-outlet>

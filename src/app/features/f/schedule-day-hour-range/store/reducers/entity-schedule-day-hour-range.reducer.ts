@@ -32,7 +32,9 @@ export const reducer = createReducer(
   ),
   on(
     fromScheduleDayHourRangeActions.EntityActions.UpdateSuccessEntity,
-    (state, { entity }) => adapter.updateOne({ id: entity.updateScheduleDayHourRange.schedule_day_hour_range_id, changes: entity.updateScheduleDayHourRange }, state)
+    (state, { entity }) => adapter.updateOne({
+      id: entity.updateScheduleDayHourRange.schedule_day_hour_range_id, changes: entity.updateScheduleDayHourRange
+    }, state)
   ),
   on(
     fromScheduleDayHourRangeActions.EntityActions.DestroySuccessEntity,
