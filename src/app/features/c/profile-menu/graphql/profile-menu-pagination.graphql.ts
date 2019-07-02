@@ -11,7 +11,7 @@ import gql from 'graphql-tag';
 })
 export class ProfileMenuPaginationGQL extends Query<PaginationProfileMenu> {
 
-document: DocumentNode = gql`
+  document: DocumentNode = gql`
   query paginationProfileMenu(
     $profile_menu_id: ID,
     $profile_menu_status: String,
@@ -26,17 +26,24 @@ document: DocumentNode = gql`
       limit: $limit,
       page: $page
     ) {
-      profile_menu_id
-      profile_menu_status
-      profile_id
-      menu_id
-      menu {
+      total
+      per_page
+      current_page
+      from
+      to
+      data {
+        profile_menu_id
+        profile_menu_status
+        profile_id
         menu_id
-        menu_name
-        menu_title_case
-        menu_upper_case
-        menu_uri
-        menu_parent_id
+        menu {
+          menu_id
+          menu_name
+          menu_title_case
+          menu_upper_case
+          menu_uri
+          menu_parent_id
+        }
       }
     }
   }

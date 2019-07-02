@@ -15,3 +15,11 @@ export const {
   selectAll: getAllEntities, // Entities
   selectTotal: getTotalEntities, // total
 } = fromEntity.adapter.getSelectors(getEntityState);
+
+export const getSelectedByRouter = createSelector(
+  getEntities,
+  fromCore.getRouterState,
+  (entities, router) => {
+    return (router) ? router.state && entities[router.state.params.profile_menu_id] : null;
+  }
+);

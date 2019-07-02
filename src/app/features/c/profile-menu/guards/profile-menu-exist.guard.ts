@@ -44,7 +44,7 @@ export class ProfileMenuExistGuard implements CanActivate {
       select(fromProfileMenu.getLoaded),
       tap(loaded => {
         if (!loaded) {
-          this.store.dispatch(new fromProfileMenu.LoadEntity({
+          this.store.dispatch(fromProfileMenu.EntityActions.LoadEntity({
             search: {
               profile_menu: {
                 profile_menu_id: profileMenuId,

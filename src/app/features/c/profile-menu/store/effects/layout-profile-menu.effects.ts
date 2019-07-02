@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromCore from '@web/app/core/store';
 import * as fromProfileMenuActions from '@web/app/features/c/profile-menu/store/actions';
 
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutProfileMenuEffects {
@@ -14,12 +14,12 @@ export class LayoutProfileMenuEffects {
   entity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileMenuActions.EntityActionTypes.LoadEntity,
-        fromProfileMenuActions.EntityActionTypes.StoreEntity,
-        fromProfileMenuActions.EntityActionTypes.UpdateEntity,
-        fromProfileMenuActions.EntityActionTypes.DestroyEntity,
-        fromProfileMenuActions.EntityActionTypes.PaginateEntity,
-        fromProfileMenuActions.EntityActionTypes.LoadEntityShared
+        fromProfileMenuActions.EntityActions.LoadEntity,
+        fromProfileMenuActions.EntityActions.StoreEntity,
+        fromProfileMenuActions.EntityActions.UpdateEntity,
+        fromProfileMenuActions.EntityActions.DestroyEntity,
+        fromProfileMenuActions.EntityActions.PaginateEntity,
+        fromProfileMenuActions.EntityActions.LoadEntityShared
       ),
       tap(() => {
         this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: true }));
@@ -31,7 +31,7 @@ export class LayoutProfileMenuEffects {
   loadSuccessEntity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileMenuActions.EntityActionTypes.LoadSuccessEntity
+        fromProfileMenuActions.EntityActions.LoadSuccessEntity
       ),
       tap(() => {
         this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
@@ -43,9 +43,9 @@ export class LayoutProfileMenuEffects {
   success$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileMenuActions.EntityActionTypes.StoreSuccessEntity,
-        fromProfileMenuActions.EntityActionTypes.UpdateSuccessEntity,
-        fromProfileMenuActions.EntityActionTypes.DestroySuccessEntity
+        fromProfileMenuActions.EntityActions.StoreSuccessEntity,
+        fromProfileMenuActions.EntityActions.UpdateSuccessEntity,
+        fromProfileMenuActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
@@ -62,10 +62,10 @@ export class LayoutProfileMenuEffects {
   fail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileMenuActions.EntityActionTypes.LoadFailEntity,
-        fromProfileMenuActions.EntityActionTypes.StoreFailEntity,
-        fromProfileMenuActions.EntityActionTypes.UpdateFailEntity,
-        fromProfileMenuActions.EntityActionTypes.DestroyFailEntity
+        fromProfileMenuActions.EntityActions.LoadFailEntity,
+        fromProfileMenuActions.EntityActions.StoreFailEntity,
+        fromProfileMenuActions.EntityActions.UpdateFailEntity,
+        fromProfileMenuActions.EntityActions.DestroyFailEntity
       ),
       tap(() => {
         this.store.dispatch(fromCore.LayoutActions.ShowSpinner({ toggle: false }));
@@ -79,14 +79,14 @@ export class LayoutProfileMenuEffects {
     { dispatch: false }
   );
 
-  // Redirects
+  /* // Redirects
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        fromProfileMenuActions.EntityActionTypes.LoadEntity,
-        fromProfileMenuActions.EntityActionTypes.StoreSuccessEntity,
-        fromProfileMenuActions.EntityActionTypes.UpdateSuccessEntity,
-        fromProfileMenuActions.EntityActionTypes.DestroySuccessEntity
+        fromProfileMenuActions.EntityActions.LoadEntity,
+        fromProfileMenuActions.EntityActions.StoreSuccessEntity,
+        fromProfileMenuActions.EntityActions.UpdateSuccessEntity,
+        fromProfileMenuActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
         this.store.dispatch(fromCore.RouterActions.Go({ path: ['profile_menu'] }));
@@ -97,8 +97,7 @@ export class LayoutProfileMenuEffects {
 
   reset$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromProfileMenuActions.EntityActionTypes.Reset),
-      map((action: fromProfileMenuActions.Reset) => action.payload),
+      ofType(fromProfileMenuActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
           this.store.dispatch(fromCore.RouterActions.Go({ path: ['profile_menu'] }));
@@ -106,7 +105,7 @@ export class LayoutProfileMenuEffects {
       })
     ),
     { dispatch: false }
-  );
+  ); */
 
   constructor(
     private actions$: Actions,
