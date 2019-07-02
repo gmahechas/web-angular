@@ -26,8 +26,8 @@ export const reducer = createReducer(
   on(
     fromScheduleDayHourRangeActions.EntityActions.StoreSuccessEntity,
     (state, { entity }) => {
-      const newState = adapter.removeAll(state);
-      return adapter.addOne(entity.storeScheduleDayHourRange, newState);
+      /* const newState = adapter.removeAll(state); */
+      return adapter.addOne(entity.storeScheduleDayHourRange, state);
     }
   ),
   on(

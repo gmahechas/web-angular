@@ -79,7 +79,7 @@ export class LayoutScheduleDayEffects {
     { dispatch: false }
   );
 
-  // Redirects
+  /* // Redirects
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -89,7 +89,7 @@ export class LayoutScheduleDayEffects {
         fromScheduleDayActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
-        this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule_day'] }));
+        this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule-day'] }));
       })
     ),
     { dispatch: false }
@@ -100,12 +100,12 @@ export class LayoutScheduleDayEffects {
       ofType(fromScheduleDayActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
-          this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule_day'] }));
+          this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule-day'] }));
         }
       })
     ),
     { dispatch: false }
-  );
+  ); */
 
   constructor(
     private actions$: Actions,

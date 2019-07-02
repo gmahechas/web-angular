@@ -79,7 +79,7 @@ export class LayoutScheduleDayHourRangeEffects {
     { dispatch: false }
   );
 
-  // Redirects
+  /* // Redirects
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -89,7 +89,7 @@ export class LayoutScheduleDayHourRangeEffects {
         fromScheduleDayHourRangeActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
-        this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule_day_hour_range'] }));
+        this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule-day-hour-range'] }));
       })
     ),
     { dispatch: false }
@@ -100,12 +100,12 @@ export class LayoutScheduleDayHourRangeEffects {
       ofType(fromScheduleDayHourRangeActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
-          this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule_day_hour_range'] }));
+          this.store.dispatch(fromCore.RouterActions.Go({ path: ['schedule-day-hour-range'] }));
         }
       })
     ),
     { dispatch: false }
-  );
+  ); */
 
   constructor(
     private actions$: Actions,
