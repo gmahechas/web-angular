@@ -38,9 +38,9 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export function clearState(reducer: ActionReducer<State>): ActionReducer<State> {
   return (state: State, action: any): any => {
     if (
-      action.type === fromAuthActions.AuthActions.LogoutAuthSuccess ||
-      action.type === fromAuthActions.AuthActions.CheckAuthFailure ||
-      action.type === fromAuthActions.AuthActions.ExpiredAuth
+      action.type === fromAuthActions.AuthActions.LogoutAuthSuccess.type ||
+      action.type === fromAuthActions.AuthActions.CheckAuthFailure.type ||
+      action.type === fromAuthActions.AuthActions.ExpiredAuth.type
     ) {
       state = undefined;
     }

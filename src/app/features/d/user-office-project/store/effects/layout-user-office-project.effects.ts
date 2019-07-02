@@ -79,7 +79,7 @@ export class LayoutUserOfficeProjectEffects {
     { dispatch: false }
   );
 
-  // Redirects
+/*   // Redirects
   successRedirect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -89,7 +89,7 @@ export class LayoutUserOfficeProjectEffects {
         fromUserOfficeProjectActions.EntityActions.DestroySuccessEntity
       ),
       tap(() => {
-        this.store.dispatch(fromCore.RouterActions.Go({ path: ['user_office_project'] }));
+        this.store.dispatch(fromCore.RouterActions.Go({ path: ['user-office-project'] }));
       })
     ),
     { dispatch: false }
@@ -100,12 +100,12 @@ export class LayoutUserOfficeProjectEffects {
       ofType(fromUserOfficeProjectActions.EntityActions.Reset),
       tap(({ redirect }) => {
         if (redirect) {
-          this.store.dispatch(fromCore.RouterActions.Go({ path: ['user_office_project'] }));
+          this.store.dispatch(fromCore.RouterActions.Go({ path: ['user-office-project'] }));
         }
       })
     ),
     { dispatch: false }
-  );
+  ); */
 
   constructor(
     private actions$: Actions,

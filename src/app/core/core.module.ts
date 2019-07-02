@@ -26,7 +26,7 @@ import { environment } from '@web/environments/environment';
         strictStateImmutability: true,
         strictActionImmutability: true,
         strictStateSerializability: true,
-        strictActionSerializability: true,
+        strictActionSerializability: false,
       },
     }),
     StoreRouterConnectingModule.forRoot({

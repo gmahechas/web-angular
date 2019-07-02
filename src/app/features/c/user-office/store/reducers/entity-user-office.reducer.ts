@@ -26,8 +26,8 @@ export const reducer = createReducer(
   on(
     fromUserOfficeActions.EntityActions.StoreSuccessEntity,
     (state, { entity }) => {
-      const newState = adapter.removeAll(state);
-      return adapter.addOne(entity.storeUserOffice, newState);
+    /*   const newState = adapter.removeAll(state); */
+      return adapter.addOne(entity.storeUserOffice, state);
     }
   ),
   on(
