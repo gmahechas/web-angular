@@ -48,9 +48,8 @@ export class DayExistGuard implements CanActivate {
             search: {
               day: {
                 day_id: dayId,
-                // TODO
-              },
-              // TODO
+                day_name: ''
+              }
             }
           }));
         }

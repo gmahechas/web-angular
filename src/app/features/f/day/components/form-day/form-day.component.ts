@@ -24,9 +24,8 @@ export class FormDayComponent implements OnChanges, OnInit {
 
   dayForm = this.formBuilder.group({
     day: this.formBuilder.group({
-      // TODO
+      day_name: this.formBuilder.control('', [Validators.required]),
     }),
-    // TODO
   });
 
   constructor(
@@ -38,9 +37,8 @@ export class FormDayComponent implements OnChanges, OnInit {
       this.dayForm.reset();
       this.dayForm.setValue({
         day: {
-          // TODO
-        },
-        // TODO
+          day_name: this.day.day_name
+        }
       });
     }
   }
@@ -53,14 +51,13 @@ export class FormDayComponent implements OnChanges, OnInit {
     if (this.day) {
       if (this.dayForm.dirty) {
         const updated = {
-            day_id: this.day.day_id,
-            ...this.dayForm.value.day,
-            // TODO
+          day_id: this.day.day_id,
+          ...this.dayForm.value.day
         };
         this.submitted.emit(updated);
       }
     } else {
-      this.submitted.emit({...this.dayForm.value.day}); // TODO
+      this.submitted.emit({ ...this.dayForm.value.day });
     }
 
   }

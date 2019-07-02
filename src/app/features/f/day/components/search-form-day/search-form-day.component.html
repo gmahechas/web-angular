@@ -9,18 +9,32 @@
         <div class="p-col">
           <div class="p-grid p-nogutter">
             <div class="p-col">
-              // TODO
+              <app-translate-shared [strings]="['day.model.day_id']"></app-translate-shared>
             </div>
             <div class="p-col">
-              // TODO
+              <app-input-text-shared [group]="searchFormDay" [groupName]="'day'" [controlName]="'day_id'">
+              </app-input-text-shared>
+            </div>
+          </div>
+        </div>
+        <div class="p-col">
+          <div class="p-grid p-nogutter">
+            <div class="p-col">
+              <app-translate-shared [strings]="['day.model.day_name']"></app-translate-shared>
+            </div>
+            <div class="p-col">
+              <app-input-text-shared [group]="searchFormDay" [groupName]="'day'" [controlName]="'day_name'">
+              </app-input-text-shared>
             </div>
           </div>
         </div>
         <div class="p-col">
           <app-button-shared [type]="'submit'" [label]="['verbs.search.verb']" [disabled]="searchFormDay.invalid"
             [class]="'ui-button-secondary'"></app-button-shared>
-          <app-button-shared [type]="'button'" [label]="['verbs.create.verb']" (click)="onCreate()" [class]="'ui-button-secondary'"></app-button-shared>
-          <app-button-shared [type]="'button'" [label]="['verbs.clean.verb']" (click)="onReset()" [class]="'ui-button-secondary'"></app-button-shared>
+          <!--           <app-button-shared [type]="'button'" [label]="['verbs.create.verb']" (click)="onCreate()"
+            [class]="'ui-button-secondary'"></app-button-shared> -->
+          <app-button-shared [type]="'button'" [label]="['verbs.clean.verb']" (click)="onReset()"
+            [class]="'ui-button-secondary'"></app-button-shared>
         </div>
       </div>
 

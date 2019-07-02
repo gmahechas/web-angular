@@ -140,6 +140,13 @@ export const routes: Routes = [
   },
   /* F */
   {
+    path: 'day',
+    loadChildren: () => {
+      return import('@web/app/features/f/day/day.module').then(m => m.DayModule);
+    },
+    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+  },
+  {
     path: 'schedule',
     loadChildren: () => {
       return import('@web/app/features/f/schedule/schedule.module').then(m => m.ScheduleModule);

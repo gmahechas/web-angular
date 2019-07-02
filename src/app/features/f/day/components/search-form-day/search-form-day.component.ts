@@ -18,7 +18,8 @@ export class SearchFormDayComponent implements OnChanges, OnInit {
 
   searchFormDay = this.formBuilder.group({
     day: this.formBuilder.group({
-      // TODO
+      day_id: this.formBuilder.control(''),
+      day_name: this.formBuilder.control('')
     })
   });
 
@@ -29,7 +30,8 @@ export class SearchFormDayComponent implements OnChanges, OnInit {
   ngOnChanges() {
     this.searchFormDay.setValue({
       day: {
-        // TODO
+        day_id: this.query.day.day_id,
+        day_name: this.query.day.day_name
       }
     });
   }

@@ -7,21 +7,23 @@
 
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <!-- // TODO -->
+          <app-translate-shared [strings]="['day.model.day_name']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <!-- // TODO -->
+          <app-input-text-shared [group]="dayForm" [groupName]="'day'" [controlName]="'day_name'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
-          <!-- // TODO -->
+          <app-validation-errors-shared [control]="dayForm.get('day.day_name')">
+          </app-validation-errors-shared>
         </div>
       </div>
 
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
-            [disabled]="dayForm.invalid || dayForm.disabled"></app-button-shared>
-          <ng-content select="app-button-shared"></ng-content>
+<!--           <app-button-shared [type]="'submit'" [label]="['verbs.save.verb']" [class]="'ui-button-secondary'"
+            [disabled]="dayForm.invalid || dayForm.disabled"></app-button-shared> -->
+  <!--         <ng-content select="app-button-shared"></ng-content> -->
         </div>
       </div>
     </form>

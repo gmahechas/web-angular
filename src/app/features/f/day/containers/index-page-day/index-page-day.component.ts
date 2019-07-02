@@ -36,8 +36,10 @@ export class IndexPageDayComponent implements OnInit, OnDestroy {
     this.configTable = {
       dataKey: 'day_id',
       cols: [
-        // TODO
-      ]
+        { fields: ['day_id'], header: ['day.model.day_id'], style: { width: '10%' } },
+        { fields: ['day_name'], header: ['day.model.day_name'], style: { width: '90%' } },
+      ],
+      selectionMode: 'single'
     };
   }
 
