@@ -20,7 +20,7 @@ export const reducer = createReducer(
     fromWorkflowActions.EntityActions.SetSelected,
     (state, { selected }) => ({
       ...state,
-      selected
+      selected: { ...state.selected, ...selected }
     })
   ),
   on(

@@ -22,7 +22,7 @@ export const reducer = createReducer(
     fromOfficeDepartmentActions.EntityActions.SetSelected,
     (state, { selected }) => ({
       ...state,
-      selected
+      selected: { ...state.selected, ...selected }
     })
   ),
   on(

@@ -23,7 +23,7 @@ export const reducer = createReducer(
     fromUserOfficeProjectActions.EntityActions.SetSelected,
     (state, { selected }) => ({
       ...state,
-      selected
+      selected: { ...state.selected, ...selected }
     })
   ),
   on(
