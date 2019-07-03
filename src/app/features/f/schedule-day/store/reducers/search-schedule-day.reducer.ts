@@ -27,7 +27,9 @@ export const reducer = createReducer(
     (state, { search }) => ({
       ...state,
       loaded: false,
-      query: { schedule_day: search.schedule_day }
+      query: {
+        schedule_day: search.schedule_day
+      }
     })
   ),
   on(

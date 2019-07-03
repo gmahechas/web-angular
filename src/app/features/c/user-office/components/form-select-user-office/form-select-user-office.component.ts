@@ -27,9 +27,11 @@ export class FormSelectUserOfficeComponent implements OnInit {
   ngOnInit() {
     this.searchUserOffice = {
       user_office: {
+        user_office_id: '',
         user_office_status: true
       },
-      user: this.user
+      user: this.user,
+      office: null
     };
   }
 
