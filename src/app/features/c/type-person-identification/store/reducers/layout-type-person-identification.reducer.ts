@@ -34,7 +34,7 @@ export const reducer = createReducer(
     (state, { error }) => ({
       ...state,
       selected: initialStateSelectedTypePersonIdentification,
-      error,
+      error: JSON.stringify(error),
       pending: false
     })
   ),

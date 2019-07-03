@@ -31,7 +31,7 @@ export const reducer = createReducer(
     (state, { error }) => ({
       ...state,
       selected: initialStateSelectedDay,
-      error,
+      error: JSON.stringify(error),
       pending: false
     })
   ),

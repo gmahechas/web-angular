@@ -33,7 +33,7 @@ export const reducer = createReducer(
     (state, { error }) => ({
       ...state,
       selected: initialStateSelectedOfficeDepartment,
-      error,
+      error: JSON.stringify(error),
       pending: false
     })
   ),

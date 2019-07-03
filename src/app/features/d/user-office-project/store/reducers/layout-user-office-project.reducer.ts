@@ -34,7 +34,7 @@ export const reducer = createReducer(
     (state, { error }) => ({
       ...state,
       selected: initialStateSelectedUserOfficeProject,
-      error,
+      error: JSON.stringify(error),
       pending: false
     })
   ),
