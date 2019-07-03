@@ -27,7 +27,11 @@ export const reducer = createReducer(
     (state, { search }) => ({
       ...state,
       loaded: false,
-      query: { ...state.query, ...search }
+      query: {
+        user_office: search.user_office,
+        user: search.user,
+        office: search.office
+      }
     })
   ),
   on(
