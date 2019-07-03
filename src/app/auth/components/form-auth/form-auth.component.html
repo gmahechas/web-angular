@@ -9,7 +9,8 @@
           <app-translate-shared [strings]="['user.model.username']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-text-shared [group]="authForm" [groupName]="'auth'" [controlName]="'username'"></app-input-text-shared>
+          <app-input-text-shared [group]="authForm" [groupName]="'auth'" [controlName]="'username'">
+          </app-input-text-shared>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="authForm.get('auth.username')"></app-validation-errors-shared>
@@ -20,7 +21,8 @@
           <app-translate-shared [strings]="['user.model.password']"></app-translate-shared>
         </div>
         <div class="p-col">
-          <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'"></app-input-password-shared>
+          <app-input-password-shared [group]="authForm" [groupName]="'auth'" [controlName]="'password'">
+          </app-input-password-shared>
         </div>
         <div class="p-col">
           <app-validation-errors-shared [control]="authForm.get('auth.password')"></app-validation-errors-shared>
@@ -28,8 +30,11 @@
       </div>
       <div class="p-grid p-nogutter">
         <div class="p-col">
-          <app-button-shared [type]="'submit'" [label]="['auth.singIn']" [disabled]="authForm.invalid" [class]="'ui-button-secondary'"></app-button-shared>
-          <app-button-shared [type]="'button'" [label]="['auth.forgotPassword']" [class]="'ui-button-secondary'"></app-button-shared>
+          <app-button-shared [type]="'submit'" [label]="['auth.singIn']"
+            [disabled]="authForm.invalid || authForm.disabled" [class]="'ui-button-secondary'"></app-button-shared>
+          <app-button-shared [type]="'button'" [label]="['auth.forgotPassword']" [class]="'ui-button-secondary'"
+            [disabled]="authForm.disabled">
+          </app-button-shared>
         </div>
       </div>
       <div class="p-grid p-nogutter">
