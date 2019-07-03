@@ -23,6 +23,15 @@ export const reducer = createReducer(
     })
   ),
   on(
+    fromAuthActions.AuthActions.AuthSuccess,
+    fromAuthActions.AuthActions.CheckAuthSuccess,
+    (state) => ({
+      ...state,
+      error: null,
+      pending: false
+    })
+  ),
+  on(
     fromAuthActions.AuthActions.AuthFailure,
     (state, { error }) => ({
       ...state,
