@@ -10,8 +10,7 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: '/dashboard',
-    pathMatch: 'full',
-    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
+    pathMatch: 'full'
   },
   {
     path: 'dashboard',
@@ -167,8 +166,8 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'not-found',
-    canActivate: [AuthGuard, HaveUserOfficeCoreGuard]
+    redirectTo: '/not-found',
+    pathMatch: 'full'
   },
 ];
 
