@@ -66,7 +66,9 @@
   "auth": {
     "singIn": "sing in",
     "singOut": "sing out",
-    "forgotPassword": "forgot your password"
+    "forgotPassword": "forgot your password",
+    "authenticationIncorrect": "the authentication data entered is incorrect",
+    "sessionExpired": "the session has expired"
   },
   "dashboard": {
     "singular": "dashboard"

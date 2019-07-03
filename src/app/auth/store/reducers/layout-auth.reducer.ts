@@ -26,7 +26,7 @@ export const reducer = createReducer(
     fromAuthActions.AuthActions.AuthFailure,
     (state, { error }) => ({
       ...state,
-      error: error.error.error,
+      error: 'auth.authenticationIncorrect',
       pending: false
     })
   ),
@@ -34,7 +34,7 @@ export const reducer = createReducer(
     fromAuthActions.AuthActions.CheckAuthFailure,
     (state, { error }) => ({
       ...state,
-      error: 'nouns.error.singular',
+      error: 'auth.sessionExpired',
       pending: false
     })
   )

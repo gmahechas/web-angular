@@ -66,7 +66,9 @@
   "auth": {
     "singIn": "iniciar sesion",
     "singOut": "cerrar sesion",
-    "forgotPassword": "olvide mi contraseña"
+    "forgotPassword": "olvide mi contraseña",
+    "authenticationIncorrect": "los datos introducidos son incorrectos",
+    "sessionExpired": "la sesion ha expirado"
   },
   "dashboard": {
     "singular": "inicio"
