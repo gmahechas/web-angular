@@ -12,8 +12,6 @@ import { Token } from '@web/app/auth/models/token.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
-import { environment } from '@web/environments/environment';
-
 @Injectable()
 export class RefreshTokenInterceptor implements HttpInterceptor {
 
