@@ -1,0 +1,6 @@
+[submodule "projects/ms1"]
+	path = projects/ms1
+	url = https://github.com/gmahechas/ms1
+[submodule "projects/ms2"]
+	path = projects/ms2
+	url = https://github.com/gmahechas/ms2

@@ -21,7 +21,9 @@
       "esnext.asynciterable"
     ],
     "paths": {
-      "@web/*" : ["src/*"]
+      "@web/*" : ["src/*"],
+      "@ms1/*" : ["projects/ms1/src/*"],
+      "@ms2/*" : ["projects/ms2/src/*"]
     }
   }
 }
