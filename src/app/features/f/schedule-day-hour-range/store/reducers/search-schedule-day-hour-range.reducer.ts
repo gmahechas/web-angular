@@ -27,11 +27,7 @@ export const reducer = createReducer(
     (state, { search }) => ({
       ...state,
       loaded: false,
-      query: {
-        schedule_day_hour_range: search.schedule_day_hour_range,
-        schedule_day: search.schedule_day,
-        hour_range: search.hour_range
-      }
+      query: { ...state.query, ...search }
     })
   ),
   on(

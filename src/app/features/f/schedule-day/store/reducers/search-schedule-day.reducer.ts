@@ -28,9 +28,7 @@ export const reducer = createReducer(
       ...state,
       loaded: false,
       query: {
-        schedule_day: search.schedule_day,
-        schedule: search.schedule,
-        day: search.day
+        schedule_day: search.schedule_day
       }
     })
   ),

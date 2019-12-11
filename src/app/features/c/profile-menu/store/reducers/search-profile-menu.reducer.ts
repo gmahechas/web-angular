@@ -27,11 +27,7 @@ export const reducer = createReducer(
     (state, { search }) => ({
       ...state,
       loaded: false,
-      query: {
-        profile_menu: search.profile_menu,
-        profile: search.profile,
-        menu: search.menu
-      }
+      query: { ...state.query, ...search }
     })
   ),
   on(
