@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MS1Module } from '@ms1/app/app.module';
-import { MS2Module } from '@ms2/app/app.module';
-
 import { AuthGuard } from '@web/app/auth/guards/auth.guard';
 import { HaveUserOfficeCoreGuard } from '@web/app/core/guards/have-user-office-core.guard';
 
@@ -163,20 +160,6 @@ export const routes: Routes = [
     canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
   },
   {
-    path: 'ms1',
-    loadChildren: () => {
-      return import('@ms1/app/app.module').then(m => m.MS1Module);
-    },
-    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
-  },
-  {
-    path: 'ms2',
-    loadChildren: () => {
-      return import('@ms2/app/app.module').then(m => m.MS2Module);
-    },
-    canLoad: [AuthGuard, HaveUserOfficeCoreGuard]
-  },
-  {
     path: 'not-found',
     component: NotFoundCoreComponent,
     canActivate: [AuthGuard, HaveUserOfficeCoreGuard]
@@ -190,9 +173,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
-    MS1Module.forRoot(),
-    MS2Module.forRoot()
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule],
 })
